@@ -1,0 +1,80 @@
+import { formatDistanceToNow } from 'date-fns';
+import { Clock, Heart, Tag, Users } from 'lucide-react';
+import Image from 'next/image';
+import type React from 'react';
+import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
+
+interface HubInfoCardProps {
+  hub: {
+    name: string;
+    description: string | null;
+    iconUrl: string | null;
+    upvotes: SimplifiedHub['upvotes']; // Replace with actual type if available
+    _count: { connections: number };
+    lastActive: Date | null;
+    tags: Array<{ name: string }>;
+  };
+}
+
+const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
+  return (
+    <div className="relative flex flex-col items-start gap-6 md:flex-row md:items-center">
+
+      <div className="group h-28 w-28 flex-shrink-0 transform overflow-hidden rounded-2xl border-4 border-gray-700/70 bg-gray-800/80 shadow-lg transition-transform duration-300 hover:scale-105 md:h-36 md:w-36">
+        <div className="relative h-full w-full">
+          <Image
+            src={hub.iconUrl || '/default-hub-icon.png'}
+            alt={hub.name}
+            width={144}
+            height={144}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          {/* Subtle glow effect on hover */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        </div>
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="break-words bg-gradient-to-r from-white to-gray-300 bg-clip-text font-bold text-3xl text-transparent md:text-4xl">
+            {hub.name}
+          </h1>
+        </div>
+        {/* Brief description preview */}
+        <p className="mt-2 line-clamp-2 text-gray-300 text-sm md:text-base">
+          {hub.description?.split('\n')[0] ||
+            'Join this active Discord community hub and connect with like-minded people.'}
+        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-gray-300">
+          {/* Server Count */}
+          <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
+            <Users className="h-4 w-4 text-primary" /> {hub._count.connections}{' '}
+            server
+            {hub._count.connections !== 1 ? 's' : ''}
+          </span>
+          {/* Upvotes */}
+          <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
+            <Heart className="h-4 w-4 text-rose-500" /> {hub.upvotes.length}{' '}
+            upvote
+            {hub.upvotes.length !== 1 ? 's' : ''}
+          </span>
+          {/* Activity */}
+          <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
+            <Clock className="h-4 w-4 text-primary" />
+            {hub.lastActive
+              ? formatDistanceToNow(hub.lastActive, { addSuffix: true })
+              : 'No activity yet'}
+          </span>
+          {/* Tags with hover effect */}
+          {hub.tags && hub.tags.length > 0 && (
+            <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
+              <Tag className="h-4 w-4 text-primary" />
+              {hub.tags.map((tag) => tag.name).join(', ')}
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+export default HubInfoCard;

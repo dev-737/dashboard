@@ -1,0 +1,303 @@
+/* Dashboard grid background */
+.bg-grid-white {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+.dashboard-card {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-card:hover {
+  background: var(--color-bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Dashboard section styles */
+.dashboard-section {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-section-description {
+  font-size: 0.875rem;
+  color: rgba(156, 163, 175, 1);
+  margin-bottom: 1rem;
+}
+
+.dashboard-button-primary {
+  background: linear-gradient(135deg, var(--color-brand-purple-500), var(--color-brand-blue-500));
+  color: white;
+  font-weight: 500;
+  border-radius: var(--radius-button);
+  border: none;
+  box-shadow: 0 4px 15px rgba(147, 114, 216, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-button-primary:hover {
+  background: linear-gradient(135deg, var(--color-brand-purple-600), var(--color-brand-blue-600));
+  box-shadow: 0 8px 25px rgba(147, 114, 216, 0.4);
+  transform: translateY(-2px);
+}
+
+.dashboard-button-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(147, 114, 216, 0.3);
+}
+
+.dashboard-button-secondary {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-weight: 500;
+  border-radius: var(--radius-button);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-button-secondary:hover {
+  background: var(--color-bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+
+
+/* Dashboard input styles */
+.dashboard-input {
+  background-color: rgba(31, 41, 55, 0.5);
+  border-color: rgba(55, 65, 81, 0.5);
+  color: white;
+  border-radius: var(--radius-input);
+  transition: all 0.2s ease;
+}
+
+/* Dashboard table styles */
+.dashboard-table {
+  width: 100%;
+  font-size: 0.875rem;
+  color: rgba(209, 213, 219, 1);
+}
+
+.dashboard-table thead {
+  background-color: rgba(31, 41, 55, 0.5);
+  color: rgba(156, 163, 175, 1);
+}
+
+.dashboard-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 500;
+}
+
+.dashboard-table tbody tr {
+  border-bottom: 1px solid rgba(31, 41, 55, 0.5);
+  transition: background-color 0.2s ease;
+}
+
+.dashboard-table tbody tr:hover {
+  background-color: rgba(31, 41, 55, 0.3);
+}
+
+.dashboard-table td {
+  padding: 0.75rem 1rem;
+}
+
+/* Dashboard tabs styles */
+.dashboard-tabs {
+  background-color: rgba(31, 41, 55, 0.5);
+  border: 1px solid rgba(55, 65, 81, 0.5);
+  border-radius: 0.5rem;
+}
+
+.dashboard-tab[data-state="active"] {
+  background-color: rgba(99, 102, 241, 0.2);
+  color: rgba(165, 180, 252, 1);
+}
+
+/* Dashboard badge styles */
+.dashboard-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.dashboard-badge-blue {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: rgba(147, 197, 253, 1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.dashboard-badge-green {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: rgba(110, 231, 183, 1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.dashboard-badge-purple {
+  background-color: rgba(139, 92, 246, 0.2);
+  color: rgba(196, 181, 253, 1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.dashboard-badge-red {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: rgba(252, 165, 165, 1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.dashboard-badge-yellow {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: rgba(252, 211, 77, 1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.dashboard-stat-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: var(--color-bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.dashboard-stat-card:hover {
+  background: var(--color-bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.dashboard-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.dashboard-stat-value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.dashboard-stat-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(156, 163, 175, 1);
+}
+
+.dashboard-stat-icon {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dashboard animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-animate-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.dashboard-animate-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.dashboard-animate-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.dashboard-animate-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.dashboard-animate-delay-4 {
+  animation-delay: 0.4s;
+}
+
+/* Dashboard scrollbar styles */
+.dashboard-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dashboard-scrollbar::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.1);
+  border-radius: 4px;
+}
+
+.dashboard-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(79, 70, 229, 0.2);
+  border-radius: 4px;
+}
+
+.dashboard-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 70, 229, 0.3);
+}
+
+/* Hub sidebar specific styles */
+.hub-sidebar-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.hub-sidebar-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hub-sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(75, 85, 99, 0.5);
+  border-radius: 3px;
+}
+
+.hub-sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(75, 85, 99, 0.7);
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

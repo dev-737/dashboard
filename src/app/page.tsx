@@ -1,0 +1,66 @@
+import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+import { Hero } from '@/app/_components/Hero';
+import { HomePageSchemas } from '@/app/_components/HomePageSchemas';
+
+const FeaturesShowcase = dynamic(() => import('@/app/_components/FeaturesShowcase').then(mod => ({ default: mod.FeaturesShowcase })), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />,
+});
+
+const FaqSection = dynamic(() => import('@/app/_components/FaqSection').then(mod => ({ default: mod.FaqSection })), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-800/50 rounded-lg" />,
+});
+
+const CTA = dynamic(() => import('@/app/_components/CTA').then(mod => ({ default: mod.CTA })), {
+  loading: () => <div className="h-32 animate-pulse bg-gray-800/50 rounded-lg" />,
+});
+
+export const revalidate = 300;
+
+export const metadata: Metadata = {
+  title: 'InterChat v5 – Faster, modern, and redesigned',
+  description:
+    'Introducing InterChat v5: a complete rewrite with improved performance, modern command UIs, and a redesigned dashboard for cross-server communication.',
+  keywords: [
+    'Discord bot',
+    'cross-server chat',
+    'InterChat v5',
+    'InterChat',
+    'Discord hubs',
+    'server bridge',
+    'Discord moderation',
+  ],
+  openGraph: {
+    title: 'InterChat v5 – Faster, modern, and redesigned',
+    description:
+      'A complete rewrite with improved performance, enhanced command UIs, and a modern dashboard.',
+    url: 'https://interchat.tech',
+    siteName: 'InterChat',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'InterChat v5 – Faster, modern, and redesigned',
+    description:
+      'A complete rewrite with improved performance, enhanced command UIs, and a modern dashboard.',
+  },
+};
+
+export default async function HomePage() {
+  return (
+    <>
+      <HomePageSchemas />
+
+      <main
+        className="flex flex-1 flex-col justify-center"
+        itemScope
+        itemType="https://schema.org/WebPage"
+      >
+        <Hero />
+        <FeaturesShowcase />
+        <FaqSection />
+        <CTA />
+      </main>
+    </>
+  );
+}

@@ -1,0 +1,22 @@
+# deps
+/node_modules/
+
+# build
+/.next/
+/out/
+/build
+/.open-next/
+.wrangler/
+
+# env
+.env*
+
+# misc
+.DS_Store
+*.pem
+.source
+next-env.d.ts
+tsconfig.tsbuildinfo
+src/lib/generated/prisma
+# Sentry Config File
+.env.sentry-build-plugin
