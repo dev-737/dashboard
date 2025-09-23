@@ -41,6 +41,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
+import { DeleteConnectionDialog } from '@/components/dashboard/connections/delete-connection-dialog';
 import { useTRPC } from '@/utils/trpc';
 
 interface ServerData {
@@ -71,6 +72,11 @@ export function ConnectionsList({
   // Simple state management
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredConnections, setFilteredConnections] = useState(connections);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [connectionToDelete, setConnectionToDelete] = useState<{
+    id: string;
+    serverName: string;
+  } | null>(null);
 
   // tRPC mutation for removing connections
   const removeConnectionMutation = useMutation(
@@ -139,13 +145,12 @@ export function ConnectionsList({
   };
 
   const handleRemoveConnection = (connectionId: string, serverName: string) => {
-    if (
-      confirm(
-        `Are you sure you want to remove the connection to "${serverName}"?`
-      )
-    ) {
-      removeConnectionMutation.mutate({ connectionId });
-    }
+    setConnectionToDelete({ id: connectionId, serverName });
+    setDeleteDialogOpen(true);
+  };
+
+  const handleConfirmRemove = (connectionId: string) => {
+    removeConnectionMutation.mutate({ connectionId });
   };
 
   const handleBlacklistServer = (serverId: string) => {
@@ -317,6 +322,23 @@ export function ConnectionsList({
           </div>
         )}
       </CardContent>
+
+      {/* Delete Connection Modal */}
+      {connectionToDelete && (
+        <DeleteConnectionDialog
+          connectionId={connectionToDelete.id}
+          serverName={connectionToDelete.serverName}
+          onConfirm={handleConfirmRemove}
+          isLoading={removeConnectionMutation.isPending}
+          open={deleteDialogOpen}
+          onOpenChange={(open) => {
+            setDeleteDialogOpen(open);
+            if (!open) {
+              setConnectionToDelete(null);
+            }
+          }}
+        />
+      )}
     </Card>
   );
 }

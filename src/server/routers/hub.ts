@@ -352,18 +352,58 @@ export const hubRouter = router({
     .mutation(async ({ input, ctx }) => {
       const { hubId, confirmName } = input;
       const userId = ctx.session.user.id;
+      
       const hub = await db.hub.findUnique({ where: { id: hubId } });
       if (!hub) throw new TRPCError({ code: 'NOT_FOUND' });
+      
       const level = await getUserHubPermission(userId, hubId);
       if (level < PermissionLevel.OWNER)
         throw new TRPCError({ code: 'FORBIDDEN' });
+        
       if (hub.name !== confirmName)
         throw new TRPCError({
           code: 'BAD_REQUEST',
           message: 'Confirmation name does not match',
         });
 
-      await db.hub.delete({ where: { id: hubId } });
+      await db.$transaction(async (tx) => {
+        await tx.appeal.deleteMany({
+          where: {
+            infraction: {
+              hubId: hubId,
+            },
+          },
+        });
+
+        await tx.infraction.deleteMany({
+          where: { hubId: hubId },
+        });
+
+        
+        await tx.antiSwearPattern.deleteMany({
+          where: { rule: { hubId: hubId } },
+        });
+        
+        await tx.antiSwearWhitelist.deleteMany({
+          where: {
+            AntiSwearRule: {
+              hubId: hubId,
+            },
+          },
+        });
+
+        await tx.hubMessageReaction.deleteMany({ where: { Message: { hubId: hubId } } });
+
+        await tx.globalReport.updateMany({
+          where: { Message: { hubId: hubId } },
+          data: { messageId: null },
+        });
+
+        await tx.broadcast.deleteMany({ where: { message: { hubId: hubId } } });
+
+        await tx.hub.delete({ where: { id: hubId } });
+      });
+
       return { success: true as const };
     }),
   // Get a list of hubs with pagination and filtering

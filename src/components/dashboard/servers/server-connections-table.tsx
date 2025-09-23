@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -31,6 +32,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useToast } from '@/components/ui/use-toast';
+import { DeleteConnectionDialog } from '@/components/dashboard/connections/delete-connection-dialog';
 import type { Connection, Hub } from '@/lib/generated/prisma/client';
 import { useTRPC } from '@/utils/trpc';
 
@@ -44,6 +46,13 @@ export function ServerConnectionsTable({
   const trpc = useTRPC();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  // Modal state for delete confirmation
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [connectionToDelete, setConnectionToDelete] = useState<{
+    id: string;
+    hubName: string;
+  } | null>(null);
 
   // tRPC mutations for connection management
   const updateConnectionMutation = useMutation(
@@ -79,6 +88,8 @@ export function ServerConnectionsTable({
         });
         // Invalidate and refetch relevant queries
         queryClient.invalidateQueries(trpc.connection.pathFilter());
+        // Force a page refresh to show updated data
+        window.location.reload();
       },
       onError: (error) => {
         toast({
@@ -109,8 +120,12 @@ export function ServerConnectionsTable({
     });
   };
 
-  // Function to delete a connection using tRPC
-  const deleteConnection = (connectionId: string) => {
+  const handleDeleteConnection = (connectionId: string, hubName: string) => {
+    setConnectionToDelete({ id: connectionId, hubName });
+    setDeleteDialogOpen(true);
+  };
+
+  const handleConfirmDelete = (connectionId: string) => {
     deleteConnectionMutation.mutate({
       connectionId,
     });
@@ -251,13 +266,7 @@ export function ServerConnectionsTable({
                       <DropdownMenuItem
                         className="cursor-pointer text-red-400 hover:bg-red-900/30 hover:text-red-300"
                         onClick={() => {
-                          if (
-                            confirm(
-                              'Are you sure you want to delete this connection? This action cannot be undone.'
-                            )
-                          ) {
-                            deleteConnection(connection.id);
-                          }
+                          handleDeleteConnection(connection.id, connection.hub.name);
                         }}
                         disabled={isLoading}
                       >
@@ -272,6 +281,23 @@ export function ServerConnectionsTable({
           })}
         </TableBody>
       </Table>
+
+      {/* Delete Connection Modal */}
+      {connectionToDelete && (
+        <DeleteConnectionDialog
+          connectionId={connectionToDelete.id}
+          serverName={connectionToDelete.hubName}
+          onConfirm={handleConfirmDelete}
+          isLoading={deleteConnectionMutation.isPending}
+          open={deleteDialogOpen}
+          onOpenChange={(open) => {
+            setDeleteDialogOpen(open);
+            if (!open) {
+              setConnectionToDelete(null);
+            }
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -121,7 +121,7 @@ export async function getServers(session: Omit<Session, 'expires'> | null): Prom
     // Check if the token is expired and refresh if needed
     let accessToken = account.access_token;
 
-    if (account.expires_at && account.expires_at < Date.now() && account.refresh_token) {
+    if (account.expires_at && account.expires_at * 1000 < Date.now() && account.refresh_token) {
       try {
         // Token is expired, refresh it
         const response = await fetch('https://discord.com/api/oauth2/token', {
@@ -141,6 +141,7 @@ export async function getServers(session: Omit<Session, 'expires'> | null): Prom
         const tokens = await response.json();
         
         if (!response.ok) {
+          console.error('Discord token refresh failed:', tokens);
           return { error: 'Failed to refresh token', status: 401 };
         }
 
@@ -155,7 +156,7 @@ export async function getServers(session: Omit<Session, 'expires'> | null): Prom
           data: {
             access_token: tokens.access_token,
             refresh_token: tokens.refresh_token ?? account.refresh_token,
-            expires_at: tokens.expires_at,
+            expires_at: tokens.expires_in ? Math.floor(Date.now() / 1000) + tokens.expires_in : null,
           },
         });
 
@@ -330,100 +331,44 @@ export async function getServerDetails(
 
     const userId = session.user.id;
 
-    // Get the user's Discord account to get the access token
-    const account = await db.account.findFirst({
-      where: {
-        userId,
-        provider: 'discord',
-      },
-    });
-
-    if (!account || !account.access_token) {
-      return {
-        error: 'Discord account not found or missing access token',
-        status: 400,
-      };
-    }
-
-    // Check if the token is expired and refresh if needed
-    let accessToken = account.access_token;
-
-    if (account.expires_at && account.expires_at < Date.now() && account.refresh_token) {
-      try {
-        // Token is expired, refresh it
-        const response = await fetch('https://discord.com/api/oauth2/token', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: new URLSearchParams({
-            // biome-ignore lint/style/noNonNullAssertion: Environment variables are validated at build time
-            client_id: process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID!,
-            // biome-ignore lint/style/noNonNullAssertion: Environment variables are validated at build time
-            client_secret: process.env.DISCORD_CLIENT_SECRET!,
-            grant_type: 'refresh_token',
-            refresh_token: account.refresh_token,
-          }),
-        });
-
-        const tokens = await response.json();
-        if (!response.ok) {
-          return { error: 'Failed to refresh token', status: 401 };
-        }
-
-        // Update the account with the new tokens
-        await db.account.update({
-          where: {
-            provider_providerAccountId: {
-              provider: 'discord',
-              providerAccountId: userId,
-            },
-          },
-          data: {
-            access_token: tokens.access_token,
-            refresh_token: tokens.refreshToken ?? account.refresh_token,
-            expires_at: tokens.expires_at,
-          },
-        });
-
-        // Use the new access token
-        accessToken = tokens.access_token;
-      } catch {
-        return { error: 'Failed to refresh Discord token', status: 401 };
+    const cacheKey = `discord:guilds:${userId}`;
+    const cachedGuilds = await perfCache.get<DiscordGuild[]>(cacheKey);
+    
+    let userGuilds: DiscordGuild[] | null = null;
+    
+    if (cachedGuilds && Array.isArray(cachedGuilds)) {
+      userGuilds = cachedGuilds;
+    } else {
+      const serversResult = await getServers(session);
+      if ('error' in serversResult) {
+        return { error: serversResult.error, status: serversResult.status };
       }
+      
+      userGuilds = serversResult.data.map(server => ({
+        id: server.id,
+        name: server.name,
+        icon: server.icon || null,
+        owner: server.owner || false,
+        permissions: server.permissions || '0',
+        features: server.features || [],
+        verification_level: server.verification_level || 0,
+      }));
+      
+      await perfCache.set(cacheKey, userGuilds, { ttl: 300 }); // 5 minutes
     }
 
-    // Fetch the user's guilds to verify access and get basic info
-    const userGuildsResponse = await fetch(`${DISCORD_API}/users/@me/guilds`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    if (!userGuildsResponse.ok) {
-      return {
-        error:
-          userGuildsResponse.status === 429
-            ? 'Discord API rate limit exceeded. Please try again later.'
-            : "Failed to fetch user's guilds",
-        status: userGuildsResponse.status,
-      };
-    }
-
-    const userGuilds = (await userGuildsResponse.json()) as DiscordGuild[];
-
-    // Find the specific guild in the user's guilds
+    // Find the specific guild
     const userGuild = userGuilds.find((guild) => guild.id === serverId);
 
     if (!userGuild) {
       return { error: "You don't have access to this server", status: 403 };
     }
 
-    // Check if the user has the MANAGE_GUILD permission (0x20) or is the owner
+    // Check permissions
     const hasManageGuildPermission =
       userGuild.owner ||
       (BigInt(userGuild.permissions) & BigInt(0x20)) === BigInt(0x20) ||
-      (BigInt(userGuild.permissions) & BigInt(0x8)) === BigInt(0x8); // ADMINISTRATOR
+      (BigInt(userGuild.permissions) & BigInt(0x8)) === BigInt(0x8);
 
     if (!hasManageGuildPermission) {
       return {
@@ -458,7 +403,6 @@ export async function getServerDetails(
       botAdded: !!dbServer, // Use database presence to determine if bot is added
       inviteCode: dbServer?.inviteCode || null,
       updatedAt: dbServer?.updatedAt || new Date(),
-
       messageCount: dbServer?.messageCount || 0,
       lastMessageAt: dbServer?.lastMessageAt ? dbServer.lastMessageAt : new Date(),
       createdAt: createdAt,
