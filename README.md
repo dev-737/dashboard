@@ -1,4 +1,4 @@
-# InterChat Website (bread was here again)
+# InterChat Website (bread was here)
 
 This is a Next.js application
 Run development server:
