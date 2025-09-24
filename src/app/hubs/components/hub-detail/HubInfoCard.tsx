@@ -43,7 +43,7 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
         {/* Brief description preview */}
         <p className="mt-2 line-clamp-2 text-gray-300 text-sm md:text-base">
           {hub.description?.split('\n')[0] ||
-            'Join this active Discord community hub and connect with like-minded people.'}
+            'Join this active Cross-Server Hubs and connect with like-minded people.'}
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-gray-300">
           {/* Server Count */}

@@ -77,7 +77,7 @@ const features = [
       'Mobile responsive',
       'Dark mode optimized',
     ],
-    mockup: '/features/dashboard.svg',
+    mockup: '/features/dashboard.png',
     isReversed: true,
   },
 ];

@@ -38,10 +38,10 @@ export async function generateMetadata(props: {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://interchat.dev';
 
   return {
-    title: `${hub.name} | InterChat Discord Community Hub`,
+    title: `${hub.name} | InterChat Cross-Server Hubs`,
     description:
       hub.description ||
-      'Join this active Discord community hub with InterChat. Connect your server and start chatting with other communities.',
+      'Join this active Cross-Server Hubs with InterChat. Connect your server and start chatting with other communities.',
     keywords: [
       'discord community',
       'discord hub',
@@ -50,10 +50,10 @@ export async function generateMetadata(props: {
       ...(hub.tags.map((t) => t.name) || []),
     ],
     openGraph: {
-      title: `${hub.name} | InterChat Discord Community Hub`,
+      title: `${hub.name} | InterChat Cross-Server Hubs`,
       description:
         hub.description ||
-        'Join this active Discord community hub with InterChat. Connect your server and start chatting with other communities.',
+        'Join this active Cross-Server Hubs with InterChat. Connect your server and start chatting with other communities.',
       type: 'website',
       url: `${baseUrl}/hubs/${hubId}`,
       images: [
@@ -68,10 +68,10 @@ export async function generateMetadata(props: {
     twitter: {
       card: 'summary_large_image',
       images: [hub.bannerUrl || hub.iconUrl || `${baseUrl}/InterChatLogo.webp`],
-      title: `${hub.name} | InterChat Discord Community Hub`,
+      title: `${hub.name} | InterChat Cross-Server Hubs`,
       description:
         hub.description ||
-        'Join this active Discord community hub with InterChat.',
+        'Join this active Cross-Server Hubs with InterChat.',
       creator: '@737_dev',
       site: '@interchatapp',
     },
