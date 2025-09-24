@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /dashboard/private/
 
-Sitemap: https://interchat.tech/sitemap.xml
+Sitemap: https://interchat.dev/sitemap.xml

@@ -140,7 +140,7 @@ export function FAQSchema({ faqs }: FAQSchemaProps) {
 
 export function OrganizationSchema({
   name = 'InterChat',
-  url = 'https://interchat.tech',
+  url = 'https://interchat.dev',
   logo = 'https://interchatdiscord.com/InterChatLogo.png',
   description = 'Open-source Discord bot platform for connecting communities through cross-server chat.',
 }: OrganizationSchemaProps) {

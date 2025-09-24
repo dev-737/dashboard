@@ -184,7 +184,7 @@ export function Footer() {
                 variant="outline"
                 size="sm"
                 onClick={() =>
-                  window.open('https://status.interchat.tech', '_blank')
+                  window.open('https://status.interchat.dev', '_blank')
                 }
               >
                 <div className="h-2 w-2 animate-pulse rounded-full bg-green-400"></div>

@@ -31,7 +31,7 @@ export function Hero() {
               className="mb-6 inline-flex items-center gap-2 rounded-[var(--radius-button)] border border-gray-700/60 bg-gradient-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-gray-600/70"
             >
               <Sparkles className="h-4 w-4 animate-pulse text-primary" />
-              <Link href="https://docs.interchat.tech/changelog">
+              <Link href="https://docs.interchat.dev/changelog">
                 <AnimatedShinyText className="font-semibold tracking-wide">
                   Introducing InterChat v5
                 </AnimatedShinyText>

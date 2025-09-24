@@ -241,7 +241,7 @@ export default function PrivacyPolicy() {
                       </ol>
                       <p className="bg-gradient-to-r from-green-400/20 to-emerald-400/20 border border-green-500/30 rounded-xl p-4 text-green-200">
                         <strong className="text-green-300">How to exercise these rights:</strong> Contact us at our{' '}
-                        <span className="text-green-300 font-semibold"><Link href="https://interchat.tech/support">support server</Link></span> with your
+                        <span className="text-green-300 font-semibold"><Link href="https://interchat.dev/support">support server</Link></span> with your
                         request. Include sufficient information to identify your data (e.g., Discord
                         ID). Requests will be processed within <strong className="text-green-300">30 days</strong>.
                       </p>
@@ -311,8 +311,8 @@ export default function PrivacyPolicy() {
                         <li className="hover:text-purple-200 transition-colors">
                           <strong className="text-purple-300">Official Discord server</strong>{' '}
                           <span className="text-purple-400 font-semibold">
-                            <Link href="https://interchat.tech/support">
-                              https://interchat.tech/support
+                            <Link href="https://interchat.dev/support">
+                              https://interchat.dev/support
                             </Link>
                           </span>
                         </li>
@@ -345,7 +345,7 @@ export default function PrivacyPolicy() {
                     </ol>
                     <p>
                       <strong>How to exercise these rights:</strong> Contact us at our{' '}
-                      <Link href="https://interchat.tech/support">support server</Link> with your
+                      <Link href="https://interchat.dev/support">support server</Link> with your
                       request. Include sufficient information to identify your data (e.g., Discord
                       ID). Requests will be processed within <strong>30 days</strong>.
                     </p>
@@ -406,8 +406,8 @@ export default function PrivacyPolicy() {
                     <ul>
                       <li>
                         <strong>Official Discord server</strong>{' '}
-                        <Link href="https://interchat.tech/support">
-                          https://interchat.tech/support
+                        <Link href="https://interchat.dev/support">
+                          https://interchat.dev/support
                         </Link>
                       </li>
                     </ul>

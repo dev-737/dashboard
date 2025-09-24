@@ -108,7 +108,7 @@ export default function TermsOfService() {
                         You are responsible for all activity originating from your
                         accounts, including any bots or integrations you configure. Keep
                         credentials secure. Report unauthorized access immediately to{' '}
-                        <span className="text-purple-400 font-semibold"><Link href="https://interchat.tech/support">our support server</Link></span>.
+                        <span className="text-purple-400 font-semibold"><Link href="https://interchat.dev/support">our support server</Link></span>.
                       </p>
                     </div>
                   </section>
@@ -149,7 +149,7 @@ export default function TermsOfService() {
                       </p>
                       <p className="bg-gradient-to-r from-blue-400/20 to-cyan-400/20 border border-blue-500/30 rounded-xl p-4 text-blue-200">
                         If your content infringes copyright, follow our DMCA process (contact{' '}
-                        <span className="text-blue-300 font-semibold"><Link href="https://interchat.tech/support">our support server</Link></span>
+                        <span className="text-blue-300 font-semibold"><Link href="https://interchat.dev/support">our support server</Link></span>
                         ). We will respond in accordance with applicable law.
                       </p>
                     </div>
@@ -170,7 +170,7 @@ export default function TermsOfService() {
                       <p className="bg-gradient-to-r from-green-400/20 to-emerald-400/20 border border-green-500/30 rounded-xl p-4 text-green-200">
                         <strong className="text-green-300">Appeals:</strong> If you believe enforcement was incorrect, open a
                         ticket in{' '}
-                        <span className="text-green-300 font-semibold"><Link href="https://interchat.tech/support">our support server</Link></span> with
+                        <span className="text-green-300 font-semibold"><Link href="https://interchat.dev/support">our support server</Link></span> with
                         your Discord ID, incident details, and supporting evidence. Appeals
                         are reviewed. Submitting an appeal does not guarantee reversal. Abuse
                         of the appeals process may result in permanent enforcement.
@@ -298,7 +298,7 @@ export default function TermsOfService() {
                     <div className="space-y-4 text-lg leading-relaxed">
                       <p>
                         If you believe content violates your copyright, contact our agent at{' '}
-                        <span className="text-purple-400 font-semibold"><Link href="https://interchat.tech/support">our support server</Link></span>{' '}
+                        <span className="text-purple-400 font-semibold"><Link href="https://interchat.dev/support">our support server</Link></span>{' '}
                         with a DMCA takedown notice including identification of the
                         copyrighted work, location of infringing material, contact
                         information, a statement of good faith, and a signature.
@@ -313,7 +313,7 @@ export default function TermsOfService() {
                       <ul className="space-y-2">
                         <li className="hover:text-purple-200 transition-colors">
                           <strong className="text-purple-300">Discord: {" "}</strong>
-                          <span className="text-purple-400 font-semibold"><Link href="https://interchat.tech/support">Official InterChat support server</Link></span>
+                          <span className="text-purple-400 font-semibold"><Link href="https://interchat.dev/support">Official InterChat support server</Link></span>
                         </li>
                       </ul>
                     </div>

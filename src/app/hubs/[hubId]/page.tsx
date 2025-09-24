@@ -35,7 +35,7 @@ export async function generateMetadata(props: {
 
   if (!hub) return { title: 'Hub Not Found' };
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://interchat.tech';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://interchat.dev';
 
   return {
     title: `${hub.name} | InterChat Discord Community Hub`,

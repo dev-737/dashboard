@@ -230,7 +230,7 @@ export const CreditsSection = () => {
                     <div className="flex gap-2">
                       {contributor.github && (
                         <Link
-                          href={`https://github.com/${contributor.github}?utm_source=interchat.tech&utm_medium=referral`}
+                          href={`https://github.com/${contributor.github}?utm_source=interchat.dev&utm_medium=referral`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="group/link rounded-[var(--radius)] p-2 transition-colors hover:bg-gray-700/50"
@@ -244,7 +244,7 @@ export const CreditsSection = () => {
                       )}
                       {contributor.linkedin && (
                         <Link
-                          href={`https://linkedin.com/${contributor.linkedin}?utm_source=interchat.tech&utm_medium=referral`}
+                          href={`https://linkedin.com/${contributor.linkedin}?utm_source=interchat.dev&utm_medium=referral`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="group/link rounded-[var(--radius)] p-2 transition-colors hover:bg-gray-700/50"
@@ -258,7 +258,7 @@ export const CreditsSection = () => {
                       )}
                       {contributor.website && (
                         <Link
-                          href={`${contributor.website}?utm_source=interchat.tech`}
+                          href={`${contributor.website}?utm_source=interchat.dev`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="group/link rounded-[var(--radius)] p-2 transition-colors hover:bg-gray-700/50"
@@ -272,7 +272,7 @@ export const CreditsSection = () => {
                       )}
                       {contributor.discord && (
                         <Link
-                          href={`https://discord.com/invite/${contributor.discord}?utm_source=interchat.tech&utm_medium=referral`}
+                          href={`https://discord.com/invite/${contributor.discord}?utm_source=interchat.dev&utm_medium=referral`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="group/link rounded-[var(--radius)] p-2 transition-colors hover:bg-gray-700/50"
