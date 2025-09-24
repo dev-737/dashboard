@@ -3,7 +3,6 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
 const config = {
-  turbopack: {},
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
@@ -233,7 +232,6 @@ const config = {
 
     // Tree shake unused exports
     config.optimization.usedExports = true;
-    config.optimization.sideEffects = false;
 
     return config;
   },

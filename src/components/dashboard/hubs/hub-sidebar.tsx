@@ -37,13 +37,13 @@ interface SidebarNavItemProps {
   label: string;
   active: boolean;
   isCollapsed: boolean;
-  color?: 'default' | 'blue' | 'green' | 'purple' | 'red' | 'orange' | 'yellow';
+  color?: 'default' | 'blue' | 'green' | 'purple' | 'red' | 'orange' | 'yellow' | 'indigo';
 }
 
 interface NavigationItem {
   value: string;
   label: string;
-  color: 'default' | 'blue' | 'green' | 'purple' | 'red' | 'orange' | 'yellow';
+  color: 'default' | 'blue' | 'green' | 'purple' | 'red' | 'orange' | 'yellow' | 'indigo';
   icon: React.ComponentType<{ className?: string }>;
   href: string;
   show: boolean | ((permissions: { canModerate: boolean; canEdit: boolean }) => boolean);
@@ -127,6 +127,15 @@ function SidebarNavItem({
       icon: active
         ? 'text-amber-300 bg-amber-400/15'
         : 'text-amber-400 group-hover:text-white group-hover:bg-amber-400/10',
+    },
+    indigo: {
+      active:
+        'bg-gradient-to-r from-indigo-500/15 to-purple-500/15 text-indigo-300 border-indigo-400/40 shadow-lg shadow-indigo-500/5 backdrop-blur-sm',
+      inactive:
+        'text-gray-300 hover:text-white hover:bg-indigo-500/10 hover:border-indigo-500/30 border-transparent backdrop-blur-sm',
+      icon: active
+        ? 'text-indigo-300 bg-indigo-400/15'
+        : 'text-indigo-400 group-hover:text-white group-hover:bg-indigo-400/10',
     },
   };
 
@@ -289,7 +298,7 @@ export function HubSidebar({
         {
           value: 'logging',
           label: 'Logging',
-          color: 'purple',
+          color: 'indigo',
           icon: FileText,
           href: `/dashboard/hubs/${hubId}/logging`,
           show: ({ canEdit }) => canEdit,
@@ -328,17 +337,17 @@ export function HubSidebar({
         {
           value: 'infractions',
           label: 'Infractions',
-          color: 'orange',
+          color: 'purple',
           icon: Gavel,
           href: `/dashboard/hubs/${hubId}/infractions`,
           show: ({ canModerate }) => canModerate,
         },
         {
-          value: 'anti-swear',
-          label: 'Anti-Swear',
-          color: 'red',
-          icon: AlertTriangle,
-          href: `/dashboard/hubs/${hubId}/anti-swear`,
+          value: 'automod',
+          label: 'AutoMod',
+          color: 'green',
+          icon: Shield,
+          href: `/dashboard/hubs/${hubId}/automod`,
           show: ({ canModerate }) => canModerate,
         },
       ],

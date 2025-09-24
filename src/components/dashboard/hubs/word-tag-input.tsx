@@ -138,7 +138,7 @@ export function WordTagInput({
         return 'bg-green-900/40 border-green-700/50 text-green-200';
       case MatchPattern.SUFFIX:
         return 'bg-purple-900/40 border-purple-700/50 text-purple-200';
-      case MatchPattern.SUBSTRING:
+      case MatchPattern.WILDCARD:
         return 'bg-amber-900/40 border-amber-700/50 text-amber-200';
       default:
         return 'bg-gray-900/40 border-gray-700/50 text-gray-200';
@@ -150,7 +150,7 @@ export function WordTagInput({
       MatchPattern.EXACT,
       MatchPattern.PREFIX,
       MatchPattern.SUFFIX,
-      MatchPattern.SUBSTRING,
+      MatchPattern.WILDCARD,
     ];
     const currentIndex = patterns.indexOf(currentPattern);
     const nextIndex = (currentIndex + 1) % patterns.length;

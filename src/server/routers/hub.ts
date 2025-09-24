@@ -7,7 +7,7 @@ import { z } from 'zod/v4';
 import { SortOptions } from '@/app/hubs/constants';
 import { buildWhereClause, getSortedHubs } from '@/app/hubs/utils';
 import { PermissionLevel } from '@/lib/constants';
-import { BlockWordAction } from '@/lib/generated/prisma/client';
+import { BlockWordAction, Prisma } from '@/lib/generated/prisma/client';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 import { protectedProcedure, publicProcedure, router } from '../trpc';
@@ -171,6 +171,39 @@ export const hubRouter = router({
       return { success: true as const };
     }),
 
+  updateAutomodSettings: protectedProcedure
+    .input(
+      z.object({
+        hubId: z.string(),
+        automodEnabled: z.boolean().optional(),
+        defaultMuteDurationMinutes: z.number().int().min(1).max(43200).optional(),
+        alertModsEnabled: z.boolean().optional(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const { hubId, automodEnabled, defaultMuteDurationMinutes, alertModsEnabled } = input;
+      const userId = ctx.session.user.id;
+      const level = await getUserHubPermission(userId, hubId);
+      if (level < PermissionLevel.MANAGER)
+        throw new TRPCError({ code: 'FORBIDDEN' });
+
+      const hub = await db.hub.findUnique({ where: { id: hubId } });
+      if (!hub) throw new TRPCError({ code: 'NOT_FOUND', message: 'Hub not found' });
+
+      const updateData: Prisma.HubUpdateInput = {};
+      
+      if (defaultMuteDurationMinutes !== undefined) {
+        updateData.appealCooldownHours = Math.round(defaultMuteDurationMinutes / 60);
+      }
+      
+      await db.hub.update({ 
+        where: { id: hubId }, 
+        data: updateData
+      });
+      
+      return { success: true as const };
+    }),
+
   // Update or create logging configuration
   updateLogConfig: protectedProcedure
     .input(
@@ -224,6 +257,8 @@ export const hubRouter = router({
       return rules.map((r) => ({
         id: r.id,
         name: r.name,
+        enabled: r.enabled,
+        muteDurationMinutes: r.muteDurationMinutes,
         actions: r.actions as BlockWordAction[],
         patterns: r.patterns.map((p) => ({ id: p.id, pattern: p.pattern })),
       }));
@@ -276,6 +311,8 @@ export const hubRouter = router({
       z.object({
         id: z.string(),
         name: z.string().min(3).max(64),
+        enabled: z.boolean().optional(),
+        muteDurationMinutes: z.number().int().min(0).max(43200).nullable().optional(),
         actions: z.array(z.enum(BlockWordAction)).min(1),
         patterns: z
           .array(
@@ -288,7 +325,7 @@ export const hubRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      const { id, name, actions, patterns } = input;
+      const { id, name, enabled, muteDurationMinutes, actions, patterns } = input;
       const existing = await db.antiSwearRule.findUnique({
         where: { id },
         select: { hubId: true },
@@ -301,14 +338,22 @@ export const hubRouter = router({
       if (level < PermissionLevel.MANAGER)
         throw new TRPCError({ code: 'FORBIDDEN' });
 
-      // Replace patterns by deleting old and creating new for simplicity
-      await db.$transaction([
-        db.antiSwearPattern.deleteMany({ where: { ruleId: id } }),
-        db.antiSwearRule.update({ where: { id }, data: { name, actions } }),
-        db.antiSwearPattern.createMany({
-          data: patterns.map((p) => ({ ruleId: id, pattern: p.pattern })),
-        }),
-      ]);
+      await db.antiSwearRule.update({
+        where: { id },
+        data: {
+          name,
+          enabled: enabled !== undefined ? enabled : undefined,
+          muteDurationMinutes: muteDurationMinutes !== undefined ? muteDurationMinutes : undefined,
+          actions,
+
+          patterns: {
+            deleteMany: {},
+            createMany: {
+              data: patterns.map((p) => ({ pattern: p.pattern })),
+            },
+          },
+        },
+      });
 
       const updated = await db.antiSwearRule.findUnique({
         where: { id },
@@ -318,6 +363,8 @@ export const hubRouter = router({
       return {
         id: updated.id,
         name: updated.name,
+        enabled: updated.enabled,
+        muteDurationMinutes: updated.muteDurationMinutes,
         actions: updated.actions as BlockWordAction[],
         patterns: updated.patterns.map((p) => ({
           id: p.id,
@@ -343,6 +390,120 @@ export const hubRouter = router({
         throw new TRPCError({ code: 'FORBIDDEN' });
 
       await db.antiSwearRule.delete({ where: { id } });
+      return { success: true as const };
+    }),
+
+  getAntiSwearWhitelist: protectedProcedure
+    .input(z.object({ ruleId: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const { ruleId } = input;
+      // Verify user has access to this rule
+      const rule = await db.antiSwearRule.findUnique({
+        where: { id: ruleId },
+        select: { hubId: true },
+      });
+      if (!rule) throw new TRPCError({ code: 'NOT_FOUND' });
+      
+      const level = await getUserHubPermission(ctx.session.user.id, rule.hubId);
+      if (level < PermissionLevel.MODERATOR)
+        throw new TRPCError({ code: 'FORBIDDEN' });
+
+      const whitelist = await db.antiSwearWhitelist.findMany({
+        where: { ruleId },
+        orderBy: { createdAt: 'desc' },
+        include: {
+          User: {
+            select: { id: true, name: true },
+          },
+        },
+      });
+
+      return whitelist.map((item) => ({
+        id: item.id,
+        word: item.word,
+        reason: item.reason,
+        createdAt: item.createdAt,
+        createdBy: {
+          id: item.User.id,
+          name: item.User.name,
+        },
+      }));
+    }),
+
+  addAntiSwearWhitelist: protectedProcedure
+    .input(
+      z.object({
+        ruleId: z.string(),
+        word: z.string().min(1).max(64),
+        reason: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const { ruleId, word, reason } = input;
+      const userId = ctx.session.user.id;
+      
+      // Verify user has access to this rule
+      const rule = await db.antiSwearRule.findUnique({
+        where: { id: ruleId },
+        select: { hubId: true },
+      });
+      if (!rule) throw new TRPCError({ code: 'NOT_FOUND' });
+      
+      const level = await getUserHubPermission(userId, rule.hubId);
+      if (level < PermissionLevel.MANAGER)
+        throw new TRPCError({ code: 'FORBIDDEN' });
+
+      const created = await db.antiSwearWhitelist.create({
+        data: {
+          id: `${ruleId}-${word}`.toLowerCase(),
+          ruleId,
+          word: word.toLowerCase(),
+          reason,
+          createdBy: userId,
+        },
+        include: {
+          User: {
+            select: { id: true, name: true },
+          },
+        },
+      });
+
+      return {
+        id: created.id,
+        word: created.word,
+        reason: created.reason,
+        createdAt: created.createdAt,
+        createdBy: {
+          id: created.User.id,
+          name: created.User.name,
+        },
+      };
+    }),
+
+  deleteAntiSwearWhitelist: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const { id } = input;
+      
+      // Verify user has access to this whitelist item
+      const whitelistItem = await db.antiSwearWhitelist.findUnique({
+        where: { id },
+        include: {
+          AntiSwearRule: {
+            select: { hubId: true },
+          },
+        },
+      });
+      if (!whitelistItem) throw new TRPCError({ code: 'NOT_FOUND' });
+      
+      const level = await getUserHubPermission(
+        ctx.session.user.id,
+        whitelistItem.AntiSwearRule.hubId
+      );
+      if (level < PermissionLevel.MANAGER)
+        throw new TRPCError({ code: 'FORBIDDEN' });
+
+      await db.antiSwearWhitelist.delete({ where: { id } });
       return { success: true as const };
     }),
 
