@@ -33,7 +33,7 @@ export function OnboardingHelpMenu() {
       label: 'Documentation',
       description: 'Read our comprehensive guides',
       icon: BookOpen,
-      href: '/docs',
+      href: 'https://docs.interchat.dev',
       external: true,
       color: 'text-blue-400',
     },

@@ -32,7 +32,7 @@ interface User {
 const links = [
   {
     text: 'Docs',
-    url: '/docs',
+    url: 'https://docs.interchat.dev',
   },
   {
     text: 'Discover',
@@ -59,8 +59,7 @@ export function Navbar() {
   
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const isDocsOrDashboardPage =
-    pathname?.startsWith('/docs') || pathname.startsWith('/dashboard');
+  const isDashboardPage = pathname.startsWith('/dashboard');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,7 +71,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`${isDocsOrDashboardPage ? 'hidden' : ''} fixed top-0 z-50 w-full ${isScrolled ? 'bg-[#0a0a0c]/30 backdrop-blur-[6px]' : 'pointer-events-auto bg-transparent'}transition-all duration-300`}
+      className={`${isDashboardPage ? 'hidden' : ''} fixed top-0 z-50 w-full ${isScrolled ? 'bg-[#0a0a0c]/30 backdrop-blur-[6px]' : 'pointer-events-auto bg-transparent'}transition-all duration-300`}
     >
       <div className="container mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-4 py-2">
         {/* Logo and Navigation */}

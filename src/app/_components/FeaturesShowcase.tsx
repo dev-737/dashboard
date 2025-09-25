@@ -31,7 +31,7 @@ const features = [
       'Unlimited connections',
       'Rich media support',
     ],
-    mockup: '/features/CrossChat.svg', // Placeholder for now
+    mockup: '/features/CrossChat.png',
     isReversed: false,
   },
   {
@@ -52,18 +52,6 @@ const features = [
     isReversed: true,
   },
   {
-    id: 'performance',
-    title: 'Lightning Fast Performance',
-    description:
-      'Built from the ground up for speed. Our v5 architecture delivers messages faster with improved reliability and reduced latency.',
-    icon: Zap,
-    color: 'from-yellow-500/20 to-orange-500/20',
-    borderColor: 'border-yellow-500/30',
-    benefits: ['Optimized infrastructure', 'Reduced latency', '99.99% uptime'],
-    mockup: '/mockups/performance-stats.png', // Placeholder for now
-    isReversed: false,
-  },
-  {
     id: 'dashboard',
     title: 'Modern Dashboard',
     description:
@@ -72,7 +60,7 @@ const features = [
     color: 'from-purple-500/20 to-pink-500/20',
     borderColor: 'border-purple-500/30',
     benefits: [
-      'Real-time analytics',
+      'Intuitive UI/UX',
       'Easy hub management',
       'Mobile responsive',
       'Dark mode optimized',
@@ -232,7 +220,7 @@ export function FeaturesShowcase() {
                 className="h-12 border-gray-600/70 bg-gray-800/60 px-8 font-semibold text-white backdrop-blur-xl hover:bg-gray-800/80"
               >
                 <Link
-                  href="/docs/getting-started"
+                  href="https://docs.interchat.dev"
                   className="flex items-center"
                 >
                   View Documentation

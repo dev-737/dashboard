@@ -46,10 +46,10 @@ export function Footer() {
       },
     ],
     resources: [
-      { label: 'Documentation', href: '/docs', icon: FileText },
-      { label: 'API Reference', href: '/docs/api', icon: ExternalLink },
-      { label: 'Status Page', href: '/status', icon: Shield },
-      { label: 'Changelog', href: '/changelog', icon: FileText },
+      { label: 'Documentation', href: 'https://docs.interchat.dev', icon: FileText },
+      { label: 'API Reference', href: 'https://docs.interchat.dev/api', icon: ExternalLink },
+      { label: 'Status Page', href: 'https://status.interchat.dev', icon: Shield },
+      { label: 'Changelog', href: 'https://docs.interchat.dev/changelog', icon: FileText },
     ],
   };
 
