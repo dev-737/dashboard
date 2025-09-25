@@ -211,7 +211,6 @@ export async function getDiscoverHubs(params: DiscoverParams) {
     }>(cacheKey);
 
     if (cached) {
-        console.log(`Cache hit for discover query: ${cacheKey}`);
         return cached;
     }
 
@@ -271,8 +270,5 @@ export async function getDiscoverHubs(params: DiscoverParams) {
         await setCachedData(countCacheKey, total, { ttl: 900 });
     }
 
-    console.log(
-        `Database query executed for discover: ${cacheKey}, ${items.length} items`,
-    );
     return result;
 }

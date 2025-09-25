@@ -80,16 +80,15 @@ class RedisManager {
 
       // Set up event handlers
       this.client.on('connect', () => {
-        console.log('✅ Redis connected successfully for rate limiting');
+        console.log('Redis connected successfully for rate limiting');
       });
 
       this.client.on('ready', () => {
-        console.log('✅ Redis ready for rate limiting operations');
+        console.log('Redis ready for rate limiting operations');
       });
 
       this.client.on('error', (error) => {
-        console.error('❌ Redis connection error:', error.message);
-        // Don't throw here, let rate limiting fall back to memory
+        console.error('Redis connection error:', error.message);
       });
 
       this.client.on('close', () => {
@@ -99,7 +98,7 @@ class RedisManager {
       });
 
       this.client.on('reconnecting', () => {
-        console.log('🔄 Redis reconnecting...');
+        console.log('Redis reconnecting...');
       });
 
       // Test the connection
@@ -119,9 +118,9 @@ class RedisManager {
     if (this.client) {
       try {
         await this.client.quit();
-        console.log('✅ Redis disconnected gracefully');
+        console.log('Redis disconnected gracefully');
       } catch (error) {
-        console.error('❌ Error disconnecting Redis:', error);
+        console.error('Error disconnecting Redis:', error);
       } finally {
         this.client = null;
       }

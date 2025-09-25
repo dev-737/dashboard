@@ -13,6 +13,7 @@ import { getHubConnections, getHubData } from '@/lib/hub-queries';
 import { getUserHubPermission } from '@/lib/permissions';
 import { cn } from '@/lib/utils';
 import ClientReviewSection from '../components/hub-detail/ClientReviewSection';
+import ClientReviewList from '../components/hub-detail/ClientReviewList';
 import HubBanner from '../components/hub-detail/HubBanner';
 import HubConnectedServers from '../components/hub-detail/HubConnectedServers';
 import HubDetailsCard from '../components/hub-detail/HubDetailsCard';
@@ -22,7 +23,6 @@ import HubOverview from '../components/hub-detail/HubOverview';
 import HubReviewAnalytics from '../components/hub-detail/HubReviewAnalytics';
 import HubRules from '../components/hub-detail/HubRules';
 import JoinButton from '../components/hub-detail/JoinButton';
-import ReviewItem from '../components/hub-detail/ReviewItem';
 import SimilarHubsCard from '../components/hub-detail/SimilarHubsCard';
 import UpvoteButton from '../components/hub-detail/UpvoteButton';
 
@@ -220,27 +220,10 @@ const session = await auth()
                     <ClientReviewSection hubId={hub.id} />
 
                     {/* Review list */}
-                    <div className="space-y-4">
-                      {hub.reviews?.length > 0 ? (
-                        hub.reviews.map((review) => (
-                          <ReviewItem
-                            key={review.id}
-                            review={review}
-                            hubId={hub.id}
-                          />
-                        ))
-                      ) : (
-                        <div className="flex flex-col items-center justify-center p-10 text-gray-400">
-                          <MessageSquare className="mb-3 h-12 w-12 text-gray-500 opacity-50" />
-                          <p className="text-center text-gray-400">
-                            No reviews yet
-                          </p>
-                          <p className="mt-1 text-center text-gray-500 text-sm">
-                            Be the first to review this hub!
-                          </p>
-                        </div>
-                      )}
-                    </div>
+                    <ClientReviewList
+                      hubId={hub.id}
+                      initialReviews={hub.reviews}
+                    />
                   </div>
                 </TabsContent>
 

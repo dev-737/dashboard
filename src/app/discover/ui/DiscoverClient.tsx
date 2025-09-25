@@ -115,7 +115,6 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
   useEffect(() => {
     setLoading(true);
     const id = setTimeout(() => {
-      console.log('Fetching initial data with filters:', buildInput());
       queryClient
         .fetchQuery(trpc.discover.list.queryOptions(buildInput()))
         .then((res: DiscoverResponse) => {

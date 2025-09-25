@@ -158,9 +158,6 @@ export function useMultipleRecommendations(
   };
 }
 
-/**
- * Utility function to get activity level color for UI
- */
 export function getActivityLevelColor(
   level: 'LOW' | 'MEDIUM' | 'HIGH'
 ): string {
@@ -176,9 +173,6 @@ export function getActivityLevelColor(
   }
 }
 
-/**
- * Utility function to get activity level description
- */
 export function getActivityLevelDescription(
   level: 'LOW' | 'MEDIUM' | 'HIGH'
 ): string {
@@ -194,9 +188,6 @@ export function getActivityLevelDescription(
   }
 }
 
-/**
- * Utility function to format recommendation reason for display
- */
 export function formatRecommendationReason(reason: string): {
   primary: string;
   secondary?: string;
@@ -208,9 +199,6 @@ export function formatRecommendationReason(reason: string): {
   };
 }
 
-/**
- * Utility function to track recommendation interactions for analytics
- */
 export function trackRecommendationClick(
   hubId: string,
   recommendationType: RecommendationType,

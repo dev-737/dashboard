@@ -6,7 +6,7 @@ const config = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
-
+  turbopack: {},
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   },
@@ -27,11 +27,16 @@ const config = {
       '@tanstack/react-query',
       'react-hook-form',
       'motion',
+      'lodash-es', 
+      'date-fns',
     ],
     optimizeCss: true,
     scrollRestoration: true,
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB'],
     esmExternals: true,
+    typedEnv: true,
+
+
   },
 
   images: {
@@ -136,6 +141,7 @@ const config = {
       { source: '/hubs', destination: '/discover', permanent: true },
       { source: '/invite', destination: 'https://discord.com/oauth2/authorize?client_id=769921109209907241', permanent: true },
       { source: '/vote', destination: 'https://top.gg/bot/769921109209907241/vote', permanent: true },
+      { source: '/docs', destination: 'https://docs.interchat.dev', permanent: true },
     ];
   },
 };

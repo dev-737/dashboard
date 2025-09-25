@@ -110,7 +110,7 @@ export function Hero() {
               communities across servers.
               <span className="font-medium text-gray-300">
                 {' '}
-                Join 11,000+ servers already connected.
+                Join 12,000+ servers already connected.
               </span>
             </motion.p>
           </div>

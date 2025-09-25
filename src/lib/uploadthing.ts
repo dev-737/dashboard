@@ -62,9 +62,6 @@ export const ourFileRouter = {
         data: { bannerUrl: file.ufsUrl },
       });
 
-      console.log('Banner upload complete for hub:', metadata.hubId);
-      console.log('File URL:', file.ufsUrl);
-
       return {
         uploadedBy: metadata.userId,
         hubId: metadata.hubId,
@@ -120,9 +117,6 @@ export const ourFileRouter = {
         where: { id: metadata.hubId },
         data: { iconUrl: file.ufsUrl },
       });
-
-      console.log('Icon upload complete for hub:', metadata.hubId);
-      console.log('File URL:', file.ufsUrl);
 
       return {
         uploadedBy: metadata.userId,

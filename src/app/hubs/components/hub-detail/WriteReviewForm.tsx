@@ -2,7 +2,6 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Star } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useId, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -37,22 +36,47 @@ export default function WriteReviewForm({
   const [reviewText, setReviewText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const router = useRouter();
   const queryClient = useQueryClient();
   const createReview = useMutation(
     trpc.hub.createHubReview.mutationOptions({
-      onSuccess: () => {
+      onSuccess: (newReview) => {
         toast({
           title: 'Review submitted',
           description: 'Thank you for your feedback!',
         });
-        // invalidate related queries (reviews list and hub detail counts)
-        queryClient
-          .invalidateQueries(trpc.hub.getHubReviews.queryFilter({ hubId }))
-          .catch(() => {});
-        queryClient
-          .invalidateQueries(trpc.hub.getHub.queryFilter({ id: hubId }))
-          .catch(() => {});
+        
+        setRating(0);
+        setReviewText('');
+        
+        Promise.all([
+          queryClient.invalidateQueries(trpc.hub.getHubReviews.queryFilter({ hubId })),
+          queryClient.invalidateQueries(trpc.hub.getHub.queryFilter({ id: hubId })),
+          queryClient.refetchQueries(trpc.hub.getHubReviews.queryFilter({ hubId }))
+        ]).catch(() => {});
+        
+        if (onReviewSubmitted) {
+          const r = newReview as {
+            id: string;
+            rating: number;
+            text: string;
+            createdAt: Date | string;
+            user: { id: string; name: string | null; image: string | null };
+          };
+          onReviewSubmitted({
+            id: r.id,
+            rating: r.rating,
+            text: r.text,
+            createdAt: (r.createdAt instanceof Date
+              ? r.createdAt
+              : new Date(r.createdAt)
+            ).toISOString(),
+            user: {
+              id: r.user.id,
+              name: r.user.name ?? '',
+              image: r.user.image ?? undefined,
+            },
+          });
+        }
       },
       onError: (error) => {
         toast({
@@ -92,35 +116,6 @@ export default function WriteReviewForm({
     createReview.mutate(
       { hubId, rating, text: reviewText },
       {
-        onSuccess: (newReview) => {
-          // Reset form
-          setRating(0);
-          setReviewText('');
-          if (onReviewSubmitted) {
-            const r = newReview as {
-              id: string;
-              rating: number;
-              text: string;
-              createdAt: Date | string;
-              user: { id: string; name: string | null; image: string | null };
-            };
-            onReviewSubmitted({
-              id: r.id,
-              rating: r.rating,
-              text: r.text,
-              createdAt: (r.createdAt instanceof Date
-                ? r.createdAt
-                : new Date(r.createdAt)
-              ).toISOString(),
-              user: {
-                id: r.user.id,
-                name: r.user.name ?? '',
-                image: r.user.image ?? undefined,
-              },
-            });
-          }
-          router.refresh();
-        },
         onSettled: () => setIsSubmitting(false),
       }
     );

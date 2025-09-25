@@ -1,5 +1,5 @@
 import { formatDistanceToNow } from 'date-fns';
-import { Clock, Users } from 'lucide-react';
+import { Clock, Users, Plus } from 'lucide-react';
 import type React from 'react';
 
 interface HubConnectedServersProps {
@@ -13,11 +13,14 @@ interface HubConnectedServersProps {
 const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
   connections,
 }) => {
+  const visibleConnections = connections.slice(0, 10);
+  const remainingCount = connections.length - 10;
+
   return (
     <>
       {connections.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {connections.slice(0, 10).map((conn) => (
+          {visibleConnections.map((conn) => (
             <div
               key={conn.id}
               className="flex items-center gap-4 rounded-lg border border-gray-800/60 bg-gray-800/30 p-4 transition-colors duration-200 hover:bg-gray-800/50"
@@ -40,6 +43,23 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
               </div>
             </div>
           ))}
+          {remainingCount > 0 && (
+            <div className="flex items-center gap-4 rounded-lg border border-gray-700/50 bg-gray-700/20 p-4 transition-colors duration-200 hover:bg-gray-700/30">
+              <div className="h-12 w-12 overflow-hidden rounded-lg border border-gray-600/50">
+                <div className="flex h-full w-full items-center justify-center bg-gray-600">
+                  <Plus className="h-6 w-6 text-gray-300" />
+                </div>
+              </div>
+              <div className="min-w-0 flex-1">
+                <h4 className="font-medium text-sm text-gray-300">
+                  +{remainingCount} more server{remainingCount !== 1 ? 's' : ''}
+                </h4>
+                <p className="mt-1 text-gray-400 text-xs">
+                  View all connections in dashboard
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center p-10 text-gray-400">
