@@ -258,7 +258,10 @@ const session = await auth()
 
               <HubModeratorsCard moderators={hub.moderators} />
 
-              <SimilarHubsCard />
+              <SimilarHubsCard 
+                currentHubId={hub.id}
+                hubTags={hub.tags?.map(tag => tag.name) || []}
+              />
             </div>
           </div>
         </div>

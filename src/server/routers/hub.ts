@@ -10,6 +10,7 @@ import { PermissionLevel } from '@/lib/constants';
 import { BlockWordAction, Prisma } from '@/lib/generated/prisma/client';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
+import { getRedisClient } from '@/lib/redis-config';
 import { protectedProcedure, publicProcedure, router } from '../trpc';
 
 // Schema for creating a hub
@@ -1305,27 +1306,139 @@ export const hubRouter = router({
           .enum(['personalized', 'trending', 'activity', 'similar', 'friends'])
           .default('personalized'),
         limit: z.number().min(1).max(50).default(8),
+        currentHubId: z.string().optional(),
+        tags: z.array(z.string()).optional(),
       })
     )
     .query(async ({ input, ctx }) => {
-      const { type, limit } = input;
+      const { type, limit, currentHubId, tags } = input;
       const userId = ctx.session?.user?.id;
 
-      // Base query for active, public hubs
+      const cacheKey = `hub:recommendations:${type}:${limit}:${currentHubId || 'none'}:${(tags || []).sort().join(',')}:${userId || 'anon'}`;
+      
+      try {
+        const redis = await getRedisClient();
+        if (redis) {
+          const cached = await redis.get(cacheKey);
+          if (cached) {
+            console.log(`Cache hit for recommendations: ${cacheKey}`);
+            return JSON.parse(cached);
+          }
+        }
+      } catch (error) {
+        console.error('Redis cache read error for recommendations:', error);
+      }
+
       const baseWhere = {
         private: false,
         locked: false,
         connections: {
           some: { connected: true },
         },
+        // Exclude current hub if specified
+        ...(currentHubId && { id: { not: currentHubId } }),
       };
 
-      // biome-ignore lint/suspicious/noImplicitAnyLet: Complex Prisma query type
+      // biome-ignore lint/suspicious/noImplicitAnyLet: Fookin complex Prisma query type
       let hubs;
       // biome-ignore lint/suspicious/noImplicitAnyLet: Dynamic metadata object
       let metadata;
 
       switch (type) {
+        case 'similar': {
+          // Find hubs with similar tags
+          if (tags && tags.length > 0) {
+            hubs = await db.hub.findMany({
+              where: {
+                ...baseWhere,
+                tags: {
+                  some: {
+                    name: { in: tags },
+                  },
+                },
+              },
+              select: {
+                id: true,
+                name: true,
+                description: true,
+                shortDescription: true,
+                iconUrl: true,
+                bannerUrl: true,
+                nsfw: true,
+                verified: true,
+                partnered: true,
+                activityLevel: true,
+                createdAt: true,
+                lastActive: true,
+                tags: { select: { name: true } },
+                _count: {
+                  select: {
+                    connections: { where: { connected: true } },
+                    upvotes: true,
+                    reviews: true,
+                  },
+                },
+              },
+              orderBy: [
+                // Prioritize hubs with more matching tags
+                { connections: { _count: 'desc' } },
+                { upvotes: { _count: 'desc' } },
+                { lastActive: 'desc' },
+              ],
+              take: limit * 2, // Get more to filter by tag similarity
+            });
+
+            // clculate tag similarity and sort by it
+            hubs = hubs
+              .map(hub => ({
+                ...hub,
+                tagSimilarity: hub.tags.filter(tag => tags.includes(tag.name)).length,
+              }))
+              .sort((a, b) => b.tagSimilarity - a.tagSimilarity)
+              .slice(0, limit);
+          } else {
+            // general recommendations if no tags provided
+            hubs = await db.hub.findMany({
+              where: baseWhere,
+              select: {
+                id: true,
+                name: true,
+                description: true,
+                shortDescription: true,
+                iconUrl: true,
+                bannerUrl: true,
+                nsfw: true,
+                verified: true,
+                partnered: true,
+                activityLevel: true,
+                createdAt: true,
+                lastActive: true,
+                tags: { select: { name: true } },
+                _count: {
+                  select: {
+                    connections: { where: { connected: true } },
+                    upvotes: true,
+                    reviews: true,
+                  },
+                },
+              },
+              orderBy: [
+                { connections: { _count: 'desc' } },
+                { upvotes: { _count: 'desc' } },
+              ],
+              take: limit,
+            });
+          }
+
+          metadata = {
+            type: 'similar',
+            count: hubs.length,
+            generatedAt: new Date().toISOString(),
+            userContext: { authenticated: !!userId, userId },
+          };
+          break;
+        }
+
         case 'trending': {
           // Get hubs with most upvotes in the last 7 days
           const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -1476,12 +1589,25 @@ export const hubRouter = router({
         if (isQuality) score += 10;
         if (isTrusted) score += 25;
 
-        // Generate reason based on metrics
+        if (type === 'similar' && tags && 'tagSimilarity' in hub) {
+          score += (hub.tagSimilarity as number) * 30;
+        }
+
         let reason = 'Popular community';
-        if (isTrusted) reason = 'Verified community';
-        else if (isGrowing) reason = 'Trending community';
-        else if (isHighActivity) reason = 'Very active community';
-        else if (connectionCount > 10) reason = 'Large community';
+        if (type === 'similar') {
+          const matchingTags = hub.tags.filter(tag => tags?.includes(tag.name)).length;
+          reason = matchingTags > 1 
+            ? `${matchingTags} shared interests` 
+            : 'Similar community';
+        } else if (isTrusted) {
+          reason = 'Verified community';
+        } else if (isGrowing) {
+          reason = 'Trending community';
+        } else if (isHighActivity) {
+          reason = 'Very active community';
+        } else if (connectionCount > 10) {
+          reason = 'Large community';
+        }
 
         return {
           hubId: hub.id,
@@ -1489,7 +1615,7 @@ export const hubRouter = router({
             ...hub,
             activityLevel: hub.activityLevel,
             connectionCount,
-            recentMessageCount: 0, // Would need message tracking
+            recentMessageCount: 0, // TODO: Would need message tracking
             upvoteCount,
           },
           score,
@@ -1503,19 +1629,30 @@ export const hubRouter = router({
         };
       });
 
-      return {
+      const result = {
         recommendations,
         metadata,
       };
+
+      try {
+        const redis = await getRedisClient();
+        if (redis) {
+          const cacheTime = type === 'similar' ? 3600 : 300; // 1 hour for similar, 5 minutes for others
+          await redis.set(cacheKey, JSON.stringify(result), 'EX', cacheTime);
+          console.log(`Cached recommendations: ${cacheKey} for ${cacheTime}s`);
+        }
+      } catch (error) {
+        console.error('Redis cache write error for recommendations:', error);
+      }
+
+      return result;
     }),
 
-  // Validate hub name availability
   validateName: publicProcedure
     .input(z.object({ name: z.string().min(3).max(32) }))
     .query(async ({ input }) => {
       const { name } = input;
 
-      // Check if hub name is already taken (case-insensitive)
       const existingHub = await db.hub.findFirst({
         where: { name: { equals: name, mode: 'insensitive' } },
         select: { id: true },

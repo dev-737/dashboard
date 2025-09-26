@@ -30,13 +30,17 @@ const config = {
       'lodash-es', 
       'date-fns',
     ],
+    ppr: true,
+    viewTransition: true,
+    parallelServerCompiles: true,
+    parallelServerBuildTraces: true,
+    routerBFCache: true,
+    webpackBuildWorker: true,
     optimizeCss: true,
     scrollRestoration: true,
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB'],
     esmExternals: true,
     typedEnv: true,
-
-
   },
 
   images: {

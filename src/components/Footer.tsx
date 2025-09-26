@@ -12,11 +12,9 @@ import {
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { Button } from './ui/button';
+import Image from 'next/image';
 
-/**
- * 7️⃣ Footer
- * Links to terms, privacy, community guidelines, social links, and Discord server invite
- */
+
 export function Footer() {
   const footerLinks = {
     legal: [
@@ -65,9 +63,7 @@ export function Footer() {
             className="lg:col-span-1"
           >
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-purple-500">
-                <MessageCircle className="h-6 w-6 text-white" />
-              </div>
+              <Image src="/InterChatLogo.webp" alt="InterChat Logo" height={40} width={40} className='rounded-full' />
               <h3 className="font-bold text-white text-xl">InterChat</h3>
             </div>
             <p className="mb-6 text-gray-400 text-sm leading-relaxed">
