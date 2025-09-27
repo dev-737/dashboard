@@ -3,22 +3,13 @@ import type { Prisma } from "@/lib/generated/prisma/client";
 import { db } from "@/lib/prisma";
 import { PerformanceCache } from "@/lib/performance-cache";
 
+const DEFAULT_PAGE_SIZE = 24;
+const MAX_PAGE_SIZE = 60;
+const CACHE_TTL_SHORT = 300; // 5 minutes
+const CACHE_TTL_LONG = 600; // 10 minutes
+const CACHE_TTL_COUNT = 900; // 15 minutes
+
 export type DiscoverSort = "trending" | "active" | "new" | "upvoted";
-
-// Cache helper functions
-const cache = PerformanceCache.getInstance();
-
-async function getCachedData<T>(key: string): Promise<T | null> {
-    return await cache.get<T>(key);
-}
-
-async function setCachedData<T>(
-    key: string,
-    data: T,
-    options?: { ttl?: number },
-): Promise<void> {
-    return await cache.set(key, data, options);
-}
 
 export type DiscoverParams = {
     q?: string;
@@ -55,6 +46,24 @@ export type HubCardDTO = {
     isUpvoted?: boolean;
 };
 
+class CacheService {
+    private cache = PerformanceCache.getInstance();
+
+    public get<T>(key: string): Promise<T | null> {
+        return this.cache.get<T>(key);
+    }
+
+    public set<T>(key: string, data: T, ttl: number): Promise<void> {
+        return this.cache.set(key, data, { ttl });
+    }
+
+    public generateCacheKey(prefix: string, params: object): string {
+        return `${prefix}:${JSON.stringify(params)}`;
+    }
+}
+
+const cacheService = new CacheService();
+
 async function getBaseSelect(userId?: string) {
     const baseSelect = {
         id: true,
@@ -70,12 +79,7 @@ async function getBaseSelect(userId?: string) {
         partnered: true,
         nsfw: true,
         createdAt: true,
-        // Optimize tag selection to reduce N+1 queries
-        tags: {
-            select: { name: true, color: true },
-            take: 10, // Limit tags to prevent excessive data transfer
-        },
-        // Optimize activity metrics selection
+        tags: { select: { name: true, color: true }, take: 10 },
         activityMetrics: {
             select: {
                 messagesLast24h: true,
@@ -83,7 +87,6 @@ async function getBaseSelect(userId?: string) {
                 newConnectionsLast24h: true,
             },
         },
-        // Optimize count queries with specific conditions
         _count: {
             select: {
                 upvotes: true,
@@ -99,15 +102,10 @@ async function getBaseSelect(userId?: string) {
         },
     } as const;
 
-    // Add upvotes relation if user is authenticated
     if (userId) {
         return {
             ...baseSelect,
-            upvotes: {
-                where: { userId },
-                select: { userId: true },
-                take: 1,
-            },
+            upvotes: { where: { userId }, select: { userId: true }, take: 1 },
         };
     }
 
@@ -115,7 +113,9 @@ async function getBaseSelect(userId?: string) {
 }
 
 function buildWhere(p: DiscoverParams): Prisma.HubWhereInput {
-    const and: Prisma.HubWhereInput[] = [{ private: false }];
+    const and: Prisma.HubWhereInput[] = [
+        { private: false, connections: { some: { connected: true } } },
+    ];
 
     if (p.q) {
         and.push({
@@ -133,29 +133,17 @@ function buildWhere(p: DiscoverParams): Prisma.HubWhereInput {
     if (p.features?.verified) and.push({ verified: true });
     if (p.features?.partnered) and.push({ partnered: true });
 
-    // NSFW Filter Fix: When NSFW is enabled, ONLY show NSFW hubs. When disabled, exclude NSFW hubs.
-    if (p.features?.nsfw) {
-        and.push({ nsfw: true }); // Only NSFW hubs when filter is enabled
-    } else {
-        and.push({ nsfw: false }); // Exclude NSFW hubs when filter is disabled
-    }
+    and.push({ nsfw: p.features?.nsfw === true });
 
     if (p.tags?.length) {
-        // Optimize tag filtering to avoid N+1 queries
-        and.push({
-            tags: {
-                some: {
-                    name: { in: p.tags },
-                },
-            },
-        });
+        and.push({ tags: { some: { name: { in: p.tags } } } });
     }
 
     return { AND: and };
 }
 
 function buildOrderBy(
-    sort: DiscoverSort | undefined,
+    sort: DiscoverSort = "trending",
 ): Prisma.HubOrderByWithRelationInput[] {
     switch (sort) {
         case "active":
@@ -173,7 +161,8 @@ function buildOrderBy(
                 { weeklyMessageCount: "desc" },
                 { id: "desc" },
             ];
-        default: // trending - optimized to use database sorting instead of in-memory calculation
+        case "trending":
+        default:
             return [
                 { activityMetrics: { messagesLast24h: "desc" } },
                 { activityMetrics: { activeUsersLast24h: "desc" } },
@@ -192,66 +181,78 @@ export async function getDiscoverHubs(params: DiscoverParams) {
     const userId = session?.user?.id;
 
     const page = Math.max(1, params.page ?? 1);
-    const pageSize = Math.min(60, Math.max(1, params.pageSize ?? 24));
+    const pageSize = Math.min(
+        MAX_PAGE_SIZE,
+        Math.max(1, params.pageSize ?? DEFAULT_PAGE_SIZE),
+    );
+
     const where = buildWhere(params);
     const orderBy = buildOrderBy(params.sort);
     const select = await getBaseSelect(userId);
 
-    const baseParams = { ...params, userId, page, pageSize };
-    const cacheKey = `discover:v2:${JSON.stringify(baseParams)}`;
-    const countCacheKey = `discover:count:v2:${JSON.stringify({ ...params, userId })}`;
+    const baseCacheParams = { ...params, userId };
+    const pageCacheKey = cacheService.generateCacheKey("discover:v3", {
+        ...baseCacheParams,
+        page,
+        pageSize,
+    });
+    const countCacheKey = cacheService.generateCacheKey(
+        "discover:count:v3",
+        baseCacheParams,
+    );
 
-    // Try to get from cache first - with improved cache strategy
-    const cached = await getCachedData<{
+    type PaginatedResult = {
         items: HubCardDTO[];
         page: number;
         pageSize: number;
         total: number;
         nextPage: number | null;
-    }>(cacheKey);
+    };
 
-    if (cached) {
-        return cached;
+    const cachedResult = await cacheService.get<PaginatedResult>(pageCacheKey);
+    if (cachedResult) {
+        return cachedResult;
     }
 
-    let cachedTotal: number | null = null;
-    if (page > 1) {
-        cachedTotal = await getCachedData<number>(countCacheKey);
-    }
+    const cachedTotal =
+        page > 1 ? await cacheService.get<number>(countCacheKey) : null;
 
-    const [items, total] = await Promise.all([
-        db.hub.findMany({
-            where,
-            orderBy,
-            skip: (page - 1) * pageSize,
-            take: pageSize,
-            select,
-            relationLoadStrategy: "join",
-        }),
-        cachedTotal ?? db.hub.count({ where }),
-    ]);
+    const itemsPromise = db.hub.findMany({
+        where,
+        orderBy,
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+        select,
+        relationLoadStrategy: "join",
+    });
 
+    const totalPromise =
+        cachedTotal !== null
+            ? Promise.resolve(cachedTotal)
+            : db.hub.count({ where });
+
+    const [items, total] = await Promise.all([itemsPromise, totalPromise]);
     const hasMore = page * pageSize < total;
 
     const processedItems = items.map((item) => {
-        const typedItem = item as { upvotes?: { userId: string }[] };
+        const typedItem = item as typeof item & { upvotes?: { userId: string }[] };
+
         return {
             ...item,
             weeklyMessageCount: item._count.messages,
-            isUpvoted: userId ? (typedItem.upvotes?.length || 0) > 0 : false,
+            isUpvoted: !!(userId && typedItem.upvotes?.length),
         };
-    }) as unknown as HubCardDTO[];
+    });
 
-    const result = {
+    const result: PaginatedResult = {
         items: processedItems,
         page,
         pageSize,
         total,
         nextPage: hasMore ? page + 1 : null,
-    } as const;
+    };
 
-    const isFirstPage = page === 1;
-    const isFilteredQuery = !!(
+    const isFiltered = !!(
         params.q ||
         params.tags?.length ||
         params.language ||
@@ -261,14 +262,15 @@ export async function getDiscoverHubs(params: DiscoverParams) {
         params.features?.partnered ||
         params.features?.nsfw
     );
+    const cacheTtl =
+        page === 1 && !isFiltered ? CACHE_TTL_LONG : CACHE_TTL_SHORT;
 
-    const cacheTtl = isFirstPage && !isFilteredQuery ? 600 : 300;
-
-    await setCachedData(cacheKey, result, { ttl: cacheTtl });
-
-    if (!cachedTotal) {
-        await setCachedData(countCacheKey, total, { ttl: 900 });
-    }
+    await Promise.all([
+        cacheService.set(pageCacheKey, result, cacheTtl),
+        cachedTotal === null
+            ? cacheService.set(countCacheKey, total, CACHE_TTL_COUNT)
+            : Promise.resolve(),
+    ]);
 
     return result;
 }

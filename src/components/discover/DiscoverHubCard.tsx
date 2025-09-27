@@ -150,8 +150,8 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 'A community space for meaningful discussions and connections.'}
             </CardDescription>
 
-            {/* Activity Badge */}
-            <div
+            {/* TODO: Enable Activity Badge after adding logic to update activity level in the python bot */}
+            {/* <div
               className={`mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1 ${config.bgColor} ${config.borderColor} border`}
             >
               <div
@@ -160,33 +160,33 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
               <span className={`font-medium text-sm ${config.textColor}`}>
                 {config.label}
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
       </CardHeader>
 
       <CardContent className="relative flex-1 space-y-4">
         {/* Tags */}
-        <div className="flex min-h-[32px] items-start">
+        <div className="flex items-center">
           {tags && tags.length > 0 ? (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1">
               {tags.slice(0, 3).map((tag) => (
                 <Button
                   key={tag.name}
                   onClick={() => onTagClick?.(tag.name)}
-                  className="inline-flex cursor-pointer items-center rounded-full border border-gray-700/50 bg-gray-800/60 px-3 py-1 font-medium text-gray-300 text-xs transition-all duration-200 hover:border-gray-600/50 hover:bg-gray-700/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                  className="inline-flex cursor-pointer items-center rounded-2xl border border-gray-700/50 bg-gray-800/60 px-1.5 py-0.5 text-xs font-medium text-gray-300 transition-all duration-200 hover:border-gray-600/50 hover:bg-gray-700/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                 >
                   #{tag.name}
                 </Button>
               ))}
               {tags.length > 3 && (
-                <span className="inline-flex items-center rounded-full border border-gray-700/30 bg-gray-800/40 px-3 py-1 text-gray-400 text-xs">
+                <span className="inline-flex items-center rounded-md border border-gray-700/30 bg-gray-800/40 px-1.5 py-0.5 text-xs text-gray-400">
                   +{tags.length - 3} more
                 </span>
               )}
             </div>
           ) : (
-            <div className="h-8" />
+            <div className="h-6" /> // Reduced placeholder height
           )}
         </div>
 
@@ -232,11 +232,10 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
             size="icon"
             onClick={handleUpvote}
             disabled={isLoading}
-            className={`shrink-0 rounded-[var(--radius-button)] border-2 transition-all duration-300 ${
-              liked
-                ? 'border-red-500/50 bg-red-500/20 text-red-400 hover:bg-red-500/30'
-                : 'border-gray-700/50 bg-gray-800/50 text-gray-400 hover:border-gray-600 hover:text-white'
-            }`}
+            className={`shrink-0 rounded-[var(--radius-button)] border-2 transition-all duration-300 ${liked
+              ? 'border-red-500/50 bg-red-500/20 text-red-400 hover:bg-red-500/30'
+              : 'border-gray-700/50 bg-gray-800/50 text-gray-400 hover:border-gray-600 hover:text-white'
+              }`}
           >
             {isLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
