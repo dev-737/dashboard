@@ -1,6 +1,6 @@
 # InterChat Web Dashboard 🌐
 
-A modern, responsive web dashboard for InterChat built with Next.js 15, React 19, and TypeScript. Provides comprehensive hub management, analytics, and administrative tools for Discord server networks.
+A very modern, responsive web dashboard for InterChat built with Next.js 15, React 19, and TypeScript. Provides comprehensive hub management, analytics, and administrative tools for Discord server networks.
 
 ## ✨ Features
 
