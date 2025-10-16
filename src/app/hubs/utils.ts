@@ -11,18 +11,18 @@ import {
 
 // sorting algorithm constants
 const TRENDING_WINDOW_DAYS = 7;
-const NEW_HUB_WINDOW_DAYS = 30; // For 'Most Upvoted New Hubs'
-const RECENT_ACTIVITY_WINDOW_DAYS = 30; // Extended for better activity tracking
+const NEW_HUB_WINDOW_DAYS = 30;
+const RECENT_ACTIVITY_WINDOW_DAYS = 30;
 // trending weights
-const WEIGHT_RECENT_CONNECTION = 15; // Increased weight for new connections
-const WEIGHT_RECENT_UPVOTE = 8; // Increased weight for recent upvotes
-const WEIGHT_RECENT_REVIEW = 5; // Increased weight for reviews
-const WEIGHT_MESSAGE_FREQUENCY = 12; // New weight for message activity
-const WEIGHT_CONNECTION_GROWTH = 10; // New weight for connection growth rate
+const WEIGHT_RECENT_CONNECTION = 15;
+const WEIGHT_RECENT_UPVOTE = 8;
+const WEIGHT_RECENT_REVIEW = 5;
+const WEIGHT_MESSAGE_FREQUENCY = 12;
+const WEIGHT_CONNECTION_GROWTH = 10;
 
 // decay factors for trending
-const TRENDING_DECAY_BASE = 1.5; // Reduced for slower decay
-const TRENDING_DECAY_RATE = 0.4; // Reduced for more gradual decay
+const TRENDING_DECAY_BASE = 1.5;
+const TRENDING_DECAY_RATE = 0.4;
 
 export interface FilterOptions {
   search?: string;
@@ -53,7 +53,7 @@ export function buildWhereClause({
     { private: false }, // Always filter out private hubs
   ];
 
-  // Filter by tags - AND logic (hub must have ALL selected tags)
+  // Filter by tags - hub must have ALL selected tags
   if (tags && tags.length > 0) {
     filterConditions.push({
       AND: tags.map((tag) => ({
@@ -96,7 +96,7 @@ export function buildWhereClause({
   if (minServers !== undefined || maxServers !== undefined) {
     // We'll add a basic filter for connections
     // The actual count filtering will be done after the query
-    // This ensures we at least get hubs with connections
+    // This make sures we at least get hubs with connections
     if (minServers !== undefined && minServers > 0) {
       filterConditions.push({
         connections: {
@@ -107,7 +107,7 @@ export function buildWhereClause({
       });
     }
 
-    // Note: We can't directly filter by count in the where clause
+    // NOTE: We can't directly filter by count in the where clause
     // We'll handle the actual min/max server filtering in the getSortedHubs function
   }
 

@@ -13,10 +13,12 @@ export interface HubDetailData
   rules: string[];
   shortDescription: string | null;
   activityLevel: 'LOW' | 'MEDIUM' | 'HIGH';
+  ownerId: string;
   upvotes: { id: string; userId: string }[];
   moderators: {
     id: string;
     role: Role;
+    userId: string;
     user: { name: string | null; image: string | null; id: string };
   }[];
   reviews: {
@@ -44,10 +46,9 @@ export interface HubConnectionData {
 }
 
 export const getHubData = cache(
-  async (hubId: string): Promise<HubDetailData | null> => {
-    // Try cache first
+  async (hubId: string, userId?: string): Promise<HubDetailData | null> => {
     const performanceCache = PerformanceCache.getInstance();
-    const cacheKey = `hub-data:${hubId}`;
+    const cacheKey = `hub-data:${hubId}:${userId || 'anon'}`;
     const cached = await performanceCache.get<HubDetailData>(cacheKey);
 
     if (cached) {
@@ -70,6 +71,7 @@ export const getHubData = cache(
         partnered: true,
         shortDescription: true,
         activityLevel: true,
+        ownerId: true,
         reviews: {
           select: {
             id: true,
@@ -88,6 +90,7 @@ export const getHubData = cache(
           select: {
             id: true,
             role: true,
+            userId: true,
             user: { select: { name: true, image: true, id: true } },
           },
         },

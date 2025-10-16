@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 import { toast } from '@/hooks/use-toast';
 
-const JOIN_HUB_COMMAND_PREFIX = '/connect hub:';
+const JOIN_HUB_COMMAND_PREFIX = '/connection add hub:';
 
 export default function BannerSection({ hub }: { hub: SimplifiedHub }) {
   const joinHubCommand = `${JOIN_HUB_COMMAND_PREFIX}${hub.name}`;

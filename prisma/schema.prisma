@@ -142,6 +142,7 @@ model Hub {
     settings            Int                  @default(0)
     appealCooldownHours Int                  @default(168)
     weeklyMessageCount  Int                  @default(0)
+    averageRating       Float?
     private             Boolean              @default(true)
     locked              Boolean              @default(false)
     nsfw                Boolean              @default(false)
@@ -179,6 +180,9 @@ model Hub {
     @@index([private, language, region])
     @@index([lastActive, weeklyMessageCount])
     @@index([createdAt, weeklyMessageCount])
+    @@index([private, activityLevel, averageRating])
+    @@index([private, verified, partnered, weeklyMessageCount])
+    @@index([averageRating])
 }
 
 model HubActivityMetrics {
@@ -194,10 +198,12 @@ model HubActivityMetrics {
     newConnectionsLast7d  Int      @default(0)
     memberGrowthRate      Float    @default(0.0)
     engagementRate        Float    @default(0.0)
+    trendingScore         Float    @default(0.0)
     hub                   Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
     @@index([hubId])
     @@index([lastUpdated])
+    @@index([trendingScore(sort: Desc)])
 }
 
 model HubInvite {
@@ -257,6 +263,8 @@ model HubReview {
 
     @@unique([hubId, userId])
     @@index([userId])
+    @@index([hubId, rating])
+    @@index([hubId, createdAt])
 }
 
 model HubRulesAcceptance {
@@ -336,8 +344,6 @@ model Message {
     @@index([guildId, hubId])
     @@index([guildId])
     @@index([hubId, createdAt(sort: Desc)])
-    @@index([authorId, createdAt(sort: Desc)], map: "Message_author_timestamp_idx")
-    @@index([channelId, createdAt(sort: Desc)], map: "Message_channel_timestamp_idx")
 }
 
 model ReputationLog {

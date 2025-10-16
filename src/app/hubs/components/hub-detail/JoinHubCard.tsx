@@ -11,7 +11,7 @@ export default function JoinHubCard({ hub }: { hub: SimplifiedHub }) {
   const { name } = hub;
   const [copied, setCopied] = useState(false);
 
-  const joinHubCommand = `/connect hub:${name}`;
+  const joinHubCommand = `/connection add hub:${name}`;
 
   const handleCopyCommand = async () => {
     try {

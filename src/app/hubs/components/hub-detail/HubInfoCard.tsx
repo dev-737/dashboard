@@ -1,7 +1,8 @@
 import { formatDistanceToNow } from 'date-fns';
-import { Clock, Heart, Tag, Users } from 'lucide-react';
+import { Clock, Handshake, Heart, Tag, Users } from 'lucide-react';
 import Image from 'next/image';
 import type React from 'react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 
 interface HubInfoCardProps {
@@ -13,6 +14,8 @@ interface HubInfoCardProps {
     _count: { connections: number };
     lastActive: Date | null;
     tags: Array<{ name: string }>;
+    verified?: boolean;
+    partnered?: boolean;
   };
 }
 
@@ -36,9 +39,48 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
 
       <div className="min-w-0 flex-1">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="break-words bg-gradient-to-r from-white to-gray-300 bg-clip-text font-bold text-3xl text-transparent md:text-4xl">
-            {hub.name}
-          </h1>
+          <div className="flex items-center gap-3">
+            <h1 className="break-words bg-gradient-to-r from-white to-gray-300 bg-clip-text font-bold text-3xl text-transparent md:text-4xl">
+              {hub.name}
+            </h1>
+            <div className="flex items-center gap-2">
+              {hub.verified && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 cursor-help">
+                      <svg
+                        className="h-4 w-4 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <title>Verified hub</title>
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Verified Hub</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+              {hub.partnered && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 via-purple-600 to-violet-700 cursor-help">
+                      <Handshake className="h-4 w-4 text-white" />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Partner Hub</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+            </div>
+          </div>
         </div>
         {/* Brief description preview */}
         <p className="mt-2 line-clamp-2 text-gray-300 text-sm md:text-base">

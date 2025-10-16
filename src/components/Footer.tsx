@@ -32,13 +32,13 @@ export function Footer() {
       },
       {
         label: 'GitHub',
-        href: 'https://github.com/interchatapp',
+        href: 'https://github.com/oxaradev',
         icon: ExternalLink,
         description: 'Open Source',
       },
       {
         label: 'Twitter',
-        href: 'https://twitter.com/interchatapp',
+        href: 'https://twitter.com/oxaradev',
         icon: ExternalLink,
         description: '@InterChatApp',
       },

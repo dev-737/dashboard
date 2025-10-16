@@ -17,52 +17,66 @@ export function DiscoverSkeleton({ count = 8 }: DiscoverSkeletonProps) {
       {skeletons.map((skeleton) => (
         <div
           key={skeleton.id}
-          className="relative h-[380px] sm:h-[420px] animate-pulse overflow-hidden rounded-[var(--radius)] border border-gray-700/50 bg-gradient-to-br from-gray-900/90 to-gray-950/90 backdrop-blur-sm"
-          style={{
-            // Exact dimensions matching DiscoverHubCard to prevent layout shifts
-            minHeight: '380px',
-            maxHeight: '420px',
-            aspectRatio: '1 / 1.2',
-            contain: 'layout style paint',
-          }}
+          className="relative flex h-full animate-pulse flex-col overflow-hidden rounded-xl border border-gray-800/60 bg-gray-900/90 sm:bg-gray-900/40 sm:backdrop-blur-sm"
         >
           {/* Shimmer effect */}
           <div
-            className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-gray-800/20 to-transparent"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-gray-800/10 to-transparent"
             style={{
               backgroundSize: '200% 100%',
               animation: 'shimmer 2s infinite linear',
             }}
           />
-          <div className="space-y-4 p-8">
-            {/* Avatar and title skeleton */}
-            <div className="mt-8 flex items-center gap-4">
-              <div className="h-14 w-14 rounded-full bg-gray-800/60" />
-              <div className="flex-1 space-y-2">
-                <div className="h-5 w-3/4 rounded bg-gray-800/60" />
-                <div className="h-4 w-1/2 rounded bg-gray-800/40" />
+
+          {/* Header */}
+          <div className="relative space-y-3 px-6 pb-3 pt-5">
+            <div className="flex items-start gap-4">
+              {/* Avatar */}
+              <div className="h-14 w-14 shrink-0 rounded-full bg-gray-800/50" />
+
+              {/* Title and description */}
+              <div className="min-w-0 flex-1 space-y-2">
+                <div className="h-5 w-3/4 rounded bg-gray-800/50" />
+                <div className="h-4 w-full rounded bg-gray-800/30" />
+                <div className="h-4 w-2/3 rounded bg-gray-800/30" />
               </div>
             </div>
+          </div>
 
-            {/* Stats skeleton */}
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <div className="h-16 rounded-xl bg-gray-800/40" />
-              <div className="h-16 rounded-xl bg-gray-800/40" />
-            </div>
-
-            {/* Activity skeleton */}
-            <div className="h-12 rounded-xl bg-gray-800/40" />
-
+          {/* Content */}
+          <div className="relative flex-1 space-y-4 px-6 pb-4">
             {/* Tags skeleton */}
-            <div className="flex gap-2">
-              <div className="h-6 w-12 rounded-xl bg-gray-800/40" />
-              <div className="h-6 w-16 rounded-xl bg-gray-800/40" />
+            <div className="flex flex-wrap gap-1.5">
+              <div className="h-6 w-16 rounded-full bg-gray-800/40" />
+              <div className="h-6 w-20 rounded-full bg-gray-800/40" />
+              <div className="h-6 w-14 rounded-full bg-gray-800/40" />
             </div>
 
-            {/* Action buttons skeleton */}
-            <div className="flex gap-2 pt-4">
-              <div className="h-10 flex-1 rounded-xl bg-gray-800/40" />
-              <div className="h-10 w-10 rounded-xl bg-gray-800/40" />
+            {/* Stats Grid - 3 columns to match new design */}
+            <div className="grid grid-cols-3 gap-3">
+              <div className="flex flex-col items-center gap-1 rounded-lg border border-gray-800/50 bg-gray-950/30 p-3">
+                <div className="h-4 w-4 rounded bg-gray-800/40" />
+                <div className="h-5 w-12 rounded bg-gray-800/50" />
+                <div className="h-3 w-10 rounded bg-gray-800/30" />
+              </div>
+              <div className="flex flex-col items-center gap-1 rounded-lg border border-gray-800/50 bg-gray-950/30 p-3">
+                <div className="h-4 w-4 rounded bg-gray-800/40" />
+                <div className="h-5 w-12 rounded bg-gray-800/50" />
+                <div className="h-3 w-10 rounded bg-gray-800/30" />
+              </div>
+              <div className="flex flex-col items-center gap-1 rounded-lg border border-gray-800/50 bg-gray-950/30 p-3">
+                <div className="h-4 w-4 rounded bg-gray-800/40" />
+                <div className="h-5 w-12 rounded bg-gray-800/50" />
+                <div className="h-3 w-10 rounded bg-gray-800/30" />
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="relative border-t border-gray-800/50 px-6 pt-4 pb-6">
+            <div className="flex gap-2">
+              <div className="h-10 flex-1 rounded-lg bg-gray-800/40" />
+              <div className="h-10 w-10 rounded-lg bg-gray-800/40" />
             </div>
           </div>
         </div>

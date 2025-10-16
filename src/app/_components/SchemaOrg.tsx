@@ -157,8 +157,8 @@ export function OrganizationSchema({
       description,
       sameAs: [
         'https://discord.gg/cgYgC6YZyX',
-        'https://github.com/interchatapp/InterChat',
-        'https://twitter.com/interchatapp',
+        'https://github.com/oxaradev/InterChat',
+        'https://twitter.com/oxaradev',
       ],
     };
 

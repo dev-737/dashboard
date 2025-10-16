@@ -1,15 +1,17 @@
 'use client';
 
 import { useQueryClient } from '@tanstack/react-query';
+import { X } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import DiscoverHubCard from '@/components/discover/DiscoverHubCard';
 import { DiscoverSkeleton } from '@/components/discover/DiscoverSkeleton';
 import { HubSearch } from '@/components/discover/HubSearch';
 import { Button } from '@/components/ui/button';
-import { StableGrid, LayoutStabilizer } from '@/components/ui/layout-optimizer';
+import { LayoutStabilizer, StableGrid } from '@/components/ui/layout-optimizer';
 import type { HubCardDTO } from '@/lib/discover/query';
 import { useTRPC } from '@/utils/trpc';
 import { type FeatureFlags, Filters } from './Filters';
+import { QuickFilters, type QuickFilterType } from './QuickFilters';
 
 export type DiscoverResponse = {
   items: HubCardDTO[];
@@ -19,25 +21,47 @@ export type DiscoverResponse = {
   nextPage?: number | null;
 };
 
+// Utility function to parse member range - moved outside component for stability
+function parseMemberRange(range?: string) {
+  if (!range) return undefined;
+  switch (range) {
+    case 'small':
+      return { min: 0, max: 49 };
+    case 'medium':
+      return { min: 50, max: 199 };
+    case 'large':
+      return { min: 200, max: 999 };
+    case 'huge':
+      return { min: 1000, max: undefined };
+    default:
+      return undefined;
+  }
+}
+
 export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
   const [data, setData] = useState<DiscoverResponse>(initial);
   const [searchQuery, setSearchQuery] = useState(''); // For actual filtering
-  const [sort, setSort] = useState<'trending' | 'active' | 'new' | 'upvoted'>(
-    'trending'
-  );
+  const [sort, setSort] = useState<
+    'trending' | 'active' | 'new' | 'upvoted' | 'rated' | 'members' | 'growing'
+  >('trending');
   const [tags, setTags] = useState<string[]>([]);
   const [language, setLanguage] = useState<string | undefined>(undefined);
   const [region, setRegion] = useState<string | undefined>(undefined);
   const [activity, setActivity] = useState<('LOW' | 'MEDIUM' | 'HIGH')[]>([]);
+  const [memberRange, setMemberRange] = useState<string | undefined>(undefined);
+  const [minRating, setMinRating] = useState<number | undefined>(undefined);
   const [features, setFeatures] = useState<FeatureFlags>({
     verified: false,
     partnered: false,
     nsfw: false,
   });
+  const [activeQuickFilter, setActiveQuickFilter] =
+    useState<QuickFilterType | null>(null);
   const [page, setPage] = useState<number | null>(initial.nextPage ?? null);
   const [loading, setLoading] = useState(false);
 
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const fetchAbortControllerRef = useRef<AbortController | null>(null);
   const queryClient = useQueryClient();
   const trpc = useTRPC();
 
@@ -51,6 +75,10 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
     const region0 = sp.get('region') || undefined;
     const activity0 =
       (sp.get('activity')?.split(',').filter(Boolean) as typeof activity) ?? [];
+    const memberRange0 = sp.get('memberRange') || undefined;
+    const minRating0 = sp.get('minRating')
+      ? Number.parseFloat(sp.get('minRating')!)
+      : undefined;
     const features0 = new Set(
       (sp.get('features') || '').split(',').filter(Boolean)
     );
@@ -61,6 +89,8 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
     setLanguage(lang0);
     setRegion(region0);
     setActivity(activity0);
+    setMemberRange(memberRange0);
+    setMinRating(minRating0);
     setFeatures({
       verified: features0.has('verified'),
       partnered: features0.has('partnered'),
@@ -74,12 +104,18 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
     if (features.verified) feats.push('verified');
     if (features.partnered) feats.push('partnered');
     if (features.nsfw) feats.push('nsfw');
+
+    const memberCount = parseMemberRange(memberRange);
+
     return {
       q: searchQuery || undefined,
       tags: tags.length ? tags : undefined,
       language,
       region,
       activity: activity.length ? activity : undefined,
+      memberCount,
+      minRating,
+      showFeaturedOnly: activeQuickFilter === 'featured' ? true : undefined,
       features: feats.length
         ? {
             verified: features.verified,
@@ -90,7 +126,18 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
       sort,
       pageSize: 24,
     } as const;
-  }, [searchQuery, tags, language, region, activity, features, sort]);
+  }, [
+    searchQuery,
+    tags,
+    language,
+    region,
+    activity,
+    memberRange,
+    minRating,
+    features,
+    sort,
+    activeQuickFilter,
+  ]);
 
   // Sync URL bar (without reload)
   useEffect(() => {
@@ -100,6 +147,8 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
     if (language) sp.set('lang', language);
     if (region) sp.set('region', region);
     if (activity.length) sp.set('activity', activity.join(','));
+    if (memberRange) sp.set('memberRange', memberRange);
+    if (minRating) sp.set('minRating', minRating.toString());
     const feats: string[] = [];
     if (features.verified) feats.push('verified');
     if (features.partnered) feats.push('partnered');
@@ -109,25 +158,56 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
     const qs = sp.toString();
     const nextUrl = qs ? `/discover?${qs}` : '/discover';
     window.history.replaceState(null, '', nextUrl);
-  }, [searchQuery, sort, tags, language, region, activity, features]);
+  }, [
+    searchQuery,
+    sort,
+    tags,
+    language,
+    region,
+    activity,
+    memberRange,
+    minRating,
+    features,
+  ]);
+
+  // Create a stable input object using useMemo
+  const queryInput = useMemo(() => buildInput(), [buildInput]);
+
+  // Create a stable key for dependency tracking
+  const queryKey = useMemo(() => JSON.stringify(queryInput), [queryInput]);
 
   // Debounced fetch on filter changes
   useEffect(() => {
+    // Cancel any in-flight request
+    if (fetchAbortControllerRef.current) {
+      fetchAbortControllerRef.current.abort();
+    }
+
     setLoading(true);
     const id = setTimeout(() => {
+      // Create new abort controller for this request
+      fetchAbortControllerRef.current = new AbortController();
+
       queryClient
-        .fetchQuery(trpc.discover.list.queryOptions(buildInput()))
+        .fetchQuery(trpc.discover.list.queryOptions(queryInput))
         .then((res: DiscoverResponse) => {
           setData(res);
           setPage(res.nextPage ?? null);
         })
         .catch((error) => {
-          console.error('Error fetching initial data:', error);
+          // Ignore abort errors
+          if (error.name !== 'AbortError') {
+            console.error('Error fetching initial data:', error);
+          }
         })
         .finally(() => setLoading(false));
     }, 300);
-    return () => clearTimeout(id);
-  }, [buildInput, queryClient, trpc.discover.list]);
+
+    return () => {
+      clearTimeout(id);
+      // Don't abort here - let the next effect cancel if needed
+    };
+  }, [queryKey, queryClient, trpc.discover.list, queryInput]);
 
   // Infinite scroll
   useEffect(() => {
@@ -160,9 +240,9 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
             .finally(() => setLoading(false));
         }
       },
-      { rootMargin: '200px',threshold: 0 }
+      { rootMargin: '200px', threshold: 0 }
     );
-    
+
     io.observe(el);
     return () => io.disconnect();
   }, [page, loading, buildInput, queryClient, trpc.discover.list]);
@@ -181,6 +261,87 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
     }
     // Reset will happen automatically via the debounced effect
   };
+
+  const handleQuickFilterClick = (type: QuickFilterType) => {
+    if (activeQuickFilter === type) {
+      setActiveQuickFilter(null);
+      if (type === 'featured') {
+      } else if (type === 'new') {
+        setSort('trending');
+      } else if (type === 'rated') {
+        setSort('trending');
+        setMinRating(undefined);
+      } else if (type === 'popular') {
+        setSort('trending');
+      } else if (type === 'rising') {
+        setSort('trending');
+      }
+      return;
+    }
+
+    setActiveQuickFilter(type);
+
+    switch (type) {
+      case 'popular':
+        setSort('active');
+        break;
+      case 'rising':
+        setSort('growing');
+        break;
+      case 'new':
+        setSort('new');
+        break;
+      case 'rated':
+        setSort('rated');
+        setMinRating(4.5);
+        break;
+      case 'featured':
+        break;
+      case 'random':
+        setSort('new');
+        // TODO: Redirect to a random ass hub
+        break;
+    }
+  };
+
+  const handleClearAllFilters = () => {
+    setSearchQuery('');
+    setTags([]);
+    setLanguage(undefined);
+    setRegion(undefined);
+    setActivity([]);
+    setMemberRange(undefined);
+    setMinRating(undefined);
+    setFeatures({ verified: false, partnered: false, nsfw: false });
+    setActiveQuickFilter(null);
+    setSort('trending');
+  };
+
+  const hasActiveFilters = useMemo(() => {
+    return !!(
+      searchQuery ||
+      tags.length > 0 ||
+      language ||
+      region ||
+      activity.length > 0 ||
+      memberRange ||
+      minRating ||
+      features.verified ||
+      features.partnered ||
+      features.nsfw ||
+      activeQuickFilter
+    );
+  }, [
+    searchQuery,
+    tags,
+    language,
+    region,
+    activity,
+    memberRange,
+    minRating,
+    features,
+    activeQuickFilter,
+  ]);
 
   // Remove the inline skeleton generation since we're using the optimized component
 
@@ -223,10 +384,16 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
         )}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:gap-8 lg:grid-cols-12">
-        {/* Sidebar - Mobile-responsive with collapsible filters */}
-        <div className="lg:col-span-3">
-          <div className="scrollbar-thin scrollbar-thumb-purple-500/20 scrollbar-track-transparent hover:scrollbar-thumb-purple-500/40 sticky top-20 z-20 max-h-[calc(100vh-6rem)] overflow-y-auto">
+      {/* Quick Filters */}
+      <QuickFilters
+        onFilterClick={handleQuickFilterClick}
+        activeFilter={activeQuickFilter}
+      />
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-8">
+        {/* Filters Sidebar - Appears first on mobile, right side on desktop */}
+        <div className="lg:order-2 lg:col-span-3">
+          <div className="scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
             <Filters
               q=""
               onQChange={() => {}}
@@ -240,27 +407,57 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
               onRegionChange={setRegion}
               activity={activity}
               onActivityChange={setActivity}
+              memberRange={memberRange}
+              onMemberRangeChange={setMemberRange}
+              minRating={minRating}
+              onMinRatingChange={setMinRating}
               features={features}
               onFeaturesChange={setFeatures}
             />
           </div>
         </div>
 
-        {/* Content */}
-        <div className="lg:col-span-9">
+        {/* Content - Appears second on mobile, left side on desktop */}
+        <div className="lg:order-1 lg:col-span-9">
+          {/* Result count and clear filters */}
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <div className="text-gray-300">
+              {!loading && (
+                <span className="text-lg">
+                  <span className="font-semibold text-white">
+                    {data.total !== undefined
+                      ? data.total.toLocaleString()
+                      : data.items.length.toLocaleString()}
+                  </span>{' '}
+                  {data.total === 1 ? 'hub' : 'hubs'} found
+                </span>
+              )}
+            </div>
+
+            {hasActiveFilters && (
+              <Button
+                onClick={handleClearAllFilters}
+                variant="outline"
+                className="group flex items-center gap-2 rounded-[var(--radius-button)] border-gray-700/50 bg-gray-900/50 text-gray-300 transition-all hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-300"
+              >
+                <X className="h-4 w-4" />
+                <span>Clear All Filters</span>
+              </Button>
+            )}
+          </div>
+
           {/* Grid - Mobile-responsive with layout stability */}
           <LayoutStabilizer minHeight="800px">
             <StableGrid itemMinHeight="380px">
-
-            {data.items.map((h, index) => (
-              <DiscoverHubCard
-                key={h.id}
-                {...h}
-                onTagClick={handleTagClick}
-                isAboveFold={index < 12} // First 12 cards are considered above-the-fold
-              />
-            ))}
-            {loading && <DiscoverSkeleton count={8} />}
+              {data.items.map((h, index) => (
+                <DiscoverHubCard
+                  key={h.id}
+                  {...h}
+                  onTagClick={handleTagClick}
+                  isAboveFold={index < 12} // First 12 cards are considered above-the-fold
+                />
+              ))}
+              {loading && <DiscoverSkeleton count={8} />}
             </StableGrid>
           </LayoutStabilizer>
 
@@ -270,7 +467,7 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
               <div className="relative inline-block">
                 {/* Glow effect */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-gray-800/20 via-gray-700/20 to-gray-800/20 blur-xl" />
-                <div className="relative mx-auto max-w-md rounded-2xl border border-gray-700/50 bg-gradient-to-br from-gray-900/90 to-gray-950/90 p-12 backdrop-blur-sm">
+                <div className="relative mx-auto max-w-md rounded-2xl border border-gray-700/50 bg-gradient-to-br from-gray-900 to-gray-950 p-12 sm:from-gray-900/90 sm:to-gray-950/90 sm:backdrop-blur-sm">
                   <div className="mb-4 text-6xl">🔍</div>
                   <h3 className="mb-3 font-semibold text-white text-xl">
                     No hubs found

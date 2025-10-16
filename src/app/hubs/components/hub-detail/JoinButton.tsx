@@ -20,7 +20,7 @@ interface JoinButtonProps {
 
 export default function JoinButton({ hubName, hubId }: JoinButtonProps) {
   const [copied, setCopied] = useState(false);
-  const joinHubCommand = `/connect hub:${hubName}`;
+  const joinHubCommand = `/connection add hub:${hubName}`;
   const router = useRouter();
   const { data: session } = useSession();
 

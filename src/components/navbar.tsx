@@ -56,7 +56,7 @@ const links = [
 export function Navbar() {
   const { data: session } = useSession();
   const actualUser = session?.user;
-  
+
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const isDashboardPage = pathname.startsWith('/dashboard');
@@ -118,7 +118,7 @@ export function Navbar() {
             className="hidden rounded-full text-gray-400 transition-transform duration-300 hover:scale-110 hover:bg-transparent hover:text-white lg:flex"
           >
             <Link
-              href="https://github.com/interchatapp/InterChat"
+              href="https://github.com/oxaradev/InterChat"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -159,78 +159,109 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full text-gray-400 backdrop-blur-sm transition-all duration-300 hover:bg-white/5 hover:text-white lg:hidden"
+                className="group rounded-full border border-gray-700/30 text-gray-400 backdrop-blur-sm transition-all duration-300 hover:border-gray-600/50 hover:bg-white/5 hover:text-white hover:shadow-lg hover:shadow-purple-500/10 lg:hidden"
               >
-                <Menu className="h-5 w-5" />
+                <Menu className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[280px] border-gray-800/30 border-l bg-[#0a0a0c]/95 p-0 backdrop-blur-md sm:w-[320px]"
+              className="w-[280px] overflow-hidden border-gray-700/40 border-l bg-gradient-to-b from-gray-900/98 to-gray-950/98 p-0 shadow-2xl shadow-black/20 backdrop-blur-xl sm:w-[320px]"
             >
-              <SheetHeader className="border-gray-800/30 border-b p-6">
-                <SheetTitle className="flex items-center gap-2 text-white">
-                  <Image
-                    alt="InterChat"
-                    src="/interchat.png"
-                    height={24}
-                    width={24}
-                    className="rounded-full transition-transform duration-300 hover:scale-105"
-                  />
-                  <span className="font-medium">InterChat Menu</span>
+              <SheetHeader className="border-gray-700/40 border-b bg-gradient-to-r from-gray-900/50 to-gray-800/50 p-6 backdrop-blur-sm">
+                <SheetTitle className="flex items-center gap-3 text-white">
+                  <div className="relative">
+                    <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500/20 blur-md" />
+                    <Image
+                      alt="InterChat"
+                      src="/interchat.png"
+                      height={24}
+                      width={24}
+                      className="relative rounded-full transition-transform duration-300 hover:scale-110"
+                    />
+                  </div>
+                  <span className="bg-gradient-to-r from-white via-gray-100 to-gray-200 bg-clip-text font-semibold text-transparent">
+                    InterChat Menu
+                  </span>
                 </SheetTitle>
               </SheetHeader>
 
               <div className="flex h-full flex-col">
-                <nav className="flex flex-col py-4">
-                  {links.map((link) => (
+                <nav className="relative flex flex-col space-y-2 px-4 py-6">
+                  {/* Vertical line connecting bullets */}
+                  <div className="absolute top-[calc(1.5rem+0.75rem)] bottom-[calc(0.5rem+0.75rem)] left-[2.25rem] w-[2px] bg-gradient-to-b from-purple-500/40 via-indigo-500/30 to-purple-500/40" />
+
+                  {links.map((link, index) => (
                     <Link
                       key={link.url}
                       href={link.url}
-                      className={`relative flex items-center px-6 py-3 font-medium text-gray-400 text-sm transition-all duration-300 hover:text-white ${pathname === link.url ? 'bg-white/5 pl-8 text-white' : ''}hover:bg-white/5 hover:pl-8`}
+                      className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border px-4 py-3 font-medium text-sm transition-all duration-300 ${
+                        pathname === link.url
+                          ? 'border-purple-500/30 bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
+                          : 'border-transparent text-gray-400 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-md hover:shadow-black/5'
+                      }`}
+                      style={{
+                        animationDelay: `${index * 50}ms`,
+                      }}
                     >
-                      {link.text}
+                      <div
+                        className={`relative z-10 flex h-2 w-2 shrink-0 rounded-full transition-all duration-300 ${
+                          pathname === link.url
+                            ? 'bg-purple-400 shadow-lg shadow-purple-400/50'
+                            : 'bg-gray-600 group-hover:bg-purple-400 group-hover:shadow-md group-hover:shadow-purple-400/30'
+                        }`}
+                      />
+                      <span className="truncate">{link.text}</span>
+                      {link.external && (
+                        <ExternalLink className="ml-auto h-3.5 w-3.5 opacity-50 transition-opacity duration-300 group-hover:opacity-100" />
+                      )}
                     </Link>
                   ))}
                 </nav>
 
-                <div className="mt-auto space-y-4 border-gray-800/30 border-t p-6">
-                  <Button
-                    asChild
-                    className="w-full bg-gradient-to-r from-primary to-primary-alt font-medium text-white shadow-md transition-all duration-300 hover:shadow-primary/20"
-                  >
-                    <Link
-                      href="/invite"
-                      className="group flex items-center justify-center gap-2"
-                    >
-                      Invite
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                    </Link>
-                  </Button>
-
-                  {!actualUser && (
-                    <Button
-                      asChild
-                      variant="ghost"
-                      className="w-full text-gray-400 backdrop-blur-sm transition-all duration-300 hover:bg-white/5 hover:text-white"
-                    >
-                      <Link
-                        href={`/login?callbackUrl=${encodeURIComponent(pathname)}`}
+                <div className="mt-auto space-y-3 border-gray-700/40 border-t bg-gradient-to-t from-gray-950/80 to-transparent p-6 backdrop-blur-sm">
+                  <div className="space-y-3">
+                    <div className="group relative">
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary to-primary-alt opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-30" />
+                      <Button
+                        asChild
+                        className="relative w-full bg-gradient-to-r from-primary to-primary-alt font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-primary-alt hover:to-primary hover:shadow-xl hover:shadow-primary/20"
                       >
-                        Login
-                      </Link>
-                    </Button>
-                  )}
+                        <Link
+                          href="/invite"
+                          className="group/btn flex items-center justify-center gap-2"
+                        >
+                          Invite Bot
+                          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
+                        </Link>
+                      </Button>
+                    </div>
 
-                  <div className="flex items-center justify-between border-gray-800/30 border-t pt-4">
+                    {!actualUser && (
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="w-full border-gray-700/50 bg-gray-800/30 text-gray-300 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-gray-600/50 hover:bg-gray-700/50 hover:text-white"
+                      >
+                        <Link
+                          href={`/login?callbackUrl=${encodeURIComponent(pathname)}`}
+                        >
+                          Login
+                        </Link>
+                      </Button>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-center border-gray-700/30 border-t pt-4">
                     <Link
-                      href="https://github.com/interchatapp/InterChat"
+                      href="https://github.com/oxaradev/InterChat"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-md p-2 text-gray-400 transition-colors hover:text-white"
+                      className="group/link flex items-center gap-2 rounded-lg p-2 text-gray-400 transition-all duration-300 hover:bg-white/5 hover:text-white"
                     >
-                      <ExternalLink className="h-5 w-5" />
+                      <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/link:scale-110" />
+                      <span className="text-xs font-medium">View on GitHub</span>
                     </Link>
                   </div>
                 </div>

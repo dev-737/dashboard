@@ -1,7 +1,7 @@
 'use client';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { Search, X } from 'lucide-react';
+import { Handshake, Search, X } from 'lucide-react';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -9,17 +9,13 @@ import {
   Command,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useDebounce } from '@/hooks/use-debounce';
 import type { HubCardDTO } from '@/lib/discover/query';
+import { formatNumber } from '@/lib/utils';
 import { useTRPC } from '@/utils/trpc';
 
 interface HubSearchProps {
@@ -28,12 +24,13 @@ interface HubSearchProps {
 }
 
 export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
-  const [open, setOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState<HubCardDTO[]>([]);
   const [loading, setLoading] = useState(false);
   const debouncedSearch = useDebounce(searchValue, 300);
   const inputRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Search function
   const queryClient = useQueryClient();
@@ -74,9 +71,10 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
   const handleSearchSubmit = () => {
     if (searchValue.trim() && onSearchSubmit) {
       onSearchSubmit(searchValue.trim());
-      setOpen(false);
       setSearchValue('');
       setSearchResults([]);
+      setIsFocused(false);
+      inputRef.current?.blur();
     }
   };
 
@@ -87,107 +85,117 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
       handleSearchSubmit();
     }
     if (e.key === 'Escape') {
-      setOpen(false);
+      setIsFocused(false);
+      inputRef.current?.blur();
     }
   };
 
-  // Auto-focus input when popover opens
+  // Handle click outside to close dropdown
   useEffect(() => {
-    if (open && inputRef.current) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 100);
-    }
-  }, [open]);
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsFocused(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Global keyboard shortcut handler
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      if (e.key === '/' && !open && e.target === document.body) {
+      if (e.key === '/' && !isFocused && e.target === document.body) {
         e.preventDefault();
-        setOpen(true);
+        inputRef.current?.focus();
+        setIsFocused(true);
       }
     };
 
     document.addEventListener('keydown', handleGlobalKeyDown);
     return () => document.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [open]);
+  }, [isFocused]);
+
+  // Show dropdown when focused and has value or results
+  const showDropdown = isFocused && (searchValue.trim() !== '' || searchResults.length > 0);
 
   return (
-    <div className={className}>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <button
-            type="button"
-            aria-expanded={open}
-            className="premium-card flex h-12 w-full cursor-pointer items-center rounded-[var(--radius-button)] border border-gray-700/50 bg-gray-900/50 px-3 text-base shadow-lg transition-all duration-300 hover:border-purple-500/50 hover:bg-gray-800/50 hover:shadow-xl sm:h-14 sm:px-4 touch-manipulation"
-            onClick={() => setOpen(!open)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                setOpen(!open);
-              }
-            }}
-          >
-            <Search className="mr-3 h-5 w-5 flex-shrink-0 text-gray-400" />
-            <span className="flex-1 text-left text-gray-400 text-sm sm:text-base">
-              {searchValue || (
-                <>
-                  <span className="sm:hidden">Search communities...</span>
-                  <span className="hidden sm:inline">Search for communities, topics, or interests...</span>
-                </>
-              )}
-            </span>
-            {searchValue && (
-              <button
-                type="button"
-                className="ml-auto flex h-6 w-6 flex-shrink-0 cursor-pointer items-center justify-center rounded p-0 transition-colors hover:bg-gray-700/50"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSearchValue('');
-                  setSearchResults([]);
-                }}
-              >
-                <X className="h-3 w-3" />
-              </button>
-            )}
-            <div className="ml-2 hidden flex-shrink-0 text-gray-500 text-xs sm:block">
-              Press / to search
-            </div>
-          </button>
-        </PopoverTrigger>
-        <PopoverContent
-          className="w-[var(--radix-popover-trigger-width)] min-w-[300px] border-gray-600/50 bg-gray-900/95 p-0 sm:min-w-[600px]"
-          align="start"
-          sideOffset={8}
+    <div className={`relative ${className}`} ref={containerRef}>
+      {/* Enhanced search input */}
+      <div className="relative">
+        <div
+          className={`premium-card flex h-12 w-full items-center overflow-hidden rounded-[var(--radius-button)] border bg-gray-900/50 px-3 shadow-lg backdrop-blur-sm transition-all duration-300 sm:h-14 sm:px-4 ${
+            isFocused
+              ? 'border-purple-500/70 shadow-xl shadow-purple-500/20 ring-2 ring-purple-500/30'
+              : 'border-gray-700/50 hover:border-purple-500/50 hover:bg-gray-800/50 hover:shadow-xl'
+          }`}
         >
-          <Command className="border-none bg-transparent">
-            <CommandInput
-              ref={inputRef}
-              placeholder="Search for communities, topics, or interests..."
-              value={searchValue}
-              onValueChange={setSearchValue}
-              onKeyDown={handleKeyDown}
-              className="h-12 border-none bg-transparent text-base text-white placeholder:text-gray-500 focus:ring-0"
-            />
-            <CommandList className="max-h-[400px]">
+          <Search
+            className={`mr-3 h-5 w-5 flex-shrink-0 transition-colors duration-300 ${
+              isFocused ? 'text-purple-400' : 'text-gray-400'
+            }`}
+          />
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder="Search communities, topics, or tags..."
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onFocus={() => setIsFocused(true)}
+            className="flex-1 bg-transparent text-base text-white placeholder:text-gray-500 focus:outline-none sm:text-base"
+          />
+          {searchValue && (
+            <button
+              type="button"
+              className="ml-auto flex h-6 w-6 flex-shrink-0 cursor-pointer items-center justify-center rounded-full p-0 text-gray-400 transition-all duration-200 hover:bg-gray-700/50 hover:text-white"
+              onClick={() => {
+                setSearchValue('');
+                setSearchResults([]);
+              }}
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          )}
+        </div>
+
+        {/* Keyboard shortcut hint */}
+        {!isFocused && !searchValue && (
+          <div className="pointer-events-none absolute top-1/2 right-4 flex -translate-y-1/2 items-center gap-1 rounded bg-gray-800/50 px-2 py-1 font-medium text-gray-500 text-xs">
+            <kbd className="rounded border border-gray-600/50 bg-gray-900/50 px-1.5 py-0.5 font-mono text-[10px]">
+              /
+            </kbd>
+          </div>
+        )}
+      </div>
+
+      {/* Search results dropdown */}
+      {showDropdown && (
+        <div className="absolute top-full z-50 mt-2 w-full animate-in fade-in slide-in-from-top-2 duration-200">
+          <Command className="overflow-hidden rounded-[var(--radius-button)] border border-gray-700/60 bg-gray-900/90 shadow-2xl shadow-black/20 backdrop-blur-xl">
+            <CommandList className="max-h-[500px]">
               {loading && (
-                <div className="flex items-center justify-center py-6">
-                  <div className="flex items-center gap-2 text-gray-400">
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-600 border-t-purple-400"></div>
-                    <span>Searching...</span>
+                <div className="flex items-center justify-center py-8">
+                  <div className="flex items-center gap-3 text-gray-400">
+                    <div className="relative h-5 w-5">
+                      <div className="absolute inset-0 animate-spin rounded-full border-2 border-gray-600 border-t-purple-400" />
+                    </div>
+                    <span className="text-sm">Searching...</span>
                   </div>
                 </div>
               )}
 
               {!loading && searchValue && searchResults.length === 0 && (
-                <CommandEmpty className="py-6 text-center">
+                <CommandEmpty className="py-8 text-center">
                   <div className="text-gray-400">
-                    <Search className="mx-auto mb-2 h-12 w-12 opacity-50" />
-                    <p className="text-sm">
+                    <div className="relative mx-auto mb-3 inline-block">
+                      <div className="absolute inset-0 rounded-full bg-gray-700/20 blur-xl" />
+                      <Search className="relative mx-auto h-12 w-12 opacity-50" />
+                    </div>
+                    <p className="font-medium text-sm">
                       No communities found for &ldquo;{searchValue}&rdquo;
                     </p>
-                    <p className="mt-1 text-gray-500 text-xs">
+                    <p className="mt-1.5 text-gray-500 text-xs">
                       Try different keywords or check your spelling
                     </p>
                   </div>
@@ -196,20 +204,20 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
 
               {searchResults.length > 0 && (
                 <>
-                  <CommandGroup heading="Communities" className="p-2">
+                  <CommandGroup heading="Communities" className="p-2 [&_[cmdk-group-heading]]:text-gray-400">
                     {searchResults.map((hub) => (
                       <CommandItem
                         key={hub.id}
                         value={hub.name}
                         onSelect={() => {
-                          setOpen(false);
                           setSearchValue('');
+                          setIsFocused(false);
                         }}
-                        className="p-0 data-[selected=true]:bg-gray-800/50"
+                        className="rounded-lg p-0 data-[selected=true]:bg-gray-800/40"
                       >
                         <Link
                           href={`/hubs/${hub.id}`}
-                          className="flex w-full items-center gap-3 rounded-lg p-3 transition-colors hover:bg-gray-800/30"
+                          className="flex w-full items-center gap-3 rounded-lg p-3 transition-colors hover:bg-gray-800/40"
                         >
                           <Avatar className="h-10 w-10 ring-1 ring-gray-700/50">
                             <AvatarImage
@@ -227,25 +235,39 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
                                 {hub.name}
                               </h4>
                               {hub.verified && (
-                                <div className="flex h-4 w-4 items-center justify-center rounded-full bg-blue-500">
-                                  <svg
-                                    className="h-2.5 w-2.5 text-white"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                  >
-                                    <title>Verified hub</title>
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </div>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <div className="flex h-4 w-4 cursor-help items-center justify-center rounded-full bg-blue-500">
+                                      <svg
+                                        className="h-2.5 w-2.5 text-white"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                      >
+                                        <title>Verified hub</title>
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clipRule="evenodd"
+                                        />
+                                      </svg>
+                                    </div>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p>Verified Hub</p>
+                                  </TooltipContent>
+                                </Tooltip>
                               )}
                               {hub.partnered && (
-                                <div className="rounded bg-gradient-to-r from-purple-500 to-pink-500 px-1.5 py-0.5 font-medium text-white text-xs">
-                                  Partner
-                                </div>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <div className="flex h-4 w-4 cursor-help items-center justify-center rounded-full bg-gradient-to-br from-purple-500 via-purple-600 to-violet-700">
+                                      <Handshake className="h-2.5 w-2.5 text-white" />
+                                    </div>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p>Partner Hub</p>
+                                  </TooltipContent>
+                                </Tooltip>
                               )}
                               {hub.nsfw && (
                                 <div className="rounded border border-red-500/50 bg-red-500/20 px-1.5 py-0.5 font-medium text-red-400 text-xs">
@@ -259,13 +281,12 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
                             </p>
                             <div className="mt-1 flex items-center gap-3 text-gray-500 text-xs">
                               <span>
-                                {hub.weeklyMessageCount?.toLocaleString() ??
-                                  '0'}{' '}
+                                {formatNumber(hub.weeklyMessageCount)}{' '}
                                 msgs/week
                               </span>
                               <span>•</span>
                               <span>
-                                {hub._count.upvotes?.toLocaleString() ?? '0'}{' '}
+                                {formatNumber(hub._count.upvotes)}{' '}
                                 members
                               </span>
                               {hub.tags.length > 0 && (
@@ -288,17 +309,17 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
                   </CommandGroup>
 
                   {searchValue.trim() && (
-                    <CommandGroup className="border-gray-700/50 border-t p-2">
+                    <CommandGroup className="border-gray-800/50 border-t p-2">
                       <CommandItem
                         value={`search-all-${searchValue}`}
                         onSelect={handleSearchSubmit}
-                        className="hover:bg-purple-500/10 data-[selected=true]:bg-purple-500/10"
+                        className="cursor-pointer rounded-lg transition-colors hover:bg-purple-500/15 data-[selected=true]:bg-purple-500/15"
                       >
                         <div className="flex w-full items-center gap-3 p-2">
                           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-500/20">
                             <Search className="h-4 w-4 text-purple-400" />
                           </div>
-                          <span className="font-medium text-purple-400">
+                          <span className="font-medium text-purple-400 text-sm">
                             Search all communities for &ldquo;{searchValue}
                             &rdquo;
                           </span>
@@ -310,8 +331,8 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
               )}
             </CommandList>
           </Command>
-        </PopoverContent>
-      </Popover>
+        </div>
+      )}
     </div>
   );
 }

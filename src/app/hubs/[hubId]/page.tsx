@@ -1,8 +1,7 @@
 'use server';
 
-import { Info, MessageSquare, ScrollText, Settings, Users } from 'lucide-react';
+import { ChevronRight, Home, Info, MessageSquare, ScrollText, Search, Settings, Users } from 'lucide-react';
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { auth } from '@/auth';
@@ -10,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PermissionLevel } from '@/lib/constants';
 import { getHubConnections, getHubData } from '@/lib/hub-queries';
-import { getUserHubPermission } from '@/lib/permissions';
 import { cn } from '@/lib/utils';
 import ClientReviewSection from '../components/hub-detail/ClientReviewSection';
 import ClientReviewList from '../components/hub-detail/ClientReviewList';
@@ -26,12 +24,11 @@ import JoinButton from '../components/hub-detail/JoinButton';
 import SimilarHubsCard from '../components/hub-detail/SimilarHubsCard';
 import UpvoteButton from '../components/hub-detail/UpvoteButton';
 
-// Metadata function remains the same
 export async function generateMetadata(props: {
   params: Promise<{ hubId: string }>;
 }): Promise<Metadata> {
   const { hubId } = await props.params;
-  const hub = await getHubData(hubId);
+  const hub = await getHubData(hubId, undefined);
 
   if (!hub) return { title: 'Hub Not Found' };
 
@@ -86,22 +83,35 @@ export default async function HubDetailView(props: {
 }) {
   const { hubId } = await props.params;
 
-  // Check user authentication and permissions
-const session = await auth()
-  let userPermissionLevel = PermissionLevel.NONE;
+  const session = await auth();
+  const userId = session?.user?.id;
 
-  if (session?.user) {
-    userPermissionLevel = await getUserHubPermission(session.user.id, hubId);
-  }
-
-  const canManageHub = userPermissionLevel >= PermissionLevel.MODERATOR;
-
-  const hub = await getHubData(hubId);
-  const connections = (await getHubConnections(hubId)) ?? [];
+  const [hub, connections] = await Promise.all([
+    getHubData(hubId, userId),
+    getHubConnections(hubId),
+  ]);
 
   if (!hub) {
     notFound();
   }
+
+  let userPermissionLevel = PermissionLevel.NONE;
+  if (userId) {
+    if (hub.ownerId === userId) {
+      userPermissionLevel = PermissionLevel.OWNER;
+    } else {
+      const moderatorRole = hub.moderators.find((mod) => mod.userId === userId);
+      if (moderatorRole) {
+        userPermissionLevel =
+          moderatorRole.role === 'MANAGER'
+            ? PermissionLevel.MANAGER
+            : PermissionLevel.MODERATOR;
+      }
+    }
+  }
+
+  const canManageHub = userPermissionLevel >= PermissionLevel.MODERATOR;
+  const connectionsData = connections ?? [];
 
   const formattedDate = new Date(hub.createdAt).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -132,6 +142,22 @@ const session = await auth()
       <div className="flex-grow">
         <HubBanner bannerUrl={hub.bannerUrl} name={hub.name} />
 
+        <div className="container mx-auto max-w-7xl px-4 pt-4">
+          <nav className="flex items-center gap-2 text-gray-400 text-sm">
+            <Link href="/" className="flex items-center gap-1 transition-colors hover:text-gray-200">
+              <Home className="h-4 w-4" />
+              <span>Home</span>
+            </Link>
+            <ChevronRight className="h-4 w-4" />
+            <Link href="/discover" className="flex items-center gap-1 transition-colors hover:text-gray-200">
+              <Search className="h-4 w-4" />
+              <span>Browse Hubs</span>
+            </Link>
+            <ChevronRight className="h-4 w-4" />
+            <span className="font-medium text-gray-200">{hub.name}</span>
+          </nav>
+        </div>
+
         {/* Page Content */}
         <div className="container mx-auto max-w-7xl px-4 pb-16">
           <div className="-mt-32 md:-mt-40 relative mb-12 transform transition-all duration-300">
@@ -140,8 +166,8 @@ const session = await auth()
                 <HubInfoCard hub={hub} />
 
                 <div className="mt-6 flex flex-shrink-0 gap-3 rounded-lg border border-gray-700/50 bg-gray-800/40 p-2 md:mt-0 md:ml-auto">
-                  {/* Manage Hub button - only show for users with management permissions */}
-                  {canManageHub && (
+                    {/* Manage Hub button - only show for users with management permissions */}
+                    {canManageHub && (
                     <Link href={`/dashboard/hubs/${hubId}`}>
                       <Button
                         className="flex cursor-pointer items-center gap-2 rounded-lg border-0 bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-indigo-600/80 hover:to-purple-600/80"
@@ -153,10 +179,10 @@ const session = await auth()
                       </Button>
                     </Link>
                   )}
-                  <div className="group relative">
-                    <JoinButton hubName={hub.name} hubId={hub.id} />
-                  </div>
-                  <UpvoteButton hubId={hub.id} initialUpvotes={hub.upvotes} />
+                    <div className="group relative">
+                      <JoinButton hubName={hub.name} hubId={hub.id} />
+                    </div>
+                    <UpvoteButton hubId={hub.id} initialUpvotes={hub.upvotes} />
                 </div>
               </div>
             </div>
@@ -244,21 +270,21 @@ const session = await auth()
                     'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
                   )}
                 >
-                  <HubConnectedServers connections={connections} />
+                  <HubConnectedServers connections={connectionsData} />
                 </TabsContent>
               </Tabs>
             </div>
-            {/* Right Column (Sidebar) */}
+            {/* Filter Sidebar */}
             <div className="space-y-4 sm:space-y-6 lg:col-span-1">
               <HubDetailsCard
                 formattedDate={formattedDate}
                 hub={hub}
-                connections={connections}
+                connections={connectionsData}
               />
 
               <HubModeratorsCard moderators={hub.moderators} />
 
-              <SimilarHubsCard 
+              <SimilarHubsCard
                 currentHubId={hub.id}
                 hubTags={hub.tags?.map(tag => tag.name) || []}
               />

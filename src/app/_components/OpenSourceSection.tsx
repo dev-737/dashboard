@@ -82,7 +82,7 @@ export function OpenSourceSection() {
                 className="w-full border border-gray-600/50 bg-gray-700/50 text-white transition-all duration-300 hover:border-gray-500/50 hover:bg-gray-600/50"
               >
                 <Link
-                  href="https://github.com/interchatapp/InterChat"
+                  href="https://github.com/oxaradev/InterChat"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2"
