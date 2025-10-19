@@ -1,4 +1,4 @@
-import '../../global.css';
+import '@/styles/globals.css';
 
 export default function HubsLayout({
   children,

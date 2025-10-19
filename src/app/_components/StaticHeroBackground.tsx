@@ -1,4 +1,4 @@
-import { GridPattern } from '../../components/magicui/grid-pattern';
+import { GridPattern } from '../../components/magicui/GridPattern';
 
 export function StaticHeroBackground() {
   return (

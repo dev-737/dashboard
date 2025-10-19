@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp, Filter } from 'lucide-react';
-import { TagPicker } from '@/components/discover/TagPicker';
+import { TagPicker } from '@/components/features/discover/TagPicker';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';

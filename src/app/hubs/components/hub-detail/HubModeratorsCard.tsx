@@ -28,7 +28,7 @@ const HubModeratorsCard: React.FC<HubModeratorsCardProps> = ({
             >
               <div className="h-8 w-8 flex-shrink-0 overflow-hidden rounded-full border border-gray-700/50 bg-gray-800 sm:h-10 sm:w-10">
                 <Image
-                  src={mod.user?.image || '/default-avatar.png'}
+                  src={mod.user?.image || '/assets/images/defaults/default-avatar.png'}
                   alt={mod.user?.name || 'User Avatar'}
                   width={40}
                   height={40}

@@ -16,7 +16,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
-import { ChannelIcon } from '@/components/discord/channel-icon';
+import { ChannelIcon } from '@/components/discord/ChannelIcon';
 import { Button } from '@/components/ui/button';
 import {
   Card,

@@ -4,6 +4,7 @@ import { Share2 } from 'lucide-react';
 import Image from 'next/image';
 import type React from 'react';
 import { Button } from '@/components/ui/button';
+import { GridPattern } from '@/components/magicui/GridPattern';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 import { toast } from '@/hooks/use-toast';
 
@@ -49,7 +50,11 @@ export default function BannerSection({ hub }: { hub: SimplifiedHub }) {
   } else {
     bannerContent = (
       <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-15" />
+        <GridPattern
+          width={40}
+          height={40}
+          className="absolute inset-0 opacity-[0.15]"
+        />
         <div className="absolute top-1/4 left-1/5 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute right-1/6 bottom-1/4 h-96 w-96 rounded-full bg-primary-alt/20 blur-3xl" />
         {hub.iconUrl ? (

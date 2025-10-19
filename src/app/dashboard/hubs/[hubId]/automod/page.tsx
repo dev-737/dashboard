@@ -1,8 +1,8 @@
 import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/auth';
-import { AutomodDashboard } from '@/components/dashboard/hubs/automod-dashboard';
-import { HubLayout } from '@/components/dashboard/hubs/hub-layout';
+import { AutomodDashboard } from '@/components/features/dashboard/hubs/AutomodDashboard';
+import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { PermissionLevel } from '@/lib/constants';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';

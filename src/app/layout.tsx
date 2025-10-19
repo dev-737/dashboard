@@ -3,11 +3,11 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
 import { auth } from '@/auth';
-import { Navbar } from '@/components/navbar';
+import { Navbar } from '@/components/layout/Navbar';
 import { Providers } from '@/components/providers';
-import { Toaster } from '@/components/toaster';
-import './global.css';
-import { ConditionalFooter } from '@/components/ConditionalFooter';
+import { Toaster } from '@/components/layout/Toaster';
+import '@/styles/globals.css';
+import { ConditionalFooter } from '@/components/layout/ConditionalFooter';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   creator: 'dev-737',
   icons: {
     icon: '/favicon.ico',
-    apple: '/interchat.png',
+    apple: '/assets/images/logos/interchat.png',
     shortcut: '/favicon.ico',
   },
   openGraph: {
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     url: process.env.NEXT_PUBLIC_BASE_URL || 'https://interchat.dev',
     images: [
       {
-        url: '/InterChatLogo.webp',
+        url: '/assets/images/logos/InterChatLogo.webp',
         width: 300,
         height: 300,
         alt: 'InterChat Logo',
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     title: 'InterChat: Connect Discord Servers & Keep Your Community Active',
     description:
       'Is your Discord server quiet? InterChat connects your community with others by linking channels into shared chatrooms. Grow your server and keep conversations flowing 24/7. Free & easy setup!',
-    images: ['/InterChatLogo.webp'],
+    images: ['/assets/images/logos/InterChatLogo.webp'],
     site: '@interchatapp',
     creator: '@737_dev',
   },
@@ -104,7 +104,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
         <link rel="preconnect" href="https://cloud.umami.is" crossOrigin="" />
         <link
           rel="preload"
-          href="/InterChatLogo.webp"
+          href="/assets/images/logos/InterChatLogo.webp"
           as="image"
           type="image/webp"
         />

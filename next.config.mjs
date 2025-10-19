@@ -1,5 +1,7 @@
-import { withSentryConfig } from '@sentry/nextjs';
+// @ts-check
+
 import withBundleAnalyzer from '@next/bundle-analyzer';
+import { withSentryConfig } from '@sentry/nextjs';
 
 /** @type {import('next').NextConfig} */
 const config = {
@@ -8,9 +10,9 @@ const config = {
   compress: true,
   turbopack: {},
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
+    removeConsole:
+      process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   },
-
   experimental: {
     optimizePackageImports: [
       'lucide-react',
@@ -27,10 +29,10 @@ const config = {
       '@tanstack/react-query',
       'react-hook-form',
       'motion',
-      'lodash-es', 
+      'lodash-es',
       'date-fns',
     ],
-    ppr: true,
+    cacheComponents: true,
     viewTransition: true,
     parallelServerCompiles: true,
     parallelServerBuildTraces: true,
@@ -75,10 +77,11 @@ const config = {
       { key: 'X-Content-Type-Options', value: 'nosniff' },
       { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
     ];
-    
+
     const cspHeader = {
-        key: 'Content-Security-Policy',
-        value: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cloud.umami.is/script.js",
+      key: 'Content-Security-Policy',
+      value:
+        "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cloud.umami.is/script.js",
     };
 
     return [
@@ -95,11 +98,21 @@ const config = {
       },
       {
         source: '/static/:path*',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
       },
       {
         source: '/_next/image/:path*',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=86400' }],
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate=86400',
+          },
+        ],
       },
       {
         source: '/sw.js',
@@ -111,7 +124,7 @@ const config = {
     ];
   },
 
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev }) => {
     if (!dev) {
       config.optimization.splitChunks.cacheGroups = {
         ...config.optimization.splitChunks.cacheGroups,
@@ -141,11 +154,28 @@ const config = {
 
   async redirects() {
     return [
-      { source: '/support', destination: 'https://discord.gg/cgYgC6YZyX', permanent: true },
+      {
+        source: '/support',
+        destination: 'https://discord.gg/cgYgC6YZyX',
+        permanent: true,
+      },
       { source: '/hubs', destination: '/discover', permanent: true },
-      { source: '/invite', destination: 'https://discord.com/oauth2/authorize?client_id=769921109209907241', permanent: true },
-      { source: '/vote', destination: 'https://top.gg/bot/769921109209907241/vote', permanent: true },
-      { source: '/docs', destination: 'https://docs.interchat.dev', permanent: true },
+      {
+        source: '/invite',
+        destination:
+          'https://discord.com/oauth2/authorize?client_id=769921109209907241',
+        permanent: true,
+      },
+      {
+        source: '/vote',
+        destination: 'https://top.gg/bot/769921109209907241/vote',
+        permanent: true,
+      },
+      {
+        source: '/docs',
+        destination: 'https://docs.interchat.dev',
+        permanent: true,
+      },
     ];
   },
 };
@@ -157,13 +187,12 @@ const bundleAnalyzer = withBundleAnalyzer({
 export default withSentryConfig(
   bundleAnalyzer(config),
   {
-    org: "interchat",
-    project: "interchat-website",
+    org: 'interchat',
+    project: 'interchat-website',
     silent: !process.env.CI,
     widenClientFileUpload: true,
-    tunnelRoute: "/monitoring",
+    tunnelRoute: '/monitoring',
     disableLogger: true,
     automaticVercelMonitors: true,
   },
-  { hideSourceMaps: true }
 );

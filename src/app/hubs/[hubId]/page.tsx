@@ -55,7 +55,7 @@ export async function generateMetadata(props: {
       url: `${baseUrl}/hubs/${hubId}`,
       images: [
         {
-          url: hub.bannerUrl || hub.iconUrl || `${baseUrl}/InterChatLogo.webp`,
+          url: hub.bannerUrl || hub.iconUrl,
           width: 1200,
           height: 630,
           alt: hub.name,
@@ -64,7 +64,7 @@ export async function generateMetadata(props: {
     },
     twitter: {
       card: 'summary_large_image',
-      images: [hub.bannerUrl || hub.iconUrl || `${baseUrl}/InterChatLogo.webp`],
+      images: [hub.bannerUrl || hub.iconUrl],
       title: `${hub.name} | InterChat Cross-Server Hubs`,
       description:
         hub.description ||

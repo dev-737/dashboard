@@ -15,7 +15,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { db } from '@/lib/prisma';
-import { MyAppealsPagination } from './components/my-appeals-pagination';
+import { MyAppealsPagination } from './components/MyAppealsPagination';
 
 export const metadata: Metadata = {
   title: 'My Appeals | InterChat Dashboard',
@@ -190,7 +190,7 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-md">
             <Image
-              src={appeal.infraction.hub.iconUrl || '/images/default-hub.png'}
+              src={appeal.infraction.hub.iconUrl || '/assets/images/defaults/default-hub.png'}
               alt={appeal.infraction.hub.name}
               width={40}
               height={40}

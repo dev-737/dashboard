@@ -1,6 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { ConnectionNavigationTabsSkeleton } from '@/components/dashboard/connections/connection-navigation-tabs';
+import { ConnectionNavigationTabsSkeleton } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
 import { Button } from '@/components/ui/button';
 import {
   Card,

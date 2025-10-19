@@ -26,7 +26,7 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
       <div className="group h-28 w-28 flex-shrink-0 transform overflow-hidden rounded-2xl border-4 border-gray-700/70 bg-gray-800/80 shadow-lg transition-transform duration-300 hover:scale-105 md:h-36 md:w-36">
         <div className="relative h-full w-full">
           <Image
-            src={hub.iconUrl || '/default-hub-icon.png'}
+            src={hub.iconUrl || '/assets/images/defaults/default-hub-icon.png'}
             alt={hub.name}
             width={144}
             height={144}

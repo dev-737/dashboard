@@ -1,4 +1,4 @@
-import { ConnectionNavigationTabsSkeleton } from '@/components/dashboard/connections/connection-navigation-tabs';
+import { ConnectionNavigationTabsSkeleton } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
 import {
   Card,
   CardContent,

@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { useId, useState } from 'react';
 import { StaticHeroBackground } from '@/app/_components/StaticHeroBackground';
-import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
+import { AnimatedShinyText } from '@/components/ui/AnimatedShinyText';
 import { Button } from '@/components/ui/button';
 
 export function Hero() {

@@ -8,14 +8,14 @@ import {
   type ServerDataWithConnections,
 } from '@/actions/server-actions';
 import { auth } from '@/auth';
-import { AnimatedDashboardSkeleton } from '@/components/dashboard/animated-dashboard-skeleton';
-import { AnimatedWelcome } from '@/components/dashboard/animated-welcome';
-import { AnimatedEmptyState } from '@/components/dashboard/hubs/animated-empty-state';
-import { AnimatedHubCard } from '@/components/dashboard/hubs/animated-hub-card';
-import { PageFooter } from '@/components/dashboard/page-footer';
-import { ServerGrid } from '@/components/dashboard/servers/server-grid';
-// import { StatCard } from '@/components/dashboard/stat-card';
-import { UnderlinedTabs } from '@/components/dashboard/underlined-tabs';
+import { AnimatedDashboardSkeleton } from '@/components/features/dashboard/AnimatedDashboardSkeleton';
+import { AnimatedWelcome } from '@/components/features/dashboard/AnimatedWelcome';
+import { AnimatedEmptyState } from '@/components/features/dashboard/hubs/AnimatedEmptyState';
+import { AnimatedHubCard } from '@/components/features/dashboard/hubs/AnimatedHubCard';
+import { PageFooter } from '@/components/layout/DashboardPageFooter';
+import { ServerGrid } from '@/components/features/dashboard/servers/ServerGrid';
+// import { StatCard } from '@/components/features/dashboard/stat-card';
+import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
 import { Button } from '@/components/ui/button';
 import {
   Card,

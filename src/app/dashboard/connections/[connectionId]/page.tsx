@@ -5,8 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/auth';
-import { ConnectionNavigationTabs } from '@/components/dashboard/connections/connection-navigation-tabs';
-import { ConnectionOverview } from '@/components/dashboard/connections/connection-overview';
+import { ConnectionNavigationTabs } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
+import { ConnectionOverview } from '@/components/features/dashboard/connections/ConnectionOverview';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { db } from '@/lib/prisma';
@@ -176,7 +176,7 @@ export default async function ConnectionPage(props: {
               <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-4 transition-colors hover:bg-gray-900/30">
                 <div className="flex items-center gap-3">
                   <Image
-                    src={connection.hub.iconUrl || '/pfp1.png'}
+                    src={connection.hub.iconUrl || '/assets.images/pfp1.png'}
                     alt={connection.hub.name || 'Hub'}
                     width={48}
                     height={48}

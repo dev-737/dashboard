@@ -4,13 +4,13 @@ import { headers } from 'next/headers';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/auth';
-import { DeleteHubDialog } from '@/components/dashboard/hubs/delete-hub-dialog';
-import { HubLayout } from '@/components/dashboard/hubs/hub-layout';
+import { DeleteHubDialog } from '@/components/features/dashboard/hubs/DeleteHubDialog';
+import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { Button } from '@/components/ui/button';
 import { PermissionLevel } from '@/lib/constants';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
-import { HubEditForm } from './components/hub-edit-form';
+import { HubEditForm } from '@/components/forms/HubEditForm';
 
 interface HubEditPageProps {
   params: Promise<{

@@ -3,19 +3,38 @@ import dynamic from 'next/dynamic';
 import { Hero } from '@/app/_components/Hero';
 import { HomePageSchemas } from '@/app/_components/HomePageSchemas';
 
-const FeaturesShowcase = dynamic(() => import('@/app/_components/FeaturesShowcase').then(mod => ({ default: mod.FeaturesShowcase })), {
-  loading: () => <div className="h-96 animate-pulse bg-gray-800/50 rounded-lg" />,
-});
+const FeaturesShowcase = dynamic(
+  () =>
+    import('@/app/_components/FeaturesShowcase').then((mod) => ({
+      default: mod.FeaturesShowcase,
+    })),
+  {
+    loading: () => (
+      <div className="h-96 animate-pulse rounded-lg bg-gray-800/50" />
+    ),
+  }
+);
 
-const FaqSection = dynamic(() => import('@/app/_components/FaqSection').then(mod => ({ default: mod.FaqSection })), {
-  loading: () => <div className="h-64 animate-pulse bg-gray-800/50 rounded-lg" />,
-});
+const FaqSection = dynamic(
+  () =>
+    import('@/app/_components/FaqSection').then((mod) => ({
+      default: mod.FaqSection,
+    })),
+  {
+    loading: () => (
+      <div className="h-64 animate-pulse rounded-lg bg-gray-800/50" />
+    ),
+  }
+);
 
-const CTA = dynamic(() => import('@/app/_components/CTA').then(mod => ({ default: mod.CTA })), {
-  loading: () => <div className="h-32 animate-pulse bg-gray-800/50 rounded-lg" />,
-});
-
-export const revalidate = 300;
+const CTA = dynamic(
+  () => import('@/app/_components/CTA').then((mod) => ({ default: mod.CTA })),
+  {
+    loading: () => (
+      <div className="h-32 animate-pulse rounded-lg bg-gray-800/50" />
+    ),
+  }
+);
 
 export const metadata: Metadata = {
   title: 'InterChat v5 – Faster, modern, and redesigned',

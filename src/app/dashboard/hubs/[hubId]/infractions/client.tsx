@@ -44,7 +44,7 @@ import {
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
-import { InfractionRevokeModal } from '@/components/moderation/infraction-revoke-modal';
+import { InfractionRevokeModal } from '@/components/features/moderation/InfractionRevokeModal';
 import type {
   InfractionStatus,
   InfractionType,
@@ -576,9 +576,9 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
           ) : (
             <div className="space-y-4">
               {infractions.map((infraction) => (
-                <InfractionCard 
-                  key={infraction.id} 
-                  infraction={infraction} 
+                <InfractionCard
+                  key={infraction.id}
+                  infraction={infraction}
                   onRevokeClick={handleRevokeClick}
                 />
               ))}
@@ -694,7 +694,7 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
           <div className="relative">
             {isUserInfraction ? (
               <Image
-                src={infraction.user?.image || '/pfp1.png'}
+                src={infraction.user?.image || '/assets.images/pfp1.png'}
                 alt={targetName}
                 width={40}
                 height={40}

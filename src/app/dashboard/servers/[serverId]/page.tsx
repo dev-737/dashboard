@@ -14,9 +14,9 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { getServerDetails } from '@/actions/server-actions';
 import { auth } from '@/auth';
-import { ServerConnectionsTable } from '@/components/dashboard/servers/server-connections-table';
-import { UnderlinedTabs } from '@/components/dashboard/underlined-tabs';
-import { LogoutButton } from '@/components/logout-button';
+import { ServerConnectionsTable } from '@/components/features/dashboard/servers/ServerConnectionsTable';
+import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
+import { LogoutButton } from '@/components/LogoutButton';
 import { Button } from '@/components/ui/button';
 import {
   Card,

@@ -76,7 +76,7 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 overflow-hidden rounded-full border border-gray-700/50">
             <Image
-              src={review.user?.image || '/default-avatar.png'}
+              src={review.user?.image || '/assets/images/defaults/default-avatar.png'}
               alt={review.user?.name || 'User'}
               width={40}
               height={40}

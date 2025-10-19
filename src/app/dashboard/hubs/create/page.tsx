@@ -1,12 +1,11 @@
+import { auth } from '@/auth';
+import { HubCreateForm } from '@/components/forms/HubCreateForm';
+import { PageFooter } from '@/components/layout/DashboardPageFooter';
+import { Button } from '@/components/ui/button';
 import { ArrowLeft, Globe, Shield, Sparkles, Zap } from 'lucide-react';
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { auth } from '@/auth';
-import { PageFooter } from '@/components/dashboard/page-footer';
-import { Button } from '@/components/ui/button';
-import { HubCreateForm } from './components/hub-create-form';
 
 export const metadata: Metadata = {
   title: 'Create Hub | InterChat Dashboard',

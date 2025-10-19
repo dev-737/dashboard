@@ -4,9 +4,9 @@ import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import type { ReactNode } from 'react';
 import type { DehydratedState } from '@/lib/tanstack-query';
-import { HydrationBoundaryProvider } from './providers/hydration-boundary';
-import { TanstackQueryProvider } from './providers/query-provider';
-import { TRPCProvider } from './providers/trpc-provider';
+import { HydrationBoundaryProvider } from './providers/HydrationBoundary';
+import { TanstackQueryProvider } from './providers/QueryProvider';
+import { TRPCProvider } from './providers/TrpcProvider';
 
 export function Providers({
   children,

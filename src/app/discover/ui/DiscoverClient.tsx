@@ -3,11 +3,11 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { X } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import DiscoverHubCard from '@/components/discover/DiscoverHubCard';
-import { DiscoverSkeleton } from '@/components/discover/DiscoverSkeleton';
-import { HubSearch } from '@/components/discover/HubSearch';
+import DiscoverHubCard from '@/components/features/discover/DiscoverHubCard';
+import { DiscoverSkeleton } from '@/components/features/discover/DiscoverSkeleton';
+import { HubSearch } from '@/components/features/discover/HubSearch';
 import { Button } from '@/components/ui/button';
-import { LayoutStabilizer, StableGrid } from '@/components/ui/layout-optimizer';
+import { LayoutStabilizer, StableGrid } from '@/components/ui/LayoutOptimizer';
 import type { HubCardDTO } from '@/lib/discover/query';
 import { useTRPC } from '@/utils/trpc';
 import { type FeatureFlags, Filters } from './Filters';

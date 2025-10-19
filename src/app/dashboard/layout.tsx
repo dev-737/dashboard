@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { auth } from '@/auth';
-import { DashboardLayoutProvider } from '@/components/dashboard/layout-provider';
-import { GuidedTourProvider } from '@/components/dashboard/onboarding/guided-tour-provider';
-import { DashboardTopBar } from '@/components/dashboard/topbar';
 import './dashboard.css';
+import { DashboardLayoutProvider } from '@/components/features/dashboard/LayoutProvider';
+import { GuidedTourProvider } from '@/components/features/dashboard/onboarding/GuidedTourProvider';
+import { DashboardTopBar } from '@/components/layout/DashboardTopbar';
 
 export default async function DashboardLayout({
   children,
@@ -24,7 +24,7 @@ export default async function DashboardLayout({
         <div className="min-h-screen bg-gradient-primary">
           <div className="flex h-screen flex-col overflow-hidden">
             {/* Top bar */}
-            <DashboardTopBar user={session.user as any} />
+            <DashboardTopBar user={session.user} />
 
             {/* Main content area */}
             <main className="dashboard-scrollbar relative flex-1 overflow-y-auto">
@@ -44,8 +44,8 @@ export default async function DashboardLayout({
                   style={{ zIndex: -1 }}
                 />
 
-                {/* Subtle noise texture */}
-                <div className="absolute inset-0 bg-[url('/noise.svg')] bg-repeat opacity-[0.015]" />
+                {/* Film grain effect */}
+                <div className="film-grain" />
               </div>
 
               {/* Content with */}

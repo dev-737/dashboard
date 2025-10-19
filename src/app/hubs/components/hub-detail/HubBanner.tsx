@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type React from 'react';
+import { GridPattern } from '@/components/magicui/GridPattern';
 
 interface HubBannerProps {
   bannerUrl: string | null;
@@ -17,7 +18,11 @@ const HubBanner: React.FC<HubBannerProps> = ({ bannerUrl, name }) => {
         priority
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.1]" />
+      <GridPattern
+        width={40}
+        height={40}
+        className="absolute inset-0 opacity-[0.1] [mask-image:radial-gradient(ellipse_at_center,white,transparent_85%)]"
+      />
       <div className="absolute right-0 bottom-0 left-0 h-24 bg-gradient-to-t from-gray-950 to-transparent" />
 
       {/* Optional visual elements - subtle animated orbs */}
@@ -31,7 +36,11 @@ const HubBanner: React.FC<HubBannerProps> = ({ bannerUrl, name }) => {
     // Fallback banner with enhanced design
     <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-gray-900 via-gray-950 to-black">
       {/* Animated grid pattern */}
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.15]" />
+      <GridPattern
+        width={40}
+        height={40}
+        className="absolute inset-0 opacity-[0.15]"
+      />
       <div className="absolute top-1/4 left-1/5 h-72 w-72 animate-pulse rounded-full bg-primary/15 opacity-50 blur-3xl" />
       <div
         className="absolute right-1/6 bottom-1/4 h-96 w-96 animate-pulse rounded-full bg-purple-500/15 opacity-40 blur-3xl"

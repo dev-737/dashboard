@@ -1,6 +1,6 @@
 'use client';
 
-import { ConnectionsList } from '@/components/dashboard/hubs/connections-list';
+import { ConnectionsList } from '@/components/features/dashboard/hubs/ConnectionsList';
 import { useConnections, useRemoveConnection } from '@/hooks/use-connections';
 
 export interface ServerData {

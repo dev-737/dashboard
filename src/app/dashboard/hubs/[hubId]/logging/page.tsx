@@ -10,8 +10,8 @@ import {
 import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/auth';
-import { HubLayout } from '@/components/dashboard/hubs/hub-layout';
-import { HubLoggingForm } from '@/components/dashboard/hubs/hub-logging-form';
+import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
+import { HubLoggingForm } from '@/components/features/dashboard/hubs/HubLoggingForm';
 import { Card, CardContent } from '@/components/ui/card';
 import { PermissionLevel } from '@/lib/constants';
 import { getUserHubPermission } from '@/lib/permissions';

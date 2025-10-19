@@ -8,7 +8,6 @@ import {
   Shield,
   Sparkles,
   Star,
-  Zap,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
@@ -31,7 +30,7 @@ const features = [
       'Unlimited connections',
       'Rich media support',
     ],
-    mockup: '/features/CrossChat.png',
+    mockup: '/assets/images/features/CrossChat.png',
     isReversed: false,
   },
   {
@@ -48,7 +47,7 @@ const features = [
       'Auto-moderation',
       'Detailed logging',
     ],
-    mockup: '/features/NSFWDetection.svg',
+    mockup: '/assets/images/features/NSFWDetection.svg',
     isReversed: true,
   },
   {
@@ -65,7 +64,7 @@ const features = [
       'Mobile responsive',
       'Dark mode optimized',
     ],
-    mockup: '/features/dashboard.png',
+    mockup: '/assets/images/features/dashboard.png',
     isReversed: true,
   },
 ];

@@ -2,8 +2,8 @@ import { AlertCircle } from 'lucide-react';
 import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/auth';
-import { HubLayout } from '@/components/dashboard/hubs/hub-layout';
-import { HubModulesForm } from '@/components/dashboard/hubs/hub-modules-form';
+import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
+import { HubModulesForm } from '@/components/features/dashboard/hubs/HubModulesForm';
 import {
   Card,
   CardContent,

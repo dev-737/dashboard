@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { UnderlinedTabs } from '@/components/dashboard/underlined-tabs';
+import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {

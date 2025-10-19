@@ -1,14 +1,12 @@
-import { Suspense } from 'react';
+import { GridPattern } from '@/components/magicui/GridPattern';
+import { CriticalCSS, LayoutOptimizer } from '@/components/ui/LayoutOptimizer';
 import {
-  type DiscoverParams,
-  type DiscoverSort,
-  getDiscoverHubs,
+    type DiscoverParams,
+    type DiscoverSort,
+    getDiscoverHubs,
 } from '@/lib/discover/query';
-import { LayoutOptimizer, CriticalCSS } from '@/components/ui/layout-optimizer';
-import { GridPattern } from '@/components/magicui/grid-pattern';
+import { Suspense } from 'react';
 import { DiscoverClient } from './ui/DiscoverClient';
-
-export const revalidate = 60;
 
 const SORT_OPTIONS: readonly DiscoverSort[] = [
   'trending',
@@ -88,13 +86,13 @@ export default async function DiscoverPage({
             <div className="mb-12 text-center">
               <div className="relative mb-6">
                 <h1 className="bg-gradient-to-br from-white via-gray-100 to-gray-300 bg-clip-text font-bold text-6xl text-transparent tracking-tight">
-                  Browse Communities
+                  Browse Community Hubs
                 </h1>
               </div>
 
               <div className="relative mx-auto mb-8 max-w-3xl">
                 <p className="text-gray-400 text-lg leading-relaxed">
-                  Connect across Discord servers. Filter by topics, activity, and language to find communities that match your interests.
+                  Connect across Discord servers. Filter by topics, activity, and language to find hubs that match your interests.
                 </p>
               </div>
             </div>

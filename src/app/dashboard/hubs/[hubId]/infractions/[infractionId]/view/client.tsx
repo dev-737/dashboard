@@ -336,7 +336,7 @@ export function ViewInfractionClient({
                 {isUserInfraction ? (
                   <>
                     <Image
-                      src={infraction.user?.image || '/pfp1.png'}
+                      src={infraction.user?.image || '/assets.images/pfp1.png'}
                       alt={targetName}
                       width={48}
                       height={48}
@@ -496,7 +496,7 @@ export function ViewInfractionClient({
             <CardContent>
               <div className="flex items-center gap-3">
                 <Image
-                  src={infraction.moderator.image || '/pfp1.png'}
+                  src={infraction.moderator.image || '/assets.images/pfp1.png'}
                   alt={infraction.moderator.name}
                   width={40}
                   height={40}
@@ -553,7 +553,7 @@ export function ViewInfractionClient({
             <CardContent>
               <div className="flex items-center gap-3">
                 <Image
-                  src={infraction.hub.iconUrl || '/default-server.svg'}
+                  src={infraction.hub.iconUrl || '/assets/images/defaults/default-server.svg'}
                   alt={infraction.hub.name}
                   width={40}
                   height={40}
