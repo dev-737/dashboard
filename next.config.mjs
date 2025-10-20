@@ -65,6 +65,7 @@ const config = {
       { protocol: 'https', hostname: 'images7.alphacoders.com' },
       { protocol: 'https', hostname: 'i.ibb.co' },
       { protocol: 'https', hostname: 'm.media-amazon.com' },
+      {protocol: 'https', hostname: 'img.freepik.com' },
     ],
   },
 

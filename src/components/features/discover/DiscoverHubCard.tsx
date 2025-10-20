@@ -84,22 +84,22 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
         </div>
       )}
 
-      <CardHeader className="relative pt-5 pb-3">
-        <div className="flex items-start gap-4">
+      <CardHeader className="relative pt-6 pb-4">
+        <div className="flex items-start gap-5">
           <SafeHubAvatar
-            src={iconUrl || '/assets/images/defaults/default-server.svg'}
+            src={iconUrl || '/assets/images/defaults/default-hub.svg'}
             name={name}
-            size={56}
+            size={72}
             className="shrink-0 ring-2 ring-gray-700/50"
             priority={isAboveFold}
             quality={isAboveFold ? 85 : 75}
-            sizes="56px"
+            sizes="72px"
             fetchPriority={isAboveFold ? 'high' : 'low'}
           />
 
-          <div className="min-w-0 flex-1 space-y-1.5">
+          <div className="min-w-0 flex-1 space-y-2">
             <div className="flex items-center gap-2">
-              <CardTitle className="truncate font-semibold text-lg text-white">
+              <CardTitle className="truncate font-semibold text-xl text-white">
                 {name}
               </CardTitle>
               {verified && (
@@ -140,11 +140,11 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
             </div>
 
             {/* icon stats */}
-            <div className="flex items-center gap-3 text-xs">
+            <div className="flex items-center gap-4 text-sm">
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="flex cursor-help items-center gap-1">
-                    <MessageCircle className="h-3.5 w-3.5 text-purple-400" />
+                  <div className="flex cursor-help items-center gap-1.5">
+                    <MessageCircle className="h-4 w-4 text-purple-400" />
                     <span className="text-gray-300">
                       {formatNumber(weeklyMessageCount)}
                     </span>
@@ -157,8 +157,8 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
 
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="flex cursor-help items-center gap-1">
-                    <Users className="h-3.5 w-3.5 text-emerald-400" />
+                  <div className="flex cursor-help items-center gap-1.5">
+                    <Users className="h-4 w-4 text-emerald-400" />
                     <span className="text-gray-300">
                       {formatNumber(_count.connections)}
                     </span>
@@ -171,8 +171,8 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
 
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="flex cursor-help items-center gap-1">
-                    <Heart className="h-3.5 w-3.5 text-pink-400" />
+                  <div className="flex cursor-help items-center gap-1.5">
+                    <Heart className="h-4 w-4 text-pink-400" />
                     <span className="text-gray-300">
                       {formatNumber(upvoteCount)}
                     </span>
@@ -186,13 +186,13 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
 
             {/* Rating Display */}
             {averageRating !== null && averageRating !== undefined && (
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <div className="flex items-center gap-0.5">
                   {[1, 2, 3, 4, 5].map((starIndex) => (
                     <Star
                       key={starIndex}
                       className={cn(
-                        'h-3 w-3',
+                        'h-3.5 w-3.5',
                         starIndex <= Math.round(averageRating)
                           ? 'fill-yellow-400 text-yellow-400'
                           : 'text-gray-600'
@@ -200,7 +200,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                     />
                   ))}
                 </div>
-                <span className="text-gray-400 text-xs">
+                <span className="text-gray-400 text-sm">
                   {averageRating.toFixed(1)}
                 </span>
               </div>
@@ -209,22 +209,22 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
         </div>
       </CardHeader>
 
-      <CardContent className="relative flex-1 space-y-3 pb-4">
+      <CardContent className="relative flex-1 space-y-4 pb-5">
         {/* Tags */}
         {tags && tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-2">
             {tags.slice(0, 3).map((tag) => (
               <button
                 type="button"
                 key={tag.name}
                 onClick={() => onTagClick?.(tag.name)}
-                className="inline-flex cursor-pointer items-center rounded-full border border-gray-700/40 bg-gray-800/40 px-2.5 py-1 font-medium text-gray-400 text-xs transition-colors hover:border-gray-600/60 hover:bg-gray-800/60 hover:text-gray-300"
+                className="inline-flex cursor-pointer items-center rounded-full border border-gray-700/40 bg-gray-800/40 px-3 py-1.5 font-medium text-gray-400 text-sm transition-colors hover:border-gray-600/60 hover:bg-gray-800/60 hover:text-gray-300"
               >
                 #{tag.name}
               </button>
             ))}
             {tags.length > 3 && (
-              <span className="inline-flex items-center rounded-full border border-gray-700/30 bg-gray-800/30 px-2.5 py-1 text-gray-500 text-xs">
+              <span className="inline-flex items-center rounded-full border border-gray-700/30 bg-gray-800/30 px-3 py-1.5 text-gray-500 text-sm">
                 +{tags.length - 3}
               </span>
             )}
@@ -232,17 +232,17 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
         )}
 
         {/* Description */}
-        <CardDescription className="text-gray-400 text-xs leading-relaxed">
+        <CardDescription className="text-gray-400 text-sm leading-relaxed">
           {shortDescription ||
             description ||
             'A community space for discussions and connections.'}
         </CardDescription>
       </CardContent>
 
-      <CardFooter className="relative border-gray-800/50 border-t pt-4">
-        <div className="flex w-full gap-2">
+      <CardFooter className="relative border-gray-800/50 border-t pt-5">
+        <div className="flex w-full gap-3">
           <Link href={`/hubs/${id}`} className="flex-1">
-            <Button className="btn-primary group w-full">
+            <Button className="btn-primary group w-full text-base">
               <Eye className="mr-2 h-4 w-4" />
               View Hub
             </Button>
@@ -254,7 +254,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
             onClick={handleUpvote}
             disabled={isLoading}
             className={cn(
-              'shrink-0 rounded-lg border transition-colors',
+              'shrink-0 rounded-lg border transition-colors h-10 w-10',
               liked
                 ? 'border-red-500/50 bg-red-500/10 text-red-400 hover:bg-red-500/20'
                 : 'border-gray-700/60 bg-gray-900/40 text-gray-400 hover:border-gray-600 hover:bg-gray-800/60 hover:text-white'

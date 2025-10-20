@@ -149,7 +149,7 @@ model Hub {
   featured            Boolean              @default(false)
   rules               String[]
   activityLevel       HubActivityLevel     @default(LOW)
-  averageRating       Float                @default(0.0)
+  averageRating       Float?                @default(0.0)
   antiSwearRules      AntiSwearRule[]
   blockWords          BlockWord[]
   connections         Connection[]

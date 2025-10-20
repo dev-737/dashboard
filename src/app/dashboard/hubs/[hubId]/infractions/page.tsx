@@ -29,7 +29,6 @@ export default async function HubInfractionsPage({
   const permissionLevel = await getUserHubPermission(session.user.id, hubId);
 
   if (permissionLevel < PermissionLevel.MODERATOR) {
-    // User doesn't have sufficient permissions
     notFound();
   }
 

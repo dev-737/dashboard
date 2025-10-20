@@ -232,7 +232,7 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
                         >
                           <Avatar className="h-10 w-10 ring-1 ring-gray-700/50">
                             <AvatarImage
-                              src={hub.iconUrl || '/assets/images/defaults/default-server.svg'}
+                              src={hub.iconUrl || '/assets/images/defaults/default-hub.svg'}
                               alt={hub.name}
                             />
                             <AvatarFallback className="bg-gray-800 text-sm text-white">

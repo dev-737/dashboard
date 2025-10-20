@@ -69,7 +69,7 @@ export function StableGrid({
 }) {
   return (
     <div
-      className={`grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 ${className}`}
+      className={`grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 ${className}`}
       style={
         {
           // Ensure consistent item heights to prevent layout shifts

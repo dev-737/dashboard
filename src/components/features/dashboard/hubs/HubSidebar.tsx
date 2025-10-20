@@ -1,15 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { cn } from '@/lib/utils';
-import {
-  AlertTriangle,
   Bell,
   ChevronLeft,
   ChevronRight,
@@ -17,8 +8,8 @@ import {
   Gavel,
   Globe,
   Home,
-  MessageSquare,
   MessageCircle,
+  MessageSquare,
   Package,
   Shield,
   Users,
@@ -27,6 +18,14 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { cn } from '@/lib/utils';
 
 interface HubSidebarProps {
   hubId: string;
@@ -42,6 +41,8 @@ interface SidebarNavItemProps {
   label: string;
   active: boolean;
   isCollapsed: boolean;
+  locked?: boolean;
+  lockReason?: string;
   color?:
     | 'default'
     | 'blue'
@@ -70,6 +71,8 @@ interface NavigationItem {
   show:
     | boolean
     | ((permissions: { canModerate: boolean; canEdit: boolean }) => boolean);
+  locked?: (permissions: { canModerate: boolean; canEdit: boolean }) => boolean;
+  lockReason?: string;
 }
 
 interface SidebarSection {
@@ -85,6 +88,8 @@ function SidebarNavItem({
   label,
   active,
   isCollapsed,
+  locked = false,
+  lockReason = 'Requires higher permissions',
   color = 'default',
 }: SidebarNavItemProps) {
   const colorClasses = {
@@ -93,91 +98,136 @@ function SidebarNavItem({
         'bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-300 border-purple-400/50 shadow-lg shadow-purple-500/10 backdrop-blur-sm',
       inactive:
         'text-gray-300 hover:text-white hover:bg-purple-500/10 hover:border-purple-500/30 border-transparent backdrop-blur-sm',
+      locked:
+        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
       icon: active
         ? 'text-purple-300 bg-purple-400/20 shadow-sm shadow-purple-500/20'
         : 'text-purple-400 group-hover:text-white group-hover:bg-purple-400/15',
+      iconLocked: 'text-gray-600 bg-gray-700/10',
     },
     blue: {
       active:
         'bg-gradient-to-r from-blue-500/15 to-cyan-500/15 text-blue-300 border-blue-400/40 shadow-lg shadow-blue-500/5 backdrop-blur-sm',
       inactive:
         'text-gray-300 hover:text-white hover:bg-blue-500/10 hover:border-blue-500/30 border-transparent backdrop-blur-sm',
+      locked:
+        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
       icon: active
         ? 'text-blue-300 bg-blue-400/15'
         : 'text-blue-400 group-hover:text-white group-hover:bg-blue-400/10',
+      iconLocked: 'text-gray-600 bg-gray-700/10',
     },
     green: {
       active:
         'bg-gradient-to-r from-emerald-500/15 to-green-500/15 text-emerald-300 border-emerald-400/40 shadow-lg shadow-emerald-500/5 backdrop-blur-sm',
       inactive:
         'text-gray-300 hover:text-white hover:bg-emerald-500/10 hover:border-emerald-500/30 border-transparent backdrop-blur-sm',
+      locked:
+        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
       icon: active
         ? 'text-emerald-300 bg-emerald-400/15'
         : 'text-emerald-400 group-hover:text-white group-hover:bg-emerald-400/10',
+      iconLocked: 'text-gray-600 bg-gray-700/10',
     },
     purple: {
       active:
         'bg-gradient-to-r from-purple-500/15 to-indigo-500/15 text-purple-300 border-purple-400/40 shadow-lg shadow-purple-500/5 backdrop-blur-sm',
       inactive:
         'text-gray-300 hover:text-white hover:bg-purple-500/10 hover:border-purple-500/30 border-transparent backdrop-blur-sm',
+      locked:
+        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
       icon: active
         ? 'text-purple-300 bg-purple-400/15'
         : 'text-purple-400 group-hover:text-white group-hover:bg-purple-400/10',
+      iconLocked: 'text-gray-600 bg-gray-700/10',
     },
     red: {
       active:
         'bg-gradient-to-r from-red-500/15 to-pink-500/15 text-red-300 border-red-400/40 shadow-lg shadow-red-500/5 backdrop-blur-sm',
       inactive:
         'text-gray-300 hover:text-white hover:bg-red-500/10 hover:border-red-500/30 border-transparent backdrop-blur-sm',
+      locked:
+        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
       icon: active
         ? 'text-red-300 bg-red-400/15'
         : 'text-red-400 group-hover:text-white group-hover:bg-red-400/10',
+      iconLocked: 'text-gray-600 bg-gray-700/10',
     },
     orange: {
       active:
         'bg-gradient-to-r from-orange-500/15 to-amber-500/15 text-orange-300 border-orange-400/40 shadow-lg shadow-orange-500/5 backdrop-blur-sm',
       inactive:
         'text-gray-300 hover:text-white hover:bg-orange-500/10 hover:border-orange-500/30 border-transparent backdrop-blur-sm',
+      locked:
+        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
       icon: active
         ? 'text-orange-300 bg-orange-400/15'
         : 'text-orange-400 group-hover:text-white group-hover:bg-orange-400/10',
+      iconLocked: 'text-gray-600 bg-gray-700/10',
     },
     yellow: {
       active:
         'bg-gradient-to-r from-amber-500/15 to-yellow-500/15 text-amber-300 border-amber-400/40 shadow-lg shadow-amber-500/5 backdrop-blur-sm',
       inactive:
         'text-gray-300 hover:text-white hover:bg-amber-500/10 hover:border-amber-500/30 border-transparent backdrop-blur-sm',
+      locked:
+        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
       icon: active
         ? 'text-amber-300 bg-amber-400/15'
         : 'text-amber-400 group-hover:text-white group-hover:bg-amber-400/10',
+      iconLocked: 'text-gray-600 bg-gray-700/10',
     },
     indigo: {
       active:
         'bg-gradient-to-r from-indigo-500/15 to-purple-500/15 text-indigo-300 border-indigo-400/40 shadow-lg shadow-indigo-500/5 backdrop-blur-sm',
       inactive:
         'text-gray-300 hover:text-white hover:bg-indigo-500/10 hover:border-indigo-500/30 border-transparent backdrop-blur-sm',
+      locked:
+        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
       icon: active
         ? 'text-indigo-300 bg-indigo-400/15'
         : 'text-indigo-400 group-hover:text-white group-hover:bg-indigo-400/10',
+      iconLocked: 'text-gray-600 bg-gray-700/10',
     },
   };
 
   const colors = colorClasses[color];
 
-  const content = (
-    <Link
-      href={href}
+  const content = locked ? (
+    <div
       className={cn(
-        'flex items-center text-sm font-medium rounded-2xl transition-all duration-300 group relative border',
+        'group relative flex items-center rounded-2xl border font-medium text-sm transition-all duration-300',
         isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
-        active
-          ? `${colors.active} border scale-[0.98]`
-          : `${colors.inactive} hover:shadow-md hover:shadow-black/5 hover:scale-[0.99]`
+        colors.locked
       )}
     >
       <div
         className={cn(
-          'p-1.5 rounded-xl transition-all duration-300 shrink-0',
+          'shrink-0 rounded-xl p-1.5 transition-all duration-300',
+          colors.iconLocked
+        )}
+      >
+        <Icon className="h-4 w-4" />
+      </div>
+
+      {!isCollapsed && (
+        <span className="truncate font-medium text-sm">{label}</span>
+      )}
+    </div>
+  ) : (
+    <Link
+      href={href}
+      className={cn(
+        'group relative flex items-center rounded-2xl border font-medium text-sm transition-all duration-300',
+        isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
+        active
+          ? `${colors.active} scale-[0.98] border`
+          : `${colors.inactive} hover:scale-[0.99] hover:shadow-black/5 hover:shadow-md`
+      )}
+    >
+      <div
+        className={cn(
+          'shrink-0 rounded-xl p-1.5 transition-all duration-300',
           colors.icon
         )}
       >
@@ -190,16 +240,23 @@ function SidebarNavItem({
     </Link>
   );
 
-  if (isCollapsed) {
+  if (isCollapsed || locked) {
     return (
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>{content}</TooltipTrigger>
           <TooltipContent
             side="right"
-            className="ml-3 bg-gray-900/95 border-gray-700/50 text-gray-200 rounded-xl shadow-xl backdrop-blur-md"
+            className="ml-3 rounded-xl border-gray-700/50 bg-gray-900/95 text-gray-200 shadow-xl backdrop-blur-md"
           >
-            <p className="font-medium text-sm">{label}</p>
+            {locked ? (
+              <div className="space-y-1">
+                <p className="font-medium text-sm">{label}</p>
+                <p className="text-gray-400 text-xs">{lockReason}</p>
+              </div>
+            ) : (
+              <p className="font-medium text-sm">{label}</p>
+            )}
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -231,19 +288,20 @@ function SidebarSection({
   return (
     <div className="space-y-3">
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between px-3 py-2 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-gray-200 transition-all duration-300 group rounded-xl hover:bg-gray-800/30 backdrop-blur-sm border border-transparent hover:border-gray-700/50"
+        className="group flex w-full items-center justify-between rounded-xl border border-transparent px-3 py-2 font-bold text-gray-400 text-xs uppercase tracking-wider backdrop-blur-sm transition-all duration-300 hover:border-gray-700/50 hover:bg-gray-800/30 hover:text-gray-200"
       >
         <span className="flex items-center gap-2">
-          <div className="w-1.5 h-1.5 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-          <span className="bg-gradient-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent group-hover:from-white group-hover:to-gray-200 transition-all duration-300">
+          <div className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
+          <span className="bg-gradient-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent transition-all duration-300 group-hover:from-white group-hover:to-gray-200">
             {title}
           </span>
         </span>
         <motion.div
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300"
+          className="text-gray-400 transition-colors duration-300 group-hover:text-gray-200"
         >
           <ChevronRight className="h-3 w-3" />
         </motion.div>
@@ -297,7 +355,9 @@ export function HubSidebar({
           color: 'yellow',
           icon: Globe,
           href: `/dashboard/hubs/${hubId}/discoverability`,
-          show: ({ canEdit }) => canEdit,
+          show: true,
+          locked: ({ canEdit }) => !canEdit,
+          lockReason: 'Requires Manager role',
         },
       ],
     },
@@ -312,7 +372,7 @@ export function HubSidebar({
           color: 'blue',
           icon: Users,
           href: `/dashboard/hubs/${hubId}/members`,
-          show: ({ canModerate }) => canModerate,
+          show: ({ canEdit }) => canEdit,
         },
         {
           value: 'connections',
@@ -336,7 +396,9 @@ export function HubSidebar({
           color: 'indigo',
           icon: FileText,
           href: `/dashboard/hubs/${hubId}/logging`,
-          show: ({ canEdit }) => canEdit,
+          show: true,
+          locked: ({ canEdit }) => !canEdit,
+          lockReason: 'Requires Manager role',
         },
         {
           value: 'modules',
@@ -404,14 +466,14 @@ export function HubSidebar({
   return (
     <div
       className={cn(
-        'flex flex-col h-full bg-gradient-to-b from-gray-900/98 to-gray-950/98 backdrop-blur-xl border-r border-gray-700/40 transition-all duration-300 shadow-2xl shadow-black/20',
+        'flex h-full flex-col border-gray-700/40 border-r bg-gradient-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/20 backdrop-blur-xl transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >
-      <div className="flex items-center justify-between p-4 border-b border-gray-700/40 bg-gradient-to-r from-gray-900/50 to-gray-800/50 backdrop-blur-sm">
+      <div className="flex items-center justify-between border-gray-700/40 border-b bg-gradient-to-r from-gray-900/50 to-gray-800/50 p-4 backdrop-blur-sm">
         {!isCollapsed && (
           <div className="flex items-center gap-2">
-            <div className="text-sm font-bold text-white tracking-wide">
+            <div className="font-bold text-sm text-white tracking-wide">
               Hub Dashboard
             </div>
           </div>
@@ -421,7 +483,7 @@ export function HubSidebar({
             variant="ghost"
             size="icon"
             onClick={onToggleCollapse}
-            className="h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700/50 shrink-0 rounded-xl transition-all duration-300 backdrop-blur-sm border border-transparent hover:border-gray-600/40 shadow-sm hover:shadow-lg"
+            className="h-8 w-8 shrink-0 rounded-xl border border-transparent text-gray-400 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-gray-600/40 hover:bg-gray-700/50 hover:text-white hover:shadow-lg"
           >
             <motion.div
               animate={{ rotate: isCollapsed ? 180 : 0 }}
@@ -438,19 +500,29 @@ export function HubSidebar({
       </div>
 
       {/* Premium Navigation */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-5 hub-sidebar-scrollbar scrollbar-thin scrollbar-thumb-gray-700/30 scrollbar-track-transparent hover:scrollbar-thumb-gray-600/50 transition-colors">
+      <div className="hub-sidebar-scrollbar scrollbar-thin scrollbar-thumb-gray-700/30 scrollbar-track-transparent hover:scrollbar-thumb-gray-600/50 flex-1 space-y-5 overflow-y-auto p-4 transition-colors">
         {visibleSections.map((section) => {
-          const sectionItems = section.items.map((item) => (
-            <SidebarNavItem
-              key={item.value}
-              href={item.href}
-              icon={item.icon}
-              label={item.label}
-              active={pathname === item.href}
-              isCollapsed={isCollapsed}
-              color={item.color}
-            />
-          ));
+          const sectionItems = section.items.map((item) => {
+            const isLocked =
+              item.locked &&
+              (typeof item.locked === 'function'
+                ? item.locked(permissions)
+                : item.locked);
+
+            return (
+              <SidebarNavItem
+                key={item.value}
+                href={item.href}
+                icon={item.icon}
+                label={item.label}
+                active={pathname === item.href}
+                isCollapsed={isCollapsed}
+                locked={isLocked}
+                lockReason={item.lockReason}
+                color={item.color}
+              />
+            );
+          });
 
           // Render items directly if no title
           if (!section.title) {
@@ -477,10 +549,10 @@ export function HubSidebar({
       </div>
 
       {/* Footer */}
-      <div className="mt-auto p-4 border-t border-gray-700/40 bg-gradient-to-t from-gray-950/80 to-transparent backdrop-blur-sm">
+      <div className="mt-auto border-gray-700/40 border-t bg-gradient-to-t from-gray-950/80 to-transparent p-4 backdrop-blur-sm">
         {!isCollapsed ? (
           <div className="space-y-3">
-            <div className="text-xs text-gray-500">
+            <div className="text-gray-500 text-xs">
               <div className="flex justify-between">
                 <span>Version</span>
                 <span className="text-gray-400">v5.0.5</span>
@@ -488,7 +560,7 @@ export function HubSidebar({
             </div>
           </div>
         ) : (
-          <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse mx-auto" />
+          <div className="mx-auto h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
         )}
       </div>
     </div>

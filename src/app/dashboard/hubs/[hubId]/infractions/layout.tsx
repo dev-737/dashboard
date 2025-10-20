@@ -26,8 +26,7 @@ export default async function InfractionsLayout({
   // Check if user has manager or owner permissions
   const permissionLevel = await getUserHubPermission(session.user.id, hubId);
 
-  if (permissionLevel < PermissionLevel.MANAGER) {
-    // User doesn't have sufficient permissions
+  if (permissionLevel < PermissionLevel.MODERATOR) {
     notFound();
   }
 
