@@ -388,7 +388,9 @@ model User {
   hubJoinCount           Int                       @default(0)
   hubEngagementScore     Float                     @default(0.0)
   locale                 String?
-  lastVoted              DateTime?                
+  lastVoted              DateTime?
+  voteRemindersEnabled   Boolean                   @default(true)
+  lastVoteReminderSent   DateTime?
   badges                 Badges[]                  @default([])
   preferredLanguages     String[]                  @default([])
   accounts               Account[]
