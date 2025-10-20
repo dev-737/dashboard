@@ -155,8 +155,22 @@ export const userRouter = router({
         );
       });
 
+      // Check which servers have the bot present (exist in ServerData)
+      const manageableGuildIds = manageableGuilds.map((g) => g.id);
+      const serversWithBot = await db.serverData.findMany({
+        where: { id: { in: manageableGuildIds } },
+        select: { id: true },
+      });
+
+      const botServerIds = new Set(serversWithBot.map((s) => s.id));
+
+      // Filter to only servers where bot is present
+      const serversWithBotPresent = manageableGuilds.filter((guild) =>
+        botServerIds.has(guild.id)
+      );
+
       // Format the response
-      const servers = manageableGuilds.map((guild: DiscordGuild) => ({
+      const servers = serversWithBotPresent.map((guild: DiscordGuild) => ({
         id: guild.id,
         name: guild.name,
         icon: guild.icon

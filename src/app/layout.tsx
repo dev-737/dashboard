@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
-import { auth } from '@/auth';
 import { Navbar } from '@/components/layout/Navbar';
 import { Providers } from '@/components/providers';
 import { Toaster } from '@/components/layout/Toaster';
@@ -99,7 +98,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
       className={`${inter.className} dark bg-[#0a0a0c]`}
       suppressHydrationWarning
     >
-            <head>
+      <head>
         <link rel="dns-prefetch" href="https://cloud.umami.is" />
         <link rel="preconnect" href="https://cloud.umami.is" crossOrigin="" />
         <link

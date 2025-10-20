@@ -1,7 +1,14 @@
 'use client';
 
 import { formatDistanceToNow } from 'date-fns';
-import { AlertTriangle, Calendar, Clock, Shield, User, Home } from 'lucide-react';
+import {
+  AlertTriangle,
+  Calendar,
+  Clock,
+  Shield,
+  User,
+  Home,
+} from 'lucide-react';
 import { useState } from 'react';
 import {
   AlertDialog,
@@ -15,7 +22,10 @@ import {
 } from '@/components/ui/AlertDialog';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-import type { InfractionType, InfractionStatus } from '@/lib/generated/prisma/client';
+import type {
+  InfractionType,
+  InfractionStatus,
+} from '@/lib/generated/prisma/client';
 import { revokeInfraction } from '@/actions/server-actions';
 
 interface Infraction {
@@ -58,10 +68,10 @@ export function InfractionRevokeModal({
 
   const handleRevoke = async () => {
     setIsRevoking(true);
-    
+
     try {
       const result = await revokeInfraction(infraction.id);
-      
+
       if (result.error) {
         toast({
           title: 'Failed to revoke infraction',
@@ -127,7 +137,8 @@ export function InfractionRevokeModal({
             Revoke Infraction
           </AlertDialogTitle>
           <AlertDialogDescription className="text-gray-300">
-            Are you sure you want to revoke this infraction? This action cannot be undone.
+            Are you sure you want to revoke this infraction? This action cannot
+            be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -178,7 +189,9 @@ export function InfractionRevokeModal({
               <Calendar className="h-4 w-4 text-gray-400" />
               <span className="text-gray-400">Created:</span>
               <span className="text-white">
-                {formatDistanceToNow(new Date(infraction.createdAt), { addSuffix: true })}
+                {formatDistanceToNow(new Date(infraction.createdAt), {
+                  addSuffix: true,
+                })}
               </span>
             </div>
 
@@ -187,7 +200,9 @@ export function InfractionRevokeModal({
                 <Clock className="h-4 w-4 text-gray-400" />
                 <span className="text-gray-400">Expires:</span>
                 <span className="text-white">
-                  {formatDistanceToNow(new Date(infraction.expiresAt), { addSuffix: true })}
+                  {formatDistanceToNow(new Date(infraction.expiresAt), {
+                    addSuffix: true,
+                  })}
                 </span>
               </div>
             )}

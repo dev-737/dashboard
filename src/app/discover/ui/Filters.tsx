@@ -25,8 +25,24 @@ export type FeatureFlags = {
 export function Filters(props: {
   q: string;
   onQChange: (v: string) => void;
-  sort: 'trending' | 'active' | 'new' | 'upvoted' | 'rated' | 'members' | 'growing';
-  onSortChange: (v: 'trending' | 'active' | 'new' | 'upvoted' | 'rated' | 'members' | 'growing') => void;
+  sort:
+    | 'trending'
+    | 'active'
+    | 'new'
+    | 'upvoted'
+    | 'rated'
+    | 'members'
+    | 'growing';
+  onSortChange: (
+    v:
+      | 'trending'
+      | 'active'
+      | 'new'
+      | 'upvoted'
+      | 'rated'
+      | 'members'
+      | 'growing'
+  ) => void;
 
   tags: string[];
   onTagsChange: (tags: string[]) => void;
@@ -66,7 +82,10 @@ export function Filters(props: {
 
   // Save collapsed state to localStorage
   useEffect(() => {
-    localStorage.setItem('discover-filters-collapsed', JSON.stringify(isCollapsed));
+    localStorage.setItem(
+      'discover-filters-collapsed',
+      JSON.stringify(isCollapsed)
+    );
   }, [isCollapsed]);
 
   const toggleCollapsed = () => {
@@ -82,9 +101,22 @@ export function Filters(props: {
     if (props.activity.length > 0) count++;
     if (props.memberRange) count++;
     if (props.minRating) count++;
-    if (props.features.verified || props.features.partnered || props.features.nsfw) count++;
+    if (
+      props.features.verified ||
+      props.features.partnered ||
+      props.features.nsfw
+    )
+      count++;
     return count;
-  }, [props.tags, props.language, props.region, props.activity, props.memberRange, props.minRating, props.features]);
+  }, [
+    props.tags,
+    props.language,
+    props.region,
+    props.activity,
+    props.memberRange,
+    props.minRating,
+    props.features,
+  ]);
 
   return (
     <aside className="rounded-lg border border-gray-800 bg-gray-900/95 shadow-lg sm:bg-gray-900/50 sm:backdrop-blur-sm">
@@ -128,199 +160,202 @@ export function Filters(props: {
         }}
       >
         <div className="space-y-6 p-6">
+          <div className="flex flex-col gap-6">
+            {/* Sort */}
+            <div className="flex flex-col gap-3">
+              <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
+                Sort by
+              </Label>
+              <Select
+                value={props.sort}
+                onValueChange={(v: string) =>
+                  props.onSortChange(v as typeof props.sort)
+                }
+              >
+                <SelectTrigger className="select-standard">
+                  <SelectValue placeholder="Sort" />
+                </SelectTrigger>
+                <SelectContent className="select-content">
+                  <SelectItem value="trending">Trending</SelectItem>
+                  <SelectItem value="active">Most Active</SelectItem>
+                  <SelectItem value="new">Newest</SelectItem>
+                  <SelectItem value="upvoted">Most Upvoted</SelectItem>
+                  <SelectItem value="rated">Best Rated</SelectItem>
+                  <SelectItem value="members">Most Members</SelectItem>
+                  <SelectItem value="growing">Fastest Growing</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-      <div className="flex flex-col gap-6">
-        {/* Sort */}
-        <div className="flex flex-col gap-3">
-          <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
-            Sort by
-          </Label>
-          <Select
-            value={props.sort}
-            onValueChange={(v: string) =>
-              props.onSortChange(v as typeof props.sort)
-            }
-          >
-            <SelectTrigger className="select-standard">
-              <SelectValue placeholder="Sort" />
-            </SelectTrigger>
-            <SelectContent className="select-content">
-              <SelectItem value="trending">Trending</SelectItem>
-              <SelectItem value="active">Most Active</SelectItem>
-              <SelectItem value="new">Newest</SelectItem>
-              <SelectItem value="upvoted">Most Upvoted</SelectItem>
-              <SelectItem value="rated">Best Rated</SelectItem>
-              <SelectItem value="members">Most Members</SelectItem>
-              <SelectItem value="growing">Fastest Growing</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+            {/* Tags */}
+            <TagPicker
+              selectedTags={props.tags}
+              onTagsChange={props.onTagsChange}
+              maxTags={5}
+            />
 
-        {/* Tags */}
-        <TagPicker
-          selectedTags={props.tags}
-          onTagsChange={props.onTagsChange}
-          maxTags={5}
-        />
+            {/* Language */}
+            <div className="flex flex-col gap-3">
+              <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
+                Language
+              </Label>
+              <Select
+                value={props.language ?? 'any'}
+                onValueChange={(v) =>
+                  props.onLanguageChange(v === 'any' ? undefined : v)
+                }
+              >
+                <SelectTrigger className="select-standard">
+                  <SelectValue placeholder="Any language" />
+                </SelectTrigger>
+                <SelectContent className="select-content">
+                  <SelectItem value="any">Any language</SelectItem>
+                  {languageOptions.map((l) => (
+                    <SelectItem key={l.code} value={l.code}>
+                      {l.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
-        {/* Language */}
-        <div className="flex flex-col gap-3">
-          <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
-            Language
-          </Label>
-          <Select
-            value={props.language ?? 'any'}
-            onValueChange={(v) =>
-              props.onLanguageChange(v === 'any' ? undefined : v)
-            }
-          >
-            <SelectTrigger className="select-standard">
-              <SelectValue placeholder="Any language" />
-            </SelectTrigger>
-            <SelectContent className="select-content">
-              <SelectItem value="any">Any language</SelectItem>
-              {languageOptions.map((l) => (
-                <SelectItem key={l.code} value={l.code}>
-                  {l.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+            <div className="flex flex-col gap-3">
+              <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
+                Member Count
+              </Label>
+              <Select
+                value={props.memberRange ?? 'any'}
+                onValueChange={(v) =>
+                  props.onMemberRangeChange(v === 'any' ? undefined : v)
+                }
+              >
+                <SelectTrigger className="select-standard">
+                  <SelectValue placeholder="Any size" />
+                </SelectTrigger>
+                <SelectContent className="select-content">
+                  <SelectItem value="any">Any size</SelectItem>
+                  <SelectItem value="small">Small (&lt;50)</SelectItem>
+                  <SelectItem value="medium">Medium (50-200)</SelectItem>
+                  <SelectItem value="large">Large (200-1000)</SelectItem>
+                  <SelectItem value="huge">Huge (1000+)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-        <div className="flex flex-col gap-3">
-          <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
-            Member Count
-          </Label>
-          <Select
-            value={props.memberRange ?? 'any'}
-            onValueChange={(v) =>
-              props.onMemberRangeChange(v === 'any' ? undefined : v)
-            }
-          >
-            <SelectTrigger className="select-standard">
-              <SelectValue placeholder="Any size" />
-            </SelectTrigger>
-            <SelectContent className="select-content">
-              <SelectItem value="any">Any size</SelectItem>
-              <SelectItem value="small">Small (&lt;50)</SelectItem>
-              <SelectItem value="medium">Medium (50-200)</SelectItem>
-              <SelectItem value="large">Large (200-1000)</SelectItem>
-              <SelectItem value="huge">Huge (1000+)</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+            {/* Minimum Rating */}
+            <div className="flex flex-col gap-3">
+              <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
+                Minimum Rating
+              </Label>
+              <Select
+                value={props.minRating?.toString() ?? 'any'}
+                onValueChange={(v) =>
+                  props.onMinRatingChange(
+                    v === 'any' ? undefined : Number.parseFloat(v)
+                  )
+                }
+              >
+                <SelectTrigger className="select-standard">
+                  <SelectValue placeholder="Any rating" />
+                </SelectTrigger>
+                <SelectContent className="select-content">
+                  <SelectItem value="any">Any rating</SelectItem>
+                  <SelectItem value="3">3+ stars</SelectItem>
+                  <SelectItem value="4">4+ stars</SelectItem>
+                  <SelectItem value="4.5">4.5+ stars</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-        {/* Minimum Rating */}
-        <div className="flex flex-col gap-3">
-          <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
-            Minimum Rating
-          </Label>
-          <Select
-            value={props.minRating?.toString() ?? 'any'}
-            onValueChange={(v) =>
-              props.onMinRatingChange(v === 'any' ? undefined : Number.parseFloat(v))
-            }
-          >
-            <SelectTrigger className="select-standard">
-              <SelectValue placeholder="Any rating" />
-            </SelectTrigger>
-            <SelectContent className="select-content">
-              <SelectItem value="any">Any rating</SelectItem>
-              <SelectItem value="3">3+ stars</SelectItem>
-              <SelectItem value="4">4+ stars</SelectItem>
-              <SelectItem value="4.5">4.5+ stars</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+            {/* Activity */}
+            <div className="flex flex-col gap-3">
+              <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
+                Activity Level
+              </Label>
+              <div className="grid grid-cols-1 gap-2">
+                {(['LOW', 'MEDIUM', 'HIGH'] as const).map((lvl) => {
+                  const checked = props.activity.includes(lvl);
+                  return (
+                    <Label
+                      key={lvl}
+                      className={`inline-flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors ${
+                        checked
+                          ? 'border-purple-500/40 bg-purple-500/10 text-purple-300'
+                          : 'border-gray-700 bg-gray-900/30 text-gray-300 hover:border-gray-600 hover:bg-gray-800/50'
+                      }`}
+                    >
+                      <Checkbox
+                        checked={checked}
+                        onCheckedChange={(val) => {
+                          const on = Boolean(val);
+                          let next = props.activity;
+                          if (on && !next.includes(lvl)) next = [...next, lvl];
+                          if (!on) next = next.filter((x) => x !== lvl);
+                          props.onActivityChange(next);
+                        }}
+                      />
+                      <span className="font-medium text-sm capitalize">
+                        {lvl.toLowerCase()}
+                      </span>
+                    </Label>
+                  );
+                })}
+              </div>
+            </div>
 
-        {/* Activity */}
-        <div className="flex flex-col gap-3">
-          <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
-            Activity Level
-          </Label>
-          <div className="grid grid-cols-1 gap-2">
-            {(['LOW', 'MEDIUM', 'HIGH'] as const).map((lvl) => {
-              const checked = props.activity.includes(lvl);
-              return (
-                <Label
-                  key={lvl}
-                  className={`inline-flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors ${
-                    checked
-                      ? 'border-purple-500/40 bg-purple-500/10 text-purple-300'
-                      : 'border-gray-700 bg-gray-900/30 text-gray-300 hover:border-gray-600 hover:bg-gray-800/50'
-                  }`}
-                >
+            {/* Features */}
+            <div className="flex flex-col gap-3">
+              <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
+                Features
+              </Label>
+              <div className="grid grid-cols-1 gap-2">
+                <Label className="inline-flex cursor-pointer items-center gap-3 rounded-lg border border-gray-700 bg-gray-900/30 p-3 transition-colors hover:border-gray-600 hover:bg-gray-800/50">
                   <Checkbox
-                    checked={checked}
-                    onCheckedChange={(val) => {
-                      const on = Boolean(val);
-                      let next = props.activity;
-                      if (on && !next.includes(lvl)) next = [...next, lvl];
-                      if (!on) next = next.filter((x) => x !== lvl);
-                      props.onActivityChange(next);
-                    }}
+                    checked={!!props.features.verified}
+                    onCheckedChange={(v) =>
+                      props.onFeaturesChange({
+                        ...props.features,
+                        verified: Boolean(v),
+                      })
+                    }
                   />
-                  <span className="font-medium text-sm capitalize">
-                    {lvl.toLowerCase()}
+                  <span className="font-medium text-gray-200 text-sm">
+                    Verified Only
                   </span>
                 </Label>
-              );
-            })}
+                <Label className="inline-flex cursor-pointer items-center gap-3 rounded-lg border border-gray-700 bg-gray-900/30 p-3 transition-colors hover:border-gray-600 hover:bg-gray-800/50">
+                  <Checkbox
+                    checked={!!props.features.partnered}
+                    onCheckedChange={(v) =>
+                      props.onFeaturesChange({
+                        ...props.features,
+                        partnered: Boolean(v),
+                      })
+                    }
+                  />
+                  <span className="font-medium text-gray-200 text-sm">
+                    Partnered Only
+                  </span>
+                </Label>
+                <Label className="inline-flex cursor-pointer items-center gap-3 rounded-lg border border-gray-700 bg-gray-900/30 p-3 transition-colors hover:border-gray-600 hover:bg-gray-800/50">
+                  <Checkbox
+                    checked={!!props.features.nsfw}
+                    onCheckedChange={(v) =>
+                      props.onFeaturesChange({
+                        ...props.features,
+                        nsfw: Boolean(v),
+                      })
+                    }
+                  />
+                  <span className="text-sm">🔞</span>
+                  <span className="font-medium text-gray-200 text-sm">
+                    NSFW Content
+                  </span>
+                </Label>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Features */}
-        <div className="flex flex-col gap-3">
-          <Label className="font-medium text-gray-300 text-xs uppercase tracking-wide">
-            Features
-          </Label>
-          <div className="grid grid-cols-1 gap-2">
-            <Label className="inline-flex cursor-pointer items-center gap-3 rounded-lg border border-gray-700 bg-gray-900/30 p-3 transition-colors hover:border-gray-600 hover:bg-gray-800/50">
-              <Checkbox
-                checked={!!props.features.verified}
-                onCheckedChange={(v) =>
-                  props.onFeaturesChange({
-                    ...props.features,
-                    verified: Boolean(v),
-                  })
-                }
-              />
-              <span className="font-medium text-gray-200 text-sm">
-                Verified Only
-              </span>
-            </Label>
-            <Label className="inline-flex cursor-pointer items-center gap-3 rounded-lg border border-gray-700 bg-gray-900/30 p-3 transition-colors hover:border-gray-600 hover:bg-gray-800/50">
-              <Checkbox
-                checked={!!props.features.partnered}
-                onCheckedChange={(v) =>
-                  props.onFeaturesChange({
-                    ...props.features,
-                    partnered: Boolean(v),
-                  })
-                }
-              />
-              <span className="font-medium text-gray-200 text-sm">
-                Partnered Only
-              </span>
-            </Label>
-            <Label className="inline-flex cursor-pointer items-center gap-3 rounded-lg border border-gray-700 bg-gray-900/30 p-3 transition-colors hover:border-gray-600 hover:bg-gray-800/50">
-              <Checkbox
-                checked={!!props.features.nsfw}
-                onCheckedChange={(v) =>
-                  props.onFeaturesChange({
-                    ...props.features,
-                    nsfw: Boolean(v),
-                  })
-                }
-              />
-              <span className="text-sm">🔞</span>
-              <span className="font-medium text-gray-200 text-sm">NSFW Content</span>
-            </Label>
-          </div>
-        </div>
-      </div>
-      </div>
       </div>
     </aside>
   );

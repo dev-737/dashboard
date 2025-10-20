@@ -1,34 +1,35 @@
-import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { auth } from '@/auth';
+import type { NextRequest } from 'next/server';
 
-export async function proxy(request: NextRequest) {
+// Edge-compatible middleware without Prisma
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Protected routes that require authentication
   const protectedRoutes = ['/dashboard', '/admin'];
   const isProtectedRoute = protectedRoutes.some((route) =>
-    pathname.startsWith(route)
+    pathname.startsWith(route),
   );
 
   if (isProtectedRoute) {
-    const session = await auth();
+    // Check for NextAuth session token (JWT)
+    const token = request.cookies.get('authjs.session-token') ||
+                  request.cookies.get('__Secure-authjs.session-token');
 
-    if (!session) {
-      // Redirect to login with callback URL
+    if (!token) {
       const url = new URL('/login', request.url);
       url.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(url);
     }
 
-    // Check admin access for /admin routes
+    // For admin routes, add additional checks here
+    // NOTE: Full session data requires server-side auth() call
     if (pathname.startsWith('/admin')) {
-      // You can add admin role checking logic here
-      // For example: if (!session.user.isAdmin) return NextResponse.redirect(new URL('/dashboard', request.url));
+      // Admin role checking should be done in the actual page/API route
+      // where you have access to the full session
     }
   }
 
-  // Allow public routes
   return NextResponse.next();
 }
 

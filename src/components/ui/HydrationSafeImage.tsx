@@ -47,22 +47,24 @@ export function HydrationSafeImage({
   const [error, setError] = useState(false);
 
   // Determine fallback image based on alt text or use provided fallback
-  const determinedFallback = fallbackSrc || (() => {
-    const altLower = alt.toLowerCase();
-    if (altLower.includes('avatar') || altLower.includes('profile')) {
-      return DEFAULT_FALLBACKS.avatar;
-    }
-    if (altLower.includes('banner')) {
-      return DEFAULT_FALLBACKS.banner;
-    }
-    if (altLower.includes('server')) {
-      return DEFAULT_FALLBACKS.server;
-    }
-    if (altLower.includes('hub') || altLower.includes('community')) {
+  const determinedFallback =
+    fallbackSrc ||
+    (() => {
+      const altLower = alt.toLowerCase();
+      if (altLower.includes('avatar') || altLower.includes('profile')) {
+        return DEFAULT_FALLBACKS.avatar;
+      }
+      if (altLower.includes('banner')) {
+        return DEFAULT_FALLBACKS.banner;
+      }
+      if (altLower.includes('server')) {
+        return DEFAULT_FALLBACKS.server;
+      }
+      if (altLower.includes('hub') || altLower.includes('community')) {
+        return DEFAULT_FALLBACKS.hub;
+      }
       return DEFAULT_FALLBACKS.hub;
-    }
-    return DEFAULT_FALLBACKS.hub;
-  })();
+    })();
 
   const handleError = () => {
     setError(true);

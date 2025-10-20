@@ -15,7 +15,17 @@ import {
 } from 'discord-api-types/v10';
 import { z } from 'zod/v4';
 import { db } from '@/lib/prisma';
+import type { ResolvedLogConfigs } from '@/types/logging';
 import { protectedProcedure, router } from '../trpc';
+
+// In-memory cache for resolved log configs
+interface CacheEntry {
+  data: ResolvedLogConfigs;
+  timestamp: number;
+}
+
+const resolveCache = new Map<string, CacheEntry>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 export const serverRouter = router({
   // Get Discord server roles
@@ -194,10 +204,27 @@ export const serverRouter = router({
               );
             }
 
+            // Find category for text channels (not threads)
+            let categoryId: string | null = null;
+            let categoryName: string | null = null;
+            if (!isThread && hasParent(channel)) {
+              const category = discordChannels.find(
+                (c) =>
+                  c.id === channel.parent_id &&
+                  c.type === ChannelType.GuildCategory
+              );
+              if (category) {
+                categoryId = category.id;
+                categoryName = hasName(category) ? category.name : null;
+              }
+            }
+
             return {
               id: channel.id,
               name: hasName(channel) ? channel.name : 'unknown-channel',
               type: channel.type,
+              categoryId,
+              categoryName,
               parentId:
                 isThread && hasParent(channel) ? channel.parent_id : null,
               parentName:
@@ -375,5 +402,228 @@ export const serverRouter = router({
       });
 
       return { connection: updatedConnection };
+    }),
+
+  // Resolve log configuration details (channel/role names, access control)
+  resolveLogConfigDetails: protectedProcedure
+    .input(
+      z.object({
+        configs: z.array(
+          z.object({
+            logType: z.string(),
+            channelId: z.string().optional().nullable(),
+            roleId: z.string().optional().nullable(),
+          })
+        ),
+      })
+    )
+    .query(async ({ input, ctx }) => {
+      const { configs } = input;
+      const userId = ctx.session.user.id;
+
+      // Generate cache key from config IDs
+      const cacheKey = configs
+        .map((c) => `${c.channelId || ''}-${c.roleId || ''}`)
+        .sort()
+        .join('|');
+
+      // Check cache first
+      const cached = resolveCache.get(cacheKey);
+      if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+        return cached.data;
+      }
+
+      // Get bot token
+      const botToken = process.env.DISCORD_BOT_TOKEN;
+      if (!botToken) {
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Bot token not configured',
+        });
+      }
+
+      const rest = new REST({ version: '10' }).setToken(botToken);
+
+      // Get user's manageable servers for access control
+      const account = await db.account.findFirst({
+        where: { userId, provider: 'discord' },
+        select: { access_token: true },
+      });
+
+      let manageableServerIds = new Set<string>();
+      if (account?.access_token) {
+        try {
+          const userGuildsResponse = await fetch(
+            'https://discord.com/api/v10/users/@me/guilds',
+            {
+              headers: { Authorization: `Bearer ${account.access_token}` },
+            }
+          );
+          if (userGuildsResponse.ok) {
+            const userGuilds = (await userGuildsResponse.json()) as Array<{
+              id: string;
+              permissions: string;
+              owner: boolean;
+            }>;
+            const manageable = userGuilds.filter((guild) => {
+              const permissions = BigInt(guild.permissions);
+              return (
+                guild.owner ||
+                (permissions & BigInt(0x10)) === BigInt(0x10) ||
+                (permissions & BigInt(0x8)) === BigInt(0x8)
+              );
+            });
+            manageableServerIds = new Set(manageable.map((g) => g.id));
+          }
+        } catch (error) {
+          console.error('Error fetching user guilds for access check:', error);
+        }
+      }
+
+      const result: ResolvedLogConfigs = {};
+
+      // Process each config
+      for (const config of configs) {
+        const { logType, channelId, roleId } = config;
+
+        let channelData = null;
+        let roleData = null;
+        let serverId: string | null = null;
+        let serverName: string | null = null;
+        // Default to true - only set to false if we can definitively prove no access
+        let userHasAccess = true;
+
+        // Resolve channel details
+        if (channelId) {
+          try {
+            const channel = (await rest.get(
+              Routes.channel(channelId)
+            )) as APIChannel;
+
+            if ('guild_id' in channel && channel.guild_id) {
+              serverId = channel.guild_id;
+
+              // Fetch server name
+              try {
+                const guild = (await rest.get(
+                  Routes.guild(serverId)
+                )) as APIGuild;
+                serverName = guild.name;
+              } catch (guildError) {
+                console.error('Error fetching guild:', guildError);
+                serverName = serverId; // Fallback to ID
+              }
+
+              // Check user access only if we successfully fetched manageable servers
+              // If manageableServerIds is empty but we have an access token, assume access check failed
+              // and default to allowing access (optimistic)
+              if (manageableServerIds.size > 0) {
+                userHasAccess = manageableServerIds.has(serverId);
+              }
+              // Otherwise keep default (true)
+
+              channelData = {
+                id: channel.id,
+                name:
+                  'name' in channel && typeof channel.name === 'string'
+                    ? channel.name
+                    : 'unknown',
+                serverId,
+                serverName,
+                exists: true,
+              };
+            }
+          } catch (error: unknown) {
+            console.error('Error fetching channel:', error);
+            const apiError = error as { status?: number };
+            if (apiError.status === 404) {
+              channelData = {
+                id: channelId,
+                name: 'Deleted Channel',
+                serverId: 'unknown',
+                serverName: 'Unknown Server',
+                exists: false,
+              };
+            } else if (apiError.status === 403) {
+              channelData = {
+                id: channelId,
+                name: 'Access Denied',
+                serverId: 'unknown',
+                serverName: 'Unknown Server',
+                exists: false,
+              };
+              userHasAccess = false;
+            } else {
+              throw new TRPCError({
+                code: 'INTERNAL_SERVER_ERROR',
+                message: 'Discord API temporarily unavailable',
+              });
+            }
+          }
+        }
+
+        // Resolve role details
+        if (roleId && serverId) {
+          try {
+            const roles = (await rest.get(
+              Routes.guildRoles(serverId)
+            )) as APIRole[];
+            const role = roles.find((r) => r.id === roleId);
+
+            if (role) {
+              roleData = {
+                id: role.id,
+                name: role.name,
+                color: role.color,
+                exists: true,
+              };
+            } else {
+              roleData = {
+                id: roleId,
+                name: 'Deleted Role',
+                color: 0,
+                exists: false,
+              };
+            }
+          } catch (error: unknown) {
+            console.error('Error fetching roles:', error);
+            const apiError = error as { status?: number };
+            if (apiError.status === 404 || apiError.status === 403) {
+              roleData = {
+                id: roleId,
+                name: 'Deleted Role',
+                color: 0,
+                exists: false,
+              };
+            } else {
+              throw new TRPCError({
+                code: 'INTERNAL_SERVER_ERROR',
+                message: 'Discord API temporarily unavailable',
+              });
+            }
+          }
+        }
+
+        result[logType] = {
+          channel: channelData,
+          role: roleData,
+          userHasAccess,
+        };
+      }
+
+      // Cache the result
+      resolveCache.set(cacheKey, { data: result, timestamp: Date.now() });
+
+      // Clean up old cache entries (simple cleanup)
+      if (resolveCache.size > 100) {
+        const now = Date.now();
+        for (const [key, entry] of resolveCache.entries()) {
+          if (now - entry.timestamp > CACHE_TTL) {
+            resolveCache.delete(key);
+          }
+        }
+      }
+
+      return result;
     }),
 });

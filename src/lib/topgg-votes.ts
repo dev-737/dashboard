@@ -386,6 +386,10 @@ function createVoteEmbed(
       DEVELOPER: '👨‍💻',
       STAFF: '👑',
       BETA_TESTER: '🧪',
+      HUB_OWNER: '🏠',
+      HUB_MODERATOR: '🔨',
+      HUB_MANAGER: '🛡️',
+      TOP_CHATTER: '💬',
     };
 
     const badgeNames = result.badgesAwarded

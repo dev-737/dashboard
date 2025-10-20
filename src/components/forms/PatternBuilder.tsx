@@ -4,12 +4,12 @@ import { Plus, X, HelpCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -19,12 +19,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { 
-  MatchPattern, 
-  MatchPatternLabels, 
-  MatchPatternDescriptions, 
+import {
+  MatchPattern,
+  MatchPatternLabels,
+  MatchPatternDescriptions,
   MatchPatternExamples,
-  formatWordWithPattern
+  formatWordWithPattern,
 } from '@/lib/types/anti-swear';
 
 interface PatternBuilderProps {
@@ -34,12 +34,17 @@ interface PatternBuilderProps {
 
 export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
   const [newWord, setNewWord] = useState('');
-  const [newMatchType, setNewMatchType] = useState<MatchPattern>(MatchPattern.EXACT);
+  const [newMatchType, setNewMatchType] = useState<MatchPattern>(
+    MatchPattern.EXACT
+  );
 
   const addPattern = () => {
     if (!newWord.trim()) return;
-    
-    const formattedPattern = formatWordWithPattern(newWord.trim(), newMatchType);
+
+    const formattedPattern = formatWordWithPattern(
+      newWord.trim(),
+      newMatchType
+    );
     const newPatterns = [...patterns, { pattern: formattedPattern }];
     onChange(newPatterns);
     setNewWord('');
@@ -74,21 +79,30 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
               />
             </div>
             <div className="w-full sm:w-48 min-w-0">
-              <Select value={newMatchType} onValueChange={(value) => setNewMatchType(value as MatchPattern)}>
+              <Select
+                value={newMatchType}
+                onValueChange={(value) =>
+                  setNewMatchType(value as MatchPattern)
+                }
+              >
                 <SelectTrigger className="bg-gray-700 border-gray-600">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-800 border-gray-700">
                   {Object.entries(MatchPatternLabels).map(([key, label]) => (
-                    <SelectItem key={key} value={key} className="focus:bg-gray-700">
+                    <SelectItem
+                      key={key}
+                      value={key}
+                      className="focus:bg-gray-700"
+                    >
                       {label}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-            <Button 
-              onClick={addPattern} 
+            <Button
+              onClick={addPattern}
               disabled={!newWord.trim()}
               size="sm"
               className="bg-purple-600 hover:bg-purple-700"
@@ -105,18 +119,26 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
                   <TooltipTrigger asChild>
                     <div className="flex items-center gap-1 text-gray-400">
                       <HelpCircle className="h-4 w-4" />
-                      <span className="font-medium">{MatchPatternLabels[newMatchType]}</span>
+                      <span className="font-medium">
+                        {MatchPatternLabels[newMatchType]}
+                      </span>
                     </div>
                   </TooltipTrigger>
                   <TooltipContent className="bg-gray-800 border-gray-700 text-white max-w-xs">
-                    <p className="font-medium mb-1">{MatchPatternLabels[newMatchType]}</p>
-                    <p className="text-sm text-gray-300 mb-2">{MatchPatternDescriptions[newMatchType]}</p>
-                    <p className="text-sm text-purple-300">{MatchPatternExamples[newMatchType]}</p>
+                    <p className="font-medium mb-1">
+                      {MatchPatternLabels[newMatchType]}
+                    </p>
+                    <p className="text-sm text-gray-300 mb-2">
+                      {MatchPatternDescriptions[newMatchType]}
+                    </p>
+                    <p className="text-sm text-purple-300">
+                      {MatchPatternExamples[newMatchType]}
+                    </p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </div>
-            
+
             {newWord.trim() && (
               <div className="p-2 bg-gray-700/50 rounded-md border border-gray-600">
                 <span className="text-xs text-gray-400">Preview: </span>
@@ -137,7 +159,7 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
             {patterns.map((pattern, index) => (
-              <div 
+              <div
                 key={index}
                 className="flex items-center justify-between p-2 bg-gray-800/50 rounded-md border border-gray-700"
               >

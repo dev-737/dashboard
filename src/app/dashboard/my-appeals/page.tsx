@@ -44,7 +44,7 @@ interface AppealWithInfraction {
 
 // Server-side function to fetch user's appeals
 async function getMyAppealsData(searchParams: { page?: string }) {
-const session = await auth()
+  const session = await auth();
   if (!session?.user?.id) {
     redirect('/login?callbackUrl=/dashboard/my-appeals');
   }

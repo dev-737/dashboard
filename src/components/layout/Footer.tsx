@@ -14,7 +14,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
-
 export function Footer() {
   const footerLinks = {
     legal: [
@@ -44,10 +43,26 @@ export function Footer() {
       },
     ],
     resources: [
-      { label: 'Documentation', href: 'https://docs.interchat.dev', icon: FileText },
-      { label: 'API Reference', href: 'https://docs.interchat.dev/api', icon: ExternalLink },
-      { label: 'Status Page', href: 'https://status.interchat.dev', icon: Shield },
-      { label: 'Changelog', href: 'https://docs.interchat.dev/changelog', icon: FileText },
+      {
+        label: 'Documentation',
+        href: 'https://docs.interchat.dev',
+        icon: FileText,
+      },
+      {
+        label: 'API Reference',
+        href: 'https://docs.interchat.dev/api',
+        icon: ExternalLink,
+      },
+      {
+        label: 'Status Page',
+        href: 'https://status.interchat.dev',
+        icon: Shield,
+      },
+      {
+        label: 'Changelog',
+        href: 'https://docs.interchat.dev/changelog',
+        icon: FileText,
+      },
     ],
   };
 

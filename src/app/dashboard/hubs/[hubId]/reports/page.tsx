@@ -17,7 +17,7 @@ interface HubReportsPageProps {
 
 export default async function HubReportsPage({ params }: HubReportsPageProps) {
   const { hubId } = await params;
-const session = await auth()
+  const session = await auth();
 
   if (!session?.user?.id) {
     redirect(`/login?callbackUrl=/dashboard/hubs/${hubId}/reports`);

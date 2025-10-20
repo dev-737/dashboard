@@ -40,7 +40,11 @@
 }
 
 .dashboard-button-primary {
-  background: linear-gradient(135deg, var(--color-brand-purple-500), var(--color-brand-blue-500));
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-purple-500),
+    var(--color-brand-blue-500)
+  );
   color: white;
   font-weight: 500;
   border-radius: var(--radius-button);
@@ -52,7 +56,11 @@
 }
 
 .dashboard-button-primary:hover {
-  background: linear-gradient(135deg, var(--color-brand-purple-600), var(--color-brand-blue-600));
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-purple-600),
+    var(--color-brand-blue-600)
+  );
   box-shadow: 0 8px 25px rgba(147, 114, 216, 0.4);
   transform: translateY(-2px);
 }
@@ -77,8 +85,6 @@
   border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-1px);
 }
-
-
 
 /* Dashboard input styles */
 .dashboard-input {
@@ -194,13 +200,18 @@
 }
 
 .dashboard-stat-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
 }
 
 .dashboard-stat-value {

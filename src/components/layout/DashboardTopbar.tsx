@@ -26,17 +26,15 @@ export function DashboardTopBar({ user }: { user: User }) {
 
   return (
     <div className="sticky top-0 z-40 flex h-16 flex-shrink-0 border-white/10 border-b bg-gradient-to-r from-gray-900/95 via-gray-900/90 to-gray-950/95 backdrop-blur-xl">
-      
       <div className="absolute inset-0 bg-gradient-to-r from-purple-900/5 via-transparent to-blue-900/5" />
 
       <div className="relative z-10 flex flex-1 items-center px-4">
-        
         <div className="flex items-center gap-3">
           <Link href="/" className="group flex items-center gap-3">
             <div className="relative">
               <Image
                 alt="InterChat"
-                src="/interchat.png"
+                src="/assets/images/logos/interchat.png"
                 height={32}
                 width={32}
                 className="rounded-[var(--radius-avatar)] border border-white/20 transition-all duration-300 group-hover:border-purple-400/50 group-hover:shadow-lg group-hover:shadow-purple-500/20"
@@ -50,7 +48,6 @@ export function DashboardTopBar({ user }: { user: User }) {
           </Link>
         </div>
 
-        
         <div className="ml-8 hidden items-center gap-2 lg:flex">
           <Link
             href="/dashboard"
@@ -90,7 +87,6 @@ export function DashboardTopBar({ user }: { user: User }) {
           </Link>
         </div>
 
-        
         <div className="ml-auto flex items-center lg:hidden">
           <Button
             variant="ghost"
@@ -103,9 +99,7 @@ export function DashboardTopBar({ user }: { user: User }) {
           </Button>
         </div>
 
-        
         <div className="ml-auto hidden items-center gap-3 lg:flex">
-
           <div data-tour="notifications" className="relative">
             <div className="rounded-[var(--radius-button)] p-1 transition-all duration-300 hover:bg-white/5">
               <NotificationDropdown />

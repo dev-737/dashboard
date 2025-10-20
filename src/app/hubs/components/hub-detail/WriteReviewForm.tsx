@@ -44,16 +44,22 @@ export default function WriteReviewForm({
           title: 'Review submitted',
           description: 'Thank you for your feedback!',
         });
-        
+
         setRating(0);
         setReviewText('');
-        
+
         Promise.all([
-          queryClient.invalidateQueries(trpc.hub.getHubReviews.queryFilter({ hubId })),
-          queryClient.invalidateQueries(trpc.hub.getHub.queryFilter({ id: hubId })),
-          queryClient.refetchQueries(trpc.hub.getHubReviews.queryFilter({ hubId }))
+          queryClient.invalidateQueries(
+            trpc.hub.getHubReviews.queryFilter({ hubId })
+          ),
+          queryClient.invalidateQueries(
+            trpc.hub.getHub.queryFilter({ id: hubId })
+          ),
+          queryClient.refetchQueries(
+            trpc.hub.getHubReviews.queryFilter({ hubId })
+          ),
         ]).catch(() => {});
-        
+
         if (onReviewSubmitted) {
           const r = newReview as {
             id: string;

@@ -20,7 +20,11 @@ interface AutomodDashboardProps {
   canModerate: boolean;
 }
 
-export function AutomodDashboard({ hubId, canEdit, canModerate }: AutomodDashboardProps) {
+export function AutomodDashboard({
+  hubId,
+  canEdit,
+  canModerate,
+}: AutomodDashboardProps) {
   const [activeTab, setActiveTab] = useState('rules');
   const [showCreateRule, setShowCreateRule] = useState(false);
 
@@ -39,7 +43,8 @@ export function AutomodDashboard({ hubId, canEdit, canModerate }: AutomodDashboa
                   Automod & Content Filter
                 </CardTitle>
                 <CardDescription>
-                  Manage automated moderation rules and content filtering for your hub
+                  Manage automated moderation rules and content filtering for
+                  your hub
                 </CardDescription>
               </div>
             </div>
@@ -59,14 +64,14 @@ export function AutomodDashboard({ hubId, canEdit, canModerate }: AutomodDashboa
       {/* Main Content Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2 bg-gray-900/50 border border-gray-800">
-          <TabsTrigger 
-            value="rules" 
+          <TabsTrigger
+            value="rules"
             className="data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-300"
           >
             <Shield className="mr-2 h-4 w-4" />
             Filter Rules
           </TabsTrigger>
-          <TabsTrigger 
+          <TabsTrigger
             value="whitelist"
             className="data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-300"
           >
@@ -76,17 +81,17 @@ export function AutomodDashboard({ hubId, canEdit, canModerate }: AutomodDashboa
         </TabsList>
 
         <TabsContent value="rules" className="mt-6">
-          <RulesList 
-            hubId={hubId} 
-            canEdit={canEdit} 
+          <RulesList
+            hubId={hubId}
+            canEdit={canEdit}
             canModerate={canModerate}
           />
         </TabsContent>
 
         <TabsContent value="whitelist" className="mt-6">
-          <WhitelistManager 
-            hubId={hubId} 
-            canEdit={canEdit} 
+          <WhitelistManager
+            hubId={hubId}
+            canEdit={canEdit}
             canModerate={canModerate}
           />
         </TabsContent>

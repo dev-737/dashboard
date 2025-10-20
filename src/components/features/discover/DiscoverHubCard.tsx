@@ -1,6 +1,14 @@
 'use client';
 
-import { Eye, Handshake, Heart, Loader2, MessageCircle, Star, Users } from 'lucide-react';
+import {
+  Eye,
+  Handshake,
+  Heart,
+  Loader2,
+  MessageCircle,
+  Star,
+  Users,
+} from 'lucide-react';
 import Link from 'next/link';
 import { memo } from 'react';
 import { Button } from '@/components/ui/button';
@@ -137,7 +145,9 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 <TooltipTrigger asChild>
                   <div className="flex cursor-help items-center gap-1">
                     <MessageCircle className="h-3.5 w-3.5 text-purple-400" />
-                    <span className="text-gray-300">{formatNumber(weeklyMessageCount)}</span>
+                    <span className="text-gray-300">
+                      {formatNumber(weeklyMessageCount)}
+                    </span>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -149,7 +159,9 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 <TooltipTrigger asChild>
                   <div className="flex cursor-help items-center gap-1">
                     <Users className="h-3.5 w-3.5 text-emerald-400" />
-                    <span className="text-gray-300">{formatNumber(_count.connections)}</span>
+                    <span className="text-gray-300">
+                      {formatNumber(_count.connections)}
+                    </span>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -161,7 +173,9 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 <TooltipTrigger asChild>
                   <div className="flex cursor-help items-center gap-1">
                     <Heart className="h-3.5 w-3.5 text-pink-400" />
-                    <span className="text-gray-300">{formatNumber(upvoteCount)}</span>
+                    <span className="text-gray-300">
+                      {formatNumber(upvoteCount)}
+                    </span>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -219,7 +233,9 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
 
         {/* Description */}
         <CardDescription className="text-gray-400 text-xs leading-relaxed">
-          {shortDescription || description || 'A community space for discussions and connections.'}
+          {shortDescription ||
+            description ||
+            'A community space for discussions and connections.'}
         </CardDescription>
       </CardContent>
 
@@ -247,12 +263,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
             {isLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              <Heart
-                className={cn(
-                  'h-4 w-4',
-                  liked && 'fill-red-400'
-                )}
-              />
+              <Heart className={cn('h-4 w-4', liked && 'fill-red-400')} />
             )}
           </Button>
         </div>

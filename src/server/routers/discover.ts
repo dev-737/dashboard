@@ -23,7 +23,17 @@ const discoverInput = z.object({
     .optional(),
   minRating: z.number().min(0).max(5).optional(),
   showFeaturedOnly: z.boolean().optional(),
-  sort: z.enum(['trending', 'active', 'new', 'upvoted', 'rated', 'members', 'growing']).optional(),
+  sort: z
+    .enum([
+      'trending',
+      'active',
+      'new',
+      'upvoted',
+      'rated',
+      'members',
+      'growing',
+    ])
+    .optional(),
   page: z.number().int().min(1).optional(),
   pageSize: z.number().int().min(1).max(60).optional(),
 });

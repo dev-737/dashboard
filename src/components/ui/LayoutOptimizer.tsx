@@ -2,14 +2,6 @@
 
 import { useEffect, useLayoutEffect, useState } from 'react';
 
-/**
- * Layout Optimizer Component
- * Helps reduce Cumulative Layout Shift (CLS) by:
- * 1. Preloading critical resources
- * 2. Setting up proper aspect ratios
- * 3. Preventing layout shifts during hydration
- */
-
 interface LayoutOptimizerProps {
   children: React.ReactNode;
   className?: string;
@@ -20,7 +12,8 @@ export function useIsomorphicLayoutEffect(
   effect: React.EffectCallback,
   deps?: React.DependencyList
 ) {
-  const useEffect_ = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+  const useEffect_ =
+    typeof window !== 'undefined' ? useLayoutEffect : useEffect;
   useEffect_(effect, deps);
 }
 
@@ -39,7 +32,7 @@ export function useClientOnly<T>(clientValue: T, serverValue: T): T {
 export function LayoutStabilizer({
   children,
   minHeight = '400px',
-  className = ''
+  className = '',
 }: {
   children: React.ReactNode;
   minHeight?: string;
@@ -56,7 +49,7 @@ export function LayoutStabilizer({
       className={`transition-opacity duration-200 ${className}`}
       style={{
         minHeight: isLoaded ? 'auto' : minHeight,
-        opacity: isLoaded ? 1 : 0.8
+        opacity: isLoaded ? 1 : 0.8,
       }}
     >
       {children}
@@ -68,7 +61,7 @@ export function LayoutStabilizer({
 export function StableGrid({
   children,
   className = '',
-  itemMinHeight = '380px'
+  itemMinHeight = '380px',
 }: {
   children: React.ReactNode;
   className?: string;
@@ -77,10 +70,12 @@ export function StableGrid({
   return (
     <div
       className={`grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 ${className}`}
-      style={{
-        // Ensure consistent item heights to prevent layout shifts
-        '--item-min-height': itemMinHeight,
-      } as React.CSSProperties}
+      style={
+        {
+          // Ensure consistent item heights to prevent layout shifts
+          '--item-min-height': itemMinHeight,
+        } as React.CSSProperties
+      }
     >
       {children}
     </div>
@@ -93,7 +88,7 @@ export function DimensionPreserver({
   height,
   aspectRatio,
   className = '',
-  children
+  children,
 }: {
   width?: number | string;
   height?: number | string;
@@ -104,21 +99,22 @@ export function DimensionPreserver({
   const style: React.CSSProperties = {};
 
   if (width) style.width = typeof width === 'number' ? `${width}px` : width;
-  if (height) style.height = typeof height === 'number' ? `${height}px` : height;
+  if (height)
+    style.height = typeof height === 'number' ? `${height}px` : height;
   if (aspectRatio) style.aspectRatio = aspectRatio;
 
   return (
-    <div
-      className={`relative ${className}`}
-      style={style}
-    >
+    <div className={`relative ${className}`} style={style}>
       {children}
     </div>
   );
 }
 
 // Main Layout Optimizer component
-export function LayoutOptimizer({ children, className = '' }: LayoutOptimizerProps) {
+export function LayoutOptimizer({
+  children,
+  className = '',
+}: LayoutOptimizerProps) {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
@@ -153,10 +149,16 @@ export function LayoutOptimizer({ children, className = '' }: LayoutOptimizerPro
     }
 
     // Add performance observer for CLS monitoring in development
-    if (process.env.NODE_ENV === 'development' && 'PerformanceObserver' in window) {
+    if (
+      process.env.NODE_ENV === 'development' &&
+      'PerformanceObserver' in window
+    ) {
       const observer = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          if (entry.entryType === 'layout-shift' && !(entry as any).hadRecentInput) {
+          if (
+            entry.entryType === 'layout-shift' &&
+            !(entry as any).hadRecentInput
+          ) {
             console.log('Layout shift detected:', entry);
           }
         }

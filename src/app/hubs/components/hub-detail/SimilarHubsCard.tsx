@@ -4,7 +4,10 @@ import { Tag, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useHubRecommendations, type HubRecommendation } from '@/hooks/use-hub-recommendations';
+import {
+  useHubRecommendations,
+  type HubRecommendation,
+} from '@/hooks/use-hub-recommendations';
 import { useEffect, useState } from 'react';
 
 interface SimilarHubsCardProps {
@@ -12,9 +15,12 @@ interface SimilarHubsCardProps {
   hubTags?: string[];
 }
 
-const SimilarHubsCard = ({ currentHubId, hubTags = [] }: SimilarHubsCardProps) => {
+const SimilarHubsCard = ({
+  currentHubId,
+  hubTags = [],
+}: SimilarHubsCardProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  
+
   // Lazy load when component becomes visible
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,20 +41,12 @@ const SimilarHubsCard = ({ currentHubId, hubTags = [] }: SimilarHubsCardProps) =
     return () => observer.disconnect();
   }, [currentHubId]);
 
-  const { 
-    data,
-    isLoading, 
-    isError 
-  } = useHubRecommendations(
-    'similar', 
-    6, 
-    { 
-      enabled: isVisible,
-      staleTime: 1000 * 30, // 30 seconds for testing variety
-      currentHubId,
-      tags: hubTags
-    }
-  );
+  const { data, isLoading, isError } = useHubRecommendations('similar', 6, {
+    enabled: isVisible,
+    staleTime: 1000 * 30, // 30 seconds for testing variety
+    currentHubId,
+    tags: hubTags,
+  });
 
   const recommendations = data?.recommendations || [];
 
@@ -63,7 +61,7 @@ const SimilarHubsCard = ({ currentHubId, hubTags = [] }: SimilarHubsCardProps) =
   );
 
   return (
-    <div 
+    <div
       id={`similar-hubs-${currentHubId}`}
       className="rounded-xl border border-gray-800/70 bg-gray-900/60 p-4 shadow-lg backdrop-blur-md sm:p-6"
     >
@@ -95,7 +93,10 @@ const SimilarHubsCard = ({ currentHubId, hubTags = [] }: SimilarHubsCardProps) =
             >
               <div className="h-10 w-10 overflow-hidden rounded-lg border border-gray-700/50 relative">
                 <Image
-                  src={rec.hub.iconUrl || `https://api.dicebear.com/7.x/shapes/svg?seed=${rec.hub.name}`}
+                  src={
+                    rec.hub.iconUrl ||
+                    `https://api.dicebear.com/7.x/shapes/svg?seed=${rec.hub.name}`
+                  }
                   alt={rec.hub.name}
                   width={40}
                   height={40}
@@ -118,7 +119,10 @@ const SimilarHubsCard = ({ currentHubId, hubTags = [] }: SimilarHubsCardProps) =
                     <>
                       <span>•</span>
                       <span className="truncate">
-                        {rec.hub.tags.slice(0, 2).map((tag: { name: string }) => tag.name).join(', ')}
+                        {rec.hub.tags
+                          .slice(0, 2)
+                          .map((tag: { name: string }) => tag.name)
+                          .join(', ')}
                       </span>
                     </>
                   )}

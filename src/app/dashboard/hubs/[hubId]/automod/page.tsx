@@ -17,7 +17,7 @@ export default async function HubAntiSwearPage({
   params,
 }: HubAntiSwearPageProps) {
   const { hubId } = await params;
-  const session = await auth()
+  const session = await auth();
 
   if (!session?.user?.id) {
     redirect(`/login?callbackUrl=/dashboard/hubs/${hubId}/anti-swear`);
@@ -73,9 +73,9 @@ export default async function HubAntiSwearPage({
       canModerate={canModerate}
       canEdit={canEdit}
     >
-      <AutomodDashboard 
-        hubId={hubId} 
-        canEdit={canEdit} 
+      <AutomodDashboard
+        hubId={hubId}
+        canEdit={canEdit}
         canModerate={canModerate}
       />
     </HubLayout>

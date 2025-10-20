@@ -1,6 +1,15 @@
 'use server';
 
-import { ChevronRight, Home, Info, MessageSquare, ScrollText, Search, Settings, Users } from 'lucide-react';
+import {
+  ChevronRight,
+  Home,
+  Info,
+  MessageSquare,
+  ScrollText,
+  Search,
+  Settings,
+  Users,
+} from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -67,8 +76,7 @@ export async function generateMetadata(props: {
       images: [hub.bannerUrl || hub.iconUrl],
       title: `${hub.name} | InterChat Cross-Server Hubs`,
       description:
-        hub.description ||
-        'Join this active Cross-Server Hubs with InterChat.',
+        hub.description || 'Join this active Cross-Server Hubs with InterChat.',
       creator: '@737_dev',
       site: '@interchatapp',
     },
@@ -144,12 +152,18 @@ export default async function HubDetailView(props: {
 
         <div className="container mx-auto max-w-7xl px-4 pt-4">
           <nav className="flex items-center gap-2 text-gray-400 text-sm">
-            <Link href="/" className="flex items-center gap-1 transition-colors hover:text-gray-200">
+            <Link
+              href="/"
+              className="flex items-center gap-1 transition-colors hover:text-gray-200"
+            >
               <Home className="h-4 w-4" />
               <span>Home</span>
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/discover" className="flex items-center gap-1 transition-colors hover:text-gray-200">
+            <Link
+              href="/discover"
+              className="flex items-center gap-1 transition-colors hover:text-gray-200"
+            >
               <Search className="h-4 w-4" />
               <span>Browse Hubs</span>
             </Link>
@@ -166,8 +180,8 @@ export default async function HubDetailView(props: {
                 <HubInfoCard hub={hub} />
 
                 <div className="mt-6 flex flex-shrink-0 gap-3 rounded-lg border border-gray-700/50 bg-gray-800/40 p-2 md:mt-0 md:ml-auto">
-                    {/* Manage Hub button - only show for users with management permissions */}
-                    {canManageHub && (
+                  {/* Manage Hub button - only show for users with management permissions */}
+                  {canManageHub && (
                     <Link href={`/dashboard/hubs/${hubId}`}>
                       <Button
                         className="flex cursor-pointer items-center gap-2 rounded-lg border-0 bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-indigo-600/80 hover:to-purple-600/80"
@@ -179,10 +193,10 @@ export default async function HubDetailView(props: {
                       </Button>
                     </Link>
                   )}
-                    <div className="group relative">
-                      <JoinButton hubName={hub.name} hubId={hub.id} />
-                    </div>
-                    <UpvoteButton hubId={hub.id} initialUpvotes={hub.upvotes} />
+                  <div className="group relative">
+                    <JoinButton hubName={hub.name} hubId={hub.id} />
+                  </div>
+                  <UpvoteButton hubId={hub.id} initialUpvotes={hub.upvotes} />
                 </div>
               </div>
             </div>
@@ -286,7 +300,7 @@ export default async function HubDetailView(props: {
 
               <SimilarHubsCard
                 currentHubId={hub.id}
-                hubTags={hub.tags?.map(tag => tag.name) || []}
+                hubTags={hub.tags?.map((tag) => tag.name) || []}
               />
             </div>
           </div>

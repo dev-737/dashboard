@@ -20,7 +20,7 @@ export default async function ViewInfractionPage({
   params,
 }: ViewInfractionPageProps) {
   const { hubId, infractionId } = await params;
-const session = await auth()
+  const session = await auth();
 
   if (!session?.user?.id) {
     redirect(

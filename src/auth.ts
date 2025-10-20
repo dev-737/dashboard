@@ -35,11 +35,16 @@ const customAdapter = {
     });
 
     if (!user) {
-      console.error('User not found for account linking:', account.providerAccountId);
-      throw new Error(`User not found for account linking: ${account.providerAccountId}`);
+      console.error(
+        'User not found for account linking:',
+        account.providerAccountId
+      );
+      throw new Error(
+        `User not found for account linking: ${account.providerAccountId}`
+      );
     }
 
-    return await db.account.upsert({
+    return (await db.account.upsert({
       where: {
         provider_providerAccountId: {
           provider: account.provider,
@@ -69,7 +74,7 @@ const customAdapter = {
         userId: user.id,
         session_state: account.session_state?.toString(),
       },
-    }) as unknown as AdapterAccount;
+    })) as unknown as AdapterAccount;
   },
 } as Adapter;
 

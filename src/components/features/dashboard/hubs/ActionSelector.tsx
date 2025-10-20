@@ -14,10 +14,10 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { BlockWordAction } from '@/lib/generated/prisma/client';
-import { 
-  BlockWordActionLabels, 
-  BlockWordActionDescriptions, 
-  BlockWordActionColors 
+import {
+  BlockWordActionLabels,
+  BlockWordActionDescriptions,
+  BlockWordActionColors,
 } from '@/lib/types/anti-swear';
 
 interface ActionSelectorProps {
@@ -28,12 +28,12 @@ interface ActionSelectorProps {
   onMuteDurationChange?: (minutes: number | null) => void;
 }
 
-export function ActionSelector({ 
-  selectedActions, 
-  onChange, 
+export function ActionSelector({
+  selectedActions,
+  onChange,
   showMuteDuration = true,
   muteDurationMinutes,
-  onMuteDurationChange
+  onMuteDurationChange,
 }: ActionSelectorProps) {
   const [customMuteDuration, setCustomMuteDuration] = useState(
     muteDurationMinutes?.toString() || '60'
@@ -41,7 +41,7 @@ export function ActionSelector({
 
   const toggleAction = (action: BlockWordAction) => {
     if (selectedActions.includes(action)) {
-      onChange(selectedActions.filter(a => a !== action));
+      onChange(selectedActions.filter((a) => a !== action));
     } else {
       onChange([...selectedActions, action]);
     }
@@ -70,7 +70,7 @@ export function ActionSelector({
         {actionOrder.map((action) => {
           const isSelected = selectedActions.includes(action);
           const isDeprecated = action === BlockWordAction.BLACKLIST;
-          
+
           return (
             <Card
               key={action}
@@ -85,18 +85,23 @@ export function ActionSelector({
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
-                        isSelected 
-                          ? 'bg-purple-600 border-purple-600' 
-                          : 'border-gray-500'
-                      }`}>
+                      <div
+                        className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
+                          isSelected
+                            ? 'bg-purple-600 border-purple-600'
+                            : 'border-gray-500'
+                        }`}
+                      >
                         {isSelected && <Check className="w-3 h-3 text-white" />}
                       </div>
                       <span className="font-medium text-white text-sm">
                         {BlockWordActionLabels[action]}
                       </span>
                       {isDeprecated && (
-                        <Badge variant="outline" className="text-xs text-orange-400 border-orange-500/30">
+                        <Badge
+                          variant="outline"
+                          className="text-xs text-orange-400 border-orange-500/30"
+                        >
                           Deprecated
                         </Badge>
                       )}
@@ -105,7 +110,7 @@ export function ActionSelector({
                       {BlockWordActionDescriptions[action]}
                     </p>
                   </div>
-                  
+
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -114,8 +119,12 @@ export function ActionSelector({
                         </div>
                       </TooltipTrigger>
                       <TooltipContent className="bg-gray-800 border-gray-700 text-white max-w-xs">
-                        <p className="font-medium mb-1">{BlockWordActionLabels[action]}</p>
-                        <p className="text-sm text-gray-300">{BlockWordActionDescriptions[action]}</p>
+                        <p className="font-medium mb-1">
+                          {BlockWordActionLabels[action]}
+                        </p>
+                        <p className="text-sm text-gray-300">
+                          {BlockWordActionDescriptions[action]}
+                        </p>
                         {action === BlockWordAction.MUTE && (
                           <p className="text-sm text-purple-300 mt-2">
                             Requires mute duration configuration
@@ -153,7 +162,9 @@ export function ActionSelector({
                   className="bg-gray-700 border-gray-600"
                 />
               </div>
-              <span className="text-sm text-gray-400 whitespace-nowrap">minutes</span>
+              <span className="text-sm text-gray-400 whitespace-nowrap">
+                minutes
+              </span>
             </div>
             <p className="text-xs text-gray-500">
               How long users should be muted (1-43200 minutes, max 30 days)
@@ -171,8 +182,8 @@ export function ActionSelector({
             </Label>
             <div className="flex flex-wrap gap-2">
               {selectedActions.map((action) => (
-                <Badge 
-                  key={action} 
+                <Badge
+                  key={action}
                   className={`${BlockWordActionColors[action]} text-xs`}
                 >
                   {BlockWordActionLabels[action]}

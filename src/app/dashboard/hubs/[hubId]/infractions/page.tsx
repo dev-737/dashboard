@@ -19,7 +19,7 @@ export default async function HubInfractionsPage({
   params,
 }: HubInfractionsPageProps) {
   const { hubId } = await params;
-const session = await auth()
+  const session = await auth();
 
   if (!session?.user?.id) {
     redirect(`/login?callbackUrl=/dashboard/hubs/${hubId}/infractions`);

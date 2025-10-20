@@ -5,11 +5,11 @@ import { Footer } from '@/components/layout/Footer';
 
 export function ConditionalFooter() {
   const pathname = usePathname();
-  
+
   // Don't show footer on dashboard pages
   if (pathname.startsWith('/dashboard')) {
     return null;
   }
-  
+
   return <Footer />;
 }

@@ -22,7 +22,7 @@ export default async function AddInfractionPage({
   searchParams,
 }: AddInfractionPageProps) {
   const { hubId, type, userId, serverId } = await searchParams;
-const session = await auth()
+  const session = await auth();
 
   if (!session?.user?.id) {
     redirect(

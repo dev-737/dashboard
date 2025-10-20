@@ -190,7 +190,11 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                   <div className="flex items-center gap-2 px-3 font-bold text-gray-400 text-xs uppercase tracking-wider">
                     <motion.div
                       animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                      transition={{
+                        duration: 2,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: 'easeInOut',
+                      }}
                       className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 opacity-60"
                     />
                     <span className="bg-gradient-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">

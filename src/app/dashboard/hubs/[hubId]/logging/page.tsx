@@ -27,7 +27,7 @@ export default async function HubLoggingPage({
   params: paramsPromise,
 }: HubLoggingPageProps) {
   const { hubId } = await paramsPromise;
-const session = await auth()
+  const session = await auth();
 
   if (!session?.user?.id) {
     redirect('/login');
@@ -95,137 +95,6 @@ const session = await auth()
       canEdit={canEdit}
     >
       <div className="space-y-8">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {/* Total Configured Logs */}
-          <Card className="premium-card group transition-all duration-300 hover:scale-[1.02]">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="space-y-2">
-                  <p className="font-medium text-gray-400 text-sm">
-                    Configured Logs
-                  </p>
-                  <div className="flex items-baseline gap-2">
-                    <p className="font-bold text-3xl text-white">
-                      {configuredLogs.length}
-                    </p>
-                    <p className="text-gray-500 text-sm">/6</p>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="h-2 w-16 overflow-hidden rounded-full bg-gray-800">
-                      <div
-                        className="h-full bg-gradient-to-r from-emerald-500 to-green-400 transition-all duration-500"
-                        style={{
-                          width: `${(configuredLogs.length / 6) * 100}%`,
-                        }}
-                      />
-                    </div>
-                    <span className="text-gray-500 text-xs">
-                      {Math.round((configuredLogs.length / 6) * 100)}%
-                    </span>
-                  </div>
-                </div>
-                <div className="rounded-[var(--radius-button)] bg-emerald-500/20 p-3 transition-colors group-hover:bg-emerald-500/30">
-                  <FileText className="h-6 w-6 text-emerald-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Moderation Status */}
-          <Card className="premium-card group transition-all duration-300 hover:scale-[1.02]">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="space-y-2">
-                  <p className="font-medium text-gray-400 text-sm">
-                    Moderation
-                  </p>
-                  <div className="flex items-center gap-2">
-                    {logConfig?.modLogsChannelId ? (
-                      <>
-                        <CheckCircle className="h-4 w-4 text-green-400" />
-                        <span className="font-semibold text-green-400 text-lg">
-                          Active
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <XCircle className="h-4 w-4 text-red-400" />
-                        <span className="font-semibold text-lg text-red-400">
-                          Inactive
-                        </span>
-                      </>
-                    )}
-                  </div>
-                  <p className="text-gray-500 text-xs">
-                    Moderation logging status
-                  </p>
-                </div>
-                <div className="rounded-[var(--radius-button)] bg-indigo-500/20 p-3 transition-colors group-hover:bg-indigo-500/30">
-                  <Shield className="h-6 w-6 text-indigo-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Message Logs Status */}
-          <Card className="premium-card group transition-all duration-300 hover:scale-[1.02]">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="space-y-2">
-                  <p className="font-medium text-gray-400 text-sm">Messages</p>
-                  <div className="flex items-center gap-2">
-                    {logConfig?.messageModerationChannelId ? (
-                      <>
-                        <CheckCircle className="h-4 w-4 text-green-400" />
-                        <span className="font-semibold text-green-400 text-lg">
-                          Active
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <XCircle className="h-4 w-4 text-red-400" />
-                        <span className="font-semibold text-lg text-red-400">
-                          Inactive
-                        </span>
-                      </>
-                    )}
-                  </div>
-                  <p className="text-gray-500 text-xs">
-                    Message logging status
-                  </p>
-                </div>
-                <div className="rounded-[var(--radius-button)] bg-purple-500/20 p-3 transition-colors group-hover:bg-purple-500/30">
-                  <MessageSquare className="h-6 w-6 text-purple-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* System Health */}
-          <Card className="premium-card group transition-all duration-300 hover:scale-[1.02]">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="space-y-2">
-                  <p className="font-medium text-gray-400 text-sm">
-                    System Health
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
-                    <span className="font-semibold text-green-400 text-lg">
-                      Healthy
-                    </span>
-                  </div>
-                  <p className="text-gray-500 text-xs">
-                    All systems operational
-                  </p>
-                </div>
-                <div className="rounded-[var(--radius-button)] bg-green-500/20 p-3 transition-colors group-hover:bg-green-500/30">
-                  <TrendingUp className="h-6 w-6 text-green-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
         <div className="space-y-6">
           {/* Configuration Header */}
           <div className="flex items-center justify-between">

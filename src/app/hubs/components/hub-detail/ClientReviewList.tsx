@@ -7,20 +7,23 @@ import ReviewItem from './ReviewItem';
 
 interface ClientReviewListProps {
   hubId: string;
-  initialReviews?: any[]; 
+  initialReviews?: any[];
 }
 
 export default function ClientReviewList({
   hubId,
   initialReviews = [],
 }: ClientReviewListProps) {
-  const { data: reviews, isLoading, error } = useHubReviews(hubId, {
+  const {
+    data: reviews,
+    isLoading,
+    error,
+  } = useHubReviews(hubId, {
     enabled: true,
     staleTime: 0,
-    initialData: initialReviews, 
+    initialData: initialReviews,
   });
 
-  
   const reviewsToShow = reviews || [];
 
   if (isLoading && !reviewsToShow?.length) {

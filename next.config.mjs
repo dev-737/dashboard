@@ -32,7 +32,6 @@ const config = {
       'lodash-es',
       'date-fns',
     ],
-    cacheComponents: true,
     viewTransition: true,
     parallelServerCompiles: true,
     parallelServerBuildTraces: true,

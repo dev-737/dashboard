@@ -15,7 +15,6 @@ import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 import { protectedProcedure, router } from '../trpc';
 
-
 const createInfractionSchema = z
   .object({
     hubId: z.string(),
@@ -41,7 +40,6 @@ const getInfractionsSchema = z.object({
   page: z.number().int().min(1).default(1),
   limit: z.number().int().min(1).max(100).default(10),
 });
-
 
 const getReportsSchema = z.object({
   hubId: z.string().optional(),

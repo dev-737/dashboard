@@ -43,7 +43,7 @@ export async function generateMetadata(
 }
 
 async function getConnectionForEdit(connectionId: string) {
-const session = await auth()
+  const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
   }

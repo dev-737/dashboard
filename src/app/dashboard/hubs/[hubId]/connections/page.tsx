@@ -21,7 +21,7 @@ export default async function HubConnectionsPage({
   params,
 }: HubConnectionsPageProps) {
   const hubId = (await params).hubId;
-const session = await auth()
+  const session = await auth();
 
   if (!session?.user?.id) {
     return notFound();

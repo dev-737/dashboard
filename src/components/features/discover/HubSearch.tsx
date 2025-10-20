@@ -12,7 +12,11 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { useDebounce } from '@/hooks/use-debounce';
 import type { HubCardDTO } from '@/lib/discover/query';
 import { formatNumber } from '@/lib/utils';
@@ -93,7 +97,10 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
   // Handle click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setIsFocused(false);
       }
     };
@@ -117,7 +124,8 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
   }, [isFocused]);
 
   // Show dropdown when focused and has value or results
-  const showDropdown = isFocused && (searchValue.trim() !== '' || searchResults.length > 0);
+  const showDropdown =
+    isFocused && (searchValue.trim() !== '' || searchResults.length > 0);
 
   return (
     <div className={`relative ${className}`} ref={containerRef}>
@@ -204,7 +212,10 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
 
               {searchResults.length > 0 && (
                 <>
-                  <CommandGroup heading="Communities" className="p-2 [&_[cmdk-group-heading]]:text-gray-400">
+                  <CommandGroup
+                    heading="Communities"
+                    className="p-2 [&_[cmdk-group-heading]]:text-gray-400"
+                  >
                     {searchResults.map((hub) => (
                       <CommandItem
                         key={hub.id}
@@ -281,13 +292,11 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
                             </p>
                             <div className="mt-1 flex items-center gap-3 text-gray-500 text-xs">
                               <span>
-                                {formatNumber(hub.weeklyMessageCount)}{' '}
-                                msgs/week
+                                {formatNumber(hub.weeklyMessageCount)} msgs/week
                               </span>
                               <span>•</span>
                               <span>
-                                {formatNumber(hub._count.upvotes)}{' '}
-                                members
+                                {formatNumber(hub._count.upvotes)} members
                               </span>
                               {hub.tags.length > 0 && (
                                 <>

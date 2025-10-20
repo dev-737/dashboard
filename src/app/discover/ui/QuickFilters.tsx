@@ -55,7 +55,10 @@ const QUICK_FILTERS = [
   },
 ];
 
-export function QuickFilters({ onFilterClick, activeFilter }: QuickFiltersProps) {
+export function QuickFilters({
+  onFilterClick,
+  activeFilter,
+}: QuickFiltersProps) {
   return (
     <div className="mb-8 w-full">
       <div className="mb-3 flex items-center gap-2">

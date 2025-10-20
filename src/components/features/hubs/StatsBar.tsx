@@ -1,15 +1,23 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 import { useEffect, useState, useRef } from 'react';
 
 // Lazy-load motion and icons for non-blocking load
-const Activity = dynamic(() => import("lucide-react").then(mod => mod.Activity), { ssr: false });
-const Globe = dynamic(() => import("lucide-react").then(mod => mod.Globe), { ssr: false });
-const TrendingUp = dynamic(() => import("lucide-react").then(mod => mod.TrendingUp), { ssr: false });
+const Activity = dynamic(
+  () => import('lucide-react').then((mod) => mod.Activity),
+  { ssr: false }
+);
+const Globe = dynamic(() => import('lucide-react').then((mod) => mod.Globe), {
+  ssr: false,
+});
+const TrendingUp = dynamic(
+  () => import('lucide-react').then((mod) => mod.TrendingUp),
+  { ssr: false }
+);
 
 // Dynamically load motion and store in state
-import type { motion as MotionType } from "motion/react";
+import type { motion as MotionType } from 'motion/react';
 
 interface StatsData {
   activeServers: number;
@@ -33,7 +41,9 @@ export function StatsBar({ stats }: StatsBarProps) {
     weeklyMessages: 0,
   });
   const [isVisible, setIsVisible] = useState(false);
-  const [motionObj, setMotionObj] = useState<typeof import("motion/react") | null>(null);
+  const [motionObj, setMotionObj] = useState<
+    typeof import('motion/react') | null
+  >(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
 
@@ -47,7 +57,7 @@ export function StatsBar({ stats }: StatsBarProps) {
   // Dynamically import motion on mount (client only)
   useEffect(() => {
     let cancelled = false;
-    import("motion/react").then((mod) => {
+    import('motion/react').then((mod) => {
       if (!cancelled) setMotionObj(mod);
     });
     return () => {
@@ -151,7 +161,7 @@ export function StatsBar({ stats }: StatsBarProps) {
   ];
 
   // Helper to render either motion.div or div
-  const MotionDiv = motionObj?.motion?.div || "div";
+  const MotionDiv = motionObj?.motion?.div || 'div';
 
   return (
     <div
@@ -169,8 +179,8 @@ export function StatsBar({ stats }: StatsBarProps) {
         >
           {statsItems.map((stat, index) => {
             const Icon = stat.icon;
-            const ItemMotionDiv = motionObj?.motion?.div || "div";
-            const IconMotionDiv = motionObj?.motion?.div || "div";
+            const ItemMotionDiv = motionObj?.motion?.div || 'div';
+            const IconMotionDiv = motionObj?.motion?.div || 'div';
             return (
               <ItemMotionDiv
                 key={stat.label}
@@ -182,7 +192,8 @@ export function StatsBar({ stats }: StatsBarProps) {
                   whileHover: { y: -4, scale: 1.02 },
                 })}
               >
-                <div className={`
+                <div
+                  className={`
                   relative p-6 rounded-2xl border backdrop-blur-xl
                   bg-gradient-to-br ${stat.gradient}
                   border-${stat.color}-400/30 hover:shadow-${stat.color}-500/25
@@ -192,7 +203,8 @@ export function StatsBar({ stats }: StatsBarProps) {
                   before:bg-gradient-to-br before:from-white/5 before:to-transparent
                   before:pointer-events-none
                   overflow-hidden
-                `}>
+                `}
+                >
                   {/* Background decoration */}
                   <div
                     className={`absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-10 blur-xl bg-gradient-to-br ${stat.iconGradient}`}
@@ -207,7 +219,7 @@ export function StatsBar({ stats }: StatsBarProps) {
                       `}
                       {...(motionObj && {
                         whileHover: { rotate: 5, scale: 1.1 },
-                        transition: { type: "spring", stiffness: 300 },
+                        transition: { type: 'spring', stiffness: 300 },
                       })}
                     >
                       <Icon className="h-8 w-8 text-white" />
@@ -215,10 +227,14 @@ export function StatsBar({ stats }: StatsBarProps) {
                     </IconMotionDiv>
 
                     <div className="text-left">
-                      <div className={`text-4xl font-black tracking-tight bg-gradient-to-r ${stat.textColor} bg-clip-text`}>
+                      <div
+                        className={`text-4xl font-black tracking-tight bg-gradient-to-r ${stat.textColor} bg-clip-text`}
+                      >
                         {formatNumber(stat.value)}
                       </div>
-                      <div className="text-sm text-gray-300 font-medium uppercase tracking-wider">{stat.label}</div>
+                      <div className="text-sm text-gray-300 font-medium uppercase tracking-wider">
+                        {stat.label}
+                      </div>
                     </div>
                   </div>
 
@@ -228,7 +244,7 @@ export function StatsBar({ stats }: StatsBarProps) {
                       className={`h-full bg-gradient-to-r ${stat.iconGradient}`}
                       {...(motionObj && {
                         initial: { width: 0 },
-                        animate: { width: "85%" },
+                        animate: { width: '85%' },
                         transition: { duration: 1, delay: 0.5 + index * 0.1 },
                       })}
                     />

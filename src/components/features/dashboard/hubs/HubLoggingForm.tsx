@@ -1,25 +1,33 @@
 'use client';
 
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  AlertTriangle,
+  Bell,
+  Check,
+  ChevronDown,
+  Flag,
+  Loader2,
+  Lock,
+  MessageSquare,
+  Shield,
+  Users,
+} from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 import { DiscordChannelSelector } from '@/components/discord/DiscordChannelSelector';
 import { DiscordRoleSelector } from '@/components/discord/DiscordRoleSelector';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
-import { UnsavedChangesPrompt } from '@/components/features/dashboard/UnsavedChangesPrompt';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useToast } from '@/components/ui/use-toast';
-import { useTRPC } from '@/utils/trpc';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import {
-    AlertTriangle,
-    Bell,
-    Check,
-    Flag,
-    MessageSquare,
-    Shield,
-    Users,
-} from 'lucide-react';
-import { useCallback, useState } from 'react';
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import { useToast } from '@/components/ui/use-toast';
+import type { ResolvedLogConfigs } from '@/types/logging';
+import { useTRPC } from '@/utils/trpc';
+import { UnsavedChangesPrompt } from '../UnsavedChangesPrompt';
 
 interface LogConfig {
   id?: string;
@@ -115,7 +123,51 @@ export function HubLoggingForm({
   const [serverIds, setServerIds] = useState<Record<string, string>>({});
   const [isSaving, setIsSaving] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
-  const [activeTab, setActiveTab] = useState('modLogs');
+  const [resolvedConfigs, setResolvedConfigs] = useState<ResolvedLogConfigs>(
+    {}
+  );
+
+  // Resolve log config details on mount
+  const configsToResolve = LOG_TYPES.map(({ key }) => ({
+    logType: key,
+    channelId: initialLogConfig?.[`${key}ChannelId` as keyof LogConfig] as
+      | string
+      | null
+      | undefined,
+    roleId: initialLogConfig?.[`${key}RoleId` as keyof LogConfig] as
+      | string
+      | null
+      | undefined,
+  })).filter((c) => c.channelId || c.roleId);
+
+  const {
+    data: resolvedData,
+    isLoading: isResolvingConfigs,
+    error: resolveError,
+  } = useQuery(
+    trpc.server.resolveLogConfigDetails.queryOptions(
+      { configs: configsToResolve },
+      {
+        enabled: configsToResolve.length > 0 && !!initialLogConfig,
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        retry: 1,
+      }
+    )
+  );
+
+  // Update resolved configs when data is fetched
+  useEffect(() => {
+    if (resolvedData) {
+      setResolvedConfigs(resolvedData);
+    }
+  }, [resolvedData]);
+
+  // Log resolve errors
+  useEffect(() => {
+    if (resolveError) {
+      console.error('Failed to resolve log configs:', resolveError);
+    }
+  }, [resolveError]);
 
   const saveMutation = useMutation(
     trpc.hub.updateLogConfig.mutationOptions({
@@ -251,43 +303,31 @@ export function HubLoggingForm({
         bg: 'bg-indigo-500/10',
         border: 'border-indigo-500/20',
         text: 'text-indigo-400',
-        active:
-          'data-[state=active]:bg-indigo-500/20 data-[state=active]:border-indigo-500/40',
       },
       emerald: {
         bg: 'bg-emerald-500/10',
         border: 'border-emerald-500/20',
         text: 'text-emerald-400',
-        active:
-          'data-[state=active]:bg-emerald-500/20 data-[state=active]:border-emerald-500/40',
       },
       blue: {
         bg: 'bg-blue-500/10',
         border: 'border-blue-500/20',
         text: 'text-blue-400',
-        active:
-          'data-[state=active]:bg-blue-500/20 data-[state=active]:border-blue-500/40',
       },
       red: {
         bg: 'bg-red-500/10',
         border: 'border-red-500/20',
         text: 'text-red-400',
-        active:
-          'data-[state=active]:bg-red-500/20 data-[state=active]:border-red-500/40',
       },
       amber: {
         bg: 'bg-amber-500/10',
         border: 'border-amber-500/20',
         text: 'text-amber-400',
-        active:
-          'data-[state=active]:bg-amber-500/20 data-[state=active]:border-amber-500/40',
       },
       purple: {
         bg: 'bg-purple-500/10',
         border: 'border-purple-500/20',
         text: 'text-purple-400',
-        active:
-          'data-[state=active]:bg-purple-500/20 data-[state=active]:border-purple-500/40',
       },
     };
     return colors[color as keyof typeof colors] || colors.indigo;
@@ -295,36 +335,26 @@ export function HubLoggingForm({
 
   return (
     <div className="mx-auto mt-6 max-w-4xl space-y-8">
+      {/* Loading state during resolution */}
+      {isResolvingConfigs && (
+        <div className="flex items-center justify-center gap-2 py-8">
+          <Loader2 className="h-5 w-5 animate-spin text-indigo-400" />
+          <p className="text-gray-400">Loading configurations...</p>
+        </div>
+      )}
+
       {/* Main Content */}
-      <div className="space-y-6">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          {/* Simplified Tab List */}
-          <TabsList className="grid w-full grid-cols-3 bg-gray-900/50 p-1 lg:grid-cols-6">
-            {LOG_TYPES.map(({ key, title, icon: Icon, color }) => {
-              const colorClasses = getColorClasses(color);
-              return (
-                <TabsTrigger
-                  key={key}
-                  value={key}
-                  className={`relative flex flex-col items-center gap-1.5 px-2 py-3 transition-all duration-200 ${colorClasses.active} hover:bg-gray-800/50`}
-                >
-                  <Icon className={`h-4 w-4 ${colorClasses.text}`} />
-                  <span className="truncate font-medium text-xs">{title}</span>
-                  {isConfigured(key) && (
-                    <div className="-top-1 -right-1 absolute h-2 w-2 rounded-full bg-emerald-400" />
-                  )}
-                </TabsTrigger>
-              );
-            })}
-          </TabsList>
+      <div className="space-y-4">
+        {LOG_TYPES.map(({ key, title, description, icon: Icon, color }) => {
+          const colorClasses = getColorClasses(color);
+          const resolved = resolvedConfigs[key];
+          const channelId = logConfig[`${key}ChannelId` as keyof LogConfig];
+          const roleId = logConfig[`${key}RoleId` as keyof LogConfig];
 
-          {/* Tab Content */}
-          {LOG_TYPES.map(({ key, title, description, icon: Icon, color }) => {
-            const colorClasses = getColorClasses(color);
-
-            return (
-              <TabsContent key={key} value={key} className="mt-6">
-                <Card className="border-gray-800/50 bg-gray-900/50">
+          return (
+            <Collapsible key={key} defaultOpen={true}>
+              <Card className="border-gray-800/50 bg-gray-900/50">
+                <CollapsibleTrigger className="w-full">
                   <CardHeader className="pb-4">
                     <div className="flex items-center gap-3">
                       <div
@@ -332,14 +362,17 @@ export function HubLoggingForm({
                       >
                         <Icon className={`h-5 w-5 ${colorClasses.text}`} />
                       </div>
-                      <div className="flex-1">
-                        <CardTitle className="text-lg text-white">
+                      <div className="flex-1 text-left">
+                        <div className="font-semibold text-lg text-white">
                           {title} Logs
-                        </CardTitle>
+                        </div>
                         <p className="mt-0.5 text-gray-400 text-sm">
                           {description}
                         </p>
                       </div>
+                      {resolved && !resolved.userHasAccess && (
+                        <Lock className="h-4 w-4 text-amber-400" />
+                      )}
                       {isConfigured(key) && (
                         <div className="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/20 px-3 py-1">
                           <Check className="h-3 w-3 text-emerald-400" />
@@ -348,19 +381,18 @@ export function HubLoggingForm({
                           </span>
                         </div>
                       )}
+                      <ChevronDown className="h-5 w-5 text-gray-400 transition-transform duration-200 data-[state=open]:rotate-180" />
                     </div>
                   </CardHeader>
+                </CollapsibleTrigger>
 
-                  <CardContent className="space-y-6">
+                <CollapsibleContent>
+                  <CardContent className="space-y-6 pt-0">
                     <div className="grid gap-4 md:grid-cols-2">
                       <div className="space-y-2">
                         <DiscordChannelSelector
                           hubId={hubId}
-                          value={
-                            (logConfig[
-                              `${key}ChannelId` as keyof LogConfig
-                            ] as string) || ''
-                          }
+                          value={(channelId as string) || ''}
                           onChange={(value: string) =>
                             updateLogConfig(key, 'channelId', value)
                           }
@@ -370,27 +402,70 @@ export function HubLoggingForm({
                           label="Discord Channel"
                           placeholder="Select channel"
                           description="Where notifications will be sent"
+                          initialServerId={resolved?.channel?.serverId}
+                          initialChannelId={channelId as string | null}
+                          initialChannelName={resolved?.channel?.name}
+                          initialServerName={resolved?.channel?.serverName}
+                          isAccessible={resolved?.userHasAccess ?? true}
+                          onAccessDenied={() => {
+                            toast({
+                              title: 'Configuration Cleared',
+                              description:
+                                'The log configuration has been removed.',
+                            });
+                          }}
                         />
                       </div>
 
                       <div className="space-y-2">
                         <DiscordRoleSelector
                           hubId={hubId}
-                          serverId={serverIds[key]}
-                          value={
-                            (logConfig[
-                              `${key}RoleId` as keyof LogConfig
-                            ] as string) || ''
+                          serverId={
+                            serverIds[key] || resolved?.channel?.serverId
                           }
+                          value={(roleId as string) || ''}
                           onChange={(value: string) =>
                             updateLogConfig(key, 'roleId', value)
                           }
                           label="Mention Role (Optional)"
                           placeholder="Select role"
                           description="Role to ping for notifications"
+                          initialRoleId={roleId as string | null}
+                          initialRoleName={resolved?.role?.name}
+                          initialRoleColor={resolved?.role?.color}
+                          isAccessible={resolved?.userHasAccess ?? true}
+                          onAccessDenied={() => {
+                            toast({
+                              title: 'Configuration Cleared',
+                              description:
+                                'The role configuration has been removed.',
+                            });
+                          }}
                         />
                       </div>
                     </div>
+
+                    {/* Warning if channel no longer exists */}
+                    {resolved?.channel && !resolved.channel.exists && (
+                      <Alert className="border-red-500/30 bg-red-950/30">
+                        <AlertTriangle className="h-4 w-4 text-red-400" />
+                        <AlertDescription className="text-red-200 text-sm">
+                          This channel no longer exists. Please update the
+                          configuration.
+                        </AlertDescription>
+                      </Alert>
+                    )}
+
+                    {/* Warning if role no longer exists */}
+                    {resolved?.role && !resolved.role.exists && (
+                      <Alert className="border-red-500/30 bg-red-950/30">
+                        <AlertTriangle className="h-4 w-4 text-red-400" />
+                        <AlertDescription className="text-red-200 text-sm">
+                          This role no longer exists. Please update the
+                          configuration.
+                        </AlertDescription>
+                      </Alert>
+                    )}
 
                     <Alert className="border-amber-500/30 bg-amber-950/30">
                       <AlertTriangle className="h-4 w-4 text-amber-400" />
@@ -400,11 +475,11 @@ export function HubLoggingForm({
                       </AlertDescription>
                     </Alert>
                   </CardContent>
-                </Card>
-              </TabsContent>
-            );
-          })}
-        </Tabs>
+                </CollapsibleContent>
+              </Card>
+            </Collapsible>
+          );
+        })}
       </div>
 
       {/* Unsaved Changes Prompt */}

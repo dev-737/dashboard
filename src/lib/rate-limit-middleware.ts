@@ -27,7 +27,7 @@ export type RateLimitMiddlewareOptions = {
 export type ApiHandler = (
   request: NextRequest,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  context?: any,
+  context?: any
 ) => Promise<NextResponse> | NextResponse | Promise<NextResponse>;
 
 /**
@@ -35,14 +35,16 @@ export type ApiHandler = (
  */
 export function withRateLimit(
   handler: ApiHandler,
-  options: RateLimitMiddlewareOptions = {},
+  options: RateLimitMiddlewareOptions = {}
 ): ApiHandler {
   return async (
     request: NextRequest,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    context?: any,
+    context?: any
   ): Promise<NextResponse> => {
-    return await executeWithRateLimit(request, options, () => handler(request, context));
+    return await executeWithRateLimit(request, options, () =>
+      handler(request, context)
+    );
   };
 }
 
@@ -50,7 +52,7 @@ export function withRateLimit(
 async function executeWithRateLimit(
   request: NextRequest,
   options: RateLimitMiddlewareOptions,
-  executeHandler: () => Promise<NextResponse> | NextResponse,
+  executeHandler: () => Promise<NextResponse> | NextResponse
 ): Promise<NextResponse> {
   const {
     tier = RATE_LIMIT_TIERS.MODERATE,
@@ -82,7 +84,7 @@ async function executeWithRateLimit(
         request,
         burst.shortTerm,
         burst.longTerm,
-        userId || undefined,
+        userId || undefined
       );
     } else if (useUserId) {
       rateLimitResult = await rateLimitWithUser(request, userId, tier);
@@ -116,7 +118,7 @@ async function executeWithRateLimit(
  */
 export function withPublicRateLimit(
   handler: ApiHandler,
-  customOptions: Partial<RateLimitMiddlewareOptions> = {},
+  customOptions: Partial<RateLimitMiddlewareOptions> = {}
 ): ApiHandler {
   return withRateLimit(handler, {
     tier: RATE_LIMIT_TIERS.PUBLIC,
@@ -130,7 +132,7 @@ export function withPublicRateLimit(
  */
 export function withAuthRateLimit(
   handler: ApiHandler,
-  customOptions: Partial<RateLimitMiddlewareOptions> = {},
+  customOptions: Partial<RateLimitMiddlewareOptions> = {}
 ): ApiHandler {
   return withRateLimit(handler, {
     tier: RATE_LIMIT_TIERS.MODERATE,
@@ -144,7 +146,7 @@ export function withAuthRateLimit(
  */
 export function withStrictRateLimit(
   handler: ApiHandler,
-  customOptions: Partial<RateLimitMiddlewareOptions> = {},
+  customOptions: Partial<RateLimitMiddlewareOptions> = {}
 ): ApiHandler {
   return withRateLimit(handler, {
     tier: RATE_LIMIT_TIERS.STRICT,
@@ -158,12 +160,13 @@ export function withStrictRateLimit(
  */
 export function withCriticalRateLimit(
   handler: ApiHandler,
-  customOptions: Partial<RateLimitMiddlewareOptions> = {},
+  customOptions: Partial<RateLimitMiddlewareOptions> = {}
 ): ApiHandler {
   return withRateLimit(handler, {
     tier: RATE_LIMIT_TIERS.CRITICAL,
     useUserId: true,
-    customMessage: 'This operation is heavily rate limited. Please wait before trying again.',
+    customMessage:
+      'This operation is heavily rate limited. Please wait before trying again.',
     ...customOptions,
   });
 }
@@ -181,7 +184,7 @@ export function withBurstRateLimit(
     limit: 100,
     timeframe: 3600,
   },
-  customOptions: Partial<RateLimitMiddlewareOptions> = {},
+  customOptions: Partial<RateLimitMiddlewareOptions> = {}
 ): ApiHandler {
   return withRateLimit(handler, {
     burst: { shortTerm, longTerm },
@@ -196,7 +199,7 @@ export function withBurstRateLimit(
 export function createCustomRateLimit(
   limit: number,
   timeframe: number,
-  name: string = 'custom',
+  name: string = 'custom'
 ): RateLimitTier {
   return {
     name,
@@ -214,12 +217,13 @@ export function createCustomRateLimit(
  */
 export function withUploadRateLimit(
   handler: ApiHandler,
-  customOptions: Partial<RateLimitMiddlewareOptions> = {},
+  customOptions: Partial<RateLimitMiddlewareOptions> = {}
 ): ApiHandler {
   return withRateLimit(handler, {
     tier: createCustomRateLimit(5, 300), // 5 uploads per 5 minutes
     useUserId: true,
-    customMessage: 'Upload rate limit exceeded. Please wait before uploading again.',
+    customMessage:
+      'Upload rate limit exceeded. Please wait before uploading again.',
     ...customOptions,
   });
 }

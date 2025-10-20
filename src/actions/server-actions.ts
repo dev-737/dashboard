@@ -1,7 +1,12 @@
 'use server';
 
 import { auth } from '@/auth';
-import type { Connection, Hub, ReportStatus, ServerData } from '@/lib/generated/prisma/client';
+import type {
+  Connection,
+  Hub,
+  ReportStatus,
+  ServerData,
+} from '@/lib/generated/prisma/client';
 import type { Session } from 'next-auth';
 import { db } from '@/lib/prisma';
 import { cache as perfCache } from '@/lib/performance-cache';
@@ -31,7 +36,9 @@ export interface ServerDataWithConnections extends ServerDataWithDiscordGuild {
   })[];
 }
 
-export async function getServers(session: Omit<Session, 'expires'> | null): Promise<
+export async function getServers(
+  session: Omit<Session, 'expires'> | null
+): Promise<
   | { error: string; status: number }
   | {
       data: ServerDataWithConnections[];
@@ -70,7 +77,8 @@ export async function getServers(session: Omit<Session, 'expires'> | null): Prom
     // Early cache hit: if we have recent guilds, skip Discord/API entirely
     try {
       const cacheKeyEarly = `discord:guilds:${session.user.id}`;
-      const cachedGuildsEarly = await perfCache.get<DiscordGuild[]>(cacheKeyEarly);
+      const cachedGuildsEarly =
+        await perfCache.get<DiscordGuild[]>(cacheKeyEarly);
       if (cachedGuildsEarly && Array.isArray(cachedGuildsEarly)) {
         // Filter guilds where the user has the Manage Channels permission (0x10)
         const adminGuilds = cachedGuildsEarly.filter((guild: DiscordGuild) => {
@@ -84,44 +92,55 @@ export async function getServers(session: Omit<Session, 'expires'> | null): Prom
           include: { connections: { include: { hub: true, server: true } } },
         });
 
-        const servers: ServerDataWithConnections[] = adminGuilds.map((guild: DiscordGuild) => {
-          const dbServer = dbServers.find((server) => server.id === guild.id);
-          const createdTimestamp = Number((BigInt(guild.id) >> BigInt(22)) + BigInt(1420070400000));
-          const createdAt = new Date(createdTimestamp);
-          const botAdded = !!dbServer;
-          if (!dbServer) {
-            const serverData = {
-              premiumStatus: false,
-              createdAt: createdAt,
-              updatedAt: new Date(),
-              inviteCode: null,
-              messageCount: 0,
-              lastMessageAt: new Date(),
-              iconUrl: null,
+        const servers: ServerDataWithConnections[] = adminGuilds.map(
+          (guild: DiscordGuild) => {
+            const dbServer = dbServers.find((server) => server.id === guild.id);
+            const createdTimestamp = Number(
+              (BigInt(guild.id) >> BigInt(22)) + BigInt(1420070400000)
+            );
+            const createdAt = new Date(createdTimestamp);
+            const botAdded = !!dbServer;
+            if (!dbServer) {
+              const serverData = {
+                premiumStatus: false,
+                createdAt: createdAt,
+                updatedAt: new Date(),
+                inviteCode: null,
+                messageCount: 0,
+                lastMessageAt: new Date(),
+                iconUrl: null,
+                botAdded,
+                connections: [],
+              };
+              return { ...guild, ...serverData } as ServerDataWithConnections;
+            }
+            return {
+              ...dbServer,
+              ...guild,
+              createdAt,
               botAdded,
-              connections: [],
             };
-            return { ...guild, ...serverData } as ServerDataWithConnections;
           }
-          return {
-            ...dbServer,
-            ...guild,
-            createdAt,
-            botAdded,
-          };
-        });
+        );
 
         return { data: servers, status: 200 };
       }
     } catch (e) {
       // Non-fatal: fall through to normal flow on cache errors
-      console.warn('Guilds cache early path failed, continuing without cache:', e);
+      console.warn(
+        'Guilds cache early path failed, continuing without cache:',
+        e
+      );
     }
 
     // Check if the token is expired and refresh if needed
     let accessToken = account.access_token;
 
-    if (account.expires_at && account.expires_at * 1000 < Date.now() && account.refresh_token) {
+    if (
+      account.expires_at &&
+      account.expires_at * 1000 < Date.now() &&
+      account.refresh_token
+    ) {
       try {
         // Token is expired, refresh it
         const response = await fetch('https://discord.com/api/oauth2/token', {
@@ -139,7 +158,7 @@ export async function getServers(session: Omit<Session, 'expires'> | null): Prom
           }),
         });
         const tokens = await response.json();
-        
+
         if (!response.ok) {
           console.error('Discord token refresh failed:', tokens);
           return { error: 'Failed to refresh token', status: 401 };
@@ -156,7 +175,9 @@ export async function getServers(session: Omit<Session, 'expires'> | null): Prom
           data: {
             access_token: tokens.access_token,
             refresh_token: tokens.refresh_token ?? account.refresh_token,
-            expires_at: tokens.expires_in ? Math.floor(Date.now() / 1000) + tokens.expires_in : null,
+            expires_at: tokens.expires_in
+              ? Math.floor(Date.now() / 1000) + tokens.expires_in
+              : null,
           },
         });
 
@@ -181,12 +202,15 @@ export async function getServers(session: Omit<Session, 'expires'> | null): Prom
       const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
 
       try {
-        const userGuildsResponse = await fetch(`${DISCORD_API}/users/@me/guilds`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          signal: controller.signal,
-        });
+        const userGuildsResponse = await fetch(
+          `${DISCORD_API}/users/@me/guilds`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            signal: controller.signal,
+          }
+        );
 
         clearTimeout(timeoutId);
 
@@ -250,44 +274,48 @@ export async function getServers(session: Omit<Session, 'expires'> | null): Prom
     // If a server exists in our database, the bot is added
 
     // Map Discord guilds to our server data format
-    const servers: ServerDataWithConnections[] = adminGuilds.map((guild: DiscordGuild) => {
-      // Find the corresponding server in our database
-      const dbServer = dbServers.find((server) => server.id === guild.id);
+    const servers: ServerDataWithConnections[] = adminGuilds.map(
+      (guild: DiscordGuild) => {
+        // Find the corresponding server in our database
+        const dbServer = dbServers.find((server) => server.id === guild.id);
 
-      // Calculate creation date from Discord snowflake
-      const createdTimestamp = Number((BigInt(guild.id) >> BigInt(22)) + BigInt(1420070400000));
-      const createdAt = new Date(createdTimestamp);
+        // Calculate creation date from Discord snowflake
+        const createdTimestamp = Number(
+          (BigInt(guild.id) >> BigInt(22)) + BigInt(1420070400000)
+        );
+        const createdAt = new Date(createdTimestamp);
 
-      // If server exists in database, bot is added
-      const botAdded = !!dbServer;
+        // If server exists in database, bot is added
+        const botAdded = !!dbServer;
 
-      // If the server doesn't exist in our database, create a minimal object
-      if (!dbServer) {
-        const serverData = {
-          // Basic server data
-          premiumStatus: false,
-          createdAt: createdAt,
-          updatedAt: new Date(),
-          inviteCode: null,
-          messageCount: 0,
-          lastMessageAt: new Date(),
-          iconUrl: null,
-          // Discord guild data
+        // If the server doesn't exist in our database, create a minimal object
+        if (!dbServer) {
+          const serverData = {
+            // Basic server data
+            premiumStatus: false,
+            createdAt: createdAt,
+            updatedAt: new Date(),
+            inviteCode: null,
+            messageCount: 0,
+            lastMessageAt: new Date(),
+            iconUrl: null,
+            // Discord guild data
+            botAdded, // Use database presence to determine if bot is added
+            connections: [],
+          };
+
+          // Combine with guild data (which includes id and name)
+          return { ...guild, ...serverData } as ServerDataWithConnections;
+        }
+
+        return {
+          ...dbServer,
+          ...guild,
+          createdAt,
           botAdded, // Use database presence to determine if bot is added
-          connections: [],
         };
-
-        // Combine with guild data (which includes id and name)
-        return { ...guild, ...serverData } as ServerDataWithConnections;
       }
-
-      return {
-        ...dbServer,
-        ...guild,
-        createdAt,
-        botAdded, // Use database presence to determine if bot is added
-      };
-    });
+    );
 
     return { data: servers, status: 200 };
   } catch {
@@ -318,9 +346,10 @@ export async function getAllConnections(): Promise<
 }
 
 export async function getServerDetails(
-  serverId: string,
+  serverId: string
 ): Promise<
-  { error: string; status: number } | { data: ServerDataWithConnections; status: number }
+  | { error: string; status: number }
+  | { data: ServerDataWithConnections; status: number }
 > {
   try {
     const session = await auth();
@@ -333,9 +362,9 @@ export async function getServerDetails(
 
     const cacheKey = `discord:guilds:${userId}`;
     const cachedGuilds = await perfCache.get<DiscordGuild[]>(cacheKey);
-    
+
     let userGuilds: DiscordGuild[] | null = null;
-    
+
     if (cachedGuilds && Array.isArray(cachedGuilds)) {
       userGuilds = cachedGuilds;
     } else {
@@ -343,8 +372,8 @@ export async function getServerDetails(
       if ('error' in serversResult) {
         return { error: serversResult.error, status: serversResult.status };
       }
-      
-      userGuilds = serversResult.data.map(server => ({
+
+      userGuilds = serversResult.data.map((server) => ({
         id: server.id,
         name: server.name,
         icon: server.icon || null,
@@ -353,7 +382,7 @@ export async function getServerDetails(
         features: server.features || [],
         verification_level: server.verification_level || 0,
       }));
-      
+
       await perfCache.set(cacheKey, userGuilds, { ttl: 300 }); // 5 minutes
     }
 
@@ -386,7 +415,9 @@ export async function getServerDetails(
     });
 
     // Calculate server creation date from snowflake ID
-    const createdTimestamp = Number((BigInt(serverId) >> BigInt(22)) + BigInt(1420070400000));
+    const createdTimestamp = Number(
+      (BigInt(serverId) >> BigInt(22)) + BigInt(1420070400000)
+    );
     const createdAt = new Date(createdTimestamp);
 
     // Combine the data
@@ -404,7 +435,9 @@ export async function getServerDetails(
       inviteCode: dbServer?.inviteCode || null,
       updatedAt: dbServer?.updatedAt || new Date(),
       messageCount: dbServer?.messageCount || 0,
-      lastMessageAt: dbServer?.lastMessageAt ? dbServer.lastMessageAt : new Date(),
+      lastMessageAt: dbServer?.lastMessageAt
+        ? dbServer.lastMessageAt
+        : new Date(),
       createdAt: createdAt,
       verification_level: userGuild.verification_level || 0,
       connections: dbServer?.connections || [],
@@ -476,7 +509,10 @@ export async function revokeInfraction(infractionId: string) {
     const isModerator = infraction.hub.moderators.length > 0;
 
     if (!isOwner && !isModerator) {
-      return { error: 'You do not have permission to revoke this infraction', status: 403 };
+      return {
+        error: 'You do not have permission to revoke this infraction',
+        status: 403,
+      };
     }
 
     // Check if infraction is already revoked

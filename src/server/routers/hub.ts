@@ -177,31 +177,44 @@ export const hubRouter = router({
       z.object({
         hubId: z.string(),
         automodEnabled: z.boolean().optional(),
-        defaultMuteDurationMinutes: z.number().int().min(1).max(43200).optional(),
+        defaultMuteDurationMinutes: z
+          .number()
+          .int()
+          .min(1)
+          .max(43200)
+          .optional(),
         alertModsEnabled: z.boolean().optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {
-      const { hubId, automodEnabled, defaultMuteDurationMinutes, alertModsEnabled } = input;
+      const {
+        hubId,
+        automodEnabled,
+        defaultMuteDurationMinutes,
+        alertModsEnabled,
+      } = input;
       const userId = ctx.session.user.id;
       const level = await getUserHubPermission(userId, hubId);
       if (level < PermissionLevel.MANAGER)
         throw new TRPCError({ code: 'FORBIDDEN' });
 
       const hub = await db.hub.findUnique({ where: { id: hubId } });
-      if (!hub) throw new TRPCError({ code: 'NOT_FOUND', message: 'Hub not found' });
+      if (!hub)
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Hub not found' });
 
       const updateData: Prisma.HubUpdateInput = {};
-      
+
       if (defaultMuteDurationMinutes !== undefined) {
-        updateData.appealCooldownHours = Math.round(defaultMuteDurationMinutes / 60);
+        updateData.appealCooldownHours = Math.round(
+          defaultMuteDurationMinutes / 60
+        );
       }
-      
-      await db.hub.update({ 
-        where: { id: hubId }, 
-        data: updateData
+
+      await db.hub.update({
+        where: { id: hubId },
+        data: updateData,
       });
-      
+
       return { success: true as const };
     }),
 
@@ -313,7 +326,13 @@ export const hubRouter = router({
         id: z.string(),
         name: z.string().min(3).max(64),
         enabled: z.boolean().optional(),
-        muteDurationMinutes: z.number().int().min(0).max(43200).nullable().optional(),
+        muteDurationMinutes: z
+          .number()
+          .int()
+          .min(0)
+          .max(43200)
+          .nullable()
+          .optional(),
         actions: z.array(z.enum(BlockWordAction)).min(1),
         patterns: z
           .array(
@@ -326,7 +345,8 @@ export const hubRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      const { id, name, enabled, muteDurationMinutes, actions, patterns } = input;
+      const { id, name, enabled, muteDurationMinutes, actions, patterns } =
+        input;
       const existing = await db.antiSwearRule.findUnique({
         where: { id },
         select: { hubId: true },
@@ -344,7 +364,8 @@ export const hubRouter = router({
         data: {
           name,
           enabled: enabled !== undefined ? enabled : undefined,
-          muteDurationMinutes: muteDurationMinutes !== undefined ? muteDurationMinutes : undefined,
+          muteDurationMinutes:
+            muteDurationMinutes !== undefined ? muteDurationMinutes : undefined,
           actions,
 
           patterns: {
@@ -404,7 +425,7 @@ export const hubRouter = router({
         select: { hubId: true },
       });
       if (!rule) throw new TRPCError({ code: 'NOT_FOUND' });
-      
+
       const level = await getUserHubPermission(ctx.session.user.id, rule.hubId);
       if (level < PermissionLevel.MODERATOR)
         throw new TRPCError({ code: 'FORBIDDEN' });
@@ -442,14 +463,14 @@ export const hubRouter = router({
     .mutation(async ({ input, ctx }) => {
       const { ruleId, word, reason } = input;
       const userId = ctx.session.user.id;
-      
+
       // Verify user has access to this rule
       const rule = await db.antiSwearRule.findUnique({
         where: { id: ruleId },
         select: { hubId: true },
       });
       if (!rule) throw new TRPCError({ code: 'NOT_FOUND' });
-      
+
       const level = await getUserHubPermission(userId, rule.hubId);
       if (level < PermissionLevel.MANAGER)
         throw new TRPCError({ code: 'FORBIDDEN' });
@@ -485,7 +506,7 @@ export const hubRouter = router({
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input, ctx }) => {
       const { id } = input;
-      
+
       // Verify user has access to this whitelist item
       const whitelistItem = await db.antiSwearWhitelist.findUnique({
         where: { id },
@@ -496,7 +517,7 @@ export const hubRouter = router({
         },
       });
       if (!whitelistItem) throw new TRPCError({ code: 'NOT_FOUND' });
-      
+
       const level = await getUserHubPermission(
         ctx.session.user.id,
         whitelistItem.AntiSwearRule.hubId
@@ -514,14 +535,14 @@ export const hubRouter = router({
     .mutation(async ({ input, ctx }) => {
       const { hubId, confirmName } = input;
       const userId = ctx.session.user.id;
-      
+
       const hub = await db.hub.findUnique({ where: { id: hubId } });
       if (!hub) throw new TRPCError({ code: 'NOT_FOUND' });
-      
+
       const level = await getUserHubPermission(userId, hubId);
       if (level < PermissionLevel.OWNER)
         throw new TRPCError({ code: 'FORBIDDEN' });
-        
+
       if (hub.name !== confirmName)
         throw new TRPCError({
           code: 'BAD_REQUEST',
@@ -541,11 +562,10 @@ export const hubRouter = router({
           where: { hubId: hubId },
         });
 
-        
         await tx.antiSwearPattern.deleteMany({
           where: { rule: { hubId: hubId } },
         });
-        
+
         await tx.antiSwearWhitelist.deleteMany({
           where: {
             AntiSwearRule: {
@@ -554,7 +574,9 @@ export const hubRouter = router({
           },
         });
 
-        await tx.hubMessageReaction.deleteMany({ where: { Message: { hubId: hubId } } });
+        await tx.hubMessageReaction.deleteMany({
+          where: { Message: { hubId: hubId } },
+        });
 
         await tx.globalReport.updateMany({
           where: { Message: { hubId: hubId } },
@@ -1315,7 +1337,7 @@ export const hubRouter = router({
       const userId = ctx.session?.user?.id;
 
       const cacheKey = `hub:recommendations:${type}:${limit}:${currentHubId || 'none'}:${(tags || []).sort().join(',')}:${userId || 'anon'}`;
-      
+
       try {
         const redis = await getRedisClient();
         if (redis) {
@@ -1390,9 +1412,10 @@ export const hubRouter = router({
 
             // clculate tag similarity and sort by it
             hubs = hubs
-              .map(hub => ({
+              .map((hub) => ({
                 ...hub,
-                tagSimilarity: hub.tags.filter(tag => tags.includes(tag.name)).length,
+                tagSimilarity: hub.tags.filter((tag) => tags.includes(tag.name))
+                  .length,
               }))
               .sort((a, b) => b.tagSimilarity - a.tagSimilarity)
               .slice(0, limit);
@@ -1595,10 +1618,13 @@ export const hubRouter = router({
 
         let reason = 'Popular community';
         if (type === 'similar') {
-          const matchingTags = hub.tags.filter(tag => tags?.includes(tag.name)).length;
-          reason = matchingTags > 1 
-            ? `${matchingTags} shared interests` 
-            : 'Similar community';
+          const matchingTags = hub.tags.filter((tag) =>
+            tags?.includes(tag.name)
+          ).length;
+          reason =
+            matchingTags > 1
+              ? `${matchingTags} shared interests`
+              : 'Similar community';
         } else if (isTrusted) {
           reason = 'Verified community';
         } else if (isGrowing) {

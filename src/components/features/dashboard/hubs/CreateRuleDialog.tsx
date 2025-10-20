@@ -14,16 +14,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/components/ui/use-toast';
 import { BlockWordAction } from '@/lib/generated/prisma/client';
-import { 
+import {
   type AntiSwearRule,
   RULE_TEMPLATES,
   BlockWordActionLabels,
   BlockWordActionColors,
-  BlockWordActionDescriptions
+  BlockWordActionDescriptions,
 } from '@/lib/types/anti-swear';
 import { useTRPC } from '@/utils/trpc';
 import { PatternBuilder } from '@/components/forms/PatternBuilder';
@@ -35,12 +41,18 @@ interface CreateRuleDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function CreateRuleDialog({ hubId, open, onOpenChange }: CreateRuleDialogProps) {
+export function CreateRuleDialog({
+  hubId,
+  open,
+  onOpenChange,
+}: CreateRuleDialogProps) {
   const trpc = useTRPC();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState('template');
-  const [selectedTemplate, setSelectedTemplate] = useState<keyof typeof RULE_TEMPLATES | null>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState<
+    keyof typeof RULE_TEMPLATES | null
+  >(null);
   const [customRule, setCustomRule] = useState({
     name: '',
     patterns: [] as { pattern: string }[],
@@ -80,7 +92,9 @@ export function CreateRuleDialog({ hubId, open, onOpenChange }: CreateRuleDialog
     });
   };
 
-  const handleCreateFromTemplate = async (templateKey: keyof typeof RULE_TEMPLATES) => {
+  const handleCreateFromTemplate = async (
+    templateKey: keyof typeof RULE_TEMPLATES
+  ) => {
     const template = RULE_TEMPLATES[templateKey];
     await createMutation.mutateAsync({
       hubId,
@@ -136,119 +150,161 @@ export function CreateRuleDialog({ hubId, open, onOpenChange }: CreateRuleDialog
               Create New Filter Rule
             </DialogTitle>
             <DialogDescription>
-              Choose from a template or create a custom rule to protect your hub from unwanted content.
+              Choose from a template or create a custom rule to protect your hub
+              from unwanted content.
             </DialogDescription>
           </DialogHeader>
 
-          <div className="flex-1 overflow-y-auto pr-2 -mr-2"
-            style={{ scrollbarWidth: 'thin', scrollbarColor: '#374151 transparent' }}
+          <div
+            className="flex-1 overflow-y-auto pr-2 -mr-2"
+            style={{
+              scrollbarWidth: 'thin',
+              scrollbarColor: '#374151 transparent',
+            }}
           >
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="grid w-full grid-cols-2 bg-gray-800">
-                <TabsTrigger value="custom" className="data-[state=active]:bg-purple-600/20">
+                <TabsTrigger
+                  value="custom"
+                  className="data-[state=active]:bg-purple-600/20"
+                >
                   <Plus className="mr-2 h-4 w-4" />
                   Custom Rule
                 </TabsTrigger>
-                <TabsTrigger value="template" className="data-[state=active]:bg-purple-600/20">
+                <TabsTrigger
+                  value="template"
+                  className="data-[state=active]:bg-purple-600/20"
+                >
                   <Sparkles className="mr-2 h-4 w-4" />
                   Templates (Coming Soon)
                 </TabsTrigger>
               </TabsList>
 
-          <TabsContent value="template" className="mt-6">
-            <div className="space-y-4">
-              <div className="text-sm text-gray-400 mb-4">
-                Start with a pre-configured rule template. You can customize it after creation.
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {Object.entries(RULE_TEMPLATES).map(([key, template]) => (
-                  <Card 
-                    key={key}
-                    className={`cursor-pointer transition-all duration-200 hover:border-purple-500/50 ${
-                      selectedTemplate === key 
-                        ? 'border-purple-500/50 bg-purple-950/20' 
-                        : 'border-gray-800 bg-gray-950/50'
-                    }`}
-                    onClick={() => setSelectedTemplate(key as keyof typeof RULE_TEMPLATES)}
-                  >
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-lg text-white">{template.name}</CardTitle>
-                      <CardDescription className="text-sm break-words">{template.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        <div>
-                          <Label className="text-xs font-medium text-gray-400">ACTIONS</Label>
-                          <div className="flex flex-wrap gap-1 mt-1">
-                            {template.actions.map((action) => (
-                              <Badge key={action} className={`${BlockWordActionColors[action]} text-xs`}>
-                                {BlockWordActionLabels[action]}
-                              </Badge>
-                            ))}
+              <TabsContent value="template" className="mt-6">
+                <div className="space-y-4">
+                  <div className="text-sm text-gray-400 mb-4">
+                    Start with a pre-configured rule template. You can customize
+                    it after creation.
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {Object.entries(RULE_TEMPLATES).map(([key, template]) => (
+                      <Card
+                        key={key}
+                        className={`cursor-pointer transition-all duration-200 hover:border-purple-500/50 ${
+                          selectedTemplate === key
+                            ? 'border-purple-500/50 bg-purple-950/20'
+                            : 'border-gray-800 bg-gray-950/50'
+                        }`}
+                        onClick={() =>
+                          setSelectedTemplate(
+                            key as keyof typeof RULE_TEMPLATES
+                          )
+                        }
+                      >
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-lg text-white">
+                            {template.name}
+                          </CardTitle>
+                          <CardDescription className="text-sm break-words">
+                            {template.description}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-3">
+                            <div>
+                              <Label className="text-xs font-medium text-gray-400">
+                                ACTIONS
+                              </Label>
+                              <div className="flex flex-wrap gap-1 mt-1">
+                                {template.actions.map((action) => (
+                                  <Badge
+                                    key={action}
+                                    className={`${BlockWordActionColors[action]} text-xs`}
+                                  >
+                                    {BlockWordActionLabels[action]}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
 
-              {selectedTemplate && (
-                <div className="flex justify-end pt-4 border-t border-gray-800">
-                  <Button
-                    onClick={() => handleCreateFromTemplate(selectedTemplate)}
-                    disabled={createMutation.isPending}
-                    className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
-                  >
-                    {createMutation.isPending ? 'Creating...' : 'Create Rule'}
-                  </Button>
+                  {selectedTemplate && (
+                    <div className="flex justify-end pt-4 border-t border-gray-800">
+                      <Button
+                        onClick={() =>
+                          handleCreateFromTemplate(selectedTemplate)
+                        }
+                        disabled={createMutation.isPending}
+                        className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                      >
+                        {createMutation.isPending
+                          ? 'Creating...'
+                          : 'Create Rule'}
+                      </Button>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          </TabsContent>
+              </TabsContent>
 
-          <TabsContent value="custom" className="mt-6">
-            <div className="space-y-6">
-              {/* Rule Name */}
-              <div className="space-y-2">
-                <Label htmlFor="rule-name">Rule Name</Label>
-                <Input
-                  id="rule-name"
-                  placeholder="Enter a descriptive name for your rule"
-                  value={customRule.name}
-                  onChange={(e) => setCustomRule(prev => ({ ...prev, name: e.target.value }))}
-                  className="bg-gray-800 border-gray-700"
-                />
-              </div>
+              <TabsContent value="custom" className="mt-6">
+                <div className="space-y-6">
+                  {/* Rule Name */}
+                  <div className="space-y-2">
+                    <Label htmlFor="rule-name">Rule Name</Label>
+                    <Input
+                      id="rule-name"
+                      placeholder="Enter a descriptive name for your rule"
+                      value={customRule.name}
+                      onChange={(e) =>
+                        setCustomRule((prev) => ({
+                          ...prev,
+                          name: e.target.value,
+                        }))
+                      }
+                      className="bg-gray-800 border-gray-700"
+                    />
+                  </div>
 
-              <div className="space-y-2">
-                <Label>Patterns to Match</Label>
-                <PatternBuilder
-                  patterns={customRule.patterns}
-                  onChange={(patterns: { pattern: string }[]) => setCustomRule(prev => ({ ...prev, patterns }))}
-                />
-              </div>
+                  <div className="space-y-2">
+                    <Label>Patterns to Match</Label>
+                    <PatternBuilder
+                      patterns={customRule.patterns}
+                      onChange={(patterns: { pattern: string }[]) =>
+                        setCustomRule((prev) => ({ ...prev, patterns }))
+                      }
+                    />
+                  </div>
 
-              <div className="space-y-2">
-                <Label>Actions to Take</Label>
-                <ActionSelector
-                  selectedActions={customRule.actions}
-                  onChange={(actions: BlockWordAction[]) => setCustomRule(prev => ({ ...prev, actions }))}
-                />
-              </div>
+                  <div className="space-y-2">
+                    <Label>Actions to Take</Label>
+                    <ActionSelector
+                      selectedActions={customRule.actions}
+                      onChange={(actions: BlockWordAction[]) =>
+                        setCustomRule((prev) => ({ ...prev, actions }))
+                      }
+                    />
+                  </div>
 
-              <div className="flex justify-end pt-4 border-t border-gray-800">
-                <Button
-                  onClick={handleCreateCustomRule}
-                  disabled={createMutation.isPending || !customRule.name.trim() || customRule.patterns.length === 0}
-                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
-                >
-                  {createMutation.isPending ? 'Creating...' : 'Create Rule'}
-                </Button>
-              </div>
-            </div>
-          </TabsContent>
+                  <div className="flex justify-end pt-4 border-t border-gray-800">
+                    <Button
+                      onClick={handleCreateCustomRule}
+                      disabled={
+                        createMutation.isPending ||
+                        !customRule.name.trim() ||
+                        customRule.patterns.length === 0
+                      }
+                      className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                    >
+                      {createMutation.isPending ? 'Creating...' : 'Create Rule'}
+                    </Button>
+                  </div>
+                </div>
+              </TabsContent>
             </Tabs>
           </div>
         </div>

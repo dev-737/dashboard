@@ -266,7 +266,10 @@ export function ServerConnectionsTable({
                       <DropdownMenuItem
                         className="cursor-pointer text-red-400 hover:bg-red-900/30 hover:text-red-300"
                         onClick={() => {
-                          handleDeleteConnection(connection.id, connection.hub.name);
+                          handleDeleteConnection(
+                            connection.id,
+                            connection.hub.name
+                          );
                         }}
                         disabled={isLoading}
                       >

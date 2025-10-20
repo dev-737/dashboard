@@ -10,10 +10,10 @@ import { useErrorNotification } from './use-error-notification';
  */
 export function useHubReviews(
   hubId: string,
-  options?: { 
-    enabled?: boolean; 
-    staleTime?: number; 
-    initialData?: any[] 
+  options?: {
+    enabled?: boolean;
+    staleTime?: number;
+    initialData?: any[];
   }
 ) {
   const trpc = useTRPC();

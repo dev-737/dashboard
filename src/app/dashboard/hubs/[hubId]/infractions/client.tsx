@@ -123,7 +123,8 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
 
   // Modal state
   const [revokeModalOpen, setRevokeModalOpen] = useState(false);
-  const [selectedInfraction, setSelectedInfraction] = useState<Infraction | null>(null);
+  const [selectedInfraction, setSelectedInfraction] =
+    useState<Infraction | null>(null);
 
   const typeFilter =
     type === 'BLACKLIST' || type === 'WARNING'

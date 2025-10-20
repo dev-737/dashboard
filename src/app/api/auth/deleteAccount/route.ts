@@ -8,7 +8,7 @@ import {
 } from '@/lib/rate-limit-middleware';
 
 async function handleDELETE() {
-const session = await auth()
+  const session = await auth();
 
   // Only allow authenticated users
   if (!session?.user?.id) {

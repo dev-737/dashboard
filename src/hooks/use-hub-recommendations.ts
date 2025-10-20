@@ -93,17 +93,30 @@ interface UseHubRecommendationsOptions {
   enabled?: boolean;
 }
 
-
-function generateStrategies(tags: string[] = [], seed: number): RecommendationStrategy[] {
-  const tagStrategies: RecommendationStrategy[] = tags.length > 0 ? [
-    { search: tags.join(' '), sort: SortOptions.Trending, tags },
-    { search: tags.slice(0, 2).join(' '), sort: SortOptions.Upvotes, tags: tags.slice(0, 2) },
-    ...tags.slice(0, 3).map((tag, idx) => ({
-      search: tag,
-      sort: [SortOptions.Trending, SortOptions.Upvotes, SortOptions.Activity][idx % 3],
-      skip: (seed + idx * 3) % 15,
-    })),
-  ] : [];
+function generateStrategies(
+  tags: string[] = [],
+  seed: number
+): RecommendationStrategy[] {
+  const tagStrategies: RecommendationStrategy[] =
+    tags.length > 0
+      ? [
+          { search: tags.join(' '), sort: SortOptions.Trending, tags },
+          {
+            search: tags.slice(0, 2).join(' '),
+            sort: SortOptions.Upvotes,
+            tags: tags.slice(0, 2),
+          },
+          ...tags.slice(0, 3).map((tag, idx) => ({
+            search: tag,
+            sort: [
+              SortOptions.Trending,
+              SortOptions.Upvotes,
+              SortOptions.Activity,
+            ][idx % 3],
+            skip: (seed + idx * 3) % 15,
+          })),
+        ]
+      : [];
 
   const fallbackSortOptions: SortOptions[] = [
     SortOptions.Upvotes,
@@ -117,23 +130,31 @@ function generateStrategies(tags: string[] = [], seed: number): RecommendationSt
     SortOptions.MostRecentPopular,
   ];
 
-  const fallbackStrategies: RecommendationStrategy[] = fallbackSortOptions.map((sort, idx) => ({
-    search: '',
-    sort,
-    skip: (seed * (idx + 1)) % 40,
-  }));
+  const fallbackStrategies: RecommendationStrategy[] = fallbackSortOptions.map(
+    (sort, idx) => ({
+      search: '',
+      sort,
+      skip: (seed * (idx + 1)) % 40,
+    })
+  );
 
   const allStrategies = [...tagStrategies, ...fallbackStrategies];
 
   return allStrategies
-    .map((strategy, index) => ({ strategy, sortKey: (seed + index * 13) % 1000 }))
+    .map((strategy, index) => ({
+      strategy,
+      sortKey: (seed + index * 13) % 1000,
+    }))
     .sort((a, b) => a.sortKey - b.sortKey)
-    .map(item => item.strategy);
+    .map((item) => item.strategy);
 }
 
 function calculateVarietyScore(hub: Hub, tags: string[] = []): number {
   const scoringRules = [
-    { condition: tags.some(tag => hub.tags.some(ht => ht.name === tag)), points: 30 },
+    {
+      condition: tags.some((tag) => hub.tags.some((ht) => ht.name === tag)),
+      points: 30,
+    },
     { condition: hub.verified, points: 20 },
     { condition: hub.partnered, points: 20 },
     { condition: hub.activityLevel === 'HIGH', points: 15 },
@@ -142,7 +163,10 @@ function calculateVarietyScore(hub: Hub, tags: string[] = []): number {
     { condition: hub.reviews.length > 2, points: 8 },
   ];
 
-  let score = scoringRules.reduce((acc, rule) => acc + (rule.condition ? rule.points : 0), 0);
+  let score = scoringRules.reduce(
+    (acc, rule) => acc + (rule.condition ? rule.points : 0),
+    0
+  );
 
   const hubHash = parseInt(hub.id.slice(-4), 16) || 0;
   score += (hubHash % 15) - 7;
@@ -150,29 +174,43 @@ function calculateVarietyScore(hub: Hub, tags: string[] = []): number {
   return score;
 }
 
-function determineRecommendationReason(hub: Hub, sourceTags: string[] = [], index: number): string {
-    const matchingTags = hub.tags.filter(tag => sourceTags.includes(tag.name)).length;
+function determineRecommendationReason(
+  hub: Hub,
+  sourceTags: string[] = [],
+  index: number
+): string {
+  const matchingTags = hub.tags.filter((tag) =>
+    sourceTags.includes(tag.name)
+  ).length;
 
-    const reasonRules: [boolean, string][] = [
-        [matchingTags > 2, 'Many shared interests'],
-        [matchingTags > 0, 'Similar topic'],
-        [hub.verified && hub.partnered, 'Official verified partner'],
-        [hub.verified, 'Verified community'],
-        [hub.partnered, 'Partnered community'],
-        [hub.activityLevel === 'HIGH' && hub._count.connections > 100, 'Very active & popular'],
-        [hub.activityLevel === 'HIGH', 'Highly active'],
-        [hub._count.connections > 100, 'Large community'],
-        [hub._count.connections > 50, 'Growing community'],
-        [hub.upvotes.length > 10, 'Highly rated'],
-        [hub.reviews.length > 5, 'Well-reviewed'],
-    ];
+  const reasonRules: [boolean, string][] = [
+    [matchingTags > 2, 'Many shared interests'],
+    [matchingTags > 0, 'Similar topic'],
+    [hub.verified && hub.partnered, 'Official verified partner'],
+    [hub.verified, 'Verified community'],
+    [hub.partnered, 'Partnered community'],
+    [
+      hub.activityLevel === 'HIGH' && hub._count.connections > 100,
+      'Very active & popular',
+    ],
+    [hub.activityLevel === 'HIGH', 'Highly active'],
+    [hub._count.connections > 100, 'Large community'],
+    [hub._count.connections > 50, 'Growing community'],
+    [hub.upvotes.length > 10, 'Highly rated'],
+    [hub.reviews.length > 5, 'Well-reviewed'],
+  ];
 
-    for (const [condition, reason] of reasonRules) {
-        if (condition) return reason;
-    }
-    
-    const genericReasons = ['Recommended for you', 'Interesting community', 'Popular choice', 'Community pick'];
-    return genericReasons[index % genericReasons.length];
+  for (const [condition, reason] of reasonRules) {
+    if (condition) return reason;
+  }
+
+  const genericReasons = [
+    'Recommended for you',
+    'Interesting community',
+    'Popular choice',
+    'Community pick',
+  ];
+  return genericReasons[index % genericReasons.length];
 }
 
 export function useHubRecommendations(
@@ -184,7 +222,13 @@ export function useHubRecommendations(
   const queryClient = useQueryClient();
 
   return useQuery({
-    queryKey: ['hub-recommendations', type, limit, options?.currentHubId, options?.tags],
+    queryKey: [
+      'hub-recommendations',
+      type,
+      limit,
+      options?.currentHubId,
+      options?.tags,
+    ],
     queryFn: async () => {
       if (type === 'personalized') {
         const result = await queryClient.fetchQuery(
@@ -194,7 +238,7 @@ export function useHubRecommendations(
             limit,
           })
         );
-        
+
         return {
           recommendations: result.hubs.map((hub, index) => ({
             hubId: hub.id,
@@ -228,7 +272,7 @@ export function useHubRecommendations(
       const strategies = generateStrategies(options.tags, seed);
 
       const results = await Promise.allSettled(
-        strategies.map(strategy =>
+        strategies.map((strategy) =>
           queryClient.fetchQuery(
             trpc.hub.getHubs.queryOptions({ ...strategy, limit: 15 })
           )
@@ -237,7 +281,7 @@ export function useHubRecommendations(
 
       const seenIds = new Set([options.currentHubId]);
       const allHubs: Hub[] = [];
-      
+
       for (const result of results) {
         if (result.status === 'fulfilled' && result.value?.hubs) {
           for (const hub of result.value.hubs) {
@@ -251,7 +295,7 @@ export function useHubRecommendations(
         }
       }
 
-      const scoredHubs = allHubs.map(hub => ({
+      const scoredHubs = allHubs.map((hub) => ({
         hub,
         varietyScore: calculateVarietyScore(hub, options.tags),
       }));
@@ -260,7 +304,11 @@ export function useHubRecommendations(
         .sort((a, b) => b.varietyScore - a.varietyScore)
         .slice(0, limit)
         .map(({ hub }, index) => {
-          const reason = determineRecommendationReason(hub, options.tags, index);
+          const reason = determineRecommendationReason(
+            hub,
+            options.tags,
+            index
+          );
           return {
             hubId: hub.id,
             hub: {
@@ -303,16 +351,12 @@ export function useMultipleRecommendations(
   options?: { enabled?: boolean }
 ) {
   // Create individual queries for each type
-  const results = types.map((config, index) => 
+  const results = types.map((config, index) =>
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useHubRecommendations(
-      config.type,
-      config.limit || 8,
-      {
-        enabled: options?.enabled ?? true,
-        staleTime: 1000 * 60 * 5, // 5 minutes
-      }
-    )
+    useHubRecommendations(config.type, config.limit || 8, {
+      enabled: options?.enabled ?? true,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+    })
   );
 
   const isLoading = results.some((r) => r.isLoading);

@@ -66,7 +66,8 @@ export default async function DiscoverPage({
             style={{
               top: '-8rem',
               right: '-8rem',
-              background: 'radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent 70%)',
+              background:
+                'radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent 70%)',
             }}
           />
 
@@ -75,7 +76,8 @@ export default async function DiscoverPage({
             style={{
               bottom: '-8rem',
               left: '-8rem',
-              background: 'radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent 70%)',
+              background:
+                'radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent 70%)',
             }}
           />
         </div>

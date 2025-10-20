@@ -8,7 +8,7 @@ export default async function AdminLayout({
 }: {
   children: ReactNode;
 }) {
-const session = await auth()
+  const session = await auth();
 
   // Redirect to login if not authenticated
   if (!session?.user?.id) {

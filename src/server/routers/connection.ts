@@ -54,8 +54,10 @@ export const connectionRouter = router({
           message: 'Access denied',
         });
       }
-      
-      const hasAccess = serversResult.data.some((server) => server.id === input.serverId);
+
+      const hasAccess = serversResult.data.some(
+        (server) => server.id === input.serverId
+      );
       if (!hasAccess) {
         throw new TRPCError({
           code: 'FORBIDDEN',
@@ -86,7 +88,7 @@ export const connectionRouter = router({
     .input(z.object({ connectionId: z.string(), hubId: z.string().optional() }))
     .mutation(async ({ input, ctx }) => {
       const { connectionId } = input;
-      
+
       try {
         const connection = await db.connection.findUnique({
           where: { id: connectionId },
@@ -119,7 +121,7 @@ export const connectionRouter = router({
 
         const isHubOwner = connection.hub.ownerId === ctx.session.user.id;
         const isHubModerator = connection.hub.moderators.length > 0;
-        
+
         let hasServerAccess = false;
         try {
           const serversResult = await getServers(ctx.session);
@@ -147,7 +149,7 @@ export const connectionRouter = router({
         if (error instanceof TRPCError) {
           throw error;
         }
-        
+
         console.error('Error removing connection:', error);
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
@@ -194,7 +196,7 @@ export const connectionRouter = router({
 
         const isHubOwner = connection.hub.ownerId === ctx.session.user.id;
         const isHubModerator = connection.hub.moderators.length > 0;
-        
+
         let hasServerAccess = false;
         try {
           const serversResult = await getServers(ctx.session);
@@ -221,10 +223,12 @@ export const connectionRouter = router({
           invite: string | null;
           channelId: string;
         }> = {};
-        
-        if (input.connected !== undefined) updateData.connected = input.connected;
+
+        if (input.connected !== undefined)
+          updateData.connected = input.connected;
         if (input.invite !== undefined) updateData.invite = input.invite;
-        if (input.channelId !== undefined) updateData.channelId = input.channelId;
+        if (input.channelId !== undefined)
+          updateData.channelId = input.channelId;
 
         const updatedConnection = await db.connection.update({
           where: { id: input.connectionId },
@@ -236,7 +240,7 @@ export const connectionRouter = router({
         if (error instanceof TRPCError) {
           throw error;
         }
-        
+
         console.error('Error updating connection:', error);
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
@@ -275,7 +279,7 @@ export const connectionRouter = router({
 
         const isHubOwner = connection.hub.ownerId === ctx.session.user.id;
         const isHubModerator = connection.hub.moderators.length > 0;
-        
+
         let hasServerAccess = false;
         try {
           const serversResult = await getServers(ctx.session);
@@ -291,7 +295,8 @@ export const connectionRouter = router({
         if (!isHubOwner && !isHubModerator && !hasServerAccess) {
           throw new TRPCError({
             code: 'FORBIDDEN',
-            message: 'You do not have permission to generate invites for this connection',
+            message:
+              'You do not have permission to generate invites for this connection',
           });
         }
 
@@ -330,7 +335,7 @@ export const connectionRouter = router({
         if (error instanceof TRPCError) {
           throw error;
         }
-        
+
         console.error('Error generating invite:', error);
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',

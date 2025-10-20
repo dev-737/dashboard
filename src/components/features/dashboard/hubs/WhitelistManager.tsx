@@ -1,7 +1,14 @@
 'use client';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { CheckCircle2, Plus, Trash2, Shield, Search, Users } from 'lucide-react';
+import {
+  CheckCircle2,
+  Plus,
+  Trash2,
+  Shield,
+  Search,
+  Users,
+} from 'lucide-react';
 import { useState } from 'react';
 import {
   Card,
@@ -50,39 +57,38 @@ interface WhitelistManagerProps {
   canModerate: boolean;
 }
 
-export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManagerProps) {
+export function WhitelistManager({
+  hubId,
+  canEdit,
+  canModerate,
+}: WhitelistManagerProps) {
   const trpc = useTRPC();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  
+
   const [selectedRuleId, setSelectedRuleId] = useState<string>('');
   const [showAddDialog, setShowAddDialog] = useState(false);
-  const [deleteDialogItem, setDeleteDialogItem] = useState<AntiSwearWhitelistItem | null>(null);
+  const [deleteDialogItem, setDeleteDialogItem] =
+    useState<AntiSwearWhitelistItem | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [newWhitelistItem, setNewWhitelistItem] = useState({
     word: '',
     reason: '',
   });
 
-  const {
-    data: rules = [],
-    isLoading: rulesLoading,
-  } = useQuery(
+  const { data: rules = [], isLoading: rulesLoading } = useQuery(
     trpc.hub.getAntiSwearRules.queryOptions(
       { hubId },
       { refetchOnWindowFocus: false }
     )
   );
 
-  const {
-    data: whitelistItems = [],
-    isLoading: whitelistLoading,
-  } = useQuery(
+  const { data: whitelistItems = [], isLoading: whitelistLoading } = useQuery(
     trpc.hub.getAntiSwearWhitelist.queryOptions(
       { ruleId: selectedRuleId },
-      { 
+      {
         enabled: !!selectedRuleId,
-        refetchOnWindowFocus: false 
+        refetchOnWindowFocus: false,
       }
     )
   );
@@ -153,9 +159,11 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
     setDeleteDialogItem(null);
   };
 
-  const filteredWhitelistItems = whitelistItems.filter(item =>
-    item.word.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (item.reason && item.reason.toLowerCase().includes(searchQuery.toLowerCase()))
+  const filteredWhitelistItems = whitelistItems.filter(
+    (item) =>
+      item.word.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.reason &&
+        item.reason.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   if (rulesLoading) {
@@ -171,7 +179,9 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
       <Card className="border border-gray-800/50 bg-gray-950/50">
         <CardContent className="p-8 text-center">
           <Shield className="mx-auto h-12 w-12 text-gray-500 mb-4" />
-          <h3 className="text-lg font-medium text-gray-300 mb-2">No Rules Found</h3>
+          <h3 className="text-lg font-medium text-gray-300 mb-2">
+            No Rules Found
+          </h3>
           <p className="text-gray-400 mb-6">
             Create filter rules first before managing whitelists.
           </p>
@@ -191,7 +201,9 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
                 <CheckCircle2 className="h-5 w-5 text-green-400" />
               </div>
               <div>
-                <CardTitle className="text-green-400">Whitelist Management</CardTitle>
+                <CardTitle className="text-green-400">
+                  Whitelist Management
+                </CardTitle>
                 <CardDescription>
                   Allow specific words to bypass filter rules for each rule
                 </CardDescription>
@@ -215,7 +227,11 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
             </SelectTrigger>
             <SelectContent className="bg-gray-800 border-gray-700">
               {rules.map((rule) => (
-                <SelectItem key={rule.id} value={rule.id} className="focus:bg-gray-700">
+                <SelectItem
+                  key={rule.id}
+                  value={rule.id}
+                  className="focus:bg-gray-700"
+                >
                   <div className="flex items-center justify-between w-full">
                     <span>{rule.name}</span>
                     <Badge variant="outline" className="ml-2 text-xs">
@@ -234,7 +250,9 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-white text-lg">Whitelist Items</CardTitle>
+                <CardTitle className="text-white text-lg">
+                  Whitelist Items
+                </CardTitle>
                 <CardDescription>
                   Words that will bypass the selected filter rule
                 </CardDescription>
@@ -249,9 +267,12 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
                   </DialogTrigger>
                   <DialogContent className="bg-gray-900 border-gray-800">
                     <DialogHeader>
-                      <DialogTitle className="text-green-400">Add to Whitelist</DialogTitle>
+                      <DialogTitle className="text-green-400">
+                        Add to Whitelist
+                      </DialogTitle>
                       <DialogDescription>
-                        Add a word that should be allowed even if it matches this rule's patterns.
+                        Add a word that should be allowed even if it matches
+                        this rule's patterns.
                       </DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
@@ -261,17 +282,29 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
                           id="whitelist-word"
                           placeholder="Enter word to whitelist"
                           value={newWhitelistItem.word}
-                          onChange={(e) => setNewWhitelistItem(prev => ({ ...prev, word: e.target.value }))}
+                          onChange={(e) =>
+                            setNewWhitelistItem((prev) => ({
+                              ...prev,
+                              word: e.target.value,
+                            }))
+                          }
                           className="bg-gray-800 border-gray-700"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="whitelist-reason">Reason (Optional)</Label>
+                        <Label htmlFor="whitelist-reason">
+                          Reason (Optional)
+                        </Label>
                         <Textarea
                           id="whitelist-reason"
                           placeholder="Why should this word be allowed?"
                           value={newWhitelistItem.reason}
-                          onChange={(e) => setNewWhitelistItem(prev => ({ ...prev, reason: e.target.value }))}
+                          onChange={(e) =>
+                            setNewWhitelistItem((prev) => ({
+                              ...prev,
+                              reason: e.target.value,
+                            }))
+                          }
                           className="bg-gray-800 border-gray-700"
                           rows={3}
                         />
@@ -286,10 +319,15 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
                         </Button>
                         <Button
                           onClick={handleAddWhitelistItem}
-                          disabled={addMutation.isPending || !newWhitelistItem.word.trim()}
+                          disabled={
+                            addMutation.isPending ||
+                            !newWhitelistItem.word.trim()
+                          }
                           className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                         >
-                          {addMutation.isPending ? 'Adding...' : 'Add to Whitelist'}
+                          {addMutation.isPending
+                            ? 'Adding...'
+                            : 'Add to Whitelist'}
                         </Button>
                       </div>
                     </div>
@@ -320,15 +358,14 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
               </div>
             ) : filteredWhitelistItems.length === 0 ? (
               <div className="text-center py-8 text-gray-500">
-                {whitelistItems.length === 0 
-                  ? "No whitelist items for this rule yet."
-                  : "No items match your search."
-                }
+                {whitelistItems.length === 0
+                  ? 'No whitelist items for this rule yet.'
+                  : 'No items match your search.'}
               </div>
             ) : (
               <div className="space-y-3">
                 {filteredWhitelistItems.map((item) => (
-                  <div 
+                  <div
                     key={item.id}
                     className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg border border-gray-700"
                   >
@@ -339,18 +376,23 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
                         </code>
                         <div className="flex items-center gap-2 text-xs text-gray-400">
                           <Users className="h-3 w-3" />
-                          <span>Added by {item.createdBy.name || 'Unknown'}</span>
+                          <span>
+                            Added by {item.createdBy.name || 'Unknown'}
+                          </span>
                           <span>•</span>
-                          <span>{new Date(item.createdAt).toLocaleDateString()}</span>
+                          <span>
+                            {new Date(item.createdAt).toLocaleDateString()}
+                          </span>
                         </div>
                       </div>
                       {item.reason && (
                         <p className="text-sm text-gray-400 mt-2">
-                          <span className="font-medium">Reason:</span> {item.reason}
+                          <span className="font-medium">Reason:</span>{' '}
+                          {item.reason}
                         </p>
                       )}
                     </div>
-                    
+
                     {canEdit && (
                       <Button
                         variant="ghost"
@@ -369,13 +411,18 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
         </Card>
       )}
 
-      <AlertDialog open={!!deleteDialogItem} onOpenChange={() => setDeleteDialogItem(null)}>
+      <AlertDialog
+        open={!!deleteDialogItem}
+        onOpenChange={() => setDeleteDialogItem(null)}
+      >
         <AlertDialogContent className="bg-gray-900 border-gray-800">
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-red-400">Remove from Whitelist</AlertDialogTitle>
+            <AlertDialogTitle className="text-red-400">
+              Remove from Whitelist
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to remove "{deleteDialogItem?.word}" from the whitelist? 
-              This word will be subject to filtering again.
+              Are you sure you want to remove "{deleteDialogItem?.word}" from
+              the whitelist? This word will be subject to filtering again.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -383,7 +430,9 @@ export function WhitelistManager({ hubId, canEdit, canModerate }: WhitelistManag
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction
-              onClick={() => deleteDialogItem && handleDeleteWhitelistItem(deleteDialogItem)}
+              onClick={() =>
+                deleteDialogItem && handleDeleteWhitelistItem(deleteDialogItem)
+              }
               className="bg-red-600 hover:bg-red-700"
               disabled={deleteMutation.isPending}
             >

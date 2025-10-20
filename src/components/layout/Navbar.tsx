@@ -261,7 +261,9 @@ export function Navbar() {
                       className="group/link flex items-center gap-2 rounded-lg p-2 text-gray-400 transition-all duration-300 hover:bg-white/5 hover:text-white"
                     >
                       <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/link:scale-110" />
-                      <span className="text-xs font-medium">View on GitHub</span>
+                      <span className="text-xs font-medium">
+                        View on GitHub
+                      </span>
                     </Link>
                   </div>
                 </div>

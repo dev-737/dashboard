@@ -1,7 +1,12 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import {
   AlertTriangle,
@@ -37,16 +42,34 @@ interface SidebarNavItemProps {
   label: string;
   active: boolean;
   isCollapsed: boolean;
-  color?: 'default' | 'blue' | 'green' | 'purple' | 'red' | 'orange' | 'yellow' | 'indigo';
+  color?:
+    | 'default'
+    | 'blue'
+    | 'green'
+    | 'purple'
+    | 'red'
+    | 'orange'
+    | 'yellow'
+    | 'indigo';
 }
 
 interface NavigationItem {
   value: string;
   label: string;
-  color: 'default' | 'blue' | 'green' | 'purple' | 'red' | 'orange' | 'yellow' | 'indigo';
+  color:
+    | 'default'
+    | 'blue'
+    | 'green'
+    | 'purple'
+    | 'red'
+    | 'orange'
+    | 'yellow'
+    | 'indigo';
   icon: React.ComponentType<{ className?: string }>;
   href: string;
-  show: boolean | ((permissions: { canModerate: boolean; canEdit: boolean }) => boolean);
+  show:
+    | boolean
+    | ((permissions: { canModerate: boolean; canEdit: boolean }) => boolean);
 }
 
 interface SidebarSection {
@@ -149,14 +172,21 @@ function SidebarNavItem({
         isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
         active
           ? `${colors.active} border scale-[0.98]`
-          : `${colors.inactive} hover:shadow-md hover:shadow-black/5 hover:scale-[0.99]`,
+          : `${colors.inactive} hover:shadow-md hover:shadow-black/5 hover:scale-[0.99]`
       )}
     >
-      <div className={cn('p-1.5 rounded-xl transition-all duration-300 shrink-0', colors.icon)}>
+      <div
+        className={cn(
+          'p-1.5 rounded-xl transition-all duration-300 shrink-0',
+          colors.icon
+        )}
+      >
         <Icon className="h-4 w-4" />
       </div>
 
-      {!isCollapsed && <span className="truncate font-medium text-sm">{label}</span>}
+      {!isCollapsed && (
+        <span className="truncate font-medium text-sm">{label}</span>
+      )}
     </Link>
   );
 
@@ -186,7 +216,12 @@ interface SidebarSectionProps {
   defaultOpen?: boolean;
 }
 
-function SidebarSection({ title, children, isCollapsed, defaultOpen = true }: SidebarSectionProps) {
+function SidebarSection({
+  title,
+  children,
+  isCollapsed,
+  defaultOpen = true,
+}: SidebarSectionProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   if (isCollapsed) {
@@ -361,7 +396,7 @@ export function HubSidebar({
     .map((section) => ({
       ...section,
       items: section.items.filter((item) =>
-        typeof item.show === 'function' ? item.show(permissions) : item.show,
+        typeof item.show === 'function' ? item.show(permissions) : item.show
       ),
     }))
     .filter((section) => section.items.length > 0);
@@ -370,13 +405,15 @@ export function HubSidebar({
     <div
       className={cn(
         'flex flex-col h-full bg-gradient-to-b from-gray-900/98 to-gray-950/98 backdrop-blur-xl border-r border-gray-700/40 transition-all duration-300 shadow-2xl shadow-black/20',
-        isCollapsed ? 'w-16' : 'w-64',
+        isCollapsed ? 'w-16' : 'w-64'
       )}
     >
       <div className="flex items-center justify-between p-4 border-b border-gray-700/40 bg-gradient-to-r from-gray-900/50 to-gray-800/50 backdrop-blur-sm">
         {!isCollapsed && (
           <div className="flex items-center gap-2">
-            <div className="text-sm font-bold text-white tracking-wide">Hub Dashboard</div>
+            <div className="text-sm font-bold text-white tracking-wide">
+              Hub Dashboard
+            </div>
           </div>
         )}
         {onToggleCollapse && (
@@ -386,7 +423,10 @@ export function HubSidebar({
             onClick={onToggleCollapse}
             className="h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700/50 shrink-0 rounded-xl transition-all duration-300 backdrop-blur-sm border border-transparent hover:border-gray-600/40 shadow-sm hover:shadow-lg"
           >
-            <motion.div animate={{ rotate: isCollapsed ? 180 : 0 }} transition={{ duration: 0.3 }}>
+            <motion.div
+              animate={{ rotate: isCollapsed ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
               {isCollapsed ? (
                 <ChevronRight className="h-4 w-4" />
               ) : (

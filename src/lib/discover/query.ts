@@ -307,7 +307,6 @@ export async function getDiscoverHubs(params: DiscoverParams) {
     });
   }
 
-
   const result: PaginatedResult = {
     items: processedItems,
     page,

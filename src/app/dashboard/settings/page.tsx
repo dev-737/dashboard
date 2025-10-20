@@ -40,7 +40,10 @@ export default async function SettingsPage() {
           <div className="mb-4 flex items-center gap-4">
             <div className="relative">
               <Image
-                src={session.user.image || 'https://api.dicebear.com/7.x/shapes/svg?seed=user'}
+                src={
+                  session.user.image ||
+                  'https://api.dicebear.com/7.x/shapes/svg?seed=user'
+                }
                 alt={session.user.name || 'User'}
                 width={64}
                 height={64}
@@ -49,7 +52,9 @@ export default async function SettingsPage() {
               <div className="-bottom-1 -right-1 absolute h-4 w-4 rounded-full border-2 border-gray-900 bg-emerald-500"></div>
             </div>
             <div className="flex-1">
-              <h3 className="font-medium text-lg text-white">{session.user.name}</h3>
+              <h3 className="font-medium text-lg text-white">
+                {session.user.name}
+              </h3>
               <p className="mt-1 inline-block rounded bg-gray-800/50 px-2 py-1 font-mono text-gray-400 text-xs">
                 ID: {session.user.id}
               </p>
@@ -58,8 +63,8 @@ export default async function SettingsPage() {
 
           <div className="rounded-lg border border-blue-500/20 bg-blue-950/20 p-3">
             <p className="text-blue-200 text-sm">
-              <strong>Note:</strong> Profile info is synced from Discord. Update your avatar and
-              username there.
+              <strong>Note:</strong> Profile info is synced from Discord. Update
+              your avatar and username there.
             </p>
           </div>
         </div>

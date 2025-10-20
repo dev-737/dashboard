@@ -194,7 +194,7 @@ export const CreditsSection = () => {
                       <div className="-inset-1 absolute rounded-full bg-gradient-to-r from-primary/30 to-primary-alt/30 opacity-0 blur transition-opacity duration-300 group-hover:opacity-100" />
                       <Image
                         src={contributor.avatar}
-                        alt={`${contributor.name}'s avatar`} 
+                        alt={`${contributor.name}'s avatar`}
                         width={64}
                         height={64}
                         className="relative rounded-full border-2 border-gray-700/50 transition-colors duration-300 group-hover:border-gray-600/70"

@@ -23,7 +23,7 @@ interface HubModulesPageProps {
 
 export default async function HubModulesPage({ params }: HubModulesPageProps) {
   const { hubId } = await params;
-const session = await auth()
+  const session = await auth();
 
   if (!session?.user?.id) {
     redirect(`/login?callbackUrl=/dashboard/hubs/${hubId}/modules`);

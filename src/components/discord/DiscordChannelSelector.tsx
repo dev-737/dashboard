@@ -1,10 +1,19 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { Loader2, ServerIcon } from 'lucide-react';
+import { Loader2, Lock, RefreshCw, ServerIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import { ChannelIcon } from '@/components/discord/ChannelIcon';
+import { Button } from '@/components/ui/button';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
 import { Label } from '@/components/ui/label';
 import {
   Select,
@@ -13,6 +22,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { useTRPC } from '@/utils/trpc';
 
 interface DiscordChannelSelectorProps {
@@ -23,6 +38,13 @@ interface DiscordChannelSelectorProps {
   label: string;
   placeholder: string;
   description?: string;
+  // New props for initial values and access control
+  initialServerId?: string | null;
+  initialChannelId?: string | null;
+  initialChannelName?: string | null;
+  initialServerName?: string | null;
+  isAccessible?: boolean;
+  onAccessDenied?: () => void;
 }
 
 export function DiscordChannelSelector({
@@ -33,10 +55,19 @@ export function DiscordChannelSelector({
   label,
   placeholder,
   description,
+  initialServerId = null,
+  initialChannelId = null,
+  initialChannelName = null,
+  initialServerName = null,
+  isAccessible = true,
+  onAccessDenied,
 }: DiscordChannelSelectorProps) {
   const trpc = useTRPC();
-  const [selectedServer, setSelectedServer] = useState<string>('');
+  const [selectedServer, setSelectedServer] = useState<string>(
+    initialServerId || ''
+  );
   const [selectedChannel, setSelectedChannel] = useState<string>(value);
+  const [showRefresh, setShowRefresh] = useState(false);
 
   // Fetch servers that the user owns or moderates using tRPC
   const { data: serversData, isLoading: serversLoading } = useQuery(
@@ -59,16 +90,41 @@ export function DiscordChannelSelector({
   const channels = channelsData?.channels || [];
   const isLoading = serversLoading || channelsLoading;
 
-  // Set selected server if we have a channel value and servers are loaded
+  // Group channels by category
+  const { uncategorizedChannels, categorizedChannels } = useMemo(() => {
+    const uncategorized: typeof channels = [];
+    const categorized: Record<string, typeof channels> = {};
+
+    channels.forEach((channel) => {
+      if (channel.categoryName && channel.categoryId) {
+        if (!categorized[channel.categoryName]) {
+          categorized[channel.categoryName] = [];
+        }
+        categorized[channel.categoryName].push(channel);
+      } else {
+        uncategorized.push(channel);
+      }
+    });
+
+    return {
+      uncategorizedChannels: uncategorized,
+      categorizedChannels: categorized,
+    };
+  }, [channels]);
+
+  // Set initial server if provided
   useEffect(() => {
-    if (value && servers.length > 0 && !selectedServer) {
-      // For now, we'll require manual server selection
-      // The auto-finding logic would need to be refactored to use tRPC efficiently
-      console.log(
-        'Channel value provided but server auto-selection disabled in tRPC version'
-      );
+    if (initialServerId && !selectedServer) {
+      setSelectedServer(initialServerId);
     }
-  }, [value, servers, selectedServer]);
+  }, [initialServerId, selectedServer]);
+
+  // Show refresh icon if we have a channel ID but no name (resolution failed)
+  useEffect(() => {
+    if (initialChannelId && !initialChannelName) {
+      setShowRefresh(true);
+    }
+  }, [initialChannelId, initialChannelName]);
 
   // Update the selected channel when value changes
   useEffect(() => {
@@ -89,8 +145,22 @@ export function DiscordChannelSelector({
     onChange(channelId);
   };
 
+  // Handle clearing locked configuration
+  const handleClearConfig = () => {
+    if (
+      confirm(
+        'Clear this configuration? It was set by another manager or in a server you no longer have access to.'
+      )
+    ) {
+      onChange('');
+      setSelectedChannel('');
+      setSelectedServer('');
+      onAccessDenied?.();
+    }
+  };
+
   return (
-    <div className="space-y-2">
+    <div className="relative space-y-2">
       <div className="flex items-center justify-between">
         <Label className="font-medium text-sm">{label}</Label>
         {description && (
@@ -139,40 +209,179 @@ export function DiscordChannelSelector({
 
       {/* Channel Selection - Only show if a server is selected */}
       {selectedServer && (
-        <Select value={selectedChannel} onValueChange={handleChannelChange}>
-          <SelectTrigger className="w-full border-gray-700/50 bg-gray-800/50 focus-visible:ring-indigo-500/50">
-            <SelectValue placeholder={placeholder} />
-          </SelectTrigger>
-          <SelectContent className="max-h-[300px] border border-gray-800/50 bg-gradient-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-md">
+        <Command className="overflow-hidden rounded-lg border border-gray-700/50 bg-gray-800/50">
+          <CommandInput
+            placeholder="Search channels..."
+            className="border-0 border-gray-700/50 border-b bg-transparent focus:ring-0"
+          />
+          <CommandList className="max-h-[300px] overflow-y-auto">
             {isLoading ? (
-              <div className="flex items-center justify-center py-2">
+              <div className="flex items-center justify-center py-4">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin text-gray-400" />
                 <span className="text-gray-400">Loading channels...</span>
               </div>
             ) : channels.length === 0 ? (
-              <div className="p-2 text-center text-gray-400">
-                No channels found in this server
-              </div>
+              <CommandEmpty>No channels found in this server</CommandEmpty>
             ) : (
-              channels.map((channel) => (
-                <SelectItem key={channel.id} value={channel.id}>
-                  <div className="flex items-center gap-2">
-                    <ChannelIcon
-                      type={channel.type}
-                      className="h-4 w-4 flex-shrink-0"
-                    />
-                    <span className="truncate">#{channel.name}</span>
-                    {channel.parentName && (
-                      <span className="text-gray-400 text-xs">
-                        (in {channel.parentName})
-                      </span>
-                    )}
-                  </div>
-                </SelectItem>
-              ))
+              <>
+                {/* Uncategorized channels first */}
+                {uncategorizedChannels.length > 0 && (
+                  <CommandGroup
+                    heading="Uncategorized"
+                    className="text-gray-400 text-xs"
+                  >
+                    {uncategorizedChannels.map((channel) => (
+                      <CommandItem
+                        key={channel.id}
+                        value={`${channel.name}-${channel.id}`}
+                        onSelect={() => handleChannelChange(channel.id)}
+                        className={
+                          selectedChannel === channel.id
+                            ? 'bg-indigo-500/20 aria-selected:bg-indigo-500/20'
+                            : ''
+                        }
+                      >
+                        <div className="flex items-center gap-2">
+                          <ChannelIcon
+                            type={channel.type}
+                            className="h-4 w-4 flex-shrink-0"
+                          />
+                          <span className="truncate">#{channel.name}</span>
+                          {channel.parentName && (
+                            <span className="text-gray-400 text-xs">
+                              (in {channel.parentName})
+                            </span>
+                          )}
+                        </div>
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                )}
+
+                {/* Categorized channels */}
+                {Object.entries(categorizedChannels).map(
+                  ([categoryName, categoryChannels]) => (
+                    <CommandGroup
+                      key={categoryName}
+                      heading={categoryName}
+                      className="text-gray-400 text-xs"
+                    >
+                      {categoryChannels.map((channel) => (
+                        <CommandItem
+                          key={channel.id}
+                          value={`${channel.name}-${channel.id}`}
+                          onSelect={() => handleChannelChange(channel.id)}
+                          className={
+                            selectedChannel === channel.id
+                              ? 'bg-indigo-500/20 aria-selected:bg-indigo-500/20'
+                              : ''
+                          }
+                        >
+                          <div className="flex items-center gap-2">
+                            <ChannelIcon
+                              type={channel.type}
+                              className="h-4 w-4 flex-shrink-0"
+                            />
+                            <span className="truncate">#{channel.name}</span>
+                            {channel.parentName && (
+                              <span className="text-gray-400 text-xs">
+                                (in {channel.parentName})
+                              </span>
+                            )}
+                          </div>
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  )
+                )}
+              </>
             )}
-          </SelectContent>
-        </Select>
+          </CommandList>
+        </Command>
+      )}
+
+      {/* Show initial channel info if we have it but no server selected */}
+      {!selectedServer && initialChannelId && initialChannelName && (
+        <div className="flex items-center justify-between rounded-lg border border-gray-700/50 bg-gray-800/50 p-3">
+          <div className="flex items-center gap-2">
+            <ChannelIcon type={0} className="h-4 w-4 flex-shrink-0" />
+            <div className="flex flex-col">
+              <span className="text-sm">#{initialChannelName}</span>
+              {initialServerName && (
+                <span className="text-gray-400 text-xs">
+                  in {initialServerName}
+                </span>
+              )}
+            </div>
+          </div>
+          {showRefresh && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => window.location.reload()}
+                  >
+                    <RefreshCw className="h-4 w-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Retry loading channel details</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </div>
+      )}
+
+      {/* Graceful degradation: show ID if we have channel but no name */}
+      {!selectedServer && initialChannelId && !initialChannelName && (
+        <div className="flex items-center justify-between rounded-lg border border-gray-700/50 bg-gray-800/30 p-3">
+          <div className="flex items-center gap-2">
+            <ChannelIcon
+              type={0}
+              className="h-4 w-4 flex-shrink-0 text-gray-500"
+            />
+            <div className="flex flex-col">
+              <span className="text-gray-400 text-sm">
+                Channel: {initialChannelId}
+              </span>
+              <span className="text-gray-500 text-xs">
+                Unable to load channel details
+              </span>
+            </div>
+          </div>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => window.location.reload()}
+                >
+                  <RefreshCw className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Retry loading channel details</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+      )}
+
+      {/* Locked state overlay */}
+      {!isAccessible && (
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg bg-gray-900/80 backdrop-blur-sm">
+          <Lock className="h-6 w-6 text-amber-400" />
+          <p className="px-4 text-center text-gray-300 text-sm">
+            You don't have access to this server
+          </p>
+          <Button size="sm" variant="outline" onClick={handleClearConfig}>
+            Clear Configuration
+          </Button>
+        </div>
       )}
     </div>
   );

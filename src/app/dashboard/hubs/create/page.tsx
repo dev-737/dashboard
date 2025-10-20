@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CreateHubPage() {
-const session = await auth()
+  const session = await auth();
 
   if (!session?.user?.id) {
     redirect('/login?callbackUrl=/dashboard/hubs/create');
