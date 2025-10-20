@@ -289,6 +289,15 @@ model Infraction {
   updatedAt   DateTime         @default(now())
   status      InfractionStatus @default(ACTIVE)
   notified    Boolean          @default(false)
+  evidenceMessageId   String?
+  evidenceContent     String?
+  evidenceImageUrl    String?
+  evidenceAuthorId    String?
+  evidenceAuthorName  String?
+  evidenceChannelId   String?
+  evidenceGuildId     String?
+  evidenceGuildName   String?
+  evidenceCreatedAt   DateTime?
   appeals     Appeal[]
   hub         Hub              @relation(fields: [hubId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   moderator   User             @relation("Infraction_moderatorIdToUser", fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
