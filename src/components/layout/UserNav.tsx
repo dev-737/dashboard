@@ -119,7 +119,7 @@ export function UserNav({
             asChild
             className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-2 text-gray-200 transition-colors duration-150 hover:bg-gray-800/50 hover:text-white"
           >
-            <Link href="/dashboard" className="flex w-full items-center">
+            <Link href="/dashboard?tab=hubs" className="flex w-full items-center">
               <MessageSquare className="mr-2 h-4 w-4 text-blue-400" />
               My Hubs
             </Link>

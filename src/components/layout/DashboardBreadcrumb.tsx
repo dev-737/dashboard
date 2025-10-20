@@ -110,7 +110,7 @@ export function useBreadcrumb() {
       // This is a hub detail page
       items.push({
         label: 'My Hubs',
-        href: '/dashboard',
+        href: '/dashboard?tab=hubs',
       });
 
       items.push({
@@ -131,7 +131,7 @@ export function useBreadcrumb() {
       // This is a hub management page
       items.push({
         label: 'My Hubs',
-        href: '/dashboard',
+        href: '/dashboard?tab=hubs',
       });
 
       items.push({
