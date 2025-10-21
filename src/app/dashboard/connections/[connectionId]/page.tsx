@@ -31,17 +31,7 @@ async function getConnectionData(connectionId: string) {
 
   const connection = await db.connection.findUnique({
     where: { id: connectionId },
-    select: {
-      id: true,
-      channelId: true,
-      parentId: true,
-      serverId: true,
-      hubId: true,
-      connected: true,
-      invite: true,
-      createdAt: true,
-      lastActive: true,
-      webhookURL: true,
+    include: {
       hub: {
         select: {
           id: true,

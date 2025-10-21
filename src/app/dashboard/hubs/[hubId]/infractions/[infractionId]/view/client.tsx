@@ -56,15 +56,17 @@ interface Infraction {
   };
   moderator: {
     id: string;
-    name: string;
+    name: string | null;
     image: string | null;
   };
-  user?: {
+  user: {
     id: string;
-    name: string;
+    name: string | null;
     image: string | null;
   } | null;
-  appeals: Array<{ id: string }>;
+  _count: {
+    appeals: number;
+  };
 }
 
 interface ViewInfractionClientProps {
@@ -113,7 +115,7 @@ export function ViewInfractionClient({
       setError(null);
     }
     if (data?.infraction) {
-      setInfraction(data.infraction as Infraction);
+      setInfraction(data.infraction);
       if (data.infraction.expiresAt) {
         setNewExpiresAt(
           new Date(data.infraction.expiresAt).toISOString().slice(0, 16)
@@ -137,7 +139,7 @@ export function ViewInfractionClient({
         infractionId,
         expiresAt: isPermanent ? null : newExpiresAt,
       });
-      setInfraction(result.infraction as Infraction);
+      setInfraction(result.infraction);
       setIsEditDurationOpen(false);
 
       toast({
@@ -497,7 +499,7 @@ export function ViewInfractionClient({
               <div className="flex items-center gap-3">
                 <Image
                   src={infraction.moderator.image || '/assets.images/pfp1.png'}
-                  alt={infraction.moderator.name}
+                  alt={infraction.moderator.name || 'Moderator'}
                   width={40}
                   height={40}
                   className="rounded-full border-2 border-gray-700"
@@ -513,7 +515,7 @@ export function ViewInfractionClient({
           </Card>
 
           {/* Appeals Information */}
-          {infraction.appeals.length > 0 && (
+          {infraction._count.appeals > 0 && (
             <Card className="premium-card">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -525,8 +527,8 @@ export function ViewInfractionClient({
               </CardHeader>
               <CardContent>
                 <div className="font-medium text-blue-400">
-                  {infraction.appeals.length} appeal
-                  {infraction.appeals.length !== 1 ? 's' : ''} submitted
+                  {infraction._count.appeals} appeal
+                  {infraction._count.appeals !== 1 ? 's' : ''} submitted
                 </div>
                 {infraction.appealedAt && (
                   <div className="mt-1 text-gray-400 text-sm">
