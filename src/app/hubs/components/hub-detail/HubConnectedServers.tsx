@@ -1,5 +1,5 @@
 import { formatDistanceToNow } from 'date-fns';
-import { Clock, Users, Plus } from 'lucide-react';
+import { Clock, Plus, Users } from 'lucide-react';
 import type React from 'react';
 
 interface HubConnectedServersProps {
@@ -51,7 +51,7 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
                 </div>
               </div>
               <div className="min-w-0 flex-1">
-                <h4 className="font-medium text-sm text-gray-300">
+                <h4 className="font-medium text-gray-300 text-sm">
                   +{remainingCount} more server{remainingCount !== 1 ? 's' : ''}
                 </h4>
                 <p className="mt-1 text-gray-400 text-xs">

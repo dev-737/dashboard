@@ -50,7 +50,7 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
               {hub.verified && (
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 cursor-help">
+                    <div className="flex h-6 w-6 cursor-help items-center justify-center rounded-full bg-blue-500">
                       <svg
                         className="h-4 w-4 text-white"
                         fill="currentColor"
@@ -73,7 +73,7 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
               {hub.partnered && (
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 via-purple-600 to-violet-700 cursor-help">
+                    <div className="flex h-6 w-6 cursor-help items-center justify-center rounded-full bg-gradient-to-br from-purple-500 via-purple-600 to-violet-700">
                       <Handshake className="h-4 w-4 text-white" />
                     </div>
                   </TooltipTrigger>

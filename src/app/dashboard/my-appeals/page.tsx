@@ -190,7 +190,10 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-md">
             <Image
-              src={appeal.infraction.hub.iconUrl || '/assets/images/defaults/default-hub.png'}
+              src={
+                appeal.infraction.hub.iconUrl ||
+                '/assets/images/defaults/default-hub.png'
+              }
               alt={appeal.infraction.hub.name}
               width={40}
               height={40}

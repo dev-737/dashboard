@@ -3,6 +3,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Edit2, Save, Shield } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { PatternBuilder } from '@/components/forms/PatternBuilder';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,14 +12,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { BlockWordAction } from '@/lib/generated/prisma/client';
-import { type AntiSwearRule } from '@/lib/types/anti-swear';
+import type { AntiSwearRule } from '@/lib/types/anti-swear';
 import { useTRPC } from '@/utils/trpc';
-import { PatternBuilder } from '@/components/forms/PatternBuilder';
 import { ActionSelector } from './ActionSelector';
 
 interface EditRuleDialogProps {
@@ -140,8 +140,8 @@ export function EditRuleDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[95vw] sm:max-w-2xl lg:max-w-4xl max-h-[90vh] overflow-hidden bg-gray-900 border-gray-800">
-        <div className="flex flex-col h-full max-h-[85vh]">
+      <DialogContent className="max-h-[90vh] max-w-[95vw] overflow-hidden border-gray-800 bg-gray-900 sm:max-w-2xl lg:max-w-4xl">
+        <div className="flex h-full max-h-[85vh] flex-col">
           <DialogHeader className="flex-shrink-0 pb-4">
             <DialogTitle className="flex items-center text-blue-400">
               <Shield className="mr-2 h-5 w-5" />
@@ -153,13 +153,13 @@ export function EditRuleDialog({
           </DialogHeader>
 
           <div
-            className="flex-1 overflow-y-auto pr-2 -mr-2"
+            className="-mr-2 flex-1 overflow-y-auto pr-2"
             style={{
               scrollbarWidth: 'thin',
               scrollbarColor: '#374151 transparent',
             }}
           >
-            <div className="space-y-6 mt-6">
+            <div className="mt-6 space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="edit-rule-name">Rule Name</Label>
                 <Input
@@ -169,7 +169,7 @@ export function EditRuleDialog({
                   onChange={(e) =>
                     setEditForm((prev) => ({ ...prev, name: e.target.value }))
                   }
-                  className="bg-gray-800 border-gray-700"
+                  className="border-gray-700 bg-gray-800"
                 />
               </div>
 
@@ -202,7 +202,7 @@ export function EditRuleDialog({
               </div>
             </div>
 
-            <div className="flex justify-end pt-6 border-t border-gray-800 gap-3">
+            <div className="flex justify-end gap-3 border-gray-800 border-t pt-6">
               <Button
                 variant="outline"
                 onClick={() => onOpenChange(false)}

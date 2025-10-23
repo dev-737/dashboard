@@ -1,10 +1,10 @@
 'use client';
 
-import { Check, HelpCircle, Clock } from 'lucide-react';
+import { Check, Clock, HelpCircle } from 'lucide-react';
 import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -15,9 +15,9 @@ import {
 } from '@/components/ui/tooltip';
 import { BlockWordAction } from '@/lib/generated/prisma/client';
 import {
-  BlockWordActionLabels,
-  BlockWordActionDescriptions,
   BlockWordActionColors,
+  BlockWordActionDescriptions,
+  BlockWordActionLabels,
 } from '@/lib/types/anti-swear';
 
 interface ActionSelectorProps {
@@ -66,7 +66,7 @@ export function ActionSelector({
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         {actionOrder.map((action) => {
           const isSelected = selectedActions.includes(action);
           const isDeprecated = action === BlockWordAction.BLACKLIST;
@@ -74,7 +74,7 @@ export function ActionSelector({
           return (
             <Card
               key={action}
-              className={`cursor-pointer transition-all duration-200 border ${
+              className={`cursor-pointer border transition-all duration-200 ${
                 isSelected
                   ? 'border-purple-500/50 bg-purple-900/20'
                   : 'border-gray-700 bg-gray-800/50 hover:border-gray-600'
@@ -84,29 +84,29 @@ export function ActionSelector({
               <div className="p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="mb-2 flex items-center gap-2">
                       <div
-                        className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
+                        className={`flex h-4 w-4 items-center justify-center rounded border-2 ${
                           isSelected
-                            ? 'bg-purple-600 border-purple-600'
+                            ? 'border-purple-600 bg-purple-600'
                             : 'border-gray-500'
                         }`}
                       >
-                        {isSelected && <Check className="w-3 h-3 text-white" />}
+                        {isSelected && <Check className="h-3 w-3 text-white" />}
                       </div>
-                      <span className="font-medium text-white text-sm">
+                      <span className="font-medium text-sm text-white">
                         {BlockWordActionLabels[action]}
                       </span>
                       {isDeprecated && (
                         <Badge
                           variant="outline"
-                          className="text-xs text-orange-400 border-orange-500/30"
+                          className="border-orange-500/30 text-orange-400 text-xs"
                         >
                           Deprecated
                         </Badge>
                       )}
                     </div>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-gray-400 text-xs">
                       {BlockWordActionDescriptions[action]}
                     </p>
                   </div>
@@ -118,15 +118,15 @@ export function ActionSelector({
                           <HelpCircle className="h-4 w-4 text-gray-500" />
                         </div>
                       </TooltipTrigger>
-                      <TooltipContent className="bg-gray-800 border-gray-700 text-white max-w-xs">
-                        <p className="font-medium mb-1">
+                      <TooltipContent className="max-w-xs border-gray-700 bg-gray-800 text-white">
+                        <p className="mb-1 font-medium">
                           {BlockWordActionLabels[action]}
                         </p>
-                        <p className="text-sm text-gray-300">
+                        <p className="text-gray-300 text-sm">
                           {BlockWordActionDescriptions[action]}
                         </p>
                         {action === BlockWordAction.MUTE && (
-                          <p className="text-sm text-purple-300 mt-2">
+                          <p className="mt-2 text-purple-300 text-sm">
                             Requires mute duration configuration
                           </p>
                         )}
@@ -142,16 +142,16 @@ export function ActionSelector({
 
       {/* Mute Duration Configuration */}
       {showMuteDuration && selectedActions.includes(BlockWordAction.MUTE) && (
-        <Card className="p-4 bg-gray-800/50 border-gray-700">
+        <Card className="border-gray-700 bg-gray-800/50 p-4">
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4 text-purple-400" />
-              <Label className="text-sm font-medium text-gray-300">
+              <Label className="font-medium text-gray-300 text-sm">
                 Mute Duration
               </Label>
             </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <div className="flex-1 min-w-0 max-w-xs">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="min-w-0 max-w-xs flex-1">
                 <Input
                   type="number"
                   min="1"
@@ -159,14 +159,14 @@ export function ActionSelector({
                   placeholder="60"
                   value={customMuteDuration}
                   onChange={(e) => handleMuteDurationChange(e.target.value)}
-                  className="bg-gray-700 border-gray-600"
+                  className="border-gray-600 bg-gray-700"
                 />
               </div>
-              <span className="text-sm text-gray-400 whitespace-nowrap">
+              <span className="whitespace-nowrap text-gray-400 text-sm">
                 minutes
               </span>
             </div>
-            <p className="text-xs text-gray-500">
+            <p className="text-gray-500 text-xs">
               How long users should be muted (1-43200 minutes, max 30 days)
             </p>
           </div>
@@ -175,9 +175,9 @@ export function ActionSelector({
 
       {/* Action Summary */}
       {selectedActions.length > 0 && (
-        <Card className="p-4 bg-gray-900/50 border-gray-700">
+        <Card className="border-gray-700 bg-gray-900/50 p-4">
           <div className="space-y-2">
-            <Label className="text-sm font-medium text-gray-300">
+            <Label className="font-medium text-gray-300 text-sm">
               Selected Actions ({selectedActions.length})
             </Label>
             <div className="flex flex-wrap gap-2">
@@ -195,7 +195,7 @@ export function ActionSelector({
       )}
 
       {selectedActions.length === 0 && (
-        <div className="text-center py-4 text-gray-500">
+        <div className="py-4 text-center text-gray-500">
           Select at least one action to take when patterns are matched.
         </div>
       )}

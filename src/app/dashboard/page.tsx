@@ -12,10 +12,10 @@ import { AnimatedDashboardSkeleton } from '@/components/features/dashboard/Anima
 import { AnimatedWelcome } from '@/components/features/dashboard/AnimatedWelcome';
 import { AnimatedEmptyState } from '@/components/features/dashboard/hubs/AnimatedEmptyState';
 import { AnimatedHubCard } from '@/components/features/dashboard/hubs/AnimatedHubCard';
-import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { ServerGrid } from '@/components/features/dashboard/servers/ServerGrid';
 // import { StatCard } from '@/components/features/dashboard/stat-card';
 import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
+import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Button } from '@/components/ui/button';
 import {
   Card,

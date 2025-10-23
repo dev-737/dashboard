@@ -14,12 +14,12 @@ interface User {
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { signOut } from 'next-auth/react';
-import { cn } from '@/lib/utils';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
 import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/OnboardingHelpMenu';
+import { cn } from '@/lib/utils';
 
 interface MobileSidebarProps {
   isOpen: boolean;
@@ -122,7 +122,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                 className="group flex items-center gap-3"
                 onClick={onClose}
               >
-                <span className="bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text font-bold text-lg text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:via-indigo-300 group-hover:to-blue-300 group-hover:scale-105">
+                <span className="bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text font-bold text-lg text-transparent transition-all duration-300 group-hover:scale-105 group-hover:from-purple-300 group-hover:via-indigo-300 group-hover:to-blue-300">
                   InterChat
                 </span>
               </Link>
@@ -203,7 +203,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                   </div>
 
                   {/* Notifications */}
-                  <div className="group relative flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3 font-medium text-sm transition-all duration-300 hover:scale-[1.02] hover:border-white/10 hover:bg-white/5 hover:shadow-md hover:shadow-blue-500/5">
+                  <div className="group relative flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3 font-medium text-sm transition-all duration-300 hover:scale-[1.02] hover:border-white/10 hover:bg-white/5 hover:shadow-blue-500/5 hover:shadow-md">
                     <motion.div
                       className="shrink-0 rounded-xl p-2 text-gray-400 transition-all duration-300 group-hover:bg-blue-400/15 group-hover:text-white"
                       whileHover={{ rotate: [0, -15, 15, 0] }}
@@ -220,7 +220,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                   </div>
 
                   {/* Help */}
-                  <div className="group relative flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3 font-medium text-sm transition-all duration-300 hover:scale-[1.02] hover:border-white/10 hover:bg-white/5 hover:shadow-md hover:shadow-green-500/5">
+                  <div className="group relative flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3 font-medium text-sm transition-all duration-300 hover:scale-[1.02] hover:border-white/10 hover:bg-white/5 hover:shadow-green-500/5 hover:shadow-md">
                     <motion.div
                       className="shrink-0 rounded-xl p-2 text-gray-400 transition-all duration-300 group-hover:bg-green-400/15 group-hover:text-white"
                       whileHover={{ scale: 1.1 }}

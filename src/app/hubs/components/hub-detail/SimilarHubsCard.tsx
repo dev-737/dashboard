@@ -1,14 +1,14 @@
 'use client';
 
-import { Tag, ExternalLink } from 'lucide-react';
+import { ExternalLink, Tag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
-  useHubRecommendations,
   type HubRecommendation,
+  useHubRecommendations,
 } from '@/hooks/use-hub-recommendations';
-import { useEffect, useState } from 'react';
 
 interface SimilarHubsCardProps {
   currentHubId: string;
@@ -77,11 +77,11 @@ const SimilarHubsCard = ({
             <SimilarHubSkeleton key={i} />
           ))
         ) : isError ? (
-          <div className="text-center text-gray-400 text-sm py-4">
+          <div className="py-4 text-center text-gray-400 text-sm">
             Unable to load similar hubs
           </div>
         ) : recommendations.length === 0 ? (
-          <div className="text-center text-gray-400 text-sm py-4">
+          <div className="py-4 text-center text-gray-400 text-sm">
             No similar hubs found
           </div>
         ) : (
@@ -89,9 +89,9 @@ const SimilarHubsCard = ({
             <Link
               key={rec.hubId}
               href={`/hubs/${rec.hubId}`}
-              className="flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-gray-800/40 group"
+              className="group flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-gray-800/40"
             >
-              <div className="h-10 w-10 overflow-hidden rounded-lg border border-gray-700/50 relative">
+              <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-gray-700/50">
                 <Image
                   src={
                     rec.hub.iconUrl ||
@@ -104,7 +104,7 @@ const SimilarHubsCard = ({
                   unoptimized
                 />
                 {rec.hub.verified && (
-                  <div className="absolute -top-1 -right-1 h-4 w-4 bg-blue-500 rounded-full flex items-center justify-center">
+                  <div className="-top-1 -right-1 absolute flex h-4 w-4 items-center justify-center rounded-full bg-blue-500">
                     <span className="text-white text-xs">✓</span>
                   </div>
                 )}
@@ -113,7 +113,7 @@ const SimilarHubsCard = ({
                 <p className="truncate font-medium text-gray-200 text-sm">
                   {rec.hub.name}
                 </p>
-                <div className="flex items-center gap-2 text-xs text-gray-400">
+                <div className="flex items-center gap-2 text-gray-400 text-xs">
                   <span>{rec.hub.connectionCount} servers</span>
                   {rec.hub.tags?.length > 0 && (
                     <>
@@ -128,7 +128,7 @@ const SimilarHubsCard = ({
                   )}
                 </div>
               </div>
-              <ExternalLink className="h-3 w-3 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <ExternalLink className="h-3 w-3 text-gray-500 opacity-0 transition-opacity group-hover:opacity-100" />
             </Link>
           ))
         )}

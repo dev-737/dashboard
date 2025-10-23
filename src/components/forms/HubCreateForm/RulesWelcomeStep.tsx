@@ -137,7 +137,9 @@ export function RulesWelcomeStep({
           </div>
 
           {rules.length >= 10 && (
-            <p className="text-sm text-yellow-400">Maximum of 10 rules allowed</p>
+            <p className="text-sm text-yellow-400">
+              Maximum of 10 rules allowed
+            </p>
           )}
 
           <p className="text-gray-400 text-xs">

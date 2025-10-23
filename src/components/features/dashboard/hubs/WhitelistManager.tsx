@@ -4,38 +4,12 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   CheckCircle2,
   Plus,
-  Trash2,
-  Shield,
   Search,
+  Shield,
+  Trash2,
   Users,
 } from 'lucide-react';
 import { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -47,8 +21,34 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/AlertDialog';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
-import { type AntiSwearWhitelistItem } from '@/lib/types/anti-swear';
+import type { AntiSwearWhitelistItem } from '@/lib/types/anti-swear';
 import { useTRPC } from '@/utils/trpc';
 
 interface WhitelistManagerProps {
@@ -178,11 +178,11 @@ export function WhitelistManager({
     return (
       <Card className="border border-gray-800/50 bg-gray-950/50">
         <CardContent className="p-8 text-center">
-          <Shield className="mx-auto h-12 w-12 text-gray-500 mb-4" />
-          <h3 className="text-lg font-medium text-gray-300 mb-2">
+          <Shield className="mx-auto mb-4 h-12 w-12 text-gray-500" />
+          <h3 className="mb-2 font-medium text-gray-300 text-lg">
             No Rules Found
           </h3>
-          <p className="text-gray-400 mb-6">
+          <p className="mb-6 text-gray-400">
             Create filter rules first before managing whitelists.
           </p>
         </CardContent>
@@ -197,7 +197,7 @@ export function WhitelistManager({
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-green-500/30 bg-gradient-to-br from-green-500/20 to-emerald-500/20">
                 <CheckCircle2 className="h-5 w-5 text-green-400" />
               </div>
               <div>
@@ -215,24 +215,24 @@ export function WhitelistManager({
 
       <Card className="border border-gray-800/50 bg-gray-950/50">
         <CardHeader>
-          <CardTitle className="text-white text-lg">Select Rule</CardTitle>
+          <CardTitle className="text-lg text-white">Select Rule</CardTitle>
           <CardDescription>
             Choose which filter rule you want to manage whitelist for
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Select value={selectedRuleId} onValueChange={setSelectedRuleId}>
-            <SelectTrigger className="bg-gray-800 border-gray-700">
+            <SelectTrigger className="border-gray-700 bg-gray-800">
               <SelectValue placeholder="Select a filter rule" />
             </SelectTrigger>
-            <SelectContent className="bg-gray-800 border-gray-700">
+            <SelectContent className="border-gray-700 bg-gray-800">
               {rules.map((rule) => (
                 <SelectItem
                   key={rule.id}
                   value={rule.id}
                   className="focus:bg-gray-700"
                 >
-                  <div className="flex items-center justify-between w-full">
+                  <div className="flex w-full items-center justify-between">
                     <span>{rule.name}</span>
                     <Badge variant="outline" className="ml-2 text-xs">
                       {rule.patterns.length} patterns
@@ -250,7 +250,7 @@ export function WhitelistManager({
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-white text-lg">
+                <CardTitle className="text-lg text-white">
                   Whitelist Items
                 </CardTitle>
                 <CardDescription>
@@ -265,7 +265,7 @@ export function WhitelistManager({
                       Add Word
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="bg-gray-900 border-gray-800">
+                  <DialogContent className="border-gray-800 bg-gray-900">
                     <DialogHeader>
                       <DialogTitle className="text-green-400">
                         Add to Whitelist
@@ -275,7 +275,7 @@ export function WhitelistManager({
                         this rule's patterns.
                       </DialogDescription>
                     </DialogHeader>
-                    <div className="space-y-4 mt-4">
+                    <div className="mt-4 space-y-4">
                       <div className="space-y-2">
                         <Label htmlFor="whitelist-word">Word or Phrase</Label>
                         <Input
@@ -288,7 +288,7 @@ export function WhitelistManager({
                               word: e.target.value,
                             }))
                           }
-                          className="bg-gray-800 border-gray-700"
+                          className="border-gray-700 bg-gray-800"
                         />
                       </div>
                       <div className="space-y-2">
@@ -305,7 +305,7 @@ export function WhitelistManager({
                               reason: e.target.value,
                             }))
                           }
-                          className="bg-gray-800 border-gray-700"
+                          className="border-gray-700 bg-gray-800"
                           rows={3}
                         />
                       </div>
@@ -341,12 +341,12 @@ export function WhitelistManager({
             {whitelistItems.length > 0 && (
               <div className="mb-4">
                 <div className="relative">
-                  <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Search className="absolute top-3 left-3 h-4 w-4 text-gray-400" />
                   <Input
                     placeholder="Search whitelist items..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 bg-gray-800 border-gray-700"
+                    className="border-gray-700 bg-gray-800 pl-10"
                   />
                 </div>
               </div>
@@ -357,7 +357,7 @@ export function WhitelistManager({
                 <div className="h-6 w-6 animate-spin rounded-full border-green-500 border-b-2" />
               </div>
             ) : filteredWhitelistItems.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
+              <div className="py-8 text-center text-gray-500">
                 {whitelistItems.length === 0
                   ? 'No whitelist items for this rule yet.'
                   : 'No items match your search.'}
@@ -367,14 +367,14 @@ export function WhitelistManager({
                 {filteredWhitelistItems.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg border border-gray-700"
+                    className="flex items-center justify-between rounded-lg border border-gray-700 bg-gray-800/50 p-4"
                   >
                     <div className="flex-1">
                       <div className="flex items-center gap-3">
-                        <code className="text-green-300 font-mono bg-green-950/30 px-2 py-1 rounded text-sm">
+                        <code className="rounded bg-green-950/30 px-2 py-1 font-mono text-green-300 text-sm">
                           {item.word}
                         </code>
-                        <div className="flex items-center gap-2 text-xs text-gray-400">
+                        <div className="flex items-center gap-2 text-gray-400 text-xs">
                           <Users className="h-3 w-3" />
                           <span>
                             Added by {item.createdBy.name || 'Unknown'}
@@ -386,7 +386,7 @@ export function WhitelistManager({
                         </div>
                       </div>
                       {item.reason && (
-                        <p className="text-sm text-gray-400 mt-2">
+                        <p className="mt-2 text-gray-400 text-sm">
                           <span className="font-medium">Reason:</span>{' '}
                           {item.reason}
                         </p>
@@ -398,7 +398,7 @@ export function WhitelistManager({
                         variant="ghost"
                         size="sm"
                         onClick={() => setDeleteDialogItem(item)}
-                        className="text-red-400 hover:text-red-300 hover:bg-red-950/20"
+                        className="text-red-400 hover:bg-red-950/20 hover:text-red-300"
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -415,7 +415,7 @@ export function WhitelistManager({
         open={!!deleteDialogItem}
         onOpenChange={() => setDeleteDialogItem(null)}
       >
-        <AlertDialogContent className="bg-gray-900 border-gray-800">
+        <AlertDialogContent className="border-gray-800 bg-gray-900">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-red-400">
               Remove from Whitelist

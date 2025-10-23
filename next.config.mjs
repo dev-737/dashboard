@@ -65,7 +65,7 @@ const config = {
       { protocol: 'https', hostname: 'images7.alphacoders.com' },
       { protocol: 'https', hostname: 'i.ibb.co' },
       { protocol: 'https', hostname: 'm.media-amazon.com' },
-      {protocol: 'https', hostname: 'img.freepik.com' },
+      { protocol: 'https', hostname: 'img.freepik.com' },
     ],
   },
 
@@ -184,15 +184,12 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-export default withSentryConfig(
-  bundleAnalyzer(config),
-  {
-    org: 'interchat',
-    project: 'interchat-website',
-    silent: !process.env.CI,
-    widenClientFileUpload: true,
-    tunnelRoute: '/monitoring',
-    disableLogger: true,
-    automaticVercelMonitors: true,
-  },
-);
+export default withSentryConfig(bundleAnalyzer(config), {
+  org: 'interchat',
+  project: 'interchat-website',
+  silent: !process.env.CI,
+  widenClientFileUpload: true,
+  tunnelRoute: '/monitoring',
+  disableLogger: true,
+  automaticVercelMonitors: true,
+});

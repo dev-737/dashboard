@@ -24,6 +24,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useId, useState } from 'react';
+import { InfractionRevokeModal } from '@/components/features/moderation/InfractionRevokeModal';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -44,7 +45,6 @@ import {
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
-import { InfractionRevokeModal } from '@/components/features/moderation/InfractionRevokeModal';
 import type {
   InfractionStatus,
   InfractionType,

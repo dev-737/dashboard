@@ -4,11 +4,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Star, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 import { useToast } from '@/hooks/use-toast';
-import { useSession } from 'next-auth/react';
 import { cn } from '@/lib/utils';
 import { useTRPC } from '@/utils/trpc';
 
@@ -76,7 +76,10 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 overflow-hidden rounded-full border border-gray-700/50">
             <Image
-              src={review.user?.image || '/assets/images/defaults/default-avatar.png'}
+              src={
+                review.user?.image ||
+                '/assets/images/defaults/default-avatar.png'
+              }
               alt={review.user?.name || 'User'}
               width={40}
               height={40}

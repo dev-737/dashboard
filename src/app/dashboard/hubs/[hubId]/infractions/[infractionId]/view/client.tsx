@@ -555,7 +555,10 @@ export function ViewInfractionClient({
             <CardContent>
               <div className="flex items-center gap-3">
                 <Image
-                  src={infraction.hub.iconUrl || '/assets/images/defaults/default-server.svg'}
+                  src={
+                    infraction.hub.iconUrl ||
+                    '/assets/images/defaults/default-server.svg'
+                  }
                   alt={infraction.hub.name}
                   width={40}
                   height={40}

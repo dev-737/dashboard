@@ -3,8 +3,8 @@
 import { Share2 } from 'lucide-react';
 import Image from 'next/image';
 import type React from 'react';
-import { Button } from '@/components/ui/button';
 import { GridPattern } from '@/components/magicui/GridPattern';
+import { Button } from '@/components/ui/button';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 import { toast } from '@/hooks/use-toast';
 

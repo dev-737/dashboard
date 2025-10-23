@@ -1,8 +1,8 @@
 'use client';
 
 import { MessageSquare } from 'lucide-react';
-import { useHubReviews } from '@/hooks/use-hub-reviews';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useHubReviews } from '@/hooks/use-hub-reviews';
 import ReviewItem from './ReviewItem';
 
 interface ClientReviewListProps {

@@ -20,8 +20,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { SafeHubAvatar, SafeHubBanner } from '@/components/ui/HydrationSafeImage';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import {
+  SafeHubAvatar,
+  SafeHubBanner,
+} from '@/components/ui/HydrationSafeImage';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { useDiscoverUpvote } from '@/hooks/use-discover-upvote';
 import type { HubCardDTO } from '@/lib/discover/query';
 import { cn, formatNumber } from '@/lib/utils';
@@ -99,7 +106,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
 
           <div className="min-w-0 flex-1 space-y-2">
             <div className="flex items-center gap-2">
-              <CardTitle className="truncate font-semibold text-xl text-white">
+              <CardTitle className="truncate font-semibold text-white text-xl">
                 {name}
               </CardTitle>
               {verified && (
@@ -254,7 +261,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
             onClick={handleUpvote}
             disabled={isLoading}
             className={cn(
-              'shrink-0 rounded-lg border transition-colors h-10 w-10',
+              'h-10 w-10 shrink-0 rounded-lg border transition-colors',
               liked
                 ? 'border-red-500/50 bg-red-500/10 text-red-400 hover:bg-red-500/20'
                 : 'border-gray-700/60 bg-gray-900/40 text-gray-400 hover:border-gray-600 hover:bg-gray-800/60 hover:text-white'

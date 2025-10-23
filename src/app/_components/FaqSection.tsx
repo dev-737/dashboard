@@ -1,11 +1,11 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface AccordionItemProps {
   readonly title: string;
@@ -31,22 +31,22 @@ function AccordionItem({
     >
       <div
         className={cn(
-          'bg-gray-800/60 border border-gray-700/60 rounded-[var(--radius)]',
-          'transition-all duration-200 shadow-lg backdrop-blur-xl',
-          'hover:shadow-xl hover:border-gray-600/70 hover:bg-gray-800/80'
+          'rounded-[var(--radius)] border border-gray-700/60 bg-gray-800/60',
+          'shadow-lg backdrop-blur-xl transition-all duration-200',
+          'hover:border-gray-600/70 hover:bg-gray-800/80 hover:shadow-xl'
         )}
       >
         <button
           onClick={onToggle}
-          className="flex w-full items-center justify-between p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-[var(--radius)]"
+          className="flex w-full items-center justify-between rounded-[var(--radius)] p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
         >
-          <h3 className="font-semibold text-white text-lg pr-4">{title}</h3>
+          <h3 className="pr-4 font-semibold text-lg text-white">{title}</h3>
           <motion.div
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.2 }}
             className="flex-shrink-0"
           >
-            <ChevronDown className="h-5 w-5 text-gray-400 group-hover:text-gray-300 transition-colors duration-200" />
+            <ChevronDown className="h-5 w-5 text-gray-400 transition-colors duration-200 group-hover:text-gray-300" />
           </motion.div>
         </button>
 
@@ -59,7 +59,7 @@ function AccordionItem({
               transition={{ duration: 0.2 }}
               className="overflow-hidden"
             >
-              <div className="px-6 pb-6 text-gray-300 border-t border-gray-700/50 pt-4">
+              <div className="border-gray-700/50 border-t px-6 pt-4 pb-6 text-gray-300">
                 {content}
               </div>
             </motion.div>
@@ -117,7 +117,7 @@ export function FaqSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="max-w-4xl mx-auto space-y-4"
+          className="mx-auto max-w-4xl space-y-4"
         >
           {faqs.map((faq, index) => (
             <AccordionItem
@@ -140,7 +140,7 @@ export function FaqSection() {
         >
           <Button
             variant="outline"
-            className="border-gray-600/70 bg-gray-800/60 text-gray-300 shadow-lg backdrop-blur-xl hover:bg-gray-800/80 hover:border-gray-500/70 hover:text-white transition-all duration-200"
+            className="border-gray-600/70 bg-gray-800/60 text-gray-300 shadow-lg backdrop-blur-xl transition-all duration-200 hover:border-gray-500/70 hover:bg-gray-800/80 hover:text-white"
             asChild
           >
             <Link href="/docs" className="flex items-center gap-2">
@@ -174,7 +174,7 @@ const faqs = [
     content: (
       <>
         Getting started is simple. Invite InterChat to your server, then use the{' '}
-        <code className="px-2 py-1 bg-gray-700/60 rounded text-primary">
+        <code className="rounded bg-gray-700/60 px-2 py-1 text-primary">
           /setup
         </code>{' '}
         command to connect a channel to an existing hub or create a new one.
@@ -182,7 +182,7 @@ const faqs = [
         detailed instructions and advanced options, check out our{' '}
         <Link
           href="https://docs.interchat.dev"
-          className="text-primary hover:text-primary-alt font-medium underline underline-offset-2 transition-colors duration-200"
+          className="font-medium text-primary underline underline-offset-2 transition-colors duration-200 hover:text-primary-alt"
         >
           documentation
         </Link>
@@ -202,7 +202,7 @@ const faqs = [
         our{' '}
         <Link
           href="/hubs"
-          className="text-primary hover:text-primary-alt font-medium underline underline-offset-2 transition-colors duration-200"
+          className="font-medium text-primary underline underline-offset-2 transition-colors duration-200 hover:text-primary-alt"
         >
           Hub Browser
         </Link>
@@ -220,7 +220,7 @@ const faqs = [
         contribute code, report bugs, suggest features, or donate via{' '}
         <Link
           href="/donate"
-          className="text-primary hover:text-primary-alt font-medium underline underline-offset-2 transition-colors duration-200"
+          className="font-medium text-primary underline underline-offset-2 transition-colors duration-200 hover:text-primary-alt"
         >
           Ko-Fi
         </Link>
@@ -238,7 +238,7 @@ const faqs = [
         step-by-step in our{' '}
         <Link
           href="https://docs.interchat.dev"
-          className="text-primary hover:text-primary-alt font-medium underline underline-offset-2 transition-colors duration-200"
+          className="font-medium text-primary underline underline-offset-2 transition-colors duration-200 hover:text-primary-alt"
         >
           documentation
         </Link>

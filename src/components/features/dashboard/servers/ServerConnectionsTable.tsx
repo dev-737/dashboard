@@ -13,6 +13,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { DeleteConnectionDialog } from '@/components/features/dashboard/connections/DeleteConnectionDialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -32,7 +33,6 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useToast } from '@/components/ui/use-toast';
-import { DeleteConnectionDialog } from '@/components/features/dashboard/connections/DeleteConnectionDialog';
 import type { Connection, Hub } from '@/lib/generated/prisma/client';
 import { useTRPC } from '@/utils/trpc';
 

@@ -113,7 +113,10 @@ export function SafeHubAvatar({
 } & Omit<HydrationSafeImageProps, 'src' | 'alt' | 'width' | 'height'>) {
   return (
     <div
-      className={cn('relative overflow-hidden rounded-full bg-gray-800', className)}
+      className={cn(
+        'relative overflow-hidden rounded-full bg-gray-800',
+        className
+      )}
       style={{ width: size, height: size }}
     >
       <HydrationSafeImage

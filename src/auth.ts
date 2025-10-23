@@ -1,8 +1,8 @@
-import { db } from '@/lib/prisma';
 import type { Adapter, AdapterAccount } from '@auth/core/adapters';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import NextAuth from 'next-auth';
 import Discord from 'next-auth/providers/discord';
+import { db } from '@/lib/prisma';
 
 const customAdapter = {
   ...PrismaAdapter(db),

@@ -4,13 +4,13 @@ import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
+import { getServers } from '@/actions/server-actions';
 import { auth } from '@/auth';
 import { ConnectionNavigationTabs } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
 import { ConnectionOverview } from '@/components/features/dashboard/connections/ConnectionOverview';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { db } from '@/lib/prisma';
-import { getServers } from '@/actions/server-actions';
 
 export async function generateMetadata(props: {
   params: Promise<{ connectionId: string }>;

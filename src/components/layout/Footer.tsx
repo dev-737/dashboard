@@ -10,9 +10,9 @@ import {
   Users,
 } from 'lucide-react';
 import { motion } from 'motion/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 
 export function Footer() {
   const footerLinks = {
@@ -78,7 +78,13 @@ export function Footer() {
             className="lg:col-span-1"
           >
             <div className="mb-4 flex items-center gap-3">
-              <Image src="/assets/imgaes/logos/InterChatLogo.webp" alt="InterChat Logo" height={40} width={40} className='rounded-full' />
+              <Image
+                src="/assets/images/logos/InterChatLogo.webp"
+                alt="InterChat Logo"
+                height={40}
+                width={40}
+                className="rounded-full"
+              />
               <h3 className="font-bold text-white text-xl">InterChat</h3>
             </div>
             <p className="mb-6 text-gray-400 text-sm leading-relaxed">

@@ -3,8 +3,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AlertTriangle } from 'lucide-react';
 import { useEffect, useId, useState } from 'react';
-import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { UnsavedChangesPrompt } from '@/components/features/dashboard/UnsavedChangesPrompt';
+import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Label } from '@/components/ui/label';
 import {
   Select,

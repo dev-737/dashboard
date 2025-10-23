@@ -163,9 +163,9 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
 
       {/* Unsaved Changes Notification */}
       {hasUnsavedChanges && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-yellow-500/20 bg-yellow-900/20 p-4 backdrop-blur-sm">
+        <div className="fixed right-0 bottom-0 left-0 z-50 border-yellow-500/20 border-t bg-yellow-900/20 p-4 backdrop-blur-sm">
           <div className="container mx-auto flex items-center justify-between">
-            <p className="text-yellow-200 text-sm">
+            <p className="text-sm text-yellow-200">
               You have unsaved changes that will be lost if you leave this page.
             </p>
             <div className="flex gap-2">

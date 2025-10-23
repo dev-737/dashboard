@@ -1,9 +1,9 @@
 'use client';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
-import { useSession } from 'next-auth/react';
 import { useTRPC } from '@/utils/trpc';
 
 /**

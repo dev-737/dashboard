@@ -5,11 +5,12 @@ import {
   AlertTriangle,
   Calendar,
   Clock,
+  Home,
   Shield,
   User,
-  Home,
 } from 'lucide-react';
 import { useState } from 'react';
+import { revokeInfraction } from '@/actions/server-actions';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,10 +24,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import type {
-  InfractionType,
   InfractionStatus,
+  InfractionType,
 } from '@/lib/generated/prisma/client';
-import { revokeInfraction } from '@/actions/server-actions';
 
 interface Infraction {
   id: string;
@@ -176,7 +176,7 @@ export function InfractionRevokeModal({
             </div>
 
             <div className="flex items-start gap-2 text-sm">
-              <AlertTriangle className="mt-0.5 h-4 w-4 text-yellow-400 flex-shrink-0" />
+              <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-yellow-400" />
               <div className="flex-1">
                 <span className="text-gray-400">Reason:</span>
                 <div className="mt-1 rounded border border-gray-800/50 bg-gray-950/50 p-2 text-white">

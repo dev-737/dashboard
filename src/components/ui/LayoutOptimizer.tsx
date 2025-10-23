@@ -69,7 +69,7 @@ export function StableGrid({
 }) {
   return (
     <div
-      className={`grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 ${className}`}
+      className={`grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 ${className}`}
       style={
         {
           // Ensure consistent item heights to prevent layout shifts
@@ -127,10 +127,10 @@ export function LayoutOptimizer({
       const defaultImages = [
         '/assets/images/logos/InterChatLogo.svg',
         '/assets/images/defaults/default-server.svg',
-        '/assets/images/defaults/default-avatar.svg'
+        '/assets/images/defaults/default-avatar.svg',
       ];
 
-      defaultImages.forEach(src => {
+      defaultImages.forEach((src) => {
         const link = document.createElement('link');
         link.rel = 'preload';
         link.as = 'image';

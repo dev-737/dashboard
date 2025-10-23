@@ -4,10 +4,10 @@ import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/auth';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
+import { HubDiscoverabilityForm } from '@/components/forms/HubDiscoverabilityForm';
 import { PermissionLevel } from '@/lib/constants';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
-import { HubDiscoverabilityForm } from '@/components/forms/HubDiscoverabilityForm';
 
 interface HubDiscoverabilityPageProps {
   params: Promise<{

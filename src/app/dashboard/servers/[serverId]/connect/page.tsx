@@ -15,6 +15,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { ChannelIcon } from '@/components/discord/ChannelIcon';
 import { Button } from '@/components/ui/button';
@@ -29,7 +30,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { useSession } from 'next-auth/react';
 import { useTRPC } from '@/utils/trpc';
 
 interface ServerData {

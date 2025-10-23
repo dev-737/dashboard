@@ -22,6 +22,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import type { BasicHubConnection } from '@/app/dashboard/hubs/[hubId]/connections/client';
+import { DeleteConnectionDialog } from '@/components/features/dashboard/connections/DeleteConnectionDialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -41,7 +42,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
-import { DeleteConnectionDialog } from '@/components/features/dashboard/connections/DeleteConnectionDialog';
 import { useTRPC } from '@/utils/trpc';
 
 interface ServerData {

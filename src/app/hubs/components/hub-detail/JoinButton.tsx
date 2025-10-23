@@ -2,6 +2,7 @@
 
 import { Check, ChevronDown, Copy, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,7 +12,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { toast } from '@/hooks/use-toast';
-import { useSession } from 'next-auth/react';
 
 interface JoinButtonProps {
   hubName: string;

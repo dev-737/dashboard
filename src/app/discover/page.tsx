@@ -1,11 +1,11 @@
+import { Suspense } from 'react';
 import { GridPattern } from '@/components/magicui/GridPattern';
 import { CriticalCSS, LayoutOptimizer } from '@/components/ui/LayoutOptimizer';
 import {
-    type DiscoverParams,
-    type DiscoverSort,
-    getDiscoverHubs,
+  type DiscoverParams,
+  type DiscoverSort,
+  getDiscoverHubs,
 } from '@/lib/discover/query';
-import { Suspense } from 'react';
 import { DiscoverClient } from './ui/DiscoverClient';
 
 const SORT_OPTIONS: readonly DiscoverSort[] = [
@@ -94,7 +94,8 @@ export default async function DiscoverPage({
 
               <div className="relative mx-auto mb-8 max-w-3xl">
                 <p className="text-gray-400 text-lg leading-relaxed">
-                  Connect across Discord servers. Filter by topics, activity, and language to find hubs that match your interests.
+                  Connect across Discord servers. Filter by topics, activity,
+                  and language to find hubs that match your interests.
                 </p>
               </div>
             </div>

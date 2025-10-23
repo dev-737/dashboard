@@ -1,10 +1,10 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod/v4';
+import { getServers } from '@/actions/server-actions';
 import { PermissionLevel } from '@/lib/constants';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 import { protectedProcedure, router } from '../trpc';
-import { getServers } from '@/actions/server-actions';
 
 export const connectionRouter = router({
   listByHub: protectedProcedure

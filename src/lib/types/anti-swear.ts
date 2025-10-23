@@ -1,6 +1,6 @@
 import {
   BlockWordAction,
-  PatternMatchType,
+  type PatternMatchType,
 } from '@/lib/generated/prisma/client';
 
 export enum MatchPattern {

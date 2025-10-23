@@ -1,7 +1,7 @@
 'use client';
 
-import { useMemo, useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp, Filter } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 import { TagPicker } from '@/components/features/discover/TagPicker';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -13,8 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SUPPORTED_LANGUAGES } from '@/lib/constants';
 import { useMobile } from '@/hooks/use-mobile';
+import { SUPPORTED_LANGUAGES } from '@/lib/constants';
 
 export type FeatureFlags = {
   verified?: boolean;
@@ -126,7 +126,7 @@ export function Filters(props: {
           <Filter className="h-4 w-4 text-purple-400" />
           <h2 className="font-semibold text-sm text-white">Filters</h2>
           {activeFilterCount > 0 && (
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-purple-500 text-xs font-medium text-white">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-purple-500 font-medium text-white text-xs">
               {activeFilterCount}
             </span>
           )}
@@ -148,10 +148,10 @@ export function Filters(props: {
 
       {/* Collapsible content with optimized animations */}
       <div
-        className={`transition-all duration-300 overflow-hidden ${
+        className={`overflow-hidden transition-all duration-300 ${
           isCollapsed
-            ? 'transform scale-y-0 opacity-0 ease-in'
-            : 'transform scale-y-100 opacity-100 ease-out'
+            ? 'scale-y-0 transform opacity-0 ease-in'
+            : 'scale-y-100 transform opacity-100 ease-out'
         }`}
         style={{
           transformOrigin: 'top',

@@ -1,5 +1,6 @@
 'use server';
 
+import type { Session } from 'next-auth';
 import { auth } from '@/auth';
 import type {
   Connection,
@@ -7,9 +8,8 @@ import type {
   ReportStatus,
   ServerData,
 } from '@/lib/generated/prisma/client';
-import type { Session } from 'next-auth';
-import { db } from '@/lib/prisma';
 import { cache as perfCache } from '@/lib/performance-cache';
+import { db } from '@/lib/prisma';
 
 // Discord API endpoints
 const DISCORD_API = 'https://discord.com/api/v10';

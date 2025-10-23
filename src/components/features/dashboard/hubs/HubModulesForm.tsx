@@ -2,8 +2,8 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { UnsavedChangesPrompt } from '@/components/features/dashboard/UnsavedChangesPrompt';
+import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/components/ui/use-toast';

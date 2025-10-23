@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Lazy-load motion and icons for non-blocking load
 const Activity = dynamic(
@@ -94,7 +94,7 @@ export function StatsBar({ stats }: StatsBarProps) {
       if (start === null) start = ts;
       const elapsed = ts - start;
       const progress = Math.min(elapsed / duration, 1);
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const easeOutQuart = 1 - (1 - progress) ** 4;
 
       setAnimatedStats({
         activeServers: Math.floor(finalStats.activeServers * easeOutQuart),
@@ -166,11 +166,11 @@ export function StatsBar({ stats }: StatsBarProps) {
   return (
     <div
       ref={containerRef}
-      className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 border-y border-white/10 backdrop-blur-xl py-12"
+      className="border-white/10 border-y bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 py-12 backdrop-blur-xl"
     >
       <div className="container mx-auto px-4">
         <MotionDiv
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-3"
           {...(motionObj && {
             initial: { opacity: 0, y: 20 },
             animate: { opacity: 1, y: 0 },
@@ -193,53 +193,39 @@ export function StatsBar({ stats }: StatsBarProps) {
                 })}
               >
                 <div
-                  className={`
-                  relative p-6 rounded-2xl border backdrop-blur-xl
-                  bg-gradient-to-br ${stat.gradient}
-                  border-${stat.color}-400/30 hover:shadow-${stat.color}-500/25
-                  transition-all duration-300 ease-out
-                  hover:shadow-2xl hover:border-opacity-50
-                  before:absolute before:inset-0 before:rounded-2xl
-                  before:bg-gradient-to-br before:from-white/5 before:to-transparent
-                  before:pointer-events-none
-                  overflow-hidden
-                `}
+                  className={`relative rounded-2xl border bg-gradient-to-br p-6 backdrop-blur-xl ${stat.gradient}border-${stat.color}-400/30 hover:shadow-${stat.color}-500/25 overflow-hidden transition-all duration-300 ease-out before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-white/5 before:to-transparent hover:border-opacity-50 hover:shadow-2xl`}
                 >
                   {/* Background decoration */}
                   <div
-                    className={`absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-10 blur-xl bg-gradient-to-br ${stat.iconGradient}`}
+                    className={`-top-4 -right-4 absolute h-24 w-24 rounded-full bg-gradient-to-br opacity-10 blur-xl ${stat.iconGradient}`}
                   />
 
-                  <div className="flex items-center justify-center mb-6">
+                  <div className="mb-6 flex items-center justify-center">
                     <IconMotionDiv
-                      className={`
-                        relative p-4 rounded-xl bg-gradient-to-br ${stat.iconGradient}
-                        shadow-lg group-hover:shadow-xl transition-all duration-300
-                        mr-4
-                      `}
+                      className={`relative rounded-xl bg-gradient-to-br p-4 ${stat.iconGradient}shadow-lg mr-4 transition-all duration-300 group-hover:shadow-xl`}
                       {...(motionObj && {
                         whileHover: { rotate: 5, scale: 1.1 },
                         transition: { type: 'spring', stiffness: 300 },
                       })}
                     >
                       <Icon className="h-8 w-8 text-white" />
-                      <div className="absolute inset-0 rounded-xl bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 rounded-xl bg-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     </IconMotionDiv>
 
                     <div className="text-left">
                       <div
-                        className={`text-4xl font-black tracking-tight bg-gradient-to-r ${stat.textColor} bg-clip-text`}
+                        className={`bg-gradient-to-r font-black text-4xl tracking-tight ${stat.textColor} bg-clip-text`}
                       >
                         {formatNumber(stat.value)}
                       </div>
-                      <div className="text-sm text-gray-300 font-medium uppercase tracking-wider">
+                      <div className="font-medium text-gray-300 text-sm uppercase tracking-wider">
                         {stat.label}
                       </div>
                     </div>
                   </div>
 
                   {/* Subtle progress bar */}
-                  <div className="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                  <div className="h-1 w-full overflow-hidden rounded-full bg-gray-800">
                     <IconMotionDiv
                       className={`h-full bg-gradient-to-r ${stat.iconGradient}`}
                       {...(motionObj && {

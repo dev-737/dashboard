@@ -134,7 +134,7 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
         <div
           className={`premium-card flex h-12 w-full items-center overflow-hidden rounded-[var(--radius-button)] border bg-gray-900/50 px-3 shadow-lg backdrop-blur-sm transition-all duration-300 sm:h-14 sm:px-4 ${
             isFocused
-              ? 'border-purple-500/70 shadow-xl shadow-purple-500/20 ring-2 ring-purple-500/30'
+              ? 'border-purple-500/70 shadow-purple-500/20 shadow-xl ring-2 ring-purple-500/30'
               : 'border-gray-700/50 hover:border-purple-500/50 hover:bg-gray-800/50 hover:shadow-xl'
           }`}
         >
@@ -169,7 +169,7 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
 
         {/* Keyboard shortcut hint */}
         {!isFocused && !searchValue && (
-          <div className="pointer-events-none absolute top-1/2 right-4 flex -translate-y-1/2 items-center gap-1 rounded bg-gray-800/50 px-2 py-1 font-medium text-gray-500 text-xs">
+          <div className="-translate-y-1/2 pointer-events-none absolute top-1/2 right-4 flex items-center gap-1 rounded bg-gray-800/50 px-2 py-1 font-medium text-gray-500 text-xs">
             <kbd className="rounded border border-gray-600/50 bg-gray-900/50 px-1.5 py-0.5 font-mono text-[10px]">
               /
             </kbd>
@@ -179,7 +179,7 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
 
       {/* Search results dropdown */}
       {showDropdown && (
-        <div className="absolute top-full z-50 mt-2 w-full animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="fade-in slide-in-from-top-2 absolute top-full z-50 mt-2 w-full animate-in duration-200">
           <Command className="overflow-hidden rounded-[var(--radius-button)] border border-gray-700/60 bg-gray-900/90 shadow-2xl shadow-black/20 backdrop-blur-xl">
             <CommandList className="max-h-[500px]">
               {loading && (
@@ -232,7 +232,10 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
                         >
                           <Avatar className="h-10 w-10 ring-1 ring-gray-700/50">
                             <AvatarImage
-                              src={hub.iconUrl || '/assets/images/defaults/default-hub.svg'}
+                              src={
+                                hub.iconUrl ||
+                                '/assets/images/defaults/default-hub.svg'
+                              }
                               alt={hub.name}
                             />
                             <AvatarFallback className="bg-gray-800 text-sm text-white">

@@ -1,8 +1,10 @@
 'use client';
 
-import { Plus, X, HelpCircle } from 'lucide-react';
+import { HelpCircle, Plus, X } from 'lucide-react';
 import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -11,8 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
 import {
   Tooltip,
   TooltipContent,
@@ -20,11 +20,11 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import {
+  formatWordWithPattern,
   MatchPattern,
-  MatchPatternLabels,
   MatchPatternDescriptions,
   MatchPatternExamples,
-  formatWordWithPattern,
+  MatchPatternLabels,
 } from '@/lib/types/anti-swear';
 
 interface PatternBuilderProps {
@@ -66,29 +66,29 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
   return (
     <div className="space-y-4">
       {/* Add New Pattern */}
-      <Card className="p-4 bg-gray-800/50 border-gray-700">
+      <Card className="border-gray-700 bg-gray-800/50 p-4">
         <div className="space-y-3">
-          <div className="flex flex-col sm:flex-row gap-2">
-            <div className="flex-1 min-w-0">
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <div className="min-w-0 flex-1">
               <Input
                 placeholder="Enter word or phrase"
                 value={newWord}
                 onChange={(e) => setNewWord(e.target.value)}
                 onKeyPress={handleKeyPress}
-                className="bg-gray-700 border-gray-600"
+                className="border-gray-600 bg-gray-700"
               />
             </div>
-            <div className="w-full sm:w-48 min-w-0">
+            <div className="w-full min-w-0 sm:w-48">
               <Select
                 value={newMatchType}
                 onValueChange={(value) =>
                   setNewMatchType(value as MatchPattern)
                 }
               >
-                <SelectTrigger className="bg-gray-700 border-gray-600">
+                <SelectTrigger className="border-gray-600 bg-gray-700">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-gray-800 border-gray-700">
+                <SelectContent className="border-gray-700 bg-gray-800">
                   {Object.entries(MatchPatternLabels).map(([key, label]) => (
                     <SelectItem
                       key={key}
@@ -112,7 +112,7 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
           </div>
 
           {/* Match Type Information */}
-          <div className="text-sm space-y-2">
+          <div className="space-y-2 text-sm">
             <div className="flex items-center gap-2">
               <TooltipProvider>
                 <Tooltip>
@@ -124,14 +124,14 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
                       </span>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-gray-800 border-gray-700 text-white max-w-xs">
-                    <p className="font-medium mb-1">
+                  <TooltipContent className="max-w-xs border-gray-700 bg-gray-800 text-white">
+                    <p className="mb-1 font-medium">
                       {MatchPatternLabels[newMatchType]}
                     </p>
-                    <p className="text-sm text-gray-300 mb-2">
+                    <p className="mb-2 text-gray-300 text-sm">
                       {MatchPatternDescriptions[newMatchType]}
                     </p>
-                    <p className="text-sm text-purple-300">
+                    <p className="text-purple-300 text-sm">
                       {MatchPatternExamples[newMatchType]}
                     </p>
                   </TooltipContent>
@@ -140,9 +140,9 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
             </div>
 
             {newWord.trim() && (
-              <div className="p-2 bg-gray-700/50 rounded-md border border-gray-600">
-                <span className="text-xs text-gray-400">Preview: </span>
-                <code className="text-xs text-purple-300 font-mono break-all">
+              <div className="rounded-md border border-gray-600 bg-gray-700/50 p-2">
+                <span className="text-gray-400 text-xs">Preview: </span>
+                <code className="break-all font-mono text-purple-300 text-xs">
                   {formatWordWithPattern(newWord.trim(), newMatchType)}
                 </code>
               </div>
@@ -154,16 +154,16 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
       {/* Current Patterns */}
       {patterns.length > 0 && (
         <div className="space-y-2">
-          <h4 className="text-sm font-medium text-gray-300">
+          <h4 className="font-medium text-gray-300 text-sm">
             Patterns ({patterns.length})
           </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {patterns.map((pattern, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between p-2 bg-gray-800/50 rounded-md border border-gray-700"
+                className="flex items-center justify-between rounded-md border border-gray-700 bg-gray-800/50 p-2"
               >
-                <code className="text-sm text-purple-300 font-mono flex-1 mr-2 break-all">
+                <code className="mr-2 flex-1 break-all font-mono text-purple-300 text-sm">
                   {pattern.pattern}
                 </code>
                 <Button
@@ -181,7 +181,7 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
       )}
 
       {patterns.length === 0 && (
-        <div className="text-center py-4 text-gray-500">
+        <div className="py-4 text-center text-gray-500">
           No patterns added yet. Add your first pattern above.
         </div>
       )}

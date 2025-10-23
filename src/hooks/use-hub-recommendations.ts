@@ -1,10 +1,10 @@
 'use client';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { SortOptions } from '@/app/hubs/constants';
 import { useTRPC } from '@/utils/trpc';
 import { useErrorNotification } from './use-error-notification';
 import type { SimplifiedHub } from './use-infinite-hubs';
-import { SortOptions } from '@/app/hubs/constants';
 
 export interface HubRecommendation {
   hubId: string;

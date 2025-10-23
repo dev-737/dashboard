@@ -1,10 +1,4 @@
-import {
-  ArrowDown,
-  ArrowUp,
-  MessageSquare,
-  Plus,
-  X,
-} from 'lucide-react';
+import { ArrowDown, ArrowUp, MessageSquare, Plus, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';

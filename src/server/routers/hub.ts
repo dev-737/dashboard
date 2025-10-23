@@ -7,7 +7,7 @@ import { z } from 'zod/v4';
 import { SortOptions } from '@/app/hubs/constants';
 import { buildWhereClause, getSortedHubs } from '@/app/hubs/utils';
 import { PermissionLevel } from '@/lib/constants';
-import { BlockWordAction, Prisma } from '@/lib/generated/prisma/client';
+import { BlockWordAction, type Prisma } from '@/lib/generated/prisma/client';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 import { getRedisClient } from '@/lib/redis-config';

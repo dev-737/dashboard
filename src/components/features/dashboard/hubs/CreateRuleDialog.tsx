@@ -3,17 +3,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus, Shield, Sparkles } from 'lucide-react';
 import { useState } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { PatternBuilder } from '@/components/forms/PatternBuilder';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Card,
   CardContent,
@@ -21,18 +13,26 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
 import { BlockWordAction } from '@/lib/generated/prisma/client';
 import {
   type AntiSwearRule,
-  RULE_TEMPLATES,
-  BlockWordActionLabels,
   BlockWordActionColors,
   BlockWordActionDescriptions,
+  BlockWordActionLabels,
+  RULE_TEMPLATES,
 } from '@/lib/types/anti-swear';
 import { useTRPC } from '@/utils/trpc';
-import { PatternBuilder } from '@/components/forms/PatternBuilder';
 import { ActionSelector } from './ActionSelector';
 
 interface CreateRuleDialogProps {
@@ -142,8 +142,8 @@ export function CreateRuleDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[95vw] sm:max-w-2xl lg:max-w-4xl max-h-[90vh] overflow-hidden bg-gray-900 border-gray-800">
-        <div className="flex flex-col h-full max-h-[85vh]">
+      <DialogContent className="max-h-[90vh] max-w-[95vw] overflow-hidden border-gray-800 bg-gray-900 sm:max-w-2xl lg:max-w-4xl">
+        <div className="flex h-full max-h-[85vh] flex-col">
           <DialogHeader className="flex-shrink-0 pb-4">
             <DialogTitle className="flex items-center text-purple-400">
               <Shield className="mr-2 h-5 w-5" />
@@ -156,7 +156,7 @@ export function CreateRuleDialog({
           </DialogHeader>
 
           <div
-            className="flex-1 overflow-y-auto pr-2 -mr-2"
+            className="-mr-2 flex-1 overflow-y-auto pr-2"
             style={{
               scrollbarWidth: 'thin',
               scrollbarColor: '#374151 transparent',
@@ -182,12 +182,12 @@ export function CreateRuleDialog({
 
               <TabsContent value="template" className="mt-6">
                 <div className="space-y-4">
-                  <div className="text-sm text-gray-400 mb-4">
+                  <div className="mb-4 text-gray-400 text-sm">
                     Start with a pre-configured rule template. You can customize
                     it after creation.
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {Object.entries(RULE_TEMPLATES).map(([key, template]) => (
                       <Card
                         key={key}
@@ -206,17 +206,17 @@ export function CreateRuleDialog({
                           <CardTitle className="text-lg text-white">
                             {template.name}
                           </CardTitle>
-                          <CardDescription className="text-sm break-words">
+                          <CardDescription className="break-words text-sm">
                             {template.description}
                           </CardDescription>
                         </CardHeader>
                         <CardContent>
                           <div className="space-y-3">
                             <div>
-                              <Label className="text-xs font-medium text-gray-400">
+                              <Label className="font-medium text-gray-400 text-xs">
                                 ACTIONS
                               </Label>
-                              <div className="flex flex-wrap gap-1 mt-1">
+                              <div className="mt-1 flex flex-wrap gap-1">
                                 {template.actions.map((action) => (
                                   <Badge
                                     key={action}
@@ -234,7 +234,7 @@ export function CreateRuleDialog({
                   </div>
 
                   {selectedTemplate && (
-                    <div className="flex justify-end pt-4 border-t border-gray-800">
+                    <div className="flex justify-end border-gray-800 border-t pt-4">
                       <Button
                         onClick={() =>
                           handleCreateFromTemplate(selectedTemplate)
@@ -266,7 +266,7 @@ export function CreateRuleDialog({
                           name: e.target.value,
                         }))
                       }
-                      className="bg-gray-800 border-gray-700"
+                      className="border-gray-700 bg-gray-800"
                     />
                   </div>
 
@@ -290,7 +290,7 @@ export function CreateRuleDialog({
                     />
                   </div>
 
-                  <div className="flex justify-end pt-4 border-t border-gray-800">
+                  <div className="flex justify-end border-gray-800 border-t pt-4">
                     <Button
                       onClick={handleCreateCustomRule}
                       disabled={

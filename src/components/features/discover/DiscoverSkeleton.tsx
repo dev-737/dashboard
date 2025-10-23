@@ -29,7 +29,7 @@ export function DiscoverSkeleton({ count = 8 }: DiscoverSkeletonProps) {
           />
 
           {/* Header */}
-          <div className="relative space-y-3 px-6 pb-3 pt-5">
+          <div className="relative space-y-3 px-6 pt-5 pb-3">
             <div className="flex items-start gap-4">
               {/* Avatar */}
               <div className="h-14 w-14 shrink-0 rounded-full bg-gray-800/50" />
@@ -73,7 +73,7 @@ export function DiscoverSkeleton({ count = 8 }: DiscoverSkeletonProps) {
           </div>
 
           {/* Footer */}
-          <div className="relative border-t border-gray-800/50 px-6 pt-4 pb-6">
+          <div className="relative border-gray-800/50 border-t px-6 pt-4 pb-6">
             <div className="flex gap-2">
               <div className="h-10 flex-1 rounded-lg bg-gray-800/40" />
               <div className="h-10 w-10 rounded-lg bg-gray-800/40" />

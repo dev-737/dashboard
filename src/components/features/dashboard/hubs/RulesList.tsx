@@ -2,36 +2,21 @@
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
-  Shield,
-  Edit2,
-  Trash2,
-  MoreVertical,
-  Eye,
-  EyeOff,
   AlertTriangle,
+  Ban,
+  Bell,
   CheckCircle2,
   Clock,
-  Ban,
+  Edit2,
+  Eye,
+  EyeOff,
   MessageSquareX,
+  MoreVertical,
+  Shield,
+  Trash2,
   UserX,
-  Bell,
 } from 'lucide-react';
 import { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/DropdownMenu';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -43,13 +28,28 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/AlertDialog';
 import { Badge } from '@/components/ui/badge';
-import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/DropdownMenu';
 import { Switch } from '@/components/ui/switch';
+import { useToast } from '@/components/ui/use-toast';
 import { BlockWordAction } from '@/lib/generated/prisma/client';
 import {
   type AntiSwearRule,
-  BlockWordActionLabels,
   BlockWordActionColors,
+  BlockWordActionLabels,
   getMatchPatternFromPattern,
   MatchPatternLabels,
 } from '@/lib/types/anti-swear';
@@ -171,9 +171,9 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
     return (
       <Card className="border-red-800/30 bg-red-950/10">
         <CardContent className="p-6 text-center">
-          <AlertTriangle className="mx-auto h-8 w-8 text-red-400 mb-4" />
+          <AlertTriangle className="mx-auto mb-4 h-8 w-8 text-red-400" />
           <p className="text-red-400">Failed to load rules</p>
-          <p className="text-gray-400 text-sm mt-2">{error.message}</p>
+          <p className="mt-2 text-gray-400 text-sm">{error.message}</p>
         </CardContent>
       </Card>
     );
@@ -183,11 +183,11 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
     return (
       <Card className="border border-gray-800/50 bg-gray-950/50">
         <CardContent className="p-8 text-center">
-          <Shield className="mx-auto h-12 w-12 text-gray-500 mb-4" />
-          <h3 className="text-lg font-medium text-gray-300 mb-2">
+          <Shield className="mx-auto mb-4 h-12 w-12 text-gray-500" />
+          <h3 className="mb-2 font-medium text-gray-300 text-lg">
             No Filter Rules
           </h3>
-          <p className="text-gray-400 mb-6">
+          <p className="mb-6 text-gray-400">
             Create your first content filter rule to start protecting your hub
             from unwanted content.
           </p>
@@ -245,7 +245,7 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
                   )}
                   <Badge
                     variant="outline"
-                    className="text-purple-400 border-purple-500/30"
+                    className="border-purple-500/30 text-purple-400"
                   >
                     {rule.patterns.length} pattern
                     {rule.patterns.length !== 1 ? 's' : ''}
@@ -255,8 +255,8 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
 
               <div className="flex items-center space-x-2">
                 {canEdit && (
-                  <div className="flex items-center space-x-2 mr-4">
-                    <span className="text-sm text-gray-400">Enabled</span>
+                  <div className="mr-4 flex items-center space-x-2">
+                    <span className="text-gray-400 text-sm">Enabled</span>
                     <Switch
                       checked={rule.enabled ?? true}
                       onCheckedChange={() => handleToggleRule(rule)}
@@ -273,7 +273,7 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent
                     align="end"
-                    className="bg-gray-900 border-gray-800"
+                    className="border-gray-800 bg-gray-900"
                   >
                     <DropdownMenuItem
                       onClick={() => setEditingRule(rule)}
@@ -299,14 +299,14 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
 
           <CardContent className="space-y-4">
             <div>
-              <h4 className="text-sm font-medium text-gray-300 mb-2">
+              <h4 className="mb-2 font-medium text-gray-300 text-sm">
                 Actions
               </h4>
               <div className="flex flex-wrap gap-2">
                 {rule.actions.map((action) => (
                   <Badge
                     key={action}
-                    className={`${BlockWordActionColors[action]} border text-xs font-medium`}
+                    className={`${BlockWordActionColors[action]} border font-medium text-xs`}
                   >
                     <ActionIcon action={action} />
                     <span className="ml-1">
@@ -318,23 +318,23 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
             </div>
 
             <div>
-              <h4 className="text-sm font-medium text-gray-300 mb-2">
+              <h4 className="mb-2 font-medium text-gray-300 text-sm">
                 Patterns ({rule.patterns.length})
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
                 {rule.patterns.slice(0, 6).map((pattern, index) => {
                   const matchType = getMatchPatternFromPattern(pattern);
                   return (
                     <div
                       key={pattern.id || index}
-                      className="flex items-center space-x-2 p-2 bg-gray-800/50 rounded-md border border-gray-700/50"
+                      className="flex items-center space-x-2 rounded-md border border-gray-700/50 bg-gray-800/50 p-2"
                     >
-                      <code className="text-xs text-purple-300 font-mono bg-purple-950/30 px-1 rounded">
+                      <code className="rounded bg-purple-950/30 px-1 font-mono text-purple-300 text-xs">
                         {pattern.pattern}
                       </code>
                       <Badge
                         variant="outline"
-                        className="text-xs text-gray-400 border-gray-600/50"
+                        className="border-gray-600/50 text-gray-400 text-xs"
                       >
                         {MatchPatternLabels[matchType]}
                       </Badge>
@@ -345,9 +345,9 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
                   <button
                     onClick={() => setEditingRule(rule)}
                     disabled={!canEdit}
-                    className="flex items-center justify-center p-2 bg-gray-800/30 rounded-md border border-gray-700/30 hover:bg-gray-800/50 hover:border-gray-600/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center justify-center rounded-md border border-gray-700/30 bg-gray-800/30 p-2 transition-colors hover:border-gray-600/50 hover:bg-gray-800/50 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    <span className="text-xs text-gray-400">
+                    <span className="text-gray-400 text-xs">
                       +{rule.patterns.length - 6} more
                     </span>
                   </button>
@@ -362,7 +362,7 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
         open={!!deleteDialogRule}
         onOpenChange={() => setDeleteDialogRule(null)}
       >
-        <AlertDialogContent className="bg-gray-900 border-gray-800">
+        <AlertDialogContent className="border-gray-800 bg-gray-900">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-red-400">
               Delete Rule

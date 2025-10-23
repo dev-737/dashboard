@@ -1,6 +1,6 @@
 'use client';
 
-import { Shield, Plus, Settings, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Plus, Settings, Shield } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,8 +10,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { RulesList } from './RulesList';
 import { CreateRuleDialog } from './CreateRuleDialog';
+import { RulesList } from './RulesList';
 import { WhitelistManager } from './WhitelistManager';
 
 interface AutomodDashboardProps {
@@ -35,7 +35,7 @@ export function AutomodDashboard({
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/30">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-purple-500/30 bg-gradient-to-br from-purple-500/20 to-indigo-500/20">
                 <Shield className="h-6 w-6 text-purple-400" />
               </div>
               <div>
@@ -63,7 +63,7 @@ export function AutomodDashboard({
 
       {/* Main Content Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 bg-gray-900/50 border border-gray-800">
+        <TabsList className="grid w-full grid-cols-2 border border-gray-800 bg-gray-900/50">
           <TabsTrigger
             value="rules"
             className="data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-300"

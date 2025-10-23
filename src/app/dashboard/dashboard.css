@@ -315,7 +315,8 @@
 
 /* Film grain effect */
 @keyframes filmGrain {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0);
   }
   10% {
@@ -375,7 +376,10 @@
       rgba(255, 255, 255, 0.015) 5px,
       rgba(255, 255, 255, 0.015) 10px
     );
-  background-size: 100% 100%, 100% 100%, 200% 200%;
+  background-size:
+    100% 100%,
+    100% 100%,
+    200% 200%;
   animation: filmGrain 8s steps(10) infinite;
   pointer-events: none;
   mix-blend-mode: overlay;

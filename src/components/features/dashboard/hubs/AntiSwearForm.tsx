@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AlertCircle, Edit, Plus, Save, Trash, X } from 'lucide-react';
 import { useEffect, useId, useState } from 'react';
+import { WordTagInput } from '@/components/forms/WordTagInput';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -33,7 +34,6 @@ import {
   BlockWordActionLabels,
 } from '@/lib/types/anti-swear';
 import { useTRPC } from '@/utils/trpc';
-import { WordTagInput } from '@/components/forms/WordTagInput';
 
 interface AntiSwearFormProps {
   hubId: string;

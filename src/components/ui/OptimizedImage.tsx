@@ -1,8 +1,8 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 interface OptimizedImageProps {
   src: string;

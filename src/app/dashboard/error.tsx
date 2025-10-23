@@ -1,8 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 
 export default function DashboardError({
   error,
@@ -18,7 +18,7 @@ export default function DashboardError({
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center p-4">
       <div className="text-center">
-        <h2 className="mb-4 text-2xl font-bold">Dashboard Error</h2>
+        <h2 className="mb-4 font-bold text-2xl">Dashboard Error</h2>
         <p className="mb-6 text-muted-foreground">
           {error.message || 'Failed to load dashboard data'}
         </p>

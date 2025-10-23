@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { getServers } from '@/actions/server-actions';
 import { auth } from '@/auth';
-import { ConnectionEditFormClient } from '@/components/forms/ConnectionEditForm';
 import { ConnectionNavigationTabs } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
+import { ConnectionEditFormClient } from '@/components/forms/ConnectionEditForm';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -138,7 +138,10 @@ export default async function ConnectionEditPage(
               <div className="flex items-center gap-2">
                 <div className="rounded-lg border border-purple-500/20 bg-purple-500/10 p-2">
                   <Image
-                    src={connection.hub.iconUrl || '/assets/images/defaults/default-hub-icon.png'}
+                    src={
+                      connection.hub.iconUrl ||
+                      '/assets/images/defaults/default-hub-icon.png'
+                    }
                     alt={connection.hub.name}
                     width={20}
                     height={20}

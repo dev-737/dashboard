@@ -10,145 +10,145 @@ export default function TermsOfService() {
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-16 text-center">
             <div className="mb-6 inline-block">
-              <div className="flex items-center justify-center rounded-full border border-purple-500/30 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 px-6 py-3 text-purple-300 backdrop-blur-sm shadow-lg shadow-purple-500/20">
+              <div className="flex items-center justify-center rounded-full border border-purple-500/30 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 px-6 py-3 text-purple-300 shadow-lg shadow-purple-500/20 backdrop-blur-sm">
                 <Scale className="mr-3 h-6 w-6" />
                 <span className="font-semibold text-lg">Terms of Service</span>
               </div>
             </div>
 
-            <h1 className="mb-6 bg-gradient-to-r from-white via-purple-100 to-indigo-200 bg-clip-text text-transparent text-5xl font-extrabold md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 bg-gradient-to-r from-white via-purple-100 to-indigo-200 bg-clip-text font-extrabold text-5xl text-transparent md:text-6xl lg:text-7xl">
               InterChat Terms of Service
             </h1>
 
-            <p className="mx-auto mb-16 max-w-2xl text-lg font-medium tracking-wide text-purple-300/80">
+            <p className="mx-auto mb-16 max-w-2xl font-medium text-lg text-purple-300/80 tracking-wide">
               Effective date: September 16, 2025
             </p>
           </div>
 
           <div className="grid gap-12 lg:grid-cols-[320px_1fr]">
             <aside className="hidden lg:block">
-              <div className="sticky top-24 rounded-2xl border border-gray-700/30 bg-gradient-to-br from-gray-900/80 to-gray-800/80 p-8 shadow-2xl backdrop-blur-xl shadow-purple-500/10">
-                <p className="mb-6 text-sm font-bold uppercase tracking-wider text-purple-300">
+              <div className="sticky top-24 rounded-2xl border border-gray-700/30 bg-gradient-to-br from-gray-900/80 to-gray-800/80 p-8 shadow-2xl shadow-purple-500/10 backdrop-blur-xl">
+                <p className="mb-6 font-bold text-purple-300 text-sm uppercase tracking-wider">
                   On this page
                 </p>
                 <nav className="space-y-4 text-sm">
                   <a
                     href="#definitions"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     1. Definitions
                   </a>
                   <a
                     href="#eligibility"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     2. Eligibility
                   </a>
                   <a
                     href="#acceptance"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     3. Acceptance of Terms
                   </a>
                   <a
                     href="#account-responsibility"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     4. Account Responsibility
                   </a>
                   <a
                     href="#acceptable-use"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     5. Acceptable Use
                   </a>
                   <a
                     href="#user-content"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     6. User Content
                   </a>
                   <a
                     href="#moderation"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     7. Moderation & Enforcement
                   </a>
                   <a
                     href="#rate-limits"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     8. Rate Limits & Fair Use
                   </a>
                   <a
                     href="#third-party"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     9. Third-Party Services
                   </a>
                   <a
                     href="#fees"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     10. Fees & Paid Features
                   </a>
                   <a
                     href="#intellectual-property"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     11. Intellectual Property
                   </a>
                   <a
                     href="#termination"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     12. Termination
                   </a>
                   <a
                     href="#warranties"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     13. Warranties & Disclaimers
                   </a>
                   <a
                     href="#limitation"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     14. Limitation of Liability
                   </a>
                   <a
                     href="#indemnification"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     15. Indemnification
                   </a>
                   <a
                     href="#governing-law"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     16. Governing Law & Disputes
                   </a>
                   <a
                     href="#changes"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     17. Changes to the Terms
                   </a>
                   <a
                     href="#dmca"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     18. DMCA
                   </a>
                   <a
                     href="#contact"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     19. Contact
                   </a>
                   <a
                     href="#final-notes"
-                    className="block text-gray-300 hover:text-purple-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
+                    className="block text-gray-300 transition-all duration-200 hover:translate-x-1 hover:font-medium hover:text-purple-400"
                   >
                     20. Final Notes
                   </a>
@@ -157,29 +157,29 @@ export default function TermsOfService() {
             </aside>
 
             <div className="min-w-0">
-              <div className="prose prose-lg prose-invert max-w-none prose-headings:text-white prose-p:text-gray-300 prose-li:text-gray-300 prose-strong:text-purple-300 prose-ul:list-disc prose-ul:pl-6 prose-ol:list-decimal prose-ol:pl-6 prose-li:my-2">
+              <div className="prose prose-lg prose-invert prose-li:my-2 max-w-none prose-ol:list-decimal prose-ul:list-disc prose-ol:pl-6 prose-ul:pl-6 prose-headings:text-white prose-li:text-gray-300 prose-p:text-gray-300 prose-strong:text-purple-300">
                 <div className="space-y-16">
                   <section className="group">
                     <h2
                       id="definitions"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       1. Definitions
                     </h2>
                     <div className="space-y-4 text-lg leading-relaxed">
                       <ul className="space-y-3">
-                        <li className="hover:text-purple-200 transition-colors">
+                        <li className="transition-colors hover:text-purple-200">
                           <strong className="text-purple-300">Service</strong> —
                           the InterChat bot, related software, APIs, website,
                           and any other features we provide.
                         </li>
-                        <li className="hover:text-purple-200 transition-colors">
+                        <li className="transition-colors hover:text-purple-200">
                           <strong className="text-purple-300">
                             You / User
                           </strong>{' '}
                           — any person or entity that uses the Service.
                         </li>
-                        <li className="hover:text-purple-200 transition-colors">
+                        <li className="transition-colors hover:text-purple-200">
                           <strong className="text-purple-300">
                             User Content
                           </strong>{' '}
@@ -193,12 +193,12 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="eligibility"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       2. Eligibility
                     </h2>
                     <div className="space-y-4 text-lg leading-relaxed">
-                      <p className="bg-gradient-to-r from-red-400/20 to-orange-400/20 border border-red-500/30 rounded-xl p-4 text-red-200">
+                      <p className="rounded-xl border border-red-500/30 bg-gradient-to-r from-red-400/20 to-orange-400/20 p-4 text-red-200">
                         You must be legally able to enter into contracts where
                         you live. Users in the EU must be at least 16 years old;
                         elsewhere, at least 13. If you are under the required
@@ -210,7 +210,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="acceptance"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       3. Acceptance of Terms
                     </h2>
@@ -218,7 +218,7 @@ export default function TermsOfService() {
                       <p>
                         Use of the Service constitutes acceptance of these Terms
                         and our{' '}
-                        <span className="text-purple-400 font-semibold">
+                        <span className="font-semibold text-purple-400">
                           <Link href="/privacy">Privacy Policy</Link>
                         </span>
                         . Continued use after changes means you accept the
@@ -230,7 +230,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="account-responsibility"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       4. Account Responsibility
                     </h2>
@@ -240,7 +240,7 @@ export default function TermsOfService() {
                         your accounts, including any bots or integrations you
                         configure. Keep credentials secure. Report unauthorized
                         access immediately to{' '}
-                        <span className="text-purple-400 font-semibold">
+                        <span className="font-semibold text-purple-400">
                           <Link href="https://interchat.dev/support">
                             our support server
                           </Link>
@@ -253,7 +253,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="acceptable-use"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       5. Acceptable Use
                     </h2>
@@ -265,27 +265,27 @@ export default function TermsOfService() {
                       </p>
                       <p>Prohibited actions include, but are not limited to:</p>
                       <ul className="space-y-2">
-                        <li className="hover:text-purple-200 transition-colors">
+                        <li className="transition-colors hover:text-purple-200">
                           Illegal activity, including trafficking in illicit
                           goods or services.
                         </li>
-                        <li className="hover:text-purple-200 transition-colors">
+                        <li className="transition-colors hover:text-purple-200">
                           Malware distribution, infiltration, or exploitation
                           attempts.
                         </li>
-                        <li className="hover:text-purple-200 transition-colors">
+                        <li className="transition-colors hover:text-purple-200">
                           Spam, bulk unsolicited messages, or automated scraping
                           that violates Discord rules.
                         </li>
-                        <li className="hover:text-purple-200 transition-colors">
+                        <li className="transition-colors hover:text-purple-200">
                           Attempts to reverse-engineer, bypass, or subvert rate
                           limits, security controls, or moderation.
                         </li>
-                        <li className="hover:text-purple-200 transition-colors">
+                        <li className="transition-colors hover:text-purple-200">
                           Harassment, threats, or targeted abuse.
                         </li>
                       </ul>
-                      <p className="bg-gradient-to-r from-yellow-400/20 to-orange-400/20 border border-yellow-500/30 rounded-xl p-4 text-yellow-200">
+                      <p className="rounded-xl border border-yellow-500/30 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 p-4 text-yellow-200">
                         We may refuse or suspend access for conduct we deem
                         harmful.
                       </p>
@@ -295,7 +295,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="user-content"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       6. User Content
                     </h2>
@@ -312,10 +312,10 @@ export default function TermsOfService() {
                         content and that it does not violate any laws or
                         third-party rights.
                       </p>
-                      <p className="bg-gradient-to-r from-blue-400/20 to-cyan-400/20 border border-blue-500/30 rounded-xl p-4 text-blue-200">
+                      <p className="rounded-xl border border-blue-500/30 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 p-4 text-blue-200">
                         If your content infringes copyright, follow our DMCA
                         process (contact{' '}
-                        <span className="text-blue-300 font-semibold">
+                        <span className="font-semibold text-blue-300">
                           <Link href="https://interchat.dev/support">
                             our support server
                           </Link>
@@ -328,7 +328,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="moderation"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       7. Moderation, Enforcement, and Data Handling
                     </h2>
@@ -346,10 +346,10 @@ export default function TermsOfService() {
                         security. See the Privacy Policy for retention periods
                         and data handling details.
                       </p>
-                      <p className="bg-gradient-to-r from-green-400/20 to-emerald-400/20 border border-green-500/30 rounded-xl p-4 text-green-200">
+                      <p className="rounded-xl border border-green-500/30 bg-gradient-to-r from-green-400/20 to-emerald-400/20 p-4 text-green-200">
                         <strong className="text-green-300">Appeals:</strong> If
                         you believe enforcement was incorrect, open a ticket in{' '}
-                        <span className="text-green-300 font-semibold">
+                        <span className="font-semibold text-green-300">
                           <Link href="https://interchat.dev/support">
                             our support server
                           </Link>
@@ -365,7 +365,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="rate-limits"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       8. Rate Limits and Fair Use
                     </h2>
@@ -381,7 +381,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="third-party"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       9. Third-Party Services
                     </h2>
@@ -398,12 +398,12 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="fees"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       10. Fees and Paid Features
                     </h2>
                     <div className="space-y-4 text-lg leading-relaxed">
-                      <p className="bg-gradient-to-r from-emerald-400/20 to-green-400/20 border border-emerald-500/30 rounded-xl p-4 text-emerald-200">
+                      <p className="rounded-xl border border-emerald-500/30 bg-gradient-to-r from-emerald-400/20 to-green-400/20 p-4 text-emerald-200">
                         InterChat is free unless we announce paid features. If
                         we introduce fees, we will publish terms for those
                         features. Paid features may have separate cancellation,
@@ -415,7 +415,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="intellectual-property"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       11. Intellectual Property
                     </h2>
@@ -437,7 +437,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="termination"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       12. Termination
                     </h2>
@@ -455,7 +455,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="warranties"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       13. Warranties and Disclaimers
                     </h2>
@@ -474,7 +474,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="limitation"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       14. Limitation of Liability
                     </h2>
@@ -486,7 +486,7 @@ export default function TermsOfService() {
                         consequential, or punitive damages, or loss of profits,
                         data, or goodwill, arising from your use of the Service.
                       </p>
-                      <p className="bg-gradient-to-r from-amber-400/20 to-yellow-400/20 border border-amber-500/30 rounded-xl p-4 text-amber-200">
+                      <p className="rounded-xl border border-amber-500/30 bg-gradient-to-r from-amber-400/20 to-yellow-400/20 p-4 text-amber-200">
                         Our total liability for direct damages is limited to the
                         greater of (a) the amount you paid us in the last 12
                         months, or (b) $100 USD. This limitation applies even if
@@ -498,7 +498,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="indemnification"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       15. Indemnification
                     </h2>
@@ -516,7 +516,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="changes"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       17. Changes to the Terms
                     </h2>
@@ -533,7 +533,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="dmca"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       18. DMCA and Copyright Agent
                     </h2>
@@ -541,7 +541,7 @@ export default function TermsOfService() {
                       <p>
                         If you believe content violates your copyright, contact
                         our agent at{' '}
-                        <span className="text-purple-400 font-semibold">
+                        <span className="font-semibold text-purple-400">
                           <Link href="https://interchat.dev/support">
                             our support server
                           </Link>
@@ -557,7 +557,7 @@ export default function TermsOfService() {
                   <section className="group">
                     <h2
                       id="contact"
-                      className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-indigo-300 transition-all duration-300"
+                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       19. Contact
                     </h2>
@@ -567,9 +567,9 @@ export default function TermsOfService() {
                         DMCA requests, contact:
                       </p>
                       <ul className="space-y-2">
-                        <li className="hover:text-purple-200 transition-colors">
+                        <li className="transition-colors hover:text-purple-200">
                           <strong className="text-purple-300">Discord: </strong>
-                          <span className="text-purple-400 font-semibold">
+                          <span className="font-semibold text-purple-400">
                             <Link href="https://interchat.dev/support">
                               Official InterChat support server
                             </Link>
@@ -583,11 +583,11 @@ export default function TermsOfService() {
             </div>
           </div>
 
-          <footer className="mt-20 border-t border-gray-700/30 pt-12 text-center">
-            <div className="bg-gradient-to-r from-gray-900/50 to-gray-800/50 rounded-2xl p-8 backdrop-blur-sm border border-gray-700/20">
+          <footer className="mt-20 border-gray-700/30 border-t pt-12 text-center">
+            <div className="rounded-2xl border border-gray-700/20 bg-gradient-to-r from-gray-900/50 to-gray-800/50 p-8 backdrop-blur-sm">
               <p className="text-gray-300 text-lg">
                 By using InterChat, you agree to these Terms of Service and our{' '}
-                <span className="text-purple-400 hover:text-purple-300 font-semibold transition-colors">
+                <span className="font-semibold text-purple-400 transition-colors hover:text-purple-300">
                   <Link href="/privacy">Privacy Policy</Link>
                 </span>
               </p>

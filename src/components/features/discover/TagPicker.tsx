@@ -13,13 +13,13 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
+import { Label } from '@/components/ui/label';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { useTRPC } from '@/utils/trpc';
-import { Label } from '@/components/ui/label';
 
 interface Tag {
   name: string;
