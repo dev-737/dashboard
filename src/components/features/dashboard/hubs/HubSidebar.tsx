@@ -33,6 +33,11 @@ interface HubSidebarProps {
   canEdit?: boolean;
   isCollapsed?: boolean;
   onToggleCollapse?: () => void;
+  pendingCounts?: {
+    reports?: number;
+    appeals?: number;
+    infractions?: number;
+  };
 }
 
 interface SidebarNavItemProps {
@@ -43,6 +48,8 @@ interface SidebarNavItemProps {
   isCollapsed: boolean;
   locked?: boolean;
   lockReason?: string;
+  badge?: number;
+  comingSoon?: boolean;
   color?:
     | 'default'
     | 'blue'
@@ -73,6 +80,7 @@ interface NavigationItem {
     | ((permissions: { canModerate: boolean; canEdit: boolean }) => boolean);
   locked?: (permissions: { canModerate: boolean; canEdit: boolean }) => boolean;
   lockReason?: string;
+  comingSoon?: boolean;
 }
 
 interface SidebarSection {
@@ -90,6 +98,8 @@ function SidebarNavItem({
   isCollapsed,
   locked = false,
   lockReason = 'Requires higher permissions',
+  badge,
+  comingSoon = false,
   color = 'default',
 }: SidebarNavItemProps) {
   const colorClasses = {
@@ -235,7 +245,21 @@ function SidebarNavItem({
       </div>
 
       {!isCollapsed && (
-        <span className="truncate font-medium text-sm">{label}</span>
+        <>
+          <span className="flex-1 truncate font-medium text-sm">{label}</span>
+          {comingSoon ? (
+            <span className="flex h-5 items-center justify-center rounded-full bg-gradient-to-r from-amber-500/80 to-orange-500/80 px-2 font-bold text-white text-[10px] uppercase tracking-wide shadow-sm shadow-amber-500/30">
+              Soon
+            </span>
+          ) : (
+            badge !== undefined &&
+            badge > 0 && (
+              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-full bg-red-500/90 px-1.5 font-bold text-white text-xs shadow-sm shadow-red-500/30">
+                {badge > 99 ? '99+' : badge}
+              </span>
+            )
+          )}
+        </>
       )}
     </Link>
   );
@@ -333,6 +357,7 @@ export function HubSidebar({
   canEdit = false,
   isCollapsed = false,
   onToggleCollapse,
+  pendingCounts,
 }: HubSidebarProps) {
   const pathname = usePathname();
 
@@ -389,6 +414,7 @@ export function HubSidebar({
           icon: MessageCircle,
           href: `/dashboard/hubs/${hubId}/messages`,
           show: ({ canModerate }) => canModerate,
+          comingSoon: true,
         },
         {
           value: 'logging',
@@ -509,6 +535,16 @@ export function HubSidebar({
                 ? item.locked(permissions)
                 : item.locked);
 
+            // Get badge count for this item
+            let badgeCount: number | undefined;
+            if (pendingCounts) {
+              if (item.value === 'reports') badgeCount = pendingCounts.reports;
+              else if (item.value === 'appeals')
+                badgeCount = pendingCounts.appeals;
+              else if (item.value === 'infractions')
+                badgeCount = pendingCounts.infractions;
+            }
+
             return (
               <SidebarNavItem
                 key={item.value}
@@ -519,6 +555,8 @@ export function HubSidebar({
                 isCollapsed={isCollapsed}
                 locked={isLocked}
                 lockReason={item.lockReason}
+                badge={badgeCount}
+                comingSoon={item.comingSoon}
                 color={item.color}
               />
             );
@@ -549,18 +587,25 @@ export function HubSidebar({
       </div>
 
       {/* Footer */}
-      <div className="mt-auto rounded-b-2xl border-t border-gray-700/40 p-4">
+      <div className="mt-auto space-y-3 rounded-b-2xl border-t border-gray-700/40 p-4">
         {!isCollapsed ? (
-          <div className="space-y-3">
-            <div className="text-xs text-gray-500">
-              <div className="flex justify-between">
-                <span>Version</span>
-                <span className="text-gray-400">v5.2.0</span>
+          <>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-medium text-gray-400">Status</span>
+                <div className="flex items-center gap-1.5">
+                  <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400 shadow-sm shadow-green-400/50" />
+                  <span className="font-semibold text-green-400">Active</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-medium text-gray-400">Version</span>
+                <span className="font-semibold text-gray-300">v5.2.0</span>
               </div>
             </div>
-          </div>
+          </>
         ) : (
-          <div className="mx-auto h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
+          <div className="mx-auto h-1.5 w-1.5 animate-pulse rounded-full bg-green-400 shadow-sm shadow-green-400/50" />
         )}
       </div>
     </div>

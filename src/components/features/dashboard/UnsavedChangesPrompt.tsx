@@ -36,27 +36,16 @@ export function UnsavedChangesPrompt({
             damping: 25,
             duration: 0.2,
           }}
-          className="fixed bottom-6 left-1/2 z-[9999] px-4"
-          style={{
-            x: '-50%',
-            maxWidth: 'calc(100vw - 2rem)', // Ensure it doesn't exceed viewport width on mobile
-          }}
+          className="fixed bottom-4 left-4 right-4 z-[9999] mx-auto max-w-2xl md:bottom-6 md:left-1/2 md:right-auto md:-translate-x-1/2"
         >
-          <div
-            className="flex max-w-full flex-col items-start gap-3 rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 shadow-xl sm:flex-row sm:items-center"
-            style={{
-              boxShadow: `
-                0 8px 16px -4px rgba(0, 0, 0, 0.4),
-                0 4px 6px -2px rgba(0, 0, 0, 0.2)
-              `,
-            }}
-          >
+          <div className="flex w-full flex-col items-start gap-3 rounded-2xl border border-gray-700/50 bg-gray-800/95 px-4 py-3 shadow-2xl backdrop-blur-xl sm:flex-row sm:items-center">
             {/* Icon and Message */}
-            <div className="flex flex-shrink-0 items-center gap-2.5">
+            <div className="flex min-w-0 flex-shrink items-center gap-2.5">
               <motion.div
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.1, type: 'spring', stiffness: 300 }}
+                className="flex-shrink-0"
               >
                 <AlertTriangle className="h-4 w-4 text-orange-400" />
               </motion.div>
@@ -65,48 +54,51 @@ export function UnsavedChangesPrompt({
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 }}
-                className="font-medium text-sm text-white"
+                className="min-w-0 truncate font-medium text-sm text-white"
               >
                 {message}
               </motion.span>
             </div>
 
             {/* Divider - hidden on mobile */}
-            <div className="hidden h-5 w-px bg-gray-600 sm:block" />
+            <div className="hidden h-5 w-px flex-shrink-0 bg-gray-600 sm:block" />
 
             {/* Actions */}
             <motion.div
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.15 }}
-              className="flex w-full items-center gap-2 sm:w-auto"
+              className="flex w-full flex-shrink-0 items-center gap-2 sm:w-auto sm:min-w-fit"
             >
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={onReset}
                 disabled={isSubmitting}
-                className="flex h-auto flex-1 cursor-pointer items-center gap-1.5 px-3 py-1.5 font-medium text-gray-300 text-xs transition-colors duration-150 hover:bg-gray-700 hover:text-white sm:flex-none"
+                className="flex h-auto flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 font-medium text-gray-300 text-xs transition-colors duration-150 hover:bg-gray-700 hover:text-white sm:flex-none"
               >
-                <RotateCcw className="h-3 w-3" />
-                {resetLabel}
+                <RotateCcw className="h-3 w-3 flex-shrink-0" />
+                <span className="hidden sm:inline">{resetLabel}</span>
+                <span className="sm:hidden">Reset</span>
               </Button>
 
               <Button
                 size="sm"
                 onClick={(e) => onSave(e)}
                 disabled={isSubmitting}
-                className="flex h-auto flex-1 cursor-pointer items-center gap-1.5 bg-orange-600 px-3 py-1.5 font-medium text-white text-xs transition-colors duration-150 hover:bg-orange-700 sm:flex-none"
+                className="flex h-auto flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl bg-orange-600 px-3 py-2 font-medium text-white text-xs transition-colors duration-150 hover:bg-orange-700 sm:flex-none"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="h-3 w-3 animate-spin" />
-                    Saving...
+                    <Loader2 className="h-3 w-3 flex-shrink-0 animate-spin" />
+                    <span className="hidden sm:inline">Saving...</span>
+                    <span className="sm:hidden">Save</span>
                   </>
                 ) : (
                   <>
-                    <Save className="h-3 w-3" />
-                    {saveLabel}
+                    <Save className="h-3 w-3 flex-shrink-0" />
+                    <span className="hidden sm:inline">{saveLabel}</span>
+                    <span className="sm:hidden">Save</span>
                   </>
                 )}
               </Button>

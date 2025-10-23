@@ -121,6 +121,11 @@ export default async function HubOverviewPage({
         currentTab="overview"
         canModerate={canModerate}
         canEdit={canEdit}
+        pendingCounts={{
+          reports: pendingReports,
+          appeals: pendingAppeals,
+          infractions: activeInfractions,
+        }}
         headerActions={
           <Button
             asChild
@@ -135,126 +140,169 @@ export default async function HubOverviewPage({
         }
       >
         <div className="space-y-6">
+          {/* Hub Stats Grid */}
+          <div className="grid gap-4 md:grid-cols-3">
+            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-blue-900/20 to-blue-950/20 transition-all hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10">
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-1">
+                    <p className="font-medium text-blue-400 text-sm">
+                      Connections
+                    </p>
+                    <p className="font-bold text-3xl text-white">
+                      {hub._count.connections}
+                    </p>
+                    <p className="text-gray-400 text-xs">Active servers</p>
+                  </div>
+                  <div className="rounded-xl bg-blue-500/10 p-3 transition-all group-hover:bg-blue-500/20">
+                    <Home className="h-6 w-6 text-blue-400" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-purple-900/20 to-purple-950/20 transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10">
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-1">
+                    <p className="font-medium text-purple-400 text-sm">
+                      Visibility
+                    </p>
+                    <p className="font-bold text-2xl text-white">
+                      {hub.private ? 'Private' : 'Public'}
+                    </p>
+                    <p className="text-gray-400 text-xs">
+                      {hub.nsfw ? 'NSFW Content' : 'Safe for Work'}
+                    </p>
+                  </div>
+                  <div className="rounded-xl bg-purple-500/10 p-3 transition-all group-hover:bg-purple-500/20">
+                    <Globe className="h-6 w-6 text-purple-400" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-green-900/20 to-green-950/20 transition-all hover:border-green-500/50 hover:shadow-lg hover:shadow-green-500/10">
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-1">
+                    <p className="font-medium text-green-400 text-sm">Votes</p>
+                    <p className="font-bold text-3xl text-white">
+                      {hub._count.upvotes}
+                    </p>
+                    <p className="text-gray-400 text-xs">Community votes</p>
+                  </div>
+                  <div className="rounded-xl bg-green-500/10 p-3 transition-all group-hover:bg-green-500/20">
+                    <Shield className="h-6 w-6 text-green-400" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           {/* Hub Information Card */}
-          <Card className="rounded-2xl border-gray-700/50 bg-gray-900/50">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <FileText className="h-5 w-5" />
+          <Card className="overflow-hidden rounded-2xl border-gray-700/50 bg-gray-900/50 backdrop-blur-sm">
+            <CardHeader className="border-b border-gray-700/50 bg-gradient-to-r from-gray-800/50 to-gray-900/50">
+              <CardTitle className="flex items-center gap-2 text-white">
+                <FileText className="h-5 w-5 text-indigo-400" />
                 Hub Information
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 p-6">
               <div>
-                <h3 className="font-medium text-gray-400 text-sm">Name</h3>
-                <p className="mt-1 text-base text-white">{hub.name}</p>
+                <h3 className="mb-2 font-semibold text-gray-300 text-sm uppercase tracking-wide">
+                  Name
+                </h3>
+                <p className="font-medium text-lg text-white">{hub.name}</p>
               </div>
               {hub.description && (
                 <div>
-                  <h3 className="font-medium text-gray-400 text-sm">
+                  <h3 className="mb-2 font-semibold text-gray-300 text-sm uppercase tracking-wide">
                     Description
                   </h3>
-                  <p className="mt-1 text-base text-gray-200">
+                  <p className="leading-relaxed text-base text-gray-200">
                     {hub.description}
                   </p>
                 </div>
               )}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <h3 className="font-medium text-gray-400 text-sm">
-                    Visibility
-                  </h3>
-                  <p className="mt-1 text-base text-white">
-                    {hub.private ? 'Private' : 'Public'}
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-medium text-gray-400 text-sm">NSFW</h3>
-                  <p className="mt-1 text-base text-white">
-                    {hub.nsfw ? 'Yes' : 'No'}
-                  </p>
-                </div>
-              </div>
-              <div>
-                <h3 className="font-medium text-gray-400 text-sm">
-                  Connected Servers
-                </h3>
-                <p className="mt-1 text-base text-white">
-                  {hub._count.connections}
-                </p>
-              </div>
             </CardContent>
           </Card>
 
           {/* Moderation Quick Actions */}
           <div>
-            <h2 className="mb-4 font-semibold text-lg text-white">
-              Moderation Tools
-            </h2>
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="font-bold text-white text-xl">
+                Moderation Tools
+              </h2>
+              <p className="text-gray-400 text-sm">
+                Manage your hub's moderation
+              </p>
+            </div>
             <div className="grid gap-4 md:grid-cols-3">
               <Link href={`/dashboard/hubs/${hubId}/reports`}>
-                <Card className="cursor-pointer rounded-2xl border-gray-700/50 bg-gradient-to-br from-red-900/20 to-red-950/20 transition-all hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/10">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center justify-between text-base">
-                      <div className="flex items-center gap-2">
-                        <Shield className="h-5 w-5 text-red-400" />
-                        <span>Reports</span>
+                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-red-900/20 to-red-950/20 transition-all hover:scale-[1.02] hover:border-red-500/50 hover:shadow-xl hover:shadow-red-500/20">
+                  <CardContent className="p-6">
+                    <div className="mb-4 flex items-start justify-between">
+                      <div className="rounded-xl bg-red-500/10 p-3 transition-all group-hover:bg-red-500/20 group-hover:scale-110">
+                        <Shield className="h-6 w-6 text-red-400" />
                       </div>
                       {pendingReports > 0 && (
-                        <span className="rounded-full bg-red-500/20 px-2 py-1 font-semibold text-red-300 text-xs">
+                        <span className="rounded-full bg-red-500/30 px-2.5 py-1 font-bold text-white text-sm shadow-lg shadow-red-500/30 ring-2 ring-red-500/50">
                           {pendingReports}
                         </span>
                       )}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-400 text-sm">
-                      Review and manage content reports
+                    </div>
+                    <h3 className="mb-2 font-bold text-white text-xl">
+                      Reports
+                    </h3>
+                    <p className="leading-relaxed text-gray-300 text-sm">
+                      Review and manage content reports from the community
                     </p>
                   </CardContent>
                 </Card>
               </Link>
 
               <Link href={`/dashboard/hubs/${hubId}/appeals`}>
-                <Card className="cursor-pointer rounded-2xl border-gray-700/50 bg-gradient-to-br from-orange-900/20 to-orange-950/20 transition-all hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/10">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center justify-between text-base">
-                      <div className="flex items-center gap-2">
-                        <Bell className="h-5 w-5 text-orange-400" />
-                        <span>Appeals</span>
+                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-orange-900/20 to-orange-950/20 transition-all hover:scale-[1.02] hover:border-orange-500/50 hover:shadow-xl hover:shadow-orange-500/20">
+                  <CardContent className="p-6">
+                    <div className="mb-4 flex items-start justify-between">
+                      <div className="rounded-xl bg-orange-500/10 p-3 transition-all group-hover:bg-orange-500/20 group-hover:scale-110">
+                        <Bell className="h-6 w-6 text-orange-400" />
                       </div>
                       {pendingAppeals > 0 && (
-                        <span className="rounded-full bg-orange-500/20 px-2 py-1 font-semibold text-orange-300 text-xs">
+                        <span className="rounded-full bg-orange-500/30 px-2.5 py-1 font-bold text-white text-sm shadow-lg shadow-orange-500/30 ring-2 ring-orange-500/50">
                           {pendingAppeals}
                         </span>
                       )}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-400 text-sm">
-                      Review infraction appeals
+                    </div>
+                    <h3 className="mb-2 font-bold text-white text-xl">
+                      Appeals
+                    </h3>
+                    <p className="leading-relaxed text-gray-300 text-sm">
+                      Review and process infraction appeal requests
                     </p>
                   </CardContent>
                 </Card>
               </Link>
 
               <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-                <Card className="cursor-pointer rounded-2xl border-gray-700/50 bg-gradient-to-br from-purple-900/20 to-purple-950/20 transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center justify-between text-base">
-                      <div className="flex items-center gap-2">
-                        <Gavel className="h-5 w-5 text-purple-400" />
-                        <span>Infractions</span>
+                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-purple-900/20 to-purple-950/20 transition-all hover:scale-[1.02] hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/20">
+                  <CardContent className="p-6">
+                    <div className="mb-4 flex items-start justify-between">
+                      <div className="rounded-xl bg-purple-500/10 p-3 transition-all group-hover:bg-purple-500/20 group-hover:scale-110">
+                        <Gavel className="h-6 w-6 text-purple-400" />
                       </div>
                       {activeInfractions > 0 && (
-                        <span className="rounded-full bg-purple-500/20 px-2 py-1 font-semibold text-purple-300 text-xs">
+                        <span className="rounded-full bg-purple-500/30 px-2.5 py-1 font-bold text-white text-sm shadow-lg shadow-purple-500/30 ring-2 ring-purple-500/50">
                           {activeInfractions}
                         </span>
                       )}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-400 text-sm">
-                      Manage bans, mutes, and warnings
+                    </div>
+                    <h3 className="mb-2 font-bold text-white text-xl">
+                      Infractions
+                    </h3>
+                    <p className="leading-relaxed text-gray-300 text-sm">
+                      View and manage bans, mutes, and warnings
                     </p>
                   </CardContent>
                 </Card>
@@ -290,6 +338,11 @@ export default async function HubOverviewPage({
       currentTab="overview"
       canModerate={canModerate}
       canEdit={canEdit}
+      pendingCounts={{
+        reports: pendingReports,
+        appeals: pendingAppeals,
+        infractions: activeInfractions,
+      }}
       headerActions={
         <div className="flex items-center gap-3">
           <Button

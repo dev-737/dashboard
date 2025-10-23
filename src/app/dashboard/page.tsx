@@ -13,7 +13,7 @@ import { AnimatedWelcome } from '@/components/features/dashboard/AnimatedWelcome
 import { AnimatedEmptyState } from '@/components/features/dashboard/hubs/AnimatedEmptyState';
 import { AnimatedHubCard } from '@/components/features/dashboard/hubs/AnimatedHubCard';
 import { ServerGrid } from '@/components/features/dashboard/servers/ServerGrid';
-// import { StatCard } from '@/components/features/dashboard/stat-card';
+import { StatCard } from '@/components/features/dashboard/StatCard';
 import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Button } from '@/components/ui/button';
@@ -169,40 +169,40 @@ async function DashboardContent({
       )}
 
       {/* Stats Cards */}
-      {/* <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title="Your Hubs"
-          value={stats.totalHubs.toLocaleString()}
+          value={userHubs.length.toLocaleString()}
           description="Hubs you own or moderate"
           iconName="MessageSquare"
           index={0}
           color="purple"
         />
         <StatCard
-          title="Connections"
-          value={stats.totalConnections.toLocaleString()}
-          description="Active channel connections"
-          iconName="BarChart3"
+          title="Discord Servers"
+          value={servers.length.toLocaleString()}
+          description="Connected Discord servers"
+          iconName="Server"
           index={1}
           color="blue"
         />
         <StatCard
-          title="Connected Servers"
-          value={stats.totalServers.toLocaleString()}
-          description="Discord servers in your hubs"
-          iconName="Server"
+          title="Active Users"
+          value="--"
+          description="Members across your hubs"
+          iconName="Users"
           index={2}
           color="emerald"
         />
         <StatCard
-          title="Active Hubs"
-          value={stats.activeHubs.toLocaleString()}
-          description="Hubs with recent activity"
+          title="Activity"
+          value="--"
+          description="Recent hub interactions"
           iconName="Activity"
           index={3}
-          color="red"
+          color="orange"
         />
-      </div> */}
+      </div>
 
       {/* Main Dashboard Content with Tabs */}
       <div className="space-y-6">

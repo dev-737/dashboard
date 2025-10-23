@@ -4,7 +4,6 @@ import { ArrowRight, ExternalLink, Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { UserNav } from '@/components/layout/UserNav';
 import { Button } from '@/components/ui/button';
@@ -46,10 +45,20 @@ const links = [
   },
 ];
 
-export function Navbar() {
-  const { data: session, status } = useSession();
+interface NavbarProps {
+  session?: {
+    user?: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  } | null;
+}
+
+export function Navbar({ session }: NavbarProps) {
   const actualUser = session?.user;
-  const isLoading = status === 'loading';
+  const isLoading = false; // Session is passed from server, no loading state
 
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);

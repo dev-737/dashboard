@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { Suspense, type ReactNode } from 'react';
-import { Navbar } from '@/components/layout/Navbar';
+import { NavbarWrapper } from '@/components/layout/NavbarWrapper';
 import { Toaster } from '@/components/layout/Toaster';
 import { Providers } from '@/components/providers';
 import '@/styles/globals.css';
@@ -91,7 +91,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Layout({ children }: { children: ReactNode }) {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
@@ -120,7 +120,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
         <Providers>
           <div className="relative">
             <Suspense fallback={<div className="h-16" />}>
-              <Navbar />
+              <NavbarWrapper />
             </Suspense>
             <Toaster />
 

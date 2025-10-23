@@ -23,6 +23,11 @@ interface HubLayoutProps {
   canEdit?: boolean;
   backHref?: string;
   headerActions?: React.ReactNode;
+  pendingCounts?: {
+    reports?: number;
+    appeals?: number;
+    infractions?: number;
+  };
   onHubUpdate?: (updates: { iconUrl?: string; bannerUrl?: string }) => void;
   children: React.ReactNode;
 }
@@ -33,6 +38,7 @@ function HubLayoutContent({
   canEdit = false,
   backHref = '/dashboard',
   headerActions,
+  pendingCounts,
   children,
 }: Omit<HubLayoutProps, 'hub' | 'onHubUpdate'>) {
   // Get dashboard layout context for hub sidebar state
@@ -72,6 +78,7 @@ function HubLayoutContent({
             onToggleCollapse={() =>
               setHubSidebarCollapsed(!hubSidebarCollapsed)
             }
+            pendingCounts={pendingCounts}
           />
         </div>
       )}
@@ -132,6 +139,7 @@ export function HubLayout({
   canEdit = false,
   backHref = '/dashboard',
   headerActions,
+  pendingCounts,
   children,
 }: Omit<HubLayoutProps, 'onHubUpdate'>) {
   return (
@@ -142,6 +150,7 @@ export function HubLayout({
         canEdit={canEdit}
         backHref={backHref}
         headerActions={headerActions}
+        pendingCounts={pendingCounts}
       >
         {children}
       </HubLayoutContent>

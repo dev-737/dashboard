@@ -1,7 +1,6 @@
-import { unstable_cache as cache } from 'next/cache';
+import { cacheLife, cacheTag } from 'next/cache';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 import type { Role } from '@/lib/generated/prisma/client';
-import { PerformanceCache } from '@/lib/performance-cache';
 import { db } from '@/lib/prisma';
 
 // Define a more specific type for the hub data fetched for the detail page
@@ -45,117 +44,93 @@ export interface HubConnectionData {
   };
 }
 
-export const getHubData = cache(
-  async (hubId: string, userId?: string): Promise<HubDetailData | null> => {
-    const performanceCache = PerformanceCache.getInstance();
-    const cacheKey = `hub-data:${hubId}:${userId || 'anon'}`;
-    const cached = await performanceCache.get<HubDetailData>(cacheKey);
+export async function getHubData(
+  hubId: string,
+  userId?: string
+): Promise<HubDetailData | null> {
+  'use cache';
+  cacheLife('hub-data');
+  cacheTag('hub', `hub-${hubId}`);
 
-    if (cached) {
-      return cached;
-    }
-
-    const hub = await db.hub.findUnique({
-      where: { id: hubId },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        iconUrl: true,
-        bannerUrl: true,
-        createdAt: true,
-        lastActive: true,
-        rules: true,
-        nsfw: true,
-        verified: true,
-        partnered: true,
-        shortDescription: true,
-        activityLevel: true,
-        ownerId: true,
-        reviews: {
-          select: {
-            id: true,
-            rating: true,
-            text: true,
-            createdAt: true,
-            user: { select: { name: true, image: true, id: true } },
-          },
-          orderBy: { createdAt: 'desc' },
-          take: 10,
+  const hub = await db.hub.findUnique({
+    where: { id: hubId },
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      iconUrl: true,
+      bannerUrl: true,
+      createdAt: true,
+      lastActive: true,
+      rules: true,
+      nsfw: true,
+      verified: true,
+      partnered: true,
+      shortDescription: true,
+      activityLevel: true,
+      ownerId: true,
+      reviews: {
+        select: {
+          id: true,
+          rating: true,
+          text: true,
+          createdAt: true,
+          user: { select: { name: true, image: true, id: true } },
         },
-        tags: { select: { name: true } },
-        upvotes: { select: { id: true, userId: true } },
-        moderators: {
-          where: { user: { name: { not: null } } },
-          select: {
-            id: true,
-            role: true,
-            userId: true,
-            user: { select: { name: true, image: true, id: true } },
-          },
-        },
-        _count: {
-          select: {
-            connections: { where: { connected: true } },
-          },
+        orderBy: { createdAt: 'desc' },
+        take: 10,
+      },
+      tags: { select: { name: true } },
+      upvotes: { select: { id: true, userId: true } },
+      moderators: {
+        where: { user: { name: { not: null } } },
+        select: {
+          id: true,
+          role: true,
+          userId: true,
+          user: { select: { name: true, image: true, id: true } },
         },
       },
-    });
+      _count: {
+        select: {
+          connections: { where: { connected: true } },
+        },
+      },
+    },
+  });
 
-    if (hub) {
-      // Cache for 5 minutes
-      await performanceCache.set(cacheKey, hub, { ttl: 300 });
-    }
+  return hub;
+}
 
-    return hub;
-  },
-  ['hub-data'],
-  { revalidate: 300 }
-);
+export async function getHubConnections(
+  hubId: string
+): Promise<HubConnectionData[] | null> {
+  'use cache';
+  cacheLife('hub-data');
+  cacheTag('hub-connections', `hub-${hubId}-connections`);
 
-export const getHubConnections = cache(
-  async (hubId: string): Promise<HubConnectionData[] | null> => {
-    // Try cache first
-    const performanceCache = PerformanceCache.getInstance();
-    const cacheKey = `hub-connections:${hubId}`;
-    const cached = await performanceCache.get<HubConnectionData[]>(cacheKey);
-
-    if (cached) {
-      return cached;
-    }
-
-    const connections = await db.hub.findUnique({
-      where: { id: hubId },
-      select: {
-        connections: {
-          where: { connected: true },
-          select: {
-            id: true,
-            serverId: true,
-            connected: true,
-            createdAt: true,
-            lastActive: true,
-            server: {
-              select: {
-                id: true,
-                name: true,
-              },
+  const connections = await db.hub.findUnique({
+    where: { id: hubId },
+    select: {
+      connections: {
+        where: { connected: true },
+        select: {
+          id: true,
+          serverId: true,
+          connected: true,
+          createdAt: true,
+          lastActive: true,
+          server: {
+            select: {
+              id: true,
+              name: true,
             },
           },
-          orderBy: { lastActive: 'desc' },
         },
+        orderBy: { lastActive: 'desc' },
       },
-    });
+    },
+  });
 
-    const result = connections?.connections ?? null;
-
-    if (result) {
-      // Cache for 5 minutes
-      await performanceCache.set(cacheKey, result, { ttl: 300 });
-    }
-
-    return result;
-  },
-  ['hub-connections'],
-  { revalidate: 300 }
-);
+  return connections?.connections ?? null;
+}

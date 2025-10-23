@@ -14,6 +14,28 @@ const config = {
       process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   },
   cacheComponents: true,
+  cacheLife: {
+    'user-data': {
+      stale: 60 * 5, // 5 minutes - serve stale content
+      revalidate: 60, // 1 minute - revalidate interval
+      expire: 60 * 10, // 10 minutes - hard expiry
+    },
+    'hub-data': {
+      stale: 60 * 10, // 10 minutes
+      revalidate: 60 * 5, // 5 minutes
+      expire: 60 * 30, // 30 minutes
+    },
+    'platform-stats': {
+      stale: 60 * 15, // 15 minutes
+      revalidate: 60 * 5, // 5 minutes
+      expire: 60 * 30, // 30 minutes
+    },
+    'discover-data': {
+      stale: 60 * 5, // 5 minutes
+      revalidate: 60 * 2, // 2 minutes
+      expire: 60 * 15, // 15 minutes
+    },
+  },
   experimental: {
     optimizePackageImports: [
       'lucide-react',

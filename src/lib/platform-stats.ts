@@ -1,5 +1,5 @@
+import { cacheLife, cacheTag } from 'next/cache';
 import { db } from '@/lib/prisma';
-import { CACHE_KEYS, cache } from './performance-cache';
 
 export interface PlatformStats {
   activeServers: number;
@@ -35,20 +35,11 @@ export interface PlatformStatsResponse {
  * Used for SSR instead of API route
  */
 export async function getPlatformStats(): Promise<PlatformStatsResponse> {
+  'use cache';
+  cacheLife('platform-stats');
+  cacheTag('platform-stats');
+
   try {
-    // Check cache first
-    const cachedStats = await cache.get<PlatformStats>(
-      CACHE_KEYS.PLATFORM_STATS
-    );
-    if (cachedStats) {
-      return {
-        success: true,
-        data: cachedStats,
-      };
-    }
-
-    console.log('Cache miss for platform stats, querying database');
-
     // Get current date for time-based queries
     const now = new Date();
     const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -153,12 +144,6 @@ export async function getPlatformStats(): Promise<PlatformStatsResponse> {
       lastUpdated: now.toISOString(),
       cacheExpiry: 5 * 60 * 1000, // 5 minutes in milliseconds
     };
-
-    // Update cache
-    await cache.set(CACHE_KEYS.PLATFORM_STATS, stats, {
-      ttl: 300,
-      memoryTtl: 60,
-    });
 
     return {
       success: true,
@@ -267,6 +252,10 @@ export interface LeaderboardResponse {
  * Used for SSR instead of API route
  */
 export async function getLeaderboardData(): Promise<LeaderboardResponse> {
+  'use cache';
+  cacheLife('platform-stats');
+  cacheTag('leaderboard');
+
   try {
     // Calculate date ranges
     const now = new Date();
@@ -443,6 +432,10 @@ export interface FeaturedHubsResponse {
  * Used for SSR instead of API route
  */
 export async function getFeaturedHubsData(): Promise<FeaturedHubsResponse> {
+  'use cache';
+  cacheLife('platform-stats');
+  cacheTag('featured-hubs');
+
   try {
     // Get featured hubs from database
     const featuredHubs = await db.hub.findMany({
@@ -658,6 +651,10 @@ export async function getHubRecommendations(
   type: RecommendationType = 'trending',
   limit: number = 8
 ): Promise<HubRecommendationsResponse> {
+  'use cache';
+  cacheLife('platform-stats');
+  cacheTag('hub-recommendations', `recommendations-${type}`);
+
   try {
     // biome-ignore lint/suspicious/noImplicitAnyLet: nuh uh
     let hubs;

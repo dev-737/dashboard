@@ -1,5 +1,6 @@
 'use server';
 
+import { cacheLife, cacheTag } from 'next/cache';
 import { db } from '@/lib/prisma';
 import { PermissionLevel } from './constants';
 
@@ -13,6 +14,10 @@ export async function getUserHubPermission(
   userId: string,
   hubId: string
 ): Promise<PermissionLevel> {
+  'use cache';
+  cacheLife('user-data');
+  cacheTag('permissions', `user-${userId}`, `hub-${hubId}`);
+
   if (!userId || !hubId) return PermissionLevel.NONE;
 
   // Get the hub
@@ -51,6 +56,10 @@ export async function getUserHubPermission(
  * @returns An array of hubs with permission levels
  */
 export async function getUserHubs(userId: string) {
+  'use cache';
+  cacheLife('user-data');
+  cacheTag('user-hubs', `user-${userId}`);
+
   if (!userId) return [];
 
   const user = await db.user.findUnique({
