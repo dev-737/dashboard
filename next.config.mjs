@@ -13,6 +13,7 @@ const config = {
     removeConsole:
       process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   },
+  cacheComponents: true,
   experimental: {
     optimizePackageImports: [
       'lucide-react',
@@ -35,7 +36,6 @@ const config = {
     viewTransition: true,
     parallelServerCompiles: true,
     parallelServerBuildTraces: true,
-    routerBFCache: true,
     webpackBuildWorker: true,
     optimizeCss: true,
     scrollRestoration: true,

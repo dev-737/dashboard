@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
-import type { ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Toaster } from '@/components/layout/Toaster';
 import { Providers } from '@/components/providers';
@@ -119,12 +119,16 @@ export default async function Layout({ children }: { children: ReactNode }) {
       <body className="min-h-screen">
         <Providers>
           <div className="relative">
-            <Navbar />
+            <Suspense fallback={<div className="h-16" />}>
+              <Navbar />
+            </Suspense>
             <Toaster />
 
             <main className="relative">{children}</main>
           </div>
-          <ConditionalFooter />
+          <Suspense fallback={<div className="h-48" />}>
+            <ConditionalFooter />
+          </Suspense>
         </Providers>
       </body>
     </html>

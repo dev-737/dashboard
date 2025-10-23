@@ -58,12 +58,35 @@
     "tsconfig.json": "tsconfig.*.json",
     ".env": ".env.*",
     "docker-compose.yml": "docker-compose.*.yml, Dockerfile*",
-    "README.md": "CHANGELOG.md, CONTRIBUTING.md, LICENSE, CODE_OF_CONDUCT.md",
+    "README.md": "CHANGELOG.md, CONTRIBUTING.md, LICENSE, CODE_OF_CONDUCT.md"
   },
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
   "editor.inlineSuggest.enabled": true,
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "chat.mcp.serverSampling": {
+    "web/.vscode/mcp.json: nextjs-devtools": {
+      "allowedModels": [
+        "copilot/gpt-5-mini",
+        "copilot/auto",
+        "copilot/claude-haiku-4.5",
+        "copilot/claude-3.5-sonnet",
+        "copilot/claude-3.7-sonnet",
+        "copilot/claude-3.7-sonnet-thought",
+        "copilot/claude-sonnet-4",
+        "copilot/claude-sonnet-4.5",
+        "copilot/gemini-2.0-flash-001",
+        "copilot/gemini-2.5-pro",
+        "copilot/gpt-4.1",
+        "copilot/gpt-4o",
+        "copilot/gpt-5",
+        "copilot/gpt-5-codex",
+        "copilot/grok-code-fast-1",
+        "copilot/o3-mini",
+        "copilot/o4-mini"
+      ]
+    }
+  }
 }
