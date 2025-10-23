@@ -1,4 +1,4 @@
-import { Bell, FileText, Gavel, Globe, Shield } from 'lucide-react';
+import { Bell, FileText, Gavel, Globe, Home, Shield } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -231,9 +231,7 @@ export default async function HubOverviewPage({
           {/* Moderation Quick Actions */}
           <div>
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-bold text-white text-xl">
-                Moderation Tools
-              </h2>
+              <h2 className="font-bold text-white text-xl">Moderation Tools</h2>
               <p className="text-gray-400 text-sm">
                 Manage your hub's moderation
               </p>
