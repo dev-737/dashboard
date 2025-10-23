@@ -134,9 +134,9 @@ export default async function HubOverviewPage({
           </Button>
         }
       >
-        <div className="space-y-6 p-6">
+        <div className="space-y-6">
           {/* Hub Information Card */}
-          <Card className="border-gray-700/50 bg-gray-900/50">
+          <Card className="rounded-2xl border-gray-700/50 bg-gray-900/50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <FileText className="h-5 w-5" />
@@ -192,7 +192,7 @@ export default async function HubOverviewPage({
             </h2>
             <div className="grid gap-4 md:grid-cols-3">
               <Link href={`/dashboard/hubs/${hubId}/reports`}>
-                <Card className="cursor-pointer border-gray-700/50 bg-gradient-to-br from-red-900/20 to-red-950/20 transition-all hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/10">
+                <Card className="cursor-pointer rounded-2xl border-gray-700/50 bg-gradient-to-br from-red-900/20 to-red-950/20 transition-all hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/10">
                   <CardHeader className="pb-3">
                     <CardTitle className="flex items-center justify-between text-base">
                       <div className="flex items-center gap-2">
@@ -215,7 +215,7 @@ export default async function HubOverviewPage({
               </Link>
 
               <Link href={`/dashboard/hubs/${hubId}/appeals`}>
-                <Card className="cursor-pointer border-gray-700/50 bg-gradient-to-br from-orange-900/20 to-orange-950/20 transition-all hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/10">
+                <Card className="cursor-pointer rounded-2xl border-gray-700/50 bg-gradient-to-br from-orange-900/20 to-orange-950/20 transition-all hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/10">
                   <CardHeader className="pb-3">
                     <CardTitle className="flex items-center justify-between text-base">
                       <div className="flex items-center gap-2">
@@ -238,7 +238,7 @@ export default async function HubOverviewPage({
               </Link>
 
               <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-                <Card className="cursor-pointer border-gray-700/50 bg-gradient-to-br from-purple-900/20 to-purple-950/20 transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10">
+                <Card className="cursor-pointer rounded-2xl border-gray-700/50 bg-gradient-to-br from-purple-900/20 to-purple-950/20 transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10">
                   <CardHeader className="pb-3">
                     <CardTitle className="flex items-center justify-between text-base">
                       <div className="flex items-center gap-2">
@@ -307,10 +307,8 @@ export default async function HubOverviewPage({
         </div>
       }
     >
-      <div className="space-y-8">
-        <div className="container mx-auto space-y-8 p-6">
-          <HubEditForm hubData={hubData} />
-        </div>
+      <div className="space-y-6">
+        <HubEditForm hubData={hubData} />
       </div>
     </HubLayout>
   );

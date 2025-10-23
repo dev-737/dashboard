@@ -21,7 +21,6 @@ interface HubLayoutProps {
   currentTab: string;
   canModerate?: boolean;
   canEdit?: boolean;
-  showBackButton?: boolean;
   backHref?: string;
   headerActions?: React.ReactNode;
   onHubUpdate?: (updates: { iconUrl?: string; bannerUrl?: string }) => void;
@@ -32,7 +31,6 @@ interface HubLayoutProps {
 function HubLayoutContent({
   canModerate = false,
   canEdit = false,
-  showBackButton = true,
   backHref = '/dashboard',
   headerActions,
   children,
@@ -58,16 +56,13 @@ function HubLayoutContent({
   };
 
   return (
-    <div className="relative">
-      {/* Fixed Hub Sidebar - Desktop only, positioned from left edge since no main sidebar */}
+    <div className="relative min-h-screen pb-6">
+      {/* Fixed Hub Sidebar - Desktop only with proper spacing and rounded corners */}
       {isHydrated && (
         <div
-          className={`fixed top-16 bottom-0 z-30 hidden transition-all duration-300 lg:block ${
+          className={`fixed top-20 bottom-6 left-4 z-30 hidden transition-all duration-300 lg:block ${
             hubSidebarCollapsed ? 'w-16' : 'w-64'
           }`}
-          style={{
-            left: 0, // Position from left edge since main sidebar is removed
-          }}
         >
           <HubSidebar
             hubId={hub.id}
@@ -81,28 +76,27 @@ function HubLayoutContent({
         </div>
       )}
 
-      {/* Main Content Area - Add margin to account for hub sidebar on desktop only */}
+      {/* Main Content Area with proper margin and spacing */}
       <div
-        className={`transition-all duration-300 ${
+        className={`px-4 transition-all duration-300 lg:pr-4 ${
           isHydrated
             ? hubSidebarCollapsed
-              ? 'lg:ml-16'
-              : 'lg:ml-64'
-            : 'lg:ml-64'
+              ? 'lg:ml-24'
+              : 'lg:ml-72'
+            : 'lg:ml-72'
         }`}
       >
         {/* Unified Hub Header */}
         <UnifiedHubHeader
           hub={hub}
-          showBackButton={showBackButton}
           backHref={backHref}
           actions={headerActions}
           canEdit={canEdit}
           onHubUpdate={handleHubUpdate}
         />
 
-        <div className="mt-8 lg:hidden">
-          <div className="-mx-4 sticky top-0 z-20 mb-4 border-indigo-500/30 border-b bg-gradient-to-r from-gray-900/98 via-gray-900/95 to-gray-900/98 p-4 shadow-lg backdrop-blur-md">
+        <div className="mt-6 lg:hidden">
+          <div className="sticky top-0 z-20 mb-4 rounded-2xl border border-indigo-500/30 bg-gradient-to-r from-gray-900/98 via-gray-900/95 to-gray-900/98 p-4 shadow-lg backdrop-blur-md">
             <HubMobileDropdown
               hubId={hub.id}
               canModerate={canModerate}
@@ -121,8 +115,8 @@ function HubLayoutContent({
           </div>
         </div>
 
-        {/* Page Content */}
-        <div className="mt-8">
+        {/* Page Content with rounded container */}
+        <div className="mt-6">
           <div className="space-y-6">{children}</div>
         </div>
       </div>
@@ -136,7 +130,6 @@ export function HubLayout({
   currentTab,
   canModerate = false,
   canEdit = false,
-  showBackButton = true,
   backHref = '/dashboard',
   headerActions,
   children,
@@ -147,7 +140,6 @@ export function HubLayout({
         currentTab={currentTab}
         canModerate={canModerate}
         canEdit={canEdit}
-        showBackButton={showBackButton}
         backHref={backHref}
         headerActions={headerActions}
       >

@@ -466,14 +466,14 @@ export function HubSidebar({
   return (
     <div
       className={cn(
-        'flex h-full flex-col border-gray-700/40 border-r bg-gradient-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/20 backdrop-blur-xl transition-all duration-300',
+        'flex h-full flex-col rounded-2xl border border-gray-700/40 bg-gradient-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/20 backdrop-blur-xl transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >
-      <div className="flex items-center justify-between border-gray-700/40 border-b bg-gradient-to-r from-gray-900/50 to-gray-800/50 p-4 backdrop-blur-sm">
+      <div className="flex items-center justify-between rounded-t-2xl border-b border-gray-700/40 p-4">
         {!isCollapsed && (
           <div className="flex items-center gap-2">
-            <div className="font-bold text-sm text-white tracking-wide">
+            <div className="text-sm font-bold tracking-wide text-white">
               Hub Dashboard
             </div>
           </div>
@@ -549,13 +549,13 @@ export function HubSidebar({
       </div>
 
       {/* Footer */}
-      <div className="mt-auto border-gray-700/40 border-t bg-gradient-to-t from-gray-950/80 to-transparent p-4 backdrop-blur-sm">
+      <div className="mt-auto rounded-b-2xl border-t border-gray-700/40 p-4">
         {!isCollapsed ? (
           <div className="space-y-3">
-            <div className="text-gray-500 text-xs">
+            <div className="text-xs text-gray-500">
               <div className="flex justify-between">
                 <span>Version</span>
-                <span className="text-gray-400">v5.0.5</span>
+                <span className="text-gray-400">v5.2.0</span>
               </div>
             </div>
           </div>

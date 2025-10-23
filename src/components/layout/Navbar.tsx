@@ -4,8 +4,9 @@ import { ArrowRight, ExternalLink, Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { UserNav } from '@/components/layout/UserNav';
 import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
@@ -20,14 +21,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { UserNav } from '@/components/layout/UserNav';
-
-interface User {
-  id: string;
-  name?: string | null;
-  image?: string | null;
-  email?: string | null;
-}
 
 const links = [
   {
@@ -54,8 +47,9 @@ const links = [
 ];
 
 export function Navbar() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const actualUser = session?.user;
+  const isLoading = status === 'loading';
 
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -139,7 +133,9 @@ export function Navbar() {
           </Button>
 
           {/* User Nav or Login */}
-          {actualUser ? (
+          {isLoading ? (
+            <div className="hidden h-9 w-20 animate-pulse rounded-md bg-gray-800/50 lg:block" />
+          ) : actualUser ? (
             <UserNav user={actualUser} />
           ) : (
             <Button
@@ -199,7 +195,7 @@ export function Navbar() {
                       className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border px-4 py-3 font-medium text-sm transition-all duration-300 ${
                         pathname === link.url
                           ? 'border-purple-500/30 bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
-                          : 'border-transparent text-gray-400 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-md hover:shadow-black/5'
+                          : 'border-transparent text-gray-400 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-black/5 hover:shadow-md'
                       }`}
                       style={{
                         animationDelay: `${index * 50}ms`,
@@ -226,7 +222,7 @@ export function Navbar() {
                       <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary to-primary-alt opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-30" />
                       <Button
                         asChild
-                        className="relative w-full bg-gradient-to-r from-primary to-primary-alt font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-primary-alt hover:to-primary hover:shadow-xl hover:shadow-primary/20"
+                        className="relative w-full bg-gradient-to-r from-primary to-primary-alt font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-primary-alt hover:to-primary hover:shadow-primary/20 hover:shadow-xl"
                       >
                         <Link
                           href="/invite"
@@ -238,7 +234,9 @@ export function Navbar() {
                       </Button>
                     </div>
 
-                    {!actualUser && (
+                    {isLoading ? (
+                      <div className="h-10 w-full animate-pulse rounded-md bg-gray-800/50" />
+                    ) : !actualUser ? (
                       <Button
                         asChild
                         variant="outline"
@@ -250,7 +248,7 @@ export function Navbar() {
                           Login
                         </Link>
                       </Button>
-                    )}
+                    ) : null}
                   </div>
 
                   <div className="flex items-center justify-center border-gray-700/30 border-t pt-4">
@@ -261,7 +259,7 @@ export function Navbar() {
                       className="group/link flex items-center gap-2 rounded-lg p-2 text-gray-400 transition-all duration-300 hover:bg-white/5 hover:text-white"
                     >
                       <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/link:scale-110" />
-                      <span className="text-xs font-medium">
+                      <span className="font-medium text-xs">
                         View on GitHub
                       </span>
                     </Link>

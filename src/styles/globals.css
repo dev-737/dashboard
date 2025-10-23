@@ -380,7 +380,7 @@
 .premium-card {
   @apply bg-gradient-to-br from-gray-900/90 to-gray-950/90;
   @apply backdrop-blur-sm border border-gray-700/50;
-  @apply rounded-[var(--radius)] shadow-xl;
+  @apply rounded-2xl shadow-xl;
   @apply hover:shadow-2xl transition-all duration-300;
 }
 
