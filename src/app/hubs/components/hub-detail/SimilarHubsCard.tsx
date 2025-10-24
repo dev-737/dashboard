@@ -95,7 +95,7 @@ const SimilarHubsCard = ({
                 <Image
                   src={
                     rec.hub.iconUrl ||
-                    `https://api.dicebear.com/7.x/shapes/svg?seed=${rec.hub.name}`
+                    `https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(rec.hub.name)}`
                   }
                   alt={rec.hub.name}
                   width={40}

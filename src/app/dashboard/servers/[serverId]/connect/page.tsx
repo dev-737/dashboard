@@ -849,7 +849,7 @@ export default function ServerConnectPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-center gap-4 rounded-[var(--radius)] border border-gray-700/50 bg-gray-800/30 p-4">
+                <div className="flex items-center gap-4 rounded-(--radius) border border-gray-700/50 bg-gray-800/30 p-4">
                   <div className="relative">
                     <Image
                       src={

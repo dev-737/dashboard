@@ -6,6 +6,9 @@ export const HubModulesBits = {
   BlockInvites: 1 << 3,
   UseNicknames: 1 << 4,
   BlockNSFW: 1 << 5,
+  AllowVideos: 1 << 6,
+  BlockAttachments: 1 << 7,
+  BlockTenorGifs: 1 << 8,
 } as const;
 
 // Hub modules descriptions
@@ -17,6 +20,9 @@ export const HubModulesDescriptions = {
   [HubModulesBits.UseNicknames]:
     'Use server nicknames instead of Discord usernames',
   [HubModulesBits.BlockNSFW]: 'Block NSFW content',
+  [HubModulesBits.AllowVideos]: 'Allow video attachments in messages',
+  [HubModulesBits.BlockAttachments]: 'Block image and sticker attachments',
+  [HubModulesBits.BlockTenorGifs]: 'Block all GIF attachments (including Tenor)',
 } as const;
 
 export const SUPPORTED_LANGUAGES = [

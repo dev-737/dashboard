@@ -76,7 +76,7 @@ const config = {
       { protocol: 'https', hostname: 'i.imgur.com' },
       { protocol: 'https', hostname: 'cdn.discordapp.com' },
       { protocol: 'https', hostname: 'media.discordapp.net' },
-      { protocol: 'https', hostname: 'api.dicebear.com' },
+      { protocol: 'https', hostname: 'source.boringavatars.com' },
       { protocol: 'https', hostname: 'utfs.io' },
       { protocol: 'https', hostname: '*.ufs.sh' },
       { protocol: 'https', hostname: 'i.ytimg.com' },
