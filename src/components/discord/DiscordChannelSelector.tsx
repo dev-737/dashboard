@@ -53,7 +53,6 @@ export function DiscordChannelSelector({
   onChange,
   onServerChange,
   label,
-  placeholder,
   description,
   initialServerId = null,
   initialChannelId = null,
@@ -80,7 +79,11 @@ export function DiscordChannelSelector({
   );
 
   // Fetch channels when a server is selected using tRPC
-  const { data: channelsData, isLoading: channelsLoading } = useQuery(
+  const {
+    data: channelsData,
+    isLoading: channelsLoading,
+    refetch: refetchChannels,
+  } = useQuery(
     trpc.server.getServerChannels.queryOptions(
       { serverId: selectedServer, hubId },
       { enabled: !!selectedServer }
@@ -221,7 +224,28 @@ export function DiscordChannelSelector({
                 <span className="text-gray-400">Loading channels...</span>
               </div>
             ) : channels.length === 0 ? (
-              <CommandEmpty>No channels found in this server</CommandEmpty>
+              <CommandEmpty>
+                <div className="flex flex-col items-center gap-3 py-4 text-center">
+                  <p className="font-medium text-sm">No channels found</p>
+                  <p className="text-gray-400 text-xs">
+                    The bot may not have permission to view channels in this
+                    server.
+                  </p>
+                  <p className="text-gray-400 text-xs">
+                    Please ensure the bot has "View Channels" permission and try
+                    again.
+                  </p>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => refetchChannels()}
+                    className="mt-2"
+                  >
+                    <RefreshCw className="mr-2 h-4 w-4" />
+                    Retry
+                  </Button>
+                </div>
+              </CommandEmpty>
             ) : (
               <>
                 {/* Uncategorized channels first */}

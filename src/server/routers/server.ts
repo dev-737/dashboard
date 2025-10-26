@@ -1,7 +1,3 @@
-/**
- * Server router for tRPC
- */
-
 import { REST } from '@discordjs/rest';
 import { TRPCError } from '@trpc/server';
 import {
@@ -18,7 +14,6 @@ import { db } from '@/lib/prisma';
 import type { ResolvedLogConfigs } from '@/types/logging';
 import { protectedProcedure, router } from '../trpc';
 
-// In-memory cache for resolved log configs
 interface CacheEntry {
   data: ResolvedLogConfigs;
   timestamp: number;
@@ -44,19 +39,14 @@ export const serverRouter = router({
       }
 
       try {
-        // Create REST instance
         const rest = new REST({ version: '10' }).setToken(botToken);
 
-        // Fetch roles from Discord API
         const discordRoles = (await rest.get(
           Routes.guildRoles(serverId)
         )) as APIRole[];
 
-        // Process and filter roles
         const processedRoles = discordRoles
-          // Filter out the @everyone role
           .filter((role) => role.name !== '@everyone')
-          // Map to a simpler structure
           .map((role) => ({
             id: role.id,
             name: role.name,
@@ -64,7 +54,6 @@ export const serverRouter = router({
             position: role.position,
             mentionable: role.mentionable,
           }))
-          // Sort by position (higher position roles first)
           .sort((a, b) => b.position - a.position);
 
         return { roles: processedRoles };
@@ -77,13 +66,11 @@ export const serverRouter = router({
       }
     }),
 
-  // Get a server by ID
   getServer: protectedProcedure
     .input(z.object({ serverId: z.string() }))
     .query(async ({ input }) => {
       const { serverId } = input;
 
-      // Get bot token from environment variable
       const botToken = process.env.DISCORD_BOT_TOKEN;
       if (!botToken) {
         throw new TRPCError({
@@ -93,21 +80,16 @@ export const serverRouter = router({
       }
 
       try {
-        // Create REST instance
         const rest = new REST({ version: '10' }).setToken(botToken);
 
-        // Fetch server from Discord API
         const discordServer = (await rest.get(
           Routes.guild(serverId)
         )) as APIGuild;
 
-        // Get server from database
         const dbServer = await db.serverData.findUnique({
           where: { id: serverId },
         });
 
-        // Format the response
-        // Keep icon as the raw Discord icon hash to match existing client logic
         const server = {
           id: discordServer.id,
           name: discordServer.name,
@@ -125,13 +107,11 @@ export const serverRouter = router({
       }
     }),
 
-  // Get server channels
   getServerChannels: protectedProcedure
     .input(z.object({ serverId: z.string(), hubId: z.string().optional() }))
     .query(async ({ input }) => {
-      const { serverId, hubId } = input;
+      const { serverId } = input;
 
-      // Get bot token from environment variable
       const botToken = process.env.DISCORD_BOT_TOKEN;
       if (!botToken) {
         throw new TRPCError({
@@ -141,31 +121,18 @@ export const serverRouter = router({
       }
 
       try {
-        // Create REST instance
         const rest = new REST({ version: '10' }).setToken(botToken);
 
-        // Fetch channels from Discord API
         const discordChannels = (await rest.get(
           Routes.guildChannels(serverId)
         )) as APIChannel[];
 
-        // Get all existing connections to filter out already connected channels (across all hubs)
         const existingConnections = await db.connection.findMany({
           where: { connected: true },
           select: { channelId: true },
         });
         const connectedChannelIds = existingConnections.map((c) => c.channelId);
 
-        // If hubId is provided, also get existing connections for this hub and server combination
-        let existingHubServerConnection: { id: string } | null = null;
-        if (hubId) {
-          existingHubServerConnection = await db.connection.findFirst({
-            where: { serverId, hubId, connected: true },
-            select: { id: true },
-          });
-        }
-
-        // Process and filter channels (parity with REST route)
         const hasName = (c: APIChannel): c is APIChannel & { name: string } =>
           'name' in (c as unknown as Record<string, unknown>) &&
           typeof (c as { name?: unknown }).name === 'string';
@@ -185,10 +152,7 @@ export const serverRouter = router({
 
             const isEligible = isTextChannel || isThread;
             const isNotConnected = !connectedChannelIds.includes(channel.id);
-            const hubServerAlreadyConnected = Boolean(
-              hubId && existingHubServerConnection
-            );
-            return isEligible && isNotConnected && !hubServerAlreadyConnected;
+            return isEligible && isNotConnected;
           })
           .map((channel) => {
             const isThread =
@@ -196,7 +160,6 @@ export const serverRouter = router({
               channel.type === ChannelType.PrivateThread ||
               channel.type === ChannelType.AnnouncementThread;
 
-            // Find parent channel for threads
             let parentChannel: APIChannel | undefined;
             if (isThread && hasParent(channel)) {
               parentChannel = discordChannels.find(
@@ -204,7 +167,6 @@ export const serverRouter = router({
               );
             }
 
-            // Find category for text channels (not threads)
             let categoryId: string | null = null;
             let categoryName: string | null = null;
             if (!isThread && hasParent(channel)) {
@@ -273,7 +235,6 @@ export const serverRouter = router({
       }
     }),
 
-  // Connect server to hub
   connectServerToHub: protectedProcedure
     .input(
       z.object({
@@ -286,7 +247,6 @@ export const serverRouter = router({
       const { serverId, hubId, channelId } = input;
       const userId = ctx.session.user.id;
 
-      // Check if the hub exists
       const hub = await db.hub.findUnique({
         where: { id: hubId },
         select: {
@@ -306,7 +266,6 @@ export const serverRouter = router({
         });
       }
 
-      // Check if the user has permission to connect servers to this hub
       const isOwner = hub.ownerId === userId;
       const isModerator = hub.moderators.length > 0;
 
@@ -317,7 +276,6 @@ export const serverRouter = router({
         });
       }
 
-      // Check if the server is already connected to a hub
       const existingConnection = await db.connection.findFirst({
         where: {
           serverId,
@@ -332,13 +290,12 @@ export const serverRouter = router({
         });
       }
 
-      // Create the connection
       const connection = await db.connection.create({
         data: {
           serverId,
           hubId,
           channelId,
-          webhookURL: '', // FIXME: This would be set by the bot
+          webhookURL: '', // FIXME: This should be set by the bot
           connected: true,
           lastActive: new Date(),
         },
@@ -347,7 +304,6 @@ export const serverRouter = router({
       return { connection };
     }),
 
-  // Disconnect server from hub
   disconnectServerFromHub: protectedProcedure
     .input(
       z.object({
@@ -358,7 +314,6 @@ export const serverRouter = router({
       const { connectionId } = input;
       const userId = ctx.session.user.id;
 
-      // Get the connection with hub info
       const connection = await db.connection.findUnique({
         where: { id: connectionId },
         include: {
@@ -381,7 +336,6 @@ export const serverRouter = router({
         });
       }
 
-      // Check if the user has permission to disconnect servers from this hub
       const isOwner = connection.hub.ownerId === userId;
       const isModerator = connection.hub.moderators.length > 0;
 
@@ -393,7 +347,6 @@ export const serverRouter = router({
         });
       }
 
-      // Update the connection
       const updatedConnection = await db.connection.update({
         where: { id: connectionId },
         data: {
@@ -404,7 +357,6 @@ export const serverRouter = router({
       return { connection: updatedConnection };
     }),
 
-  // Resolve log configuration details (channel/role names, access control)
   resolveLogConfigDetails: protectedProcedure
     .input(
       z.object({
@@ -421,19 +373,16 @@ export const serverRouter = router({
       const { configs } = input;
       const userId = ctx.session.user.id;
 
-      // Generate cache key from config IDs
       const cacheKey = configs
         .map((c) => `${c.channelId || ''}-${c.roleId || ''}`)
         .sort()
         .join('|');
 
-      // Check cache first
       const cached = resolveCache.get(cacheKey);
       if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
         return cached.data;
       }
 
-      // Get bot token
       const botToken = process.env.DISCORD_BOT_TOKEN;
       if (!botToken) {
         throw new TRPCError({
@@ -444,7 +393,6 @@ export const serverRouter = router({
 
       const rest = new REST({ version: '10' }).setToken(botToken);
 
-      // Get user's manageable servers for access control
       const account = await db.account.findFirst({
         where: { userId, provider: 'discord' },
         select: { access_token: true },
@@ -482,7 +430,6 @@ export const serverRouter = router({
 
       const result: ResolvedLogConfigs = {};
 
-      // Process each config
       for (const config of configs) {
         const { logType, channelId, roleId } = config;
 
@@ -493,7 +440,6 @@ export const serverRouter = router({
         // Default to true - only set to false if we can definitively prove no access
         let userHasAccess = true;
 
-        // Resolve channel details
         if (channelId) {
           try {
             const channel = (await rest.get(
@@ -503,7 +449,6 @@ export const serverRouter = router({
             if ('guild_id' in channel && channel.guild_id) {
               serverId = channel.guild_id;
 
-              // Fetch server name
               try {
                 const guild = (await rest.get(
                   Routes.guild(serverId)
@@ -514,13 +459,9 @@ export const serverRouter = router({
                 serverName = serverId; // Fallback to ID
               }
 
-              // Check user access only if we successfully fetched manageable servers
-              // If manageableServerIds is empty but we have an access token, assume access check failed
-              // and default to allowing access (optimistic)
               if (manageableServerIds.size > 0) {
                 userHasAccess = manageableServerIds.has(serverId);
               }
-              // Otherwise keep default (true)
 
               channelData = {
                 id: channel.id,
