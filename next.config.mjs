@@ -207,11 +207,12 @@ const bundleAnalyzer = withBundleAnalyzer({
 });
 
 export default withSentryConfig(bundleAnalyzer(config), {
-  org: 'interchat',
+  org: 'interchatapp',
   project: 'interchat-website',
   silent: !process.env.CI,
   widenClientFileUpload: true,
   tunnelRoute: '/monitoring',
   disableLogger: true,
   automaticVercelMonitors: true,
+  telemetry: false
 });
