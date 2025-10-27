@@ -37,9 +37,9 @@ const CTA = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: 'InterChat v5 – Faster, modern, and redesigned',
+  title: 'InterChat - Servers on Discord United',
   description:
-    'Introducing InterChat v5: a complete rewrite with improved performance, modern command UIs, and a redesigned dashboard for cross-server communication.',
+    'Introducing InterChat: a complete rewrite with improved performance, modern command UIs, and a redesigned dashboard for cross-server communication.',
   keywords: [
     'Discord bot',
     'cross-server chat',

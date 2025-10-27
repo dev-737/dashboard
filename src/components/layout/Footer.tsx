@@ -189,7 +189,7 @@ export function Footer() {
             </div>
 
             <div className="flex items-center gap-4">
-              <div className="text-gray-500 text-sm">Version 5.0.0</div>
+              <div className="text-gray-500 text-sm">Version 5.2.0</div>
               <Button
                 className="flex items-center gap-2"
                 variant="outline"
