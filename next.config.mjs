@@ -194,8 +194,8 @@ const config = {
         permanent: true,
       },
       {
-        source: '/docs',
-        destination: 'https://docs.interchat.dev',
+        source: '/docs/:path*',
+        destination: 'https://docs.interchat.dev/:path*',
         permanent: true,
       },
     ];
@@ -214,5 +214,5 @@ export default withSentryConfig(bundleAnalyzer(config), {
   tunnelRoute: '/monitoring',
   disableLogger: true,
   automaticVercelMonitors: true,
-  telemetry: false
+  telemetry: false,
 });
