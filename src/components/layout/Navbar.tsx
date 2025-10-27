@@ -31,10 +31,6 @@ const links = [
     url: '/discover',
   },
   {
-    text: 'Pricing',
-    url: '/donate',
-  },
-  {
     text: 'Guidelines',
     url: '/guidelines',
   },
