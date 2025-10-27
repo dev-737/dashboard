@@ -107,26 +107,7 @@ export function Navbar({ session }: NavbarProps) {
           </NavigationMenu>
         </div>
 
-        {/* Right side items */}
         <div className="flex items-center gap-2">
-          {/* GitHub - Visible on large screens */}
-          <Button
-            variant="ghost"
-            size="icon"
-            asChild
-            className="hidden rounded-full text-gray-400 transition-transform duration-300 hover:scale-110 hover:bg-transparent hover:text-white lg:flex"
-          >
-            <Link
-              href="https://github.com/oxaradev/InterChat"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ExternalLink className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
-            </Link>
-          </Button>
-
-          {/* Discord Button - Hidden on small/medium screens */}
           <Button
             asChild
             className="hidden bg-gradient-to-r from-primary to-primary-alt font-medium text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-primary/20 lg:flex"
@@ -137,7 +118,6 @@ export function Navbar({ session }: NavbarProps) {
             </Link>
           </Button>
 
-          {/* User Nav or Login */}
           {isLoading ? (
             <div className="hidden h-9 w-20 animate-pulse rounded-md bg-gray-800/50 lg:block" />
           ) : actualUser ? (
@@ -254,20 +234,6 @@ export function Navbar({ session }: NavbarProps) {
                         </Link>
                       </Button>
                     ) : null}
-                  </div>
-
-                  <div className="flex items-center justify-center border-gray-700/30 border-t pt-4">
-                    <Link
-                      href="https://github.com/oxaradev/InterChat"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group/link flex items-center gap-2 rounded-lg p-2 text-gray-400 transition-all duration-300 hover:bg-white/5 hover:text-white"
-                    >
-                      <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/link:scale-110" />
-                      <span className="font-medium text-xs">
-                        View on GitHub
-                      </span>
-                    </Link>
                   </div>
                 </div>
               </div>

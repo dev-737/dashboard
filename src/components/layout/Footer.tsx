@@ -30,12 +30,6 @@ export function Footer() {
         description: 'Join InterChat HQ',
       },
       {
-        label: 'GitHub',
-        href: 'https://github.com/oxaradev',
-        icon: ExternalLink,
-        description: 'Open Source',
-      },
-      {
         label: 'Twitter',
         href: 'https://twitter.com/oxaradev',
         icon: ExternalLink,

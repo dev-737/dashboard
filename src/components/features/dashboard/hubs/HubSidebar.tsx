@@ -414,7 +414,6 @@ export function HubSidebar({
           icon: MessageCircle,
           href: `/dashboard/hubs/${hubId}/messages`,
           show: ({ canModerate }) => canModerate,
-          comingSoon: true,
         },
         {
           value: 'logging',
