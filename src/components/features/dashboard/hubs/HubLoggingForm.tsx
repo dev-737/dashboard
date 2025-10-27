@@ -89,7 +89,7 @@ const LOG_TYPES = [
   },
   {
     key: 'messageModeration',
-    title: 'Message Logs',
+    title: 'Message',
     description: 'Log message deletions, edits, and moderation',
     icon: MessageSquare,
     color: 'purple',
