@@ -128,14 +128,6 @@ export function HubMobileDropdown({
           show: canModerate,
         },
         {
-          value: 'messages',
-          label: 'Messages',
-          color: 'purple' as const,
-          icon: MessageCircle,
-          href: `/dashboard/hubs/${hubId}/messages`,
-          show: canModerate,
-        },
-        {
           value: 'logging',
           label: 'Logging',
           color: 'amber' as const,

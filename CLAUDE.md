@@ -677,3 +677,5 @@ npx prisma generate    # Regenerate Prisma types if needed
 - **Error Handling**: tRPC errors are automatically formatted with Zod validation errors
 - **File Structure**: Keep related files together (colocation pattern)
 - **Sentry Monitoring**: Error tracking configured with tunnel route `/monitoring` to avoid ad-blockers
+
+Do NOT write comments or docstrings.

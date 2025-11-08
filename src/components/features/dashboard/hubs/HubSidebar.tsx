@@ -8,7 +8,6 @@ import {
   Gavel,
   Globe,
   Home,
-  MessageCircle,
   MessageSquare,
   Package,
   Shield,
@@ -405,14 +404,6 @@ export function HubSidebar({
           color: 'green',
           icon: Home,
           href: `/dashboard/hubs/${hubId}/connections`,
-          show: ({ canModerate }) => canModerate,
-        },
-        {
-          value: 'messages',
-          label: 'Messages',
-          color: 'purple',
-          icon: MessageCircle,
-          href: `/dashboard/hubs/${hubId}/messages`,
           show: ({ canModerate }) => canModerate,
         },
         {
