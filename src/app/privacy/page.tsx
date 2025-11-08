@@ -259,17 +259,17 @@ export default function PrivacyPolicy() {
                           <strong className="text-purple-300">
                             Oracle Cloud Infrastructure:
                           </strong>{' '}
-                          Hosting and storage (DPA in place)
+                          Hosting and storage
                         </li>
                         <li className="transition-colors hover:text-purple-200">
                           <strong className="text-purple-300">
                             Cloudflare:
                           </strong>{' '}
-                          Network performance and security (DPA in place)
+                          Network performance and security
                         </li>
                         <li className="transition-colors hover:text-purple-200">
                           <strong className="text-purple-300">Sentry:</strong>{' '}
-                          Error monitoring and diagnostics (DPA in place)
+                          Error monitoring and diagnostics
                         </li>
                       </ul>
                       <p className="rounded-xl border border-blue-500/30 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 p-4 text-blue-200">
@@ -394,11 +394,11 @@ export default function PrivacyPolicy() {
                       <p className="rounded-xl border border-red-500/30 bg-gradient-to-r from-red-400/20 to-pink-400/20 p-4 text-red-200">
                         InterChat is{' '}
                         <strong className="text-red-300">
-                          not intended for children under 16 in the EU
+                          not intended for children under 13
                         </strong>
-                        , or under 13 elsewhere. If we learn personal data from
-                        a child was collected, we will delete it immediately.
-                        Parents or guardians may contact us to request deletion.
+                        . If we learn personal data from a child was collected,
+                        we will delete it immediately. Parents or guardians may
+                        contact us to request deletion.
                       </p>
                     </div>
                   </section>
