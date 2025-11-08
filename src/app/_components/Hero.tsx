@@ -91,7 +91,7 @@ export function Hero() {
                   variant="outline"
                   className="h-14 border-gray-600/70 bg-gray-800/60 px-8 font-semibold text-white shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-gray-500/70 hover:bg-gray-800/80"
                 >
-                  <Link href="/dashboard" className="flex items-center">
+                  <Link href="/discover" className="flex items-center">
                     Discover Hubs
                     <Sparkles className="ml-3 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
                   </Link>
@@ -113,7 +113,6 @@ export function Hero() {
             </motion.p>
           </div>
 
-          {/* TODO: Video Section*/}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
