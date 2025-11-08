@@ -484,28 +484,28 @@
 [role="menu"],
 [role="listbox"],
 [role="combobox"] {
-  z-index: 9999 !important;
+  z-index: 9999;
 }
 
 /* Ensure hub search dropdown appears above all other elements */
 .hub-search-dropdown {
-  z-index: 10000 !important;
+  z-index: 10000;
 }
 
 /* Command component styling improvements */
 [cmdk-root] {
-  background: rgba(31, 41, 55, 0.95) !important;
-  backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(55, 65, 81, 0.5) !important;
+  background: rgba(31, 41, 55, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(55, 65, 81, 0.5);
 }
 
 [cmdk-group-heading] {
-  color: #9ca3af !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  padding: 8px 12px 4px !important;
+  color: #9ca3af;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 12px 4px;
 }
 
 /* style all buttons */
@@ -520,9 +520,9 @@ button {
 }
 
 [role="listbox"] {
-  background: rgba(31, 41, 55, 0.95) !important;
-  backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(55, 65, 81, 0.5) !important;
+  background: rgba(31, 41, 55, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(55, 65, 81, 0.5);
 }
 
 /* Hover utilities aligned with colorscheme guidelines */

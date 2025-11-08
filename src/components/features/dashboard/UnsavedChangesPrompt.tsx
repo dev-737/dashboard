@@ -36,7 +36,7 @@ export function UnsavedChangesPrompt({
             damping: 25,
             duration: 0.2,
           }}
-          className="fixed bottom-4 left-4 right-4 z-[9999] mx-auto max-w-2xl md:bottom-6 md:left-1/2 md:right-auto md:-translate-x-1/2"
+          className="md:-translate-x-1/2 fixed right-4 bottom-4 left-4 z-[9999] mx-auto max-w-2xl md:right-auto md:bottom-6 md:left-1/2"
         >
           <div className="flex w-full flex-col items-start gap-3 rounded-2xl border border-gray-700/50 bg-gray-800/95 px-4 py-3 shadow-2xl backdrop-blur-xl sm:flex-row sm:items-center">
             {/* Icon and Message */}

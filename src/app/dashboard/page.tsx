@@ -13,7 +13,6 @@ import { AnimatedWelcome } from '@/components/features/dashboard/AnimatedWelcome
 import { AnimatedEmptyState } from '@/components/features/dashboard/hubs/AnimatedEmptyState';
 import { AnimatedHubCard } from '@/components/features/dashboard/hubs/AnimatedHubCard';
 import { ServerGrid } from '@/components/features/dashboard/servers/ServerGrid';
-import { StatCard } from '@/components/features/dashboard/StatCard';
 import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Button } from '@/components/ui/button';
@@ -97,50 +96,6 @@ async function DashboardContent({
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
-  // Get user's hub IDs
-  // const userHubIds = userHubs.map((hub) => hub.id);
-
-  // Optimize dashboard queries by combining them into a single Promise.all
-  // const [connections, connectedServers] = await Promise.all([
-  //   // Get connections for user's hubs
-  //   db.connection.count({
-  //     where: {
-  //       hubId: { in: userHubIds },
-  //       connected: true,
-  //     },
-  //   }),
-  //   // Get servers connected to user's hubs (unique count)
-  //   db.connection.groupBy({
-  //     by: ['serverId'],
-  //     where: {
-  //       hubId: { in: userHubIds },
-  //       connected: true,
-  //     },
-  //   }),
-  // ]);
-
-  // // Get active hubs count (user's hubs with activity in the last 7 days)
-  // const activeHubs = userHubs.filter(
-  //   (hub) => new Date(hub.lastActive) >= oneWeekAgo
-  // ).length;
-
-  // // Get total message count across user's hubs
-  // const totalMessages = userHubs.reduce((sum, hub) => {
-  //   // We'll use connections as a proxy for message activity
-  //   return sum + (hub.connections?.length || 0);
-  // }, 0);
-
-  // // Calculate average messages per day (rough estimate)
-  // const avgMessagesPerDay = Math.round(totalMessages / 7); // Assuming weekly activity
-
-  // const stats = {
-  //   totalHubs: userHubs.length,
-  //   totalConnections: connections,
-  //   totalServers: connectedServers.length,
-  //   activeHubs,
-  //   messagesPerDay: avgMessagesPerDay,
-  // };
-
   return (
     <div className="space-y-8">
       {/* Animated Welcome Hero */}
@@ -167,42 +122,6 @@ async function DashboardContent({
           </CardContent>
         </Card>
       )}
-
-      {/* Stats Cards */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <StatCard
-          title="Your Hubs"
-          value={userHubs.length.toLocaleString()}
-          description="Hubs you own or moderate"
-          iconName="MessageSquare"
-          index={0}
-          color="purple"
-        />
-        <StatCard
-          title="Discord Servers"
-          value={servers.length.toLocaleString()}
-          description="Connected Discord servers"
-          iconName="Server"
-          index={1}
-          color="blue"
-        />
-        <StatCard
-          title="Active Users"
-          value="--"
-          description="Members across your hubs"
-          iconName="Users"
-          index={2}
-          color="emerald"
-        />
-        <StatCard
-          title="Activity"
-          value="--"
-          description="Recent hub interactions"
-          iconName="Activity"
-          index={3}
-          color="orange"
-        />
-      </div>
 
       {/* Main Dashboard Content with Tabs */}
       <div className="space-y-6">

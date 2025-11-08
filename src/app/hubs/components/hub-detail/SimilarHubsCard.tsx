@@ -5,10 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
-import {
-  type HubRecommendation,
-  useHubRecommendations,
-} from '@/hooks/use-hub-recommendations';
+import { useHubRecommendations } from '@/hooks/use-hub-recommendations';
 
 interface SimilarHubsCardProps {
   currentHubId: string;

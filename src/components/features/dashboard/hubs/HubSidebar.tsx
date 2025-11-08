@@ -248,13 +248,13 @@ function SidebarNavItem({
         <>
           <span className="flex-1 truncate font-medium text-sm">{label}</span>
           {comingSoon ? (
-            <span className="flex h-5 items-center justify-center rounded-full bg-gradient-to-r from-amber-500/80 to-orange-500/80 px-2 font-bold text-white text-[10px] uppercase tracking-wide shadow-sm shadow-amber-500/30">
+            <span className="flex h-5 items-center justify-center rounded-full bg-gradient-to-r from-amber-500/80 to-orange-500/80 px-2 font-bold text-[10px] text-white uppercase tracking-wide shadow-amber-500/30 shadow-sm">
               Soon
             </span>
           ) : (
             badge !== undefined &&
             badge > 0 && (
-              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-full bg-red-500/90 px-1.5 font-bold text-white text-xs shadow-sm shadow-red-500/30">
+              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-full bg-red-500/90 px-1.5 font-bold text-white text-xs shadow-red-500/30 shadow-sm">
                 {badge > 99 ? '99+' : badge}
               </span>
             )
@@ -491,39 +491,10 @@ export function HubSidebar({
   return (
     <div
       className={cn(
-        'flex h-full flex-col rounded-2xl border border-gray-700/40 bg-gradient-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/20 backdrop-blur-xl transition-all duration-300',
+        'flex h-full flex-col overflow-hidden border border-gray-700/40 bg-gradient-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/20 backdrop-blur-xl transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >
-      <div className="flex items-center justify-between rounded-t-2xl border-b border-gray-700/40 p-4">
-        {!isCollapsed && (
-          <div className="flex items-center gap-2">
-            <div className="text-sm font-bold tracking-wide text-white">
-              Hub Dashboard
-            </div>
-          </div>
-        )}
-        {onToggleCollapse && (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onToggleCollapse}
-            className="h-8 w-8 shrink-0 rounded-xl border border-transparent text-gray-400 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-gray-600/40 hover:bg-gray-700/50 hover:text-white hover:shadow-lg"
-          >
-            <motion.div
-              animate={{ rotate: isCollapsed ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {isCollapsed ? (
-                <ChevronRight className="h-4 w-4" />
-              ) : (
-                <ChevronLeft className="h-4 w-4" />
-              )}
-            </motion.div>
-          </Button>
-        )}
-      </div>
-
       {/* Premium Navigation */}
       <div className="hub-sidebar-scrollbar scrollbar-thin scrollbar-thumb-gray-700/30 scrollbar-track-transparent hover:scrollbar-thumb-gray-600/50 flex-1 space-y-5 overflow-y-auto p-4 transition-colors">
         {visibleSections.map((section) => {
@@ -584,6 +555,25 @@ export function HubSidebar({
           );
         })}
       </div>
+
+      {/* Collapse Button */}
+      {onToggleCollapse && (
+        <div className="border-t border-gray-700/40 p-4 flex justify-center">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onToggleCollapse}
+            className="h-8 w-8 shrink-0 rounded-xl border border-transparent text-gray-400 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-gray-600/40 hover:bg-gray-700/50 hover:text-white hover:shadow-lg"
+          >
+            <motion.div
+              animate={{ rotate: isCollapsed ? 0 : 180 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </motion.div>
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

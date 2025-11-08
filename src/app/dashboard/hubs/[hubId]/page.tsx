@@ -142,7 +142,7 @@ export default async function HubOverviewPage({
         <div className="space-y-6">
           {/* Hub Stats Grid */}
           <div className="grid gap-4 md:grid-cols-3">
-            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-blue-900/20 to-blue-950/20 transition-all hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10">
+            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-blue-900/20 to-blue-950/20 transition-all hover:border-blue-500/50 hover:shadow-blue-500/10 hover:shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
@@ -182,7 +182,7 @@ export default async function HubOverviewPage({
               </CardContent>
             </Card>
 
-            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-green-900/20 to-green-950/20 transition-all hover:border-green-500/50 hover:shadow-lg hover:shadow-green-500/10">
+            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-green-900/20 to-green-950/20 transition-all hover:border-green-500/50 hover:shadow-green-500/10 hover:shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
@@ -202,7 +202,7 @@ export default async function HubOverviewPage({
 
           {/* Hub Information Card */}
           <Card className="overflow-hidden rounded-2xl border-gray-700/50 bg-gray-900/50 backdrop-blur-sm">
-            <CardHeader className="border-b border-gray-700/50 bg-gradient-to-r from-gray-800/50 to-gray-900/50">
+            <CardHeader className="border-gray-700/50 border-b bg-gradient-to-r from-gray-800/50 to-gray-900/50">
               <CardTitle className="flex items-center gap-2 text-white">
                 <FileText className="h-5 w-5 text-indigo-400" />
                 Hub Information
@@ -220,7 +220,7 @@ export default async function HubOverviewPage({
                   <h3 className="mb-2 font-semibold text-gray-300 text-sm uppercase tracking-wide">
                     Description
                   </h3>
-                  <p className="leading-relaxed text-base text-gray-200">
+                  <p className="text-base text-gray-200 leading-relaxed">
                     {hub.description}
                   </p>
                 </div>
@@ -238,14 +238,14 @@ export default async function HubOverviewPage({
             </div>
             <div className="grid gap-4 md:grid-cols-3">
               <Link href={`/dashboard/hubs/${hubId}/reports`}>
-                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-red-900/20 to-red-950/20 transition-all hover:scale-[1.02] hover:border-red-500/50 hover:shadow-xl hover:shadow-red-500/20">
+                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-red-900/20 to-red-950/20 transition-all hover:scale-[1.02] hover:border-red-500/50 hover:shadow-red-500/20 hover:shadow-xl">
                   <CardContent className="p-6">
                     <div className="mb-4 flex items-start justify-between">
-                      <div className="rounded-xl bg-red-500/10 p-3 transition-all group-hover:bg-red-500/20 group-hover:scale-110">
+                      <div className="rounded-xl bg-red-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-red-500/20">
                         <Shield className="h-6 w-6 text-red-400" />
                       </div>
                       {pendingReports > 0 && (
-                        <span className="rounded-full bg-red-500/30 px-2.5 py-1 font-bold text-white text-sm shadow-lg shadow-red-500/30 ring-2 ring-red-500/50">
+                        <span className="rounded-full bg-red-500/30 px-2.5 py-1 font-bold text-sm text-white shadow-lg shadow-red-500/30 ring-2 ring-red-500/50">
                           {pendingReports}
                         </span>
                       )}
@@ -253,7 +253,7 @@ export default async function HubOverviewPage({
                     <h3 className="mb-2 font-bold text-white text-xl">
                       Reports
                     </h3>
-                    <p className="leading-relaxed text-gray-300 text-sm">
+                    <p className="text-gray-300 text-sm leading-relaxed">
                       Review and manage content reports from the community
                     </p>
                   </CardContent>
@@ -261,14 +261,14 @@ export default async function HubOverviewPage({
               </Link>
 
               <Link href={`/dashboard/hubs/${hubId}/appeals`}>
-                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-orange-900/20 to-orange-950/20 transition-all hover:scale-[1.02] hover:border-orange-500/50 hover:shadow-xl hover:shadow-orange-500/20">
+                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-orange-900/20 to-orange-950/20 transition-all hover:scale-[1.02] hover:border-orange-500/50 hover:shadow-orange-500/20 hover:shadow-xl">
                   <CardContent className="p-6">
                     <div className="mb-4 flex items-start justify-between">
-                      <div className="rounded-xl bg-orange-500/10 p-3 transition-all group-hover:bg-orange-500/20 group-hover:scale-110">
+                      <div className="rounded-xl bg-orange-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-orange-500/20">
                         <Bell className="h-6 w-6 text-orange-400" />
                       </div>
                       {pendingAppeals > 0 && (
-                        <span className="rounded-full bg-orange-500/30 px-2.5 py-1 font-bold text-white text-sm shadow-lg shadow-orange-500/30 ring-2 ring-orange-500/50">
+                        <span className="rounded-full bg-orange-500/30 px-2.5 py-1 font-bold text-sm text-white shadow-lg shadow-orange-500/30 ring-2 ring-orange-500/50">
                           {pendingAppeals}
                         </span>
                       )}
@@ -276,7 +276,7 @@ export default async function HubOverviewPage({
                     <h3 className="mb-2 font-bold text-white text-xl">
                       Appeals
                     </h3>
-                    <p className="leading-relaxed text-gray-300 text-sm">
+                    <p className="text-gray-300 text-sm leading-relaxed">
                       Review and process infraction appeal requests
                     </p>
                   </CardContent>
@@ -284,14 +284,14 @@ export default async function HubOverviewPage({
               </Link>
 
               <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-purple-900/20 to-purple-950/20 transition-all hover:scale-[1.02] hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/20">
+                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-purple-900/20 to-purple-950/20 transition-all hover:scale-[1.02] hover:border-purple-500/50 hover:shadow-purple-500/20 hover:shadow-xl">
                   <CardContent className="p-6">
                     <div className="mb-4 flex items-start justify-between">
-                      <div className="rounded-xl bg-purple-500/10 p-3 transition-all group-hover:bg-purple-500/20 group-hover:scale-110">
+                      <div className="rounded-xl bg-purple-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-purple-500/20">
                         <Gavel className="h-6 w-6 text-purple-400" />
                       </div>
                       {activeInfractions > 0 && (
-                        <span className="rounded-full bg-purple-500/30 px-2.5 py-1 font-bold text-white text-sm shadow-lg shadow-purple-500/30 ring-2 ring-purple-500/50">
+                        <span className="rounded-full bg-purple-500/30 px-2.5 py-1 font-bold text-sm text-white shadow-lg shadow-purple-500/30 ring-2 ring-purple-500/50">
                           {activeInfractions}
                         </span>
                       )}
@@ -299,7 +299,7 @@ export default async function HubOverviewPage({
                     <h3 className="mb-2 font-bold text-white text-xl">
                       Infractions
                     </h3>
-                    <p className="leading-relaxed text-gray-300 text-sm">
+                    <p className="text-gray-300 text-sm leading-relaxed">
                       View and manage bans, mutes, and warnings
                     </p>
                   </CardContent>

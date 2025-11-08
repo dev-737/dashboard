@@ -1,5 +1,4 @@
 'use client';
-import { motion } from 'motion/react';
 import {
   Activity,
   BarChart3,
@@ -11,6 +10,7 @@ import {
   Users,
   Zap,
 } from 'lucide-react';
+import { motion } from 'motion/react';
 
 // Map of icon names to components
 const IconMap = {

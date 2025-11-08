@@ -26,9 +26,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
 import { BlockWordAction } from '@/lib/generated/prisma/client';
 import {
-  type AntiSwearRule,
   BlockWordActionColors,
-  BlockWordActionDescriptions,
   BlockWordActionLabels,
   RULE_TEMPLATES,
 } from '@/lib/types/anti-swear';

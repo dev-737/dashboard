@@ -1,4 +1,3 @@
-import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/auth';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';

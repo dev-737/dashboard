@@ -146,7 +146,7 @@ export function SystemStatus() {
       variants={container}
       className="h-full"
     >
-      <Card className="h-full border-gray-800 bg-gradient-to-b from-gray-900/50 to-gray-900/30 backdrop-blur-sm">
+      <Card className="h-full border-gray-800 bg-linear-to-b from-gray-900/50 to-gray-900/30 backdrop-blur-sm">
         <CardHeader className="pb-3">
           <div className="flex items-center gap-2">
             <Activity className="h-5 w-5 text-indigo-400" />

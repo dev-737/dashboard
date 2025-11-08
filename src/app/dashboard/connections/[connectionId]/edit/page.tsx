@@ -1,6 +1,5 @@
 import { ArrowLeft, Trash } from 'lucide-react';
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';

@@ -16,9 +16,6 @@ const TrendingUp = dynamic(
   { ssr: false }
 );
 
-// Dynamically load motion and store in state
-import type { motion as MotionType } from 'motion/react';
-
 interface StatsData {
   activeServers: number;
   publicHubs: number;

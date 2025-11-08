@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { MessageSquare, Shield, Sparkles } from 'lucide-react';
+import { MessageSquare, Settings, Shield, Sparkles, Upload } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { Card } from '@/components/ui/card';
@@ -9,12 +9,16 @@ import { useToast } from '@/components/ui/use-toast';
 import { useTRPC } from '@/utils/trpc';
 import { BasicInfoStep } from './BasicInfoStep';
 import { DescriptionSettingsStep } from './DescriptionSettingsStep';
+import { MediaUploadStep } from './MediaUploadStep';
+import { ModulesSettingsStep } from './ModulesSettingsStep';
 import { RulesWelcomeStep } from './RulesWelcomeStep';
 import { StepIndicator } from './StepIndicator';
 
 const STEP_ICONS = [
   { icon: Sparkles, label: 'Name', color: 'text-purple-400' },
   { icon: MessageSquare, label: 'Details', color: 'text-blue-400' },
+  { icon: Upload, label: 'Media', color: 'text-pink-400' },
+  { icon: Settings, label: 'Modules', color: 'text-orange-400' },
   { icon: Shield, label: 'Rules', color: 'text-green-400' },
 ];
 
@@ -23,9 +27,13 @@ export function HubCreateForm() {
   const [step, setStep] = useState(1);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [shortDescription, setShortDescription] = useState('');
   const [isPrivate, setIsPrivate] = useState(true);
+  const [modules, setModules] = useState<number>(0);
   const [welcomeMessage, setWelcomeMessage] = useState('');
   const [rules, setRules] = useState<string[]>(['']);
+  const [iconUrl, setIconUrl] = useState<string | null>(null);
+  const [bannerUrl, setBannerUrl] = useState<string | null>(null);
   const [nameError, setNameError] = useState('');
   const [isValidatingName, setIsValidatingName] = useState(false);
   const [isNameValid, setIsNameValid] = useState(false);
@@ -36,6 +44,7 @@ export function HubCreateForm() {
   // Generate unique IDs for form fields
   const nameFieldId = useId();
   const descriptionFieldId = useId();
+  const shortDescriptionFieldId = useId();
   const privateFieldId = useId();
   const welcomeMessageFieldId = useId();
 
@@ -158,8 +167,10 @@ export function HubCreateForm() {
     createHubMutation.mutate({
       name,
       description,
+      shortDescription: shortDescription || undefined,
       private: isPrivate,
       rules: filteredRules,
+      settings: modules,
     });
   };
 
@@ -174,7 +185,15 @@ export function HubCreateForm() {
       setStep(2);
     } else if (step === 2 && description.length >= 10) {
       setStep(3);
+    } else if (step === 3) {
+      setStep(4);
+    } else if (step === 4) {
+      setStep(5);
     }
+  };
+
+  const skipModulesAndContinue = () => {
+    setStep(5);
   };
 
   const prevStep = () => {
@@ -182,6 +201,10 @@ export function HubCreateForm() {
       setStep(1);
     } else if (step === 3) {
       setStep(2);
+    } else if (step === 4) {
+      setStep(3);
+    } else if (step === 5) {
+      setStep(4);
     }
   };
 
@@ -218,17 +241,41 @@ export function HubCreateForm() {
             <DescriptionSettingsStep
               description={description}
               setDescription={setDescription}
+              shortDescription={shortDescription}
+              setShortDescription={setShortDescription}
               isPrivate={isPrivate}
               setIsPrivate={setIsPrivate}
               onNext={nextStep}
               onPrev={prevStep}
               canProceed={canProceed()}
               descriptionFieldId={descriptionFieldId}
+              shortDescriptionFieldId={shortDescriptionFieldId}
               privateFieldId={privateFieldId}
             />
           )}
 
           {step === 3 && (
+            <MediaUploadStep
+              iconUrl={iconUrl}
+              setIconUrl={setIconUrl}
+              bannerUrl={bannerUrl}
+              setBannerUrl={setBannerUrl}
+              onNext={nextStep}
+              onPrev={prevStep}
+            />
+          )}
+
+          {step === 4 && (
+            <ModulesSettingsStep
+              modules={modules}
+              setModules={setModules}
+              onNext={nextStep}
+              onPrev={prevStep}
+              onSkip={skipModulesAndContinue}
+            />
+          )}
+
+          {step === 5 && (
             <RulesWelcomeStep
               welcomeMessage={welcomeMessage}
               setWelcomeMessage={setWelcomeMessage}

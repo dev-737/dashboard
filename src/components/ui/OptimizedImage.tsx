@@ -54,7 +54,7 @@ const isSlowExternalDomain = (src: string): boolean => {
     return EXTERNAL_TIMEOUT_DOMAINS.some(
       (domain) =>
         url.hostname === domain ||
-        url.hostname.endsWith('.' + domain) ||
+        url.hostname.endsWith(`.${domain}`) ||
         url.hostname.endsWith('.ufs.sh')
     );
   } catch {

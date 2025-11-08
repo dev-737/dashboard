@@ -1,7 +1,5 @@
 'use client';
 
-import { motion } from 'motion/react';
-import { useEffect, useState } from 'react';
 import {
   Activity,
   BarChart3,
@@ -10,6 +8,8 @@ import {
   Users,
   Zap,
 } from 'lucide-react';
+import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
 
 interface User {
   id: string;
@@ -28,6 +28,7 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
 
   // Only render content after component is mounted on client
   if (!isMounted) {
@@ -114,8 +115,8 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
       </div>
 
       {/* Gradient orbs */}
-      <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
-      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="-right-20 -top-20 absolute h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
+      <div className="-bottom-20 -left-20 absolute h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
 
       {/* Content container */}
       <div className="relative z-10 flex min-h-[30vh] flex-col items-center justify-center px-6 py-12 md:min-h-[40vh]">
@@ -154,7 +155,7 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
 
           {/* Description */}
           <motion.p
-            className="mx-auto max-w-2xl text-gray-300 text-base leading-relaxed md:text-lg"
+            className="mx-auto max-w-2xl text-base text-gray-300 leading-relaxed md:text-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.6 }}
@@ -171,17 +172,19 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
             transition={{ delay: 0.7, duration: 0.6 }}
           >
             {[
-              { icon: MessageSquare, label: 'Hubs', color: 'purple' },
-              { icon: Users, label: 'Servers', color: 'blue' },
-              { icon: Activity, label: 'Active', color: 'pink' },
-            ].map(({ icon: Icon, label, color }, index) => (
+              { icon: MessageSquare, label: 'Hubs', color: 'purple', href: '/dashboard?tab=hubs' },
+              { icon: Users, label: 'Servers', color: 'blue', href: '/dashboard?tab=servers' },
+              { icon: Activity, label: 'Profile', color: 'pink', href: '/dashboard/settings' },
+            ].map(({ icon: Icon, label, color, href }, index) => (
               <motion.div
                 key={label}
-                className="flex items-center gap-2 rounded-xl border border-gray-700/50 bg-gray-900/30 px-4 py-2 backdrop-blur-sm"
+                className="flex items-center gap-2 rounded-xl border border-gray-700/50 bg-gray-900/30 px-4 py-2 backdrop-blur-sm cursor-pointer hover:bg-gray-900/50 hover:scale-105 transition-all"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
                 whileHover={{ scale: 1.05 }}
+                // take them to the link on click
+                onClick={() => (window.location.href = href)}
               >
                 <Icon
                   className={`h-4 w-4 ${

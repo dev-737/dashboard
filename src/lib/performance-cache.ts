@@ -36,7 +36,9 @@ export class PerformanceCache {
     try {
       const redisData = await redis.get(key);
       if (redisData) {
-        console.log(`Redis cache hit for key: ${key}`);
+        if (process.env.NODE_ENV !== 'production' && process.env.DEBUG_CACHE) {
+          console.log(`Redis cache hit for key: ${key}`);
+        }
         const parsed = JSON.parse(redisData) as T;
         return parsed;
       }

@@ -3,7 +3,6 @@
 import { Check, Clock, HelpCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -49,8 +48,8 @@ export function ActionSelector({
 
   const handleMuteDurationChange = (value: string) => {
     setCustomMuteDuration(value);
-    const minutes = parseInt(value);
-    if (!isNaN(minutes) && minutes > 0 && onMuteDurationChange) {
+    const minutes = parseInt(value, 10);
+    if (!Number.isNaN(minutes) && minutes > 0 && onMuteDurationChange) {
       onMuteDurationChange(minutes);
     }
   };

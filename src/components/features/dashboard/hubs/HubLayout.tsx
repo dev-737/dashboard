@@ -66,7 +66,7 @@ function HubLayoutContent({
       {/* Fixed Hub Sidebar - Desktop only with proper spacing and rounded corners */}
       {isHydrated && (
         <div
-          className={`fixed top-20 bottom-6 left-4 z-30 hidden transition-all duration-300 lg:block ${
+          className={`fixed top-16 bottom-0 left-0 z-30 hidden transition-all duration-300 lg:block ${
             hubSidebarCollapsed ? 'w-16' : 'w-64'
           }`}
         >
@@ -85,7 +85,7 @@ function HubLayoutContent({
 
       {/* Main Content Area with proper margin and spacing */}
       <div
-        className={`px-4 transition-all duration-300 lg:pr-4 ${
+        className={`px-4 transition-all duration-300 lg:pr-4 lg:rounded-l-2xl ${
           isHydrated
             ? hubSidebarCollapsed
               ? 'lg:ml-24'

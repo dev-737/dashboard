@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   Clock,
   Edit2,
-  Eye,
   EyeOff,
   MessageSquareX,
   MoreVertical,
@@ -29,13 +28,7 @@ import {
 } from '@/components/ui/AlertDialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,

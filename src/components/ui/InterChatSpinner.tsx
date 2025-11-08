@@ -24,7 +24,7 @@ export function InterChatSpinner({ size = 80 }: InterChatSpinnerProps) {
         />
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-center animate-spin">
+      <div className="absolute inset-0 flex animate-spin items-center justify-center">
         <Image
           src="/assets/images/logos/Ring.svg"
           alt="InterChat Ring"

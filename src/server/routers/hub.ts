@@ -20,7 +20,8 @@ const createHubSchema = z.object({
   shortDescription: z.string().min(10).max(100).optional(),
   private: z.boolean().prefault(true),
   rules: z.array(z.string()).optional(),
-});
+  settings: z.any().optional(),
+});;
 
 // Schema for hub search
 const hubSearchSchema = z.object({

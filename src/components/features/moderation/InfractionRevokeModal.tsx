@@ -21,7 +21,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/AlertDialog';
-import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import type {
   InfractionStatus,
@@ -87,7 +86,7 @@ export function InfractionRevokeModal({
         onSuccess();
         onClose();
       }
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: 'Failed to revoke infraction',
         description: 'An unexpected error occurred. Please try again.',

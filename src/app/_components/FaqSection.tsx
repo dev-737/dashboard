@@ -143,7 +143,7 @@ export function FaqSection() {
             className="border-gray-600/70 bg-gray-800/60 text-gray-300 shadow-lg backdrop-blur-xl transition-all duration-200 hover:border-gray-500/70 hover:bg-gray-800/80 hover:text-white"
             asChild
           >
-            <Link href="/docs" className="flex items-center gap-2">
+            <Link href="https://docs.interchat.dev" className="flex items-center gap-2">
               View Documentation
               <ArrowRight className="h-4 w-4" />
             </Link>
@@ -215,16 +215,8 @@ const faqs = [
     title: 'Is InterChat free to use?',
     content: (
       <>
-        Yes! InterChat is completely free and open-source. Anyone can use it, no
-        matter the server size. If you want to support the project, you can
-        contribute code, report bugs, suggest features, or donate via{' '}
-        <Link
-          href="/donate"
-          className="font-medium text-primary underline underline-offset-2 transition-colors duration-200 hover:text-primary-alt"
-        >
-          Ko-Fi
-        </Link>
-        .
+        Yes! InterChat is completely free. Anyone can use it, no
+        matter the server size.
       </>
     ),
   },

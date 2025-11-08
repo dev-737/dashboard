@@ -124,7 +124,7 @@ model Connection {
 
 model Hub {
   id                  String               @id @default(cuid())
-  name                String               @unique @db.VarChar(32)
+  name                String               @unique @db.VarChar(100)
   description         String               @db.VarChar(1024)
   ownerId             String
   iconUrl             String               @db.VarChar(512)
@@ -149,7 +149,7 @@ model Hub {
   featured            Boolean              @default(false)
   rules               String[]
   activityLevel       HubActivityLevel     @default(LOW)
-  averageRating       Float?                @default(0.0)
+  averageRating       Float?               @default(0.0)
   antiSwearRules      AntiSwearRule[]
   blockWords          BlockWord[]
   connections         Connection[]
@@ -276,37 +276,35 @@ model HubUpvote {
 }
 
 model Infraction {
-  id          String           @id @default(cuid())
-  hubId       String
-  moderatorId String
-  reason      String           @db.VarChar(500)
-  expiresAt   DateTime?       
-  userId      String?
-  serverId    String?
-  serverName  String?
-  type        InfractionType
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @default(now())
-  status      InfractionStatus @default(ACTIVE)
-  notified    Boolean          @default(false)
-  evidenceMessageId   String?
-  evidenceContent     String?
-  evidenceImageUrl    String?
-  evidenceAuthorId    String?
-  evidenceAuthorName  String?
-  evidenceChannelId   String?
-  evidenceGuildId     String?
-  evidenceGuildName   String?
-  evidenceCreatedAt   DateTime?
-  appeals     Appeal[]
-  hub         Hub              @relation(fields: [hubId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  moderator   User             @relation("Infraction_moderatorIdToUser", fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  server      ServerData?      @relation(fields: [serverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user        User?            @relation("Infraction_userIdToUser", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id                 String           @id @default(cuid())
+  hubId              String
+  moderatorId        String
+  reason             String           @db.VarChar(500)
+  expiresAt          DateTime?
+  userId             String?
+  serverId           String?
+  serverName         String?
+  type               InfractionType
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @default(now())
+  status             InfractionStatus @default(ACTIVE)
+  notified           Boolean          @default(false)
+  evidenceMessageId  String?
+  evidenceContent    String?
+  evidenceImageUrl   String?
+  evidenceAuthorId   String?
+  evidenceAuthorName String?
+  evidenceChannelId  String?
+  evidenceGuildId    String?
+  evidenceGuildName  String?
+  evidenceCreatedAt  DateTime?
+  appeals            Appeal[]
+  hub                Hub              @relation(fields: [hubId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  moderator          User             @relation("Infraction_moderatorIdToUser", fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  server             ServerData?      @relation(fields: [serverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user               User?            @relation("Infraction_userIdToUser", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([status, hubId])
-  @@index([serverId])
-  @@index([userId])
 }
 
 model Message {
@@ -319,6 +317,8 @@ model Message {
   authorId          String
   referredMessageId String?
   createdAt         DateTime             @default(now())
+  status            MessageStatus        @default(ACTIVE)
+  deletionQueuedAt  DateTime?
   broadcasts        Broadcast[]
   globalReports     GlobalReport[]
   reactions         HubMessageReaction[]
@@ -332,6 +332,7 @@ model Message {
   @@index([referredMessageId])
   @@index([guildId, authorId])
   @@index([hubId, createdAt(sort: Desc)])
+  @@index([status, createdAt(sort: Desc)])
 }
 
 model ReputationLog {
@@ -377,58 +378,58 @@ model Tag {
 }
 
 model User {
-  id                     String                    @id
-  name                   String?
-  image                  String?
-  lastMessageAt          DateTime?                 @default(now())
-  inboxLastReadDate      DateTime?                 @default(now())
-  createdAt              DateTime?                 @default(now())
-  updatedAt              DateTime?                 @default(now())
-  activityLevel          HubActivityLevel?
-  lastHubJoinAt          DateTime?                
-  email                  String?
-  emailVerified          Boolean?
-  showBadges             Boolean                   @default(true)
-  mentionOnReply         Boolean                   @default(true)
-  showNsfwHubs           Boolean                   @default(false)
-  voteCount              Int                       @default(0)
-  reputation             Int                       @default(0)
-  messageCount           Int                       @default(0)
-  hubJoinCount           Int                       @default(0)
-  hubEngagementScore     Float                     @default(0.0)
-  locale                 String?
-  lastVoted              DateTime?
-  voteRemindersEnabled   Boolean                   @default(true)
-  lastVoteReminderSent   DateTime?
-  badges                 Badges[]                  @default([])
-  preferredLanguages     String[]                  @default([])
-  accounts               Account[]
-  antiSwearRulesCreated  AntiSwearRule[]
-  AntiSwearWhitelist     AntiSwearWhitelist[]
-  appeals                Appeal[]
-  issuedBlacklists       Blacklist[]               @relation("Blacklist_moderatorIdToUser")
-  blacklists             Blacklist[]               @relation("Blacklist_userIdToUser")
-  blockWordsCreated      BlockWord[]
-  globalReportsSubmitted GlobalReport[]            @relation("GlobalReport_handledByToUser")
-  globalReportsReceived  GlobalReport[]            @relation("GlobalReport_reportedUserIdToUser")
-  globalReportsHandled   GlobalReport[]            @relation("GlobalReport_reporterIdToUser")
-  ownedHubs              Hub[]
-  modPositions           HubModerator[]
-  hubReportsSubmitted    HubReport[]               @relation("HubReport_handledByToUser")
-  hubReportsReceived     HubReport[]               @relation("HubReport_reportedUserIdToUser")
-  hubReportsHandled      HubReport[]               @relation("HubReport_reporterIdToUser")
-  reviews                HubReview[]
-  rulesAcceptances       HubRulesAcceptance[]
-  upvotedHubs            HubUpvote[]
-  issuedInfractions      Infraction[]              @relation("Infraction_moderatorIdToUser")
-  infractions            Infraction[]              @relation("Infraction_userIdToUser")
-  leaderboardEntries     LeaderboardEntry[]
-  reputationLog          ReputationLog[]
-  issuedServerBlacklists ServerBlacklist[]
-  ServerBlocklist        ServerBlocklist[]
-  sessions               Session[]
-  achievements           UserAchievement[]
-  achievementProgress    UserAchievementProgress[]
+  id                      String                    @id
+  name                    String?
+  image                   String?
+  lastMessageAt           DateTime?                 @default(now())
+  inboxLastReadDate       DateTime?                 @default(now())
+  createdAt               DateTime?                 @default(now())
+  updatedAt               DateTime?                 @default(now())
+  activityLevel           HubActivityLevel?
+  lastHubJoinAt           DateTime?
+  email                   String?
+  emailVerified           Boolean?
+  showBadges              Boolean                   @default(true)
+  mentionOnReply          Boolean                   @default(true)
+  showNsfwHubs            Boolean                   @default(false)
+  voteCount               Int                       @default(0)
+  reputation              Int                       @default(0)
+  messageCount            Int                       @default(0)
+  hubJoinCount            Int                       @default(0)
+  hubEngagementScore      Float                     @default(0.0)
+  locale                  String?
+  lastVoted               DateTime?
+  badges                  Badges[]                  @default([])
+  preferredLanguages      String[]                  @default([])
+  voteRemindersEnabled    Boolean                   @default(true)
+  lastVoteReminderSent    DateTime?
+  accounts                Account[]
+  antiSwearRulesCreated   AntiSwearRule[]
+  AntiSwearWhitelist      AntiSwearWhitelist[]
+  appeals                 Appeal[]
+  issuedBlacklists        Blacklist[]               @relation("Blacklist_moderatorIdToUser")
+  blacklists              Blacklist[]               @relation("Blacklist_userIdToUser")
+  blockWordsCreated       BlockWord[]
+  globalReportsSubmitted  GlobalReport[]            @relation("GlobalReport_handledByToUser")
+  globalReportsReceived   GlobalReport[]            @relation("GlobalReport_reportedUserIdToUser")
+  globalReportsHandled    GlobalReport[]            @relation("GlobalReport_reporterIdToUser")
+  ownedHubs               Hub[]
+  modPositions            HubModerator[]
+  hubReportsSubmitted     HubReport[]               @relation("HubReport_handledByToUser")
+  hubReportsReceived      HubReport[]               @relation("HubReport_reportedUserIdToUser")
+  hubReportsHandled       HubReport[]               @relation("HubReport_reporterIdToUser")
+  reviews                 HubReview[]
+  rulesAcceptances        HubRulesAcceptance[]
+  upvotedHubs             HubUpvote[]
+  issuedInfractions       Infraction[]              @relation("Infraction_moderatorIdToUser")
+  infractions             Infraction[]              @relation("Infraction_userIdToUser")
+  leaderboardEntries      LeaderboardEntry[]
+  reputationLog           ReputationLog[]
+  issuedServerBlacklists  ServerBlacklist[]
+  ServerBlocklist         ServerBlocklist[]
+  sessions                Session[]
+  achievements            UserAchievement[]
+  achievementProgress     UserAchievementProgress[]
 
   @@index([email])
   @@index([lastVoted])
@@ -466,14 +467,14 @@ model Blacklist {
   userId      String
   moderatorId String
   reason      String
-  expiresAt   DateTime?    
+  expiresAt   DateTime?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime?     @default(now())
   type        BlacklistType @default(PERMANENT)
   moderator   User          @relation("Blacklist_moderatorIdToUser", fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   user        User          @relation("Blacklist_userIdToUser", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  @@index([userId])
+  @@index([userId, expiresAt], map: "Blacklist_user_active_idx")
 }
 
 model LeaderboardEntry {
@@ -503,15 +504,15 @@ model ServerBlacklist {
   moderatorId String
   reason      String        @db.VarChar(500)
   duration    Int?
-  expiresAt   DateTime?    
+  expiresAt   DateTime?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @default(now())
   type        BlacklistType @default(PERMANENT)
   moderator   User          @relation(fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   server      ServerData    @relation(fields: [serverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  @@index([serverId])
   @@index([serverId, type])
+  @@index([serverId, expiresAt], map: "ServerBlacklist_server_active_idx")
 }
 
 model DevAlerts {
@@ -548,7 +549,7 @@ model GlobalReport {
   updatedAt                              DateTime     @default(now())
   handledBy                              String?
   status                                 ReportStatus @default(PENDING)
-  handledAt                              DateTime?   
+  handledAt                              DateTime?
   reportMessageId                        String?
   reportChannelId                        String?
   actionTaken                            String?
@@ -575,7 +576,7 @@ model HubReport {
   updatedAt        DateTime     @default(now())
   handledBy        String?
   status           ReportStatus @default(PENDING)
-  handledAt        DateTime?   
+  handledAt        DateTime?
   reportMessageId  String?
   reportChannelId  String?
   actionTaken      String?
@@ -595,7 +596,7 @@ model HubReport {
 }
 
 model HubMessageReaction {
-  id        String   @id
+  id        String   @id @db.VarChar
   messageId String
   emoji     String   @db.VarChar(64)
   users     String[]
@@ -618,17 +619,17 @@ model AntiSwearWhitelist {
 }
 
 model Account {
-  userId            String  
-  type              String  
-  provider          String  
-  providerAccountId String  
-  refresh_token     String? 
-  access_token      String? 
+  userId            String   @db.VarChar
+  type              String   @db.VarChar
+  provider          String   @db.VarChar
+  providerAccountId String   @db.VarChar
+  refresh_token     String?  @db.VarChar
+  access_token      String?  @db.VarChar
   expires_at        Int?
-  token_type        String? 
-  scope             String? 
-  id_token          String? 
-  session_state     String? 
+  token_type        String?  @db.VarChar
+  scope             String?  @db.VarChar
+  id_token          String?  @db.VarChar
+  session_state     String?  @db.VarChar
   createdAt         DateTime @default(now()) @db.Timestamptz(6)
   updatedAt         DateTime @default(now()) @updatedAt @db.Timestamptz(6)
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
@@ -637,8 +638,8 @@ model Account {
 }
 
 model Session {
-  sessionToken String   @id
-  userId       String  
+  sessionToken String   @id @db.VarChar
+  userId       String   @db.VarChar
   expires      DateTime @db.Timestamptz(6)
   createdAt    DateTime @default(now()) @db.Timestamptz(6)
   updatedAt    DateTime @default(now()) @updatedAt @db.Timestamptz(6)
@@ -744,4 +745,10 @@ enum PatternMatchType {
   PREFIX
   SUFFIX
   WILDCARD
+}
+
+enum MessageStatus {
+  PENDING
+  ACTIVE
+  DELETED
 }

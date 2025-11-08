@@ -1,13 +1,4 @@
-import {
-  AlertCircle,
-  CheckCircle,
-  FileText,
-  MessageSquare,
-  Shield,
-  TrendingUp,
-  XCircle,
-} from 'lucide-react';
-import { headers } from 'next/headers';
+import { AlertCircle, CheckCircle, FileText } from 'lucide-react';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/auth';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';

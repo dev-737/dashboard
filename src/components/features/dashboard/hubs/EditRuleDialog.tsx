@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Edit2, Save, Shield } from 'lucide-react';
+import { Save, Shield } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { PatternBuilder } from '@/components/forms/PatternBuilder';
 import { Button } from '@/components/ui/button';

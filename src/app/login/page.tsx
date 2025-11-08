@@ -27,13 +27,6 @@ function LoginContent() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gray-950">
-      {/* Animated background pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="-left-4 absolute top-0 h-72 w-72 animate-pulse rounded-full bg-purple-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
-        <div className="-right-4 animation-delay-2000 absolute top-0 h-72 w-72 animate-pulse rounded-full bg-indigo-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
-        <div className="-bottom-8 animation-delay-4000 absolute left-20 h-72 w-72 animate-pulse rounded-full bg-pink-500 opacity-20 mix-blend-multiply blur-xl filter"></div>
-      </div>
-
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
 

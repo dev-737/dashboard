@@ -13,24 +13,30 @@ import { Textarea } from '@/components/ui/textarea';
 interface DescriptionSettingsStepProps {
   description: string;
   setDescription: (description: string) => void;
+  shortDescription: string;
+  setShortDescription: (description: string) => void;
   isPrivate: boolean;
   setIsPrivate: (isPrivate: boolean) => void;
   onNext: () => void;
   onPrev: () => void;
   canProceed: boolean;
   descriptionFieldId: string;
+  shortDescriptionFieldId: string;
   privateFieldId: string;
 }
 
 export function DescriptionSettingsStep({
   description,
   setDescription,
+  shortDescription,
+  setShortDescription,
   isPrivate,
   setIsPrivate,
   onNext,
   onPrev,
   canProceed,
   descriptionFieldId,
+  shortDescriptionFieldId,
   privateFieldId,
 }: DescriptionSettingsStepProps) {
   return (
@@ -74,6 +80,26 @@ export function DescriptionSettingsStep({
             <span className="text-gray-400 text-xs">
               {description.length}/500
             </span>
+          </div>
+        </div>
+
+        {/* Short Description */}
+        <div className="space-y-3">
+          <Label htmlFor={shortDescriptionFieldId} className="font-medium text-base">
+            Short Description
+          </Label>
+          <input
+            id={shortDescriptionFieldId}
+            type="text"
+            placeholder="A catchy one-liner about your hub"
+            value={shortDescription}
+            onChange={(e) => setShortDescription(e.target.value.slice(0, 100))}
+            className="w-full rounded-lg border border-gray-700/50 bg-gray-800/50 px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+            maxLength={100}
+          />
+          <div className="flex items-center justify-between">
+            <p className="text-gray-400 text-sm">Optional but recommended</p>
+            <span className="text-gray-400 text-xs">{shortDescription.length}/100</span>
           </div>
         </div>
 

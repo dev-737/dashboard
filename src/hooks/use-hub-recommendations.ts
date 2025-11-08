@@ -351,7 +351,7 @@ export function useMultipleRecommendations(
   options?: { enabled?: boolean }
 ) {
   // Create individual queries for each type
-  const results = types.map((config, index) =>
+  const results = types.map((config, _index) =>
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useHubRecommendations(config.type, config.limit || 8, {
       enabled: options?.enabled ?? true,

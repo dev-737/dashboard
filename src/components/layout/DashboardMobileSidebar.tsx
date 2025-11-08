@@ -20,6 +20,7 @@ import { createPortal } from 'react-dom';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
 import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/OnboardingHelpMenu';
 import { cn } from '@/lib/utils';
+import { UrlObject } from 'url';
 
 interface MobileSidebarProps {
   isOpen: boolean;

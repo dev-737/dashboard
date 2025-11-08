@@ -174,7 +174,7 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
   const queryInput = useMemo(() => buildInput(), [buildInput]);
 
   // Create a stable key for dependency tracking
-  const queryKey = useMemo(() => JSON.stringify(queryInput), [queryInput]);
+  const _queryKey = useMemo(() => JSON.stringify(queryInput), [queryInput]);
 
   // Debounced fetch on filter changes
   useEffect(() => {
@@ -207,7 +207,7 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
       clearTimeout(id);
       // Don't abort here - let the next effect cancel if needed
     };
-  }, [queryKey, queryClient, trpc.discover.list, queryInput]);
+  }, [queryClient, trpc.discover.list, queryInput]);
 
   // Infinite scroll
   useEffect(() => {

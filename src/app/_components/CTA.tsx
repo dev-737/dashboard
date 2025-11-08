@@ -103,7 +103,7 @@ export function CTA() {
                 className="h-14 border-gray-600/70 bg-gray-800/60 px-8 font-semibold text-white shadow-lg backdrop-blur-xl hover:border-gray-500/70 hover:bg-gray-800/80"
               >
                 <Link
-                  href="/docs/getting-started"
+                  href="https://docs.interchat.dev"
                   className="group flex items-center"
                 >
                   Learn how it works

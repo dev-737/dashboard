@@ -1,4 +1,4 @@
-import { auth } from '@/auth';
+import { cacheLife, cacheTag } from 'next/cache';
 import type { Prisma } from '@/lib/generated/prisma/client';
 import { PerformanceCache } from '@/lib/performance-cache';
 import { db } from '@/lib/prisma';
@@ -75,7 +75,7 @@ class CacheService {
 
 const cacheService = new CacheService();
 
-async function getBaseSelect(userId?: string) {
+function getBaseSelect(userId?: string) {
   const baseSelect = {
     id: true,
     name: true,
@@ -220,9 +220,15 @@ function buildOrderBy(
   }
 }
 
-export async function getDiscoverHubs(params: DiscoverParams) {
-  const session = await auth();
-  const userId = session?.user?.id;
+// MIGRATED: Moved auth() call outside cache scope to comply with Cache Components
+// Pass userId as a parameter instead of calling auth() inside cached function
+export async function getDiscoverHubs(
+  params: DiscoverParams,
+  userId?: string
+) {
+  'use cache';
+  cacheLife('discover-data');
+  cacheTag('discover', `discover-${params.sort || 'trending'}`);
 
   const page = Math.max(1, params.page ?? 1);
   const pageSize = Math.min(
@@ -232,7 +238,7 @@ export async function getDiscoverHubs(params: DiscoverParams) {
 
   const where = buildWhere(params);
   const orderBy = buildOrderBy(params.sort);
-  const select = await getBaseSelect(userId);
+  const select = getBaseSelect(userId);
 
   const baseCacheParams = { ...params, userId };
   const pageCacheKey = cacheService.generateCacheKey('discover:v3', {

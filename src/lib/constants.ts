@@ -22,7 +22,8 @@ export const HubModulesDescriptions = {
   [HubModulesBits.BlockNSFW]: 'Block NSFW content',
   [HubModulesBits.AllowVideos]: 'Allow video attachments in messages',
   [HubModulesBits.BlockAttachments]: 'Block image and sticker attachments',
-  [HubModulesBits.BlockTenorGifs]: 'Block all GIF attachments (including Tenor)',
+  [HubModulesBits.BlockTenorGifs]:
+    'Block all Tenor GIFs links',
 } as const;
 
 export const SUPPORTED_LANGUAGES = [

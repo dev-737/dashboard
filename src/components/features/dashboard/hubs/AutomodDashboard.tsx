@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckCircle2, Plus, Settings, Shield } from 'lucide-react';
+import { CheckCircle2, Plus, Shield } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {

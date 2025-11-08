@@ -1,16 +1,7 @@
 'use client';
 
-import {
-  ArrowLeft,
-  Camera,
-  EyeOff,
-  Globe,
-  Lock,
-  Upload,
-  Users,
-} from 'lucide-react';
+import { Camera, EyeOff, Globe, Lock, Upload, Users } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -108,12 +99,12 @@ export function UnifiedHubHeader({
 
                     {/* Icon Upload Overlay */}
                     {canEdit && (
-                      <Button
+                      <button
                         onClick={() => setIconUploadOpen(true)}
                         className="absolute inset-0 flex cursor-pointer items-center justify-center rounded-2xl bg-black/0 opacity-0 transition-colors duration-200 hover:bg-black/60 group-hover:opacity-100"
                       >
                         <Upload className="h-5 w-5 text-white" />
-                      </Button>
+                      </button>
                     )}
                   </div>
 

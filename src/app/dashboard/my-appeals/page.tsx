@@ -1,7 +1,6 @@
 import { formatDistanceToNow } from 'date-fns';
 import { Check, Clock, MessageCircle, Shield, X } from 'lucide-react';
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';

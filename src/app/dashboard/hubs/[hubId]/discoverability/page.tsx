@@ -1,6 +1,5 @@
 import { Globe, Palette } from 'lucide-react';
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/auth';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';

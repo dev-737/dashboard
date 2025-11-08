@@ -166,7 +166,7 @@ export function LayoutOptimizer({
 
       try {
         observer.observe({ entryTypes: ['layout-shift'] });
-      } catch (e) {
+      } catch (_e) {
         // Ignore if not supported
       }
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
-import { Suspense, type ReactNode } from 'react';
+import { type ReactNode, Suspense } from 'react';
 import { NavbarWrapper } from '@/components/layout/NavbarWrapper';
 import { Toaster } from '@/components/layout/Toaster';
 import { Providers } from '@/components/providers';

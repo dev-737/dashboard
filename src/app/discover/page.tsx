@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { auth } from '@/auth';
 import { GridPattern } from '@/components/magicui/GridPattern';
 import { CriticalCSS, LayoutOptimizer } from '@/components/ui/LayoutOptimizer';
 import {
@@ -43,7 +44,11 @@ export default async function DiscoverPage({
       : undefined,
   };
 
-  const initialData = await getDiscoverHubs(query);
+  // Get userId from auth (moved outside cache scope for Cache Components compatibility)
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  const initialData = await getDiscoverHubs(query, userId);
 
   return (
     <LayoutOptimizer>

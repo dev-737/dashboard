@@ -162,8 +162,7 @@ export function WhitelistManager({
   const filteredWhitelistItems = whitelistItems.filter(
     (item) =>
       item.word.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (item.reason &&
-        item.reason.toLowerCase().includes(searchQuery.toLowerCase()))
+      item.reason?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   if (rulesLoading) {

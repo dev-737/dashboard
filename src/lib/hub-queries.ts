@@ -46,7 +46,7 @@ export interface HubConnectionData {
 
 export async function getHubData(
   hubId: string,
-  userId?: string
+  _userId?: string
 ): Promise<HubDetailData | null> {
   'use cache';
   cacheLife('hub-data');

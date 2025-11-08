@@ -39,20 +39,24 @@ const discoverInput = z.object({
 });
 
 export const discoverRouter = router({
-  list: publicProcedure.input(discoverInput).query(async ({ input }) => {
-    return getDiscoverHubs({
-      q: input.q,
-      tags: input.tags,
-      features: input.features,
-      language: input.language,
-      region: input.region,
-      activity: input.activity,
-      memberCount: input.memberCount,
-      minRating: input.minRating,
-      showFeaturedOnly: input.showFeaturedOnly,
-      sort: input.sort ?? 'trending',
-      page: input.page ?? 1,
-      pageSize: input.pageSize ?? 24,
-    });
+  list: publicProcedure.input(discoverInput).query(async ({ input, ctx }) => {
+    const userId = ctx.session?.user?.id;
+    return getDiscoverHubs(
+      {
+        q: input.q,
+        tags: input.tags,
+        features: input.features,
+        language: input.language,
+        region: input.region,
+        activity: input.activity,
+        memberCount: input.memberCount,
+        minRating: input.minRating,
+        showFeaturedOnly: input.showFeaturedOnly,
+        sort: input.sort ?? 'trending',
+        page: input.page ?? 1,
+        pageSize: input.pageSize ?? 24,
+      },
+      userId
+    );
   }),
 });
