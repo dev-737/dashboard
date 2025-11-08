@@ -1,12 +1,14 @@
 'use client';
 
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Play, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { useId } from 'react';
 import { StaticHeroBackground } from '@/app/_components/StaticHeroBackground';
 // import { AnimatedShinyText } from '@/components/ui/AnimatedShinyText';
 import { Button } from '@/components/ui/button';
+import { GradientText } from '@/components/ui/shadcn-io/gradient-text';
+import Image from 'next/image';
 
 export function Hero() {
   const heroId = useId();
@@ -43,10 +45,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="mb-6 bg-linear-to-br from-white via-gray-100 to-gray-300 bg-clip-text font-extrabold text-4xl text-transparent leading-[1.1] tracking-tight md:text-6xl lg:text-7xl"
             >
-              Connect Chats,{' '}
-              <span className="relative bg-linear-to-r from-primary via-primary-alt to-primary bg-clip-text text-transparent">
-                Share Conversations.
-              </span>
+              Connect Chats <GradientText text="Share Conversations" />
             </motion.h1>
 
             <motion.p
@@ -76,7 +75,7 @@ export function Hero() {
                   className="relative h-14 bg-linear-to-r from-primary to-primary-alt px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:from-primary-alt hover:to-primary hover:shadow-xl"
                 >
                   <Link href="/invite" className="flex items-center">
-                    Add to Discord
+                    Invite Now
                     <ArrowRight className="ml-3 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                 </Button>
@@ -115,7 +114,7 @@ export function Hero() {
           </div>
 
           {/* TODO: Video Section*/}
-          {/* <motion.div
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -123,80 +122,16 @@ export function Hero() {
           >
             <div className="-inset-4 absolute rounded-(--radius-modal) bg-linear-to-r from-primary/40 via-primary-alt/40 to-primary/40 opacity-20 blur-3xl transition-opacity duration-500 group-hover:opacity-40" />
 
-            <div className="relative overflow-hidden rounded-(--radius-modal) border border-gray-700/60 bg-linear-to-br from-gray-900/90 to-gray-950/90 shadow-2xl backdrop-blur-xl">
-              <div className="flex items-center justify-between border-gray-700/50 border-b bg-gray-900/80 p-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-r from-primary to-primary-alt">
-                    <Play className="h-3 w-3 text-white" />
-                  </div>
-                  <span className="font-medium text-gray-200">
-                    InterChat in Action (Coming Soon)
-                  </span>
-                </div>
-              </div>
-
-              <div className="relative aspect-video bg-gray-900/50">
-                <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-gray-800/80 to-gray-900/80">
-                  {!isVideoPlaying ? (
-                    <motion.button
-                      onClick={() => setIsVideoPlaying(true)}
-                      className="group relative"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <div className="absolute inset-0 rounded-full bg-linear-to-r from-primary to-primary-alt opacity-60 blur-xl transition-opacity duration-300 group-hover:opacity-80" />
-                      <div className="relative flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-linear-to-r from-primary to-primary-alt shadow-2xl md:h-24 md:w-24">
-                        <Play className="ml-1 h-8 w-8 text-white md:h-10 md:w-10" />
-                      </div>
-                    </motion.button>
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center text-white">
-                      <video
-                        className="h-full w-full object-cover"
-                        controls
-                        autoPlay
-                        poster="/path-to-your-video-poster.jpg"
-                      >
-                        <source
-                          src="/path-to-your-video.mp4"
-                          type="video/mp4"
-                        />
-                        <track
-                          kind="captions"
-                          src="/path-to-captions.vtt"
-                          srcLang="en"
-                          label="English captions"
-                        />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                  )}
-                </div>
-
-                {!isVideoPlaying && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.8 }}
-                    className="absolute right-6 bottom-6 left-6"
-                  >
-                    <div className="rounded-[--radius] border border-primary/30 bg-linear-to-r from-primary/10 to-primary-alt/10 p-4 text-gray-300 text-sm backdrop-blur-sm">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full border border-primary/30 bg-primary/20">
-                          <Sparkles className="h-4 w-4 text-primary" />
-                        </div>
-                        <div>
-                          <div className="text-gray-400 text-xs">
-                            Watch how cross-server communication works
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </div>
+            <div className="relative overflow-hidden rounded-(--radius-modal) border border-gray-700/60 bg-linear-to-br from-gray-900/90 to-gray-950/90 shadow-2xl backdrop-blur-xl hover:shadow-2xl">
+              <Image
+                src="/assets/images/features/CrossChat.png"
+                width={4096}
+                height={4096}
+                alt="cross chat showcase"
+                className="rounded-xl"
+              />
             </div>
-          </motion.div> */}
+          </motion.div>
         </div>
       </div>
     </section>
