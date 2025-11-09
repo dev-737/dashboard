@@ -204,7 +204,7 @@ const filterSections = [
                   const on = Boolean(val);
                   let next = props.activity;
                   if (on && !next.includes(lvl)) next = [...next, lvl];
-                  if (!on) next = next.filter((x) => x !== lvl);
+                  if (!on) next = next.filter((x: 'LOW' | 'MEDIUM' | 'HIGH') => x !== lvl);
                   props.onActivityChange(next);
                 }}
               />
@@ -278,49 +278,7 @@ function FeatureCheckbox({
   );
 }
 
-export function Filters(props: {
-  q: string;
-  onQChange: (v: string) => void;
-  sort:
-    | 'trending'
-    | 'active'
-    | 'new'
-    | 'upvoted'
-    | 'rated'
-    | 'members'
-    | 'growing';
-  onSortChange: (
-    v:
-      | 'trending'
-      | 'active'
-      | 'new'
-      | 'upvoted'
-      | 'rated'
-      | 'members'
-      | 'growing'
-  ) => void;
-
-  tags: string[];
-  onTagsChange: (tags: string[]) => void;
-
-  language?: string;
-  onLanguageChange: (lang?: string) => void;
-
-  region?: string;
-  onRegionChange: (region?: string) => void;
-
-  activity: ('LOW' | 'MEDIUM' | 'HIGH')[];
-  onActivityChange: (values: ('LOW' | 'MEDIUM' | 'HIGH')[]) => void;
-
-  memberRange?: string;
-  onMemberRangeChange: (range?: string) => void;
-
-  minRating?: number;
-  onMinRatingChange: (rating?: number) => void;
-
-  features: FeatureFlags;
-  onFeaturesChange: (f: FeatureFlags) => void;
-}) {
+export function Filters(props: FilterProps) {
   const isMobile = useMobile();
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
 
