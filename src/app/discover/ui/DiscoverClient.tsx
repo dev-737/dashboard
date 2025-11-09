@@ -393,7 +393,7 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-8">
         {/* Filters Sidebar - Appears first on mobile, right side on desktop */}
         <div className="lg:order-2 lg:col-span-3">
-          <div className="scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
+          <div className="discover-scrollbar lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
             <Filters
               q=""
               onQChange={() => {}}

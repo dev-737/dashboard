@@ -166,6 +166,30 @@
     scrollbar-color: rgba(107, 114, 128, 0.2) transparent;
   }
 
+  /* Discover page sleek scrollbar */
+  .discover-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .discover-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .discover-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(147, 114, 216, 0.2);
+    border-radius: 3px;
+    transition: background 0.3s ease;
+  }
+
+  .discover-scrollbar:hover::-webkit-scrollbar-thumb {
+    background: rgba(147, 114, 216, 0.4);
+  }
+
+  .discover-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(147, 114, 216, 0.2) transparent;
+  }
+
   /* Mobile-friendly tab scrolling */
   .mobile-tab-scroll {
     -webkit-overflow-scrolling: touch;
