@@ -69,29 +69,33 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
 
   return (
     <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-gray-800/60 bg-gray-900/90 transition-colors duration-200 hover:border-gray-700/80 hover:bg-gray-900/95 sm:bg-gray-900/40 sm:backdrop-blur-sm sm:hover:bg-gray-900/60">
-      {/* Banner Background */}
+      {/* Banner */}
       {bannerUrl && (
-        <div className="absolute inset-0 opacity-5">
+        <div className="relative h-32 w-full overflow-hidden">
           <SafeHubBanner
             src={bannerUrl}
             name={name}
-            className="object-cover"
+            className="h-full w-full object-cover"
             priority={isAboveFold}
             quality={isAboveFold ? 75 : 60}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
             fetchPriority={isAboveFold ? 'high' : 'low'}
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/60" />
         </div>
       )}
 
       {/* NSFW Badge */}
       {nsfw && (
-        <div className="absolute top-3 right-3 z-10 rounded-full border border-red-500/50 bg-red-950 px-2.5 py-1 font-medium text-red-300 text-xs sm:bg-red-950/90 sm:backdrop-blur-sm">
+        <div className={cn(
+          "absolute right-3 z-10 rounded-full border border-red-500/50 bg-red-950 px-2.5 py-1 font-medium text-red-300 text-xs sm:bg-red-950/90 sm:backdrop-blur-sm",
+          bannerUrl ? "top-3" : "top-3"
+        )}>
           🔞 NSFW
         </div>
       )}
 
-      <CardHeader className="relative pt-6 pb-4">
+      <CardHeader className={cn("relative pb-4", bannerUrl ? "pt-4" : "pt-6")}>
         <div className="flex items-start gap-5">
           <SafeHubAvatar
             src={iconUrl || '/assets/images/defaults/default-hub.svg'}
