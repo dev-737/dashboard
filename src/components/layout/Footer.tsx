@@ -13,6 +13,7 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { usePathname } from 'next/navigation';
 
 export function Footer() {
   const footerLinks = {
@@ -54,9 +55,12 @@ export function Footer() {
       },
     ],
   };
+  const pathname = usePathname();
 
   return (
-    <footer className="border-gray-800/50 border-t bg-gray-950">
+    <footer
+      className={`border-gray-800/50 border-t bg-gray-950 ${pathname === '/discover' ? 'hidden' : ''}`}
+    >
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Section */}
