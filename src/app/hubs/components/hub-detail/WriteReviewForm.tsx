@@ -143,7 +143,7 @@ export default function WriteReviewForm({
                 onClick={() => setRating(star)}
                 onMouseEnter={() => setHoverRating(star)}
                 onMouseLeave={() => setHoverRating(0)}
-                className="focus:outline-none"
+                className="bg-transparent focus:outline-none"
               >
                 <Star
                   className={`h-6 w-6 cursor-pointer ${
