@@ -1,7 +1,13 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { MessageSquare, Settings, Shield, Sparkles, Upload } from 'lucide-react';
+import {
+  MessageSquare,
+  Settings,
+  Shield,
+  Sparkles,
+  Upload,
+} from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { Card } from '@/components/ui/card';

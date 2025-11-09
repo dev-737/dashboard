@@ -87,15 +87,17 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
 
       {/* NSFW Badge */}
       {nsfw && (
-        <div className={cn(
-          "absolute right-3 z-10 rounded-full border border-red-500/50 bg-red-950 px-2.5 py-1 font-medium text-red-300 text-xs sm:bg-red-950/90 sm:backdrop-blur-sm",
-          bannerUrl ? "top-3" : "top-3"
-        )}>
+        <div
+          className={cn(
+            'absolute right-3 z-10 rounded-full border border-red-500/50 bg-red-950 px-2.5 py-1 font-medium text-red-300 text-xs sm:bg-red-950/90 sm:backdrop-blur-sm',
+            bannerUrl ? 'top-3' : 'top-3'
+          )}
+        >
           🔞 NSFW
         </div>
       )}
 
-      <CardHeader className={cn("relative pb-4", bannerUrl ? "pt-4" : "pt-6")}>
+      <CardHeader className={cn('relative pb-4', bannerUrl ? 'pt-4' : 'pt-6')}>
         <div className="flex items-start gap-5">
           <SafeHubAvatar
             src={iconUrl || '/assets/images/defaults/default-hub.svg'}

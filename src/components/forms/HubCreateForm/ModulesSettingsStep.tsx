@@ -47,7 +47,8 @@ export function ModulesSettingsStep({
         </div>
         <CardTitle className="text-2xl">Configure Hub Modules</CardTitle>
         <CardDescription className="text-base">
-          Customize which features your hub will have (you can change this later)
+          Customize which features your hub will have (you can change this
+          later)
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">

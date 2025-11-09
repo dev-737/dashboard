@@ -5,10 +5,10 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { useId } from 'react';
 import { StaticHeroBackground } from '@/app/_components/StaticHeroBackground';
+import { HeroAnimation } from '@/app/_components/HeroAnimation';
 // import { AnimatedShinyText } from '@/components/ui/AnimatedShinyText';
 import { Button } from '@/components/ui/button';
 import { GradientText } from '@/components/ui/shadcn-io/gradient-text';
-import Image from 'next/image';
 
 export function Hero() {
   const heroId = useId();
@@ -119,17 +119,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="relative mx-auto w-full max-w-5xl"
           >
-            <div className="-inset-4 absolute rounded-(--radius-modal) bg-linear-to-r from-primary/40 via-primary-alt/40 to-primary/40 opacity-20 blur-3xl transition-opacity duration-500 group-hover:opacity-40" />
-
-            <div className="relative overflow-hidden rounded-(--radius-modal) border border-gray-700/60 bg-linear-to-br from-gray-900/90 to-gray-950/90 shadow-2xl backdrop-blur-xl hover:shadow-2xl">
-              <Image
-                src="/assets/images/features/CrossChat.png"
-                width={4096}
-                height={4096}
-                alt="cross chat showcase"
-                className="rounded-xl"
-              />
-            </div>
+            <HeroAnimation />
           </motion.div>
         </div>
       </div>

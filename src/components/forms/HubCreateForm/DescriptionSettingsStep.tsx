@@ -85,7 +85,10 @@ export function DescriptionSettingsStep({
 
         {/* Short Description */}
         <div className="space-y-3">
-          <Label htmlFor={shortDescriptionFieldId} className="font-medium text-base">
+          <Label
+            htmlFor={shortDescriptionFieldId}
+            className="font-medium text-base"
+          >
             Short Description
           </Label>
           <input
@@ -99,7 +102,9 @@ export function DescriptionSettingsStep({
           />
           <div className="flex items-center justify-between">
             <p className="text-gray-400 text-sm">Optional but recommended</p>
-            <span className="text-gray-400 text-xs">{shortDescription.length}/100</span>
+            <span className="text-gray-400 text-xs">
+              {shortDescription.length}/100
+            </span>
           </div>
         </div>
 

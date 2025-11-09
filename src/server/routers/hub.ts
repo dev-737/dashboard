@@ -21,7 +21,7 @@ const createHubSchema = z.object({
   private: z.boolean().prefault(true),
   rules: z.array(z.string()).optional(),
   settings: z.any().optional(),
-});;
+});
 
 // Schema for hub search
 const hubSearchSchema = z.object({
@@ -38,9 +38,10 @@ async function updateHubAverageRating(hubId: string) {
     select: { rating: true },
   });
 
-  const averageRating = reviews.length > 0
-    ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
-    : null;
+  const averageRating =
+    reviews.length > 0
+      ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+      : null;
 
   await db.hub.update({
     where: { id: hubId },

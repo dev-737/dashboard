@@ -204,7 +204,10 @@ const filterSections = [
                   const on = Boolean(val);
                   let next = props.activity;
                   if (on && !next.includes(lvl)) next = [...next, lvl];
-                  if (!on) next = next.filter((x: 'LOW' | 'MEDIUM' | 'HIGH') => x !== lvl);
+                  if (!on)
+                    next = next.filter(
+                      (x: 'LOW' | 'MEDIUM' | 'HIGH') => x !== lvl
+                    );
                   props.onActivityChange(next);
                 }}
               />

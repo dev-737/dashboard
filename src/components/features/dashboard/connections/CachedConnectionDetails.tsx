@@ -17,7 +17,11 @@ export async function CachedConnectionDetails({
 }: CachedConnectionDetailsProps) {
   'use cache: private';
   cacheLife('hub-data');
-  cacheTag('connection-details', `connection-${connectionId}`, `user-${userId}`);
+  cacheTag(
+    'connection-details',
+    `connection-${connectionId}`,
+    `user-${userId}`
+  );
 
   const connection = await db.connection.findUnique({
     where: { id: connectionId },

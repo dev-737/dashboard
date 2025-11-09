@@ -222,10 +222,7 @@ function buildOrderBy(
 
 // MIGRATED: Moved auth() call outside cache scope to comply with Cache Components
 // Pass userId as a parameter instead of calling auth() inside cached function
-export async function getDiscoverHubs(
-  params: DiscoverParams,
-  userId?: string
-) {
+export async function getDiscoverHubs(params: DiscoverParams, userId?: string) {
   'use cache';
   cacheLife('discover-data');
   cacheTag('discover', `discover-${params.sort || 'trending'}`);

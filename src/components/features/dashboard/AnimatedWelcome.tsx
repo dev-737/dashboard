@@ -29,7 +29,6 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
     setIsMounted(true);
   }, []);
 
-
   // Only render content after component is mounted on client
   if (!isMounted) {
     return (
@@ -172,9 +171,24 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
             transition={{ delay: 0.7, duration: 0.6 }}
           >
             {[
-              { icon: MessageSquare, label: 'Hubs', color: 'purple', href: '/dashboard?tab=hubs' },
-              { icon: Users, label: 'Servers', color: 'blue', href: '/dashboard?tab=servers' },
-              { icon: Activity, label: 'Profile', color: 'pink', href: '/dashboard/settings' },
+              {
+                icon: MessageSquare,
+                label: 'Hubs',
+                color: 'purple',
+                href: '/dashboard?tab=hubs',
+              },
+              {
+                icon: Users,
+                label: 'Servers',
+                color: 'blue',
+                href: '/dashboard?tab=servers',
+              },
+              {
+                icon: Activity,
+                label: 'Profile',
+                color: 'pink',
+                href: '/dashboard/settings',
+              },
             ].map(({ icon: Icon, label, color, href }, index) => (
               <motion.div
                 key={label}

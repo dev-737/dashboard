@@ -16,11 +16,11 @@ export async function CachedHubDetails({
   userId,
 }: CachedHubDetailsProps) {
   if (userId) {
-    'use cache: private';
+    ('use cache: private');
     cacheLife('hub-data');
     cacheTag('hub-details', `hub-${hubId}`, `user-${userId}`);
   } else {
-    'use cache';
+    ('use cache');
     cacheLife('hub-data');
     cacheTag('hub-details', `hub-${hubId}`);
   }
