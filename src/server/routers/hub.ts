@@ -32,6 +32,22 @@ const hubSearchSchema = z.object({
   sort: z.enum(SortOptions).optional().prefault(SortOptions.Trending),
 });
 
+async function updateHubAverageRating(hubId: string) {
+  const reviews = await db.hubReview.findMany({
+    where: { hubId },
+    select: { rating: true },
+  });
+
+  const averageRating = reviews.length > 0
+    ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+    : null;
+
+  await db.hub.update({
+    where: { id: hubId },
+    data: { averageRating },
+  });
+}
+
 export const hubRouter = router({
   // Validate hub invite code and return hub details
   validateInvite: protectedProcedure
@@ -786,7 +802,6 @@ export const hubRouter = router({
       });
 
       if (existingReview) {
-        // Update the existing review
         const updatedReview = await db.hubReview.update({
           where: {
             hubId_userId: {
@@ -815,9 +830,9 @@ export const hubRouter = router({
           },
         });
 
+        await updateHubAverageRating(hubId);
         return updatedReview;
       }
-      // Create a new review
       const newReview = await db.hubReview.create({
         data: {
           hubId,
@@ -842,6 +857,7 @@ export const hubRouter = router({
         },
       });
 
+      await updateHubAverageRating(hubId);
       return newReview;
     }),
 
@@ -853,7 +869,7 @@ export const hubRouter = router({
 
       const review = await db.hubReview.findUnique({
         where: { id: input.reviewId },
-        select: { id: true, userId: true },
+        select: { id: true, userId: true, hubId: true },
       });
 
       if (!review) {
@@ -865,6 +881,7 @@ export const hubRouter = router({
       }
 
       await db.hubReview.delete({ where: { id: input.reviewId } });
+      await updateHubAverageRating(review.hubId);
       return { success: true } as const;
     }),
 
