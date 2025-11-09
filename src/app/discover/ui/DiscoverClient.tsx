@@ -419,21 +419,7 @@ export function DiscoverClient({ initial }: { initial: DiscoverResponse }) {
 
         {/* Content - Appears second on mobile, left side on desktop */}
         <div className="lg:order-1 lg:col-span-9">
-          {/* Result count and clear filters */}
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <div className="text-gray-300">
-              {!loading && (
-                <span className="text-lg">
-                  <span className="font-semibold text-white">
-                    {data.total !== undefined
-                      ? data.total.toLocaleString()
-                      : data.items.length.toLocaleString()}
-                  </span>{' '}
-                  {data.total === 1 ? 'hub' : 'hubs'} found
-                </span>
-              )}
-            </div>
-
             {hasActiveFilters && (
               <Button
                 onClick={handleClearAllFilters}
