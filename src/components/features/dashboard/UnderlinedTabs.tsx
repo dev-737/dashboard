@@ -164,7 +164,9 @@ export function UnderlinedTabs({
                 border-b-2 border-transparent transition-all duration-200
                 bg-transparent shadow-none focus:outline-none focus:ring-0
                 data-[state=active]:bg-transparent rounded-none
-                hover:bg-gray-800/30 hover:rounded-lg cursor-pointer
+                before:absolute before:inset-0 before:-z-10 before:rounded-lg 
+                before:bg-gray-800/0 before:transition-colors before:duration-200
+                hover:before:bg-gray-800/30 cursor-pointer
                 ${colorClasses}
                 ${isCompact ? 'px-3 py-2' : 'px-4 py-3'}
               `.trim();
