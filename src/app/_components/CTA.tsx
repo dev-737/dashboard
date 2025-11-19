@@ -29,17 +29,15 @@ export function CTA() {
             </span>
           </div>
           <h3 className="mb-6 font-bold text-4xl text-white tracking-tight md:text-6xl lg:text-7xl">
-            Get started with{' '}
-            <span className="bg-gradient-to-r from-primary via-primary-alt to-primary bg-clip-text text-transparent">
-              InterChat
+            Stop shouting into <br className="hidden md:block" />
+            <span className="bg-linear-to-r from-primary via-primary-alt to-primary bg-clip-text text-transparent">
+              the void.
             </span>
           </h3>
           <p className="mx-auto mb-10 max-w-3xl text-gray-300 text-lg leading-relaxed md:text-xl">
-            Connect your Discord servers in minutes. Explore public hubs or
-            build your own community network.
+            Join the conversation. 12,000+ servers are already chatting.
             <span className="mt-2 block text-gray-400">
-              Join thousands of communities already using InterChat to bridge
-              their servers.
+              Why aren't you?
             </span>
           </p>
 
@@ -57,7 +55,7 @@ export function CTA() {
               { icon: Zap, label: '99.9%', sublabel: 'Uptime' },
             ].map((stat) => (
               <div key={stat.label} className="flex items-center gap-3">
-                <div className="rounded-[var(--radius)] border border-gray-700/50 bg-gray-800/60 p-2">
+                <div className="rounded-(--radius) border border-gray-700/50 bg-gray-800/60 p-2">
                   <stat.icon className="h-5 w-5 text-primary" />
                 </div>
                 <div className="text-left">
@@ -81,11 +79,11 @@ export function CTA() {
               whileTap={{ scale: 0.98 }}
               className="group relative"
             >
-              <div className="absolute inset-0 rounded-[var(--radius-button)] bg-gradient-to-r from-primary to-primary-alt opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-30" />
+              <div className="absolute inset-0 rounded-(--radius-button) bg-linear-to-r from-primary to-primary-alt opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-30" />
               <Button
                 asChild
                 size="lg"
-                className="relative h-14 bg-gradient-to-r from-primary to-primary-alt px-8 font-semibold text-white shadow-lg hover:from-primary-alt hover:to-primary hover:shadow-xl"
+                className="relative h-14 bg-linear-to-r from-primary to-primary-alt px-8 font-semibold text-white shadow-lg hover:from-primary-alt hover:to-primary hover:shadow-xl"
               >
                 <Link href="/hubs" className="group flex items-center">
                   <Sparkles className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
