@@ -157,20 +157,6 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div className="flex cursor-help items-center gap-1.5">
-                    <MessageCircle className="h-4 w-4 text-purple-400" />
-                    <span className="text-gray-300">
-                      {formatNumber(weeklyMessageCount)}
-                    </span>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Messages per week</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="flex cursor-help items-center gap-1.5">
                     <Users className="h-4 w-4 text-emerald-400" />
                     <span className="text-gray-300">
                       {formatNumber(_count.connections)}
@@ -181,8 +167,19 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                   <p>Members</p>
                 </TooltipContent>
               </Tooltip>
-
-
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="flex cursor-help items-center gap-1.5">
+                    <MessageCircle className="h-4 w-4 text-purple-400" />
+                    <span className="text-gray-300">
+                      {formatNumber(weeklyMessageCount)}
+                    </span>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Messages per week</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
 
             {/* Rating Display */}

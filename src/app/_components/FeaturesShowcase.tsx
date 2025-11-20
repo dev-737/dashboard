@@ -5,43 +5,13 @@ import {
   Settings,
   Shield,
   Sparkles,
+  Users,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
-const features = [
-  {
-    id: 'cross-server',
-    title: 'The Wormhole',
-    description:
-      "Connect channels across servers. It's like a portal gun for your messages. Messages flow instantly, media is shared, and chaos is distributed.",
-    icon: MessageSquare,
-    className: 'md:col-span-2 md:row-span-2',
-    mockup: '/assets/images/features/CrossChat.png',
-    gradient: 'from-emerald-500/20 to-green-500/20',
-  },
-  {
-    id: 'moderation',
-    title: 'The Bouncer',
-    description:
-      'Keep the trolls out. Global bans, auto-mod, and tools that actually work.',
-    icon: Shield,
-    className: 'md:col-span-1 md:row-span-1',
-    mockup: '/assets/images/features/NSFWDetection.svg',
-    gradient: 'from-blue-500/20 to-cyan-500/20',
-  },
-  {
-    id: 'dashboard',
-    title: 'Control Center',
-    description:
-      "Manage everything from one place. It's so pretty you might actually want to use it.",
-    icon: Settings,
-    className: 'md:col-span-1 md:row-span-1',
-    mockup: '/assets/images/features/dashboard.png',
-    gradient: 'from-purple-500/20 to-pink-500/20',
-  },
-];
+
 
 export function FeaturesShowcase() {
   return (
@@ -69,53 +39,137 @@ export function FeaturesShowcase() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:grid-rows-2">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={cn(
-                'group relative overflow-hidden rounded-3xl border border-gray-800 bg-gray-900/50 p-8 backdrop-blur-sm transition-all hover:border-gray-700',
-                feature.className
-              )}
-            >
-              <div
-                className={cn(
-                  'absolute inset-0 bg-linear-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-10',
-                  feature.gradient
-                )}
-              />
-
-              <div className="relative z-10 flex h-full flex-col">
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="rounded-xl bg-gray-800/50 p-3 text-primary">
-                    <feature.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="font-bold text-2xl text-white">
-                    {feature.title}
-                  </h3>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:grid-rows-3">
+          {/* Instant Relay (Large) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="group relative overflow-hidden rounded-3xl border border-gray-800 bg-gray-900/50 p-8 backdrop-blur-sm transition-all hover:border-gray-700 md:col-span-2 md:row-span-2"
+          >
+            <div className="absolute inset-0 bg-linear-to-br from-emerald-500/10 to-blue-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="relative z-10 flex h-full flex-col">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="rounded-xl bg-gray-800/50 p-3 text-emerald-400">
+                  <MessageSquare className="h-6 w-6" />
                 </div>
-
-                <p className="mb-8 max-w-md text-gray-400 text-lg leading-relaxed">
-                  {feature.description}
-                </p>
-
-                <div className="mt-auto overflow-hidden rounded-xl border border-gray-800 bg-gray-950/50 shadow-2xl">
-                   <div className="relative aspect-video w-full">
-                      <Image
-                        src={feature.mockup}
-                        alt={feature.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                   </div>
+                <h3 className="font-bold text-2xl text-white">Instant Relay</h3>
+              </div>
+              <p className="mb-8 max-w-md text-gray-400 text-lg leading-relaxed">
+                Messages sync in seconds. No lag, no delay, no waiting. It's like a portal gun for your messages.
+              </p>
+              <div className="mt-auto overflow-hidden rounded-xl border border-gray-800 bg-gray-950/50 shadow-2xl">
+                <div className="relative aspect-video w-full">
+                  <Image
+                    src="/assets/images/features/CrossChat.png"
+                    alt="Instant Relay"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
               </div>
-            </motion.div>
-          ))}
+            </div>
+          </motion.div>
+
+          {/* Stay in Control */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="group relative overflow-hidden rounded-3xl border border-gray-800 bg-gray-900/50 p-8 backdrop-blur-sm transition-all hover:border-gray-700 md:col-span-1 md:row-span-1"
+          >
+            <div className="absolute inset-0 bg-linear-to-br from-red-500/10 to-orange-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="relative z-10">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="rounded-xl bg-gray-800/50 p-3 text-red-400">
+                  <Shield className="h-6 w-6" />
+                </div>
+                <h3 className="font-bold text-xl text-white">Stay in Control</h3>
+              </div>
+              <p className="text-gray-400">
+                Your server, your rules. Ban troublemakers hub-wide or locally.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Join or Create Hubs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="group relative overflow-hidden rounded-3xl border border-gray-800 bg-gray-900/50 p-8 backdrop-blur-sm transition-all hover:border-gray-700 md:col-span-1 md:row-span-1"
+          >
+            <div className="absolute inset-0 bg-linear-to-br from-purple-500/10 to-pink-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="relative z-10">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="rounded-xl bg-gray-800/50 p-3 text-purple-400">
+                  <Users className="h-6 w-6" />
+                </div>
+                <h3 className="font-bold text-xl text-white">Join or Create Hubs</h3>
+              </div>
+              <p className="text-gray-400">
+                Public hubs for everyone. Private hubs for your circle.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Control Center (Large) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="group relative overflow-hidden rounded-3xl border border-gray-800 bg-gray-900/50 p-8 backdrop-blur-sm transition-all hover:border-gray-700 md:col-span-2 md:row-span-1"
+          >
+            <div className="absolute inset-0 bg-linear-to-br from-blue-500/10 to-cyan-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="relative z-10 flex h-full items-center gap-8">
+              <div className="flex-1">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="rounded-xl bg-gray-800/50 p-3 text-blue-400">
+                    <Settings className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-bold text-2xl text-white">Control Center</h3>
+                </div>
+                <p className="text-gray-400 text-lg">
+                  Manage everything from one place. It's so pretty you might actually want to use it.
+                </p>
+              </div>
+              <div className="relative hidden h-full w-1/3 overflow-hidden rounded-xl border border-gray-800 bg-gray-950/50 shadow-lg md:block">
+                <Image
+                  src="/assets/images/features/dashboard.png"
+                  alt="Control Center"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Rich Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="group relative overflow-hidden rounded-3xl border border-gray-800 bg-gray-900/50 p-8 backdrop-blur-sm transition-all hover:border-gray-700 md:col-span-1 md:row-span-1"
+          >
+            <div className="absolute inset-0 bg-linear-to-br from-yellow-500/10 to-orange-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="relative z-10">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="rounded-xl bg-gray-800/50 p-3 text-yellow-400">
+                  <Sparkles className="h-6 w-6" />
+                </div>
+                <h3 className="font-bold text-xl text-white">Rich Content</h3>
+              </div>
+              <p className="text-gray-400">
+                Images, embeds, reactions, replies. Everything just works.
+              </p>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>
