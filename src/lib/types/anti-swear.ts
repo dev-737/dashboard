@@ -1,7 +1,7 @@
 import {
   BlockWordAction,
   type PatternMatchType,
-} from '@/lib/generated/prisma/client';
+} from '@/lib/generated/prisma/client/client';
 
 export enum MatchPattern {
   EXACT = 'EXACT',

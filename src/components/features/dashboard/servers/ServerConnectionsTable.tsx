@@ -33,7 +33,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useToast } from '@/components/ui/use-toast';
-import type { Connection, Hub } from '@/lib/generated/prisma/client';
+import type { Connection, Hub } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 
 interface ServerConnectionsTableProps {

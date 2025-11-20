@@ -1,4 +1,4 @@
-import type { Badges } from '@/lib/generated/prisma/client';
+import type { Badges } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 
 export interface VoteData {

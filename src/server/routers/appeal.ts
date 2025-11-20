@@ -1,7 +1,7 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod/v4';
 import { PermissionLevel } from '@/lib/constants';
-import { AppealStatus, type Prisma } from '@/lib/generated/prisma/client';
+import { AppealStatus, type Prisma } from '@/lib/generated/prisma/client/client';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 import { protectedProcedure, router } from '../trpc';

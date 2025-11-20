@@ -4,7 +4,7 @@
 
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod/v4';
-import type { Prisma } from '@/lib/generated/prisma/client';
+import type { Prisma } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 import { protectedProcedure, router } from '../trpc';
 

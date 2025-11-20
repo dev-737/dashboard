@@ -42,7 +42,7 @@ import {
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
-import type { AppealStatus } from '@/lib/generated/prisma/client';
+import type { AppealStatus } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 
 interface AppealUser {

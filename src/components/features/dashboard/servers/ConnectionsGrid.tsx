@@ -22,7 +22,7 @@ import type {
   Connection,
   Hub,
   ServerData,
-} from '@/lib/generated/prisma/client';
+} from '@/lib/generated/prisma/client/client';
 
 interface Props {
   connections: (Connection & {

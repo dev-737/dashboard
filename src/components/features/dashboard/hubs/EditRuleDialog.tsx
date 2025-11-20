@@ -15,7 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
-import { BlockWordAction } from '@/lib/generated/prisma/client';
+import { BlockWordAction } from '@/lib/generated/prisma/client/client';
 import type { AntiSwearRule } from '@/lib/types/anti-swear';
 import { useTRPC } from '@/utils/trpc';
 import { ActionSelector } from './ActionSelector';

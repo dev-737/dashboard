@@ -7,7 +7,7 @@ import type {
   Hub,
   ReportStatus,
   ServerData,
-} from '@/lib/generated/prisma/client';
+} from '@/lib/generated/prisma/client/client';
 import { cache as perfCache } from '@/lib/performance-cache';
 import { db } from '@/lib/prisma';
 
