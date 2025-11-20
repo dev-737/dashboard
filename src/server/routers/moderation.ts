@@ -10,7 +10,7 @@ import {
   InfractionType,
   type Prisma,
   ReportStatus,
-} from '@/lib/generated/prisma/client';
+} from '@/lib/generated/prisma/client/client';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 import { protectedProcedure, router } from '../trpc';

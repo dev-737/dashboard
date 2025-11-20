@@ -45,7 +45,7 @@ import {
 import { TabsContent } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import type { ReportStatus } from '@/lib/generated/prisma/client';
+import type { ReportStatus } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 
 interface Report {

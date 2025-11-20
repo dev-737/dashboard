@@ -1,13 +1,13 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider        = "prisma-client"
   output          = "../src/lib/generated/prisma/client"
   previewFeatures = ["postgresqlExtensions", "relationJoins"]
-  moduleFormat    = "esm"
+  runtime  = "vercel-edge"
+  moduleFormat = "esm"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Achievement {

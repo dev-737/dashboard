@@ -38,7 +38,7 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/components/ui/use-toast';
-import { BlockWordAction } from '@/lib/generated/prisma/client';
+import { BlockWordAction } from '@/lib/generated/prisma/client/client';
 import {
   type AntiSwearRule,
   BlockWordActionColors,

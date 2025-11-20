@@ -25,7 +25,7 @@ import { useToast } from '@/components/ui/use-toast';
 import type {
   InfractionStatus,
   InfractionType,
-} from '@/lib/generated/prisma/client';
+} from '@/lib/generated/prisma/client/client';
 
 interface Infraction {
   id: string;

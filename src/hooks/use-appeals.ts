@@ -7,7 +7,7 @@ import type {
   AppealStatus,
   Hub,
   Infraction,
-} from '@/lib/generated/prisma/client';
+} from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 import { useErrorNotification } from './use-error-notification';
 

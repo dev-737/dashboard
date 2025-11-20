@@ -104,99 +104,99 @@ function SidebarNavItem({
   const colorClasses = {
     default: {
       active:
-        'bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-300 border-purple-400/50 shadow-lg shadow-purple-500/10 backdrop-blur-sm',
+        'bg-purple-500/10 text-white border-purple-500/30',
       inactive:
-        'text-gray-300 hover:text-white hover:bg-purple-500/10 hover:border-purple-500/30 border-transparent backdrop-blur-sm',
+        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
       locked:
-        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
+        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
-        ? 'text-purple-300 bg-purple-400/20 shadow-sm shadow-purple-500/20'
-        : 'text-purple-400 group-hover:text-white group-hover:bg-purple-400/15',
-      iconLocked: 'text-gray-600 bg-gray-700/10',
+        ? 'text-purple-400'
+        : 'text-gray-500 group-hover:text-purple-400',
+      iconLocked: 'text-gray-600',
     },
     blue: {
       active:
-        'bg-gradient-to-r from-blue-500/15 to-cyan-500/15 text-blue-300 border-blue-400/40 shadow-lg shadow-blue-500/5 backdrop-blur-sm',
+        'bg-blue-500/10 text-white border-blue-500/30',
       inactive:
-        'text-gray-300 hover:text-white hover:bg-blue-500/10 hover:border-blue-500/30 border-transparent backdrop-blur-sm',
+        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
       locked:
-        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
+        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
-        ? 'text-blue-300 bg-blue-400/15'
-        : 'text-blue-400 group-hover:text-white group-hover:bg-blue-400/10',
-      iconLocked: 'text-gray-600 bg-gray-700/10',
+        ? 'text-blue-400'
+        : 'text-gray-500 group-hover:text-blue-400',
+      iconLocked: 'text-gray-600',
     },
     green: {
       active:
-        'bg-gradient-to-r from-emerald-500/15 to-green-500/15 text-emerald-300 border-emerald-400/40 shadow-lg shadow-emerald-500/5 backdrop-blur-sm',
+        'bg-emerald-500/10 text-white border-emerald-500/30',
       inactive:
-        'text-gray-300 hover:text-white hover:bg-emerald-500/10 hover:border-emerald-500/30 border-transparent backdrop-blur-sm',
+        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
       locked:
-        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
+        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
-        ? 'text-emerald-300 bg-emerald-400/15'
-        : 'text-emerald-400 group-hover:text-white group-hover:bg-emerald-400/10',
-      iconLocked: 'text-gray-600 bg-gray-700/10',
+        ? 'text-emerald-400'
+        : 'text-gray-500 group-hover:text-emerald-400',
+      iconLocked: 'text-gray-600',
     },
     purple: {
       active:
-        'bg-gradient-to-r from-purple-500/15 to-indigo-500/15 text-purple-300 border-purple-400/40 shadow-lg shadow-purple-500/5 backdrop-blur-sm',
+        'bg-purple-500/10 text-white border-purple-500/30',
       inactive:
-        'text-gray-300 hover:text-white hover:bg-purple-500/10 hover:border-purple-500/30 border-transparent backdrop-blur-sm',
+        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
       locked:
-        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
+        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
-        ? 'text-purple-300 bg-purple-400/15'
-        : 'text-purple-400 group-hover:text-white group-hover:bg-purple-400/10',
-      iconLocked: 'text-gray-600 bg-gray-700/10',
+        ? 'text-purple-400'
+        : 'text-gray-500 group-hover:text-purple-400',
+      iconLocked: 'text-gray-600',
     },
     red: {
       active:
-        'bg-gradient-to-r from-red-500/15 to-pink-500/15 text-red-300 border-red-400/40 shadow-lg shadow-red-500/5 backdrop-blur-sm',
+        'bg-red-500/10 text-white border-red-500/30',
       inactive:
-        'text-gray-300 hover:text-white hover:bg-red-500/10 hover:border-red-500/30 border-transparent backdrop-blur-sm',
+        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
       locked:
-        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
+        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
-        ? 'text-red-300 bg-red-400/15'
-        : 'text-red-400 group-hover:text-white group-hover:bg-red-400/10',
-      iconLocked: 'text-gray-600 bg-gray-700/10',
+        ? 'text-red-400'
+        : 'text-gray-500 group-hover:text-red-400',
+      iconLocked: 'text-gray-600',
     },
     orange: {
       active:
-        'bg-gradient-to-r from-orange-500/15 to-amber-500/15 text-orange-300 border-orange-400/40 shadow-lg shadow-orange-500/5 backdrop-blur-sm',
+        'bg-orange-500/10 text-white border-orange-500/30',
       inactive:
-        'text-gray-300 hover:text-white hover:bg-orange-500/10 hover:border-orange-500/30 border-transparent backdrop-blur-sm',
+        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
       locked:
-        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
+        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
-        ? 'text-orange-300 bg-orange-400/15'
-        : 'text-orange-400 group-hover:text-white group-hover:bg-orange-400/10',
-      iconLocked: 'text-gray-600 bg-gray-700/10',
+        ? 'text-orange-400'
+        : 'text-gray-500 group-hover:text-orange-400',
+      iconLocked: 'text-gray-600',
     },
     yellow: {
       active:
-        'bg-gradient-to-r from-amber-500/15 to-yellow-500/15 text-amber-300 border-amber-400/40 shadow-lg shadow-amber-500/5 backdrop-blur-sm',
+        'bg-amber-500/10 text-white border-amber-500/30',
       inactive:
-        'text-gray-300 hover:text-white hover:bg-amber-500/10 hover:border-amber-500/30 border-transparent backdrop-blur-sm',
+        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
       locked:
-        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
+        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
-        ? 'text-amber-300 bg-amber-400/15'
-        : 'text-amber-400 group-hover:text-white group-hover:bg-amber-400/10',
-      iconLocked: 'text-gray-600 bg-gray-700/10',
+        ? 'text-amber-400'
+        : 'text-gray-500 group-hover:text-amber-400',
+      iconLocked: 'text-gray-600',
     },
     indigo: {
       active:
-        'bg-gradient-to-r from-indigo-500/15 to-purple-500/15 text-indigo-300 border-indigo-400/40 shadow-lg shadow-indigo-500/5 backdrop-blur-sm',
+        'bg-indigo-500/10 text-white border-indigo-500/30',
       inactive:
-        'text-gray-300 hover:text-white hover:bg-indigo-500/10 hover:border-indigo-500/30 border-transparent backdrop-blur-sm',
+        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
       locked:
-        'text-gray-500 border-gray-700/30 cursor-not-allowed opacity-60 backdrop-blur-sm',
+        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
-        ? 'text-indigo-300 bg-indigo-400/15'
-        : 'text-indigo-400 group-hover:text-white group-hover:bg-indigo-400/10',
-      iconLocked: 'text-gray-600 bg-gray-700/10',
+        ? 'text-indigo-400'
+        : 'text-gray-500 group-hover:text-indigo-400',
+      iconLocked: 'text-gray-600',
     },
   };
 
@@ -205,55 +205,45 @@ function SidebarNavItem({
   const content = locked ? (
     <div
       className={cn(
-        'group relative flex items-center rounded-2xl border font-medium text-sm transition-all duration-300',
-        isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
+        'group relative flex items-center rounded-lg border transition-all duration-200',
+        isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2',
         colors.locked
       )}
     >
-      <div
-        className={cn(
-          'shrink-0 rounded-xl p-1.5 transition-all duration-300',
-          colors.iconLocked
-        )}
-      >
-        <Icon className="h-4 w-4" />
+      <div className="shrink-0">
+        <Icon className={cn('h-4 w-4 transition-colors duration-200', colors.iconLocked)} />
       </div>
 
       {!isCollapsed && (
-        <span className="truncate font-medium text-sm">{label}</span>
+        <span className="truncate text-sm">{label}</span>
       )}
     </div>
   ) : (
     <Link
       href={href}
       className={cn(
-        'group relative flex items-center rounded-2xl border font-medium text-sm transition-all duration-300',
-        isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2.5',
+        'group relative flex items-center rounded-lg border transition-all duration-200',
+        isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2',
         active
-          ? `${colors.active} scale-[0.98] border`
-          : `${colors.inactive} hover:scale-[0.99] hover:shadow-black/5 hover:shadow-md`
+          ? colors.active
+          : colors.inactive
       )}
     >
-      <div
-        className={cn(
-          'shrink-0 rounded-xl p-1.5 transition-all duration-300',
-          colors.icon
-        )}
-      >
-        <Icon className="h-4 w-4" />
+      <div className="shrink-0">
+        <Icon className={cn('h-4 w-4 transition-colors duration-200', colors.icon)} />
       </div>
 
       {!isCollapsed && (
         <>
-          <span className="flex-1 truncate font-medium text-sm">{label}</span>
+          <span className="flex-1 truncate text-sm">{label}</span>
           {comingSoon ? (
-            <span className="flex h-5 items-center justify-center rounded-full bg-gradient-to-r from-amber-500/80 to-orange-500/80 px-2 font-bold text-[10px] text-white uppercase tracking-wide shadow-amber-500/30 shadow-sm">
+            <span className="flex h-5 items-center justify-center rounded-md bg-amber-500/90 px-2 text-[10px] font-semibold text-white uppercase tracking-wide">
               Soon
             </span>
           ) : (
             badge !== undefined &&
             badge > 0 && (
-              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-full bg-red-500/90 px-1.5 font-bold text-white text-xs shadow-red-500/30 shadow-sm">
+              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-md bg-red-500 px-1.5 text-xs font-semibold text-white">
                 {badge > 99 ? '99+' : badge}
               </span>
             )
@@ -270,15 +260,15 @@ function SidebarNavItem({
           <TooltipTrigger asChild>{content}</TooltipTrigger>
           <TooltipContent
             side="right"
-            className="ml-3 rounded-xl border-gray-700/50 bg-gray-900/95 text-gray-200 shadow-xl backdrop-blur-md"
+            className="ml-2 rounded-lg border-gray-800 bg-gray-900 px-3 py-2 text-sm text-gray-200"
           >
             {locked ? (
-              <div className="space-y-1">
-                <p className="font-medium text-sm">{label}</p>
-                <p className="text-gray-400 text-xs">{lockReason}</p>
+              <div className="space-y-0.5">
+                <p className="font-medium">{label}</p>
+                <p className="text-xs text-gray-400">{lockReason}</p>
               </div>
             ) : (
-              <p className="font-medium text-sm">{label}</p>
+              <p>{label}</p>
             )}
           </TooltipContent>
         </Tooltip>
@@ -309,22 +299,16 @@ function SidebarSection({
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="group flex w-full items-center justify-between rounded-xl border border-transparent px-3 py-2 font-bold text-gray-400 text-xs uppercase tracking-wider backdrop-blur-sm transition-all duration-300 hover:border-gray-700/50 hover:bg-gray-800/30 hover:text-gray-200"
+        className="group flex w-full items-center justify-between px-3 py-1.5 text-[11px] font-semibold text-gray-500 uppercase tracking-wider transition-colors duration-200 hover:text-gray-400"
       >
-        <span className="flex items-center gap-2">
-          <div className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
-          <span className="bg-gradient-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent transition-all duration-300 group-hover:from-white group-hover:to-gray-200">
-            {title}
-          </span>
-        </span>
+        <span>{title}</span>
         <motion.div
           animate={{ rotate: isOpen ? 90 : 0 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="text-gray-400 transition-colors duration-300 group-hover:text-gray-200"
+          transition={{ duration: 0.2, ease: 'easeOut' }}
         >
           <ChevronRight className="h-3 w-3" />
         </motion.div>
@@ -337,14 +321,11 @@ function SidebarSection({
           height: isOpen ? 'auto' : 0,
         }}
         transition={{
-          duration: 0.3,
+          duration: 0.2,
           ease: 'easeInOut',
         }}
       >
-        {isOpen && (
-          <div className="mx-3 mb-2 h-px bg-gradient-to-r from-transparent via-gray-700/40 to-transparent" />
-        )}
-        <div className="space-y-1.5 pl-1">{children}</div>
+        <div className="space-y-1">{children}</div>
       </motion.div>
     </div>
   );
@@ -482,12 +463,12 @@ export function HubSidebar({
   return (
     <div
       className={cn(
-        'flex h-full flex-col overflow-hidden border border-gray-700/40 bg-gradient-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/20 backdrop-blur-xl transition-all duration-300',
+        'flex h-full flex-col overflow-hidden border-r border-gray-800/60 bg-[#0b0f1a] transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >
-      {/* Premium Navigation */}
-      <div className="hub-sidebar-scrollbar scrollbar-thin scrollbar-thumb-gray-700/30 scrollbar-track-transparent hover:scrollbar-thumb-gray-600/50 flex-1 space-y-5 overflow-y-auto p-4 transition-colors">
+      {/* Navigation */}
+      <div className="scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-transparent hover:scrollbar-thumb-gray-700 flex-1 space-y-6 overflow-y-auto px-3 pb-4 pt-20 transition-colors">
         {visibleSections.map((section) => {
           const sectionItems = section.items.map((item) => {
             const isLocked =
@@ -526,7 +507,7 @@ export function HubSidebar({
           // Render items directly if no title
           if (!section.title) {
             return (
-              <div key={section.key} className="space-y-1.5">
+              <div key={section.key} className="space-y-1">
                 {sectionItems}
               </div>
             );
@@ -549,12 +530,12 @@ export function HubSidebar({
 
       {/* Collapse Button */}
       {onToggleCollapse && (
-        <div className="border-t border-gray-700/40 p-4 flex justify-center">
+        <div className="border-t border-gray-800/80 p-3">
           <Button
             variant="ghost"
             size="icon"
             onClick={onToggleCollapse}
-            className="h-8 w-8 shrink-0 rounded-xl border border-transparent text-gray-400 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-gray-600/40 hover:bg-gray-700/50 hover:text-white hover:shadow-lg"
+            className="h-9 w-full rounded-lg text-gray-500 transition-colors duration-200 hover:bg-gray-800/50 hover:text-gray-300"
           >
             <motion.div
               animate={{ rotate: isCollapsed ? 0 : 180 }}

@@ -32,7 +32,7 @@ import type {
   Connection,
   Hub,
   ServerData,
-} from '@/lib/generated/prisma/client';
+} from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 
 interface ConnectionEditFormClientProps {

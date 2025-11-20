@@ -1,6 +1,6 @@
 import { cacheLife, cacheTag } from 'next/cache';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
-import type { Role } from '@/lib/generated/prisma/client';
+import type { Role } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 
 // Define a more specific type for the hub data fetched for the detail page

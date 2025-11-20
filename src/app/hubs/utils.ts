@@ -1,5 +1,5 @@
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
-import type { Prisma } from '@/lib/generated/prisma/client';
+import type { Prisma } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 import {
   ActivityLevel,

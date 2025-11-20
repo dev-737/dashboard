@@ -21,7 +21,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import type { Connection, ServerData } from '@/lib/generated/prisma/client';
+import type { Connection, ServerData } from '@/lib/generated/prisma/client/client';
 
 interface ConnectionOverviewProps {
   connection: Connection & {

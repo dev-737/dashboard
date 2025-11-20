@@ -31,14 +31,14 @@ function AccordionItem({
     >
       <div
         className={cn(
-          'rounded-[var(--radius)] border border-gray-700/60 bg-gray-800/60',
+          'rounded-(--radius) border border-gray-700/60 bg-gray-800/60',
           'shadow-lg backdrop-blur-xl transition-all duration-200',
           'hover:border-gray-600/70 hover:bg-gray-800/80 hover:shadow-xl'
         )}
       >
         <button
           onClick={onToggle}
-          className="flex w-full items-center justify-between rounded-[var(--radius)] p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+          className="flex w-full items-center justify-between rounded-(--radius) p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
         >
           <h3 className="pr-4 font-semibold text-lg text-white">{title}</h3>
           <motion.div
@@ -78,7 +78,7 @@ export function FaqSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 py-20 md:py-32">
+    <section className="relative overflow-hidden bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 py-20 md:py-32">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/3 left-1/4 h-96 w-96 rounded-full bg-primary/8 blur-3xl" />
         <div className="absolute right-1/4 bottom-1/3 h-80 w-80 rounded-full bg-primary-alt/8 blur-3xl" />
@@ -93,7 +93,7 @@ export function FaqSection() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-[var(--radius-button)] border border-gray-700/60 bg-gradient-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-(--radius-button) border border-gray-700/60 bg-linear-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl">
             <Sparkles className="h-4 w-4 animate-pulse text-primary" />
             <span className="font-semibold tracking-wide">
               Frequently Asked Questions
@@ -102,7 +102,7 @@ export function FaqSection() {
 
           <h2 className="mb-6 font-bold text-4xl text-white tracking-tight md:text-5xl">
             Quick answers about{' '}
-            <span className="bg-gradient-to-r from-primary via-primary-alt to-primary bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary via-primary-alt to-primary bg-clip-text text-transparent">
               InterChat
             </span>
           </h2>

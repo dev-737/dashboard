@@ -25,10 +25,8 @@ export function DashboardTopBar({ user }: { user: User }) {
   const pathname = usePathname();
 
   return (
-    <div className="sticky top-0 z-40 flex h-16 flex-shrink-0 border-white/10 border-b bg-gradient-to-r from-gray-900/95 via-gray-900/90 to-gray-950/95 backdrop-blur-xl">
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-900/5 via-transparent to-blue-900/5" />
-
-      <div className="relative z-10 flex flex-1 items-center px-4">
+    <div className="sticky top-0 z-40 flex h-16 flex-shrink-0 border-b border-gray-800/60 bg-[#0b0f1a]">
+      <div className="flex flex-1 items-center px-4">
         <div className="flex items-center gap-3">
           <Link href="/" className="group flex items-center gap-3">
             <div className="relative">

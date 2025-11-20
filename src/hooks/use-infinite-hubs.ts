@@ -6,7 +6,7 @@ import type {
   SortOptions,
   VerificationStatus,
 } from '@/app/hubs/constants';
-import type { HubActivityLevel, Role } from '@/lib/generated/prisma/client';
+import type { HubActivityLevel, Role } from '@/lib/generated/prisma/client/client';
 import { useInfiniteQuery } from '@/lib/tanstack-query';
 import { useTRPC } from '@/utils/trpc';
 import { useErrorNotification } from './use-error-notification';

@@ -1,6 +1,6 @@
-import { HubActivityLevel } from '@/lib/generated/prisma/client';
+import { HubActivityLevel } from '@/lib/generated/prisma/client/client';
 
-export { HubActivityLevel as ActivityLevel } from '@/lib/generated/prisma/client';
+export { HubActivityLevel as ActivityLevel } from '@/lib/generated/prisma/client/client';
 
 export const HUBS_PER_PAGE = 12;
 

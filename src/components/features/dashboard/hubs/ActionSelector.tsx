@@ -12,7 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { BlockWordAction } from '@/lib/generated/prisma/client';
+import { BlockWordAction } from '@/lib/generated/prisma/client/client';
 import {
   BlockWordActionColors,
   BlockWordActionDescriptions,
