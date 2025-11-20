@@ -68,7 +68,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
   });
 
   return (
-    <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-gray-800/60 bg-gray-900/90 transition-colors duration-200 hover:border-gray-700/80 hover:bg-gray-900/95 sm:bg-gray-900/40 sm:backdrop-blur-sm sm:hover:bg-gray-900/60">
+    <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-gray-800/60 bg-gray-900/90 transition-all duration-300 hover:-translate-y-1 hover:border-gray-700/80 hover:bg-gray-900/95 hover:shadow-xl hover:shadow-purple-500/10 sm:bg-gray-900/40 sm:backdrop-blur-sm sm:hover:bg-gray-900/60">
       {/* Banner */}
       {bannerUrl && (
         <div className="relative h-32 w-full overflow-hidden">
@@ -182,19 +182,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 </TooltipContent>
               </Tooltip>
 
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="flex cursor-help items-center gap-1.5">
-                    <Heart className="h-4 w-4 text-pink-400" />
-                    <span className="text-gray-300">
-                      {formatNumber(upvoteCount)}
-                    </span>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Upvotes</p>
-                </TooltipContent>
-              </Tooltip>
+
             </div>
 
             {/* Rating Display */}
@@ -261,24 +249,35 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
             </Button>
           </Link>
 
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handleUpvote}
-            disabled={isLoading}
-            className={cn(
-              'h-10 w-10 shrink-0 rounded-lg border transition-colors',
-              liked
-                ? 'border-red-500/50 bg-red-500/10 text-red-400 hover:bg-red-500/20'
-                : 'border-gray-700/60 bg-gray-900/40 text-gray-400 hover:border-gray-600 hover:bg-gray-800/60 hover:text-white'
-            )}
-          >
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Heart className={cn('h-4 w-4', liked && 'fill-red-400')} />
-            )}
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                onClick={handleUpvote}
+                disabled={isLoading}
+                className={cn(
+                  'h-10 min-w-[3.5rem] shrink-0 rounded-lg border px-3 transition-all',
+                  liked
+                    ? 'border-red-500/50 bg-red-500/10 text-red-400 hover:bg-red-500/20'
+                    : 'border-gray-700/60 bg-gray-900/40 text-gray-400 hover:border-gray-600 hover:bg-gray-800/60 hover:text-white'
+                )}
+              >
+                {isLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Heart className={cn('h-4 w-4', liked && 'fill-red-400')} />
+                    <span className="text-sm font-medium">
+                      {formatNumber(upvoteCount)}
+                    </span>
+                  </div>
+                )}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{liked ? 'Remove upvote' : 'Upvote this hub'}</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
       </CardFooter>
     </Card>
