@@ -218,12 +218,6 @@ export default function AdvancedSearchPage() {
       {/* Sticky Header with improved positioning */}
       <div className="sticky top-16 z-30 border-gray-800/60 border-b bg-[#030812]/95 backdrop-blur-xl transition-colors duration-200">
         <div className="container mx-auto max-w-7xl px-4 py-4">
-          <h1 className="text-center font-bold text-3xl text-gray-100">
-            Discover Hubs
-          </h1>
-          <p className="pb-4 text-center text-gray-500">
-            Find the best hubs for you with our advanced search tool.
-          </p>
           <div className="flex flex-col gap-4 md:flex-row md:items-center">
             {/* Search Bar */}
             <div className="relative flex-1">
@@ -283,7 +277,7 @@ export default function AdvancedSearchPage() {
                         minMembers > 0 ||
                         verifiedOnly ||
                         partneredOnly) &&
-                        'border-indigo-500/50 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20'
+                      'border-indigo-500/50 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20'
                     )}
                   >
                     <Filter className="h-4 w-4" />
@@ -292,16 +286,16 @@ export default function AdvancedSearchPage() {
                       minMembers > 0 ||
                       verifiedOnly ||
                       partneredOnly) && (
-                      <Badge
-                        variant="secondary"
-                        className="ml-1 h-5 min-w-5 bg-indigo-500/20 px-1 text-indigo-300"
-                      >
-                        {tags.length +
-                          (minMembers > 0 ? 1 : 0) +
-                          (verifiedOnly ? 1 : 0) +
-                          (partneredOnly ? 1 : 0)}
-                      </Badge>
-                    )}
+                        <Badge
+                          variant="secondary"
+                          className="ml-1 h-5 min-w-5 bg-indigo-500/20 px-1 text-indigo-300"
+                        >
+                          {tags.length +
+                            (minMembers > 0 ? 1 : 0) +
+                            (verifiedOnly ? 1 : 0) +
+                            (partneredOnly ? 1 : 0)}
+                        </Badge>
+                      )}
                   </Button>
                 </SheetTrigger>
                 <SheetContent className="flex h-full w-full flex-col border-l-white/10 bg-[#0a101d] p-0 text-gray-200 sm:max-w-md">
