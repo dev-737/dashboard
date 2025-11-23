@@ -28,6 +28,7 @@ const discoverInput = z.object({
       'trending',
       'active',
       'new',
+      'oldest',
       'upvoted',
       'rated',
       'members',

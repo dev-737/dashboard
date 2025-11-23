@@ -1,0 +1,639 @@
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
+import {
+  ArrowDownWideNarrow,
+  ArrowUpNarrowWide,
+  Filter,
+  Loader2,
+  Search,
+  X,
+  Sparkles,
+  TrendingUp,
+  Clock,
+  Hash,
+  Check
+} from 'lucide-react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useCallback, useState, useEffect } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetFooter,
+  SheetClose,
+} from '@/components/ui/sheet';
+import { Separator } from '@/components/ui/separator';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import DiscoverHubCard from '@/components/features/discover/DiscoverHubCard';
+import { FeaturedHubBanner } from './FeaturedHubBanner';
+import { useTRPC } from '@/utils/trpc';
+import { cn } from '@/lib/utils';
+import { Label } from '@/components/ui/label';
+import { Slider } from '@/components/ui/slider';
+import { Switch } from '@/components/ui/switch';
+
+// Sort options mapping to user-friendly labels
+const SORT_OPTIONS = [
+  { value: 'trending', label: 'Trending' },
+  { value: 'active', label: 'Most Active' },
+  { value: 'new', label: 'Newest' },
+  { value: 'oldest', label: 'Oldest' },
+  { value: 'upvoted', label: 'Most Upvoted' },
+  { value: 'rated', label: 'Highest Rated' },
+  { value: 'members', label: 'Most Members' },
+  { value: 'growing', label: 'Fastest Growing' },
+];
+
+export default function AdvancedSearchPage() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const trpc = useTRPC();
+
+  // -- State --
+  // Initialize from URL params if present
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
+  
+  // Debounce search term
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  const [sort, setSort] = useState<string>(searchParams.get('sort') || 'trending');
+  const [tags, setTags] = useState<string[]>(
+    searchParams.get('tags')?.split(',').filter(Boolean) || []
+  );
+  
+  // Advanced filters
+  const [minMembers, setMinMembers] = useState<number>(
+    parseInt(searchParams.get('minMembers') || '0')
+  );
+  const [verifiedOnly, setVerifiedOnly] = useState<boolean>(
+    searchParams.get('verified') === 'true'
+  );
+  const [partneredOnly, setPartneredOnly] = useState<boolean>(
+    searchParams.get('partnered') === 'true'
+  );
+  
+  const [page, setPage] = useState(1);
+  const pageSize = 24;
+
+  // -- Update URL when filters change --
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (debouncedSearchTerm) params.set('q', debouncedSearchTerm);
+    if (sort && sort !== 'trending') params.set('sort', sort);
+    if (tags.length > 0) params.set('tags', tags.join(','));
+    if (minMembers > 0) params.set('minMembers', minMembers.toString());
+    if (verifiedOnly) params.set('verified', 'true');
+    if (partneredOnly) params.set('partnered', 'true');
+
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }, [debouncedSearchTerm, sort, tags, minMembers, verifiedOnly, partneredOnly, router, pathname]);
+
+  const hasActiveFilters = 
+    !!debouncedSearchTerm || 
+    sort !== 'trending' || 
+    tags.length > 0 || 
+    minMembers > 0 || 
+    verifiedOnly || 
+    partneredOnly;
+
+  // -- Data Fetching --
+  const queryOptions = {
+    q: debouncedSearchTerm || undefined,
+    sort: sort as any,
+    tags: tags.length > 0 ? tags : undefined,
+    features: {
+      verified: verifiedOnly || undefined,
+      partnered: partneredOnly || undefined,
+    },
+    memberCount: minMembers > 0 ? { min: minMembers } : undefined,
+    page,
+    pageSize,
+  };
+
+  // Main list
+  const { data, isLoading } = useQuery(
+    trpc.discover.list.queryOptions(queryOptions)
+  );
+
+  // Staff Picks (only fetch if no active filters)
+  const { data: featuredData } = useQuery({
+    ...trpc.discover.list.queryOptions({ showFeaturedOnly: true, pageSize: 4 }),
+    enabled: !hasActiveFilters,
+  });
+
+  // Popular New Hubs (only fetch if no active filters)
+  const { data: newHubsData } = useQuery({
+    ...trpc.discover.list.queryOptions({ sort: 'new', pageSize: 8 }),
+    enabled: !hasActiveFilters,
+  });
+
+  // Trending Hubs (only fetch if no active filters)
+  const { data: trendingHubsData } = useQuery({
+    ...trpc.discover.list.queryOptions({ sort: 'trending', pageSize: 8 }),
+    enabled: !hasActiveFilters,
+  });
+
+  // Popular Tags for Filter
+  const { data: popularTagsData } = useQuery(
+    trpc.tags.list.queryOptions({ popular: true, limit: 20 })
+  );
+
+  // -- Handlers --
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    setPage(1);
+  };
+
+  const handleSortChange = (value: string) => {
+    setSort(value);
+    setPage(1);
+  };
+
+  const handleTagsChange = (newTags: string[]) => {
+    setTags(newTags);
+    setPage(1);
+  };
+
+  const handleClearFilters = () => {
+    setSearchTerm('');
+    setSort('trending');
+    setTags([]);
+    setMinMembers(0);
+    setVerifiedOnly(false);
+    setPartneredOnly(false);
+    setPage(1);
+  };
+
+  const toggleTag = (tag: string) => {
+    if (tags.includes(tag)) {
+      handleTagsChange(tags.filter((t) => t !== tag));
+    } else {
+      if (tags.length < 10) {
+        handleTagsChange([...tags, tag]);
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#030812] text-gray-200">
+      {/* Sticky Header with improved positioning */}
+      <div className="sticky top-16 z-30 border-b border-gray-800/60 bg-[#030812]/95 backdrop-blur-xl transition-colors duration-200">
+        <div className="container mx-auto max-w-7xl px-4 py-4">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center">
+            
+            {/* Search Bar */}
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+              <Input
+                placeholder="Search hubs..."
+                className="h-11 border-white/5 bg-white/5 pl-10 text-base text-gray-200 placeholder:text-gray-500 transition-colors focus:border-indigo-500/50 focus:bg-white/10 focus:ring-indigo-500/20"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => {
+                    setSearchTerm('');
+                    setPage(1);
+                  }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+
+            {/* Controls */}
+            <div className="flex items-center gap-2">
+              <Select value={sort} onValueChange={handleSortChange}>
+                <SelectTrigger className="h-11 w-[160px] border-white/5 bg-white/5 text-gray-200 hover:bg-white/10 hover:text-white">
+                  <div className="flex items-center gap-2">
+                    {sort === 'new' || sort === 'oldest' ? (
+                      <ArrowDownWideNarrow className="h-4 w-4 text-gray-400" />
+                    ) : (
+                      <ArrowUpNarrowWide className="h-4 w-4 text-gray-400" />
+                    )}
+                    <SelectValue placeholder="Sort by" />
+                  </div>
+                </SelectTrigger>
+                <SelectContent className="border-gray-800 bg-[#0a101d] text-gray-200">
+                  {SORT_OPTIONS.map((option) => (
+                    <SelectItem key={option.value} value={option.value} className="focus:bg-white/5 focus:text-white">
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "h-11 gap-2 border-white/5 bg-white/5 text-gray-200 hover:bg-white/10 hover:text-white",
+                      (tags.length > 0 || minMembers > 0 || verifiedOnly || partneredOnly) &&
+                        "border-indigo-500/50 text-indigo-400 bg-indigo-500/10 hover:bg-indigo-500/20"
+                    )}
+                  >
+                    <Filter className="h-4 w-4" />
+                    Filters
+                    {(tags.length > 0 || minMembers > 0 || verifiedOnly || partneredOnly) && (
+                      <Badge
+                        variant="secondary"
+                        className="ml-1 h-5 min-w-5 bg-indigo-500/20 px-1 text-indigo-300"
+                      >
+                        {tags.length + (minMembers > 0 ? 1 : 0) + (verifiedOnly ? 1 : 0) + (partneredOnly ? 1 : 0)}
+                      </Badge>
+                    )}
+                  </Button>
+                </SheetTrigger>
+                <SheetContent className="flex h-full w-full flex-col border-l-white/10 bg-[#0a101d] p-0 text-gray-200 sm:max-w-md">
+                  <SheetHeader className="px-6 py-4">
+                    <SheetTitle className="text-gray-100">Filters</SheetTitle>
+                    <SheetDescription className="text-gray-400">
+                      Refine your discovery results.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <Separator className="bg-white/10" />
+                  
+                  <ScrollArea className="flex-1 px-6">
+                    <div className="flex flex-col gap-8 py-6">
+                      
+                      {/* Features Section */}
+                      <div className="space-y-4">
+                        <Label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                          Properties
+                        </Label>
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between rounded-lg border border-white/5 bg-white/5 p-3 transition-colors hover:border-white/10 hover:bg-white/10">
+                            <Label htmlFor="verified-filter" className="flex cursor-pointer flex-col gap-1">
+                              <span className="font-medium text-gray-200">Verified Only</span>
+                              <span className="text-xs text-gray-500">Official trusted hubs</span>
+                            </Label>
+                            <Switch
+                              id="verified-filter"
+                              checked={verifiedOnly}
+                              onCheckedChange={setVerifiedOnly}
+                            />
+                          </div>
+                          <div className="flex items-center justify-between rounded-lg border border-white/5 bg-white/5 p-3 transition-colors hover:border-white/10 hover:bg-white/10">
+                            <Label htmlFor="partnered-filter" className="flex cursor-pointer flex-col gap-1">
+                              <span className="font-medium text-gray-200">Partnered Only</span>
+                              <span className="text-xs text-gray-500">InterChat partners</span>
+                            </Label>
+                            <Switch
+                              id="partnered-filter"
+                              checked={partneredOnly}
+                              onCheckedChange={setPartneredOnly}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <Separator className="bg-white/10" />
+
+                      {/* Size Section */}
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <Label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                            Hub Size
+                          </Label>
+                          <span className="font-mono text-sm text-indigo-400">
+                            {minMembers > 0 ? `${minMembers}+ members` : 'Any size'}
+                          </span>
+                        </div>
+                        <Slider
+                          defaultValue={[minMembers]}
+                          max={1000}
+                          step={50}
+                          onValueChange={(vals) => setMinMembers(vals[0])}
+                          className="py-2"
+                        />
+                        <div className="flex justify-between text-[10px] text-gray-600 uppercase">
+                          <span>0</span>
+                          <span>250</span>
+                          <span>500</span>
+                          <span>750</span>
+                          <span>1000+</span>
+                        </div>
+                      </div>
+
+                      <Separator className="bg-white/10" />
+
+                      {/* Tags Section */}
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <Label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                            Tags ({tags.length}/10)
+                          </Label>
+                          {tags.length > 0 && (
+                             <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="h-auto p-0 text-xs text-red-400 hover:text-red-300 hover:bg-transparent"
+                              onClick={() => setTags([])}
+                            >
+                              Clear
+                            </Button>
+                          )}
+                        </div>
+
+                        {/* Tag Search/Select Input */}
+                        <div className="rounded-lg border border-white/5 bg-white/5 p-1">
+                          <Command className="bg-transparent">
+                            <CommandInput placeholder="Search tags..." className="h-9 text-gray-200" />
+                            <CommandList className="max-h-[200px] overflow-y-auto custom-scrollbar">
+                              <CommandEmpty className="py-2 text-center text-xs text-gray-500">No tags found.</CommandEmpty>
+                              <CommandGroup>
+                                {(popularTagsData?.tags || []).map((tag: any) => (
+                                  <CommandItem
+                                    key={tag.name}
+                                    value={tag.name}
+                                    onSelect={() => toggleTag(tag.name)}
+                                    className="cursor-pointer aria-selected:bg-white/10 aria-selected:text-white"
+                                  >
+                                    <div className="flex w-full items-center justify-between">
+                                      <div className="flex items-center gap-2">
+                                        <Hash className="h-3 w-3 text-gray-500" />
+                                        <span>{tag.name}</span>
+                                      </div>
+                                      {tags.includes(tag.name) && <Check className="h-3 w-3 text-indigo-400" />}
+                                    </div>
+                                  </CommandItem>
+                                ))}
+                              </CommandGroup>
+                            </CommandList>
+                          </Command>
+                        </div>
+
+                        {/* Selected Tags Chips */}
+                        {tags.length > 0 && (
+                          <div className="flex flex-wrap gap-2">
+                            {tags.map((tag) => (
+                              <Badge 
+                                key={tag} 
+                                variant="secondary"
+                                className="gap-1 border-indigo-500/20 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20"
+                              >
+                                {tag}
+                                <X 
+                                  className="h-3 w-3 cursor-pointer" 
+                                  onClick={() => toggleTag(tag)}
+                                />
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </ScrollArea>
+
+                  <div className="border-t border-white/10 p-6">
+                    <SheetClose asChild>
+                      <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20">
+                        View Results
+                      </Button>
+                    </SheetClose>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </div>
+
+          {/* Active Filters Display */}
+          {hasActiveFilters && (
+             <div className="mt-4 flex flex-wrap items-center gap-2">
+              <span className="text-xs font-medium text-gray-500 uppercase">Active Filters:</span>
+              
+              {debouncedSearchTerm && (
+                <Badge variant="outline" className="gap-1 border-white/10 bg-white/5 text-gray-300 hover:bg-white/10">
+                  Search: {debouncedSearchTerm}
+                  <X
+                    className="h-3 w-3 cursor-pointer hover:text-white"
+                    onClick={() => setSearchTerm('')}
+                  />
+                </Badge>
+              )}
+
+              {sort !== 'trending' && (
+                 <Badge variant="outline" className="gap-1 border-white/10 bg-white/5 text-gray-300 hover:bg-white/10">
+                  Sort: {SORT_OPTIONS.find(o => o.value === sort)?.label}
+                  <X
+                    className="h-3 w-3 cursor-pointer hover:text-white"
+                    onClick={() => setSort('trending')}
+                  />
+                </Badge>
+              )}
+
+              {tags.map(tag => (
+                <Badge key={tag} variant="outline" className="gap-1 border-indigo-500/30 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20">
+                  #{tag}
+                  <X
+                    className="h-3 w-3 cursor-pointer hover:text-white"
+                    onClick={() => handleTagsChange(tags.filter(t => t !== tag))}
+                  />
+                </Badge>
+              ))}
+
+              {minMembers > 0 && (
+                 <Badge variant="outline" className="gap-1 border-white/10 bg-white/5 text-gray-300 hover:bg-white/10">
+                  Members &ge; {minMembers}
+                  <X
+                    className="h-3 w-3 cursor-pointer hover:text-white"
+                    onClick={() => setMinMembers(0)}
+                  />
+                </Badge>
+              )}
+
+              {verifiedOnly && (
+                 <Badge variant="outline" className="gap-1 border-blue-500/30 bg-blue-500/10 text-blue-300 hover:bg-blue-500/20">
+                  Verified Only
+                  <X
+                    className="h-3 w-3 cursor-pointer hover:text-white"
+                    onClick={() => setVerifiedOnly(false)}
+                  />
+                </Badge>
+              )}
+
+              {partneredOnly && (
+                 <Badge variant="outline" className="gap-1 border-purple-500/30 bg-purple-500/10 text-purple-300 hover:bg-purple-500/20">
+                  Partnered Only
+                  <X
+                    className="h-3 w-3 cursor-pointer hover:text-white"
+                    onClick={() => setPartneredOnly(false)}
+                  />
+                </Badge>
+              )}
+
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-6 px-2 text-xs text-gray-500 hover:text-white"
+                onClick={handleClearFilters}
+              >
+                Clear all
+              </Button>
+             </div>
+          )}
+        </div>
+      </div>
+
+      {/* Content Area */}
+      <div className="container mx-auto max-w-7xl px-4 py-8 space-y-12">
+        
+        {/* Sections: Featured Hubs & Popular New (Only shown when no filters active) */}
+        {!hasActiveFilters && (
+          <>
+            {/* Featured Hubs Banner */}
+            {featuredData && featuredData.items.length > 0 && (
+              <section className="space-y-4">
+                <div className="flex items-center gap-2 text-yellow-400">
+                  <Sparkles className="h-5 w-5" />
+                  <h2 className="text-xl font-bold text-gray-100">Featured Hubs</h2>
+                </div>
+                
+                <ScrollArea className="w-full whitespace-nowrap rounded-2xl">
+                  <div className="flex w-max space-x-4 pb-4">
+                    {featuredData.items.map((hub) => (
+                      <FeaturedHubBanner key={hub.id} {...hub} />
+                    ))}
+                  </div>
+                  <ScrollBar orientation="horizontal" />
+                </ScrollArea>
+              </section>
+            )}
+
+            {/* Popular New Hubs */}
+            {newHubsData && newHubsData.items.length > 0 && (
+              <section className="space-y-6">
+                <div className="flex items-center gap-2 text-indigo-400">
+                  <Clock className="h-6 w-6" />
+                  <h2 className="text-2xl font-bold text-gray-100">Fresh & Popular</h2>
+                </div>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                  {newHubsData.items.map((hub) => (
+                    <DiscoverHubCard key={hub.id} {...hub} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Trending Hubs */}
+            {trendingHubsData && trendingHubsData.items.length > 0 && (
+              <section className="space-y-6">
+                <div className="flex items-center gap-2 text-orange-500">
+                  <TrendingUp className="h-6 w-6" />
+                  <h2 className="text-2xl font-bold text-gray-100">Trending Hubs</h2>
+                </div>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                  {trendingHubsData.items.map((hub) => (
+                    <DiscoverHubCard key={hub.id} {...hub} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Divider if we showed sections */}
+            {(featuredData?.items?.length || 0) + (newHubsData?.items?.length || 0) + (trendingHubsData?.items?.length || 0) > 0 && (
+               <Separator className="bg-gray-800/60 my-8" />
+            )}
+          </>
+        )}
+
+        {/* Main Results */}
+        <section className="space-y-4">
+           <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold text-gray-100">
+                {hasActiveFilters ? 'Search Results' : 'Browse All Hubs'}
+              </h2>
+              <span className="text-sm text-gray-500">
+                {data?.total || 0} hubs found
+              </span>
+           </div>
+
+          {isLoading ? (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="h-[320px] rounded-xl border border-gray-800 bg-gray-900/40 animate-pulse" />
+              ))}
+            </div>
+          ) : data?.items.length === 0 ? (
+             <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-gray-800 bg-gray-900/20 py-20 text-center">
+               <Search className="mb-4 h-10 w-10 text-gray-600" />
+               <h3 className="text-lg font-medium text-gray-300">No hubs found</h3>
+               <p className="mt-1 text-gray-500">Try adjusting your search or filters to find what you're looking for.</p>
+               <Button 
+                 variant="outline" 
+                 className="mt-4 border-gray-700 hover:bg-gray-800"
+                 onClick={handleClearFilters}
+               >
+                 Clear all filters
+               </Button>
+             </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {data?.items.map((hub) => (
+                  <DiscoverHubCard
+                    key={hub.id}
+                    {...hub}
+                    onTagClick={(tag) => {
+                      if (!tags.includes(tag)) handleTagsChange([...tags, tag]);
+                    }}
+                  />
+                ))}
+              </div>
+
+              {data && data.total > pageSize && (
+                <div className="mt-10 flex justify-center gap-2 pt-8">
+                  <Button
+                    variant="outline"
+                    disabled={page === 1}
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    className="border-gray-800 bg-gray-900/50 hover:bg-gray-800"
+                  >
+                    Previous
+                  </Button>
+                  <div className="flex items-center px-4 text-sm text-gray-400">
+                    Page {page} of {Math.ceil(data.total / pageSize)}
+                  </div>
+                  <Button
+                    variant="outline"
+                    disabled={!data.nextPage}
+                    onClick={() => setPage((p) => p + 1)}
+                    className="border-gray-800 bg-gray-900/50 hover:bg-gray-800"
+                  >
+                    Next
+                  </Button>
+                </div>
+              )}
+            </>
+          )}
+        </section>
+      </div>
+    </div>
+  );
+}

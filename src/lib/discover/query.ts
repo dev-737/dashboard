@@ -13,6 +13,7 @@ export type DiscoverSort =
   | 'trending'
   | 'active'
   | 'new'
+  | 'oldest'
   | 'upvoted'
   | 'rated'
   | 'members'
@@ -182,6 +183,8 @@ function buildOrderBy(
       ];
     case 'new':
       return [{ createdAt: 'desc' }, { id: 'desc' }];
+    case 'oldest':
+      return [{ createdAt: 'asc' }, { id: 'asc' }];
     case 'upvoted':
       return [
         { upvotes: { _count: 'desc' } },

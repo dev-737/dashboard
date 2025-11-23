@@ -68,7 +68,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
   });
 
   return (
-    <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-gray-800/60 bg-gray-900/90 transition-all duration-300 hover:-translate-y-1 hover:border-gray-700/80 hover:bg-gray-900/95 hover:shadow-xl hover:shadow-purple-500/10 sm:bg-gray-900/40 sm:backdrop-blur-sm sm:hover:bg-gray-900/60">
+    <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-white/5 bg-[#0a101d]/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-[#0a101d] hover:shadow-2xl hover:shadow-indigo-500/10">
       {/* Banner */}
       {bannerUrl && (
         <div className="relative h-32 w-full overflow-hidden">
@@ -112,7 +112,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
 
           <div className="min-w-0 flex-1 space-y-2">
             <div className="flex items-center gap-2">
-              <CardTitle className="truncate font-semibold text-white text-xl">
+              <CardTitle className="truncate font-semibold text-white text-lg">
                 {name}
               </CardTitle>
               {verified && (
