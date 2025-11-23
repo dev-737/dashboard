@@ -7,7 +7,7 @@ export function AnimatedDashboardSkeleton() {
   return (
     <div className="space-y-8">
       {/* Hero Section Skeleton */}
-      <div className="relative mb-8 h-[30vh] animate-pulse overflow-hidden rounded-[var(--radius-button)] bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 md:h-[40vh]">
+      <div className="relative mb-8 h-[30vh] animate-pulse overflow-hidden rounded-[var(--radius-button)] bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 md:h-[40vh]">
         <div className="flex h-full flex-col items-center justify-center px-6">
           <Skeleton className="mb-4 h-12 w-64" />
           <Skeleton className="h-16 w-80" />
@@ -19,7 +19,7 @@ export function AnimatedDashboardSkeleton() {
         {Array.from({ length: 4 }).map((_, i) => (
           <Card
             key={`stat-card-${i + 1}`}
-            className="border-gray-800 bg-gradient-to-b from-gray-900/50 to-gray-900/30"
+            className="border-gray-800 bg-linear-to-b from-gray-900/50 to-gray-900/30"
           >
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <Skeleton className="h-5 w-32" />
@@ -35,7 +35,7 @@ export function AnimatedDashboardSkeleton() {
 
       {/* Recent Activity and Quick Actions Skeleton */}
       <div className="grid gap-6 md:grid-cols-2">
-        <Card className="border-gray-800 bg-gradient-to-b from-gray-900/50 to-gray-900/30">
+        <Card className="border-gray-800 bg-linear-to-b from-gray-900/50 to-gray-900/30">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <div>
               <Skeleton className="h-6 w-40" />
@@ -62,7 +62,7 @@ export function AnimatedDashboardSkeleton() {
         </Card>
 
         {/* Quick Actions Skeleton */}
-        <Card className="border-gray-800 bg-gradient-to-b from-gray-900/50 to-gray-900/30">
+        <Card className="border-gray-800 bg-linear-to-b from-gray-900/50 to-gray-900/30">
           <CardHeader>
             <div className="flex items-center gap-2">
               <Skeleton className="h-5 w-5 rounded-full" />

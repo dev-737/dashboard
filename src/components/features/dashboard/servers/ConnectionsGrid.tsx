@@ -53,7 +53,7 @@ export function ConnectionsGrid({ connections }: Props) {
         </p>
         <Button
           asChild
-          className="border-none bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-600/80 hover:to-indigo-600/80"
+          className="border-none bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-600/80 hover:to-indigo-600/80"
         >
           <Link href="/dashboard">Manage Servers</Link>
         </Button>
@@ -142,7 +142,7 @@ function ConnectionCard({ connection, index }: ConnectionCardProps) {
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Card className="flex h-full flex-col overflow-hidden border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm transition-all duration-300">
+      <Card className="flex h-full flex-col overflow-hidden border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm transition-all duration-300">
         <CardHeader className="relative pb-2">
           <div className="flex items-center justify-between">
             <Badge
@@ -212,7 +212,7 @@ function ConnectionCard({ connection, index }: ConnectionCardProps) {
         <CardFooter className="flex gap-2 border-gray-800/50 border-t pt-2 pb-4">
           <Button
             asChild
-            className="flex-1 border-none bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700"
+            className="flex-1 border-none bg-linear-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700"
           >
             <Link href={`/dashboard/servers/${connection.serverId}`}>
               <Home className="mr-2 h-4 w-4" />
@@ -221,7 +221,7 @@ function ConnectionCard({ connection, index }: ConnectionCardProps) {
           </Button>
           <Button
             asChild
-            className="flex-1 border-none bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700"
+            className="flex-1 border-none bg-linear-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700"
           >
             <Link href={`/dashboard/hubs/${connection.hubId}`}>
               <MessageSquare className="mr-2 h-4 w-4" />
@@ -230,7 +230,7 @@ function ConnectionCard({ connection, index }: ConnectionCardProps) {
           </Button>
           <Button
             asChild
-            className="flex-1 border-none bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700"
+            className="flex-1 border-none bg-linear-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700"
           >
             <Link href={`/dashboard/connections/${connection.id}/edit`}>
               <Settings className="mr-2 h-4 w-4" />

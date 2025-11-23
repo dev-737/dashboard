@@ -42,7 +42,7 @@ export function DescriptionSettingsStep({
   return (
     <>
       <CardHeader className="pb-6 text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-cyan-600">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-cyan-600">
           <MessageSquare className="h-8 w-8 text-white" />
         </div>
         <CardTitle className="text-2xl">Describe your hub</CardTitle>
@@ -142,7 +142,7 @@ export function DescriptionSettingsStep({
             type="button"
             onClick={onNext}
             disabled={!canProceed}
-            className="border-none bg-gradient-to-r from-indigo-600 to-purple-600 px-8 hover:from-indigo-600/80 hover:to-purple-600/80"
+            className="border-none bg-linear-to-r from-indigo-600 to-purple-600 px-8 hover:from-indigo-600/80 hover:to-purple-600/80"
           >
             Continue
             <ArrowRight className="ml-2 h-4 w-4" />

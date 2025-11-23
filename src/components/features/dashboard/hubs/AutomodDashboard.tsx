@@ -31,15 +31,15 @@ export function AutomodDashboard({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="border border-purple-800/30 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-purple-800/30 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-purple-500/30 bg-gradient-to-br from-purple-500/20 to-indigo-500/20">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-purple-500/30 bg-linear-to-br from-purple-500/20 to-indigo-500/20">
                 <Shield className="h-6 w-6 text-purple-400" />
               </div>
               <div>
-                <CardTitle className="flex items-center bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-gradient text-transparent">
+                <CardTitle className="flex items-center bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text text-gradient text-transparent">
                   Automod & Content Filter
                 </CardTitle>
                 <CardDescription>
@@ -51,7 +51,7 @@ export function AutomodDashboard({
             {canEdit && (
               <Button
                 onClick={() => setShowCreateRule(true)}
-                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                className="bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
               >
                 <Plus className="mr-2 h-4 w-4" />
                 New Rule

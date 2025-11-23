@@ -127,7 +127,7 @@ export default async function HubConnectionsPage({
   const headerActions = canEdit ? (
     <Button
       asChild
-      className="h-10 touch-manipulation border-none bg-gradient-to-r from-blue-600 to-indigo-600 px-3 text-sm hover:from-blue-600/80 hover:to-indigo-600/80 sm:h-9 sm:px-4"
+      className="h-10 touch-manipulation border-none bg-linear-to-r from-blue-600 to-indigo-600 px-3 text-sm hover:from-blue-600/80 hover:to-indigo-600/80 sm:h-9 sm:px-4"
     >
       <Link href={`/dashboard?hubId=${hubId}`}>
         <Plus className="mr-2 h-4 w-4" />

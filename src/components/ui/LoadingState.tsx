@@ -20,7 +20,7 @@ export function LoadingState({
   showActions = false,
 }: LoadingStateProps) {
   const renderCardSkeleton = () => (
-    <Card className="animate-pulse border-gray-800 bg-gradient-to-b from-gray-900/50 to-gray-900/30">
+    <Card className="animate-pulse border-gray-800 bg-linear-to-b from-gray-900/50 to-gray-900/30">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <Skeleton className="h-5 w-32" />
@@ -84,7 +84,7 @@ export function LoadingState({
   );
 
   const renderHeroSkeleton = () => (
-    <div className="relative mb-8 h-[30vh] animate-pulse overflow-hidden rounded-[var(--radius-button)] bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 md:h-[40vh]">
+    <div className="relative mb-8 h-[30vh] animate-pulse overflow-hidden rounded-[var(--radius-button)] bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 md:h-[40vh]">
       <div className="flex h-full flex-col items-center justify-center px-6">
         <Skeleton className="mb-4 h-12 w-64" />
         <Skeleton className="mb-8 h-6 w-80" />

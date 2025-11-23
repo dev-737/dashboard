@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 
 export function OpenSourceSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 py-20 md:py-32">
+    <section className="relative overflow-hidden bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 py-20 md:py-32">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/3 left-1/4 h-96 w-96 animate-pulse rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute right-1/4 bottom-1/3 h-80 w-80 animate-pulse rounded-full bg-primary-alt/10 blur-3xl delay-1000" />
@@ -22,7 +22,7 @@ export function OpenSourceSection() {
 
       <div className="container relative mx-auto px-4">
         <div className="relative z-10 mb-20 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-[var(--radius-button)] border border-gray-700/60 bg-gradient-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-[var(--radius-button)] border border-gray-700/60 bg-linear-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl">
             <Code className="h-4 w-4 animate-pulse text-primary" />
             <span className="font-semibold tracking-wide">Open Source</span>
           </div>
@@ -41,7 +41,7 @@ export function OpenSourceSection() {
         <div className="relative z-10 mb-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* GitHub Repository Card */}
           <div className="group relative">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-primary-alt/10 opacity-0 blur-xl transition-opacity duration-700 group-hover:opacity-50" />
+            <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-primary/10 to-primary-alt/10 opacity-0 blur-xl transition-opacity duration-700 group-hover:opacity-50" />
 
             <div className="relative h-full rounded-2xl border border-gray-700/50 bg-gray-800/50 p-8 backdrop-blur-xl transition-all duration-300 hover:shadow-primary/10 hover:shadow-xl group-hover:border-gray-600/70">
               <div className="mb-6 flex items-center gap-4">
@@ -81,7 +81,7 @@ export function OpenSourceSection() {
 
           {/* Contribution Guidelines Card */}
           <div className="group relative">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-primary-alt/10 opacity-0 blur-xl transition-opacity duration-700 group-hover:opacity-50" />
+            <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-primary/10 to-primary-alt/10 opacity-0 blur-xl transition-opacity duration-700 group-hover:opacity-50" />
 
             <div className="relative h-full rounded-2xl border border-gray-700/50 bg-gray-800/50 p-8 backdrop-blur-xl transition-all duration-300 hover:shadow-primary/10 hover:shadow-xl group-hover:border-gray-600/70">
               <div className="mb-6 flex items-center gap-4">

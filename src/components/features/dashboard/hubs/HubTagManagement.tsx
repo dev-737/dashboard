@@ -121,7 +121,7 @@ export function HubTagManagement({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-purple-500">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-r from-blue-500 to-purple-500">
             <Tag className="h-5 w-5 text-white" />
           </div>
           <div>
@@ -150,7 +150,7 @@ export function HubTagManagement({
             className={cn(
               'transition-all duration-300',
               hasChanges
-                ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700'
+                ? 'bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700'
                 : 'bg-gray-600'
             )}
           >
@@ -209,26 +209,26 @@ export function HubTagManagement({
               <div className="space-y-2 text-sm">
                 {selectedTags.filter((tag) => !currentTags.includes(tag))
                   .length > 0 && (
-                  <div>
-                    <span className="text-green-400">Adding: </span>
-                    <span className="text-gray-300">
-                      {selectedTags
-                        .filter((tag) => !currentTags.includes(tag))
-                        .join(', ')}
-                    </span>
-                  </div>
-                )}
+                    <div>
+                      <span className="text-green-400">Adding: </span>
+                      <span className="text-gray-300">
+                        {selectedTags
+                          .filter((tag) => !currentTags.includes(tag))
+                          .join(', ')}
+                      </span>
+                    </div>
+                  )}
                 {currentTags.filter((tag) => !selectedTags.includes(tag))
                   .length > 0 && (
-                  <div>
-                    <span className="text-red-400">Removing: </span>
-                    <span className="text-gray-300">
-                      {currentTags
-                        .filter((tag) => !selectedTags.includes(tag))
-                        .join(', ')}
-                    </span>
-                  </div>
-                )}
+                    <div>
+                      <span className="text-red-400">Removing: </span>
+                      <span className="text-gray-300">
+                        {currentTags
+                          .filter((tag) => !selectedTags.includes(tag))
+                          .join(', ')}
+                      </span>
+                    </div>
+                  )}
               </div>
             </motion.div>
           )}
@@ -265,7 +265,7 @@ export function HubTagManagement({
                     className={cn(
                       'border-gray-600 text-gray-300 text-xs transition-colors hover:bg-gray-700 hover:text-white',
                       selectedTags.includes(tag.name) &&
-                        'border-blue-600/50 bg-blue-600/20 text-blue-300'
+                      'border-blue-600/50 bg-blue-600/20 text-blue-300'
                     )}
                   >
                     {selectedTags.includes(tag.name) ? (

@@ -5,18 +5,18 @@ import { Link } from '@/components/Link';
 
 export default function PrivacyPolicy() {
   return (
-    <section className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-slate-900 to-black">
+    <section className="min-h-screen w-full bg-linear-to-br from-gray-900 via-slate-900 to-black">
       <main className="container relative mx-auto px-4 py-20">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-16 text-center">
             <div className="mb-6 inline-block">
-              <div className="flex items-center justify-center rounded-full border border-purple-500/30 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 px-6 py-3 text-purple-300 shadow-lg shadow-purple-500/20 backdrop-blur-sm">
+              <div className="flex items-center justify-center rounded-full border border-purple-500/30 bg-linear-to-r from-purple-900/50 to-indigo-900/50 px-6 py-3 text-purple-300 shadow-lg shadow-purple-500/20 backdrop-blur-sm">
                 <Shield className="mr-3 h-6 w-6" />
                 <span className="font-semibold text-lg">Privacy Policy</span>
               </div>
             </div>
 
-            <h1 className="mb-6 bg-gradient-to-r from-white via-purple-100 to-indigo-200 bg-clip-text font-extrabold text-5xl text-transparent md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 bg-linear-to-r from-white via-purple-100 to-indigo-200 bg-clip-text font-extrabold text-5xl text-transparent md:text-6xl lg:text-7xl">
               InterChat Privacy Policy
             </h1>
 
@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
 
           <div className="grid gap-12 lg:grid-cols-[320px_1fr]">
             <aside className="hidden lg:block">
-              <div className="sticky top-24 rounded-2xl border border-gray-700/30 bg-gradient-to-br from-gray-900/80 to-gray-800/80 p-8 shadow-2xl shadow-purple-500/10 backdrop-blur-xl">
+              <div className="sticky top-24 rounded-2xl border border-gray-700/30 bg-linear-to-br from-gray-900/80 to-gray-800/80 p-8 shadow-2xl shadow-purple-500/10 backdrop-blur-xl">
                 <p className="mb-6 font-bold text-purple-300 text-sm uppercase tracking-wider">
                   On this page
                 </p>
@@ -101,7 +101,7 @@ export default function PrivacyPolicy() {
                   <section className="group">
                     <h2
                       id="info-we-collect"
-                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
+                      className="mb-6 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       1. Information We Collect
                     </h2>
@@ -155,7 +155,7 @@ export default function PrivacyPolicy() {
                           Email address (if you contact us directly)
                         </li>
                       </ul>
-                      <p className="rounded-xl border border-red-500/30 bg-gradient-to-r from-red-400/20 to-orange-400/20 p-4 text-red-200">
+                      <p className="rounded-xl border border-red-500/30 bg-linear-to-r from-red-400/20 to-orange-400/20 p-4 text-red-200">
                         We do not knowingly collect data from children under 16
                         in the EU, or under 13 elsewhere.
                       </p>
@@ -164,7 +164,7 @@ export default function PrivacyPolicy() {
                   <section className="group">
                     <h2
                       id="how-we-use"
-                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
+                      className="mb-6 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       2. How We Use Your Information
                     </h2>
@@ -200,7 +200,7 @@ export default function PrivacyPolicy() {
                   <section className="group">
                     <h2
                       id="data-retention"
-                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
+                      className="mb-6 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       3. Data Retention
                     </h2>
@@ -239,7 +239,7 @@ export default function PrivacyPolicy() {
                   <section className="group">
                     <h2
                       id="sharing"
-                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
+                      className="mb-6 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       4. Data Sharing and Third-Party Services
                     </h2>
@@ -272,7 +272,7 @@ export default function PrivacyPolicy() {
                           Error monitoring and diagnostics
                         </li>
                       </ul>
-                      <p className="rounded-xl border border-blue-500/30 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 p-4 text-blue-200">
+                      <p className="rounded-xl border border-blue-500/30 bg-linear-to-r from-blue-400/20 to-cyan-400/20 p-4 text-blue-200">
                         All third parties are contractually obligated to process
                         your data only as necessary and in compliance with GDPR.
                       </p>
@@ -281,7 +281,7 @@ export default function PrivacyPolicy() {
                   <section className="group">
                     <h2
                       id="data-transfers"
-                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
+                      className="mb-6 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       5. Data Transfers
                     </h2>
@@ -305,7 +305,7 @@ export default function PrivacyPolicy() {
                   <section className="group">
                     <h2
                       id="your-rights"
-                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
+                      className="mb-6 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       6. Your Rights
                     </h2>
@@ -331,7 +331,7 @@ export default function PrivacyPolicy() {
                           File a complaint with your local supervisory authority
                         </li>
                       </ol>
-                      <p className="rounded-xl border border-green-500/30 bg-gradient-to-r from-green-400/20 to-emerald-400/20 p-4 text-green-200">
+                      <p className="rounded-xl border border-green-500/30 bg-linear-to-r from-green-400/20 to-emerald-400/20 p-4 text-green-200">
                         <strong className="text-green-300">
                           How to exercise these rights:
                         </strong>{' '}
@@ -351,7 +351,7 @@ export default function PrivacyPolicy() {
                   <section className="group">
                     <h2
                       id="cookies"
-                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
+                      className="mb-6 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       7. Cookies and Tracking
                     </h2>
@@ -377,7 +377,7 @@ export default function PrivacyPolicy() {
                           Understand usage trends (requires opt-in)
                         </li>
                       </ul>
-                      <p className="rounded-xl border border-yellow-500/30 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 p-4 text-yellow-200">
+                      <p className="rounded-xl border border-yellow-500/30 bg-linear-to-r from-yellow-400/20 to-orange-400/20 p-4 text-yellow-200">
                         You can manage or disable cookies in your browser, but
                         some features may not function correctly.
                       </p>
@@ -386,12 +386,12 @@ export default function PrivacyPolicy() {
                   <section className="group">
                     <h2
                       id="children"
-                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
+                      className="mb-6 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       8. Children's Privacy
                     </h2>
                     <div className="space-y-4 text-lg leading-relaxed">
-                      <p className="rounded-xl border border-red-500/30 bg-gradient-to-r from-red-400/20 to-pink-400/20 p-4 text-red-200">
+                      <p className="rounded-xl border border-red-500/30 bg-linear-to-r from-red-400/20 to-pink-400/20 p-4 text-red-200">
                         InterChat is{' '}
                         <strong className="text-red-300">
                           not intended for children under 13
@@ -405,7 +405,7 @@ export default function PrivacyPolicy() {
                   <section className="group">
                     <h2
                       id="changes"
-                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
+                      className="mb-6 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       9. Changes to this Policy
                     </h2>
@@ -425,7 +425,7 @@ export default function PrivacyPolicy() {
                   <section className="group">
                     <h2
                       id="contact"
-                      className="mb-6 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
+                      className="mb-6 bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text font-bold text-3xl text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:to-indigo-300"
                     >
                       10. Contact Us
                     </h2>
@@ -558,7 +558,7 @@ export default function PrivacyPolicy() {
           </div>
 
           <footer className="mt-20 border-gray-700/30 border-t pt-12 text-center">
-            <div className="rounded-2xl border border-gray-700/20 bg-gradient-to-r from-gray-900/50 to-gray-800/50 p-8 backdrop-blur-sm">
+            <div className="rounded-2xl border border-gray-700/20 bg-linear-to-r from-gray-900/50 to-gray-800/50 p-8 backdrop-blur-sm">
               <p className="text-gray-300 text-lg">
                 This privacy policy is part of our{' '}
                 <span className="font-semibold text-purple-400 transition-colors hover:text-purple-300">

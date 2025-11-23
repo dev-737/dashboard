@@ -216,7 +216,7 @@ export function ServerConnectionsTable({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                       align="end"
-                      className="border border-gray-800/50 bg-gradient-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-md"
+                      className="border border-gray-800/50 bg-linear-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-md"
                     >
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuSeparator className="bg-gray-800/50" />

@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import { ActionGrid } from '@/app/_components/ActionGrid';
 import { Hero } from '@/app/_components/Hero';
 import { HomePageSchemas } from '@/app/_components/HomePageSchemas';
-import { ActionGrid } from '@/app/_components/ActionGrid';
 
 const TrendingHubs = dynamic(
-  () => import('@/app/_components/TrendingHubsServer').then((mod) => ({ default: mod.TrendingHubs })),
+  () =>
+    import('@/app/_components/TrendingHubsServer').then((mod) => ({
+      default: mod.TrendingHubs,
+    })),
   {
-    loading: () => (
-      <div className="h-96 w-full animate-pulse bg-gray-900/50" />
-    ),
+    loading: () => <div className="h-96 w-full animate-pulse bg-gray-900/50" />,
   }
 );
 
@@ -89,7 +90,11 @@ export default async function HomePage() {
         <Hero />
         <FeaturesShowcase />
         <ActionGrid />
-        <Suspense fallback={<div className="h-96 w-full animate-pulse bg-gray-900/50" />}>
+        <Suspense
+          fallback={
+            <div className="h-96 w-full animate-pulse bg-gray-900/50" />
+          }
+        >
           <TrendingHubs />
         </Suspense>
         <FaqSection />

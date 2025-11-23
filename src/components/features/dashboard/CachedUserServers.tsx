@@ -1,5 +1,5 @@
-import { cacheLife, cacheTag } from 'next/cache';
 import { PlusCircle, Server } from 'lucide-react';
+import { cacheLife, cacheTag } from 'next/cache';
 import Link from 'next/link';
 import type { Session } from 'next-auth';
 import { getServers } from '@/actions/server-actions';
@@ -49,7 +49,7 @@ export async function CachedUserServers({
   // Handle errors
   if ('error' in serversResult) {
     return (
-      <Card className="border-gray-800/50 bg-gradient-to-br from-gray-900/60 to-gray-950/60 backdrop-blur-sm">
+      <Card className="border-gray-800/50 bg-linear-to-br from-gray-900/60 to-gray-950/60 backdrop-blur-sm">
         <CardHeader className="py-12 text-center">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10">
             <Server className="h-6 w-6 text-red-400" />
@@ -67,7 +67,7 @@ export async function CachedUserServers({
 
   if (servers.length === 0) {
     return (
-      <Card className="border-gray-800/50 bg-gradient-to-br from-gray-900/60 to-gray-950/60 backdrop-blur-sm">
+      <Card className="border-gray-800/50 bg-linear-to-br from-gray-900/60 to-gray-950/60 backdrop-blur-sm">
         <CardHeader className="py-12 text-center">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
             <Server className="h-6 w-6 text-blue-400" />
@@ -82,7 +82,7 @@ export async function CachedUserServers({
           <Button
             asChild
             size="lg"
-            className="border-none bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:from-blue-700 hover:to-indigo-700"
+            className="border-none bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:from-blue-700 hover:to-indigo-700"
           >
             <Link
               href="https://discord.com/oauth2/authorize?client_id=769921109209907241"

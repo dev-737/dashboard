@@ -29,14 +29,14 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        dark: 'border-gray-700/50 bg-gradient-to-r from-gray-900/95 to-gray-950/95 text-white shadow-2xl shadow-gray-900/50',
+        dark: 'border-gray-700/50 bg-linear-to-r from-gray-900/95 to-gray-950/95 text-white shadow-2xl shadow-gray-900/50',
         default: 'border bg-background text-foreground',
         destructive:
-          'destructive group border-red-500/50 bg-gradient-to-r from-red-950/95 to-red-900/95 text-red-100 shadow-2xl shadow-red-900/50',
+          'destructive group border-red-500/50 bg-linear-to-r from-red-950/95 to-red-900/95 text-red-100 shadow-2xl shadow-red-900/50',
         success:
-          'border-green-500/50 bg-gradient-to-r from-green-950/95 to-emerald-950/95 text-green-100 shadow-2xl shadow-green-900/50',
+          'border-green-500/50 bg-linear-to-r from-green-950/95 to-emerald-950/95 text-green-100 shadow-2xl shadow-green-900/50',
         dashboard:
-          'border-blue-500/30 bg-gradient-to-r from-blue-950/95 to-indigo-950/95 text-blue-100 shadow-2xl shadow-blue-900/50 backdrop-blur-md',
+          'border-blue-500/30 bg-linear-to-r from-blue-950/95 to-indigo-950/95 text-blue-100 shadow-2xl shadow-blue-900/50 backdrop-blur-md',
       },
     },
     defaultVariants: {
@@ -48,7 +48,7 @@ const toastVariants = cva(
 const Toast = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
-    VariantProps<typeof toastVariants>
+  VariantProps<typeof toastVariants>
 >(({ className, variant, ...props }, ref) => {
   return (
     <ToastPrimitives.Root

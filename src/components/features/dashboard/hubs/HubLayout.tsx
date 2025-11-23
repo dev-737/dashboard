@@ -66,9 +66,8 @@ function HubLayoutContent({
       {/* Fixed Hub Sidebar - Desktop only extending to very top */}
       {isHydrated && (
         <div
-          className={`fixed top-0 bottom-0 left-0 z-30 hidden transition-all duration-300 lg:block ${
-            hubSidebarCollapsed ? 'w-16' : 'w-64'
-          }`}
+          className={`fixed top-0 bottom-0 left-0 z-30 hidden transition-all duration-300 lg:block ${hubSidebarCollapsed ? 'w-16' : 'w-64'
+            }`}
         >
           <HubSidebar
             hubId={hub.id}
@@ -85,13 +84,12 @@ function HubLayoutContent({
 
       {/* Main Content Area with proper margin and spacing */}
       <div
-        className={`min-h-screen bg-[#141b2b] px-4 pt-20 transition-all duration-300 lg:pr-4 lg:rounded-l-3xl ${
-          isHydrated
+        className={`min-h-screen bg-[#141b2b] px-4 pt-20 transition-all duration-300 lg:rounded-l-3xl lg:pr-4 ${isHydrated
             ? hubSidebarCollapsed
               ? 'lg:ml-16'
               : 'lg:ml-64'
             : 'lg:ml-64'
-        }`}
+          }`}
       >
         {/* Unified Hub Header */}
         <UnifiedHubHeader
@@ -103,7 +101,7 @@ function HubLayoutContent({
         />
 
         <div className="mt-6 lg:hidden">
-          <div className="sticky top-0 z-20 mb-4 rounded-2xl border border-indigo-500/30 bg-gradient-to-r from-gray-900/98 via-gray-900/95 to-gray-900/98 p-4 shadow-lg backdrop-blur-md">
+          <div className="sticky top-0 z-20 mb-4 rounded-2xl border border-indigo-500/30 bg-linear-to-r from-gray-900/98 via-gray-900/95 to-gray-900/98 p-4 shadow-lg backdrop-blur-md">
             <HubMobileDropdown
               hubId={hub.id}
               canModerate={canModerate}

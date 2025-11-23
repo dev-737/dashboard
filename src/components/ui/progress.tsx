@@ -19,7 +19,7 @@ function Progress({
       {...props}
     >
       <ProgressPrimitive.Indicator
-        className="h-full w-full flex-1 rounded-[var(--radius-badge)] bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-200"
+        className="h-full w-full flex-1 rounded-[var(--radius-badge)] bg-linear-to-r from-purple-600 to-blue-600 transition-all duration-200"
         style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
       />
     </ProgressPrimitive.Root>

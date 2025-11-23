@@ -22,7 +22,7 @@ export function NotificationBadge({
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.5, opacity: 0 }}
         className={cn(
-          'absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 font-bold text-[10px] text-white shadow-md',
+          'absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-linear-to-r from-indigo-500 to-purple-500 font-bold text-[10px] text-white shadow-md',
           className
         )}
       >

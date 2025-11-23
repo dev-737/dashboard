@@ -55,7 +55,7 @@ const HubReviewAnalytics: React.FC<HubReviewAnalyticsProps> = ({
               </div>
               <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-700">
                 <div
-                  className="h-full bg-gradient-to-r from-amber-500 to-amber-400"
+                  className="h-full bg-linear-to-r from-amber-500 to-amber-400"
                   style={{ width: `${item.percentage}%` }}
                 />
               </div>

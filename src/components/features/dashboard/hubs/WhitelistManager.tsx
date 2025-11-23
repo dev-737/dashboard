@@ -192,11 +192,11 @@ export function WhitelistManager({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="border border-green-800/30 bg-gradient-to-b from-gray-900/80 to-gray-950/80">
+      <Card className="border border-green-800/30 bg-linear-to-b from-gray-900/80 to-gray-950/80">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-green-500/30 bg-gradient-to-br from-green-500/20 to-emerald-500/20">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-green-500/30 bg-linear-to-br from-green-500/20 to-emerald-500/20">
                 <CheckCircle2 className="h-5 w-5 text-green-400" />
               </div>
               <div>
@@ -259,7 +259,7 @@ export function WhitelistManager({
               {canEdit && (
                 <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
                   <DialogTrigger asChild>
-                    <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
+                    <Button className="bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
                       <Plus className="mr-2 h-4 w-4" />
                       Add Word
                     </Button>
@@ -322,7 +322,7 @@ export function WhitelistManager({
                             addMutation.isPending ||
                             !newWhitelistItem.word.trim()
                           }
-                          className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
+                          className="bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                         >
                           {addMutation.isPending
                             ? 'Adding...'

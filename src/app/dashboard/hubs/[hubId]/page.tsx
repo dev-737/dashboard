@@ -93,22 +93,22 @@ export default async function HubOverviewPage({
   // Fetch moderation stats for moderators
   const moderationStats = canModerate
     ? await db.$transaction([
-        db.hubReport.count({
-          where: { hubId, status: 'PENDING' },
-        }),
-        db.appeal.count({
-          where: {
-            status: 'PENDING',
-            infraction: { hubId },
-          },
-        }),
-        db.infraction.count({
-          where: {
-            hubId,
-            status: 'ACTIVE',
-          },
-        }),
-      ])
+      db.hubReport.count({
+        where: { hubId, status: 'PENDING' },
+      }),
+      db.appeal.count({
+        where: {
+          status: 'PENDING',
+          infraction: { hubId },
+        },
+      }),
+      db.infraction.count({
+        where: {
+          hubId,
+          status: 'ACTIVE',
+        },
+      }),
+    ])
     : [0, 0, 0];
 
   const [pendingReports, pendingAppeals, activeInfractions] = moderationStats;
@@ -142,7 +142,7 @@ export default async function HubOverviewPage({
         <div className="space-y-6">
           {/* Hub Stats Grid */}
           <div className="grid gap-4 md:grid-cols-3">
-            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-blue-900/20 to-blue-950/20 transition-all hover:border-blue-500/50 hover:shadow-blue-500/10 hover:shadow-lg">
+            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-linear-to-br from-blue-900/20 to-blue-950/20 transition-all hover:border-blue-500/50 hover:shadow-blue-500/10 hover:shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
@@ -161,7 +161,7 @@ export default async function HubOverviewPage({
               </CardContent>
             </Card>
 
-            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-purple-900/20 to-purple-950/20 transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10">
+            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-linear-to-br from-purple-900/20 to-purple-950/20 transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
@@ -182,7 +182,7 @@ export default async function HubOverviewPage({
               </CardContent>
             </Card>
 
-            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-green-900/20 to-green-950/20 transition-all hover:border-green-500/50 hover:shadow-green-500/10 hover:shadow-lg">
+            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-linear-to-br from-green-900/20 to-green-950/20 transition-all hover:border-green-500/50 hover:shadow-green-500/10 hover:shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
@@ -202,7 +202,7 @@ export default async function HubOverviewPage({
 
           {/* Hub Information Card */}
           <Card className="overflow-hidden rounded-2xl border-gray-700/50 bg-gray-900/50 backdrop-blur-sm">
-            <CardHeader className="border-gray-700/50 border-b bg-gradient-to-r from-gray-800/50 to-gray-900/50">
+            <CardHeader className="border-gray-700/50 border-b bg-linear-to-r from-gray-800/50 to-gray-900/50">
               <CardTitle className="flex items-center gap-2 text-white">
                 <FileText className="h-5 w-5 text-indigo-400" />
                 Hub Information
@@ -238,7 +238,7 @@ export default async function HubOverviewPage({
             </div>
             <div className="grid gap-4 md:grid-cols-3">
               <Link href={`/dashboard/hubs/${hubId}/reports`}>
-                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-red-900/20 to-red-950/20 transition-all hover:scale-[1.02] hover:border-red-500/50 hover:shadow-red-500/20 hover:shadow-xl">
+                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-linear-to-br from-red-900/20 to-red-950/20 transition-all hover:scale-[1.02] hover:border-red-500/50 hover:shadow-red-500/20 hover:shadow-xl">
                   <CardContent className="p-6">
                     <div className="mb-4 flex items-start justify-between">
                       <div className="rounded-xl bg-red-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-red-500/20">
@@ -261,7 +261,7 @@ export default async function HubOverviewPage({
               </Link>
 
               <Link href={`/dashboard/hubs/${hubId}/appeals`}>
-                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-orange-900/20 to-orange-950/20 transition-all hover:scale-[1.02] hover:border-orange-500/50 hover:shadow-orange-500/20 hover:shadow-xl">
+                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-linear-to-br from-orange-900/20 to-orange-950/20 transition-all hover:scale-[1.02] hover:border-orange-500/50 hover:shadow-orange-500/20 hover:shadow-xl">
                   <CardContent className="p-6">
                     <div className="mb-4 flex items-start justify-between">
                       <div className="rounded-xl bg-orange-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-orange-500/20">
@@ -284,7 +284,7 @@ export default async function HubOverviewPage({
               </Link>
 
               <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-gradient-to-br from-purple-900/20 to-purple-950/20 transition-all hover:scale-[1.02] hover:border-purple-500/50 hover:shadow-purple-500/20 hover:shadow-xl">
+                <Card className="group cursor-pointer overflow-hidden rounded-2xl border-gray-700/50 bg-linear-to-br from-purple-900/20 to-purple-950/20 transition-all hover:scale-[1.02] hover:border-purple-500/50 hover:shadow-purple-500/20 hover:shadow-xl">
                   <CardContent className="p-6">
                     <div className="mb-4 flex items-start justify-between">
                       <div className="rounded-xl bg-purple-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-purple-500/20">

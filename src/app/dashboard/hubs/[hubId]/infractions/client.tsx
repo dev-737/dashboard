@@ -255,7 +255,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
         </div>
         <Button
           asChild
-          className="w-full border-none bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 sm:w-auto"
+          className="w-full border-none bg-linear-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 sm:w-auto"
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions/add`}>
             <PlusCircle className="mr-2 h-4 w-4" />
@@ -275,7 +275,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   {infractions.length}
                 </p>
               </div>
-              <div className="rounded-[var(--radius-button)] bg-gradient-to-br from-purple-500/20 to-indigo-500/20 p-3 transition-transform group-hover:scale-110">
+              <div className="rounded-[var(--radius-button)] bg-linear-to-br from-purple-500/20 to-indigo-500/20 p-3 transition-transform group-hover:scale-110">
                 <Shield className="h-5 w-5 text-purple-400" />
               </div>
             </div>
@@ -291,7 +291,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   {infractions.filter((i) => i.status === 'ACTIVE').length}
                 </p>
               </div>
-              <div className="rounded-[var(--radius-button)] bg-gradient-to-br from-emerald-500/20 to-green-500/20 p-3 transition-transform group-hover:scale-110">
+              <div className="rounded-[var(--radius-button)] bg-linear-to-br from-emerald-500/20 to-green-500/20 p-3 transition-transform group-hover:scale-110">
                 <AlertTriangle className="h-5 w-5 text-emerald-400" />
               </div>
             </div>
@@ -307,7 +307,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   {infractions.filter((i) => i.appealedAt).length}
                 </p>
               </div>
-              <div className="rounded-[var(--radius-button)] bg-gradient-to-br from-blue-500/20 to-cyan-500/20 p-3 transition-transform group-hover:scale-110">
+              <div className="rounded-[var(--radius-button)] bg-linear-to-br from-blue-500/20 to-cyan-500/20 p-3 transition-transform group-hover:scale-110">
                 <MessageSquare className="h-5 w-5 text-blue-400" />
               </div>
             </div>
@@ -323,7 +323,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   {infractions.filter((i) => i.status === 'REVOKED').length}
                 </p>
               </div>
-              <div className="rounded-[var(--radius-button)] bg-gradient-to-br from-gray-500/20 to-slate-500/20 p-3 transition-transform group-hover:scale-110">
+              <div className="rounded-[var(--radius-button)] bg-linear-to-br from-gray-500/20 to-slate-500/20 p-3 transition-transform group-hover:scale-110">
                 <RotateCcw className="h-5 w-5 text-gray-400" />
               </div>
             </div>
@@ -481,7 +481,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 <Button
                   type="submit"
                   size="icon"
-                  className="rounded-[var(--radius-button)] border-none bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
+                  className="rounded-[var(--radius-button)] border-none bg-linear-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
                 >
                   <Search className="h-4 w-4" />
                 </Button>
@@ -531,7 +531,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
               ))}
             </div>
           ) : error ? (
-            <div className="rounded-[var(--radius)] border border-red-500/30 bg-gradient-to-br from-red-950/30 to-red-900/20 p-8 py-12 text-center">
+            <div className="rounded-[var(--radius)] border border-red-500/30 bg-linear-to-br from-red-950/30 to-red-900/20 p-8 py-12 text-center">
               <div className="mx-auto mb-6 w-fit rounded-[var(--radius-button)] bg-red-500/20 p-4">
                 <AlertTriangle className="h-8 w-8 text-red-400" />
               </div>
@@ -541,14 +541,14 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
               <p className="mx-auto mb-6 max-w-md text-gray-300">{error}</p>
               <Button
                 onClick={() => refetch()}
-                className="rounded-[var(--radius-button)] border-none bg-gradient-to-r from-red-500 to-red-600 px-6 text-white hover:from-red-600 hover:to-red-700"
+                className="rounded-[var(--radius-button)] border-none bg-linear-to-r from-red-500 to-red-600 px-6 text-white hover:from-red-600 hover:to-red-700"
               >
                 <RotateCcw className="mr-2 h-4 w-4" />
                 Try Again
               </Button>
             </div>
           ) : infractions.length === 0 ? (
-            <div className="rounded-[var(--radius)] border border-gray-700/50 bg-gradient-to-br from-gray-900/50 to-gray-800/30 p-8 py-12 text-center">
+            <div className="rounded-[var(--radius)] border border-gray-700/50 bg-linear-to-br from-gray-900/50 to-gray-800/30 p-8 py-12 text-center">
               <div className="mx-auto mb-6 w-fit rounded-[var(--radius-button)] bg-gray-500/20 p-4">
                 <Shield className="h-8 w-8 text-gray-400" />
               </div>
@@ -566,7 +566,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
               </p>
               <Button
                 asChild
-                className="rounded-[var(--radius-button)] border-none bg-gradient-to-r from-purple-500 to-indigo-500 px-6 text-white hover:from-purple-600 hover:to-indigo-600"
+                className="rounded-[var(--radius-button)] border-none bg-linear-to-r from-purple-500 to-indigo-500 px-6 text-white hover:from-purple-600 hover:to-indigo-600"
               >
                 <Link href={`/dashboard/hubs/${hubId}/infractions/add`}>
                   <PlusCircle className="mr-2 h-4 w-4" />
@@ -689,7 +689,7 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
   };
 
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-800 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+    <div className="overflow-hidden rounded-lg border border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
       <div className="flex flex-col justify-between gap-2 border-gray-800 border-b bg-gray-900/50 px-4 py-3 sm:flex-row sm:items-center sm:gap-0">
         <div className="flex items-center gap-3">
           <div className="relative">
@@ -702,7 +702,7 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
                 className="rounded-full border-2 border-gray-800"
               />
             ) : (
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray-800 bg-gradient-to-br from-green-500/20 to-blue-500/20">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray-800 bg-linear-to-br from-green-500/20 to-blue-500/20">
                 <HomeIcon className="h-5 w-5 text-gray-300" />
               </div>
             )}
@@ -851,7 +851,7 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
 
 function InfractionSkeleton() {
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-800 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+    <div className="overflow-hidden rounded-lg border border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
       <div className="flex flex-col justify-between gap-2 border-gray-800 border-b bg-gray-900/50 px-4 py-3 sm:flex-row sm:items-center sm:gap-0">
         <div className="flex items-center gap-3">
           <Skeleton className="h-10 w-10 rounded-full" />

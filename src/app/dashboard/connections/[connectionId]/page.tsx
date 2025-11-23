@@ -135,7 +135,7 @@ export default async function ConnectionPage(props: {
         <Button
           asChild
           size="sm"
-          className="border-none bg-gradient-to-r from-blue-600 to-purple-600 px-6 font-medium text-white hover:from-blue-700 hover:to-purple-700"
+          className="border-none bg-linear-to-r from-blue-600 to-purple-600 px-6 font-medium text-white hover:from-blue-700 hover:to-purple-700"
         >
           <Link href={`/dashboard/connections/${params.connectionId}/edit`}>
             <Edit className="mr-2 h-4 w-4" />
@@ -154,7 +154,7 @@ export default async function ConnectionPage(props: {
 
         <div className="space-y-6">
           {/* Hub Information Card */}
-          <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <Globe className="h-5 w-5 text-purple-400" />
@@ -198,7 +198,7 @@ export default async function ConnectionPage(props: {
           </Card>
 
           {/* Server Information Card */}
-          <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <Server className="h-5 w-5 text-indigo-400" />
@@ -240,7 +240,7 @@ export default async function ConnectionPage(props: {
           </Card>
 
           {/* Quick Actions Card */}
-          <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <Edit className="h-5 w-5 text-blue-400" />
@@ -250,7 +250,7 @@ export default async function ConnectionPage(props: {
             <CardContent className="px-6 pb-6">
               <Button
                 asChild
-                className="h-12 w-full border-none bg-gradient-to-r from-blue-600 to-purple-600 font-medium text-white hover:from-blue-700 hover:to-purple-700"
+                className="h-12 w-full border-none bg-linear-to-r from-blue-600 to-purple-600 font-medium text-white hover:from-blue-700 hover:to-purple-700"
               >
                 <Link
                   href={`/dashboard/connections/${params.connectionId}/edit`}

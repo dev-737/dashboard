@@ -28,7 +28,7 @@ export default async function SettingsPage() {
       {/* Main Content */}
       <div className="mx-auto max-w-2xl space-y-6">
         {/* Profile Section */}
-        <div className="rounded-xl border border-gray-700/50 bg-gradient-to-br from-gray-900/90 to-gray-950/90 p-6 backdrop-blur-sm">
+        <div className="rounded-xl border border-gray-700/50 bg-linear-to-br from-gray-900/90 to-gray-950/90 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-2">
             <User className="h-5 w-5 text-purple-400" />
             <h2 className="font-semibold text-white text-xl">Profile</h2>
@@ -67,7 +67,7 @@ export default async function SettingsPage() {
         </div>
 
         {/* Account Preferences */}
-        <div className="rounded-xl border border-gray-700/50 bg-gradient-to-br from-gray-900/90 to-gray-950/90 p-6 backdrop-blur-sm">
+        <div className="rounded-xl border border-gray-700/50 bg-linear-to-br from-gray-900/90 to-gray-950/90 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-2">
             <Settings className="h-5 w-5 text-indigo-400" />
             <h2 className="font-semibold text-white text-xl">Preferences</h2>

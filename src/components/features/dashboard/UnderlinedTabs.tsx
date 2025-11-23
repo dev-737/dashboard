@@ -117,10 +117,10 @@ export function UnderlinedTabs({
 
           {/* Mobile Scroll Indicators */}
           {canScrollLeft && (
-            <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-10 w-8 bg-gradient-to-r from-gray-900/90 to-transparent sm:hidden" />
+            <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-10 w-8 bg-linear-to-r from-gray-900/90 to-transparent sm:hidden" />
           )}
           {canScrollRight && (
-            <div className="pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-8 bg-gradient-to-l from-gray-900/90 to-transparent sm:hidden" />
+            <div className="pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-8 bg-linear-to-l from-gray-900/90 to-transparent sm:hidden" />
           )}
 
           {/* Scrollable Tabs Container */}
@@ -160,11 +160,11 @@ export function UnderlinedTabs({
                 );
 
                 const triggerClasses = `
-                relative px-4 py-3 text-gray-400 hover:text-gray-200 
+                relative px-4 py-3 text-gray-400 hover:text-gray-200
                 border-b-2 border-transparent transition-all duration-200
                 bg-transparent shadow-none focus:outline-none focus:ring-0
                 data-[state=active]:bg-transparent rounded-none
-                before:absolute before:inset-0 before:-z-10 before:rounded-lg 
+                before:absolute before:inset-0 before:-z-10 before:rounded-lg
                 before:bg-gray-800/0 before:transition-colors before:duration-200
                 hover:before:bg-gray-800/30 cursor-pointer
                 ${colorClasses}

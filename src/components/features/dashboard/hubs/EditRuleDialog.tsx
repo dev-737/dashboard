@@ -217,7 +217,7 @@ export function EditRuleDialog({
                   !editForm.name.trim() ||
                   editForm.patterns.length === 0
                 }
-                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                className="bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
               >
                 <Save className="mr-2 h-4 w-4" />
                 {updateMutation.isPending ? 'Saving...' : 'Save Changes'}

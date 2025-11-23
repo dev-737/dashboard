@@ -118,12 +118,12 @@ export function MembersClient({ hubId }: { hubId: string }) {
         <div className="flex items-center" />
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="w-full border-none bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80 sm:w-auto">
+            <Button className="w-full border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80 sm:w-auto">
               <UserPlus className="mr-2 h-4 w-4" />
               Add Member
             </Button>
           </DialogTrigger>
-          <DialogContent className="border border-gray-800/50 bg-gradient-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-md">
+          <DialogContent className="border border-gray-800/50 bg-linear-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-md">
             <DialogHeader>
               <DialogTitle>Add New Member</DialogTitle>
               <DialogDescription>
@@ -152,11 +152,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
                     <button
                       key={user.id}
                       type="button"
-                      className={`flex w-full cursor-pointer items-center gap-3 rounded-md p-2 text-left ${
-                        selectedUser?.id === user.id
+                      className={`flex w-full cursor-pointer items-center gap-3 rounded-md p-2 text-left ${selectedUser?.id === user.id
                           ? 'border border-indigo-700/30 bg-indigo-900/30'
                           : 'hover:bg-gray-800/50'
-                      }`}
+                        }`}
                       onClick={() => setSelectedUser(user)}
                     >
                       <Image
@@ -229,7 +228,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
               <Button
                 onClick={handleAddMember}
                 disabled={!selectedUser || addMemberMutation.isPending}
-                className="border-none bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
+                className="border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
               >
                 {addMemberMutation.isPending ? (
                   <>
@@ -248,7 +247,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
         </Dialog>
       </div>
 
-      <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
         <CardHeader className="border-gray-800/50 border-b">
           <CardTitle className="flex items-center">
             <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-yellow-900/30">
@@ -291,7 +290,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
         </CardContent>
       </Card>
 
-      <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
         <CardHeader className="border-gray-800/50 border-b">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div>
@@ -308,7 +307,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
             </div>
             <Button
               onClick={() => setIsDialogOpen(true)}
-              className="w-full border-none bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80 sm:w-auto"
+              className="w-full border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80 sm:w-auto"
             >
               <UserPlus className="mr-2 h-4 w-4" />
               Add Member
@@ -401,7 +400,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
               </p>
               <Button
                 onClick={() => setIsDialogOpen(true)}
-                className="border-none bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
+                className="border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
               >
                 <UserPlus className="mr-2 h-4 w-4" />
                 Add Member

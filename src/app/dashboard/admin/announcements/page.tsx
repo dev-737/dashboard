@@ -116,7 +116,7 @@ export default function AnnouncementsPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <Card className="border-gray-800 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+        <Card className="border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
           <CardHeader>
             <CardTitle>Create Announcement</CardTitle>
           </CardHeader>
@@ -160,7 +160,7 @@ export default function AnnouncementsPage() {
               <Button
                 type="submit"
                 disabled={createMutation.isPending}
-                className="w-full border-none bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
+                className="w-full border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
               >
                 {createMutation.isPending ? (
                   <>
@@ -178,7 +178,7 @@ export default function AnnouncementsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-gray-800 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+        <Card className="border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
           <CardHeader>
             <CardTitle>Recent Announcements</CardTitle>
           </CardHeader>

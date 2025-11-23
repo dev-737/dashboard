@@ -17,10 +17,10 @@ import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { UrlObject } from 'url';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
 import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/OnboardingHelpMenu';
 import { cn } from '@/lib/utils';
-import { UrlObject } from 'url';
 
 interface MobileSidebarProps {
   isOpen: boolean;
@@ -108,7 +108,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-            className="fixed top-0 bottom-0 left-0 z-[9999] flex w-[300px] max-w-[85vw] flex-col overflow-hidden border-gray-700/40 border-r bg-gradient-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/30 backdrop-blur-xl"
+            className="fixed top-0 bottom-0 left-0 z-[9999] flex w-[300px] max-w-[85vw] flex-col overflow-hidden border-gray-700/40 border-r bg-linear-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/30 backdrop-blur-xl"
             style={{ position: 'fixed', top: 0, left: 0, bottom: 0 }}
           >
             {/* Mobile sidebar header */}
@@ -116,14 +116,14 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.3 }}
-              className="flex h-16 items-center justify-between border-gray-700/40 border-b bg-gradient-to-r from-gray-900/50 to-gray-800/50 px-4 backdrop-blur-sm"
+              className="flex h-16 items-center justify-between border-gray-700/40 border-b bg-linear-to-r from-gray-900/50 to-gray-800/50 px-4 backdrop-blur-sm"
             >
               <Link
                 href="/"
                 className="group flex items-center gap-3"
                 onClick={onClose}
               >
-                <span className="bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text font-bold text-lg text-transparent transition-all duration-300 group-hover:scale-105 group-hover:from-purple-300 group-hover:via-indigo-300 group-hover:to-blue-300">
+                <span className="bg-linear-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text font-bold text-lg text-transparent transition-all duration-300 group-hover:scale-105 group-hover:from-purple-300 group-hover:via-indigo-300 group-hover:to-blue-300">
                   InterChat
                 </span>
               </Link>
@@ -156,7 +156,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                         className={cn(
                           'group relative flex items-center gap-3 rounded-2xl border px-4 py-3 font-medium text-sm transition-all duration-300 hover:scale-[1.02]',
                           item.active
-                            ? 'border border-purple-500/30 bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
+                            ? 'border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
                             : 'border border-transparent text-gray-300 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-black/5 hover:shadow-md'
                         )}
                       >
@@ -179,7 +179,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                 </div>
 
                 {/* Separator */}
-                <div className="my-6 h-px bg-gradient-to-r from-transparent via-gray-700/40 to-transparent" />
+                <div className="my-6 h-px bg-linear-to-r from-transparent via-gray-700/40 to-transparent" />
 
                 {/* Additional Actions */}
                 <motion.div
@@ -196,9 +196,9 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                         repeat: Number.POSITIVE_INFINITY,
                         ease: 'easeInOut',
                       }}
-                      className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 opacity-60"
+                      className="h-1.5 w-1.5 rounded-full bg-linear-to-r from-purple-400 to-indigo-400 opacity-60"
                     />
-                    <span className="bg-gradient-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">
+                    <span className="bg-linear-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">
                       Quick Actions
                     </span>
                   </div>
@@ -245,7 +245,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.3 }}
-              className="mt-auto border-gray-700/40 border-t bg-gradient-to-t from-gray-950/80 to-transparent p-4 backdrop-blur-sm"
+              className="mt-auto border-gray-700/40 border-t bg-linear-to-t from-gray-950/80 to-transparent p-4 backdrop-blur-sm"
             >
               <div className="flex items-center gap-3">
                 <div className="relative">
@@ -255,7 +255,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                       src={user.image || undefined}
                       alt={user.name || 'User'}
                     />
-                    <AvatarFallback className="bg-gradient-to-br from-purple-500/80 to-indigo-500/80 font-bold text-white">
+                    <AvatarFallback className="bg-linear-to-br from-purple-500/80 to-indigo-500/80 font-bold text-white">
                       {getInitials(user.name)}
                     </AvatarFallback>
                   </Avatar>

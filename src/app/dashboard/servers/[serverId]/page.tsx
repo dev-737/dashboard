@@ -110,7 +110,7 @@ export default async function ServerDetailPage(props: {
     // For other errors, show a generic error message
     return (
       <div className="space-y-6">
-        <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+        <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
           <CardHeader>
             <CardTitle>Error Loading Server</CardTitle>
             <CardDescription>
@@ -121,7 +121,7 @@ export default async function ServerDetailPage(props: {
             <p className="mb-4 text-red-400">{result.error}</p>
             <Button
               asChild
-              className="border-none bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
+              className="border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
             >
               <Link href="/dashboard">Back to Servers</Link>
             </Button>
@@ -155,8 +155,8 @@ export default async function ServerDetailPage(props: {
 
   const lastActive = serverData.lastMessageAt
     ? formatDistanceToNow(new Date(serverData.lastMessageAt), {
-        addSuffix: true,
-      })
+      addSuffix: true,
+    })
     : 'Never';
 
   return (
@@ -218,7 +218,7 @@ export default async function ServerDetailPage(props: {
         <TabsContent value="overview" className="space-y-6">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {/* Server Stats */}
-            <Card className="col-span-2 border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+            <Card className="col-span-2 border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BarChart3 className="h-5 w-5" />
@@ -249,7 +249,7 @@ export default async function ServerDetailPage(props: {
                     <span className="text-gray-200">
                       {
                         ['None', 'Low', 'Medium', 'High', 'Very High'][
-                          discordServer.verification_level || 0
+                        discordServer.verification_level || 0
                         ]
                       }
                     </span>
@@ -295,7 +295,7 @@ export default async function ServerDetailPage(props: {
             </Card>
 
             {/* Connection Status */}
-            <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+            <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Home className="h-5 w-5" />
@@ -339,7 +339,7 @@ export default async function ServerDetailPage(props: {
                     <div className="mt-4">
                       <Button
                         asChild
-                        className="w-full border-none bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
+                        className="w-full border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
                       >
                         <Link
                           href={`https://discord.com/oauth2/authorize?client_id=769921109209907241&guild_id=${serverId}`}
@@ -359,7 +359,7 @@ export default async function ServerDetailPage(props: {
 
         {/* Connections Tab */}
         <TabsContent value="connections" className="space-y-6">
-          <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
                 <CardTitle>Hub Connections</CardTitle>
@@ -370,7 +370,7 @@ export default async function ServerDetailPage(props: {
               {!botAdded ? (
                 <Button
                   disabled
-                  className="cursor-not-allowed border-none bg-gradient-to-r from-gray-600 to-gray-700 opacity-70 hover:from-gray-600 hover:to-gray-700"
+                  className="cursor-not-allowed border-none bg-linear-to-r from-gray-600 to-gray-700 opacity-70 hover:from-gray-600 hover:to-gray-700"
                 >
                   Bot Not Added
                 </Button>
@@ -378,7 +378,7 @@ export default async function ServerDetailPage(props: {
                 <div className="flex gap-2">
                   <Button
                     asChild
-                    className="border-none bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-600/80 hover:to-indigo-600/80"
+                    className="border-none bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-600/80 hover:to-indigo-600/80"
                   >
                     <Link href={`/dashboard/servers/${serverId}/connect`}>
                       Connect to Hub
@@ -404,7 +404,7 @@ export default async function ServerDetailPage(props: {
                   </p>
                   <Button
                     asChild
-                    className="border-none bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
+                    className="border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
                   >
                     <Link
                       href={`https://discord.com/oauth2/authorize?client_id=769921109209907241&guild_id=${serverId}`}
@@ -424,7 +424,7 @@ export default async function ServerDetailPage(props: {
                   <div className="flex justify-center gap-3">
                     <Button
                       asChild
-                      className="border-none bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-600/80 hover:to-indigo-600/80"
+                      className="border-none bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-600/80 hover:to-indigo-600/80"
                     >
                       <Link href={`/dashboard/servers/${serverId}/connect`}>
                         Connect to Hub
@@ -448,7 +448,7 @@ export default async function ServerDetailPage(props: {
 
         {/* Settings Tab */}
         <TabsContent value="settings" className="space-y-6">
-          <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
             <CardHeader>
               <CardTitle>Server Settings</CardTitle>
               <CardDescription>
@@ -465,7 +465,7 @@ export default async function ServerDetailPage(props: {
                   </p>
                   <Button
                     asChild
-                    className="border-none bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-600/80 hover:to-teal-600/80"
+                    className="border-none bg-linear-to-r from-green-600 to-teal-600 hover:from-green-600/80 hover:to-teal-600/80"
                   >
                     <Link
                       href={`https://discord.com/oauth2/authorize?client_id=769921109209907241&guild_id=${serverId}`}

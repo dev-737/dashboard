@@ -80,7 +80,7 @@ export default async function HubModulesPage({ params }: HubModulesPageProps) {
       canModerate={canModerate}
       canEdit={canEdit}
     >
-      <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
         <CardHeader>
           <CardTitle>Hub Modules</CardTitle>
           <CardDescription>

@@ -42,7 +42,7 @@ export function ModulesSettingsStep({
   return (
     <>
       <CardHeader className="pb-6 text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-amber-600">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-orange-500 to-amber-600">
           <Settings className="h-8 w-8 text-white" />
         </div>
         <CardTitle className="text-2xl">Configure Hub Modules</CardTitle>
@@ -57,12 +57,12 @@ export function ModulesSettingsStep({
           {Object.entries(HubModulesBits).map(([name, bit]) => (
             <div
               key={name}
-              className="flex items-start justify-between rounded-lg border border-gray-700/40 bg-gray-800/30 p-4 hover:border-gray-600/60 hover:bg-gray-800/50 transition-all"
+              className="flex items-start justify-between rounded-lg border border-gray-700/40 bg-gray-800/30 p-4 transition-all hover:border-gray-600/60 hover:bg-gray-800/50"
             >
               <div className="flex-1 space-y-1 pr-4">
                 <Label
                   htmlFor={`module-${name}`}
-                  className="font-medium text-base cursor-pointer"
+                  className="cursor-pointer font-medium text-base"
                 >
                   {name}
                 </Label>
@@ -74,7 +74,7 @@ export function ModulesSettingsStep({
                 id={`module-${name}`}
                 checked={isModuleEnabled(bit)}
                 onCheckedChange={() => toggleModule(bit)}
-                className="data-[state=checked]:bg-indigo-600 flex-shrink-0"
+                className="flex-shrink-0 data-[state=checked]:bg-indigo-600"
               />
             </div>
           ))}
@@ -110,7 +110,7 @@ export function ModulesSettingsStep({
           <Button
             type="button"
             onClick={onNext}
-            className="border-none bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-3 hover:from-indigo-600/80 hover:to-purple-600/80"
+            className="border-none bg-linear-to-r from-indigo-600 to-purple-600 px-8 py-3 hover:from-indigo-600/80 hover:to-purple-600/80"
           >
             Continue
             <ArrowRight className="ml-2 h-4 w-4" />

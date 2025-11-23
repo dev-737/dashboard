@@ -144,7 +144,7 @@ export function AddInfractionClient({
       </div>
       <Alert
         variant="default"
-        className="border-blue-500/30 bg-gradient-to-r from-blue-950/40 to-indigo-950/40 backdrop-blur-sm"
+        className="border-blue-500/30 bg-linear-to-r from-blue-950/40 to-indigo-950/40 backdrop-blur-sm"
       >
         <Shield className="h-5 w-5 text-blue-400" />
         <AlertTitle className="font-semibold text-blue-300">
@@ -185,14 +185,14 @@ export function AddInfractionClient({
                   <TabsList className="grid w-full grid-cols-2 rounded-[var(--radius-button)] bg-gray-800/50">
                     <TabsTrigger
                       value="user"
-                      className="rounded-[var(--radius)] data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
+                      className="rounded-[var(--radius)] data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
                     >
                       <User className="mr-2 h-4 w-4" />
                       User
                     </TabsTrigger>
                     <TabsTrigger
                       value="server"
-                      className="rounded-[var(--radius)] data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-orange-500 data-[state=active]:text-white"
+                      className="rounded-[var(--radius)] data-[state=active]:bg-linear-to-r data-[state=active]:from-red-500 data-[state=active]:to-orange-500 data-[state=active]:text-white"
                     >
                       <Server className="mr-2 h-4 w-4" />
                       Server
@@ -371,11 +371,10 @@ export function AddInfractionClient({
               <Button
                 type="submit"
                 disabled={!isFormValid() || isSubmitting}
-                className={`px-8 py-2.5 font-semibold transition-all duration-300 ${
-                  isFormValid() && !isSubmitting
-                    ? 'bg-gradient-to-r from-red-500 to-purple-500 shadow-lg shadow-red-500/25 hover:from-red-600 hover:to-purple-600'
+                className={`px-8 py-2.5 font-semibold transition-all duration-300 ${isFormValid() && !isSubmitting
+                    ? 'bg-linear-to-r from-red-500 to-purple-500 shadow-lg shadow-red-500/25 hover:from-red-600 hover:to-purple-600'
                     : 'cursor-not-allowed bg-gray-600/50 text-gray-400'
-                }`}
+                  }`}
               >
                 {isSubmitting ? (
                   <>
@@ -452,7 +451,7 @@ export function AddInfractionClient({
 
                 <Alert
                   variant="default"
-                  className="border-red-500/30 bg-gradient-to-r from-red-950/40 to-orange-950/40"
+                  className="border-red-500/30 bg-linear-to-r from-red-950/40 to-orange-950/40"
                 >
                   <AlertTriangle className="h-4 w-4 text-red-400" />
                   <AlertTitle className="text-red-300 text-sm">

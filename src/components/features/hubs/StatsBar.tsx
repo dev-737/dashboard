@@ -163,7 +163,7 @@ export function StatsBar({ stats }: StatsBarProps) {
   return (
     <div
       ref={containerRef}
-      className="border-white/10 border-y bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 py-12 backdrop-blur-xl"
+      className="border-white/10 border-y bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 py-12 backdrop-blur-xl"
     >
       <div className="container mx-auto px-4">
         <MotionDiv
@@ -190,16 +190,16 @@ export function StatsBar({ stats }: StatsBarProps) {
                 })}
               >
                 <div
-                  className={`relative rounded-2xl border bg-gradient-to-br p-6 backdrop-blur-xl ${stat.gradient}border-${stat.color}-400/30 hover:shadow-${stat.color}-500/25 overflow-hidden transition-all duration-300 ease-out before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-white/5 before:to-transparent hover:border-opacity-50 hover:shadow-2xl`}
+                  className={`relative rounded-2xl border bg-linear-to-br p-6 backdrop-blur-xl ${stat.gradient}border-${stat.color}-400/30 hover:shadow-${stat.color}-500/25 overflow-hidden transition-all duration-300 ease-out before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-linear-to-br before:from-white/5 before:to-transparent hover:border-opacity-50 hover:shadow-2xl`}
                 >
                   {/* Background decoration */}
                   <div
-                    className={`-top-4 -right-4 absolute h-24 w-24 rounded-full bg-gradient-to-br opacity-10 blur-xl ${stat.iconGradient}`}
+                    className={`-top-4 -right-4 absolute h-24 w-24 rounded-full bg-linear-to-br opacity-10 blur-xl ${stat.iconGradient}`}
                   />
 
                   <div className="mb-6 flex items-center justify-center">
                     <IconMotionDiv
-                      className={`relative rounded-xl bg-gradient-to-br p-4 ${stat.iconGradient}shadow-lg mr-4 transition-all duration-300 group-hover:shadow-xl`}
+                      className={`relative rounded-xl bg-linear-to-br p-4 ${stat.iconGradient}shadow-lg mr-4 transition-all duration-300 group-hover:shadow-xl`}
                       {...(motionObj && {
                         whileHover: { rotate: 5, scale: 1.1 },
                         transition: { type: 'spring', stiffness: 300 },
@@ -211,7 +211,7 @@ export function StatsBar({ stats }: StatsBarProps) {
 
                     <div className="text-left">
                       <div
-                        className={`bg-gradient-to-r font-black text-4xl tracking-tight ${stat.textColor} bg-clip-text`}
+                        className={`bg-linear-to-r font-black text-4xl tracking-tight ${stat.textColor} bg-clip-text`}
                       >
                         {formatNumber(stat.value)}
                       </div>
@@ -224,7 +224,7 @@ export function StatsBar({ stats }: StatsBarProps) {
                   {/* Subtle progress bar */}
                   <div className="h-1 w-full overflow-hidden rounded-full bg-gray-800">
                     <IconMotionDiv
-                      className={`h-full bg-gradient-to-r ${stat.iconGradient}`}
+                      className={`h-full bg-linear-to-r ${stat.iconGradient}`}
                       {...(motionObj && {
                         initial: { width: 0 },
                         animate: { width: '85%' },

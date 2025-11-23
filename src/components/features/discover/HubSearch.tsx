@@ -132,16 +132,14 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
       {/* Enhanced search input */}
       <div className="relative">
         <div
-          className={`premium-card flex h-12 w-full items-center overflow-hidden rounded-[var(--radius-button)] border bg-gray-900/50 px-3 shadow-lg backdrop-blur-sm transition-all duration-300 sm:h-14 sm:px-4 ${
-            isFocused
+          className={`premium-card flex h-12 w-full items-center overflow-hidden rounded-[var(--radius-button)] border bg-gray-900/50 px-3 shadow-lg backdrop-blur-sm transition-all duration-300 sm:h-14 sm:px-4 ${isFocused
               ? 'border-purple-500/70 shadow-purple-500/20 shadow-xl ring-2 ring-purple-500/30'
               : 'border-gray-700/50 hover:border-purple-500/50 hover:bg-gray-800/50 hover:shadow-xl'
-          }`}
+            }`}
         >
           <Search
-            className={`mr-3 h-5 w-5 flex-shrink-0 transition-colors duration-300 ${
-              isFocused ? 'text-purple-400' : 'text-gray-400'
-            }`}
+            className={`mr-3 h-5 w-5 flex-shrink-0 transition-colors duration-300 ${isFocused ? 'text-purple-400' : 'text-gray-400'
+              }`}
           />
           <input
             ref={inputRef}
@@ -274,7 +272,7 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
                               {hub.partnered && (
                                 <Tooltip>
                                   <TooltipTrigger asChild>
-                                    <div className="flex h-4 w-4 cursor-help items-center justify-center rounded-full bg-gradient-to-br from-purple-500 via-purple-600 to-violet-700">
+                                    <div className="flex h-4 w-4 cursor-help items-center justify-center rounded-full bg-linear-to-br from-purple-500 via-purple-600 to-violet-700">
                                       <Handshake className="h-2.5 w-2.5 text-white" />
                                     </div>
                                   </TooltipTrigger>

@@ -102,7 +102,7 @@ const InterChatRules = () => {
   ];
 
   return (
-    <section className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-purple-50/20 to-gray-100 dark:from-gray-900 dark:via-purple-900/10 dark:to-gray-800">
+    <section className="min-h-screen w-full bg-linear-to-br from-gray-50 via-purple-50/20 to-gray-100 dark:from-gray-900 dark:via-purple-900/10 dark:to-gray-800">
       <main className="container relative mx-auto px-4 pt-28 pb-20">
         {/* Animated decorative elements */}
         <div className="absolute top-20 left-1/4 h-60 w-60 rounded-full bg-purple-600 opacity-5 blur-xl"></div>
@@ -118,7 +118,7 @@ const InterChatRules = () => {
               </div>
             </div>
 
-            <h1 className="mb-6 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text font-bold text-4xl text-transparent dark:from-purple-400 dark:to-blue-300">
+            <h1 className="mb-6 bg-linear-to-r from-purple-600 to-blue-500 bg-clip-text font-bold text-4xl text-transparent dark:from-purple-400 dark:to-blue-300">
               Community Guidelines
             </h1>
 

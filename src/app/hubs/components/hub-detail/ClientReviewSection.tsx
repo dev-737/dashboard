@@ -42,7 +42,7 @@ export default function ClientReviewSection({
         <div className="mb-6 flex justify-center">
           <Button
             onClick={() => setShowForm(true)}
-            className="rounded-lg bg-gradient-to-r from-primary to-primary-alt px-4 py-2 font-medium text-white transition-opacity hover:opacity-90"
+            className="rounded-lg bg-linear-to-r from-primary to-primary-alt px-4 py-2 font-medium text-white transition-opacity hover:opacity-90"
           >
             <MessageSquare className="mr-2 h-4 w-4" />
             Write a Review

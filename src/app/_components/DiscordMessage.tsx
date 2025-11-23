@@ -29,7 +29,7 @@ export function DiscordMessage({
           className="h-10 w-10 flex-shrink-0 rounded-full"
         />
       ) : (
-        <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-br from-primary to-primary-alt" />
+        <div className="h-10 w-10 flex-shrink-0 rounded-full bg-linear-to-br from-primary to-primary-alt" />
       )}
       <div className="flex-1 text-left">
         <div className="mb-1 flex items-center gap-2">

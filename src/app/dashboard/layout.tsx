@@ -31,10 +31,10 @@ export default async function DashboardLayout({
               {/* background layers */}
               <div className="pointer-events-none fixed inset-0 z-0">
                 {/* Primary gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900/95 to-gray-950" />
+                <div className="absolute inset-0 bg-linear-to-br from-gray-900 via-gray-900/95 to-gray-950" />
 
                 {/* Radial gradient overlays for depth */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-transparent to-blue-900/10" />
+                <div className="absolute inset-0 bg-linear-to-br from-purple-900/10 via-transparent to-blue-900/10" />
                 <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-purple-500/5 blur-3xl" />
                 <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-blue-500/5 blur-3xl" />
 

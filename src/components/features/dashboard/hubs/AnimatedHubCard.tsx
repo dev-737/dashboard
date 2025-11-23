@@ -74,19 +74,19 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
     switch (hub.permissionLevel) {
       case PermissionLevel.OWNER:
         return (
-          <span className="rounded-[var(--radius-badge)] border border-purple-500/30 bg-gradient-to-r from-purple-500/20 to-purple-600/20 px-3 py-1 font-medium text-purple-300 text-xs shadow-lg">
+          <span className="rounded-[var(--radius-badge)] border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-purple-600/20 px-3 py-1 font-medium text-purple-300 text-xs shadow-lg">
             Owner
           </span>
         );
       case PermissionLevel.MANAGER:
         return (
-          <span className="rounded-[var(--radius-badge)] border border-blue-500/30 bg-gradient-to-r from-blue-500/20 to-blue-600/20 px-3 py-1 font-medium text-blue-300 text-xs shadow-lg">
+          <span className="rounded-[var(--radius-badge)] border border-blue-500/30 bg-linear-to-r from-blue-500/20 to-blue-600/20 px-3 py-1 font-medium text-blue-300 text-xs shadow-lg">
             Manager
           </span>
         );
       case PermissionLevel.MODERATOR:
         return (
-          <span className="rounded-[var(--radius-badge)] border border-indigo-500/30 bg-gradient-to-r from-indigo-500/20 to-indigo-600/20 px-3 py-1 font-medium text-indigo-300 text-xs shadow-lg">
+          <span className="rounded-[var(--radius-badge)] border border-indigo-500/30 bg-linear-to-r from-indigo-500/20 to-indigo-600/20 px-3 py-1 font-medium text-indigo-300 text-xs shadow-lg">
             Moderator
           </span>
         );
@@ -109,7 +109,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
       className="h-full"
     >
       <Card
-        className={`border bg-gradient-to-br ${getCardColor()} group flex h-full min-h-[320px] flex-col overflow-hidden transition-all duration-200 hover:shadow-purple-500/10 hover:shadow-xl`}
+        className={`border bg-linear-to-br ${getCardColor()} group flex h-full min-h-[320px] flex-col overflow-hidden transition-all duration-200 hover:shadow-purple-500/10 hover:shadow-xl`}
       >
         <CardHeader className="relative pb-3">
           <div className="absolute top-4 right-4 z-10">{getRoleBadge()}</div>
@@ -131,7 +131,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
                   alt={hub.name}
                   className="object-cover"
                 />
-                <AvatarFallback className="bg-gradient-to-br from-purple-500/20 to-blue-500/20 font-bold text-lg text-purple-300">
+                <AvatarFallback className="bg-linear-to-br from-purple-500/20 to-blue-500/20 font-bold text-lg text-purple-300">
                   {hub.name.substring(0, 2)}
                 </AvatarFallback>
               </Avatar>
@@ -177,7 +177,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
           <div className="space-y-3 text-sm">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-gray-400">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
                   {hub.private ? (
                     <Lock className="h-3 w-3 text-purple-400" />
                   ) : (
@@ -192,7 +192,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
             </div>
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-gray-400">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
                   <Home className="h-3 w-3 text-blue-400" />
                 </div>
                 <span>Servers</span>
@@ -203,7 +203,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
             </div>
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-gray-400">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
                   <Users className="h-3 w-3 text-purple-400" />
                 </div>
                 <span>Upvotes</span>
@@ -214,7 +214,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
             </div>
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-gray-400">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
                   <Clock className="h-3 w-3 text-indigo-400" />
                 </div>
                 <span>Last Active</span>
@@ -228,7 +228,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
         <CardFooter className="border-gray-800/50 border-t pt-0 pb-4">
           <Button
             asChild
-            className="mt-3 w-full rounded-xl border-none bg-gradient-to-r from-purple-600 to-blue-600 font-medium text-white shadow-lg transition-all duration-300 hover:from-purple-700 hover:to-blue-700 hover:shadow-purple-500/25"
+            className="mt-3 w-full rounded-xl border-none bg-linear-to-r from-purple-600 to-blue-600 font-medium text-white shadow-lg transition-all duration-300 hover:from-purple-700 hover:to-blue-700 hover:shadow-purple-500/25"
           >
             <Link href={`/dashboard/hubs/${hub.id}`}>
               <MessageSquare className="mr-2 h-4 w-4" />

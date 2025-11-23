@@ -283,7 +283,7 @@ export default function AdvancedSearchPage() {
                         minMembers > 0 ||
                         verifiedOnly ||
                         partneredOnly) &&
-                      'border-indigo-500/50 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20'
+                        'border-indigo-500/50 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20'
                     )}
                   >
                     <Filter className="h-4 w-4" />
@@ -292,16 +292,16 @@ export default function AdvancedSearchPage() {
                       minMembers > 0 ||
                       verifiedOnly ||
                       partneredOnly) && (
-                        <Badge
-                          variant="secondary"
-                          className="ml-1 h-5 min-w-5 bg-indigo-500/20 px-1 text-indigo-300"
-                        >
-                          {tags.length +
-                            (minMembers > 0 ? 1 : 0) +
-                            (verifiedOnly ? 1 : 0) +
-                            (partneredOnly ? 1 : 0)}
-                        </Badge>
-                      )}
+                      <Badge
+                        variant="secondary"
+                        className="ml-1 h-5 min-w-5 bg-indigo-500/20 px-1 text-indigo-300"
+                      >
+                        {tags.length +
+                          (minMembers > 0 ? 1 : 0) +
+                          (verifiedOnly ? 1 : 0) +
+                          (partneredOnly ? 1 : 0)}
+                      </Badge>
+                    )}
                   </Button>
                 </SheetTrigger>
                 <SheetContent className="flex h-full w-full flex-col border-l-white/10 bg-[#0a101d] p-0 text-gray-200 sm:max-w-md">

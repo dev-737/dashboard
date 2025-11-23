@@ -36,7 +36,7 @@ function LoginContent() {
           <div className="space-y-6 text-center">
             <div className="flex justify-center">
               <div className="relative">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50 blur-lg"></div>
+                <div className="absolute inset-0 rounded-full bg-linear-to-r from-purple-500 to-indigo-500 opacity-50 blur-lg"></div>
                 <div className="relative rounded-full border border-gray-700/50 bg-gray-900/90 p-6 backdrop-blur-sm">
                   <Image
                     src="/assets/images/logos/interchat.png"
@@ -49,7 +49,7 @@ function LoginContent() {
               </div>
             </div>
             <div className="space-y-2">
-              <h1 className="bg-gradient-to-r from-white to-gray-300 bg-clip-text font-bold text-4xl text-transparent">
+              <h1 className="bg-linear-to-r from-white to-gray-300 bg-clip-text font-bold text-4xl text-transparent">
                 Welcome Back
               </h1>
               <p className="text-gray-400 text-lg">
@@ -59,7 +59,7 @@ function LoginContent() {
           </div>
 
           {/* Login Card */}
-          <Card className="rounded-[var(--radius)] border-gray-700/50 bg-gradient-to-br from-gray-900/90 to-gray-950/90 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:shadow-purple-500/10">
+          <Card className="rounded-[var(--radius)] border-gray-700/50 bg-linear-to-br from-gray-900/90 to-gray-950/90 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:shadow-purple-500/10">
             <div className="space-y-6 p-8">
               <div className="space-y-4">
                 <Button

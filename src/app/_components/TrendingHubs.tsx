@@ -1,9 +1,9 @@
 'use client';
 
-import { ArrowRight, Users, Star, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { ArrowRight, Star, TrendingUp, Users } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import type { HubCardDTO } from '@/lib/discover/query';
 import { formatNumber } from '@/lib/utils';
 
@@ -20,21 +20,21 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
       <div className="container relative z-10 mx-auto px-4">
         <div className="mb-16 flex flex-col items-end justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-400">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 font-medium text-indigo-400 text-xs">
               <TrendingUp className="h-3 w-3" />
               <span>Trending Now</span>
             </div>
             <h2 className="font-bold text-3xl text-white tracking-tight md:text-5xl">
               Popular Communities
             </h2>
-            <p className="mt-4 text-lg text-gray-400">
+            <p className="mt-4 text-gray-400 text-lg">
               Join the most active and growing hubs on InterChat today.
             </p>
           </div>
 
           <Link
             href="/discover"
-            className="group flex items-center gap-2 rounded-full border border-gray-800 bg-gray-900/50 px-6 py-3 text-sm font-medium text-gray-300 transition-all hover:border-gray-700 hover:bg-gray-800 hover:text-white"
+            className="group flex items-center gap-2 rounded-full border border-gray-800 bg-gray-900/50 px-6 py-3 font-medium text-gray-300 text-sm transition-all hover:border-gray-700 hover:bg-gray-800 hover:text-white"
           >
             View all hubs
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -68,7 +68,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
 
                     {/* NSFW Badge */}
                     {hub.nsfw && (
-                      <div className="absolute top-4 right-4 rounded-full border border-red-500/30 bg-red-950/80 px-3 py-1 text-xs font-medium text-red-300 backdrop-blur-sm">
+                      <div className="absolute top-4 right-4 rounded-full border border-red-500/30 bg-red-950/80 px-3 py-1 font-medium text-red-300 text-xs backdrop-blur-sm">
                         NSFW
                       </div>
                     )}
@@ -77,7 +77,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                   {/* Content */}
                   <div className="relative flex flex-1 flex-col p-8 pt-0">
                     {/* Icon - Overlapping Banner */}
-                    <div className="-mt-10 mb-6 relative h-20 w-20 overflow-hidden rounded-2xl border-4 border-gray-900 bg-gray-900 shadow-lg">
+                    <div className="-mt-10 relative mb-6 h-20 w-20 overflow-hidden rounded-2xl border-4 border-gray-900 bg-gray-900 shadow-lg">
                       {hub.iconUrl ? (
                         <Image
                           src={hub.iconUrl}
@@ -86,7 +86,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-indigo-600 to-violet-600 text-2xl font-bold text-white">
+                        <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-indigo-600 to-violet-600 font-bold text-2xl text-white">
                           {hub.name.charAt(0)}
                         </div>
                       )}
@@ -94,33 +94,50 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
 
                     <div className="mb-4">
                       <div className="mb-2 flex items-center gap-2">
-                        <h3 className="line-clamp-1 font-bold text-xl text-white group-hover:text-indigo-400 transition-colors">
+                        <h3 className="line-clamp-1 font-bold text-white text-xl transition-colors group-hover:text-indigo-400">
                           {hub.name}
                         </h3>
                         {hub.verified && (
-                          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-500" title="Verified Hub">
-                            <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <div
+                            className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-500"
+                            title="Verified Hub"
+                          >
+                            <svg
+                              className="h-3 w-3 text-white"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
                               <title>Verified Hub</title>
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              <path
+                                fillRule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clipRule="evenodd"
+                              />
                             </svg>
                           </div>
                         )}
                       </div>
-                      <p className="line-clamp-2 text-sm leading-relaxed text-gray-400">
-                        {hub.shortDescription || hub.description || 'A community space for discussions and connections.'}
+                      <p className="line-clamp-2 text-gray-400 text-sm leading-relaxed">
+                        {hub.shortDescription ||
+                          hub.description ||
+                          'A community space for discussions and connections.'}
                       </p>
                     </div>
 
-                    <div className="mt-auto flex items-center justify-between border-t border-gray-800/50 pt-6">
+                    <div className="mt-auto flex items-center justify-between border-gray-800/50 border-t pt-6">
                       <div className="flex items-center gap-4 text-sm">
                         <div className="flex items-center gap-2 text-gray-300">
                           <Users className="h-4 w-4 text-indigo-400" />
-                          <span className="font-medium">{formatNumber(hub._count.connections)}</span>
+                          <span className="font-medium">
+                            {formatNumber(hub._count.connections)}
+                          </span>
                         </div>
                         {hub.averageRating && (
                           <div className="flex items-center gap-2 text-gray-300">
                             <Star className="h-4 w-4 fill-yellow-500/20 text-yellow-500" />
-                            <span className="font-medium">{hub.averageRating.toFixed(1)}</span>
+                            <span className="font-medium">
+                              {hub.averageRating.toFixed(1)}
+                            </span>
                           </div>
                         )}
                       </div>

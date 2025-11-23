@@ -25,7 +25,7 @@ export default async function AdminLayout({
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text font-bold text-3xl text-transparent tracking-tight">
+        <h1 className="bg-linear-to-r from-indigo-400 to-purple-400 bg-clip-text font-bold text-3xl text-transparent tracking-tight">
           Admin Dashboard
         </h1>
       </div>

@@ -19,13 +19,13 @@ const HubBanner: React.FC<HubBannerProps> = ({ bannerUrl, name }) => {
         className="object-cover"
         priority
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent" />
       <GridPattern
         width={40}
         height={40}
         className="absolute inset-0 opacity-[0.1] [mask-image:radial-gradient(ellipse_at_center,white,transparent_85%)]"
       />
-      <div className="absolute right-0 bottom-0 left-0 h-24 bg-gradient-to-t from-gray-950 to-transparent" />
+      <div className="absolute right-0 bottom-0 left-0 h-24 bg-linear-to-t from-gray-950 to-transparent" />
 
       {/* Optional visual elements - subtle animated orbs */}
       <div className="absolute top-1/4 left-1/4 h-64 w-64 animate-pulse rounded-full bg-primary/10 opacity-30 blur-3xl" />
@@ -36,7 +36,7 @@ const HubBanner: React.FC<HubBannerProps> = ({ bannerUrl, name }) => {
     </div>
   ) : (
     // Fallback banner with enhanced design
-    <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-gray-900 via-gray-950 to-black">
+    <div className="relative h-full w-full overflow-hidden bg-linear-to-br from-gray-900 via-gray-950 to-black">
       {/* Animated grid pattern */}
       <GridPattern
         width={40}

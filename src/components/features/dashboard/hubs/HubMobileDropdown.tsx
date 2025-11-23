@@ -56,7 +56,7 @@ function DropdownNavItem({
           'group relative flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-2.5 transition-all duration-300',
           'hover:bg-gray-800/60 focus:bg-gray-800/60',
           active
-            ? 'border-purple-400/40 bg-gradient-to-r from-purple-500/15 to-indigo-500/15 font-medium text-purple-300 shadow-lg shadow-purple-500/5'
+            ? 'border-purple-400/40 bg-linear-to-r from-purple-500/15 to-indigo-500/15 font-medium text-purple-300 shadow-lg shadow-purple-500/5'
             : 'border-transparent text-gray-300 hover:border-gray-700/50 hover:text-white'
         )}
       >
@@ -201,9 +201,9 @@ export function HubMobileDropdown({
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
         >
-          <Button className="group relative w-full justify-between gap-3 overflow-hidden rounded-xl border-0 bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 font-medium text-white shadow-lg transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:shadow-xl">
+          <Button className="group relative w-full justify-between gap-3 overflow-hidden rounded-xl border-0 bg-linear-to-r from-indigo-600 to-purple-600 px-4 py-3 font-medium text-white shadow-lg transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:shadow-xl">
             {/* Background animation */}
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-400/20 to-purple-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-r from-indigo-400/20 to-purple-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
             <div className="relative z-10 flex items-center gap-3">
               <motion.div
@@ -224,7 +224,7 @@ export function HubMobileDropdown({
         className="max-h-[70vh] w-80 overflow-y-auto rounded-xl border-gray-800/50 bg-gray-900/95 p-2 text-gray-100 shadow-2xl backdrop-blur-md"
         sideOffset={8}
       >
-        <DropdownMenuLabel className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text px-3 py-2 font-bold text-lg text-transparent">
+        <DropdownMenuLabel className="bg-linear-to-r from-indigo-400 to-purple-400 bg-clip-text px-3 py-2 font-bold text-lg text-transparent">
           Hub Dashboard
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="my-2 bg-gray-800/50" />
@@ -238,8 +238,8 @@ export function HubMobileDropdown({
             <DropdownMenuGroup>
               {section.title && (
                 <DropdownMenuLabel className="flex items-center gap-2 px-3 py-1 font-medium text-gray-400 text-xs uppercase tracking-wider">
-                  <div className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 opacity-60" />
-                  <span className="bg-gradient-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">
+                  <div className="h-1.5 w-1.5 rounded-full bg-linear-to-r from-purple-400 to-indigo-400 opacity-60" />
+                  <span className="bg-linear-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">
                     {section.title}
                   </span>
                 </DropdownMenuLabel>

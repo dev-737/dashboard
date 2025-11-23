@@ -36,7 +36,7 @@ export function BasicInfoStep({
   return (
     <>
       <CardHeader className="pb-6 text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-indigo-600">
           <Sparkles className="h-8 w-8 text-white" />
         </div>
         <CardTitle className="text-2xl">What&apos;s your hub called?</CardTitle>
@@ -55,9 +55,8 @@ export function BasicInfoStep({
             placeholder="e.g., Gaming Central, Art Community, Tech Hub"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className={`border-gray-700/50 bg-gray-800/50 py-6 text-lg focus-visible:ring-indigo-500/50 ${
-              nameError ? 'border-red-500/50' : ''
-            } ${isNameValid && name.length >= 3 ? 'border-green-500/50' : ''}`}
+            className={`border-gray-700/50 bg-gray-800/50 py-6 text-lg focus-visible:ring-indigo-500/50 ${nameError ? 'border-red-500/50' : ''
+              } ${isNameValid && name.length >= 3 ? 'border-green-500/50' : ''}`}
             maxLength={32}
           />
           <div className="flex items-center justify-between">
@@ -85,7 +84,7 @@ export function BasicInfoStep({
             type="button"
             onClick={onNext}
             disabled={!canProceed}
-            className="border-none bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-3 hover:from-indigo-600/80 hover:to-purple-600/80"
+            className="border-none bg-linear-to-r from-indigo-600 to-purple-600 px-8 py-3 hover:from-indigo-600/80 hover:to-purple-600/80"
           >
             Continue
             <ArrowRight className="ml-2 h-4 w-4" />

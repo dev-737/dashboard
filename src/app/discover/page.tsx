@@ -1,11 +1,12 @@
-import { Suspense } from 'react';
-import { Metadata } from 'next';
-import AdvancedSearchPage from './_components/AdvancedSearchPage';
 import { Loader2 } from 'lucide-react';
+import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import AdvancedSearchPage from './_components/AdvancedSearchPage';
 
 export const metadata: Metadata = {
   title: 'Discover Hubs | InterChat',
-  description: 'Advanced search to find the perfect Discord hub for your community.',
+  description:
+    'Advanced search to find the perfect Discord hub for your community.',
 };
 
 export default function Page() {

@@ -117,8 +117,8 @@ function ServerCard({
   const iconUrl = server.icon
     ? `https://cdn.discordapp.com/icons/${server.id}/${server.icon}.png?size=128`
     : `https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
-        server.id
-      )}`;
+      server.id
+    )}`;
 
   // Format last active time
   const lastActive = server.lastMessageAt
@@ -140,18 +140,18 @@ function ServerCard({
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Card className="flex h-full min-h-[280px] flex-col overflow-hidden rounded-2xl border border-gray-800/50 bg-gradient-to-br from-gray-900/80 via-gray-900/70 to-gray-950/80 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/30 hover:shadow-blue-500/10 hover:shadow-lg">
+      <Card className="flex h-full min-h-[280px] flex-col overflow-hidden rounded-2xl border border-gray-800/50 bg-linear-to-br from-gray-900/80 via-gray-900/70 to-gray-950/80 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/30 hover:shadow-blue-500/10 hover:shadow-lg">
         <CardHeader className="relative pb-2">
           <div className="absolute top-3 right-3">
             {isOwner && (
-              <div className="rounded-full border border-yellow-500/30 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 px-2 py-0.5 font-medium text-xs text-yellow-300 backdrop-blur-sm">
+              <div className="rounded-full border border-yellow-500/30 bg-linear-to-r from-yellow-500/20 to-orange-500/20 px-2 py-0.5 font-medium text-xs text-yellow-300 backdrop-blur-sm">
                 Owner
               </div>
             )}
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
             <div>
-              <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-xl border-2 border-gray-700/50 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 sm:h-12 sm:w-12">
+              <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-xl border-2 border-gray-700/50 bg-linear-to-br from-blue-500/10 to-indigo-500/10 sm:h-12 sm:w-12">
                 <Image
                   src={iconUrl}
                   alt={server.name}
@@ -222,7 +222,7 @@ function ServerCard({
             server.connections.some((conn) => conn.hubId === selectedHubId) ? (
               <Button
                 disabled
-                className="mt-2 w-full cursor-not-allowed rounded-xl border-none bg-gradient-to-r from-gray-600/50 to-gray-700/50 opacity-70 hover:from-gray-600/50 hover:to-gray-700/50"
+                className="mt-2 w-full cursor-not-allowed rounded-xl border-none bg-linear-to-r from-gray-600/50 to-gray-700/50 opacity-70 hover:from-gray-600/50 hover:to-gray-700/50"
               >
                 <span className="hidden sm:inline">Already Connected</span>
                 <span className="sm:hidden">Connected</span>
@@ -230,7 +230,7 @@ function ServerCard({
             ) : (
               <Button
                 asChild
-                className="w-full rounded-xl border-none bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg transition-all duration-200 hover:from-blue-700 hover:to-indigo-700 hover:shadow-blue-500/25"
+                className="w-full rounded-xl border-none bg-linear-to-r from-blue-600 to-indigo-600 shadow-lg transition-all duration-200 hover:from-blue-700 hover:to-indigo-700 hover:shadow-blue-500/25"
               >
                 <Link
                   href={`/dashboard/servers/${server.id}/connect?hubId=${selectedHubId}`}
@@ -243,7 +243,7 @@ function ServerCard({
           ) : server.botAdded ? (
             <Button
               asChild
-              className="mt-2 w-full rounded-xl border-none bg-gradient-to-r from-gray-700 to-gray-800 shadow-lg transition-all duration-200 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"
+              className="mt-2 w-full rounded-xl border-none bg-linear-to-r from-gray-700 to-gray-800 shadow-lg transition-all duration-200 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"
             >
               <Link href={`/dashboard/servers/${server.id}`}>
                 <Home className="mr-2 h-4 w-4" />
@@ -254,7 +254,7 @@ function ServerCard({
           ) : (
             <Button
               asChild
-              className="w-full rounded-xl border-none bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg transition-all duration-200 hover:from-indigo-700 hover:to-purple-700 hover:shadow-indigo-500/25"
+              className="w-full rounded-xl border-none bg-linear-to-r from-indigo-600 to-purple-600 shadow-lg transition-all duration-200 hover:from-indigo-700 hover:to-purple-700 hover:shadow-indigo-500/25"
             >
               <Link
                 href={`https://discord.com/oauth2/authorize?client_id=769921109209907241&guild_id=${server.id}`}

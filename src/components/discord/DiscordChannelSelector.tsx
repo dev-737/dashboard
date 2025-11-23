@@ -176,7 +176,7 @@ export function DiscordChannelSelector({
         <SelectTrigger className="w-full border-gray-700/50 bg-gray-800/50 focus-visible:ring-indigo-500/50">
           <SelectValue placeholder="Select a server first" />
         </SelectTrigger>
-        <SelectContent className="max-h-[300px] border border-gray-800/50 bg-gradient-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-md">
+        <SelectContent className="max-h-[300px] border border-gray-800/50 bg-linear-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-md">
           {isLoading && !servers.length ? (
             <div className="flex items-center justify-center py-2">
               <Loader2 className="mr-2 h-4 w-4 animate-spin text-gray-400" />

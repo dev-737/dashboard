@@ -44,12 +44,12 @@ export default function BannerSection({ hub }: { hub: SimplifiedHub }) {
           priority
           unoptimized
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent" />
       </>
     );
   } else {
     bannerContent = (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 via-primary/10 to-transparent">
+      <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-primary/20 via-primary/10 to-transparent">
         <GridPattern
           width={40}
           height={40}

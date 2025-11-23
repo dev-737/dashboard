@@ -12,8 +12,8 @@ import {
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 export function Footer() {
   const footerLinks = {

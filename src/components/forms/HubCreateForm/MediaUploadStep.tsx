@@ -62,7 +62,7 @@ export function MediaUploadStep({
   return (
     <>
       <CardHeader className="pb-6 text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-pink-500 to-rose-600">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-pink-500 to-rose-600">
           <Upload className="h-8 w-8 text-white" />
         </div>
         <CardTitle className="text-2xl">Add Hub Media</CardTitle>
@@ -75,7 +75,7 @@ export function MediaUploadStep({
         <div className="space-y-3">
           <Label className="font-medium text-base">Hub Icon</Label>
           <div className="flex items-center gap-4">
-            <div className="h-24 w-24 flex-shrink-0 rounded-2xl border-4 border-gray-700/50 bg-gray-800/50 overflow-hidden">
+            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border-4 border-gray-700/50 bg-gray-800/50">
               {iconPreview ? (
                 <Image
                   src={iconPreview}
@@ -85,7 +85,7 @@ export function MediaUploadStep({
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <div className="h-full w-full flex items-center justify-center text-gray-500">
+                <div className="flex h-full w-full items-center justify-center text-gray-500">
                   <Upload className="h-6 w-6" />
                 </div>
               )}
@@ -97,7 +97,7 @@ export function MediaUploadStep({
                 onChange={handleIconChange}
                 className="border-gray-700/50 bg-gray-800/50"
               />
-              <p className="mt-2 text-xs text-gray-400">
+              <p className="mt-2 text-gray-400 text-xs">
                 Recommended: 512x512px, PNG or JPG
               </p>
             </div>
@@ -108,7 +108,7 @@ export function MediaUploadStep({
         <div className="space-y-3">
           <Label className="font-medium text-base">Hub Banner</Label>
           <div className="space-y-2">
-            <div className="h-32 w-full rounded-lg border border-gray-700/50 bg-gray-800/50 overflow-hidden">
+            <div className="h-32 w-full overflow-hidden rounded-lg border border-gray-700/50 bg-gray-800/50">
               {bannerPreview ? (
                 <Image
                   src={bannerPreview}
@@ -118,7 +118,7 @@ export function MediaUploadStep({
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <div className="h-full w-full flex items-center justify-center text-gray-500">
+                <div className="flex h-full w-full items-center justify-center text-gray-500">
                   <Upload className="h-8 w-8" />
                 </div>
               )}
@@ -129,7 +129,7 @@ export function MediaUploadStep({
               onChange={handleBannerChange}
               className="border-gray-700/50 bg-gray-800/50"
             />
-            <p className="text-xs text-gray-400">
+            <p className="text-gray-400 text-xs">
               Recommended: 1200x400px, PNG or JPG
             </p>
           </div>
@@ -149,7 +149,7 @@ export function MediaUploadStep({
           <Button
             type="button"
             onClick={onNext}
-            className="border-none bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-3 hover:from-indigo-600/80 hover:to-purple-600/80"
+            className="border-none bg-linear-to-r from-indigo-600 to-purple-600 px-8 py-3 hover:from-indigo-600/80 hover:to-purple-600/80"
           >
             Continue
             <ArrowRight className="ml-2 h-4 w-4" />

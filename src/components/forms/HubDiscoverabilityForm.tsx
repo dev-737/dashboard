@@ -57,7 +57,7 @@ export function HubDiscoverabilityForm({
       <Card className="premium-card">
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-emerald-600">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-linear-to-br from-green-500 to-emerald-600">
               <Globe className="h-7 w-7 text-white" />
             </div>
             <div>

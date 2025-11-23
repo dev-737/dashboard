@@ -406,7 +406,7 @@ export function AntiSwearForm({ hubId, canEdit }: AntiSwearFormProps) {
             <Button
               onClick={handleUpdateAntiSwearRule}
               disabled={isSaving}
-              className="border-none bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-600/80 hover:to-indigo-600/80"
+              className="border-none bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-600/80 hover:to-indigo-600/80"
             >
               {isSaving ? (
                 'Saving...'
@@ -439,7 +439,7 @@ export function AntiSwearForm({ hubId, canEdit }: AntiSwearFormProps) {
               <CardFooter>
                 <Button
                   onClick={() => setIsCreating(true)}
-                  className="w-full border-none bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-600/80 hover:to-indigo-600/80"
+                  className="w-full border-none bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-600/80 hover:to-indigo-600/80"
                 >
                   <Plus className="mr-2 h-4 w-4" />
                   Create New Rule
@@ -508,7 +508,7 @@ export function AntiSwearForm({ hubId, canEdit }: AntiSwearFormProps) {
                   <Button
                     onClick={handleCreateAntiSwearRule}
                     disabled={isSaving}
-                    className="border-none bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-600/80 hover:to-indigo-600/80"
+                    className="border-none bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-600/80 hover:to-indigo-600/80"
                   >
                     {isSaving ? (
                       'Saving...'
@@ -535,7 +535,7 @@ export function AntiSwearForm({ hubId, canEdit }: AntiSwearFormProps) {
             >
               <CardHeader>
                 <div className="flex items-start justify-between">
-                  <CardTitle className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-gradient text-lg text-transparent">
+                  <CardTitle className="bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text text-gradient text-lg text-transparent">
                     {rule.name}
                   </CardTitle>
                   {canEdit && (
@@ -670,7 +670,7 @@ export function AntiSwearForm({ hubId, canEdit }: AntiSwearFormProps) {
                     actions: [BlockWordAction.BLOCK_MESSAGE],
                   });
                 }}
-                className="mt-4 w-full border-none bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-600/80 hover:to-indigo-600/80"
+                className="mt-4 w-full border-none bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-600/80 hover:to-indigo-600/80"
               >
                 <Plus className="mr-2 h-4 w-4" />
                 Create Your First Rule

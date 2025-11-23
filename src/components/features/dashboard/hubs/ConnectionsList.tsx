@@ -165,7 +165,7 @@ export function ConnectionsList({
 
   if (isLoading) {
     return (
-      <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
         <CardHeader>
           <CardTitle>Server Connections</CardTitle>
           <CardDescription>Loading connections...</CardDescription>
@@ -192,13 +192,13 @@ export function ConnectionsList({
   }
 
   return (
-    <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+    <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
       <CardHeader className="border-gray-800/30 border-b pb-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
             <div className="space-y-1">
               <CardTitle className="flex items-center gap-2 font-bold text-white text-xl">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-indigo-600">
                   <Server className="h-4 w-4 text-white" />
                 </div>
                 Server Connections
@@ -213,7 +213,7 @@ export function ConnectionsList({
               <Button
                 asChild
                 size="sm"
-                className="h-11 w-full border-none bg-gradient-to-r from-blue-600 to-indigo-600 px-4 font-medium text-sm hover:from-blue-700 hover:to-indigo-700 sm:w-auto"
+                className="h-11 w-full border-none bg-linear-to-r from-blue-600 to-indigo-600 px-4 font-medium text-sm hover:from-blue-700 hover:to-indigo-700 sm:w-auto"
               >
                 <Link href={`/dashboard?hubId=${hubId}`}>
                   <PlusCircle className="mr-2 h-4 w-4" />
@@ -279,7 +279,7 @@ export function ConnectionsList({
             {canManage && (
               <Button
                 asChild
-                className="h-11 border-none bg-gradient-to-r from-blue-600 to-indigo-600 px-4 hover:from-blue-600/80 hover:to-indigo-600/80"
+                className="h-11 border-none bg-linear-to-r from-blue-600 to-indigo-600 px-4 hover:from-blue-600/80 hover:to-indigo-600/80"
               >
                 <Link href={`/dashboard?hubId=${hubId}`}>
                   <PlusCircle className="mr-2 h-4 w-4" />
@@ -360,11 +360,11 @@ function ConnectionItem({
   onBlacklist,
 }: ConnectionItemProps) {
   return (
-    <div className="group relative rounded-xl border border-gray-800/50 bg-gradient-to-r from-gray-800/20 to-gray-800/10 p-4 transition-all duration-200 hover:border-gray-700/70 hover:from-gray-800/40 hover:to-gray-800/30">
+    <div className="group relative rounded-xl border border-gray-800/50 bg-linear-to-r from-gray-800/20 to-gray-800/10 p-4 transition-all duration-200 hover:border-gray-700/70 hover:from-gray-800/40 hover:to-gray-800/30">
       <div className="flex items-center gap-4">
         {/* Server Icon */}
         <div className="relative flex-shrink-0">
-          <div className="h-12 w-12 overflow-hidden rounded-xl border border-gray-700/50 bg-gradient-to-br from-gray-700 to-gray-800 sm:h-14 sm:w-14">
+          <div className="h-12 w-12 overflow-hidden rounded-xl border border-gray-700/50 bg-linear-to-br from-gray-700 to-gray-800 sm:h-14 sm:w-14">
             {connection.server?.iconUrl ? (
               <Image
                 src={connection.server.iconUrl}
@@ -398,11 +398,10 @@ function ConnectionItem({
             </h4>
             <Badge
               variant={connection.connected ? 'default' : 'secondary'}
-              className={`w-fit rounded-full px-2 py-1 font-medium text-xs ${
-                connection.connected
+              className={`w-fit rounded-full px-2 py-1 font-medium text-xs ${connection.connected
                   ? 'border-green-500/40 bg-green-500/20 text-green-300'
                   : 'border-amber-500/40 bg-amber-500/20 text-amber-300'
-              }`}
+                }`}
             >
               {connection.connected ? (
                 <>

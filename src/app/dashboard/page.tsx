@@ -103,7 +103,7 @@ async function DashboardContent({
 
       {/* Hub Connection Flow Banner */}
       {targetHub && (
-        <Card className="border-indigo-500/50 bg-gradient-to-r from-indigo-900/20 to-purple-900/20 backdrop-blur-sm">
+        <Card className="border-indigo-500/50 bg-linear-to-r from-indigo-900/20 to-purple-900/20 backdrop-blur-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/20">
@@ -156,7 +156,7 @@ async function DashboardContent({
               </div>
               <Button
                 asChild
-                className="border-none bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:from-blue-700 hover:to-indigo-700"
+                className="border-none bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:from-blue-700 hover:to-indigo-700"
               >
                 <Link
                   href="https://discord.com/oauth2/authorize?client_id=769921109209907241"
@@ -170,7 +170,7 @@ async function DashboardContent({
             </div>
 
             {servers.length === 0 ? (
-              <Card className="border-gray-800/50 bg-gradient-to-br from-gray-900/60 to-gray-950/60 backdrop-blur-sm">
+              <Card className="border-gray-800/50 bg-linear-to-br from-gray-900/60 to-gray-950/60 backdrop-blur-sm">
                 <CardHeader className="py-12 text-center">
                   <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
                     <Server className="h-6 w-6 text-blue-400" />
@@ -187,7 +187,7 @@ async function DashboardContent({
                   <Button
                     asChild
                     size="lg"
-                    className="border-none bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:from-blue-700 hover:to-indigo-700"
+                    className="border-none bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:from-blue-700 hover:to-indigo-700"
                   >
                     <Link
                       href="https://discord.com/oauth2/authorize?client_id=769921109209907241"
@@ -221,7 +221,7 @@ async function DashboardContent({
               </div>
               <Button
                 asChild
-                className="border-none bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg hover:from-purple-700 hover:to-indigo-700"
+                className="border-none bg-linear-to-r from-purple-600 to-indigo-600 text-white shadow-lg hover:from-purple-700 hover:to-indigo-700"
               >
                 <Link href="/dashboard/hubs/create">
                   <PlusCircle className="mr-2 h-4 w-4" />

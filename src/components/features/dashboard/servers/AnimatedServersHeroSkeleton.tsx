@@ -6,7 +6,7 @@ export function AnimatedServersHeroSkeleton() {
   return (
     <div className="relative mb-8 h-auto min-h-[250px] animate-pulse overflow-hidden rounded-[var(--radius-button)] shadow-lg sm:h-[30vh] md:h-[35vh]">
       {/* Background gradient */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-900/30 via-indigo-900/20 to-purple-900/30" />
+      <div className="absolute inset-0 z-0 bg-linear-to-br from-blue-900/30 via-indigo-900/20 to-purple-900/30" />
 
       {/* Mesh gradient overlay */}
       <div className="absolute inset-0 z-0 bg-mesh-gradient opacity-30 mix-blend-overlay" />

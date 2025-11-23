@@ -559,8 +559,8 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
               disabled={isPending}
               className={
                 selectedAction === 'resolve'
-                  ? 'border-none bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-600/80 hover:to-emerald-600/80'
-                  : 'border-none bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-600/80 hover:to-gray-700/80'
+                  ? 'border-none bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-600/80 hover:to-emerald-600/80'
+                  : 'border-none bg-linear-to-r from-gray-600 to-gray-700 hover:from-gray-600/80 hover:to-gray-700/80'
               }
             >
               {isPending
@@ -661,7 +661,7 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
             <Button
               onClick={executeCreateInfraction}
               disabled={createInfraction.isPending}
-              className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600"
+              className="bg-linear-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600"
             >
               {createInfraction.isPending ? 'Creating...' : 'Create Infraction'}
             </Button>
@@ -998,7 +998,7 @@ function ReportCard({
             <Button
               onClick={() => onCreate(report)}
               disabled={isCreating}
-              className="border-none bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600"
+              className="border-none bg-linear-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600"
             >
               Create Infraction
             </Button>
@@ -1014,7 +1014,7 @@ function ReportCard({
             <Button
               onClick={() => onAction(report, 'resolve')}
               disabled={isUpdating}
-              className="border-none bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-600/80 hover:to-emerald-600/80"
+              className="border-none bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-600/80 hover:to-emerald-600/80"
             >
               <CheckCircle className="mr-2 h-4 w-4" />
               Resolve

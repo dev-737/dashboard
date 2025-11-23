@@ -58,7 +58,7 @@ export default function WriteReviewForm({
           queryClient.refetchQueries(
             trpc.hub.getHubReviews.queryFilter({ hubId })
           ),
-        ]).catch(() => {});
+        ]).catch(() => { });
 
         if (onReviewSubmitted) {
           const r = newReview as {
@@ -146,11 +146,10 @@ export default function WriteReviewForm({
                 className="bg-gray-700/20 focus:outline-none"
               >
                 <Star
-                  className={`h-6 w-6 cursor-pointer ${
-                    star <= (hoverRating || rating)
+                  className={`h-6 w-6 cursor-pointer ${star <= (hoverRating || rating)
                       ? 'fill-amber-400 text-amber-400'
                       : 'text-gray-600'
-                  }`}
+                    }`}
                 />
               </Button>
             ))}
@@ -175,7 +174,7 @@ export default function WriteReviewForm({
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-lg bg-gradient-to-r from-primary to-primary-alt py-2 font-medium text-white transition-opacity hover:opacity-90"
+          className="w-full rounded-lg bg-linear-to-r from-primary to-primary-alt py-2 font-medium text-white transition-opacity hover:opacity-90"
         >
           {isSubmitting ? 'Submitting...' : 'Submit Review'}
         </Button>

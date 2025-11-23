@@ -19,7 +19,7 @@ export function Toaster() {
         <Toast key={id} {...props}>
           <div className="relative">
             {/* Subtle glow effect */}
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/5 to-indigo-500/5 opacity-50" />
+            <div className="absolute inset-0 rounded-xl bg-linear-to-r from-blue-500/5 to-indigo-500/5 opacity-50" />
 
             <div className="relative grid gap-1">
               {title && (

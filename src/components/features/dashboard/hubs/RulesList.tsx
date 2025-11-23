@@ -185,7 +185,7 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
             from unwanted content.
           </p>
           {canEdit && (
-            <Button className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700">
+            <Button className="bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700">
               Create Your First Rule
             </Button>
           )}
@@ -199,11 +199,10 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
       {rules.map((rule) => (
         <Card
           key={rule.id}
-          className={`transition-all duration-200 hover:border-purple-500/30 ${
-            rule.enabled
+          className={`transition-all duration-200 hover:border-purple-500/30 ${rule.enabled
               ? 'border border-gray-800/50 bg-gray-950/50'
               : 'border border-gray-800/30 bg-gray-950/30 opacity-75'
-          }`}
+            }`}
         >
           <CardHeader>
             <div className="flex items-center justify-between">

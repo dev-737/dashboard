@@ -35,7 +35,7 @@ export default function JoinHubCard({ hub }: { hub: SimplifiedHub }) {
   };
 
   return (
-    <Card className="overflow-hidden border-primary/10 bg-gradient-to-br from-primary/3 to-primary/1 shadow-md dark:border-primary/20 dark:bg-gradient-to-br dark:from-primary/15 dark:to-primary/5">
+    <Card className="overflow-hidden border-primary/10 bg-linear-to-br from-primary/3 to-primary/1 shadow-md dark:border-primary/20 dark:bg-linear-to-br dark:from-primary/15 dark:to-primary/5">
       <div className="border-primary/10 border-b bg-primary/3 p-4 dark:border-primary/20 dark:bg-primary/15">
         <h3 className="flex items-center justify-center gap-2 font-medium text-card text-lg dark:text-card-foreground">
           <PlusIcon className="h-5 w-5 text-primary" />

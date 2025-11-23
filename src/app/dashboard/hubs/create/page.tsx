@@ -36,7 +36,7 @@ export default async function CreateHubPage() {
             </Link>
           </Button>
           <div>
-            <h1 className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text font-bold text-2xl text-transparent">
+            <h1 className="bg-linear-to-r from-indigo-400 to-purple-400 bg-clip-text font-bold text-2xl text-transparent">
               Create New Hub
             </h1>
             <p className="text-gray-400 text-sm">

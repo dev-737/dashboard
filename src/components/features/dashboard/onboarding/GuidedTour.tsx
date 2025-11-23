@@ -224,11 +224,10 @@ export function GuidedTour({
       <button
         type="button"
         tabIndex={currentStepData.action !== 'click' ? 0 : -1}
-        className={`absolute rounded-lg border-2 border-purple-400 shadow-lg ${
-          currentStepData.action === 'click'
+        className={`absolute rounded-lg border-2 border-purple-400 shadow-lg ${currentStepData.action === 'click'
             ? 'pointer-events-none'
             : 'pointer-events-auto'
-        }`}
+          }`}
         style={{
           top: highlightPosition.top,
           left: highlightPosition.left,
@@ -309,7 +308,7 @@ export function GuidedTour({
               {/* Progress bar */}
               <div className="h-2 w-full rounded-full bg-gray-800">
                 <div
-                  className="h-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300"
+                  className="h-2 rounded-full bg-linear-to-r from-purple-500 to-blue-500 transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -358,7 +357,7 @@ export function GuidedTour({
                   <Button
                     onClick={canGoNext ? onNext : onComplete}
                     size="sm"
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700"
+                    className="bg-linear-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700"
                   >
                     {canGoNext ? (
                       <>

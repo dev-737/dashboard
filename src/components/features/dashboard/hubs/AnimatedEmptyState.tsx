@@ -73,7 +73,7 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="rounded-2xl border-gray-800/50 bg-gradient-to-br from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="rounded-2xl border-gray-800/50 bg-linear-to-br from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
         <CardHeader className="flex flex-col items-center pb-2 text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -81,7 +81,7 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
               inView ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }
             }
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-4 rounded-full border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-blue-500/10 p-4"
+            className="mb-4 rounded-full border border-purple-500/20 bg-linear-to-br from-purple-500/10 to-blue-500/10 p-4"
           >
             {content.icon}
           </motion.div>
@@ -104,7 +104,7 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
             >
               <Button
                 asChild
-                className="rounded-xl border-none bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:from-purple-700 hover:to-blue-700 hover:shadow-purple-500/25"
+                className="rounded-xl border-none bg-linear-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:from-purple-700 hover:to-blue-700 hover:shadow-purple-500/25"
               >
                 <Link href="/dashboard/hubs/create">
                   <PlusCircle className="mr-2 h-4 w-4" />

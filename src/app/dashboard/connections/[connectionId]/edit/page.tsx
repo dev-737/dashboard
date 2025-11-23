@@ -132,7 +132,7 @@ export default async function ConnectionEditPage(
 
         <div className="space-y-6">
           {/* Hub Information Card */}
-          <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <div className="rounded-lg border border-purple-500/20 bg-purple-500/10 p-2">
@@ -167,7 +167,7 @@ export default async function ConnectionEditPage(
           </Card>
 
           {/* Server Information Card */}
-          <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <div className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-2">
@@ -203,7 +203,7 @@ export default async function ConnectionEditPage(
           </Card>
 
           {/* Danger Zone */}
-          <Card className="border border-red-800/50 bg-gradient-to-b from-red-900/20 to-red-950/20 backdrop-blur-sm">
+          <Card className="border border-red-800/50 bg-linear-to-b from-red-900/20 to-red-950/20 backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <CardTitle className="text-lg text-red-400">
                 Danger Zone

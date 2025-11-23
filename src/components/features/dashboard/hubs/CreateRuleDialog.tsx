@@ -189,11 +189,10 @@ export function CreateRuleDialog({
                     {Object.entries(RULE_TEMPLATES).map(([key, template]) => (
                       <Card
                         key={key}
-                        className={`cursor-pointer transition-all duration-200 hover:border-purple-500/50 ${
-                          selectedTemplate === key
+                        className={`cursor-pointer transition-all duration-200 hover:border-purple-500/50 ${selectedTemplate === key
                             ? 'border-purple-500/50 bg-purple-950/20'
                             : 'border-gray-800 bg-gray-950/50'
-                        }`}
+                          }`}
                         onClick={() =>
                           setSelectedTemplate(
                             key as keyof typeof RULE_TEMPLATES
@@ -238,7 +237,7 @@ export function CreateRuleDialog({
                           handleCreateFromTemplate(selectedTemplate)
                         }
                         disabled={createMutation.isPending}
-                        className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                        className="bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
                       >
                         {createMutation.isPending
                           ? 'Creating...'
@@ -296,7 +295,7 @@ export function CreateRuleDialog({
                         !customRule.name.trim() ||
                         customRule.patterns.length === 0
                       }
-                      className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                      className="bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
                     >
                       {createMutation.isPending ? 'Creating...' : 'Create Rule'}
                     </Button>

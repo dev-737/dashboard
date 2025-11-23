@@ -54,7 +54,7 @@ export function RulesWelcomeStep({
   return (
     <>
       <CardHeader className="pb-6 text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-emerald-600">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-green-500 to-emerald-600">
           <Shield className="h-8 w-8 text-white" />
         </div>
         <CardTitle className="text-2xl">Welcome & Rules</CardTitle>
@@ -160,7 +160,7 @@ export function RulesWelcomeStep({
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="border-none bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-3 hover:from-green-600/80 hover:to-emerald-600/80"
+            className="border-none bg-linear-to-r from-green-600 to-emerald-600 px-8 py-3 hover:from-green-600/80 hover:to-emerald-600/80"
           >
             {isSubmitting ? (
               <>

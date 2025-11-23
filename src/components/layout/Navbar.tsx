@@ -109,7 +109,7 @@ export function Navbar({ session }: NavbarProps) {
         <div className="flex items-center gap-2">
           <Button
             asChild
-            className="hidden bg-gradient-to-r from-primary to-primary-alt font-medium text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-primary/20 lg:flex"
+            className="hidden bg-linear-to-r from-primary to-primary-alt font-medium text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-primary/20 lg:flex"
           >
             <Link href="/invite" className="items-center gap-2">
               Invite
@@ -147,9 +147,9 @@ export function Navbar({ session }: NavbarProps) {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[280px] overflow-hidden border-gray-700/40 border-l bg-gradient-to-b from-gray-900/98 to-gray-950/98 p-0 shadow-2xl shadow-black/20 backdrop-blur-xl sm:w-[320px]"
+              className="w-[280px] overflow-hidden border-gray-700/40 border-l bg-linear-to-b from-gray-900/98 to-gray-950/98 p-0 shadow-2xl shadow-black/20 backdrop-blur-xl sm:w-[320px]"
             >
-              <SheetHeader className="border-gray-700/40 border-b bg-gradient-to-r from-gray-900/50 to-gray-800/50 p-6 backdrop-blur-sm">
+              <SheetHeader className="border-gray-700/40 border-b bg-linear-to-r from-gray-900/50 to-gray-800/50 p-6 backdrop-blur-sm">
                 <SheetTitle className="flex items-center gap-3 text-white">
                   <div className="relative">
                     <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500/20 blur-md" />
@@ -161,7 +161,7 @@ export function Navbar({ session }: NavbarProps) {
                       className="relative rounded-full transition-transform duration-300 hover:scale-110"
                     />
                   </div>
-                  <span className="bg-gradient-to-r from-white via-gray-100 to-gray-200 bg-clip-text font-semibold text-transparent">
+                  <span className="bg-linear-to-r from-white via-gray-100 to-gray-200 bg-clip-text font-semibold text-transparent">
                     InterChat Menu
                   </span>
                 </SheetTitle>
@@ -170,14 +170,14 @@ export function Navbar({ session }: NavbarProps) {
               <div className="flex h-full flex-col">
                 <nav className="relative flex flex-col space-y-2 px-4 py-6">
                   {/* Vertical line connecting bullets */}
-                  <div className="absolute top-[calc(1.5rem+0.75rem)] bottom-[calc(0.5rem+0.75rem)] left-[2.25rem] w-[2px] bg-gradient-to-b from-purple-500/40 via-indigo-500/30 to-purple-500/40" />
+                  <div className="absolute top-[calc(1.5rem+0.75rem)] bottom-[calc(0.5rem+0.75rem)] left-[2.25rem] w-[2px] bg-linear-to-b from-purple-500/40 via-indigo-500/30 to-purple-500/40" />
 
                   {links.map((link, index) => (
                     <Link
                       key={link.url}
                       href={link.url}
                       className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border px-4 py-3 font-medium text-sm transition-all duration-300 ${pathname === link.url
-                          ? 'border-purple-500/30 bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
+                          ? 'border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
                           : 'border-transparent text-gray-400 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-black/5 hover:shadow-md'
                         }`}
                       style={{
@@ -198,13 +198,13 @@ export function Navbar({ session }: NavbarProps) {
                   ))}
                 </nav>
 
-                <div className="mt-auto space-y-3 border-gray-700/40 border-t bg-gradient-to-t from-gray-950/80 to-transparent p-6 backdrop-blur-sm">
+                <div className="mt-auto space-y-3 border-gray-700/40 border-t bg-linear-to-t from-gray-950/80 to-transparent p-6 backdrop-blur-sm">
                   <div className="space-y-3">
                     <div className="group relative">
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary to-primary-alt opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-30" />
+                      <div className="absolute inset-0 rounded-xl bg-linear-to-r from-primary to-primary-alt opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-30" />
                       <Button
                         asChild
-                        className="relative w-full bg-gradient-to-r from-primary to-primary-alt font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-primary-alt hover:to-primary hover:shadow-primary/20 hover:shadow-xl"
+                        className="relative w-full bg-linear-to-r from-primary to-primary-alt font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-primary-alt hover:to-primary hover:shadow-primary/20 hover:shadow-xl"
                       >
                         <Link
                           href="/invite"

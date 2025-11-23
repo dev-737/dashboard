@@ -62,7 +62,7 @@ export function NotificationDropdown() {
         className="max-h-[70vh] w-80 overflow-y-auto border-gray-800 bg-gray-900 text-gray-100"
       >
         <DropdownMenuLabel className="flex items-center justify-between">
-          <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text font-bold text-lg text-transparent">
+          <span className="bg-linear-to-r from-indigo-400 to-purple-400 bg-clip-text font-bold text-lg text-transparent">
             Notifications
           </span>
           {unreadCount > 0 && (
@@ -100,11 +100,10 @@ export function NotificationDropdown() {
             displayNotifications.map((notification) => (
               <DropdownMenuItem
                 key={notification.id}
-                className={`relative flex cursor-default flex-col items-start gap-1 px-4 py-3 focus:bg-gray-800/50 ${
-                  notification.isUnread
-                    ? 'before:absolute before:top-0 before:left-0 before:h-full before:w-1 before:bg-gradient-to-b before:from-indigo-500 before:to-purple-500'
+                className={`relative flex cursor-default flex-col items-start gap-1 px-4 py-3 focus:bg-gray-800/50 ${notification.isUnread
+                    ? 'before:absolute before:top-0 before:left-0 before:h-full before:w-1 before:bg-linear-to-b before:from-indigo-500 before:to-purple-500'
                     : ''
-                }`}
+                  }`}
               >
                 <div className="flex w-full items-center justify-between">
                   <h4 className="font-medium text-white">

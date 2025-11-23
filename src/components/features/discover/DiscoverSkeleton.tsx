@@ -21,7 +21,7 @@ export function DiscoverSkeleton({ count = 8 }: DiscoverSkeletonProps) {
         >
           {/* Shimmer effect */}
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-gray-800/10 to-transparent"
+            className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-gray-800/10 to-transparent"
             style={{
               backgroundSize: '200% 100%',
               animation: 'shimmer 2s infinite linear',

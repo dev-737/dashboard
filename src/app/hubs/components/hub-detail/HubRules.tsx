@@ -16,7 +16,7 @@ const HubRules: React.FC<HubRulesProps> = ({ rules }) => {
               key={`rule-${rule.slice(0, 20)}-${index + 1}`}
               className="flex items-start gap-4 rounded-lg border border-gray-800/60 bg-gray-900/50 p-5 transition-colors duration-200 hover:bg-gray-800/30"
             >
-              <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-primary to-primary-alt font-semibold text-sm text-white shadow-sm">
+              <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-linear-to-r from-primary to-primary-alt font-semibold text-sm text-white shadow-sm">
                 {index + 1}
               </div>
               <div className="prose prose-sm prose-invert prose-p:my-0 max-w-none text-gray-300">

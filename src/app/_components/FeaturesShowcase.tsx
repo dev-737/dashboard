@@ -1,17 +1,9 @@
 'use client';
 
-import {
-  MessageSquare,
-  Settings,
-  Shield,
-  Sparkles,
-  Users,
-} from 'lucide-react';
+import { MessageSquare, Settings, Shield, Sparkles, Users } from 'lucide-react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-
-
 
 export function FeaturesShowcase() {
   return (
@@ -57,7 +49,8 @@ export function FeaturesShowcase() {
                 <h3 className="font-bold text-2xl text-white">Instant Relay</h3>
               </div>
               <p className="mb-8 max-w-md text-gray-400 text-lg leading-relaxed">
-                Messages sync in seconds. No lag, no delay, no waiting. It's like a portal gun for your messages.
+                Messages sync in seconds. No lag, no delay, no waiting. It's
+                like a portal gun for your messages.
               </p>
               <div className="mt-auto overflow-hidden rounded-xl border border-gray-800 bg-gray-950/50 shadow-2xl">
                 <div className="relative aspect-video w-full">
@@ -86,7 +79,9 @@ export function FeaturesShowcase() {
                 <div className="rounded-xl bg-gray-800/50 p-3 text-red-400">
                   <Shield className="h-6 w-6" />
                 </div>
-                <h3 className="font-bold text-xl text-white">Stay in Control</h3>
+                <h3 className="font-bold text-white text-xl">
+                  Stay in Control
+                </h3>
               </div>
               <p className="text-gray-400">
                 Your server, your rules. Ban troublemakers hub-wide or locally.
@@ -108,7 +103,9 @@ export function FeaturesShowcase() {
                 <div className="rounded-xl bg-gray-800/50 p-3 text-purple-400">
                   <Users className="h-6 w-6" />
                 </div>
-                <h3 className="font-bold text-xl text-white">Join or Create Hubs</h3>
+                <h3 className="font-bold text-white text-xl">
+                  Join or Create Hubs
+                </h3>
               </div>
               <p className="text-gray-400">
                 Public hubs for everyone. Private hubs for your circle.
@@ -131,10 +128,13 @@ export function FeaturesShowcase() {
                   <div className="rounded-xl bg-gray-800/50 p-3 text-blue-400">
                     <Settings className="h-6 w-6" />
                   </div>
-                  <h3 className="font-bold text-2xl text-white">Control Center</h3>
+                  <h3 className="font-bold text-2xl text-white">
+                    Control Center
+                  </h3>
                 </div>
                 <p className="text-gray-400 text-lg">
-                  Manage everything from one place. It's so pretty you might actually want to use it.
+                  Manage everything from one place. It's so pretty you might
+                  actually want to use it.
                 </p>
               </div>
               <div className="relative hidden h-full w-1/3 overflow-hidden rounded-xl border border-gray-800 bg-gray-950/50 shadow-lg md:block">
@@ -162,14 +162,13 @@ export function FeaturesShowcase() {
                 <div className="rounded-xl bg-gray-800/50 p-3 text-yellow-400">
                   <Sparkles className="h-6 w-6" />
                 </div>
-                <h3 className="font-bold text-xl text-white">Rich Content</h3>
+                <h3 className="font-bold text-white text-xl">Rich Content</h3>
               </div>
               <p className="text-gray-400">
                 Images, embeds, reactions, replies. Everything just works.
               </p>
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>

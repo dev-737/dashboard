@@ -4,7 +4,10 @@ import { Eye, Star, Users } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { SafeHubAvatar, SafeHubBanner } from '@/components/ui/HydrationSafeImage';
+import {
+  SafeHubAvatar,
+  SafeHubBanner,
+} from '@/components/ui/HydrationSafeImage';
 import type { HubCardDTO } from '@/lib/discover/query';
 import { cn, formatNumber } from '@/lib/utils';
 
@@ -44,10 +47,10 @@ export function FeaturedHubCarousel({
             sizes="(max-width: 768px) 100vw, 800px"
           />
         ) : (
-          <div className="h-full w-full bg-gradient-to-br from-gray-800 to-gray-900" />
+          <div className="h-full w-full bg-linear-to-br from-gray-800 to-gray-900" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-gray-950 via-gray-950/60 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-gray-950 via-gray-950/40 to-transparent" />
       </div>
 
       {/* Content */}

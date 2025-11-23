@@ -742,7 +742,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
               <Button
                 variant="default"
                 size="sm"
-                className="w-full border-none bg-gradient-to-r from-green-600 to-green-700 hover:from-green-600/80 hover:to-green-700/80 sm:w-auto"
+                className="w-full border-none bg-linear-to-r from-green-600 to-green-700 hover:from-green-600/80 hover:to-green-700/80 sm:w-auto"
                 onClick={() => handleStatusChange('ACCEPTED')}
                 disabled={isUpdating}
               >

@@ -139,13 +139,13 @@ export default async function HubDetailView(props: {
       percentage: Math.round(
         ((hub.reviews?.filter((r) => r.rating === rating).length || 0) /
           (hub.reviews?.length || 1)) *
-          100
+        100
       ),
     })),
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-gray-950 to-gray-900 text-gray-200">
+    <div className="flex min-h-screen flex-col bg-linear-to-b from-gray-950 to-gray-900 text-gray-200">
       {/* Main Content */}
       <div className="flex-grow">
         <HubBanner bannerUrl={hub.bannerUrl} name={hub.name} />
@@ -184,7 +184,7 @@ export default async function HubDetailView(props: {
                   {canManageHub && (
                     <Link href={`/dashboard/hubs/${hubId}`}>
                       <Button
-                        className="flex cursor-pointer items-center gap-2 rounded-lg border-0 bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-indigo-600/80 hover:to-purple-600/80"
+                        className="flex cursor-pointer items-center gap-2 rounded-lg border-0 bg-linear-to-r from-indigo-600 to-purple-600 px-4 py-2 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-indigo-600/80 hover:to-purple-600/80"
                         size="sm"
                         variant="outline"
                       >
@@ -224,7 +224,7 @@ export default async function HubDetailView(props: {
                           'inline-flex flex-shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-2 py-2 font-medium text-xs ring-offset-background transition-all sm:px-3 sm:py-2.5 sm:text-sm md:px-4',
                           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                           'disabled:pointer-events-none disabled:opacity-50',
-                          'data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-primary-alt data-[state=active]:text-white data-[state=active]:shadow-md', // Active state
+                          'data-[state=active]:bg-linear-to-r data-[state=active]:from-primary data-[state=active]:to-primary-alt data-[state=active]:text-white data-[state=active]:shadow-md', // Active state
                           'data-[state=active]:animate-tab-glow', // Animation for active tab
                           'text-gray-300 hover:bg-gray-700/50 hover:text-white' // Inactive state
                         )}

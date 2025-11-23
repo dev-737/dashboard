@@ -29,8 +29,8 @@ export function UnderlinedTabsSkeleton({
       <div className="-mx-6 no-scrollbar relative z-10 overflow-x-auto border-gray-800/50 border-b bg-gray-900/80 px-0 shadow-sm backdrop-blur-md transition-all duration-200">
         <div className="w-full px-2 sm:px-4 md:px-6">
           {/* Scroll indicators for mobile */}
-          <div className="pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-6 bg-gradient-to-l from-gray-900/90 to-transparent sm:hidden sm:w-8" />
-          <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-10 w-6 bg-gradient-to-r from-gray-900/90 to-transparent sm:hidden sm:w-8" />
+          <div className="pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-6 bg-linear-to-l from-gray-900/90 to-transparent sm:hidden sm:w-8" />
+          <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-10 w-6 bg-linear-to-r from-gray-900/90 to-transparent sm:hidden sm:w-8" />
 
           <TabsList className="mx-auto flex h-auto w-full min-w-max max-w-screen-xl flex-nowrap justify-start gap-1 rounded-none bg-transparent p-0 sm:justify-center sm:gap-2 md:gap-6">
             {tabs.map((tab) => {

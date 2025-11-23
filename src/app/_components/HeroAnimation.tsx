@@ -1,12 +1,12 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { useEffect, useRef, useState } from 'react';
 import { DiscordMessage } from './DiscordMessage';
 import { DiscordServerCard } from './DiscordServerCard';
 import { SquigglyConnectionLine } from './SquigglyConnectionLine';
-import Link from 'next/link';
 
 const MESSAGE_CONTENT = 'Hey everyone! 👋 Check out this awesome feature!';
 const SOURCE_SERVER = 'Gaming Server';
@@ -98,9 +98,9 @@ export function HeroAnimation() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative overflow-hidden rounded-2xl border border-gray-800/60 bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-gray-950/95 p-8 shadow-2xl backdrop-blur-xl lg:p-12"
+        className="relative overflow-hidden rounded-2xl border border-gray-800/60 bg-linear-to-br from-gray-900/95 via-gray-900/90 to-gray-950/95 p-8 shadow-2xl backdrop-blur-xl lg:p-12"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary-alt/5" />
+        <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-primary-alt/5" />
 
         <motion.div
           className="relative grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16"

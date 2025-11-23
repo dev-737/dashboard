@@ -54,7 +54,7 @@ export function PageFooter({
       aria-hidden="true"
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-gray-950/40 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-gray-950/80 via-gray-950/40 to-transparent" />
 
       {/* Decorative elements */}
       <div className="absolute inset-0">
@@ -170,7 +170,7 @@ export function PageFooter({
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 1.1, duration: 0.8, ease: 'easeOut' }}
-          className="mx-auto mt-3 h-px w-16 bg-gradient-to-r from-transparent via-purple-400/30 to-transparent"
+          className="mx-auto mt-3 h-px w-16 bg-linear-to-r from-transparent via-purple-400/30 to-transparent"
         />
       </div>
     </motion.div>

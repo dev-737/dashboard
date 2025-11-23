@@ -33,7 +33,7 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
   if (!isMounted) {
     return (
       <div className="relative mb-8 h-[30vh] overflow-hidden rounded-2xl border border-gray-800/50 md:h-[40vh]">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30" />
+        <div className="absolute inset-0 bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30" />
       </div>
     );
   }
@@ -79,13 +79,13 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
 
   return (
     <motion.div
-      className="relative mb-8 overflow-hidden rounded-2xl border border-gray-800/30 bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 shadow-2xl shadow-purple-900/20"
+      className="relative mb-8 overflow-hidden rounded-2xl border border-gray-800/30 bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 shadow-2xl shadow-purple-900/20"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       {/* Animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-transparent to-blue-600/10" />
+      <div className="absolute inset-0 bg-linear-to-r from-purple-600/10 via-transparent to-blue-600/10" />
 
       {/* Floating decorative icons */}
       <div className="absolute inset-0">
@@ -146,7 +146,7 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
             transition={{ delay: 0.5, duration: 0.6 }}
           >
             Welcome back,{' '}
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
               {user.name || 'User'}
             </span>
             !
@@ -192,7 +192,7 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
             ].map(({ icon: Icon, label, color, href }, index) => (
               <motion.div
                 key={label}
-                className="flex items-center gap-2 rounded-xl border border-gray-700/50 bg-gray-900/30 px-4 py-2 backdrop-blur-sm cursor-pointer hover:bg-gray-900/50 hover:scale-105 transition-all"
+                className="flex cursor-pointer items-center gap-2 rounded-xl border border-gray-700/50 bg-gray-900/30 px-4 py-2 backdrop-blur-sm transition-all hover:scale-105 hover:bg-gray-900/50"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
@@ -201,13 +201,12 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
                 onClick={() => (window.location.href = href)}
               >
                 <Icon
-                  className={`h-4 w-4 ${
-                    color === 'purple'
+                  className={`h-4 w-4 ${color === 'purple'
                       ? 'text-purple-400'
                       : color === 'blue'
                         ? 'text-blue-400'
                         : 'text-pink-400'
-                  }`}
+                    }`}
                 />
                 <span className="font-medium text-gray-300 text-sm">
                   {label}

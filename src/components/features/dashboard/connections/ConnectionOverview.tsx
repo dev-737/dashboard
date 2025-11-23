@@ -21,7 +21,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import type { Connection, ServerData } from '@/lib/generated/prisma/client/client';
+import type {
+  Connection,
+  ServerData,
+} from '@/lib/generated/prisma/client/client';
 
 interface ConnectionOverviewProps {
   connection: Connection & {
@@ -39,8 +42,8 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
   return (
     <div className="space-y-6">
       {/* Comprehensive Connection Overview */}
-      <Card className="relative overflow-hidden border border-gray-800/50 bg-gradient-to-r from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5" />
+      <Card className="relative overflow-hidden border border-gray-800/50 bg-linear-to-r from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+        <div className="absolute inset-0 bg-linear-to-r from-blue-500/5 to-purple-500/5" />
         <CardHeader className="relative px-6 py-4">
           <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -56,11 +59,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             </div>
             <Badge
               variant={connection.connected ? 'default' : 'secondary'}
-              className={`${
-                connection.connected
+              className={`${connection.connected
                   ? 'border-green-500/20 bg-green-500/10 text-green-400'
                   : 'border-gray-500/20 bg-gray-500/10 text-gray-400'
-              } px-3 py-1 text-sm`}
+                } px-3 py-1 text-sm`}
             >
               {connection.connected ? (
                 <>
@@ -99,11 +101,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
                   </span>
                   <Badge
                     variant="outline"
-                    className={`text-xs ${
-                      connection.hub.private
+                    className={`text-xs ${connection.hub.private
                         ? 'border-purple-500/30 bg-purple-500/10 text-purple-400'
                         : 'border-green-500/30 bg-green-500/10 text-green-400'
-                    }`}
+                      }`}
                   >
                     {connection.hub.private ? 'Private' : 'Public'}
                   </Badge>
@@ -187,7 +188,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
       </Card>
 
       {/* Additional Details */}
-      <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
         <CardHeader className="px-6 py-4">
           <CardTitle className="text-lg">Additional Details</CardTitle>
           <CardDescription className="text-gray-400">

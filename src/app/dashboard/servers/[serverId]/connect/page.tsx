@@ -459,7 +459,7 @@ export default function ServerConnectPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950">
+    <div className="min-h-screen bg-linear-to-br from-gray-900 via-gray-900 to-gray-950">
       <div className="mx-auto max-w-6xl px-4 py-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
@@ -513,7 +513,7 @@ export default function ServerConnectPage() {
 
         {/* Error banner for hub loading issues */}
         {hubLoadError && !preselectedHub && (
-          <Card className="mb-8 border-red-500/50 bg-gradient-to-r from-red-900/20 to-red-800/20 backdrop-blur-sm">
+          <Card className="mb-8 border-red-500/50 bg-linear-to-r from-red-900/20 to-red-800/20 backdrop-blur-sm">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <AlertTriangle className="h-5 w-5 flex-shrink-0 text-red-400" />
@@ -568,7 +568,7 @@ export default function ServerConnectPage() {
                       </Button>
                     </div>
 
-                    <Card className="border-indigo-500/30 bg-gradient-to-r from-indigo-900/20 to-purple-900/20 backdrop-blur-sm">
+                    <Card className="border-indigo-500/30 bg-linear-to-r from-indigo-900/20 to-purple-900/20 backdrop-blur-sm">
                       <CardContent className="pt-6">
                         <div className="flex items-center gap-4">
                           <div className="relative">
@@ -691,11 +691,10 @@ export default function ServerConnectPage() {
                           <button
                             key={hub.id}
                             type="button"
-                            className={`group w-full cursor-pointer rounded-[var(--radius)] p-4 text-left transition-all duration-200 ${
-                              selectedHub === hub.id
-                                ? 'border border-indigo-500/30 bg-gradient-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
+                            className={`group w-full cursor-pointer rounded-[var(--radius)] p-4 text-left transition-all duration-200 ${selectedHub === hub.id
+                                ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
                                 : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
-                            }`}
+                              }`}
                             onClick={() => {
                               setSelectedHub(hub.id);
                               setPreselectedHub(hub);
@@ -774,11 +773,10 @@ export default function ServerConnectPage() {
                         <button
                           key={channel.id}
                           type="button"
-                          className={`group flex w-full cursor-pointer items-center rounded-[var(--radius)] p-3 text-left transition-all duration-200 ${
-                            selectedChannel === channel.id
-                              ? 'border border-indigo-500/30 bg-gradient-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
+                          className={`group flex w-full cursor-pointer items-center rounded-[var(--radius)] p-3 text-left transition-all duration-200 ${selectedChannel === channel.id
+                              ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
                               : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
-                          }`}
+                            }`}
                           onClick={() => setSelectedChannel(channel.id)}
                         >
                           <ChannelIcon

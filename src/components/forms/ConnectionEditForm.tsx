@@ -125,7 +125,7 @@ export function ConnectionEditFormClient({
   };
 
   return (
-    <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+    <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
       <CardHeader className="px-4 sm:px-6">
         <div className="flex items-center gap-3">
           <div className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-2">
@@ -265,7 +265,7 @@ export function ConnectionEditFormClient({
           <Button
             onClick={handleSave}
             disabled={updateConnectionMutation.isPending}
-            className="border-none bg-gradient-to-r from-blue-600 to-purple-600 px-6 font-medium text-white hover:from-blue-700 hover:to-purple-700"
+            className="border-none bg-linear-to-r from-blue-600 to-purple-600 px-6 font-medium text-white hover:from-blue-700 hover:to-purple-700"
           >
             {updateConnectionMutation.isPending ? (
               <>

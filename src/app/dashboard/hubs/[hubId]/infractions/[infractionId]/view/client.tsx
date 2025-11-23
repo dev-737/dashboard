@@ -360,7 +360,7 @@ export function ViewInfractionClient({
                   </>
                 ) : (
                   <>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-gray-700 bg-gradient-to-br from-green-500/20 to-blue-500/20">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-gray-700 bg-linear-to-br from-green-500/20 to-blue-500/20">
                       <Server className="h-6 w-6 text-green-400" />
                     </div>
                     <div>
@@ -665,7 +665,7 @@ export function ViewInfractionClient({
             <Button
               onClick={handleUpdateDuration}
               disabled={isUpdating || (!isPermanent && !newExpiresAt)}
-              className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600"
+              className="bg-linear-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600"
             >
               {isUpdating ? 'Updating...' : 'Update Duration'}
             </Button>

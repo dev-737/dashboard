@@ -72,7 +72,7 @@ export function ActionGrid() {
               <Link href={action.href} className="block h-full">
                 <div
                   className={cn(
-                    'group relative h-full overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/60 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl',
+                    'group hover:-translate-y-1 relative h-full overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/60 p-6 backdrop-blur-sm transition-all duration-300 hover:shadow-2xl',
                     action.border
                   )}
                 >
@@ -84,7 +84,12 @@ export function ActionGrid() {
                   />
 
                   <div className="relative z-10 flex flex-col items-center text-center">
-                    <div className={cn('mb-4 rounded-xl bg-gray-800/50 p-3 shadow-inner', action.iconColor)}>
+                    <div
+                      className={cn(
+                        'mb-4 rounded-xl bg-gray-800/50 p-3 shadow-inner',
+                        action.iconColor
+                      )}
+                    >
                       <action.icon className="h-8 w-8" />
                     </div>
                     <h3 className="mb-2 font-semibold text-lg text-white">

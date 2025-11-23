@@ -104,7 +104,7 @@ export function ModernHero({
     <div className="relative mb-8 h-auto min-h-[250px] overflow-hidden rounded-xl shadow-lg sm:h-[30vh] md:h-[35vh]">
       {/* Background gradient */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br ${from} ${via} ${to} z-0`}
+        className={`absolute inset-0 bg-linear-to-br ${from} ${via} ${to} z-0`}
       />
 
       {/* Mesh gradient overlay */}
@@ -177,7 +177,7 @@ export function ModernHero({
               <Button
                 asChild
                 size="lg"
-                className="hover:-translate-y-1 border-none bg-gradient-to-r from-primary-alt to-primary shadow-lg transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:shadow-xl"
+                className="hover:-translate-y-1 border-none bg-linear-to-r from-primary-alt to-primary shadow-lg transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:shadow-xl"
               >
                 <Link href={actionButton.href}>
                   {actionButton.icon || <PlusCircle className="mr-2 h-4 w-4" />}

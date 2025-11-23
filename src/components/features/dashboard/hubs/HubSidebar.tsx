@@ -103,96 +103,78 @@ function SidebarNavItem({
 }: SidebarNavItemProps) {
   const colorClasses = {
     default: {
-      active:
-        'bg-purple-500/10 text-white border-purple-500/30',
+      active: 'bg-purple-500/10 text-white border-purple-500/30',
       inactive:
         'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked:
-        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
+      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
         ? 'text-purple-400'
         : 'text-gray-500 group-hover:text-purple-400',
       iconLocked: 'text-gray-600',
     },
     blue: {
-      active:
-        'bg-blue-500/10 text-white border-blue-500/30',
+      active: 'bg-blue-500/10 text-white border-blue-500/30',
       inactive:
         'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked:
-        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
+      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
         ? 'text-blue-400'
         : 'text-gray-500 group-hover:text-blue-400',
       iconLocked: 'text-gray-600',
     },
     green: {
-      active:
-        'bg-emerald-500/10 text-white border-emerald-500/30',
+      active: 'bg-emerald-500/10 text-white border-emerald-500/30',
       inactive:
         'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked:
-        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
+      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
         ? 'text-emerald-400'
         : 'text-gray-500 group-hover:text-emerald-400',
       iconLocked: 'text-gray-600',
     },
     purple: {
-      active:
-        'bg-purple-500/10 text-white border-purple-500/30',
+      active: 'bg-purple-500/10 text-white border-purple-500/30',
       inactive:
         'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked:
-        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
+      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
         ? 'text-purple-400'
         : 'text-gray-500 group-hover:text-purple-400',
       iconLocked: 'text-gray-600',
     },
     red: {
-      active:
-        'bg-red-500/10 text-white border-red-500/30',
+      active: 'bg-red-500/10 text-white border-red-500/30',
       inactive:
         'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked:
-        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
-      icon: active
-        ? 'text-red-400'
-        : 'text-gray-500 group-hover:text-red-400',
+      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
+      icon: active ? 'text-red-400' : 'text-gray-500 group-hover:text-red-400',
       iconLocked: 'text-gray-600',
     },
     orange: {
-      active:
-        'bg-orange-500/10 text-white border-orange-500/30',
+      active: 'bg-orange-500/10 text-white border-orange-500/30',
       inactive:
         'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked:
-        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
+      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
         ? 'text-orange-400'
         : 'text-gray-500 group-hover:text-orange-400',
       iconLocked: 'text-gray-600',
     },
     yellow: {
-      active:
-        'bg-amber-500/10 text-white border-amber-500/30',
+      active: 'bg-amber-500/10 text-white border-amber-500/30',
       inactive:
         'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked:
-        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
+      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
         ? 'text-amber-400'
         : 'text-gray-500 group-hover:text-amber-400',
       iconLocked: 'text-gray-600',
     },
     indigo: {
-      active:
-        'bg-indigo-500/10 text-white border-indigo-500/30',
+      active: 'bg-indigo-500/10 text-white border-indigo-500/30',
       inactive:
         'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked:
-        'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
+      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
       icon: active
         ? 'text-indigo-400'
         : 'text-gray-500 group-hover:text-indigo-400',
@@ -211,12 +193,15 @@ function SidebarNavItem({
       )}
     >
       <div className="shrink-0">
-        <Icon className={cn('h-4 w-4 transition-colors duration-200', colors.iconLocked)} />
+        <Icon
+          className={cn(
+            'h-4 w-4 transition-colors duration-200',
+            colors.iconLocked
+          )}
+        />
       </div>
 
-      {!isCollapsed && (
-        <span className="truncate text-sm">{label}</span>
-      )}
+      {!isCollapsed && <span className="truncate text-sm">{label}</span>}
     </div>
   ) : (
     <Link
@@ -224,26 +209,26 @@ function SidebarNavItem({
       className={cn(
         'group relative flex items-center rounded-lg border transition-all duration-200',
         isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2',
-        active
-          ? colors.active
-          : colors.inactive
+        active ? colors.active : colors.inactive
       )}
     >
       <div className="shrink-0">
-        <Icon className={cn('h-4 w-4 transition-colors duration-200', colors.icon)} />
+        <Icon
+          className={cn('h-4 w-4 transition-colors duration-200', colors.icon)}
+        />
       </div>
 
       {!isCollapsed && (
         <>
           <span className="flex-1 truncate text-sm">{label}</span>
           {comingSoon ? (
-            <span className="flex h-5 items-center justify-center rounded-md bg-amber-500/90 px-2 text-[10px] font-semibold text-white uppercase tracking-wide">
+            <span className="flex h-5 items-center justify-center rounded-md bg-amber-500/90 px-2 font-semibold text-[10px] text-white uppercase tracking-wide">
               Soon
             </span>
           ) : (
             badge !== undefined &&
             badge > 0 && (
-              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-md bg-red-500 px-1.5 text-xs font-semibold text-white">
+              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-md bg-red-500 px-1.5 font-semibold text-white text-xs">
                 {badge > 99 ? '99+' : badge}
               </span>
             )
@@ -260,12 +245,12 @@ function SidebarNavItem({
           <TooltipTrigger asChild>{content}</TooltipTrigger>
           <TooltipContent
             side="right"
-            className="ml-2 rounded-lg border-gray-800 bg-gray-900 px-3 py-2 text-sm text-gray-200"
+            className="ml-2 rounded-lg border-gray-800 bg-gray-900 px-3 py-2 text-gray-200 text-sm"
           >
             {locked ? (
               <div className="space-y-0.5">
                 <p className="font-medium">{label}</p>
-                <p className="text-xs text-gray-400">{lockReason}</p>
+                <p className="text-gray-400 text-xs">{lockReason}</p>
               </div>
             ) : (
               <p>{label}</p>
@@ -303,7 +288,7 @@ function SidebarSection({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="group flex w-full items-center justify-between px-3 py-1.5 text-[11px] font-semibold text-gray-500 uppercase tracking-wider transition-colors duration-200 hover:text-gray-400"
+        className="group flex w-full items-center justify-between px-3 py-1.5 font-semibold text-[11px] text-gray-500 uppercase tracking-wider transition-colors duration-200 hover:text-gray-400"
       >
         <span>{title}</span>
         <motion.div
@@ -463,12 +448,12 @@ export function HubSidebar({
   return (
     <div
       className={cn(
-        'flex h-full flex-col overflow-hidden border-r border-gray-800/60 bg-[#0b0f1a] transition-all duration-300',
+        'flex h-full flex-col overflow-hidden border-gray-800/60 border-r bg-[#0b0f1a] transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >
       {/* Navigation */}
-      <div className="scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-transparent hover:scrollbar-thumb-gray-700 flex-1 space-y-6 overflow-y-auto px-3 pb-4 pt-20 transition-colors">
+      <div className="scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-transparent hover:scrollbar-thumb-gray-700 flex-1 space-y-6 overflow-y-auto px-3 pt-20 pb-4 transition-colors">
         {visibleSections.map((section) => {
           const sectionItems = section.items.map((item) => {
             const isLocked =
@@ -530,7 +515,7 @@ export function HubSidebar({
 
       {/* Collapse Button */}
       {onToggleCollapse && (
-        <div className="border-t border-gray-800/80 p-3">
+        <div className="border-gray-800/80 border-t p-3">
           <Button
             variant="ghost"
             size="icon"

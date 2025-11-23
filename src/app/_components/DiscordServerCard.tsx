@@ -32,11 +32,11 @@ export function DiscordServerCard({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary-alt/10"
+          className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-primary-alt/10"
         />
       )}
 
-      <div className="flex h-12 items-center justify-between border-b border-[#202225] bg-[#2f3136] px-4 shadow-sm">
+      <div className="flex h-12 items-center justify-between border-[#202225] border-b bg-[#2f3136] px-4 shadow-sm">
         <div className="flex items-center gap-2">
           <span className="font-semibold text-sm text-white">{serverName}</span>
           <ChevronDown className="h-4 w-4 text-[#b9bbbe]" />
@@ -45,7 +45,7 @@ export function DiscordServerCard({
 
       <div className="flex">
         <div className="flex flex-1 flex-col">
-          <div className="flex items-center justify-between border-b border-[#202225] bg-[#36393f] px-3 py-2">
+          <div className="flex items-center justify-between border-[#202225] border-b bg-[#36393f] px-3 py-2">
             <div className="flex items-center gap-2">
               <Hash className="h-5 w-5 text-[#b9bbbe]" />
               <div className="flex flex-col">

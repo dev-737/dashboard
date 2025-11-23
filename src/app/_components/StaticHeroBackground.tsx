@@ -4,7 +4,7 @@ export function StaticHeroBackground() {
   return (
     <>
       {/* Static gradient overlay - no client-side JavaScript needed */}
-      <div className="absolute inset-0 top-[-64px] bg-gradient-to-b from-transparent to-purple-900/10" />
+      <div className="absolute inset-0 top-[-64px] bg-linear-to-b from-transparent to-purple-900/10" />
 
       {/* Grid pattern - simplified and static */}
       <GridPattern

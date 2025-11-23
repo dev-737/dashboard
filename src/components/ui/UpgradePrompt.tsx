@@ -36,7 +36,7 @@ export function UpgradePrompt({
   const defaultTrigger = (
     <Button
       variant="outline"
-      className="cursor-pointer border-blue-500/30 bg-gradient-to-r from-blue-600/20 to-blue-700/20 text-blue-400 hover:from-blue-600/30 hover:to-blue-700/30"
+      className="cursor-pointer border-blue-500/30 bg-linear-to-r from-blue-600/20 to-blue-700/20 text-blue-400 hover:from-blue-600/30 hover:to-blue-700/30"
     >
       <Info className="mr-2 h-4 w-4" />
       Learn More
@@ -95,7 +95,7 @@ export function UpgradePrompt({
           </Button>
           <Button
             asChild
-            className="border-none bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800"
+            className="border-none bg-linear-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800"
           >
             <a
               href="https://discord.gg/interchat"
@@ -125,7 +125,7 @@ export function InlineUpgradePrompt({
 }: InlineUpgradePromptProps) {
   return (
     <Card
-      className={`border-blue-500/30 bg-gradient-to-r from-blue-900/20 to-blue-900/20 shadow-blue-500/5 shadow-lg ${className}`}
+      className={`border-blue-500/30 bg-linear-to-r from-blue-900/20 to-blue-900/20 shadow-blue-500/5 shadow-lg ${className}`}
     >
       <CardContent className="p-4">
         <div className="flex items-start gap-3">

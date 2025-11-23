@@ -105,7 +105,7 @@ export default async function MyAppealsPage(props: {
       </div>
 
       {/* Appeals List */}
-      <Card className="border border-gray-800/50 bg-gradient-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg">My Appeal Requests</CardTitle>
           <CardDescription>

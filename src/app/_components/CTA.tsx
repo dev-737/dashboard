@@ -36,9 +36,7 @@ export function CTA() {
           </h3>
           <p className="mx-auto mb-10 max-w-3xl text-gray-300 text-lg leading-relaxed md:text-xl">
             Join the conversation. 12,000+ servers are already chatting.
-            <span className="mt-2 block text-gray-400">
-              Why aren't you?
-            </span>
+            <span className="mt-2 block text-gray-400">Why aren't you?</span>
           </p>
 
           {/* Stats row */}

@@ -35,13 +35,13 @@ export function PremiumBadge({
     },
     gold: {
       badge:
-        'bg-gradient-to-r from-yellow-500/20 to-amber-500/20 text-yellow-400 border-yellow-500/40 shadow-lg shadow-yellow-500/10',
+        'bg-linear-to-r from-yellow-500/20 to-amber-500/20 text-yellow-400 border-yellow-500/40 shadow-lg shadow-yellow-500/10',
       icon: Crown,
       text: 'Premium',
     },
     sparkly: {
       badge:
-        'bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-yellow-500/20 text-yellow-400 border-yellow-500/40 shadow-lg shadow-yellow-500/10',
+        'bg-linear-to-r from-purple-500/20 via-pink-500/20 to-yellow-500/20 text-yellow-400 border-yellow-500/40 shadow-lg shadow-yellow-500/10',
       icon: Sparkles,
       text: 'Premium',
     },
