@@ -70,7 +70,7 @@ export function Navbar({ session }: NavbarProps) {
 
   return (
     <header
-      className={`${isDashboardPage ? 'hidden' : ''} fixed top-0 z-50 w-full ${isScrolled ? 'bg-[#030811]' : 'pointer-events-auto bg-transparent'} transition-all duration-300`}
+      className={`${isDashboardPage ? 'hidden' : ''} fixed top-0 z-50 w-full ${isScrolled ? 'bg-[#030812]/95 backdrop-blur-xl' : 'pointer-events-auto bg-transparent'} transition-all duration-200`}
     >
       <div className="container mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-4 py-2">
         {/* Logo and Navigation */}
@@ -170,15 +170,15 @@ export function Navbar({ session }: NavbarProps) {
               <div className="flex h-full flex-col">
                 <nav className="relative flex flex-col space-y-2 px-4 py-6">
                   {/* Vertical line connecting bullets */}
-                  <div className="absolute top-[calc(1.5rem+0.75rem)] bottom-[calc(0.5rem+0.75rem)] left-[2.25rem] w-[2px] bg-linear-to-b from-purple-500/40 via-indigo-500/30 to-purple-500/40" />
+                  <div className="absolute top-9 bottom-5 left-9 w-[2px] bg-linear-to-b from-purple-500/40 via-indigo-500/30 to-purple-500/40" />
 
                   {links.map((link, index) => (
                     <Link
                       key={link.url}
                       href={link.url}
                       className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border px-4 py-3 font-medium text-sm transition-all duration-300 ${pathname === link.url
-                          ? 'border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
-                          : 'border-transparent text-gray-400 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-black/5 hover:shadow-md'
+                        ? 'border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
+                        : 'border-transparent text-gray-400 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-black/5 hover:shadow-md'
                         }`}
                       style={{
                         animationDelay: `${index * 50}ms`,
@@ -186,8 +186,8 @@ export function Navbar({ session }: NavbarProps) {
                     >
                       <div
                         className={`relative z-10 flex h-2 w-2 shrink-0 rounded-full transition-all duration-300 ${pathname === link.url
-                            ? 'bg-purple-400 shadow-lg shadow-purple-400/50'
-                            : 'bg-gray-600 group-hover:bg-purple-400 group-hover:shadow-md group-hover:shadow-purple-400/30'
+                          ? 'bg-purple-400 shadow-lg shadow-purple-400/50'
+                          : 'bg-gray-600 group-hover:bg-purple-400 group-hover:shadow-md group-hover:shadow-purple-400/30'
                           }`}
                       />
                       <span className="truncate">{link.text}</span>
