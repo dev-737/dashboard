@@ -123,7 +123,7 @@ export function FeaturedHubCarousel({
         <div className="absolute right-6 bottom-6 hidden pt-3 md:block">
           <Link href={`/hubs/${id}`}>
             <Button
-              size="lg"
+              size="default"
               className="btn-primary shadow-indigo-500/20 shadow-lg"
             >
               <Eye className="mr-2 h-5 w-5" />

@@ -53,8 +53,10 @@ const config = {
       '@tanstack/react-query',
       'react-hook-form',
       'motion',
-      'lodash-es',
       'date-fns',
+      '@discordjs/rest',
+      'react-markdown',
+      '@uploadthing/react',
     ],
     viewTransition: true,
     parallelServerCompiles: true,
@@ -70,10 +72,10 @@ const config = {
 
   images: {
     formats: ['image/webp', 'image/avif'],
-    qualities: [16, 32, 48, 60, 64, 75, 80, 85, 90, 100],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    qualities: [60, 75, 85, 90],
+    deviceSizes: [640, 828, 1200, 1920, 3840],
+    imageSizes: [16, 32, 64, 128, 256],
+    // minimumCacheTTL: 3600,
     remotePatterns: [
       { protocol: 'https', hostname: 'i.imgur.com' },
       { protocol: 'https', hostname: 'cdn.discordapp.com' },
