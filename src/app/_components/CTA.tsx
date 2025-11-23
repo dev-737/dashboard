@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button';
 
 export function CTA() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 py-20 md:py-32">
+    <section className="relative overflow-hidden bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 py-20 md:py-32">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/3 left-1/4 h-96 w-96 animate-pulse rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute right-1/4 bottom-1/3 h-80 w-80 animate-pulse rounded-full bg-primary-alt/10 blur-3xl delay-1000" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
+        <div className="absolute top-1/3 left-1/4 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute right-1/4 bottom-1/3 h-80 w-80 rounded-full bg-primary-alt/10 blur-3xl delay-1000" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4 text-center">
@@ -22,7 +22,7 @@ export function CTA() {
           transition={{ duration: 0.7 }}
           className="mx-auto max-w-4xl"
         >
-          <div className="mb-8 inline-flex items-center gap-2 rounded-[var(--radius-button)] border border-gray-700/60 bg-gradient-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl">
+          <div className="mb-8 inline-flex items-center gap-2 rounded-(--radius-button) border border-gray-700/60 bg-linear-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl">
             <Zap className="h-4 w-4 animate-pulse text-emerald-400" />
             <span className="font-semibold tracking-wide">
               Fast, clean, and easy to use

@@ -1,4 +1,3 @@
-# flake.nix
 {
   description = "A Bun project on NixOS";
 
@@ -8,12 +7,11 @@
 
   outputs = { self, nixpkgs }:
     let
-      system = "x86_64-linux"; # Or aarch64-darwin, etc.
+      system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
       };
 
-      # Define Prisma engines for easier reuse
       prismaEngines = with pkgs; [
         prisma-engines
       ];
