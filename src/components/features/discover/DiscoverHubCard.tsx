@@ -68,7 +68,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
   });
 
   return (
-    <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-white/5 bg-[#0a101d]/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-[#0a101d] hover:shadow-2xl hover:shadow-indigo-500/10">
+    <Card className="group hover:-translate-y-1 relative flex h-full flex-col overflow-hidden rounded-xl border border-gray-800/70 bg-gray-900/40 backdrop-blur-sm transition-all duration-300 hover:border-indigo-500/30 hover:bg-gray-800/60 hover:shadow-2xl hover:shadow-indigo-500/10">
       {/* Banner */}
       {bannerUrl && (
         <div className="relative h-32 w-full overflow-hidden">
@@ -81,7 +81,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
             fetchPriority={isAboveFold ? 'high' : 'low'}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/60" />
+          <div className="absolute inset-0 bg-linear-to-b from-transparent to-gray-900/60" />
         </div>
       )}
 
@@ -112,7 +112,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
 
           <div className="min-w-0 flex-1 space-y-2">
             <div className="flex items-center gap-2">
-              <CardTitle className="truncate font-semibold text-white text-lg">
+              <CardTitle className="truncate font-semibold text-lg text-white">
                 {name}
               </CardTitle>
               {verified && (
@@ -141,7 +141,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
               {partnered && (
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className="flex h-4 w-4 shrink-0 cursor-help items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600">
+                    <div className="flex h-4 w-4 shrink-0 cursor-help items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-violet-600">
                       <Handshake className="h-2.5 w-2.5 text-white" />
                     </div>
                   </TooltipTrigger>
@@ -253,7 +253,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 onClick={handleUpvote}
                 disabled={isLoading}
                 className={cn(
-                  'h-10 min-w-[3.5rem] shrink-0 rounded-lg border px-3 transition-all',
+                  'h-10 min-w-14 shrink-0 rounded-lg border px-3 transition-all',
                   liked
                     ? 'border-red-500/50 bg-red-500/10 text-red-400 hover:bg-red-500/20'
                     : 'border-gray-700/60 bg-gray-900/40 text-gray-400 hover:border-gray-600 hover:bg-gray-800/60 hover:text-white'
@@ -264,7 +264,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 ) : (
                   <div className="flex items-center gap-2">
                     <Heart className={cn('h-4 w-4', liked && 'fill-red-400')} />
-                    <span className="text-sm font-medium">
+                    <span className="font-medium text-sm">
                       {formatNumber(upvoteCount)}
                     </span>
                   </div>

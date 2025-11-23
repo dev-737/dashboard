@@ -2,9 +2,9 @@
 
 import { Eye, Star, Users } from 'lucide-react';
 import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { SafeHubAvatar, SafeHubBanner } from '@/components/ui/HydrationSafeImage';
-import { Badge } from '@/components/ui/badge';
 import type { HubCardDTO } from '@/lib/discover/query';
 import { cn, formatNumber } from '@/lib/utils';
 
@@ -12,7 +12,7 @@ interface FeaturedHubBannerProps extends HubCardDTO {
   className?: string;
 }
 
-export function FeaturedHubBanner({
+export function FeaturedHubCarousel({
   id,
   name,
   description,
@@ -29,7 +29,7 @@ export function FeaturedHubBanner({
   return (
     <div
       className={cn(
-        'group relative flex h-[300px] w-[85vw] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-[#0a101d] md:w-[600px] lg:w-[800px]',
+        'group relative flex h-[300px] w-[85vw] shrink-0 overflow-hidden rounded-2xl border border-gray-800/70 bg-[#0a101d] md:w-[600px] lg:w-[800px]',
         className
       )}
     >
@@ -64,15 +64,21 @@ export function FeaturedHubBanner({
           </div>
 
           {/* Text Info */}
-          <div className="mb-1 flex-1 min-w-0 space-y-2">
+          <div className="mb-1 min-w-0 flex-1 space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               {verified && (
-                <Badge variant="secondary" className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/30">
+                <Badge
+                  variant="secondary"
+                  className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/30"
+                >
                   Verified
                 </Badge>
               )}
               {partnered && (
-                <Badge variant="secondary" className="bg-purple-500/20 text-purple-300 hover:bg-purple-500/30">
+                <Badge
+                  variant="secondary"
+                  className="bg-purple-500/20 text-purple-300 hover:bg-purple-500/30"
+                >
                   Partner
                 </Badge>
               )}
@@ -87,22 +93,22 @@ export function FeaturedHubBanner({
               ))}
             </div>
 
-            <h3 className="truncate text-2xl font-bold text-white md:text-3xl">
+            <h3 className="truncate font-bold text-2xl text-white md:text-3xl">
               {name}
             </h3>
 
-            <p className="line-clamp-2 max-w-2xl text-sm text-gray-300 md:text-base">
+            <p className="line-clamp-2 max-w-2xl text-gray-300 text-sm md:text-base">
               {shortDescription || description}
             </p>
 
-            <div className="flex items-center gap-4 pt-1 text-sm font-medium text-gray-400">
+            <div className="flex items-center gap-4 pt-1 font-medium text-gray-400 text-sm">
               <div className="flex items-center gap-1.5">
                 <Users className="h-4 w-4 text-emerald-400" />
                 <span>{formatNumber(_count.connections)} Members</span>
               </div>
               {averageRating && (
                 <div className="flex items-center gap-1.5">
-                  <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   <span>{averageRating.toFixed(1)}</span>
                 </div>
               )}
@@ -111,19 +117,22 @@ export function FeaturedHubBanner({
         </div>
 
         {/* Action Button */}
-        <div className="absolute right-6 bottom-6 hidden md:block">
+        <div className="absolute right-6 bottom-6 hidden pt-3 md:block">
           <Link href={`/hubs/${id}`}>
-            <Button size="lg" className="btn-primary shadow-lg shadow-indigo-500/20">
+            <Button
+              size="lg"
+              className="btn-primary shadow-indigo-500/20 shadow-lg"
+            >
               <Eye className="mr-2 h-5 w-5" />
               View Hub
             </Button>
           </Link>
         </div>
-        
+
         {/* Mobile Action Button Overlay */}
-         <Link href={`/hubs/${id}`} className="absolute inset-0 md:hidden">
-           <span className="sr-only">View {name}</span>
-         </Link>
+        <Link href={`/hubs/${id}`} className="absolute inset-0 md:hidden">
+          <span className="sr-only">View {name}</span>
+        </Link>
       </div>
     </div>
   );
