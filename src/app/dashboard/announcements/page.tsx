@@ -96,8 +96,9 @@ export default async function AnnouncementsPage() {
           {announcements.map((announcement) => (
             <Card
               key={announcement.id}
-              className={`border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm ${announcement.isUnread ? 'border-l-4 border-l-indigo-500' : ''
-                }`}
+              className={`border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm ${
+                announcement.isUnread ? 'border-l-4 border-l-indigo-500' : ''
+              }`}
             >
               <CardHeader>
                 <div className="flex items-center justify-between">

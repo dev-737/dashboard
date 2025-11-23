@@ -189,10 +189,11 @@ export function CreateRuleDialog({
                     {Object.entries(RULE_TEMPLATES).map(([key, template]) => (
                       <Card
                         key={key}
-                        className={`cursor-pointer transition-all duration-200 hover:border-purple-500/50 ${selectedTemplate === key
+                        className={`cursor-pointer transition-all duration-200 hover:border-purple-500/50 ${
+                          selectedTemplate === key
                             ? 'border-purple-500/50 bg-purple-950/20'
                             : 'border-gray-800 bg-gray-950/50'
-                          }`}
+                        }`}
                         onClick={() =>
                           setSelectedTemplate(
                             key as keyof typeof RULE_TEMPLATES

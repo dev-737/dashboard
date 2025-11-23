@@ -59,10 +59,11 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             </div>
             <Badge
               variant={connection.connected ? 'default' : 'secondary'}
-              className={`${connection.connected
+              className={`${
+                connection.connected
                   ? 'border-green-500/20 bg-green-500/10 text-green-400'
                   : 'border-gray-500/20 bg-gray-500/10 text-gray-400'
-                } px-3 py-1 text-sm`}
+              } px-3 py-1 text-sm`}
             >
               {connection.connected ? (
                 <>
@@ -101,10 +102,11 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
                   </span>
                   <Badge
                     variant="outline"
-                    className={`text-xs ${connection.hub.private
+                    className={`text-xs ${
+                      connection.hub.private
                         ? 'border-purple-500/30 bg-purple-500/10 text-purple-400'
                         : 'border-green-500/30 bg-green-500/10 text-green-400'
-                      }`}
+                    }`}
                   >
                     {connection.hub.private ? 'Private' : 'Public'}
                   </Badge>

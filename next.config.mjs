@@ -213,4 +213,7 @@ export default withSentryConfig(config, {
   disableLogger: true,
   automaticVercelMonitors: true,
   telemetry: false,
+  sourcemaps: {
+    disable: !process.env.CI,
+  },
 });

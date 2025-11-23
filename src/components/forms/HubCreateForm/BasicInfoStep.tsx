@@ -55,8 +55,9 @@ export function BasicInfoStep({
             placeholder="e.g., Gaming Central, Art Community, Tech Hub"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className={`border-gray-700/50 bg-gray-800/50 py-6 text-lg focus-visible:ring-indigo-500/50 ${nameError ? 'border-red-500/50' : ''
-              } ${isNameValid && name.length >= 3 ? 'border-green-500/50' : ''}`}
+            className={`border-gray-700/50 bg-gray-800/50 py-6 text-lg focus-visible:ring-indigo-500/50 ${
+              nameError ? 'border-red-500/50' : ''
+            } ${isNameValid && name.length >= 3 ? 'border-green-500/50' : ''}`}
             maxLength={32}
           />
           <div className="flex items-center justify-between">

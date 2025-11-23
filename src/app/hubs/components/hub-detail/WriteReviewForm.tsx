@@ -58,7 +58,7 @@ export default function WriteReviewForm({
           queryClient.refetchQueries(
             trpc.hub.getHubReviews.queryFilter({ hubId })
           ),
-        ]).catch(() => { });
+        ]).catch(() => {});
 
         if (onReviewSubmitted) {
           const r = newReview as {
@@ -146,10 +146,11 @@ export default function WriteReviewForm({
                 className="bg-gray-700/20 focus:outline-none"
               >
                 <Star
-                  className={`h-6 w-6 cursor-pointer ${star <= (hoverRating || rating)
+                  className={`h-6 w-6 cursor-pointer ${
+                    star <= (hoverRating || rating)
                       ? 'fill-amber-400 text-amber-400'
                       : 'text-gray-600'
-                    }`}
+                  }`}
                 />
               </Button>
             ))}

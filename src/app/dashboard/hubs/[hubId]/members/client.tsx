@@ -152,10 +152,11 @@ export function MembersClient({ hubId }: { hubId: string }) {
                     <button
                       key={user.id}
                       type="button"
-                      className={`flex w-full cursor-pointer items-center gap-3 rounded-md p-2 text-left ${selectedUser?.id === user.id
+                      className={`flex w-full cursor-pointer items-center gap-3 rounded-md p-2 text-left ${
+                        selectedUser?.id === user.id
                           ? 'border border-indigo-700/30 bg-indigo-900/30'
                           : 'hover:bg-gray-800/50'
-                        }`}
+                      }`}
                       onClick={() => setSelectedUser(user)}
                     >
                       <Image

@@ -691,10 +691,11 @@ export default function ServerConnectPage() {
                           <button
                             key={hub.id}
                             type="button"
-                            className={`group w-full cursor-pointer rounded-[var(--radius)] p-4 text-left transition-all duration-200 ${selectedHub === hub.id
+                            className={`group w-full cursor-pointer rounded-[var(--radius)] p-4 text-left transition-all duration-200 ${
+                              selectedHub === hub.id
                                 ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
                                 : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
-                              }`}
+                            }`}
                             onClick={() => {
                               setSelectedHub(hub.id);
                               setPreselectedHub(hub);
@@ -773,10 +774,11 @@ export default function ServerConnectPage() {
                         <button
                           key={channel.id}
                           type="button"
-                          className={`group flex w-full cursor-pointer items-center rounded-[var(--radius)] p-3 text-left transition-all duration-200 ${selectedChannel === channel.id
+                          className={`group flex w-full cursor-pointer items-center rounded-[var(--radius)] p-3 text-left transition-all duration-200 ${
+                            selectedChannel === channel.id
                               ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
                               : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
-                            }`}
+                          }`}
                           onClick={() => setSelectedChannel(channel.id)}
                         >
                           <ChannelIcon

@@ -117,8 +117,8 @@ function ServerCard({
   const iconUrl = server.icon
     ? `https://cdn.discordapp.com/icons/${server.id}/${server.icon}.png?size=128`
     : `https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
-      server.id
-    )}`;
+        server.id
+      )}`;
 
   // Format last active time
   const lastActive = server.lastMessageAt

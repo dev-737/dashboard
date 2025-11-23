@@ -93,22 +93,22 @@ export default async function HubOverviewPage({
   // Fetch moderation stats for moderators
   const moderationStats = canModerate
     ? await db.$transaction([
-      db.hubReport.count({
-        where: { hubId, status: 'PENDING' },
-      }),
-      db.appeal.count({
-        where: {
-          status: 'PENDING',
-          infraction: { hubId },
-        },
-      }),
-      db.infraction.count({
-        where: {
-          hubId,
-          status: 'ACTIVE',
-        },
-      }),
-    ])
+        db.hubReport.count({
+          where: { hubId, status: 'PENDING' },
+        }),
+        db.appeal.count({
+          where: {
+            status: 'PENDING',
+            infraction: { hubId },
+          },
+        }),
+        db.infraction.count({
+          where: {
+            hubId,
+            status: 'ACTIVE',
+          },
+        }),
+      ])
     : [0, 0, 0];
 
   const [pendingReports, pendingAppeals, activeInfractions] = moderationStats;

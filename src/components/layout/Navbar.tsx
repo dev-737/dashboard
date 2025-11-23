@@ -95,8 +95,9 @@ export function Navbar({ session }: NavbarProps) {
                 <NavigationMenuItem key={link.url}>
                   <NavigationMenuLink
                     href={link.url}
-                    className={`group relative inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 font-medium text-gray-400 text-sm transition-colors duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:translate-x-[-50%] after:bg-primary after:transition-all after:duration-300 hover:text-white hover:after:w-[80%] ${pathname === link.url ? 'text-white after:w-[80%]' : ''
-                      }`}
+                    className={`group relative inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 font-medium text-gray-400 text-sm transition-colors duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:translate-x-[-50%] after:bg-primary after:transition-all after:duration-300 hover:text-white hover:after:w-[80%] ${
+                      pathname === link.url ? 'text-white after:w-[80%]' : ''
+                    }`}
                   >
                     {link.text}
                   </NavigationMenuLink>
@@ -176,19 +177,21 @@ export function Navbar({ session }: NavbarProps) {
                     <Link
                       key={link.url}
                       href={link.url}
-                      className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border px-4 py-3 font-medium text-sm transition-all duration-300 ${pathname === link.url
-                        ? 'border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
-                        : 'border-transparent text-gray-400 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-black/5 hover:shadow-md'
-                        }`}
+                      className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border px-4 py-3 font-medium text-sm transition-all duration-300 ${
+                        pathname === link.url
+                          ? 'border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
+                          : 'border-transparent text-gray-400 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-black/5 hover:shadow-md'
+                      }`}
                       style={{
                         animationDelay: `${index * 50}ms`,
                       }}
                     >
                       <div
-                        className={`relative z-10 flex h-2 w-2 shrink-0 rounded-full transition-all duration-300 ${pathname === link.url
-                          ? 'bg-purple-400 shadow-lg shadow-purple-400/50'
-                          : 'bg-gray-600 group-hover:bg-purple-400 group-hover:shadow-md group-hover:shadow-purple-400/30'
-                          }`}
+                        className={`relative z-10 flex h-2 w-2 shrink-0 rounded-full transition-all duration-300 ${
+                          pathname === link.url
+                            ? 'bg-purple-400 shadow-lg shadow-purple-400/50'
+                            : 'bg-gray-600 group-hover:bg-purple-400 group-hover:shadow-md group-hover:shadow-purple-400/30'
+                        }`}
                       />
                       <span className="truncate">{link.text}</span>
                       {link.external && (

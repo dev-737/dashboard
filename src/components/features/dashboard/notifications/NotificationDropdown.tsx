@@ -100,10 +100,11 @@ export function NotificationDropdown() {
             displayNotifications.map((notification) => (
               <DropdownMenuItem
                 key={notification.id}
-                className={`relative flex cursor-default flex-col items-start gap-1 px-4 py-3 focus:bg-gray-800/50 ${notification.isUnread
+                className={`relative flex cursor-default flex-col items-start gap-1 px-4 py-3 focus:bg-gray-800/50 ${
+                  notification.isUnread
                     ? 'before:absolute before:top-0 before:left-0 before:h-full before:w-1 before:bg-linear-to-b before:from-indigo-500 before:to-purple-500'
                     : ''
-                  }`}
+                }`}
               >
                 <div className="flex w-full items-center justify-between">
                   <h4 className="font-medium text-white">
