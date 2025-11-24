@@ -70,7 +70,11 @@ export function Navbar({ session }: NavbarProps) {
 
   return (
     <header
-      className={`${isDashboardPage ? 'hidden' : ''} fixed top-0 z-50 w-full ${isScrolled ? 'bg-[#030812]/95 backdrop-blur-xl' : 'pointer-events-auto bg-transparent'} transition-all duration-200`}
+      className={`${isDashboardPage ? 'hidden' : ''} fixed top-0 z-50 w-full transition-all duration-300 ${
+        isScrolled
+          ? 'border-white/5 border-b bg-[#030812]/80 shadow-lg shadow-purple-500/5 backdrop-blur-md'
+          : 'bg-transparent'
+      }`}
     >
       <div className="container mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-4 py-2">
         {/* Logo and Navigation */}

@@ -204,12 +204,13 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
                 onClick={() => router.push(href)}
               >
                 <Icon
-                  className={`h-4 w-4 ${color === 'purple'
+                  className={`h-4 w-4 ${
+                    color === 'purple'
                       ? 'text-purple-400'
                       : color === 'blue'
                         ? 'text-blue-400'
                         : 'text-pink-400'
-                    }`}
+                  }`}
                 />
                 <span className="font-medium text-gray-300 text-sm">
                   {label}
