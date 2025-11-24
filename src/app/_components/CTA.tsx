@@ -31,7 +31,7 @@ export function CTA() {
 
           <h3 className="mb-6 font-bold text-5xl text-white tracking-tight md:text-7xl">
             Stop shouting into <br className="hidden md:block" />
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[var(--color-brand-blue-500)] to-[var(--color-brand-purple-500)] bg-clip-text text-transparent">
               the void.
             </span>
           </h3>
@@ -85,11 +85,11 @@ export function CTA() {
               whileTap={{ scale: 0.98 }}
               className="group relative"
             >
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-70" />
+              <div className="absolute inset-0 rounded-full bg-linear-to-r from-blue-600 to-purple-600 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-70" />
               <Button
                 asChild
                 size="lg"
-                className="relative h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 font-semibold text-white shadow-lg transition-all hover:shadow-blue-500/25"
+                className="relative h-14 rounded-full bg-linear-to-r from-blue-600 to-purple-600 px-8 font-semibold text-white shadow-lg transition-all hover:shadow-blue-500/25"
               >
                 <Link href="/hubs" className="group flex items-center">
                   <Sparkles className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />

@@ -3,7 +3,6 @@
 import { MessageSquare, Settings, Shield, Sparkles, Users } from 'lucide-react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
 
 export function FeaturesShowcase() {
   return (
@@ -25,7 +24,7 @@ export function FeaturesShowcase() {
 
           <h2 className="mb-6 font-bold text-4xl text-white tracking-tight md:text-5xl lg:text-6xl">
             Features that <br className="hidden md:block" />
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[var(--color-brand-blue-500)] to-[var(--color-brand-purple-500)] bg-clip-text text-transparent">
               actually make sense
             </span>
           </h2>
@@ -40,7 +39,7 @@ export function FeaturesShowcase() {
             transition={{ duration: 0.5 }}
             className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.04] md:col-span-2 md:row-span-2"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-blue-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-blue-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10 flex h-full flex-col">
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-emerald-500/10 p-3 text-emerald-400 ring-1 ring-emerald-500/20">
@@ -73,7 +72,7 @@ export function FeaturesShowcase() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.04] md:col-span-1 md:row-span-1"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-orange-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-br from-red-500/5 to-orange-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10">
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-red-500/10 p-3 text-red-400 ring-1 ring-red-500/20">
@@ -98,7 +97,7 @@ export function FeaturesShowcase() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.04] md:col-span-1 md:row-span-1"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 to-pink-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10">
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-purple-500/10 p-3 text-purple-400 ring-1 ring-purple-500/20">
@@ -123,7 +122,7 @@ export function FeaturesShowcase() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.04] md:col-span-2 md:row-span-1"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 to-cyan-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10 flex h-full items-center gap-8">
               <div className="flex-1">
                 <div className="mb-6 flex items-center gap-4">
@@ -158,7 +157,7 @@ export function FeaturesShowcase() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.04] md:col-span-1 md:row-span-1"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-orange-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-br from-yellow-500/5 to-orange-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10">
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-yellow-500/10 p-3 text-yellow-400 ring-1 ring-yellow-500/20">

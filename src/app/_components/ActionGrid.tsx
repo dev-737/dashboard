@@ -82,7 +82,7 @@ export function ActionGrid() {
                 >
                   <div
                     className={cn(
-                      'absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100',
+                      'absolute inset-0 bg-linear-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100',
                       action.gradient
                     )}
                   />

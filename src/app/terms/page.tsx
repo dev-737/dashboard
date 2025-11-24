@@ -30,7 +30,7 @@ export default function TermsOfService() {
             <span className="font-medium text-sm">Terms of Service</span>
           </div>
 
-          <h1 className="mb-6 bg-gradient-to-r from-white via-purple-100 to-gray-300 bg-clip-text font-bold text-4xl text-transparent tracking-tight sm:text-5xl md:text-6xl">
+          <h1 className="mb-6 bg-linear-to-r from-white via-purple-100 to-gray-300 bg-clip-text font-bold text-4xl text-transparent tracking-tight sm:text-5xl md:text-6xl">
             InterChat Terms of Service
           </h1>
 

@@ -37,6 +37,7 @@ function AccordionItem({
         )}
       >
         <button
+          type="button"
           onClick={onToggle}
           className="flex w-full items-center justify-between rounded-2xl p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50"
         >
@@ -104,7 +105,7 @@ export function FaqSection() {
 
           <h2 className="mb-6 font-bold text-4xl text-white tracking-tight md:text-5xl">
             Quick answers about{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[var(--color-brand-blue-500)] to-[var(--color-brand-purple-500)] bg-clip-text text-transparent">
               InterChat
             </span>
           </h2>

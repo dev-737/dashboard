@@ -64,9 +64,9 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     ) : (
-                      <div className="h-full w-full bg-gradient-to-br from-gray-800 to-gray-900" />
+                      <div className="h-full w-full bg-linear-to-br from-gray-800 to-gray-900" />
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#030812] via-transparent to-transparent opacity-90" />
+                    <div className="absolute inset-0 bg-linear-to-t from-[#030812] via-transparent to-transparent opacity-90" />
 
                     {/* NSFW Badge */}
                     {hub.nsfw && (
@@ -88,7 +88,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-600 to-violet-600 font-bold text-3xl text-white">
+                        <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-indigo-600 to-violet-600 font-bold text-3xl text-white">
                           {hub.name.charAt(0)}
                         </div>
                       )}

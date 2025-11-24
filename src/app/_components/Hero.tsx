@@ -45,13 +45,13 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="mb-6 bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text font-extrabold text-5xl text-transparent leading-[1.1] tracking-tight md:text-7xl lg:text-8xl"
+              className="mb-6 bg-linear-to-b from-white via-white to-gray-400 bg-clip-text font-extrabold text-5xl text-transparent leading-[1.1] tracking-tight md:text-7xl lg:text-8xl"
             >
               Your Discord servers <br className="hidden md:block" />
               are{' '}
               <GradientText
                 text="lonely."
-                className="from-purple-400 to-blue-400"
+                gradient="linear-gradient(90deg, var(--color-brand-blue-500) 0%, var(--color-brand-purple-500) 25%, #a78bff 50%, var(--color-brand-purple-500) 75%, var(--color-brand-blue-500) 100%)"
               />
             </motion.h1>
 
@@ -76,10 +76,10 @@ export function Hero() {
                 whileTap={{ scale: 0.98 }}
                 className="group relative"
               >
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-70" />
+                <div className="absolute inset-0 rounded-full bg-linear-to-r from-purple-600 to-blue-600 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-70" />
                 <Button
                   size="lg"
-                  className="relative h-14 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/25"
+                  className="relative h-14 rounded-full bg-linear-to-r from-purple-600 to-blue-600 px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/25"
                 >
                   <Link href="/invite" className="flex items-center gap-2">
                     Start Connecting
