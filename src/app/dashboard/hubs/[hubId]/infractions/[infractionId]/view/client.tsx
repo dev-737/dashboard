@@ -325,7 +325,7 @@ export function ViewInfractionClient({
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <div
-                  className={`rounded-[var(--radius-button)] p-2 ${typeInfo.color}`}
+                  className={`rounded-(--radius-button) p-2 ${typeInfo.color}`}
                 >
                   <TypeIcon className="h-5 w-5" />
                 </div>
@@ -334,7 +334,7 @@ export function ViewInfractionClient({
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Target Info */}
-              <div className="flex items-center gap-4 rounded-[var(--radius)] border border-gray-700/50 bg-gray-900/50 p-4">
+              <div className="flex items-center gap-4 rounded-(--radius) border border-gray-700/50 bg-gray-900/50 p-4">
                 {isUserInfraction ? (
                   <>
                     <Image
@@ -412,7 +412,7 @@ export function ViewInfractionClient({
                 <Label className="font-medium text-gray-400 text-sm">
                   Reason
                 </Label>
-                <div className="rounded-[var(--radius-button)] border border-gray-700/50 bg-gray-900/50 p-3">
+                <div className="rounded-(--radius-button) border border-gray-700/50 bg-gray-900/50 p-3">
                   <p className="whitespace-pre-wrap text-gray-300">
                     {infraction.reason}
                   </p>
@@ -426,7 +426,7 @@ export function ViewInfractionClient({
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="rounded-[var(--radius-button)] bg-purple-500/20 p-2">
+                  <div className="rounded-(--radius-button) bg-purple-500/20 p-2">
                     <Calendar className="h-5 w-5 text-purple-400" />
                   </div>
                   Duration
@@ -489,7 +489,7 @@ export function ViewInfractionClient({
           <Card className="premium-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <div className="rounded-[var(--radius-button)] bg-indigo-500/20 p-2">
+                <div className="rounded-(--radius-button) bg-indigo-500/20 p-2">
                   <Shield className="h-5 w-5 text-indigo-400" />
                 </div>
                 Issued By
@@ -519,7 +519,7 @@ export function ViewInfractionClient({
             <Card className="premium-card">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <div className="rounded-[var(--radius-button)] bg-blue-500/20 p-2">
+                  <div className="rounded-(--radius-button) bg-blue-500/20 p-2">
                     <Eye className="h-5 w-5 text-blue-400" />
                   </div>
                   Appeals
@@ -546,7 +546,7 @@ export function ViewInfractionClient({
           <Card className="premium-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <div className="rounded-[var(--radius-button)] bg-emerald-500/20 p-2">
+                <div className="rounded-(--radius-button) bg-emerald-500/20 p-2">
                   <Server className="h-5 w-5 text-emerald-400" />
                 </div>
                 Hub

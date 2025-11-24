@@ -74,19 +74,19 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
     switch (hub.permissionLevel) {
       case PermissionLevel.OWNER:
         return (
-          <span className="rounded-[var(--radius-badge)] border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-purple-600/20 px-3 py-1 font-medium text-purple-300 text-xs shadow-lg">
+          <span className="rounded-(--radius-badge) border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-purple-600/20 px-3 py-1 font-medium text-purple-300 text-xs shadow-lg">
             Owner
           </span>
         );
       case PermissionLevel.MANAGER:
         return (
-          <span className="rounded-[var(--radius-badge)] border border-blue-500/30 bg-linear-to-r from-blue-500/20 to-blue-600/20 px-3 py-1 font-medium text-blue-300 text-xs shadow-lg">
+          <span className="rounded-(--radius-badge) border border-blue-500/30 bg-linear-to-r from-blue-500/20 to-blue-600/20 px-3 py-1 font-medium text-blue-300 text-xs shadow-lg">
             Manager
           </span>
         );
       case PermissionLevel.MODERATOR:
         return (
-          <span className="rounded-[var(--radius-badge)] border border-indigo-500/30 bg-linear-to-r from-indigo-500/20 to-indigo-600/20 px-3 py-1 font-medium text-indigo-300 text-xs shadow-lg">
+          <span className="rounded-(--radius-badge) border border-indigo-500/30 bg-linear-to-r from-indigo-500/20 to-indigo-600/20 px-3 py-1 font-medium text-indigo-300 text-xs shadow-lg">
             Moderator
           </span>
         );
@@ -121,7 +121,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
             >
-              <Avatar className="h-16 w-16 flex-shrink-0 border-2 border-gray-700/50 ring-2 ring-transparent transition-all duration-200 group-hover:border-purple-500/50 group-hover:ring-purple-500/20">
+              <Avatar className="h-16 w-16 shrink-0 border-2 border-gray-700/50 ring-2 ring-transparent transition-all duration-200 group-hover:border-purple-500/50 group-hover:ring-purple-500/20">
                 <AvatarImage
                   src={
                     hub.iconUrl?.includes('.gif')
@@ -137,7 +137,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
               </Avatar>
 
               {/* Privacy indicator */}
-              <div className="-bottom-1 -right-1 absolute flex h-6 w-6 items-center justify-center rounded-[var(--radius-avatar)] border-2 border-gray-700 bg-gray-900">
+              <div className="-bottom-1 -right-1 absolute flex h-6 w-6 items-center justify-center rounded-(--radius-avatar) border-2 border-gray-700 bg-gray-900">
                 {hub.private ? (
                   <Lock className="h-3 w-3 text-orange-400" />
                 ) : (

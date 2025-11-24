@@ -31,7 +31,7 @@ export function CTA() {
 
           <h3 className="mb-6 font-bold text-5xl text-white tracking-tight md:text-7xl">
             Stop shouting into <br className="hidden md:block" />
-            <span className="bg-linear-to-r from-[var(--color-brand-blue-500)] to-[var(--color-brand-purple-500)] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-(--color-brand-blue-500) to-(--color-brand-purple-500) bg-clip-text text-transparent">
               the void.
             </span>
           </h3>

@@ -23,7 +23,7 @@ export default function RulesSection({ hub }: { hub: SimplifiedHub }) {
                   key={`rule-${rule.slice(0, 20)}-${index + 1}`}
                   className="flex gap-4 py-3 transition-colors hover:bg-primary/5"
                 >
-                  <span className="w-6 flex-shrink-0 text-right font-medium text-primary">
+                  <span className="w-6 shrink-0 text-right font-medium text-primary">
                     {index + 1}.
                   </span>
                   <div className="text-gray-600 text-sm dark:text-gray-300">

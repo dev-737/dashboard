@@ -18,16 +18,16 @@ export default function MainContent({ hub }: { hub: SimplifiedHub }) {
           <TabsList className="w-full min-w-max border border-gray-800 bg-gray-900/50">
             <TabsTrigger
               value="about"
-              className="flex-shrink-0 px-3 py-2 text-xs data-[state=active]:bg-gray-800 sm:px-4 sm:text-sm"
+              className="shrink-0 px-3 py-2 text-xs data-[state=active]:bg-gray-800 sm:px-4 sm:text-sm"
             >
-              <Info className="mr-1 h-3 w-3 flex-shrink-0 sm:mr-2 sm:h-4 sm:w-4" />
+              <Info className="mr-1 h-3 w-3 shrink-0 sm:mr-2 sm:h-4 sm:w-4" />
               <span className="truncate">About</span>
             </TabsTrigger>
             <TabsTrigger
               value="rules"
-              className="flex-shrink-0 px-3 py-2 text-xs data-[state=active]:bg-gray-800 sm:px-4 sm:text-sm"
+              className="shrink-0 px-3 py-2 text-xs data-[state=active]:bg-gray-800 sm:px-4 sm:text-sm"
             >
-              <ScrollText className="mr-1 h-3 w-3 flex-shrink-0 sm:mr-2 sm:h-4 sm:w-4" />
+              <ScrollText className="mr-1 h-3 w-3 shrink-0 sm:mr-2 sm:h-4 sm:w-4" />
               <span className="truncate">Rules</span>
             </TabsTrigger>
           </TabsList>

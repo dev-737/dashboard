@@ -39,7 +39,7 @@ export function PageFooter({
   if (!decorative) {
     return (
       <div
-        className={`w-full ${heightClasses[height]} flex-shrink-0`}
+        className={`w-full ${heightClasses[height]} shrink-0`}
         aria-hidden="true"
       />
     );
@@ -50,7 +50,7 @@ export function PageFooter({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.5, duration: 0.8 }}
-      className={`w-full ${heightClasses[height]} relative flex flex-shrink-0 items-center justify-center overflow-hidden`}
+      className={`w-full ${heightClasses[height]} relative flex shrink-0 items-center justify-center overflow-hidden`}
       aria-hidden="true"
     >
       {/* Background gradient */}

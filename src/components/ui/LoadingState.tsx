@@ -28,7 +28,7 @@ export function LoadingState({
         </div>
         {showAvatar && (
           <div className="mt-2 flex items-center gap-3">
-            <Skeleton className="h-10 w-10 rounded-[var(--radius-avatar)]" />
+            <Skeleton className="h-10 w-10 rounded-(--radius-avatar)" />
             <div className="space-y-2">
               <Skeleton className="h-4 w-24" />
               <Skeleton className="h-3 w-16" />
@@ -44,8 +44,8 @@ export function LoadingState({
         </div>
         {showActions && (
           <div className="mt-4 flex gap-2">
-            <Skeleton className="h-9 w-20 rounded-[var(--radius-button)]" />
-            <Skeleton className="h-9 w-16 rounded-[var(--radius-button)]" />
+            <Skeleton className="h-9 w-20 rounded-(--radius-button)" />
+            <Skeleton className="h-9 w-16 rounded-(--radius-button)" />
           </div>
         )}
       </CardContent>
@@ -57,10 +57,10 @@ export function LoadingState({
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={`list-skeleton-${i + 1}`}
-          className="flex animate-pulse items-center gap-4 rounded-[var(--radius)] border border-gray-800 bg-gray-900/30 p-4"
+          className="flex animate-pulse items-center gap-4 rounded-(--radius) border border-gray-800 bg-gray-900/30 p-4"
         >
           {showAvatar && (
-            <Skeleton className="h-12 w-12 rounded-[var(--radius-avatar)]" />
+            <Skeleton className="h-12 w-12 rounded-(--radius-avatar)" />
           )}
           <div className="flex-1 space-y-2">
             <Skeleton className="h-4 w-1/3" />
@@ -68,8 +68,8 @@ export function LoadingState({
           </div>
           {showActions && (
             <div className="flex gap-2">
-              <Skeleton className="h-8 w-16 rounded-[var(--radius-button)]" />
-              <Skeleton className="h-8 w-8 rounded-[var(--radius-button)]" />
+              <Skeleton className="h-8 w-16 rounded-(--radius-button)" />
+              <Skeleton className="h-8 w-8 rounded-(--radius-button)" />
             </div>
           )}
         </div>
@@ -84,7 +84,7 @@ export function LoadingState({
   );
 
   const renderHeroSkeleton = () => (
-    <div className="relative mb-8 h-[30vh] animate-pulse overflow-hidden rounded-[var(--radius-button)] bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 md:h-[40vh]">
+    <div className="relative mb-8 h-[30vh] animate-pulse overflow-hidden rounded-(--radius-button) bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 md:h-[40vh]">
       <div className="flex h-full flex-col items-center justify-center px-6">
         <Skeleton className="mb-4 h-12 w-64" />
         <Skeleton className="mb-8 h-6 w-80" />
@@ -92,9 +92,9 @@ export function LoadingState({
           {Array.from({ length: 3 }).map((_, i) => (
             <div
               key={`card-skeleton-${i + 1}`}
-              className="flex flex-col items-center gap-2 rounded-[var(--radius-button)] border border-gray-700/50 bg-gray-900/60 px-4 py-4 backdrop-blur-md"
+              className="flex flex-col items-center gap-2 rounded-(--radius-button) border border-gray-700/50 bg-gray-900/60 px-4 py-4 backdrop-blur-md"
             >
-              <Skeleton className="h-8 w-8 rounded-[var(--radius-avatar)]" />
+              <Skeleton className="h-8 w-8 rounded-(--radius-avatar)" />
               <Skeleton className="h-6 w-12" />
               <Skeleton className="h-4 w-16" />
             </div>
@@ -105,11 +105,11 @@ export function LoadingState({
   );
 
   const renderTableSkeleton = () => (
-    <div className="animate-pulse rounded-[var(--radius)] border border-gray-800 bg-gray-900/30">
+    <div className="animate-pulse rounded-(--radius) border border-gray-800 bg-gray-900/30">
       <div className="border-gray-800 border-b p-4">
         <div className="flex items-center justify-between">
           <Skeleton className="h-6 w-32" />
-          <Skeleton className="h-9 w-24 rounded-[var(--radius-button)]" />
+          <Skeleton className="h-9 w-24 rounded-(--radius-button)" />
         </div>
       </div>
       <div className="divide-y divide-gray-800">
@@ -119,7 +119,7 @@ export function LoadingState({
             className="flex items-center gap-4 p-4"
           >
             {showAvatar && (
-              <Skeleton className="h-10 w-10 rounded-[var(--radius-avatar)]" />
+              <Skeleton className="h-10 w-10 rounded-(--radius-avatar)" />
             )}
             <div className="grid flex-1 grid-cols-3 gap-4">
               <Skeleton className="h-4 w-full" />
@@ -128,8 +128,8 @@ export function LoadingState({
             </div>
             {showActions && (
               <div className="flex gap-2">
-                <Skeleton className="h-8 w-8 rounded-[var(--radius-button)]" />
-                <Skeleton className="h-8 w-8 rounded-[var(--radius-button)]" />
+                <Skeleton className="h-8 w-8 rounded-(--radius-button)" />
+                <Skeleton className="h-8 w-8 rounded-(--radius-button)" />
               </div>
             )}
           </div>
@@ -139,28 +139,28 @@ export function LoadingState({
   );
 
   const renderFormSkeleton = () => (
-    <div className="animate-pulse space-y-6 rounded-[var(--radius)] border border-gray-800 bg-gray-900/30 p-6">
+    <div className="animate-pulse space-y-6 rounded-(--radius) border border-gray-800 bg-gray-900/30 p-6">
       <div className="space-y-2">
         <Skeleton className="h-5 w-24" />
-        <Skeleton className="h-10 w-full rounded-[var(--radius-input)]" />
+        <Skeleton className="h-10 w-full rounded-(--radius-input)" />
       </div>
       <div className="space-y-2">
         <Skeleton className="h-5 w-32" />
-        <Skeleton className="h-24 w-full rounded-[var(--radius-input)]" />
+        <Skeleton className="h-24 w-full rounded-(--radius-input)" />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Skeleton className="h-5 w-20" />
-          <Skeleton className="h-10 w-full rounded-[var(--radius-input)]" />
+          <Skeleton className="h-10 w-full rounded-(--radius-input)" />
         </div>
         <div className="space-y-2">
           <Skeleton className="h-5 w-24" />
-          <Skeleton className="h-10 w-full rounded-[var(--radius-input)]" />
+          <Skeleton className="h-10 w-full rounded-(--radius-input)" />
         </div>
       </div>
       <div className="flex gap-3 pt-4">
-        <Skeleton className="h-10 w-24 rounded-[var(--radius-button)]" />
-        <Skeleton className="h-10 w-20 rounded-[var(--radius-button)]" />
+        <Skeleton className="h-10 w-24 rounded-(--radius-button)" />
+        <Skeleton className="h-10 w-20 rounded-(--radius-button)" />
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ const HubModeratorsCard: React.FC<HubModeratorsCardProps> = ({
               key={mod.id}
               className="flex items-center gap-3 rounded-md p-2 transition-colors hover:bg-gray-800/50"
             >
-              <div className="h-8 w-8 flex-shrink-0 overflow-hidden rounded-full border border-gray-700/50 bg-gray-800 sm:h-10 sm:w-10">
+              <div className="h-8 w-8 shrink-0 overflow-hidden rounded-full border border-gray-700/50 bg-gray-800 sm:h-10 sm:w-10">
                 <Image
                   src={
                     mod.user?.image ||

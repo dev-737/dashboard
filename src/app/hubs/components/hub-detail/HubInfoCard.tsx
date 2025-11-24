@@ -26,7 +26,7 @@ interface HubInfoCardProps {
 const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
   return (
     <div className="relative flex flex-col items-start gap-6 md:flex-row md:items-center">
-      <div className="group h-28 w-28 flex-shrink-0 transform overflow-hidden rounded-2xl border-4 border-gray-700/70 bg-gray-800/80 shadow-lg transition-transform duration-300 hover:scale-105 md:h-36 md:w-36">
+      <div className="group h-28 w-28 shrink-0 transform overflow-hidden rounded-2xl border-4 border-gray-700/70 bg-gray-800/80 shadow-lg transition-transform duration-300 hover:scale-105 md:h-36 md:w-36">
         <div className="relative h-full w-full">
           <Image
             src={hub.iconUrl || '/assets/images/defaults/default-hub-icon.png'}

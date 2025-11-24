@@ -142,7 +142,7 @@ export function EditRuleDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] max-w-[95vw] overflow-hidden border-gray-800 bg-gray-900 sm:max-w-2xl lg:max-w-4xl">
         <div className="flex h-full max-h-[85vh] flex-col">
-          <DialogHeader className="flex-shrink-0 pb-4">
+          <DialogHeader className="shrink-0 pb-4">
             <DialogTitle className="flex items-center text-blue-400">
               <Shield className="mr-2 h-5 w-5" />
               Edit Filter Rule

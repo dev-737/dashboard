@@ -52,7 +52,7 @@ export default function HubDetailLoading() {
             <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6 shadow-xl backdrop-blur-lg md:p-8">
               <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
                 {/* Hub Icon */}
-                <Skeleton className="h-28 w-28 flex-shrink-0 rounded-2xl md:h-36 md:w-36" />
+                <Skeleton className="h-28 w-28 shrink-0 rounded-2xl md:h-36 md:w-36" />
 
                 {/* Hub Info */}
                 <div className="min-w-0 flex-1">
@@ -68,7 +68,7 @@ export default function HubDetailLoading() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="mt-4 flex flex-shrink-0 gap-3 self-start md:mt-0 md:self-center">
+                <div className="mt-4 flex shrink-0 gap-3 self-start md:mt-0 md:self-center">
                   <Skeleton className="h-10 w-32 rounded-full" />
                   <Skeleton className="h-10 w-28 rounded-full" />
                 </div>

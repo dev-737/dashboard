@@ -209,26 +209,26 @@ export function HubTagManagement({
               <div className="space-y-2 text-sm">
                 {selectedTags.filter((tag) => !currentTags.includes(tag))
                   .length > 0 && (
-                  <div>
-                    <span className="text-green-400">Adding: </span>
-                    <span className="text-gray-300">
-                      {selectedTags
-                        .filter((tag) => !currentTags.includes(tag))
-                        .join(', ')}
-                    </span>
-                  </div>
-                )}
+                    <div>
+                      <span className="text-green-400">Adding: </span>
+                      <span className="text-gray-300">
+                        {selectedTags
+                          .filter((tag) => !currentTags.includes(tag))
+                          .join(', ')}
+                      </span>
+                    </div>
+                  )}
                 {currentTags.filter((tag) => !selectedTags.includes(tag))
                   .length > 0 && (
-                  <div>
-                    <span className="text-red-400">Removing: </span>
-                    <span className="text-gray-300">
-                      {currentTags
-                        .filter((tag) => !selectedTags.includes(tag))
-                        .join(', ')}
-                    </span>
-                  </div>
-                )}
+                    <div>
+                      <span className="text-red-400">Removing: </span>
+                      <span className="text-gray-300">
+                        {currentTags
+                          .filter((tag) => !selectedTags.includes(tag))
+                          .join(', ')}
+                      </span>
+                    </div>
+                  )}
               </div>
             </motion.div>
           )}
@@ -265,7 +265,7 @@ export function HubTagManagement({
                     className={cn(
                       'border-gray-600 text-gray-300 text-xs transition-colors hover:bg-gray-700 hover:text-white',
                       selectedTags.includes(tag.name) &&
-                        'border-blue-600/50 bg-blue-600/20 text-blue-300'
+                      'border-blue-600/50 bg-blue-600/20 text-blue-300'
                     )}
                   >
                     {selectedTags.includes(tag.name) ? (
@@ -300,7 +300,7 @@ export function HubTagManagement({
       {/* Help Text */}
       <div className="rounded-lg border border-gray-700/30 bg-gray-800/20 p-4">
         <div className="flex items-start gap-3">
-          <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-400" />
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-blue-400" />
           <div className="space-y-1 text-gray-400 text-sm">
             <p>
               <strong className="text-gray-300">Tag Guidelines:</strong>

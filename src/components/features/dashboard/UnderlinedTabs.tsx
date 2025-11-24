@@ -141,7 +141,7 @@ export function UnderlinedTabs({
                   >
                     {tab.icon && (
                       <span
-                        className={`flex-shrink-0 ${isCompact ? 'text-sm' : ''}`}
+                        className={`shrink-0 ${isCompact ? 'text-sm' : ''}`}
                       >
                         {tab.icon}
                       </span>
@@ -152,7 +152,7 @@ export function UnderlinedTabs({
                       {tab.label}
                     </span>
                     {tab.badge && (
-                      <span className="flex h-[18px] min-w-[18px] flex-shrink-0 items-center justify-center rounded-full bg-red-500 px-1.5 py-0.5 text-white text-xs">
+                      <span className="flex h-[18px] min-w-[18px] shrink-0 items-center justify-center rounded-full bg-red-500 px-1.5 py-0.5 text-white text-xs">
                         {tab.badge}
                       </span>
                     )}

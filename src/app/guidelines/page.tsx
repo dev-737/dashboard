@@ -149,7 +149,7 @@ const InterChatRules = () => {
               className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:border-purple-500/20 hover:bg-white/[0.04] hover:shadow-2xl hover:shadow-purple-500/10"
             >
               <div className="mb-4 flex items-center gap-4">
-                <div className="flex-shrink-0 rounded-xl bg-purple-500/10 p-3 ring-1 ring-purple-500/20 transition-colors group-hover:bg-purple-500/20">
+                <div className="shrink-0 rounded-xl bg-purple-500/10 p-3 ring-1 ring-purple-500/20 transition-colors group-hover:bg-purple-500/20">
                   {rule.icon}
                 </div>
                 <h2 className="font-semibold text-gray-100 text-xl">

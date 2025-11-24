@@ -75,7 +75,7 @@ export function MediaUploadStep({
         <div className="space-y-3">
           <Label className="font-medium text-base">Hub Icon</Label>
           <div className="flex items-center gap-4">
-            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border-4 border-gray-700/50 bg-gray-800/50">
+            <div className="h-24 w-24 shrink-0 overflow-hidden rounded-2xl border-4 border-gray-700/50 bg-gray-800/50">
               {iconPreview ? (
                 <Image
                   src={iconPreview}

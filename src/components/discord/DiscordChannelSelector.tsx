@@ -191,7 +191,7 @@ export function DiscordChannelSelector({
               <SelectItem key={server.id} value={server.id}>
                 <div className="flex items-center gap-2">
                   {server.icon ? (
-                    <div className="relative h-5 w-5 flex-shrink-0 overflow-hidden rounded-full">
+                    <div className="relative h-5 w-5 shrink-0 overflow-hidden rounded-full">
                       <Image
                         src={server.icon}
                         alt={server.name}
@@ -200,7 +200,7 @@ export function DiscordChannelSelector({
                       />
                     </div>
                   ) : (
-                    <ServerIcon className="h-5 w-5 flex-shrink-0 text-gray-400" />
+                    <ServerIcon className="h-5 w-5 shrink-0 text-gray-400" />
                   )}
                   <span className="truncate">{server.name}</span>
                 </div>
@@ -268,7 +268,7 @@ export function DiscordChannelSelector({
                         <div className="flex items-center gap-2">
                           <ChannelIcon
                             type={channel.type}
-                            className="h-4 w-4 flex-shrink-0"
+                            className="h-4 w-4 shrink-0"
                           />
                           <span className="truncate">#{channel.name}</span>
                           {channel.parentName && (
@@ -304,7 +304,7 @@ export function DiscordChannelSelector({
                           <div className="flex items-center gap-2">
                             <ChannelIcon
                               type={channel.type}
-                              className="h-4 w-4 flex-shrink-0"
+                              className="h-4 w-4 shrink-0"
                             />
                             <span className="truncate">#{channel.name}</span>
                             {channel.parentName && (
@@ -328,7 +328,7 @@ export function DiscordChannelSelector({
       {!selectedServer && initialChannelId && initialChannelName && (
         <div className="flex items-center justify-between rounded-lg border border-gray-700/50 bg-gray-800/50 p-3">
           <div className="flex items-center gap-2">
-            <ChannelIcon type={0} className="h-4 w-4 flex-shrink-0" />
+            <ChannelIcon type={0} className="h-4 w-4 shrink-0" />
             <div className="flex flex-col">
               <span className="text-sm">#{initialChannelName}</span>
               {initialServerName && (
@@ -365,7 +365,7 @@ export function DiscordChannelSelector({
           <div className="flex items-center gap-2">
             <ChannelIcon
               type={0}
-              className="h-4 w-4 flex-shrink-0 text-gray-500"
+              className="h-4 w-4 shrink-0 text-gray-500"
             />
             <div className="flex flex-col">
               <span className="text-gray-400 text-sm">

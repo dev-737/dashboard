@@ -275,7 +275,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   {infractions.length}
                 </p>
               </div>
-              <div className="rounded-[var(--radius-button)] bg-linear-to-br from-purple-500/20 to-indigo-500/20 p-3 transition-transform group-hover:scale-110">
+              <div className="rounded-(--radius-button) bg-linear-to-br from-purple-500/20 to-indigo-500/20 p-3 transition-transform group-hover:scale-110">
                 <Shield className="h-5 w-5 text-purple-400" />
               </div>
             </div>
@@ -291,7 +291,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   {infractions.filter((i) => i.status === 'ACTIVE').length}
                 </p>
               </div>
-              <div className="rounded-[var(--radius-button)] bg-linear-to-br from-emerald-500/20 to-green-500/20 p-3 transition-transform group-hover:scale-110">
+              <div className="rounded-(--radius-button) bg-linear-to-br from-emerald-500/20 to-green-500/20 p-3 transition-transform group-hover:scale-110">
                 <AlertTriangle className="h-5 w-5 text-emerald-400" />
               </div>
             </div>
@@ -307,7 +307,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   {infractions.filter((i) => i.appealedAt).length}
                 </p>
               </div>
-              <div className="rounded-[var(--radius-button)] bg-linear-to-br from-blue-500/20 to-cyan-500/20 p-3 transition-transform group-hover:scale-110">
+              <div className="rounded-(--radius-button) bg-linear-to-br from-blue-500/20 to-cyan-500/20 p-3 transition-transform group-hover:scale-110">
                 <MessageSquare className="h-5 w-5 text-blue-400" />
               </div>
             </div>
@@ -323,7 +323,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   {infractions.filter((i) => i.status === 'REVOKED').length}
                 </p>
               </div>
-              <div className="rounded-[var(--radius-button)] bg-linear-to-br from-gray-500/20 to-slate-500/20 p-3 transition-transform group-hover:scale-110">
+              <div className="rounded-(--radius-button) bg-linear-to-br from-gray-500/20 to-slate-500/20 p-3 transition-transform group-hover:scale-110">
                 <RotateCcw className="h-5 w-5 text-gray-400" />
               </div>
             </div>
@@ -333,7 +333,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
       <Card className="premium-card">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-lg">
-            <div className="rounded-[var(--radius-button)] bg-indigo-500/20 p-2">
+            <div className="rounded-(--radius-button) bg-indigo-500/20 p-2">
               <Filter className="h-4 w-4 text-indigo-400" />
             </div>
             Advanced Filters
@@ -360,11 +360,11 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
               >
                 <SelectTrigger
                   id={typeFilterId}
-                  className="rounded-[var(--radius-button)] border-gray-700/50 bg-gray-900/50 transition-all hover:bg-gray-800/50 focus:border-purple-500/50"
+                  className="rounded-(--radius-button) border-gray-700/50 bg-gray-900/50 transition-all hover:bg-gray-800/50 focus:border-purple-500/50"
                 >
                   <SelectValue placeholder="All Types" />
                 </SelectTrigger>
-                <SelectContent className="rounded-[var(--radius-button)] border-gray-700/50 bg-gray-900">
+                <SelectContent className="rounded-(--radius-button) border-gray-700/50 bg-gray-900">
                   <SelectItem value="all">All Types</SelectItem>
                   <SelectItem value="BLACKLIST">
                     <div className="flex items-center gap-2">
@@ -397,11 +397,11 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
               >
                 <SelectTrigger
                   id={statusFilterId}
-                  className="rounded-[var(--radius-button)] border-gray-700/50 bg-gray-900/50 transition-all hover:bg-gray-800/50 focus:border-emerald-500/50"
+                  className="rounded-(--radius-button) border-gray-700/50 bg-gray-900/50 transition-all hover:bg-gray-800/50 focus:border-emerald-500/50"
                 >
                   <SelectValue placeholder="All Statuses" />
                 </SelectTrigger>
-                <SelectContent className="rounded-[var(--radius-button)] border-gray-700/50 bg-gray-900">
+                <SelectContent className="rounded-(--radius-button) border-gray-700/50 bg-gray-900">
                   <SelectItem value="all">All Statuses</SelectItem>
                   <SelectItem value="ACTIVE">
                     <div className="flex items-center gap-2">
@@ -440,11 +440,11 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
               >
                 <SelectTrigger
                   id={targetTypeFilterId}
-                  className="rounded-[var(--radius-button)] border-gray-700/50 bg-gray-900/50 transition-all hover:bg-gray-800/50 focus:border-blue-500/50"
+                  className="rounded-(--radius-button) border-gray-700/50 bg-gray-900/50 transition-all hover:bg-gray-800/50 focus:border-blue-500/50"
                 >
                   <SelectValue placeholder="All Targets" />
                 </SelectTrigger>
-                <SelectContent className="rounded-[var(--radius-button)] border-gray-700/50 bg-gray-900">
+                <SelectContent className="rounded-(--radius-button) border-gray-700/50 bg-gray-900">
                   <SelectItem value="all">All Targets</SelectItem>
                   <SelectItem value="user">
                     <div className="flex items-center gap-2">
@@ -475,13 +475,13 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                     placeholder="user:123456789 or server:123456789"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="rounded-[var(--radius-button)] border-gray-700/50 bg-gray-900/50 transition-all hover:bg-gray-800/50 focus:border-indigo-500/50"
+                    className="rounded-(--radius-button) border-gray-700/50 bg-gray-900/50 transition-all hover:bg-gray-800/50 focus:border-indigo-500/50"
                   />
                 </div>
                 <Button
                   type="submit"
                   size="icon"
-                  className="rounded-[var(--radius-button)] border-none bg-linear-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
+                  className="rounded-(--radius-button) border-none bg-linear-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
                 >
                   <Search className="h-4 w-4" />
                 </Button>
@@ -490,7 +490,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   variant="outline"
                   size="icon"
                   onClick={resetFilters}
-                  className="rounded-[var(--radius-button)] border-gray-700/50 hover:bg-gray-800/50 hover:text-white"
+                  className="rounded-(--radius-button) border-gray-700/50 hover:bg-gray-800/50 hover:text-white"
                 >
                   <RotateCcw className="h-4 w-4" />
                 </Button>
@@ -506,7 +506,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
       <Card className="premium-card">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-xl">
-            <div className="rounded-[var(--radius-button)] bg-purple-500/20 p-2">
+            <div className="rounded-(--radius-button) bg-purple-500/20 p-2">
               <Shield className="h-5 w-5 text-purple-400" />
             </div>
             Infractions List
@@ -531,8 +531,8 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
               ))}
             </div>
           ) : error ? (
-            <div className="rounded-[var(--radius)] border border-red-500/30 bg-linear-to-br from-red-950/30 to-red-900/20 p-8 py-12 text-center">
-              <div className="mx-auto mb-6 w-fit rounded-[var(--radius-button)] bg-red-500/20 p-4">
+            <div className="rounded-(--radius) border border-red-500/30 bg-linear-to-br from-red-950/30 to-red-900/20 p-8 py-12 text-center">
+              <div className="mx-auto mb-6 w-fit rounded-(--radius-button) bg-red-500/20 p-4">
                 <AlertTriangle className="h-8 w-8 text-red-400" />
               </div>
               <h3 className="mb-3 font-semibold text-white text-xl">
@@ -541,15 +541,15 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
               <p className="mx-auto mb-6 max-w-md text-gray-300">{error}</p>
               <Button
                 onClick={() => refetch()}
-                className="rounded-[var(--radius-button)] border-none bg-linear-to-r from-red-500 to-red-600 px-6 text-white hover:from-red-600 hover:to-red-700"
+                className="rounded-(--radius-button) border-none bg-linear-to-r from-red-500 to-red-600 px-6 text-white hover:from-red-600 hover:to-red-700"
               >
                 <RotateCcw className="mr-2 h-4 w-4" />
                 Try Again
               </Button>
             </div>
           ) : infractions.length === 0 ? (
-            <div className="rounded-[var(--radius)] border border-gray-700/50 bg-linear-to-br from-gray-900/50 to-gray-800/30 p-8 py-12 text-center">
-              <div className="mx-auto mb-6 w-fit rounded-[var(--radius-button)] bg-gray-500/20 p-4">
+            <div className="rounded-(--radius) border border-gray-700/50 bg-linear-to-br from-gray-900/50 to-gray-800/30 p-8 py-12 text-center">
+              <div className="mx-auto mb-6 w-fit rounded-(--radius-button) bg-gray-500/20 p-4">
                 <Shield className="h-8 w-8 text-gray-400" />
               </div>
               <h3 className="mb-3 font-semibold text-white text-xl">
@@ -566,7 +566,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
               </p>
               <Button
                 asChild
-                className="rounded-[var(--radius-button)] border-none bg-linear-to-r from-purple-500 to-indigo-500 px-6 text-white hover:from-purple-600 hover:to-indigo-600"
+                className="rounded-(--radius-button) border-none bg-linear-to-r from-purple-500 to-indigo-500 px-6 text-white hover:from-purple-600 hover:to-indigo-600"
               >
                 <Link href={`/dashboard/hubs/${hubId}/infractions/add`}>
                   <PlusCircle className="mr-2 h-4 w-4" />

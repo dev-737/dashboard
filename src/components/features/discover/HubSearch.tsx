@@ -132,16 +132,14 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
       {/* Enhanced search input */}
       <div className="relative">
         <div
-          className={`premium-card flex h-12 w-full items-center overflow-hidden rounded-[var(--radius-button)] border bg-gray-900/50 px-3 shadow-lg backdrop-blur-sm transition-all duration-300 sm:h-14 sm:px-4 ${
-            isFocused
-              ? 'border-purple-500/70 shadow-purple-500/20 shadow-xl ring-2 ring-purple-500/30'
-              : 'border-gray-700/50 hover:border-purple-500/50 hover:bg-gray-800/50 hover:shadow-xl'
-          }`}
+          className={`premium-card flex h-12 w-full items-center overflow-hidden rounded-(--radius-button) border bg-gray-900/50 px-3 shadow-lg backdrop-blur-sm transition-all duration-300 sm:h-14 sm:px-4 ${isFocused
+            ? 'border-purple-500/70 shadow-purple-500/20 shadow-xl ring-2 ring-purple-500/30'
+            : 'border-gray-700/50 hover:border-purple-500/50 hover:bg-gray-800/50 hover:shadow-xl'
+            }`}
         >
           <Search
-            className={`mr-3 h-5 w-5 flex-shrink-0 transition-colors duration-300 ${
-              isFocused ? 'text-purple-400' : 'text-gray-400'
-            }`}
+            className={`mr-3 h-5 w-5 shrink-0 transition-colors duration-300 ${isFocused ? 'text-purple-400' : 'text-gray-400'
+              }`}
           />
           <input
             ref={inputRef}
@@ -156,7 +154,7 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
           {searchValue && (
             <button
               type="button"
-              className="ml-auto flex h-6 w-6 flex-shrink-0 cursor-pointer items-center justify-center rounded-full p-0 text-gray-400 transition-all duration-200 hover:bg-gray-700/50 hover:text-white"
+              className="ml-auto flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-full p-0 text-gray-400 transition-all duration-200 hover:bg-gray-700/50 hover:text-white"
               onClick={() => {
                 setSearchValue('');
                 setSearchResults([]);
@@ -180,7 +178,7 @@ export function HubSearch({ onSearchSubmit, className }: HubSearchProps) {
       {/* Search results dropdown */}
       {showDropdown && (
         <div className="fade-in slide-in-from-top-2 absolute top-full z-50 mt-2 w-full animate-in duration-200">
-          <Command className="overflow-hidden rounded-[var(--radius-button)] border border-gray-700/60 bg-gray-900/90 shadow-2xl shadow-black/20 backdrop-blur-xl">
+          <Command className="overflow-hidden rounded-(--radius-button) border border-gray-700/60 bg-gray-900/90 shadow-2xl shadow-black/20 backdrop-blur-xl">
             <CommandList className="max-h-[500px]">
               {loading && (
                 <div className="flex items-center justify-center py-8">

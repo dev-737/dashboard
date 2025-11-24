@@ -70,7 +70,7 @@ export default function JoinButton({ hubName, hubId }: JoinButtonProps) {
           ) : (
             <>
               <span>Join</span>
-              <ChevronDown className="ml-1 h-3 w-3 flex-shrink-0 sm:ml-2 sm:h-4 sm:w-4" />
+              <ChevronDown className="ml-1 h-3 w-3 shrink-0 sm:ml-2 sm:h-4 sm:w-4" />
             </>
           )}
         </Button>

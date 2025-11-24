@@ -39,7 +39,7 @@ function TabsTrigger({
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
       className={cn(
-        'inline-flex items-center whitespace-nowrap rounded-[var(--radius-button)] px-3 py-1.5 font-medium text-sm transition-all duration-200 hover:bg-muted/50 disabled:pointer-events-none disabled:opacity-50',
+        'inline-flex items-center whitespace-nowrap rounded-(--radius-button) px-3 py-1.5 font-medium text-sm transition-all duration-200 hover:bg-muted/50 disabled:pointer-events-none disabled:opacity-50',
         className
       )}
       {...props}

@@ -7,7 +7,7 @@ export function AnimatedDashboardSkeleton() {
   return (
     <div className="space-y-8">
       {/* Hero Section Skeleton */}
-      <div className="relative mb-8 h-[30vh] animate-pulse overflow-hidden rounded-[var(--radius-button)] bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 md:h-[40vh]">
+      <div className="relative mb-8 h-[30vh] animate-pulse overflow-hidden rounded-(--radius-button) bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 md:h-[40vh]">
         <div className="flex h-full flex-col items-center justify-center px-6">
           <Skeleton className="mb-4 h-12 w-64" />
           <Skeleton className="h-16 w-80" />

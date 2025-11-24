@@ -124,7 +124,7 @@ export function HubNSFWToggle({ hubId, currentNsfw }: HubNSFWToggleProps) {
       {/* Warning message for NSFW content */}
       {isNsfw && (
         <div className="flex items-start gap-3 rounded-lg border border-orange-500/20 bg-orange-500/10 p-4">
-          <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange-400" />
+          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-orange-400" />
           <div className="space-y-2 text-orange-200 text-sm">
             <p>
               <strong>Important NSFW Guidelines:</strong>

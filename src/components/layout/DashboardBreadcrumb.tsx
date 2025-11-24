@@ -22,7 +22,7 @@ export function Breadcrumb({
 }: BreadcrumbProps) {
   return (
     <nav
-      className="mb-6 flex items-center rounded-[var(--radius)] border border-gray-800/50 bg-gray-900/40 px-4 py-2.5 text-gray-400 text-sm backdrop-blur-sm transition-all duration-200"
+      className="mb-6 flex items-center rounded-(--radius) border border-gray-800/50 bg-gray-900/40 px-4 py-2.5 text-gray-400 text-sm backdrop-blur-sm transition-all duration-200"
       aria-label="Breadcrumb"
     >
       <ol className="flex items-center space-x-2">

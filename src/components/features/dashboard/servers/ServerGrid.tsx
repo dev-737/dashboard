@@ -117,8 +117,8 @@ function ServerCard({
   const iconUrl = server.icon
     ? `https://cdn.discordapp.com/icons/${server.id}/${server.icon}.png?size=128`
     : `https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
-        server.id
-      )}`;
+      server.id
+    )}`;
 
   // Format last active time
   const lastActive = server.lastMessageAt
@@ -151,7 +151,7 @@ function ServerCard({
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
             <div>
-              <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-xl border-2 border-gray-700/50 bg-linear-to-br from-blue-500/10 to-indigo-500/10 sm:h-12 sm:w-12">
+              <div className="h-10 w-10 shrink-0 overflow-hidden rounded-xl border-2 border-gray-700/50 bg-linear-to-br from-blue-500/10 to-indigo-500/10 sm:h-12 sm:w-12">
                 <Image
                   src={iconUrl}
                   alt={server.name}

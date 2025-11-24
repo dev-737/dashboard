@@ -139,7 +139,7 @@ export default async function HubDetailView(props: {
       percentage: Math.round(
         ((hub.reviews?.filter((r) => r.rating === rating).length || 0) /
           (hub.reviews?.length || 1)) *
-          100
+        100
       ),
     })),
   };
@@ -179,7 +179,7 @@ export default async function HubDetailView(props: {
               <div className="flex w-full flex-col md:flex-row md:items-start md:justify-between">
                 <HubInfoCard hub={hub} />
 
-                <div className="mt-6 flex flex-shrink-0 gap-3 rounded-lg border border-gray-700/50 bg-gray-800/40 p-2 md:mt-0 md:ml-auto">
+                <div className="mt-6 flex shrink-0 gap-3 rounded-lg border border-gray-700/50 bg-gray-800/40 p-2 md:mt-0 md:ml-auto">
                   {/* Manage Hub button - only show for users with management permissions */}
                   {canManageHub && (
                     <Link href={`/dashboard/hubs/${hubId}`}>
@@ -221,7 +221,7 @@ export default async function HubDetailView(props: {
                         key={tab.value}
                         value={tab.value}
                         className={cn(
-                          'inline-flex flex-shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-2 py-2 font-medium text-xs ring-offset-background transition-all sm:px-3 sm:py-2.5 sm:text-sm md:px-4',
+                          'inline-flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-2 py-2 font-medium text-xs ring-offset-background transition-all sm:px-3 sm:py-2.5 sm:text-sm md:px-4',
                           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                           'disabled:pointer-events-none disabled:opacity-50',
                           'data-[state=active]:bg-linear-to-r data-[state=active]:from-primary data-[state=active]:to-primary-alt data-[state=active]:text-white data-[state=active]:shadow-md', // Active state
@@ -229,7 +229,7 @@ export default async function HubDetailView(props: {
                           'text-gray-300 hover:bg-gray-700/50 hover:text-white' // Inactive state
                         )}
                       >
-                        <tab.icon className="mr-1 h-3 w-3 flex-shrink-0 sm:mr-2 sm:h-4 sm:w-4" />
+                        <tab.icon className="mr-1 h-3 w-3 shrink-0 sm:mr-2 sm:h-4 sm:w-4" />
                         <span className="truncate">{tab.label}</span>
                       </TabsTrigger>
                     ))}

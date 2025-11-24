@@ -69,11 +69,11 @@ export function UpgradePrompt({
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex items-center gap-2 text-gray-300 text-sm">
-              <Check className="h-4 w-4 flex-shrink-0 text-blue-400" />
+              <Check className="h-4 w-4 shrink-0 text-blue-400" />
               Feature is being developed
             </div>
             <div className="flex items-center gap-2 text-gray-300 text-sm">
-              <Check className="h-4 w-4 flex-shrink-0 text-blue-400" />
+              <Check className="h-4 w-4 shrink-0 text-blue-400" />
               Will be available in future updates
             </div>
           </CardContent>
@@ -129,7 +129,7 @@ export function InlineUpgradePrompt({
     >
       <CardContent className="p-4">
         <div className="flex items-start gap-3">
-          <Info className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-500" />
+          <Info className="mt-0.5 h-5 w-5 shrink-0 text-blue-500" />
           <div className="flex-1 space-y-2">
             <h4 className="font-medium text-blue-400">ℹ️ Feature Information</h4>
             <p className="text-gray-300 text-sm">

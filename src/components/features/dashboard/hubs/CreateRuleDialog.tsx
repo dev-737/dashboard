@@ -142,7 +142,7 @@ export function CreateRuleDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] max-w-[95vw] overflow-hidden border-gray-800 bg-gray-900 sm:max-w-2xl lg:max-w-4xl">
         <div className="flex h-full max-h-[85vh] flex-col">
-          <DialogHeader className="flex-shrink-0 pb-4">
+          <DialogHeader className="shrink-0 pb-4">
             <DialogTitle className="flex items-center text-purple-400">
               <Shield className="mr-2 h-5 w-5" />
               Create New Filter Rule
@@ -189,11 +189,10 @@ export function CreateRuleDialog({
                     {Object.entries(RULE_TEMPLATES).map(([key, template]) => (
                       <Card
                         key={key}
-                        className={`cursor-pointer transition-all duration-200 hover:border-purple-500/50 ${
-                          selectedTemplate === key
+                        className={`cursor-pointer transition-all duration-200 hover:border-purple-500/50 ${selectedTemplate === key
                             ? 'border-purple-500/50 bg-purple-950/20'
                             : 'border-gray-800 bg-gray-950/50'
-                        }`}
+                          }`}
                         onClick={() =>
                           setSelectedTemplate(
                             key as keyof typeof RULE_TEMPLATES

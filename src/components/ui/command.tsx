@@ -20,7 +20,7 @@ function Command({
     <CommandPrimitive
       data-slot="command"
       className={cn(
-        'z-[9999] flex h-full w-full flex-col overflow-hidden rounded-[var(--radius)] border border-gray-700/50 bg-gray-900/95 text-white backdrop-blur-md',
+        'z-[9999] flex h-full w-full flex-col overflow-hidden rounded-(--radius) border border-gray-700/50 bg-gray-900/95 text-white backdrop-blur-md',
         className
       )}
       style={{ zIndex: 9999 }}
@@ -140,7 +140,7 @@ function CommandItem({
     <CommandPrimitive.Item
       data-slot="command-item"
       className={cn(
-        "relative flex cursor-default select-none items-center gap-2 rounded-[var(--radius)] px-2 py-1.5 text-gray-300 text-sm outline-hidden transition-colors duration-200 hover:bg-gray-800/30 data-[disabled=true]:pointer-events-none data-[selected=true]:bg-gray-800/50 data-[selected=true]:text-white data-[disabled=true]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-gray-400 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "relative flex cursor-default select-none items-center gap-2 rounded-(--radius) px-2 py-1.5 text-gray-300 text-sm outline-hidden transition-colors duration-200 hover:bg-gray-800/30 data-[disabled=true]:pointer-events-none data-[selected=true]:bg-gray-800/50 data-[selected=true]:text-white data-[disabled=true]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-gray-400 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className
       )}
       {...props}

@@ -20,7 +20,7 @@ export function ConnectionsSkeleton() {
               <Skeleton className="h-4 w-24 bg-gray-800" />
             </div>
             <div className="mt-2 flex items-center gap-3">
-              <Skeleton className="h-12 w-12 rounded-[var(--radius-avatar)] bg-gray-800" />
+              <Skeleton className="h-12 w-12 rounded-(--radius-avatar) bg-gray-800" />
               <div className="space-y-2">
                 <Skeleton className="h-5 w-32 bg-gray-800" />
                 <Skeleton className="h-4 w-16 bg-gray-800" />
@@ -29,7 +29,7 @@ export function ConnectionsSkeleton() {
           </CardHeader>
           <CardContent className="py-4">
             <div className="mb-4 flex items-center gap-3">
-              <Skeleton className="h-8 w-8 rounded-[var(--radius-avatar)] bg-gray-800" />
+              <Skeleton className="h-8 w-8 rounded-(--radius-avatar) bg-gray-800" />
               <div className="space-y-2">
                 <Skeleton className="h-4 w-28 bg-gray-800" />
                 <Skeleton className="h-3 w-16 bg-gray-800" />
@@ -47,9 +47,9 @@ export function ConnectionsSkeleton() {
             </div>
           </CardContent>
           <CardFooter className="flex gap-2 border-gray-800 border-t pt-2 pb-4">
-            <Skeleton className="h-9 flex-1 rounded-[var(--radius-button)] bg-gray-800" />
-            <Skeleton className="h-9 flex-1 rounded-[var(--radius-button)] bg-gray-800" />
-            <Skeleton className="h-9 flex-1 rounded-[var(--radius-button)] bg-gray-800" />
+            <Skeleton className="h-9 flex-1 rounded-(--radius-button) bg-gray-800" />
+            <Skeleton className="h-9 flex-1 rounded-(--radius-button) bg-gray-800" />
+            <Skeleton className="h-9 flex-1 rounded-(--radius-button) bg-gray-800" />
           </CardFooter>
         </Card>
       ))}

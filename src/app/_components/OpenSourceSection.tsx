@@ -22,7 +22,7 @@ export function OpenSourceSection() {
 
       <div className="container relative mx-auto px-4">
         <div className="relative z-10 mb-20 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-[var(--radius-button)] border border-gray-700/60 bg-linear-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-(--radius-button) border border-gray-700/60 bg-linear-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl">
             <Code className="h-4 w-4 animate-pulse text-primary" />
             <span className="font-semibold tracking-wide">Open Source</span>
           </div>

@@ -148,14 +148,14 @@ export function ModernHero({
             {stats.map((stat, index) => (
               <motion.div
                 key={`stat-${stat.label}-${index + 1}`}
-                className="hover:-translate-y-1 flex flex-col items-center justify-center gap-2 rounded-[var(--radius-button)] border border-gray-700/50 bg-gray-900/60 px-4 py-4 shadow-lg backdrop-blur-md transition-all duration-200 hover:shadow-xl"
+                className="hover:-translate-y-1 flex flex-col items-center justify-center gap-2 rounded-(--radius-button) border border-gray-700/50 bg-gray-900/60 px-4 py-4 shadow-lg backdrop-blur-md transition-all duration-200 hover:shadow-xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
                 whileHover={{ scale: 1.03 }}
               >
                 <div
-                  className={`rounded-[var(--radius-avatar)] p-2 ${stat.color} mb-1 bg-opacity-20`}
+                  className={`rounded-(--radius-avatar) p-2 ${stat.color} mb-1 bg-opacity-20`}
                 >
                   {stat.icon}
                 </div>

@@ -74,7 +74,7 @@ export function ModulesSettingsStep({
                 id={`module-${name}`}
                 checked={isModuleEnabled(bit)}
                 onCheckedChange={() => toggleModule(bit)}
-                className="flex-shrink-0 data-[state=checked]:bg-indigo-600"
+                className="shrink-0 data-[state=checked]:bg-indigo-600"
               />
             </div>
           ))}

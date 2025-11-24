@@ -40,12 +40,12 @@ export function UnsavedChangesPrompt({
         >
           <div className="flex w-full flex-col items-start gap-3 rounded-2xl border border-gray-700/50 bg-gray-800/95 px-4 py-3 shadow-2xl backdrop-blur-xl sm:flex-row sm:items-center">
             {/* Icon and Message */}
-            <div className="flex min-w-0 flex-shrink items-center gap-2.5">
+            <div className="flex min-w-0 shrink items-center gap-2.5">
               <motion.div
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.1, type: 'spring', stiffness: 300 }}
-                className="flex-shrink-0"
+                className="shrink-0"
               >
                 <AlertTriangle className="h-4 w-4 text-orange-400" />
               </motion.div>
@@ -61,14 +61,14 @@ export function UnsavedChangesPrompt({
             </div>
 
             {/* Divider - hidden on mobile */}
-            <div className="hidden h-5 w-px flex-shrink-0 bg-gray-600 sm:block" />
+            <div className="hidden h-5 w-px shrink-0 bg-gray-600 sm:block" />
 
             {/* Actions */}
             <motion.div
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.15 }}
-              className="flex w-full flex-shrink-0 items-center gap-2 sm:w-auto sm:min-w-fit"
+              className="flex w-full shrink-0 items-center gap-2 sm:w-auto sm:min-w-fit"
             >
               <Button
                 variant="ghost"
@@ -77,7 +77,7 @@ export function UnsavedChangesPrompt({
                 disabled={isSubmitting}
                 className="flex h-auto flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 font-medium text-gray-300 text-xs transition-colors duration-150 hover:bg-gray-700 hover:text-white sm:flex-none"
               >
-                <RotateCcw className="h-3 w-3 flex-shrink-0" />
+                <RotateCcw className="h-3 w-3 shrink-0" />
                 <span className="hidden sm:inline">{resetLabel}</span>
                 <span className="sm:hidden">Reset</span>
               </Button>
@@ -90,13 +90,13 @@ export function UnsavedChangesPrompt({
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="h-3 w-3 flex-shrink-0 animate-spin" />
+                    <Loader2 className="h-3 w-3 shrink-0 animate-spin" />
                     <span className="hidden sm:inline">Saving...</span>
                     <span className="sm:hidden">Save</span>
                   </>
                 ) : (
                   <>
-                    <Save className="h-3 w-3 flex-shrink-0" />
+                    <Save className="h-3 w-3 shrink-0" />
                     <span className="hidden sm:inline">{saveLabel}</span>
                     <span className="sm:hidden">Save</span>
                   </>

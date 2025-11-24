@@ -166,7 +166,7 @@ export function AddInfractionClient({
             <Card className="premium-card">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2">
-                  <div className="rounded-[var(--radius-button)] bg-purple-500/20 p-2">
+                  <div className="rounded-(--radius-button) bg-purple-500/20 p-2">
                     <Shield className="h-4 w-4 text-purple-400" />
                   </div>
                   Target Selection
@@ -182,17 +182,17 @@ export function AddInfractionClient({
                     setTargetType(value as 'user' | 'server')
                   }
                 >
-                  <TabsList className="grid w-full grid-cols-2 rounded-[var(--radius-button)] bg-gray-800/50">
+                  <TabsList className="grid w-full grid-cols-2 rounded-(--radius-button) bg-gray-800/50">
                     <TabsTrigger
                       value="user"
-                      className="rounded-[var(--radius)] data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
+                      className="rounded-(--radius) data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
                     >
                       <User className="mr-2 h-4 w-4" />
                       User
                     </TabsTrigger>
                     <TabsTrigger
                       value="server"
-                      className="rounded-[var(--radius)] data-[state=active]:bg-linear-to-r data-[state=active]:from-red-500 data-[state=active]:to-orange-500 data-[state=active]:text-white"
+                      className="rounded-(--radius) data-[state=active]:bg-linear-to-r data-[state=active]:from-red-500 data-[state=active]:to-orange-500 data-[state=active]:text-white"
                     >
                       <Server className="mr-2 h-4 w-4" />
                       Server
@@ -252,7 +252,7 @@ export function AddInfractionClient({
             <Card className="premium-card">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2">
-                  <div className="rounded-[var(--radius-button)] bg-red-500/20 p-2">
+                  <div className="rounded-(--radius-button) bg-red-500/20 p-2">
                     <AlertTriangle className="h-4 w-4 text-red-400" />
                   </div>
                   Infraction Details
@@ -371,11 +371,10 @@ export function AddInfractionClient({
               <Button
                 type="submit"
                 disabled={!isFormValid() || isSubmitting}
-                className={`px-8 py-2.5 font-semibold transition-all duration-300 ${
-                  isFormValid() && !isSubmitting
+                className={`px-8 py-2.5 font-semibold transition-all duration-300 ${isFormValid() && !isSubmitting
                     ? 'bg-linear-to-r from-red-500 to-purple-500 shadow-lg shadow-red-500/25 hover:from-red-600 hover:to-purple-600'
                     : 'cursor-not-allowed bg-gray-600/50 text-gray-400'
-                }`}
+                  }`}
               >
                 {isSubmitting ? (
                   <>
@@ -396,7 +395,7 @@ export function AddInfractionClient({
             <Card className="premium-card sticky top-6">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-lg">
-                  <div className="rounded-[var(--radius-button)] bg-amber-500/20 p-2">
+                  <div className="rounded-(--radius-button) bg-amber-500/20 p-2">
                     <AlertTriangle className="h-4 w-4 text-amber-400" />
                   </div>
                   Moderation Guidelines
@@ -405,7 +404,7 @@ export function AddInfractionClient({
               <CardContent className="space-y-6">
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <div className="mt-0.5 rounded-[var(--radius)] bg-red-500/20 p-1.5">
+                    <div className="mt-0.5 rounded-(--radius) bg-red-500/20 p-1.5">
                       <Shield className="h-3.5 w-3.5 text-red-400" />
                     </div>
                     <div>
@@ -420,7 +419,7 @@ export function AddInfractionClient({
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <div className="mt-0.5 rounded-[var(--radius)] bg-amber-500/20 p-1.5">
+                    <div className="mt-0.5 rounded-(--radius) bg-amber-500/20 p-1.5">
                       <AlertTriangle className="h-3.5 w-3.5 text-amber-400" />
                     </div>
                     <div>
@@ -435,7 +434,7 @@ export function AddInfractionClient({
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <div className="mt-0.5 rounded-[var(--radius)] bg-blue-500/20 p-1.5">
+                    <div className="mt-0.5 rounded-(--radius) bg-blue-500/20 p-1.5">
                       <Calendar className="h-3.5 w-3.5 text-blue-400" />
                     </div>
                     <div>

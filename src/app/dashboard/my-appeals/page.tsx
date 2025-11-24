@@ -187,7 +187,7 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
     <div className="flex flex-col rounded-md border border-gray-800/50 bg-gray-900/50 p-4">
       <div className="mb-3 flex items-start justify-between">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-md">
+          <div className="h-10 w-10 shrink-0 overflow-hidden rounded-md">
             <Image
               src={
                 appeal.infraction.hub.iconUrl ||

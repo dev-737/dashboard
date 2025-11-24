@@ -343,7 +343,7 @@ export function WordTagInput({
       </div>
 
       <div className="flex items-start text-gray-400 text-xs sm:items-center">
-        <HelpCircle className="mt-0.5 mr-1 h-4 w-4 flex-shrink-0 text-amber-400 sm:mt-0 sm:h-3 sm:w-3" />
+        <HelpCircle className="mt-0.5 mr-1 h-4 w-4 shrink-0 text-amber-400 sm:mt-0 sm:h-3 sm:w-3" />
         <span>
           Tips: Use commas to add multiple words at once. Use * for pattern
           matching. Tap/hover the help icon above for details.

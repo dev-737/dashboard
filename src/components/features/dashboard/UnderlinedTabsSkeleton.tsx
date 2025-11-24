@@ -53,7 +53,7 @@ export function UnderlinedTabsSkeleton({
                 <TabsTrigger
                   key={tab.value}
                   value={tab.value}
-                  className="min-w-0 flex-shrink-0 cursor-pointer whitespace-nowrap rounded-none border-transparent border-b-[2px] bg-transparent px-2 py-2.5 font-medium text-gray-400 text-xs shadow-none transition-all duration-200 hover:text-gray-300 focus:shadow-none focus:outline-none focus:ring-0 data-[state=active]:border-[var(--tab-border-color)] data-[state=active]:text-[var(--tab-text-color)] sm:px-4 sm:py-3 sm:text-sm md:px-6 md:py-4"
+                  className="min-w-0 shrink-0 cursor-pointer whitespace-nowrap rounded-none border-transparent border-b-[2px] bg-transparent px-2 py-2.5 font-medium text-gray-400 text-xs shadow-none transition-all duration-200 hover:text-gray-300 focus:shadow-none focus:outline-none focus:ring-0 data-[state=active]:border-(--tab-border-color) data-[state=active]:text-(--tab-text-color) sm:px-4 sm:py-3 sm:text-sm md:px-6 md:py-4"
                   style={
                     {
                       '--tab-border-color': colorMap[color].borderColor,

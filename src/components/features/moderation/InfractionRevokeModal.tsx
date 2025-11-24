@@ -175,7 +175,7 @@ export function InfractionRevokeModal({
             </div>
 
             <div className="flex items-start gap-2 text-sm">
-              <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-yellow-400" />
+              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-yellow-400" />
               <div className="flex-1">
                 <span className="text-gray-400">Reason:</span>
                 <div className="mt-1 rounded border border-gray-800/50 bg-gray-950/50 p-2 text-white">

@@ -467,7 +467,7 @@ export default function ServerConnectPage() {
             <Button
               variant="ghost"
               size="sm"
-              className="rounded-[var(--radius-button)] border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
+              className="rounded-(--radius-button) border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
               asChild
             >
               <Link href="/dashboard">
@@ -516,7 +516,7 @@ export default function ServerConnectPage() {
           <Card className="mb-8 border-red-500/50 bg-linear-to-r from-red-900/20 to-red-800/20 backdrop-blur-sm">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
-                <AlertTriangle className="h-5 w-5 flex-shrink-0 text-red-400" />
+                <AlertTriangle className="h-5 w-5 shrink-0 text-red-400" />
                 <div>
                   <h3 className="font-medium text-red-300">
                     Hub Loading Failed
@@ -556,7 +556,7 @@ export default function ServerConnectPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="rounded-[var(--radius-button)] text-gray-400 hover:bg-gray-800/50 hover:text-white"
+                        className="rounded-(--radius-button) text-gray-400 hover:bg-gray-800/50 hover:text-white"
                         onClick={() => {
                           setIsHubPreselected(false);
                           setPreselectedHub(null);
@@ -609,7 +609,7 @@ export default function ServerConnectPage() {
                 ) : (
                   <>
                     {/* Invite Code Section */}
-                    <div className="rounded-[var(--radius)] border border-gray-700/50 bg-gray-800/30 p-4">
+                    <div className="rounded-(--radius) border border-gray-700/50 bg-gray-800/30 p-4">
                       <Label
                         htmlFor={inviteCodeFieldId}
                         className="mb-2 flex items-center gap-2 font-medium text-sm text-white"
@@ -691,11 +691,10 @@ export default function ServerConnectPage() {
                           <button
                             key={hub.id}
                             type="button"
-                            className={`group w-full cursor-pointer rounded-[var(--radius)] p-4 text-left transition-all duration-200 ${
-                              selectedHub === hub.id
-                                ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
-                                : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
-                            }`}
+                            className={`group w-full cursor-pointer rounded-(--radius) p-4 text-left transition-all duration-200 ${selectedHub === hub.id
+                              ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
+                              : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
+                              }`}
                             onClick={() => {
                               setSelectedHub(hub.id);
                               setPreselectedHub(hub);
@@ -774,16 +773,15 @@ export default function ServerConnectPage() {
                         <button
                           key={channel.id}
                           type="button"
-                          className={`group flex w-full cursor-pointer items-center rounded-[var(--radius)] p-3 text-left transition-all duration-200 ${
-                            selectedChannel === channel.id
-                              ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
-                              : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
-                          }`}
+                          className={`group flex w-full cursor-pointer items-center rounded-(--radius) p-3 text-left transition-all duration-200 ${selectedChannel === channel.id
+                            ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
+                            : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
+                            }`}
                           onClick={() => setSelectedChannel(channel.id)}
                         >
                           <ChannelIcon
                             type={channel.type}
-                            className="mr-3 h-4 w-4 flex-shrink-0 text-gray-400 group-hover:text-gray-300"
+                            className="mr-3 h-4 w-4 shrink-0 text-gray-400 group-hover:text-gray-300"
                           />
                           <div className="min-w-0 flex-1">
                             <div className="truncate font-medium text-white transition-colors group-hover:text-gray-100">
@@ -805,9 +803,9 @@ export default function ServerConnectPage() {
                     )}
                   </div>
 
-                  <div className="rounded-[var(--radius)] border border-blue-500/20 bg-blue-900/20 p-3">
+                  <div className="rounded-(--radius) border border-blue-500/20 bg-blue-900/20 p-3">
                     <p className="flex items-start gap-2 text-blue-300 text-xs">
-                      <MessageSquare className="mt-0.5 h-3 w-3 flex-shrink-0" />
+                      <MessageSquare className="mt-0.5 h-3 w-3 shrink-0" />
                       Select the Discord channel where messages will be sent and
                       received. This channel will be connected to the hub.
                     </p>
@@ -882,24 +880,24 @@ export default function ServerConnectPage() {
                     <MessageSquare className="h-4 w-4" />
                     About Hub Connections
                   </h3>
-                  <div className="rounded-[var(--radius)] border border-indigo-500/20 bg-indigo-900/20 p-4">
+                  <div className="rounded-(--radius) border border-indigo-500/20 bg-indigo-900/20 p-4">
                     <p className="mb-3 text-indigo-200 text-sm">
                       Connecting your server to a hub allows members to chat
                       across Discord servers.
                     </p>
                     <ul className="space-y-2 text-indigo-300 text-sm">
                       <li className="flex items-start gap-2">
-                        <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-indigo-400"></div>
+                        <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400"></div>
                         Messages sent in the selected channel will be shared
                         with the hub
                       </li>
                       <li className="flex items-start gap-2">
-                        <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-indigo-400"></div>
+                        <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400"></div>
                         Messages from other servers in the hub will appear in
                         your channel
                       </li>
                       <li className="flex items-start gap-2">
-                        <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-indigo-400"></div>
+                        <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400"></div>
                         You can disconnect at any time from the server
                         management page
                       </li>

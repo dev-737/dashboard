@@ -237,7 +237,7 @@ export function HubIconUploadModal({
           {/* Current/Preview Icon */}
           <div className="flex justify-center">
             <div className="relative">
-              <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border-2 border-gray-700/50 bg-gray-800 shadow-lg">
+              <div className="h-24 w-24 shrink-0 overflow-hidden rounded-2xl border-2 border-gray-700/50 bg-gray-800 shadow-lg">
                 {previewUrl ? (
                   <Image
                     src={previewUrl}

@@ -157,7 +157,7 @@ export default function PrivacyPolicy() {
                     'Comply with legal obligations.',
                   ].map((item, i) => (
                     <li key={i} className="flex gap-3 text-gray-300">
-                      <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-white/5 text-gray-500 text-xs">
+                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/5 text-gray-500 text-xs">
                         {i + 1}
                       </span>
                       {item}

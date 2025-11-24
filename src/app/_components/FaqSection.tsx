@@ -47,7 +47,7 @@ function AccordionItem({
           <motion.div
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.2 }}
-            className="flex-shrink-0"
+            className="shrink-0"
           >
             <ChevronDown className="h-5 w-5 text-gray-400 transition-colors duration-200 group-hover:text-blue-400" />
           </motion.div>
@@ -105,7 +105,7 @@ export function FaqSection() {
 
           <h2 className="mb-6 font-bold text-4xl text-white tracking-tight md:text-5xl">
             Quick answers about{' '}
-            <span className="bg-linear-to-r from-[var(--color-brand-blue-500)] to-[var(--color-brand-purple-500)] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-(--color-brand-blue-500) to-(--color-brand-purple-500) bg-clip-text text-transparent">
               InterChat
             </span>
           </h2>

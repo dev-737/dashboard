@@ -363,7 +363,7 @@ function ConnectionItem({
     <div className="group relative rounded-xl border border-gray-800/50 bg-linear-to-r from-gray-800/20 to-gray-800/10 p-4 transition-all duration-200 hover:border-gray-700/70 hover:from-gray-800/40 hover:to-gray-800/30">
       <div className="flex items-center gap-4">
         {/* Server Icon */}
-        <div className="relative flex-shrink-0">
+        <div className="relative shrink-0">
           <div className="h-12 w-12 overflow-hidden rounded-xl border border-gray-700/50 bg-linear-to-br from-gray-700 to-gray-800 sm:h-14 sm:w-14">
             {connection.server?.iconUrl ? (
               <Image
@@ -398,11 +398,10 @@ function ConnectionItem({
             </h4>
             <Badge
               variant={connection.connected ? 'default' : 'secondary'}
-              className={`w-fit rounded-full px-2 py-1 font-medium text-xs ${
-                connection.connected
+              className={`w-fit rounded-full px-2 py-1 font-medium text-xs ${connection.connected
                   ? 'border-green-500/40 bg-green-500/20 text-green-300'
                   : 'border-amber-500/40 bg-amber-500/20 text-amber-300'
-              }`}
+                }`}
             >
               {connection.connected ? (
                 <>
@@ -421,13 +420,13 @@ function ConnectionItem({
           {/* Connection details */}
           <div className="flex flex-col gap-2 text-gray-400 text-sm sm:flex-row sm:items-center sm:gap-4">
             <div className="flex items-center gap-1">
-              <Hash className="h-3 w-3 flex-shrink-0" />
+              <Hash className="h-3 w-3 shrink-0" />
               <span className="truncate font-mono text-xs">
                 {connection.channelId}
               </span>
             </div>
             <div className="flex items-center gap-1">
-              <Clock className="h-3 w-3 flex-shrink-0" />
+              <Clock className="h-3 w-3 shrink-0" />
               <span className="truncate text-xs">
                 {formatDistanceToNow(new Date(connection.lastActive), {
                   addSuffix: true,

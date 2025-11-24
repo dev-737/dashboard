@@ -28,7 +28,7 @@ function LoginContent() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-gray-950">
       {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-size-[100px_100px]"></div>
 
       <div className="relative flex min-h-screen items-center justify-center px-4">
         <div className="w-full max-w-md space-y-8">
@@ -59,13 +59,13 @@ function LoginContent() {
           </div>
 
           {/* Login Card */}
-          <Card className="rounded-[var(--radius)] border-gray-700/50 bg-linear-to-br from-gray-900/90 to-gray-950/90 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:shadow-purple-500/10">
+          <Card className="rounded-(--radius) border-gray-700/50 bg-linear-to-br from-gray-900/90 to-gray-950/90 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:shadow-purple-500/10">
             <div className="space-y-6 p-8">
               <div className="space-y-4">
                 <Button
                   onClick={handleDiscordLogin}
                   disabled={isLoading}
-                  className="group h-14 w-full rounded-[var(--radius-button)] bg-[#5865F2] font-semibold text-lg text-white shadow-lg transition-all duration-200 hover:bg-[#4752C4] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50"
+                  className="group h-14 w-full rounded-(--radius-button) bg-[#5865F2] font-semibold text-lg text-white shadow-lg transition-all duration-200 hover:bg-[#4752C4] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {isLoading ? (
                     <div className="flex items-center gap-3">

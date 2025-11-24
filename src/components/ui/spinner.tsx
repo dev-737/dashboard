@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const spinnerVariants = cva(
-  'animate-spin rounded-[var(--radius-avatar)] border-current border-r-transparent border-solid align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]',
+  'animate-spin rounded-(--radius-avatar) border-current border-r-transparent border-solid align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]',
   {
     variants: {
       size: {
@@ -31,7 +31,7 @@ const spinnerVariants = cva(
 
 export interface SpinnerProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof spinnerVariants> {
+  VariantProps<typeof spinnerVariants> {
   label?: string;
 }
 
@@ -71,7 +71,7 @@ function LoadingButton({
   return (
     <button
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-[var(--radius-button)] px-4 py-2 font-medium text-sm transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50',
+        'inline-flex items-center justify-center gap-2 rounded-(--radius-button) px-4 py-2 font-medium text-sm transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50',
         className
       )}
       disabled={disabled || loading}
@@ -103,7 +103,7 @@ function LoadingOverlay({
     <div className={cn('relative', className)}>
       {children}
       {loading && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center rounded-[var(--radius)] bg-background/80 backdrop-blur-sm">
+        <div className="absolute inset-0 z-50 flex items-center justify-center rounded-(--radius) bg-background/80 backdrop-blur-sm">
           <div className="flex flex-col items-center gap-3">
             <Spinner size={spinnerSize} label={label} />
             {label && (

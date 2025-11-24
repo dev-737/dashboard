@@ -25,7 +25,7 @@ export function DashboardTopBar({ user }: { user: User }) {
   const pathname = usePathname();
 
   return (
-    <div className="sticky top-0 z-40 flex h-16 flex-shrink-0 border-gray-800/60 border-b bg-[#0b0f1a]">
+    <div className="sticky top-0 z-40 flex h-16 shrink-0 border-gray-800/60 border-b bg-[#0b0f1a]">
       <div className="flex flex-1 items-center px-4">
         <div className="flex items-center gap-3">
           <Link href="/" className="group flex items-center gap-3">
@@ -35,10 +35,10 @@ export function DashboardTopBar({ user }: { user: User }) {
                 src="/assets/images/logos/interchat.png"
                 height={32}
                 width={32}
-                className="rounded-[var(--radius-avatar)] border border-white/20 transition-all duration-300 group-hover:border-purple-400/50 group-hover:shadow-lg group-hover:shadow-purple-500/20"
+                className="rounded-(--radius-avatar) border border-white/20 transition-all duration-300 group-hover:border-purple-400/50 group-hover:shadow-lg group-hover:shadow-purple-500/20"
               />
               {/* Subtle glow effect */}
-              <div className="-z-10 absolute inset-0 rounded-[var(--radius-avatar)] bg-linear-to-r from-purple-400/20 to-blue-400/20 opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="-z-10 absolute inset-0 rounded-(--radius-avatar) bg-linear-to-r from-purple-400/20 to-blue-400/20 opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100" />
             </div>
             <span className="hidden bg-linear-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text font-bold text-lg text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:via-indigo-300 group-hover:to-blue-300 sm:block">
               InterChat
@@ -50,7 +50,7 @@ export function DashboardTopBar({ user }: { user: User }) {
           <Link
             href="/dashboard"
             className={cn(
-              'flex items-center gap-2 rounded-[var(--radius-button)] px-4 py-2.5 font-medium text-sm transition-all duration-300',
+              'flex items-center gap-2 rounded-(--radius-button) px-4 py-2.5 font-medium text-sm transition-all duration-300',
               pathname === '/dashboard'
                 ? 'border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
                 : 'border border-transparent text-gray-300 hover:border-white/10 hover:bg-white/5 hover:text-white'
@@ -62,7 +62,7 @@ export function DashboardTopBar({ user }: { user: User }) {
           <Link
             href="/dashboard/my-appeals"
             className={cn(
-              'flex items-center gap-2 rounded-[var(--radius-button)] px-4 py-2.5 font-medium text-sm transition-all duration-300',
+              'flex items-center gap-2 rounded-(--radius-button) px-4 py-2.5 font-medium text-sm transition-all duration-300',
               pathname.startsWith('/dashboard/my-appeals')
                 ? 'border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
                 : 'border border-transparent text-gray-300 hover:border-white/10 hover:bg-white/5 hover:text-white'
@@ -74,7 +74,7 @@ export function DashboardTopBar({ user }: { user: User }) {
           <Link
             href="/dashboard/settings"
             className={cn(
-              'flex items-center gap-2 rounded-[var(--radius-button)] px-4 py-2.5 font-medium text-sm transition-all duration-300',
+              'flex items-center gap-2 rounded-(--radius-button) px-4 py-2.5 font-medium text-sm transition-all duration-300',
               pathname.startsWith('/dashboard/settings')
                 ? 'border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
                 : 'border border-transparent text-gray-300 hover:border-white/10 hover:bg-white/5 hover:text-white'
@@ -99,17 +99,17 @@ export function DashboardTopBar({ user }: { user: User }) {
 
         <div className="ml-auto hidden items-center gap-3 lg:flex">
           <div data-tour="notifications" className="relative">
-            <div className="rounded-[var(--radius-button)] p-1 transition-all duration-300 hover:bg-white/5">
+            <div className="rounded-(--radius-button) p-1 transition-all duration-300 hover:bg-white/5">
               <NotificationDropdown />
             </div>
           </div>
 
-          <div className="rounded-[var(--radius-button)] p-1 transition-all duration-300 hover:bg-white/5">
+          <div className="rounded-(--radius-button) p-1 transition-all duration-300 hover:bg-white/5">
             <OnboardingHelpMenu />
           </div>
 
           <div className="flex items-center" data-tour="user-menu">
-            <div className="rounded-[var(--radius-button)] p-1 transition-all duration-300 hover:bg-white/5">
+            <div className="rounded-(--radius-button) p-1 transition-all duration-300 hover:bg-white/5">
               <UserNav
                 user={user}
                 firstPage={{ name: 'Home', icon: Home, href: '/' }}

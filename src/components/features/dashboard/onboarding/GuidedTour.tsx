@@ -224,11 +224,10 @@ export function GuidedTour({
       <button
         type="button"
         tabIndex={currentStepData.action !== 'click' ? 0 : -1}
-        className={`absolute rounded-lg border-2 border-purple-400 shadow-lg ${
-          currentStepData.action === 'click'
+        className={`absolute rounded-lg border-2 border-purple-400 shadow-lg ${currentStepData.action === 'click'
             ? 'pointer-events-none'
             : 'pointer-events-auto'
-        }`}
+          }`}
         style={{
           top: highlightPosition.top,
           left: highlightPosition.left,
@@ -322,7 +321,7 @@ export function GuidedTour({
 
               {currentStepData.action && (
                 <div className="flex items-center gap-2 rounded-lg border border-purple-500/30 bg-purple-900/20 p-3">
-                  <Lightbulb className="h-4 w-4 flex-shrink-0 text-purple-400" />
+                  <Lightbulb className="h-4 w-4 shrink-0 text-purple-400" />
                   <span className="text-purple-300 text-sm">
                     {currentStepData.action === 'click'
                       ? 'Click the highlighted element to continue'

@@ -135,7 +135,7 @@ export function DiscordRoleSelector({
                   >
                     <div className="flex items-center gap-2">
                       <div
-                        className="h-3 w-3 flex-shrink-0 rounded-full"
+                        className="h-3 w-3 shrink-0 rounded-full"
                         style={{ backgroundColor: getRoleColor(role.color) }}
                       />
                       <span className="truncate">{role.name}</span>
@@ -156,7 +156,7 @@ export function DiscordRoleSelector({
       {initialRoleId && initialRoleName && !serverId && (
         <div className="flex items-center gap-2 rounded-lg border border-gray-700/50 bg-gray-800/50 p-3">
           <div
-            className="h-3 w-3 flex-shrink-0 rounded-full"
+            className="h-3 w-3 shrink-0 rounded-full"
             style={{
               backgroundColor: getRoleColor(initialRoleColor ?? 0),
             }}
@@ -168,7 +168,7 @@ export function DiscordRoleSelector({
       {/* Graceful degradation: show ID if we have role but no name */}
       {initialRoleId && !initialRoleName && !serverId && (
         <div className="flex items-center gap-2 rounded-lg border border-gray-700/50 bg-gray-800/30 p-3">
-          <div className="h-3 w-3 flex-shrink-0 rounded-full bg-gray-500" />
+          <div className="h-3 w-3 shrink-0 rounded-full bg-gray-500" />
           <div className="flex flex-col">
             <span className="text-gray-400 text-sm">Role: {initialRoleId}</span>
             <span className="text-gray-500 text-xs">
