@@ -1,26 +1,28 @@
 'use client';
 
-import { ArrowRight, Play, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { useId } from 'react';
 import { HeroAnimation } from '@/app/_components/HeroAnimation';
-import { StaticHeroBackground } from '@/app/_components/StaticHeroBackground';
 import { AnimatedShinyText } from '@/components/ui/AnimatedShinyText';
 import { Button } from '@/components/ui/button';
 import { GradientText } from '@/components/ui/shadcn-io/gradient-text';
 
 export function Hero() {
   const heroId = useId();
-  //   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   return (
     <section
       id={heroId}
-      className="relative overflow-hidden bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 pt-24 pb-20 md:pt-32 md:pb-28"
+      className="relative overflow-hidden bg-[#030812] pt-24 pb-20 md:pt-32 md:pb-28"
     >
-      <StaticHeroBackground />
-      <div className="absolute inset-0 bg-mesh-gradient opacity-20 mix-blend-overlay" />
+      {/* Background Gradients */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] h-[800px] w-[800px] rounded-full bg-purple-600/10 blur-[120px]" />
+        <div className="absolute right-[-10%] bottom-[-10%] h-[800px] w-[800px] rounded-full bg-blue-600/10 blur-[120px]" />
+        <div className="absolute inset-0 bg-[url('/assets/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+      </div>
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
@@ -29,11 +31,11 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-(--radius-button) border border-gray-700/60 bg-linear-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-gray-600/70"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/20"
             >
-              <Sparkles className="h-4 w-4 animate-pulse text-primary" />
+              <Sparkles className="h-4 w-4 animate-pulse text-purple-400" />
               <Link href="https://docs.interchat.dev/changelog">
-                <AnimatedShinyText className="font-semibold tracking-wide">
+                <AnimatedShinyText className="font-semibold text-sm tracking-wide">
                   InterChat v5 is here
                 </AnimatedShinyText>
               </Link>
@@ -43,40 +45,45 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="mb-6 bg-linear-to-br from-white via-gray-100 to-gray-300 bg-clip-text font-extrabold text-4xl text-transparent leading-[1.1] tracking-tight md:text-6xl lg:text-7xl"
+              className="mb-6 bg-gradient-to-b from-white via-white to-gray-400 bg-clip-text font-extrabold text-5xl text-transparent leading-[1.1] tracking-tight md:text-7xl lg:text-8xl"
             >
               Your Discord servers <br className="hidden md:block" />
-              are <GradientText text="lonely." />
+              are{' '}
+              <GradientText
+                text="lonely."
+                className="from-purple-400 to-blue-400"
+              />
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mx-auto mb-8 max-w-3xl text-gray-300 text-lg leading-relaxed md:text-xl"
+              className="mx-auto mb-10 max-w-3xl text-gray-400 text-lg leading-relaxed md:text-xl"
             >
               InterChat builds bridges between them. Share messages, memes, and
               chaos across thousands of communities instantly.
             </motion.p>
+
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="mb-6 flex flex-col justify-center gap-4 sm:flex-row"
+              className="mb-8 flex flex-col justify-center gap-4 sm:flex-row"
             >
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="group relative"
               >
-                <div className="absolute inset-0 rounded-(--radius-button) bg-linear-to-r from-primary to-primary-alt opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-30" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-70" />
                 <Button
                   size="lg"
-                  className="relative h-14 bg-linear-to-r from-primary to-primary-alt px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:from-primary-alt hover:to-primary hover:shadow-xl"
+                  className="relative h-14 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/25"
                 >
-                  <Link href="/invite" className="flex items-center">
+                  <Link href="/invite" className="flex items-center gap-2">
                     Start Connecting
-                    <ArrowRight className="ml-3 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                 </Button>
               </motion.div>
@@ -84,30 +91,28 @@ export function Hero() {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="group relative"
               >
                 <Button
                   size="lg"
                   variant="outline"
-                  className="h-14 border-gray-600/70 bg-gray-800/60 px-8 font-semibold text-white shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-gray-500/70 hover:bg-gray-800/80"
+                  className="h-14 rounded-full border-white/10 bg-white/5 px-8 font-semibold text-white backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/10"
                 >
-                  <Link href="/discover" className="flex items-center">
+                  <Link href="/discover" className="flex items-center gap-2">
                     Explore Hubs
-                    <Sparkles className="ml-3 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                    <Sparkles className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
                   </Link>
                 </Button>
               </motion.div>
             </motion.div>
+
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="mx-auto max-w-lg text-gray-400 text-sm leading-relaxed"
+              className="mx-auto max-w-lg text-gray-500 text-sm"
             >
-              No setup hassle. Keep full moderation control while you connect
-              communities across servers.
-              <span className="font-medium text-gray-300">
-                {' '}
+              No setup hassle. Keep full moderation control.
+              <span className="mt-1 block font-medium text-purple-400">
                 Join 12,000+ servers already connected.
               </span>
             </motion.p>
@@ -119,6 +124,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="relative mx-auto w-full max-w-5xl"
           >
+            <div className="-z-10 absolute inset-0 rounded-full bg-purple-500/5 blur-3xl" />
             <HeroAnimation />
           </motion.div>
         </div>

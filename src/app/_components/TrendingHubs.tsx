@@ -13,18 +13,20 @@ interface TrendingHubsProps {
 
 export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
   return (
-    <section className="relative overflow-hidden bg-gray-950 py-24 md:py-32">
+    <section className="relative overflow-hidden bg-[#030812] py-24 md:py-32">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-indigo-900/20 via-gray-950 to-gray-950" />
+      <div className="pointer-events-none absolute inset-0">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 h-[600px] w-[600px] rounded-full bg-indigo-500/5 blur-[120px]" />
+      </div>
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="mb-16 flex flex-col items-end justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 font-medium text-indigo-400 text-xs">
-              <TrendingUp className="h-3 w-3" />
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 font-medium text-indigo-400 text-sm backdrop-blur-sm">
+              <TrendingUp className="h-4 w-4" />
               <span>Trending Now</span>
             </div>
-            <h2 className="font-bold text-3xl text-white tracking-tight md:text-5xl">
+            <h2 className="font-bold text-4xl text-white tracking-tight md:text-5xl">
               Popular Communities
             </h2>
             <p className="mt-4 text-gray-400 text-lg">
@@ -34,7 +36,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
 
           <Link
             href="/discover"
-            className="group flex items-center gap-2 rounded-full border border-gray-800 bg-gray-900/50 px-6 py-3 font-medium text-gray-300 text-sm transition-all hover:border-gray-700 hover:bg-gray-800 hover:text-white"
+            className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 font-medium text-white transition-all hover:border-white/20 hover:bg-white/10"
           >
             View all hubs
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -51,7 +53,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Link href={`/hubs/${hub.id}`} className="group block h-full">
-                <div className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-gray-800/70 bg-gray-900/60 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-gray-700 hover:bg-gray-900/80 hover:shadow-2xl hover:shadow-indigo-500/10">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04] hover:shadow-2xl hover:shadow-indigo-500/5">
                   {/* Banner/Image */}
                   <div className="relative h-56 w-full overflow-hidden">
                     {hub.bannerUrl ? (
@@ -62,9 +64,9 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     ) : (
-                      <div className="h-full w-full bg-linear-to-br from-gray-800 to-gray-900" />
+                      <div className="h-full w-full bg-gradient-to-br from-gray-800 to-gray-900" />
                     )}
-                    <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-transparent to-transparent opacity-80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#030812] via-transparent to-transparent opacity-90" />
 
                     {/* NSFW Badge */}
                     {hub.nsfw && (
@@ -77,7 +79,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                   {/* Content */}
                   <div className="relative flex flex-1 flex-col p-8 pt-0">
                     {/* Icon - Overlapping Banner */}
-                    <div className="-mt-10 relative mb-6 h-20 w-20 overflow-hidden rounded-2xl border-4 border-gray-900 bg-gray-900 shadow-lg">
+                    <div className="-mt-12 relative mb-6 h-24 w-24 overflow-hidden rounded-2xl border-4 border-[#030812] bg-[#030812] shadow-lg">
                       {hub.iconUrl ? (
                         <Image
                           src={hub.iconUrl}
@@ -86,14 +88,14 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-indigo-600 to-violet-600 font-bold text-2xl text-white">
+                        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-600 to-violet-600 font-bold text-3xl text-white">
                           {hub.name.charAt(0)}
                         </div>
                       )}
                     </div>
 
-                    <div className="mb-4">
-                      <div className="mb-2 flex items-center gap-2">
+                    <div className="mb-6">
+                      <div className="mb-3 flex items-center gap-2">
                         <h3 className="line-clamp-1 font-bold text-white text-xl transition-colors group-hover:text-indigo-400">
                           {hub.name}
                         </h3>
@@ -124,7 +126,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                       </p>
                     </div>
 
-                    <div className="mt-auto flex items-center justify-between border-gray-800/50 border-t pt-6">
+                    <div className="mt-auto flex items-center justify-between border-white/5 border-t pt-6">
                       <div className="flex items-center gap-4 text-sm">
                         <div className="flex items-center gap-2 text-gray-300">
                           <Users className="h-4 w-4 text-indigo-400" />
@@ -142,7 +144,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                         )}
                       </div>
 
-                      <div className="rounded-full bg-gray-800/50 p-2 text-gray-400 transition-colors group-hover:bg-indigo-500/10 group-hover:text-indigo-400">
+                      <div className="rounded-full bg-white/5 p-2 text-gray-400 transition-all group-hover:bg-indigo-500/20 group-hover:text-indigo-400">
                         <ArrowRight className="h-4 w-4" />
                       </div>
                     </div>

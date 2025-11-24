@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button';
 
 export function CTA() {
   return (
-    <section className="relative overflow-hidden bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 py-20 md:py-32">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/3 left-1/4 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute right-1/4 bottom-1/3 h-80 w-80 rounded-full bg-primary-alt/10 blur-3xl delay-1000" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
+    <section className="relative overflow-hidden bg-[#030812] py-24 md:py-32">
+      {/* Background Elements */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/3 left-1/4 h-96 w-96 rounded-full bg-blue-600/10 blur-[120px]" />
+        <div className="absolute right-1/4 bottom-1/3 h-80 w-80 rounded-full bg-purple-600/10 blur-[120px]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4 text-center">
@@ -22,21 +22,25 @@ export function CTA() {
           transition={{ duration: 0.7 }}
           className="mx-auto max-w-4xl"
         >
-          <div className="mb-8 inline-flex items-center gap-2 rounded-(--radius-button) border border-gray-700/60 bg-linear-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl">
-            <Zap className="h-4 w-4 animate-pulse text-emerald-400" />
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-emerald-400 text-sm backdrop-blur-sm">
+            <Zap className="h-4 w-4 animate-pulse" />
             <span className="font-semibold tracking-wide">
               Fast, clean, and easy to use
             </span>
           </div>
-          <h3 className="mb-6 font-bold text-4xl text-white tracking-tight md:text-6xl lg:text-7xl">
+
+          <h3 className="mb-6 font-bold text-5xl text-white tracking-tight md:text-7xl">
             Stop shouting into <br className="hidden md:block" />
-            <span className="bg-linear-to-r from-primary via-primary-alt to-primary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               the void.
             </span>
           </h3>
-          <p className="mx-auto mb-10 max-w-3xl text-gray-300 text-lg leading-relaxed md:text-xl">
+
+          <p className="mx-auto mb-12 max-w-3xl text-gray-400 text-lg leading-relaxed md:text-xl">
             Join the conversation. 12,000+ servers are already chatting.
-            <span className="mt-2 block text-gray-400">Why aren't you?</span>
+            <span className="mt-2 block font-medium text-gray-300">
+              Why aren't you?
+            </span>
           </p>
 
           {/* Stats row */}
@@ -45,16 +49,19 @@ export function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-12 flex flex-wrap justify-center gap-8"
+            className="mb-16 flex flex-wrap justify-center gap-8"
           >
             {[
               { icon: Users, label: '12,000+', sublabel: 'Connected Servers' },
               { icon: Home, label: '30+', sublabel: 'Hubs Chatting Now' },
               { icon: Zap, label: '99.9%', sublabel: 'Uptime' },
             ].map((stat) => (
-              <div key={stat.label} className="flex items-center gap-3">
-                <div className="rounded-(--radius) border border-gray-700/50 bg-gray-800/60 p-2">
-                  <stat.icon className="h-5 w-5 text-primary" />
+              <div
+                key={stat.label}
+                className="flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.02] p-4 backdrop-blur-sm transition-all hover:bg-white/[0.04]"
+              >
+                <div className="rounded-xl bg-blue-500/10 p-3 text-blue-400 ring-1 ring-blue-500/20">
+                  <stat.icon className="h-5 w-5" />
                 </div>
                 <div className="text-left">
                   <div className="font-bold text-white text-xl">
@@ -65,6 +72,7 @@ export function CTA() {
               </div>
             ))}
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -77,11 +85,11 @@ export function CTA() {
               whileTap={{ scale: 0.98 }}
               className="group relative"
             >
-              <div className="absolute inset-0 rounded-(--radius-button) bg-linear-to-r from-primary to-primary-alt opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-30" />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-70" />
               <Button
                 asChild
                 size="lg"
-                className="relative h-14 bg-linear-to-r from-primary to-primary-alt px-8 font-semibold text-white shadow-lg hover:from-primary-alt hover:to-primary hover:shadow-xl"
+                className="relative h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 font-semibold text-white shadow-lg transition-all hover:shadow-blue-500/25"
               >
                 <Link href="/hubs" className="group flex items-center">
                   <Sparkles className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
@@ -96,7 +104,7 @@ export function CTA() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="h-14 border-gray-600/70 bg-gray-800/60 px-8 font-semibold text-white shadow-lg backdrop-blur-xl hover:border-gray-500/70 hover:bg-gray-800/80"
+                className="h-14 rounded-full border-white/10 bg-white/5 px-8 font-semibold text-white backdrop-blur-xl transition-all hover:border-white/20 hover:bg-white/10"
               >
                 <Link
                   href="https://docs.interchat.dev"
@@ -115,7 +123,7 @@ export function CTA() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-8 text-gray-400 text-sm"
+            className="mt-10 text-gray-500 text-sm"
           >
             Trusted by communities worldwide • Free to use • Simple Setup
           </motion.p>

@@ -31,35 +31,37 @@ function AccordionItem({
     >
       <div
         className={cn(
-          'rounded-(--radius) border border-gray-700/60 bg-gray-800/60',
-          'shadow-lg backdrop-blur-xl transition-all duration-200',
-          'hover:border-gray-600/70 hover:bg-gray-800/80 hover:shadow-xl'
+          'rounded-2xl border border-white/5 bg-white/[0.02]',
+          'backdrop-blur-xl transition-all duration-300',
+          'hover:border-white/10 hover:bg-white/[0.04] hover:shadow-lg'
         )}
       >
         <button
           onClick={onToggle}
-          className="flex w-full items-center justify-between rounded-(--radius) p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+          className="flex w-full items-center justify-between rounded-2xl p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50"
         >
-          <h3 className="pr-4 font-semibold text-lg text-white">{title}</h3>
+          <h3 className="pr-4 font-semibold text-lg text-white transition-colors group-hover:text-blue-200">
+            {title}
+          </h3>
           <motion.div
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.2 }}
             className="flex-shrink-0"
           >
-            <ChevronDown className="h-5 w-5 text-gray-400 transition-colors duration-200 group-hover:text-gray-300" />
+            <ChevronDown className="h-5 w-5 text-gray-400 transition-colors duration-200 group-hover:text-blue-400" />
           </motion.div>
         </button>
 
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ height: 0 }}
-              animate={{ height: 'auto' }}
-              exit={{ height: 0 }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2 }}
               className="overflow-hidden"
             >
-              <div className="border-gray-700/50 border-t px-6 pt-4 pb-6 text-gray-300">
+              <div className="border-white/5 border-t px-6 pt-2 pb-6 text-gray-400 leading-relaxed">
                 {content}
               </div>
             </motion.div>
@@ -78,11 +80,11 @@ export function FaqSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 py-20 md:py-32">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/3 left-1/4 h-96 w-96 rounded-full bg-primary/8 blur-3xl" />
-        <div className="absolute right-1/4 bottom-1/3 h-80 w-80 rounded-full bg-primary-alt/8 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
+    <section className="relative overflow-hidden bg-[#030812] py-24 md:py-32">
+      {/* Background Elements */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/3 left-1/4 h-96 w-96 rounded-full bg-blue-600/5 blur-[120px]" />
+        <div className="absolute right-1/4 bottom-1/3 h-80 w-80 rounded-full bg-purple-600/5 blur-[120px]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
@@ -93,21 +95,21 @@ export function FaqSection() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-(--radius-button) border border-gray-700/60 bg-linear-to-r from-gray-800/60 to-gray-800/40 px-4 py-2 text-gray-300 text-sm shadow-lg backdrop-blur-xl">
-            <Sparkles className="h-4 w-4 animate-pulse text-primary" />
-            <span className="font-semibold tracking-wide">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-blue-300 backdrop-blur-sm">
+            <Sparkles className="h-4 w-4 animate-pulse text-blue-400" />
+            <span className="font-semibold text-sm tracking-wide">
               Frequently Asked Questions
             </span>
           </div>
 
           <h2 className="mb-6 font-bold text-4xl text-white tracking-tight md:text-5xl">
             Quick answers about{' '}
-            <span className="bg-linear-to-r from-primary via-primary-alt to-primary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               InterChat
             </span>
           </h2>
 
-          <p className="mx-auto max-w-2xl text-gray-300 text-lg">
+          <p className="mx-auto max-w-2xl text-gray-400 text-lg">
             Everything you need to know to get started.
           </p>
         </motion.div>
@@ -140,7 +142,7 @@ export function FaqSection() {
         >
           <Button
             variant="outline"
-            className="border-gray-600/70 bg-gray-800/60 text-gray-300 shadow-lg backdrop-blur-xl transition-all duration-200 hover:border-gray-500/70 hover:bg-gray-800/80 hover:text-white"
+            className="rounded-full border-white/10 bg-white/5 px-8 py-6 font-semibold text-base text-white backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/10"
             asChild
           >
             <Link
@@ -177,7 +179,7 @@ const faqs = [
     content: (
       <>
         Getting started is simple. Invite InterChat to your server, then use the{' '}
-        <code className="rounded bg-gray-700/60 px-2 py-1 text-primary">
+        <code className="rounded bg-white/10 px-2 py-1 font-mono text-blue-300 text-sm">
           /setup
         </code>{' '}
         command to connect a channel to an existing hub or create a new one.
@@ -185,7 +187,7 @@ const faqs = [
         detailed instructions and advanced options, check out our{' '}
         <Link
           href="https://docs.interchat.dev"
-          className="font-medium text-primary underline underline-offset-2 transition-colors duration-200 hover:text-primary-alt"
+          className="font-medium text-blue-400 transition-colors hover:text-blue-300"
         >
           documentation
         </Link>
@@ -205,7 +207,7 @@ const faqs = [
         our{' '}
         <Link
           href="/hubs"
-          className="font-medium text-primary underline underline-offset-2 transition-colors duration-200 hover:text-primary-alt"
+          className="font-medium text-blue-400 transition-colors hover:text-blue-300"
         >
           Hub Browser
         </Link>
@@ -233,7 +235,7 @@ const faqs = [
         step-by-step in our{' '}
         <Link
           href="https://docs.interchat.dev"
-          className="font-medium text-primary underline underline-offset-2 transition-colors duration-200 hover:text-primary-alt"
+          className="font-medium text-blue-400 transition-colors hover:text-blue-300"
         >
           documentation
         </Link>
