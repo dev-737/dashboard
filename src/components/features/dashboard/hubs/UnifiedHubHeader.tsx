@@ -4,7 +4,7 @@ import { Camera, EyeOff, Globe, Lock, Upload, Users } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+
 import { HubBannerUploadModal } from './HubBannerUploadModal';
 import { HubIconUploadModal } from './HubIconUploadModal';
 
@@ -19,7 +19,6 @@ interface UnifiedHubHeaderProps {
     nsfw: boolean;
     connectionCount: number;
   };
-  backHref?: string;
   actions?: React.ReactNode;
   canEdit?: boolean;
   onHubUpdate?: (updates: { iconUrl?: string; bannerUrl?: string }) => void;
@@ -27,7 +26,6 @@ interface UnifiedHubHeaderProps {
 
 export function UnifiedHubHeader({
   hub,
-  backHref = '/dashboard',
   actions,
   canEdit = false,
   onHubUpdate,
@@ -67,7 +65,8 @@ export function UnifiedHubHeader({
 
             {/* Banner Upload Overlay */}
             {canEdit && (
-              <Button
+              <button
+                type="button"
                 onClick={() => setBannerUploadOpen(true)}
                 className="group absolute inset-0 flex cursor-pointer items-center justify-center bg-black/0 transition-colors duration-200 hover:bg-black/40"
               >
@@ -77,7 +76,7 @@ export function UnifiedHubHeader({
                     Update Banner
                   </span>
                 </div>
-              </Button>
+              </button>
             )}
           </div>
 
@@ -87,7 +86,7 @@ export function UnifiedHubHeader({
               <div className="flex items-center gap-4">
                 <div className="-mt-16 sm:-mt-20 relative">
                   <div className="group relative">
-                    <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-2xl border-4 border-gray-900 bg-gray-800 shadow-lg sm:h-24 sm:w-24">
+                    <div className="h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-4 border-gray-900 bg-gray-800 shadow-lg sm:h-24 sm:w-24">
                       <Image
                         src={hub.iconUrl}
                         alt={hub.name}
@@ -100,6 +99,7 @@ export function UnifiedHubHeader({
                     {/* Icon Upload Overlay */}
                     {canEdit && (
                       <button
+                        type="button"
                         onClick={() => setIconUploadOpen(true)}
                         className="absolute inset-0 flex cursor-pointer items-center justify-center rounded-2xl bg-black/0 opacity-0 transition-colors duration-200 hover:bg-black/60 group-hover:opacity-100"
                       >

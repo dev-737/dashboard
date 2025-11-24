@@ -9,6 +9,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface User {
@@ -28,6 +29,8 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  const router = useRouter();
 
   // Only render content after component is mounted on client
   if (!isMounted) {
@@ -198,16 +201,15 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
                 transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
                 whileHover={{ scale: 1.05 }}
                 // take them to the link on click
-                onClick={() => (window.location.href = href)}
+                onClick={() => router.push(href)}
               >
                 <Icon
-                  className={`h-4 w-4 ${
-                    color === 'purple'
+                  className={`h-4 w-4 ${color === 'purple'
                       ? 'text-purple-400'
                       : color === 'blue'
                         ? 'text-blue-400'
                         : 'text-pink-400'
-                  }`}
+                    }`}
                 />
                 <span className="font-medium text-gray-300 text-sm">
                   {label}
