@@ -171,31 +171,3 @@ export function OrganizationSchema({
     </Script>
   );
 }
-
-export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
-  const [schema, setSchema] = useState('');
-  const id = useId();
-
-  useEffect(() => {
-    const itemListElement = items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: item.item,
-    }));
-
-    const schemaData = {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement,
-    };
-
-    setSchema(JSON.stringify(schemaData));
-  }, [items]);
-
-  return (
-    <Script id={id} type="application/ld+json">
-      {schema}
-    </Script>
-  );
-}

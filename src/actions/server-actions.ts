@@ -5,7 +5,6 @@ import { headers } from 'next/headers';
 import type {
   Connection,
   Hub,
-  ReportStatus,
   ServerData,
 } from '@/lib/generated/prisma/client/client';
 import { cache as perfCache } from '@/lib/performance-cache';
@@ -14,7 +13,7 @@ import { db } from '@/lib/prisma';
 // Discord API endpoints
 const DISCORD_API = 'https://discord.com/api/v10';
 
-export interface DiscordGuild {
+interface DiscordGuild {
   id: string;
   name: string;
   icon: string | null;
@@ -26,7 +25,7 @@ export interface DiscordGuild {
   verification_level?: number;
 }
 
-export type ServerDataWithDiscordGuild = ServerData & DiscordGuild;
+type ServerDataWithDiscordGuild = ServerData & DiscordGuild;
 
 export interface ServerDataWithConnections extends ServerDataWithDiscordGuild {
   botAdded: boolean;
@@ -318,30 +317,6 @@ export async function getServers(
   }
 }
 
-export async function getAllConnections(): Promise<
-  { error: string; status: number } | { data: Connection[]; status: number }
-> {
-  try {
-    const session = await auth.api.getSession({
-      headers: await headers()
-    });
-
-    if (!session?.user?.id) {
-      return { error: 'Unauthorized', status: 401 };
-    }
-
-    const servers = await getServers(session);
-    if ('error' in servers) {
-      return servers;
-    }
-
-    const connections = servers.data.flatMap((server) => server.connections);
-    return { data: connections, status: 200 };
-  } catch {
-    return { error: 'Failed to fetch connections', status: 500 };
-  }
-}
-
 export async function getServerDetails(
   serverId: string
 ): Promise<
@@ -445,29 +420,6 @@ export async function getServerDetails(
     return { data: serverData, status: 200 };
   } catch {
     return { error: 'Failed to fetch server details', status: 500 };
-  }
-}
-
-export async function getReports(status?: ReportStatus, search?: string) {
-  try {
-    const where: {
-      status?: ReportStatus;
-      reason?: { contains: string; mode: 'insensitive' };
-    } = status ? { status: status } : {};
-
-    if (search) {
-      where.reason = {
-        contains: search,
-        mode: 'insensitive',
-      };
-    }
-
-    const reports = await db.hubReport.findMany({
-      where,
-    });
-    return reports;
-  } catch {
-    return [];
   }
 }
 

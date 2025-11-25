@@ -24,7 +24,7 @@ const WEIGHT_CONNECTION_GROWTH = 10;
 const TRENDING_DECAY_BASE = 1.5;
 const TRENDING_DECAY_RATE = 0.4;
 
-export interface FilterOptions {
+interface FilterOptions {
   search?: string;
   tags?: string[];
   contentFilter?: ContentFilter;

@@ -118,40 +118,6 @@ export function usePopularTags(
   };
 }
 
-/**
- * Hook for getting tags by category with optimized caching
- */
-export function useTagCategories(options?: {
-  enabled?: boolean;
-  staleTime?: number;
-}) {
-  const trpc = useTRPC();
-
-  const queryResult = useQuery(
-    trpc.tags.categories.queryOptions(undefined, {
-      staleTime: options?.staleTime || 1000 * 60 * 15, // 15 minutes default for categories
-      enabled: options?.enabled ?? true,
-      retry: 2,
-      refetchOnWindowFocus: false,
-    })
-  );
-
-  useErrorNotification({
-    isError: queryResult.isError,
-    error: queryResult.error,
-    title: 'Tag Categories Error',
-    description: 'Failed to load tag categories',
-  });
-
-  return {
-    categories: queryResult.data?.categories || {},
-    metadata: queryResult.data?.metadata,
-    isLoading: queryResult.isLoading,
-    isError: queryResult.isError,
-    error: queryResult.error,
-    refetch: queryResult.refetch,
-  };
-}
 
 /**
  * Hook for tag suggestions based on content
