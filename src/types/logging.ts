@@ -1,8 +1,4 @@
-/**
- * Types for resolved log configuration details
- */
-
-export interface ResolvedChannel {
+interface ResolvedChannel {
   id: string;
   name: string;
   serverId: string;
@@ -10,14 +6,14 @@ export interface ResolvedChannel {
   exists: boolean;
 }
 
-export interface ResolvedRole {
+interface ResolvedRole {
   id: string;
   name: string;
   color: number;
   exists: boolean;
 }
 
-export interface ResolvedLogConfig {
+interface ResolvedLogConfig {
   channel: ResolvedChannel | null;
   role: ResolvedRole | null;
   userHasAccess: boolean;

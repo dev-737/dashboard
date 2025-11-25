@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ),
   title: 'InterChat: Connect Discord Servers & Keep Your Community Active',
   description:
-    'Is your Discord server quiet? InterChat connects your community with others by linking channels into shared chatrooms. Grow your server and keep conversations flowing 24/7. Free & easy setup!', // Explains the 'how' simply
+    'Is your Discord server quiet? InterChat connects your community with others by linking channels into shared chatrooms. Grow your server and keep conversations flowing 24/7. Free & easy setup!',
   keywords: [
     'connect discord servers',
     'discord shared chat',
