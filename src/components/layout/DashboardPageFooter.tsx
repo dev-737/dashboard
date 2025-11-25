@@ -176,11 +176,3 @@ export function PageFooter({
     </motion.div>
   );
 }
-
-/**
- * Simple spacer component for pages that just need bottom padding
- * without decorative elements
- */
-export function PageSpacer({ height = 'md' }: Pick<PageFooterProps, 'height'>) {
-  return <PageFooter height={height} decorative={false} />;
-}

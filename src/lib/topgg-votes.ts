@@ -9,7 +9,7 @@ export interface VoteData {
   query?: string;
 }
 
-export interface VoteResult {
+interface VoteResult {
   success: boolean;
   voteValue: number;
   totalVotes: number;
@@ -17,17 +17,17 @@ export interface VoteResult {
   error?: string;
 }
 
-export interface DiscordWebhookPayload {
+interface DiscordWebhookPayload {
   embeds: DiscordEmbed[];
 }
 
-export interface DiscordEmbedField {
+interface DiscordEmbedField {
   name: string;
   value: string;
   inline?: boolean;
 }
 
-export interface DiscordEmbed {
+interface DiscordEmbed {
   title: string;
   description: string;
   color: number;

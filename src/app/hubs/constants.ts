@@ -29,32 +29,6 @@ export enum VerificationStatus {
   VerifiedOrPartnered = 'verified_or_partnered',
 }
 
-// Activity level descriptions for UI components
-// Updated thresholds to match our new filtering (all hubs have at least 1 connection)
-export const ACTIVITY_LEVEL_INFO = {
-  [HubActivityLevel.HIGH]: {
-    label: 'High Activity',
-    description: '20+ servers, very active',
-    color: 'bg-green-500',
-    borderColor: 'border-green-500',
-    threshold: 50,
-  },
-  [HubActivityLevel.MEDIUM]: {
-    label: 'Medium Activity',
-    description: '5-19 servers, moderately active',
-    color: 'bg-yellow-500',
-    borderColor: 'border-yellow-500',
-    threshold: 15,
-  },
-  [HubActivityLevel.LOW]: {
-    label: 'Low Activity',
-    description: '1-4 servers, quiet',
-    color: 'bg-gray-500',
-    borderColor: 'border-gray-500',
-    threshold: 0,
-  },
-} as const;
-
 export const LANGUAGES = [
   { code: 'en', name: 'English' },
   { code: 'es', name: 'Spanish' },
@@ -152,42 +126,4 @@ export const LANGUAGES = [
   { code: 'to', name: 'Tongan' },
   { code: 'fj', name: 'Fijian' },
   { code: 'other', name: 'Other' },
-];
-
-export const REGIONS = [
-  { code: 'na', name: 'North America' },
-  { code: 'sa', name: 'South America' },
-  { code: 'eu', name: 'Europe' },
-  { code: 'as', name: 'Asia' },
-  { code: 'af', name: 'Africa' },
-  { code: 'oc', name: 'Oceania' },
-  { code: 'global', name: 'Global' },
-];
-
-// Popular tags for hub discovery
-export const POPULAR_TAGS = [
-  'gaming',
-  'art',
-  'technology',
-  'music',
-  'anime',
-  'memes',
-  'education',
-  'community',
-  'programming',
-  'design',
-  'sports',
-  'movies',
-  'books',
-  'food',
-  'travel',
-  'photography',
-  'science',
-  'writing',
-  'roleplay',
-  'politics',
-  'news',
-  'fashion',
-  'pets',
-  'fitness',
 ];

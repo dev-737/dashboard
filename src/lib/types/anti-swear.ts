@@ -10,7 +10,7 @@ export enum MatchPattern {
   WILDCARD = 'WILDCARD',
 }
 
-export interface AntiSwearPattern {
+interface AntiSwearPattern {
   id?: string;
   pattern: string;
   matchType?: PatternMatchType;
