@@ -1,8 +1,5 @@
 import { Redis } from 'ioredis';
 
-/**
- * Redis configuration for rate limiting
- */
 export interface RedisConfig {
   url: string;
   retryDelayOnFailover: number;
@@ -13,9 +10,6 @@ export interface RedisConfig {
   commandTimeout: number;
 }
 
-/**
- * Default Redis configuration optimized for rate limiting
- */
 export const DEFAULT_REDIS_CONFIG: Omit<RedisConfig, 'url'> = {
   retryDelayOnFailover: 100,
   maxRetriesPerRequest: 3,
@@ -25,9 +19,6 @@ export const DEFAULT_REDIS_CONFIG: Omit<RedisConfig, 'url'> = {
   commandTimeout: 5000,
 };
 
-/**
- * Redis client singleton for rate limiting
- */
 class RedisManager {
   private static instance: RedisManager;
   private client: Redis | null = null;
@@ -76,29 +67,6 @@ class RedisManager {
         ...DEFAULT_REDIS_CONFIG,
         maxRetriesPerRequest: 3,
         lazyConnect: true,
-      });
-
-      // Set up event handlers
-      this.client.on('connect', () => {
-        console.log('Redis connected successfully for rate limiting');
-      });
-
-      this.client.on('ready', () => {
-        console.log('Redis ready for rate limiting operations');
-      });
-
-      this.client.on('error', (error) => {
-        console.error('Redis connection error:', error.message);
-      });
-
-      this.client.on('close', () => {
-        console.warn(
-          '⚠️ Redis connection closed, rate limiting will use memory fallback'
-        );
-      });
-
-      this.client.on('reconnecting', () => {
-        console.log('Redis reconnecting...');
       });
 
       // Test the connection
@@ -165,33 +133,21 @@ class RedisManager {
   }
 }
 
-/**
- * Get the Redis client instance for rate limiting
- */
 export async function getRedisClient(): Promise<Redis | null> {
   const manager = RedisManager.getInstance();
   return await manager.getClient();
 }
 
-/**
- * Disconnect Redis client (useful for cleanup in tests or shutdown)
- */
 export async function disconnectRedis(): Promise<void> {
   const manager = RedisManager.getInstance();
   await manager.disconnect();
 }
 
-/**
- * Get Redis connection status
- */
 export function getRedisStatus(): string {
   const manager = RedisManager.getInstance();
   return manager.getConnectionStatus();
 }
 
-/**
- * Perform Redis health check
- */
 export async function checkRedisHealth(): Promise<{
   connected: boolean;
   status: string;
@@ -202,9 +158,6 @@ export async function checkRedisHealth(): Promise<{
   return await manager.healthCheck();
 }
 
-/**
- * Redis key utilities for rate limiting
- */
 export const RedisKeys = {
   rateLimit: (identifier: string, endpoint: string) =>
     `rate_limit:${identifier}:${endpoint}`,
@@ -218,13 +171,7 @@ export const RedisKeys = {
     `rate_limit:ip:${ip}:${endpoint}`,
 };
 
-/**
- * Redis rate limiting operations
- */
 export const RedisRateLimitOps = {
-  /**
-   * Get rate limit data from Redis
-   */
   async get(
     client: Redis,
     key: string
@@ -279,9 +226,6 @@ export const RedisRateLimitOps = {
     }
   },
 
-  /**
-   * Delete rate limit data from Redis
-   */
   async delete(client: Redis, key: string): Promise<boolean> {
     try {
       const result = await client.del(key);

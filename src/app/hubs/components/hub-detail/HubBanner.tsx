@@ -55,9 +55,9 @@ const HubBanner: React.FC<HubBannerProps> = ({ bannerUrl, name }) => {
 
       {/* Optional floating particles */}
       <div className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 20 }).map(() => (
+        {Array.from({ length: 20 }).map((_, i) => (
           <div
-            key={crypto.randomUUID()}
+            key={i}
             className="absolute h-1 w-1 animate-float rounded-full bg-white/30"
             style={{
               top: `${Math.random() * 100}%`,

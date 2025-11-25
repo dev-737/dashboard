@@ -117,8 +117,8 @@ function ServerCard({
   const iconUrl = server.icon
     ? `https://cdn.discordapp.com/icons/${server.id}/${server.icon}.png?size=128`
     : `https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
-      server.id
-    )}`;
+        server.id
+      )}`;
 
   // Format last active time
   const lastActive = server.lastMessageAt
@@ -217,30 +217,7 @@ function ServerCard({
           </div>
         </CardContent>
         <CardFooter className="border-gray-800/50 border-t pt-0 pb-3 sm:pb-4">
-          {showConnectButton && server.botAdded ? (
-            // Check if server is already connected to the selected hub
-            server.connections.some((conn) => conn.hubId === selectedHubId) ? (
-              <Button
-                disabled
-                className="mt-2 w-full cursor-not-allowed rounded-xl border-none bg-linear-to-r from-gray-600/50 to-gray-700/50 opacity-70 hover:from-gray-600/50 hover:to-gray-700/50"
-              >
-                <span className="hidden sm:inline">Already Connected</span>
-                <span className="sm:hidden">Connected</span>
-              </Button>
-            ) : (
-              <Button
-                asChild
-                className="w-full rounded-xl border-none bg-linear-to-r from-blue-600 to-indigo-600 shadow-lg transition-all duration-200 hover:from-blue-700 hover:to-indigo-700 hover:shadow-blue-500/25"
-              >
-                <Link
-                  href={`/dashboard/servers/${server.id}/connect?hubId=${selectedHubId}`}
-                >
-                  <span className="hidden sm:inline">Connect to Hub</span>
-                  <span className="sm:hidden">Connect</span>
-                </Link>
-              </Button>
-            )
-          ) : server.botAdded ? (
+          {server.botAdded ? (
             <Button
               asChild
               className="mt-2 w-full rounded-xl border-none bg-linear-to-r from-gray-700 to-gray-800 shadow-lg transition-all duration-200 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"

@@ -194,9 +194,9 @@ export default function HubDetailLoading() {
                 <div className="space-y-3">
                   {Array(3)
                     .fill(0)
-                    .map(() => (
+                    .map((_, i) => (
                       <div
-                        key={`moderator-${crypto.randomUUID()}`}
+                        key={`moderator-${i}`}
                         className="flex items-center gap-3 rounded-md p-2 transition-colors hover:bg-gray-800/50"
                       >
                         <Skeleton className="h-10 w-10 rounded-full" />

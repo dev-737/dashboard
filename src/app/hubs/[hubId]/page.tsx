@@ -142,7 +142,7 @@ export default async function HubDetailView(props: {
       percentage: Math.round(
         ((hub.reviews?.filter((r) => r.rating === rating).length || 0) /
           (hub.reviews?.length || 1)) *
-        100
+          100
       ),
     })),
   };

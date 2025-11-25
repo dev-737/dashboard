@@ -398,10 +398,11 @@ function ConnectionItem({
             </h4>
             <Badge
               variant={connection.connected ? 'default' : 'secondary'}
-              className={`w-fit rounded-full px-2 py-1 font-medium text-xs ${connection.connected
+              className={`w-fit rounded-full px-2 py-1 font-medium text-xs ${
+                connection.connected
                   ? 'border-green-500/40 bg-green-500/20 text-green-300'
                   : 'border-amber-500/40 bg-amber-500/20 text-amber-300'
-                }`}
+              }`}
             >
               {connection.connected ? (
                 <>

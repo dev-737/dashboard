@@ -269,8 +269,8 @@ export function HubSearchDropdown({
               'mx-2 my-1 flex cursor-pointer items-center gap-2 rounded-lg px-4 py-3 text-blue-400 hover:bg-gray-700/50',
               selectedIndex ===
                 searchResults.length +
-                relatedTags.length +
-                recentSearches.length
+                  relatedTags.length +
+                  recentSearches.length
                 ? 'bg-gray-700/50'
                 : ''
             )}

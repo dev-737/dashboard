@@ -72,13 +72,13 @@ export default async function HubLoggingPage({
   const logConfig = hub.logConfig;
   const configuredLogs = logConfig
     ? [
-      logConfig.modLogsChannelId ? 'modLogs' : null,
-      logConfig.joinLeavesChannelId ? 'joinLeaves' : null,
-      logConfig.appealsChannelId ? 'appeals' : null,
-      logConfig.reportsChannelId ? 'reports' : null,
-      logConfig.networkAlertsChannelId ? 'networkAlerts' : null,
-      logConfig.messageModerationChannelId ? 'messageModeration' : null,
-    ].filter(Boolean)
+        logConfig.modLogsChannelId ? 'modLogs' : null,
+        logConfig.joinLeavesChannelId ? 'joinLeaves' : null,
+        logConfig.appealsChannelId ? 'appeals' : null,
+        logConfig.reportsChannelId ? 'reports' : null,
+        logConfig.networkAlertsChannelId ? 'networkAlerts' : null,
+        logConfig.messageModerationChannelId ? 'messageModeration' : null,
+      ].filter(Boolean)
     : [];
 
   return (

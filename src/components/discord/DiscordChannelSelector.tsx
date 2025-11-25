@@ -363,10 +363,7 @@ export function DiscordChannelSelector({
       {!selectedServer && initialChannelId && !initialChannelName && (
         <div className="flex items-center justify-between rounded-lg border border-gray-700/50 bg-gray-800/30 p-3">
           <div className="flex items-center gap-2">
-            <ChannelIcon
-              type={0}
-              className="h-4 w-4 shrink-0 text-gray-500"
-            />
+            <ChannelIcon type={0} className="h-4 w-4 shrink-0 text-gray-500" />
             <div className="flex flex-col">
               <span className="text-gray-400 text-sm">
                 Channel: {initialChannelId}

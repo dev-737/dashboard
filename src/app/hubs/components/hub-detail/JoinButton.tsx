@@ -47,12 +47,12 @@ export default function JoinButton({ hubName, hubId }: JoinButtonProps) {
 
   const handleConnectServer = () => {
     if (!session) {
-      router.push(`/login?callbackUrl=/dashboard?hubId=${hubId}`);
+      router.push(`/login?callbackUrl=/dashboard/connect/${hubId}`);
       return;
     }
 
-    // Redirect to servers page with hubId parameter
-    router.push(`/dashboard?hubId=${hubId}`);
+    // Redirect to the new connection page
+    router.push(`/dashboard/connect/${hubId}`);
   };
 
   return (

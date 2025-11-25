@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { authClient } from '@/lib/auth-client';
 import { useCallback, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { authClient } from '@/lib/auth-client';
 import { useTRPC } from '@/utils/trpc';
 
 interface UseDiscoverUpvoteProps {
