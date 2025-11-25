@@ -1,39 +1,33 @@
-# Technology Stack
+# Tech Stack
 
-## Core Technologies
+## Core
+*   **Framework**: Next.js 16.0.3 (App Router)
+*   **Language**: TypeScript
+*   **Library**: React 19.2.0
 
-- **Framework**: Next.js 15 with App Router
-- **Frontend**: React 19, TypeScript
-- **Styling**: Tailwind CSS 4, Radix UI components
-- **API**: tRPC for type-safe client-server communication
-- **Database**: Prisma ORM with PostgreSQL
-- **Authentication**: NextAuth.js v5 with Discord OAuth
-- **State Management**: TanStack Query (via tRPC)
+## Styling & UI
+*   **CSS Framework**: Tailwind CSS 4.1.17
+*   **Component Primitives**: Radix UI
+*   **Animations**: Motion 12 (Framer Motion)
+*   **Icons**: Lucide React
+*   **UI Components**: `src/components/ui` (Shadcn UI inspired)
 
-## Development Tools
+## Data & State
+*   **API**: tRPC (v11.7.2) with TanStack Query (v5.90.10)
+*   **Database ORM**: Prisma v7.0.0 (PostgreSQL with @prisma/adapter-pg)
+*   **Caching/KV**: Redis (ioredis)
+*   **Validation**: Zod
 
-- **Linting/Formatting**: Biome (single quotes, 2-space indentation)
-- **Type Checking**: TypeScript with strict mode
-- **Monitoring**: Sentry for error tracking
-- **File Uploads**: UploadThing
-- **Caching**: Redis (optional but recommended)
+## Authentication
+*   **Auth Library**: NextAuth.js (v5 beta)
+*   **Provider**: Discord OAuth
 
-## Key Dependencies
+## Tooling
+*   **Linting & Formatting**: Biome
+*   **Package Manager**: npm (implied by scripts)
+*   **Monitoring**: Sentry
 
-- **UI Components**: Radix UI primitives (41+ components)
-- **Icons**: Lucide React
-- **Animations**: Framer Motion (motion package)
-- **Date Handling**: date-fns
-- **Utilities**: lodash-es, clsx, class-variance-authority
-
-## Database
-
-- **Prisma**: ORM for database operations
-- **PostgreSQL**: Primary database (shared with Python bot)
-- **Important**: Web uses Prisma schema while bot uses SQLAlchemy - schemas must be manually synchronized
-
-## Environment
-
-- **Node.js**: Modern version with ESM support
-- **Package Manager**: npm
-- **Platform**: Linux (Ubuntu/Debian-based)
+## Key Libraries
+*   `@uploadthing/react`: File uploads
+*   `date-fns`: Date manipulation
+*   `react-hook-form`: Form handling

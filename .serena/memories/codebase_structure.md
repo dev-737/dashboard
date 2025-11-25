@@ -1,208 +1,176 @@
-# Codebase Structure
+# Codebase Structure - Detailed
 
-## Root Directory: `/home/deboid/Documents/code/interchat.py/projects/web`
+The project follows the **Next.js 16 App Router** architecture with TypeScript strict mode. Source code is organized in the `src` directory.
 
-```
-projects/web/
-├── src/                      # Source code
-│   ├── app/                  # Next.js App Router
-│   ├── components/           # React components
-│   ├── server/               # Server-side code
-│   ├── lib/                  # Utilities and libraries
-│   ├── hooks/                # Custom React hooks
-│   ├── utils/                # Utility functions
-│   ├── actions/              # Server actions
-│   ├── types/                # TypeScript definitions
-│   ├── constants/            # Application constants
-│   ├── styles/               # Global styles
-│   ├── auth.ts               # NextAuth configuration
-│   ├── middleware.ts         # Next.js middleware
-│   └── instrumentation*.ts   # Sentry instrumentation
-├── prisma/                   # Prisma ORM
-│   └── schema.prisma         # Database schema
-├── public/                   # Static assets
-│   └── assets/               # Organized assets
-│       ├── images/           # Images (features, logos, defaults)
-│       └── icons/            # SVG icons
-├── next.config.mjs           # Next.js configuration
-├── biome.jsonc               # Biome configuration
-├── tsconfig.json             # TypeScript configuration
-├── package.json              # Dependencies
-└── CLAUDE.md                 # Project documentation
-```
+## Core Directory Structure
 
-## App Router Structure (`src/app/`)
+### `src/app` - Application Routes (App Router)
+**Pages & Routes:**
+- **`/` (landing)**: `page.tsx` - Homepage with Hero, Features, FAQ, CTA
+- **`/login`**: Discord OAuth login page with error handling
+- **`/discover`**: Hub discovery page with filtering and search
+- **`/hubs/[hubId]`**: Public hub details, reviews, join flow
+- **`/dashboard`**: Protected dashboard for managing connections, servers, and hubs
+  - **`/dashboard/servers/[serverId]`**: Server management and connection setup
+  - **`/dashboard/hubs/[hubId]`**: Hub management dashboard with:
+    - `/infractions` - Moderation actions and appeals
+    - `/members` - Member management
+    - `/modules` - Feature toggles
+    - `/appeals` - Appeal review interface
+    - `/discoverability` - Public listing settings
+    - `/connections` - Connected servers
+    - `/reports` - Report management
+    - `/automod` - Auto-moderation rules
+    - `/logging` - Hub logging configuration
+  - **`/dashboard/hubs/create`**: Hub creation wizard
+  - **`/dashboard/connections/[connectionId]`**: Connection details and editing
+  - **`/dashboard/settings`**: User account settings
+  - **`/dashboard/my-appeals`**: User's appeal submissions
+  - **`/dashboard/admin`**: Admin-only section for announcements
+- **`/guidelines`**, **`/terms`**, **`/privacy`**: Legal pages
 
-```
-app/
-├── _components/              # Landing page components
-├── api/                      # API routes
-│   ├── auth/                 # NextAuth routes
-│   ├── trpc/[trpc]/         # tRPC API endpoint
-│   └── webhooks/             # External webhooks
-├── dashboard/                # Main dashboard (protected)
-│   ├── admin/                # Admin panel
-│   ├── hubs/[hubId]/        # Hub management
-│   ├── connections/[id]/     # Connection management
-│   ├── settings/             # User settings
-│   ├── error.tsx             # Dashboard error boundary
-│   ├── loading.tsx           # Dashboard loading state
-│   └── not-found.tsx         # Dashboard 404 page
-├── discover/                 # Public hub discovery
-├── hubs/[hubId]/            # Public hub pages
-├── login/                    # Login page
-├── admin/                    # Admin-only pages
-├── error.tsx                 # Global error boundary
-├── loading.tsx               # Global loading state
-├── not-found.tsx             # Global 404 page
-├── layout.tsx                # Root layout
-└── page.tsx                  # Homepage
-```
+**API Routes:**
+- **`/api/trpc/[trpc]`**: tRPC handler (main API endpoint)
+- **`/api/uploadthing`**: File upload endpoint
+- **`/api/webhooks/topgg`**: Top.gg voting webhook
+- **`/api/auth/[...nextauth]`**: NextAuth.js routes
+- **`/api/auth/deleteAccount`**: Account deletion endpoint
 
-## Components Structure (`src/components/`)
+**Special Files:**
+- `_components/`: Landing page components (Hero, CTA, TrendingHubs, etc.)
+- `layout.tsx`: Root layout with providers
+- `error.tsx`, `global-error.tsx`: Error boundaries
+- `loading.tsx`: Loading states
+- `not-found.tsx`: 404 page
+- `robots.ts`, `sitemap.ts`: SEO metadata
 
-```
-components/
-├── ui/                       # Base UI components (41 files)
-│   ├── Button.tsx            # Radix UI primitives
-│   ├── Dialog.tsx
-│   ├── Input.tsx
-│   └── ...                   # 38 more components
-├── layout/                   # Layout components
-│   ├── Navbar.tsx
-│   ├── Footer.tsx
-│   ├── UserNav.tsx
-│   ├── DashboardTopbar.tsx
-│   ├── DashboardMobileSidebar.tsx
-│   ├── DashboardBreadcrumb.tsx
-│   └── DashboardPageFooter.tsx
-├── features/                 # Feature-specific components
-│   ├── dashboard/            # Dashboard domain
-│   │   ├── hubs/             # Hub management (27 files)
-│   │   ├── connections/      # Connection management
-│   │   ├── servers/          # Server management
-│   │   ├── notifications/    # Notification UI
-│   │   ├── onboarding/       # Guided tour
-│   │   └── shared/           # Shared dashboard components
-│   ├── discover/             # Hub discovery
-│   ├── hubs/                 # General hub components
-│   └── moderation/           # Moderation components
-├── forms/                    # Form components
-│   ├── HubCreateForm/        # Multi-step hub creation
-│   │   ├── HubCreateForm.tsx
-│   │   ├── StepIndicator.tsx
-│   │   ├── BasicInfoStep.tsx
-│   │   ├── DescriptionSettingsStep.tsx
-│   │   └── RulesWelcomeStep.tsx
-│   ├── HubEditForm/          # Hub editing
-│   │   ├── HubEditForm.tsx
-│   │   ├── BasicInfoSection.tsx
-│   │   ├── WelcomeMessageSection.tsx
-│   │   └── RulesSection.tsx
-│   ├── ConnectionEditForm.tsx
-│   ├── UserSettingsForm.tsx
-│   ├── DurationSelector.tsx
-│   ├── WordTagInput.tsx
-│   └── PatternBuilder.tsx
-├── discord/                  # Discord integration
-│   ├── ChannelIcon.tsx
-│   ├── DiscordChannelSelector.tsx
-│   └── DiscordRoleSelector.tsx
-├── magicui/                  # Magic UI components
-└── providers/                # React context providers
-    ├── QueryProvider.tsx
-    ├── TRPCProvider.tsx
-    └── HydrationProvider.tsx
-```
+### `src/server` - Backend Logic
+**tRPC Routers (src/server/routers/):**
+- **`hub.ts`**: Hub CRUD, settings, moderation
+- **`user.ts`**: User profile, settings, achievements
+- **`server.ts`**: Discord server data management
+- **`moderation.ts`**: Infractions, bans, appeals
+- **`announcement.ts`**: Hub announcements
+- **`discover.ts`**: Public hub discovery with filters
+- **`tags.ts`**: Hub tagging system
+- **`connection.ts`**: Server-hub connections
+- **`appeal.ts`**: Appeal submission and handling
+- **`message.ts`**: Message queries and reports
+- **`index.ts`**: Main router aggregation
 
-## Server Structure (`src/server/`)
+**Core Files:**
+- **`trpc.ts`**: tRPC initialization, context, procedures (publicProcedure, protectedProcedure)
 
-```
-server/
-├── routers/                  # tRPC routers
-│   ├── hub.ts                # Hub operations
-│   ├── user.ts               # User operations
-│   ├── server.ts             # Server operations
-│   ├── moderation.ts         # Moderation tools
-│   ├── connection.ts         # Connection management
-│   ├── appeal.ts             # Appeal system
-│   ├── announcement.ts       # Announcements
-│   ├── discover.ts           # Hub discovery
-│   ├── tags.ts               # Tag management
-│   └── index.ts              # Main router (combines all)
-└── trpc.ts                   # tRPC setup
-```
+### `src/components` - UI Components
 
-## Library Structure (`src/lib/`)
+**`ui/` - Base Components (Shadcn-inspired):**
+- Primitives: `button`, `input`, `textarea`, `select`, `checkbox`, `switch`, `radio-group`, `slider`
+- Overlays: `dialog`, `alert-dialog`, `dropdown-menu`, `popover`, `tooltip`, `sheet`
+- Data Display: `table`, `card`, `badge`, `avatar`, `separator`, `skeleton`, `tabs`
+- Feedback: `toast`, ` alert`, `progress`, `spinner`
+- Custom: `InterChatSpinner`, `PremiumBadge`, `GradientText`, `AnimatedShinyText`
 
-```
-lib/
-├── prisma.ts                 # Prisma client singleton
-├── utils.ts                  # Utility functions (cn, etc.)
-├── constants.ts              # Application constants
-├── permissions.ts            # Permission checking
-├── rate-limit.ts             # Rate limiting
-├── rate-limit-middleware.ts  # Rate limit middleware
-├── rate-limit-config.ts      # Rate limit configuration
-├── redis-config.ts           # Redis configuration
-├── hub-queries.ts            # Hub database queries
-├── hub-bans.ts               # Hub ban utilities
-├── platform-stats.ts         # Platform statistics
-├── performance-cache.ts      # Performance caching
-└── services/                 # Service layer utilities
-```
+**`layout/` - Layout Components:**
+- `Navbar.tsx`, `NavbarWrapper.tsx`: Main navigation
+- `Footer.tsx`, `ConditionalFooter.tsx`: Page footers
+- `DashboardMobileSidebar.tsx`, `DashboardTopbar.tsx`, `DashboardBreadcrumb.tsx`: Dashboard UI
+- `UserNav.tsx`: User menu dropdown
+- `Toaster.tsx`: Toast notification container
 
-## Hooks Structure (`src/hooks/`)
+**`features/` - Feature Components:**
+- **`landing/`**: Homepage sections
+- **`discover/`**: Discovery page components
+- **`hubs/`**: Hub detail components
+- **`moderation/`**: Moderation UI
+- **`dashboard/`**: Dashboard-specific components
+  - `servers/`, `connections/`, `hubs/`, `notifications/`, `onboarding/`, `shared/`
 
-Custom React hooks for data fetching and state management:
+**`forms/` - Form Components:**
+- `HubEditForm/`, `HubCreateForm/`: Multi-section hub forms
+- `ConnectionEditForm`, `UserSettingsForm`, `PatternBuilder`, `DurationSelector`
 
-```
-hooks/
-├── use-hub.ts                # Hub management hooks
-├── use-connections.ts        # Connection hooks
-├── use-tags.ts               # Tag management hooks
-└── use-*.ts                  # Other custom hooks
-```
+**`discord/` - Discord UI:**
+- `DiscordChannelSelector`, `DiscordRoleSelector`, `ChannelIcon`
 
-## Public Assets (`public/`)
+**`magicui/` - Special Effects:**
+- `GridPattern`: Animated grid backgrounds
 
-```
-public/
-├── assets/
-│   ├── images/
-│   │   ├── features/         # Feature screenshots
-│   │   ├── logos/            # Logo files
-│   │   ├── defaults/         # Default avatars/banners
-│   │   └── blog/             # Blog images
-│   └── icons/                # SVG icons
-├── favicon.ico
-└── robots.txt
-```
+**`providers/` - Context Providers:**
+- `QueryProvider`, `TrpcProvider`, `HydrationBoundary`
 
-## Configuration Files
+### `src/lib` - Shared Libraries
 
-- **next.config.mjs**: Next.js configuration (redirects, headers, optimizations)
-- **biome.jsonc**: Biome linter/formatter config
-- **tsconfig.json**: TypeScript configuration
-- **sentry.*.config.ts**: Sentry error tracking
-- **prisma/schema.prisma**: Database schema
-- **.env.local**: Environment variables (not in git)
+**Core Services:**
+- **`prisma.ts`**: Prisma client with Vercel Postgres adapter
+- **`redis-config.ts`**: Redis configuration for caching/sessions
+- **`uploadthing.ts`**: File upload setup
+- **`tanstack-query.ts`**: React Query configuration
 
-## Key File Locations
+**Services (`lib/services/`):**
+- `TagManagementService.ts`: Tag CRUD operations
 
-### Authentication
-- `src/auth.ts` - NextAuth.js configuration
-- `src/middleware.ts` - Route protection
+**Utilities:**
+- `utils.ts`: cn() utility (Tailwind merge)
+- `constants.ts`: App-wide constants
+- `permissions.ts`: Role-based access control
+- `hub-queries.ts`: Reusable hub queries
+- `rate-limit.ts`, `rate-limit-config.ts`, `rate-limit-middleware.ts`: Rate limiting
+- `performance-cache.ts`: Caching utilities
+- `error-messages.ts`: Standardized error messages
+- `hub-bans.ts`: Ban management utilities
+- `platform-stats.ts`: Platform statistics
+- `topgg-votes.ts`: Top.gg integration
+- `create-dehydrated-state.ts`: SSR hydration
 
-### Database
-- `prisma/schema.prisma` - Schema definition
-- `src/lib/prisma.ts` - Client singleton
-- `prisma/migrations/` - Migration files
+**Generated:**
+- `lib/generated/prisma/client/`: Auto-generated Prisma client
 
-### API
-- `src/server/routers/` - All tRPC routers
-- `src/app/api/trpc/[trpc]/route.ts` - tRPC HTTP handler
+**Types (`lib/types/`):**
+- `anti-swear.ts`: Anti-profanity type definitions
 
-### Styling
-- `src/styles/globals.css` - Global CSS + Tailwind
-- `src/lib/utils.ts` - `cn()` utility for class merging
+**Discover:**
+- `discover/query.ts`: Discovery query builders
+
+### `src/hooks` - Custom React Hooks
+Data Fetching:
+- `use-hub.ts`, `use-connections.ts`, `use-appeals.ts`, `use-tags.ts`
+- `use-hub-members.ts`, `use-hub-reviews.ts`, `use-hub-recommendations.ts`
+- `use-infinite-hubs.ts`: Infinite scroll hubs
+- `use-user-search.ts`: User search
+
+UI Utilities:
+- `use-mobile.tsx`: Mobile detection
+- `use-toast.ts`: Toast notifications
+- `use-error-notification.tsx`: Error handling
+- `use-debounce.ts`: Debounced values
+
+Settings:
+- `use-hub-settings.ts`, `useNSFWPreference.ts`
+- `use-discover-upvote.ts`: Hub upvoting
+- `use-notifications.ts`: Notification preferences
+
+### `src/types` - Type Definitions
+- **`next-auth.d.ts`**: NextAuth session type augmentation
+- **`global.d.ts`**: Global type declarations
+- **`logging.ts`**: Logging type definitions
+
+### `src/styles` - Global Styles
+CSS files for global styling (Tailwind base, components, utilities)
+
+### Configuration Files
+
+**Root:**
+- **`next.config.mjs`**: Next.js config with Sentry, caching strategies, image optimization, redirects
+- **`tsconfig.json`**: TypeScript config (strict mode, path aliases `@/*`)
+- **`biome.jsonc`**: Biome linter & formatter config
+- **`package.json`**: Dependencies and scripts
+- **`prisma/schema.prisma`**: Database schema (755 lines, 50+ models)
+- **`.editorconfig`**: Editor preferences
+
+## Code Organization Patterns
+
+1. **Server Components by Default**: Most page components are React Server Components
+2. **Dynamic Imports**: Features lazy-loaded with `next/dynamic`
+3. **Co-location**: Route-specific components in `_components` folders
+4. **Separation of Concerns**: UI components separate from business logic
+5. **Type Safety**: End-to-end type safety with tRPC + Prisma
