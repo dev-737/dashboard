@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useSession } from 'next-auth/react';
+import { authClient } from '@/lib/auth-client';
 import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { useTRPC } from '@/utils/trpc';
@@ -12,7 +12,7 @@ import { useTRPC } from '@/utils/trpc';
  */
 export function useNSFWPreference() {
   const trpc = useTRPC();
-  const { data: session, status: sessionStatus } = useSession();
+  const { data: session, isPending: isSessionPending } = authClient.useSession();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [isUpdating, setIsUpdating] = useState(false);
@@ -20,7 +20,7 @@ export function useNSFWPreference() {
   // Query for user settings
   const { data: userSettings, isLoading } = useQuery(
     trpc.user.getSettings.queryOptions(undefined, {
-      enabled: !!session?.user?.id && sessionStatus === 'authenticated',
+      enabled: !!session?.user?.id && !isSessionPending,
       staleTime: 1000 * 60 * 5, // 5 minutes
       gcTime: 1000 * 60 * 10, // 10 minutes
     })
@@ -39,7 +39,7 @@ export function useNSFWPreference() {
 
         queryClient.setQueryData(trpc.user.getSettings.queryKey(), (old) =>
           old
-            ? { ...old, user: { ...old.user, showNsfwHubs: showNsfwHubs! } }
+            ? { ...old, user: { ...old.user, showNsfwHubs: showNsfwHubs ?? false } }
             : undefined
         );
 
@@ -117,7 +117,7 @@ export function useNSFWPreference() {
 
   return {
     showNsfwHubs: userSettings?.user?.showNsfwHubs ?? false,
-    isLoading: isLoading && sessionStatus === 'authenticated',
+    isLoading: isLoading && !isSessionPending && !!session,
     isUpdating: isUpdating || updateMutation.isPending,
     isAuthenticated: !!session?.user?.id,
     updateNSFWPreference,

@@ -4,7 +4,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -30,7 +31,9 @@ async function getAnnouncementsData(): Promise<{
   announcements: AnnouncementWithReadStatus[];
   unreadCount: number;
 }> {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
   if (!session?.user?.id) {
     redirect('/login?callbackUrl=/dashboard/announcements');
   }
@@ -96,9 +99,8 @@ export default async function AnnouncementsPage() {
           {announcements.map((announcement) => (
             <Card
               key={announcement.id}
-              className={`border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm ${
-                announcement.isUnread ? 'border-l-4 border-l-indigo-500' : ''
-              }`}
+              className={`border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm ${announcement.isUnread ? 'border-l-4 border-l-indigo-500' : ''
+                }`}
             >
               <CardHeader>
                 <div className="flex items-center justify-between">

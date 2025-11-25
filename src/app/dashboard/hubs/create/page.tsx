@@ -2,7 +2,8 @@ import { ArrowLeft, Globe, Shield, Sparkles, Zap } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { HubCreateForm } from '@/components/forms/HubCreateForm';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Button } from '@/components/ui/button';
@@ -13,7 +14,9 @@ export const metadata: Metadata = {
 };
 
 export default async function CreateHubPage() {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session?.user?.id) {
     redirect('/login?callbackUrl=/dashboard/hubs/create');

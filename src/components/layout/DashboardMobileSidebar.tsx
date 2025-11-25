@@ -14,10 +14,9 @@ interface User {
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { signOut } from 'next-auth/react';
+import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { UrlObject } from 'url';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
 import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/OnboardingHelpMenu';
 import { cn } from '@/lib/utils';
@@ -285,7 +284,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                   size="sm"
                   onClick={async () => {
                     onClose();
-                    await signOut();
+                    await authClient.signOut();
                     window.location.href = '/';
                   }}
                   className="flex-1 border-red-700/50 bg-red-900/20 text-red-400 transition-all duration-300 hover:scale-[1.02] hover:border-red-600/50 hover:bg-red-800/30 hover:text-red-300"

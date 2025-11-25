@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { authClient } from '@/lib/auth-client';
 import { useCallback, useEffect, useState } from 'react';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 import { useToast } from '@/hooks/use-toast';
@@ -10,7 +10,7 @@ export function useHubUpvote(
   hubId: string,
   initialUpvotes: SimplifiedHub['upvotes']
 ) {
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const router = useRouter();
   const { toast } = useToast();
   const trpc = useTRPC();

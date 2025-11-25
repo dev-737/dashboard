@@ -1,7 +1,8 @@
 import { createUploadthing, type FileRouter } from 'uploadthing/next';
 import { UploadThingError } from 'uploadthing/server';
 import { z } from 'zod/v4';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { PermissionLevel } from '@/lib/constants';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
@@ -23,7 +24,9 @@ export const ourFileRouter = {
     .input(z.object({ hubId: z.string() }))
     .middleware(async ({ input }) => {
       // Get the session
-      const session = await auth();
+      const session = await auth.api.getSession({
+        headers: await headers()
+      });
       if (!session?.user?.id) {
         throw new UploadThingError('Unauthorized');
       }
@@ -79,7 +82,9 @@ export const ourFileRouter = {
     .input(z.object({ hubId: z.string() }))
     .middleware(async ({ input }) => {
       // Get the session
-      const session = await auth();
+      const session = await auth.api.getSession({
+        headers: await headers()
+      });
       if (!session?.user?.id) {
         throw new UploadThingError('Unauthorized');
       }

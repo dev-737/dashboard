@@ -1,7 +1,8 @@
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { HydrationBoundaryProvider } from '@/components/providers/HydrationBoundary';
 import { Button } from '@/components/ui/button';
@@ -21,7 +22,9 @@ export default async function HubConnectionsPage({
   params,
 }: HubConnectionsPageProps) {
   const hubId = (await params).hubId;
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session?.user?.id) {
     return notFound();

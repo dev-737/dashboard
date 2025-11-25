@@ -1,6 +1,5 @@
 'use client';
 
-import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import type { ReactNode } from 'react';
 import type { DehydratedState } from '@/lib/tanstack-query';
@@ -16,14 +15,12 @@ export function Providers({
   dehydratedState?: DehydratedState | null;
 }) {
   return (
-    <SessionProvider>
-      <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
-        <TanstackQueryProvider>
-          <HydrationBoundaryProvider state={dehydratedState}>
-            <TRPCProvider>{children}</TRPCProvider>
-          </HydrationBoundaryProvider>
-        </TanstackQueryProvider>
-      </ThemeProvider>
-    </SessionProvider>
+    <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+      <TanstackQueryProvider>
+        <HydrationBoundaryProvider state={dehydratedState}>
+          <TRPCProvider>{children}</TRPCProvider>
+        </HydrationBoundaryProvider>
+      </TanstackQueryProvider>
+    </ThemeProvider>
   );
 }

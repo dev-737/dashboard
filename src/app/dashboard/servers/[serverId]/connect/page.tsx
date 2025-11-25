@@ -15,7 +15,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { authClient } from '@/lib/auth-client';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { ChannelIcon } from '@/components/discord/ChannelIcon';
 import { Button } from '@/components/ui/button';
@@ -93,7 +93,7 @@ export default function ServerConnectPage() {
 
   const { toast } = useToast();
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const searchParams = useSearchParams();
   const { serverId } = useParams();
 

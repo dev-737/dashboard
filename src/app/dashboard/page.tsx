@@ -7,7 +7,8 @@ import {
   getServers,
   type ServerDataWithConnections,
 } from '@/actions/server-actions';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { AnimatedDashboardSkeleton } from '@/components/features/dashboard/AnimatedDashboardSkeleton';
 import { AnimatedWelcome } from '@/components/features/dashboard/AnimatedWelcome';
 import { AnimatedEmptyState } from '@/components/features/dashboard/hubs/AnimatedEmptyState';
@@ -47,7 +48,9 @@ async function DashboardContent({
 }: {
   searchParams: Promise<{ hubId?: string; tab?: string }>;
 }) {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
   const { hubId, tab } = await searchParams;
 
   if (!session?.user?.id) {
@@ -99,7 +102,7 @@ async function DashboardContent({
   return (
     <div className="space-y-8">
       {/* Animated Welcome Hero */}
-      <AnimatedWelcome user={session.user as any} />
+      <AnimatedWelcome user={session.user} />
 
       {/* Hub Connection Flow Banner */}
       {targetHub && (

@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import type { ReactNode } from 'react';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import './dashboard.css';
 import { DashboardLayoutProvider } from '@/components/features/dashboard/LayoutProvider';
 import { GuidedTourProvider } from '@/components/features/dashboard/onboarding/GuidedTourProvider';
@@ -11,7 +12,9 @@ export default async function DashboardLayout({
 }: {
   children: ReactNode;
 }) {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   // Redirect to login if not authenticated
   if (!session?.user?.id) {
@@ -40,7 +43,7 @@ export default async function DashboardLayout({
 
                 {/* grid pattern */}
                 <div
-                  className="absolute inset-0 bg-[size:40px_40px] bg-grid-white opacity-[0.02] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_120%)]"
+                  className="mask-[radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_120%)] absolute inset-0 bg-grid-white bg-size-[40px_40px] opacity-[0.02]"
                   style={{ zIndex: -1 }}
                 />
 

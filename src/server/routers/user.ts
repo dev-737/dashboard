@@ -107,21 +107,21 @@ export const userRouter = router({
     const account = await db.account.findFirst({
       where: {
         userId,
-        provider: 'discord',
+        providerId: 'discord',
       },
       select: {
-        access_token: true,
+        accessToken: true,
       },
     });
 
-    if (!account || !account.access_token) {
+    if (!account || !account.accessToken) {
       throw new TRPCError({
         code: 'BAD_REQUEST',
         message: 'Discord account not connected',
       });
     }
 
-    const accessToken = account.access_token;
+    const accessToken = account.accessToken;
     const DISCORD_API = 'https://discord.com/api/v10';
 
     try {

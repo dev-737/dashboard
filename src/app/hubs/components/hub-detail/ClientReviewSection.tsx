@@ -1,7 +1,7 @@
 'use client';
 
 import { MessageSquare } from 'lucide-react';
-import { useSession } from 'next-auth/react';
+import { authClient } from '@/lib/auth-client';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import WriteReviewForm from './WriteReviewForm';
@@ -13,7 +13,7 @@ interface ClientReviewSectionProps {
 export default function ClientReviewSection({
   hubId,
 }: ClientReviewSectionProps) {
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const [showForm, setShowForm] = useState(false);
 
   if (!session?.user?.id) {

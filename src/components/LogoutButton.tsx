@@ -1,18 +1,18 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { signOut } from 'next-auth/react';
+import { authClient } from '@/lib/auth-client';
 import { Button } from '@/components/ui/button';
 
 interface LogoutButtonProps {
   children: React.ReactNode;
   variant?:
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link';
+  | 'default'
+  | 'destructive'
+  | 'outline'
+  | 'secondary'
+  | 'ghost'
+  | 'link';
   className?: string;
 }
 
@@ -25,7 +25,7 @@ export function LogoutButton({
 
   const handleLogout = async () => {
     try {
-      await signOut();
+      await authClient.signOut();
       router.push('/login');
     } catch (error) {
       console.error('Logout error:', error);

@@ -2,8 +2,8 @@
 
 import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 import { useEffect, useRef, useState } from 'react';
+import { authClient } from '@/lib/auth-client';
 import { DiscordMessage } from './DiscordMessage';
 import { DiscordServerCard } from './DiscordServerCard';
 import { SquigglyConnectionLine } from './SquigglyConnectionLine';
@@ -19,11 +19,10 @@ const DESTINATION_SERVERS = [
 
 const channelNames = ['portal-into-discords', 'general', 'global'];
 
-type AnimationPhase = 'initial' | 'source-message' | 'connecting' | 'complete';
+
 
 export function HeroAnimation() {
-  const { data: session } = useSession();
-  const [phase, setPhase] = useState<AnimationPhase>('initial');
+  const { data: session } = authClient.useSession();
   const [showSourceMessage, setShowSourceMessage] = useState(false);
   const [activeConnections, setActiveConnections] = useState<number[]>([]);
   const [showDestMessages, setShowDestMessages] = useState<number[]>([]);
@@ -39,14 +38,12 @@ export function HeroAnimation() {
       {
         time: 500,
         action: () => {
-          setPhase('source-message');
           setShowSourceMessage(true);
         },
       },
       {
         time: 1500,
         action: () => {
-          setPhase('connecting');
           setActiveConnections([0]);
         },
       },
@@ -78,7 +75,6 @@ export function HeroAnimation() {
         time: 5500,
         action: () => {
           setShowDestMessages((prev) => [...prev, 2]);
-          setPhase('complete');
         },
       },
     ];

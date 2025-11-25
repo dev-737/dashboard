@@ -11,7 +11,7 @@ import {
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { signOut } from 'next-auth/react';
+import { authClient } from "@/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -43,7 +43,7 @@ export function UserNav({
   const router = useRouter();
 
   const handleSignOut = async () => {
-    await signOut();
+    await authClient.signOut();
     router.push('/');
   };
 

@@ -394,17 +394,17 @@ export const serverRouter = router({
       const rest = new REST({ version: '10' }).setToken(botToken);
 
       const account = await db.account.findFirst({
-        where: { userId, provider: 'discord' },
-        select: { access_token: true },
+        where: { userId, providerId: 'discord' },
+        select: { accessToken: true },
       });
 
       let manageableServerIds = new Set<string>();
-      if (account?.access_token) {
+      if (account?.accessToken) {
         try {
           const userGuildsResponse = await fetch(
             'https://discord.com/api/v10/users/@me/guilds',
             {
-              headers: { Authorization: `Bearer ${account.access_token}` },
+              headers: { Authorization: `Bearer ${account.accessToken}` },
             }
           );
           if (userGuildsResponse.ok) {
