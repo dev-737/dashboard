@@ -1,6 +1,14 @@
 'use client';
 
-import { Bell, HelpCircle, Home, Scale, Settings, X } from 'lucide-react';
+import {
+  Bell,
+  HelpCircle,
+  Home,
+  Scale,
+  Settings,
+  Trophy,
+  X,
+} from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -74,6 +82,13 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
       label: 'My Appeals',
       color: 'purple',
       active: pathname.startsWith('/dashboard/my-appeals'),
+    },
+    {
+      href: '/leaderboard',
+      icon: Trophy,
+      label: 'Leaderboard',
+      color: 'yellow',
+      active: pathname.startsWith('/leaderboard'),
     },
     {
       href: '/dashboard/settings',
