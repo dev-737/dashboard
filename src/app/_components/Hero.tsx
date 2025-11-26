@@ -19,9 +19,8 @@ export function Hero() {
     >
       {/* Background Gradients */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] h-[800px] w-[800px] rounded-full bg-purple-600/10 blur-[120px]" />
-        <div className="absolute right-[-10%] bottom-[-10%] h-[800px] w-[800px] rounded-full bg-blue-600/10 blur-[120px]" />
-        <div className="absolute inset-0 bg-[url('/assets/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+        <div className="absolute top-[-20%] left-[-10%] h-[1200px] w-[1200px] rounded-full bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-purple-600/15 via-blue-600/10 to-transparent blur-[120px]" />
+        <div className="mask-[linear-gradient(180deg,white,rgba(255,255,255,0))] absolute inset-0 bg-[url('/assets/grid.svg')] bg-center" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">

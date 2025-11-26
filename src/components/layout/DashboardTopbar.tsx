@@ -16,7 +16,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
-import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/OnboardingHelpMenu';
 import { UserNav } from '@/components/layout/UserNav';
 import { MobileSidebar } from './DashboardMobileSidebar';
 
@@ -102,10 +101,6 @@ export function DashboardTopBar({ user }: { user: User }) {
             <div className="rounded-(--radius-button) p-1 transition-all duration-300 hover:bg-white/5">
               <NotificationDropdown />
             </div>
-          </div>
-
-          <div className="rounded-(--radius-button) p-1 transition-all duration-300 hover:bg-white/5">
-            <OnboardingHelpMenu />
           </div>
 
           <div className="flex items-center" data-tour="user-menu">

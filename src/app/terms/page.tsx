@@ -5,11 +5,9 @@ import {
   Ban,
   Copyright,
   DollarSign,
-  FileText,
   Gavel,
   Mail,
   Scale,
-  Shield,
 } from 'lucide-react';
 import { Link } from '@/components/Link';
 

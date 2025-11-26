@@ -18,7 +18,6 @@ import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
-import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/OnboardingHelpMenu';
 import { cn } from '@/lib/utils';
 
 interface MobileSidebarProps {
@@ -96,7 +95,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[9998] bg-black/85 backdrop-blur-md"
+            className="fixed inset-0 z-9998 bg-black/85 backdrop-blur-md"
             onClick={onClose}
             style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
           />
@@ -107,7 +106,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-            className="fixed top-0 bottom-0 left-0 z-[9999] flex w-[300px] max-w-[85vw] flex-col overflow-hidden border-gray-700/40 border-r bg-linear-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/30 backdrop-blur-xl"
+            className="fixed top-0 bottom-0 left-0 z-9999 flex w-[300px] max-w-[85vw] flex-col overflow-hidden border-gray-700/40 border-r bg-linear-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/30 backdrop-blur-xl"
             style={{ position: 'fixed', top: 0, left: 0, bottom: 0 }}
           >
             {/* Mobile sidebar header */}
@@ -231,9 +230,6 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                     <span className="truncate text-gray-300 group-hover:text-white">
                       Help & Support
                     </span>
-                    <div className="ml-auto">
-                      <OnboardingHelpMenu />
-                    </div>
                   </div>
                 </motion.div>
               </div>

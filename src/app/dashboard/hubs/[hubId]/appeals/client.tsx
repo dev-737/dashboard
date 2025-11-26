@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
 import {
   AlertTriangle,
@@ -474,6 +474,7 @@ interface AppealCardProps {
 function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
   const trpc = useTRPC();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
   const [isUpdating, setIsUpdating] = useState(false);
   const [localStatus, setLocalStatus] = useState(appeal.status);
   const updateStatus = useMutation(trpc.appeal.updateStatus.mutationOptions());
@@ -485,7 +486,10 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
     updateStatus.mutate(
       { appealId: appeal.id, status: newStatus },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
+            queryKey: trpc.appeal.list.queryOptions({ hubId }).queryKey,
+          });
           toast({
             title: `Appeal ${newStatus === 'ACCEPTED' ? 'Accepted' : 'Rejected'}`,
             description:

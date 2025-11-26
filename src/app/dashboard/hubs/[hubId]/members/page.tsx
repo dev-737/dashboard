@@ -2,9 +2,7 @@ import { notFound } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
-import { HydrationBoundaryProvider } from '@/components/providers/HydrationBoundary';
 import { PermissionLevel } from '@/lib/constants';
-import { createDehydratedState } from '@/lib/create-dehydrated-state';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 import { MembersClient } from './client';
@@ -62,50 +60,42 @@ export default async function HubMembersPage({ params }: HubMembersPageProps) {
     notFound();
   }
 
-  // Create dehydrated state for React Query
-  const dehydratedState = await createDehydratedState(async (queryClient) => {
-    // Prefetch hub members
-    await queryClient.prefetchQuery({
-      queryKey: ['hubMembers', hubId],
-      queryFn: async () => {
-        const hubMembers = await db.hub.findUnique({
-          where: { id: hubId },
-          select: {
-            owner: {
-              select: {
-                id: true,
-                name: true,
-                image: true,
-              },
-            },
-            moderators: {
-              select: {
-                id: true,
-                userId: true,
-                role: true,
-                user: {
-                  select: {
-                    id: true,
-                    name: true,
-                    image: true,
-                  },
-                },
-              },
+  // Fetch hub members directly
+  const hubMembers = await db.hub.findUnique({
+    where: { id: hubId },
+    select: {
+      owner: {
+        select: {
+          id: true,
+          name: true,
+          image: true,
+        },
+      },
+      moderators: {
+        select: {
+          id: true,
+          userId: true,
+          role: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              image: true,
             },
           },
-        });
-
-        if (!hubMembers) {
-          throw new Error('Hub not found');
-        }
-
-        return {
-          owner: hubMembers.owner,
-          moderators: hubMembers.moderators,
-        };
+        },
       },
-    });
+    },
   });
+
+  if (!hubMembers) {
+    return notFound();
+  }
+
+  const initialMembers = {
+    owner: hubMembers.owner,
+    moderators: hubMembers.moderators,
+  };
 
   // Prepare hub data for the layout
   const hubData = {
@@ -126,9 +116,7 @@ export default async function HubMembersPage({ params }: HubMembersPageProps) {
       canModerate={canModerate}
       canEdit={canEdit}
     >
-      <HydrationBoundaryProvider state={dehydratedState}>
-        <MembersClient hubId={hubId} />
-      </HydrationBoundaryProvider>
+      <MembersClient hubId={hubId} initialMembers={initialMembers} />
     </HubLayout>
   );
 }

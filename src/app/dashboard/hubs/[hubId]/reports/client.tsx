@@ -133,9 +133,9 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
   const updateReport = useMutation(
     trpc.moderation.updateReportStatus.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries(
-          trpc.moderation.getReports.pathFilter()
-        );
+        await queryClient.invalidateQueries({
+          queryKey: trpc.moderation.getReports.queryOptions({ hubId }).queryKey,
+        });
       },
     })
   );
@@ -143,12 +143,12 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
     trpc.moderation.createInfractionFromReport.mutationOptions({
       onSuccess: async () => {
         await Promise.all([
-          queryClient.invalidateQueries(
-            trpc.moderation.getReports.pathFilter()
-          ),
-          queryClient.invalidateQueries(
-            trpc.moderation.getInfractions.pathFilter()
-          ),
+          queryClient.invalidateQueries({
+            queryKey: trpc.moderation.getReports.queryOptions({ hubId }).queryKey,
+          }),
+          queryClient.invalidateQueries({
+            queryKey: trpc.moderation.getInfractions.queryOptions({ hubId }).queryKey,
+          }),
         ]);
       },
     })

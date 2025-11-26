@@ -208,12 +208,7 @@ export const hubRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      const {
-        hubId,
-        automodEnabled,
-        defaultMuteDurationMinutes,
-        alertModsEnabled,
-      } = input;
+      const {hubId, defaultMuteDurationMinutes} = input;
       const userId = ctx.session.user.id;
       const level = await getUserHubPermission(userId, hubId);
       if (level < PermissionLevel.MANAGER)
@@ -1219,6 +1214,14 @@ export const hubRouter = router({
         });
       }
 
+      // Permission check: Managers cannot add other Managers
+      if (level === PermissionLevel.MANAGER && role === 'MANAGER') {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message: 'Managers cannot add other Managers',
+        });
+      }
+
       // Create the moderator
       const moderator = await db.hubModerator.create({
         data: {
@@ -1279,6 +1282,23 @@ export const hubRouter = router({
         throw new TRPCError({ code: 'NOT_FOUND', message: 'Member not found' });
       }
 
+      // Permission check: Managers cannot modify other Managers
+      if (level === PermissionLevel.MANAGER) {
+        if (member.role === 'MANAGER' && member.userId !== userId) {
+          throw new TRPCError({
+            code: 'FORBIDDEN',
+            message: 'Managers cannot modify other Managers',
+          });
+        }
+        // Managers cannot promote someone to Manager
+        if (role === 'MANAGER') {
+          throw new TRPCError({
+            code: 'FORBIDDEN',
+            message: 'Managers cannot promote members to Manager',
+          });
+        }
+      }
+
       // Update the member's role
       const updatedMember = await db.hubModerator.update({
         where: { id: memberId },
@@ -1327,11 +1347,22 @@ export const hubRouter = router({
           id: true,
           hubId: true,
           userId: true,
+          role: true,
         },
       });
 
       if (!member || member.hubId !== hubId) {
         throw new TRPCError({ code: 'NOT_FOUND', message: 'Member not found' });
+      }
+
+      // Permission check: Managers cannot remove other Managers
+      if (level === PermissionLevel.MANAGER) {
+        if (member.role === 'MANAGER' && member.userId !== userId) {
+          throw new TRPCError({
+            code: 'FORBIDDEN',
+            message: 'Managers cannot remove other Managers',
+          });
+        }
       }
 
       // Remove the member
