@@ -1,16 +1,8 @@
 'use client';
 
-import { Home, Menu, Scale, Settings } from 'lucide-react';
+import { Home, Menu, Scale, Settings, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-
-interface User {
-  id: string;
-  name?: string | null;
-  image?: string | null;
-  email?: string | null;
-}
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -20,12 +12,19 @@ import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/O
 import { UserNav } from '@/components/layout/UserNav';
 import { MobileSidebar } from './DashboardMobileSidebar';
 
+interface User {
+  id: string;
+  name?: string | null;
+  image?: string | null;
+  email?: string | null;
+}
+
 export function DashboardTopBar({ user }: { user: User }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   return (
-    <div className="sticky top-0 z-40 flex h-16 shrink-0 border-gray-800/60 border-b bg-[#0b0f1a]">
+    <div className="fixed top-0 right-0 left-0 z-50 flex h-16 shrink-0 bg-[#0b0f1a] transition-all duration-300">
       <div className="flex flex-1 items-center px-4">
         <div className="flex items-center gap-3">
           <Link href="/" className="group flex items-center gap-3">
@@ -40,49 +39,40 @@ export function DashboardTopBar({ user }: { user: User }) {
               {/* Subtle glow effect */}
               <div className="-z-10 absolute inset-0 rounded-(--radius-avatar) bg-linear-to-r from-purple-400/20 to-blue-400/20 opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100" />
             </div>
-            <span className="hidden bg-linear-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text font-bold text-lg text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:via-indigo-300 group-hover:to-blue-300 sm:block">
+            <span className="hidden bg-linear-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text font-bold text-lg text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:via-indigo-300 group-hover:to-blue-300 lg:block">
               InterChat
             </span>
           </Link>
-        </div>
 
-        <div className="ml-8 hidden items-center gap-2 lg:flex">
-          <Link
-            href="/dashboard"
-            className={cn(
-              'flex items-center gap-2 rounded-(--radius-button) px-4 py-2.5 font-medium text-sm transition-all duration-300',
-              pathname === '/dashboard'
-                ? 'border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
-                : 'border border-transparent text-gray-300 hover:border-white/10 hover:bg-white/5 hover:text-white'
-            )}
-          >
-            <Home className="h-4 w-4" />
-            Dashboard
-          </Link>
-          <Link
-            href="/dashboard/my-appeals"
-            className={cn(
-              'flex items-center gap-2 rounded-(--radius-button) px-4 py-2.5 font-medium text-sm transition-all duration-300',
-              pathname.startsWith('/dashboard/my-appeals')
-                ? 'border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
-                : 'border border-transparent text-gray-300 hover:border-white/10 hover:bg-white/5 hover:text-white'
-            )}
-          >
-            <Scale className="h-4 w-4" />
-            My Appeals
-          </Link>
-          <Link
-            href="/dashboard/settings"
-            className={cn(
-              'flex items-center gap-2 rounded-(--radius-button) px-4 py-2.5 font-medium text-sm transition-all duration-300',
-              pathname.startsWith('/dashboard/settings')
-                ? 'border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
-                : 'border border-transparent text-gray-300 hover:border-white/10 hover:bg-white/5 hover:text-white'
-            )}
-          >
-            <Settings className="h-4 w-4" />
-            Settings
-          </Link>
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-1 lg:flex">
+            {[
+              { name: 'Dashboard', href: '/dashboard', icon: Home },
+              {
+                name: 'My Appeals',
+                href: '/dashboard/my-appeals',
+                icon: Scale,
+              },
+              { name: 'Leaderboard', href: '/leaderboard', icon: Trophy },
+              { name: 'Settings', href: '/dashboard/settings', icon: Settings },
+            ].map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
+                  pathname === item.href ||
+                    (item.href !== '/dashboard' &&
+                      pathname.startsWith(item.href))
+                    ? 'bg-white/10 text-white'
+                    : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'
+                )}
+              >
+                {item.icon && <item.icon className="h-4 w-4" />}
+                {item.name}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         <div className="ml-auto flex items-center lg:hidden">
@@ -97,7 +87,7 @@ export function DashboardTopBar({ user }: { user: User }) {
           </Button>
         </div>
 
-        <div className="ml-auto hidden items-center gap-3 lg:flex">
+        <div className="ml-auto hidden items-center gap-4 lg:flex">
           <div data-tour="notifications" className="relative">
             <div className="rounded-(--radius-button) p-1 transition-all duration-300 hover:bg-white/5">
               <NotificationDropdown />

@@ -2,6 +2,7 @@
 
 import {
   Bell,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   FileText,
@@ -25,6 +26,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
+import { useHub } from './HubContext';
 
 interface HubSidebarProps {
   hubId: string;
@@ -99,161 +101,79 @@ function SidebarNavItem({
   lockReason = 'Requires higher permissions',
   badge,
   comingSoon = false,
-  color = 'default',
 }: SidebarNavItemProps) {
-  const colorClasses = {
-    default: {
-      active: 'bg-purple-500/10 text-white border-purple-500/30',
-      inactive:
-        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
-      icon: active
-        ? 'text-purple-400'
-        : 'text-gray-500 group-hover:text-purple-400',
-      iconLocked: 'text-gray-600',
-    },
-    blue: {
-      active: 'bg-blue-500/10 text-white border-blue-500/30',
-      inactive:
-        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
-      icon: active
-        ? 'text-blue-400'
-        : 'text-gray-500 group-hover:text-blue-400',
-      iconLocked: 'text-gray-600',
-    },
-    green: {
-      active: 'bg-emerald-500/10 text-white border-emerald-500/30',
-      inactive:
-        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
-      icon: active
-        ? 'text-emerald-400'
-        : 'text-gray-500 group-hover:text-emerald-400',
-      iconLocked: 'text-gray-600',
-    },
-    purple: {
-      active: 'bg-purple-500/10 text-white border-purple-500/30',
-      inactive:
-        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
-      icon: active
-        ? 'text-purple-400'
-        : 'text-gray-500 group-hover:text-purple-400',
-      iconLocked: 'text-gray-600',
-    },
-    red: {
-      active: 'bg-red-500/10 text-white border-red-500/30',
-      inactive:
-        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
-      icon: active ? 'text-red-400' : 'text-gray-500 group-hover:text-red-400',
-      iconLocked: 'text-gray-600',
-    },
-    orange: {
-      active: 'bg-orange-500/10 text-white border-orange-500/30',
-      inactive:
-        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
-      icon: active
-        ? 'text-orange-400'
-        : 'text-gray-500 group-hover:text-orange-400',
-      iconLocked: 'text-gray-600',
-    },
-    yellow: {
-      active: 'bg-amber-500/10 text-white border-amber-500/30',
-      inactive:
-        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
-      icon: active
-        ? 'text-amber-400'
-        : 'text-gray-500 group-hover:text-amber-400',
-      iconLocked: 'text-gray-600',
-    },
-    indigo: {
-      active: 'bg-indigo-500/10 text-white border-indigo-500/30',
-      inactive:
-        'text-gray-400 hover:text-white hover:bg-gray-800/40 hover:border-gray-700/50 border-transparent',
-      locked: 'text-gray-500 border-gray-800/50 cursor-not-allowed opacity-50',
-      icon: active
-        ? 'text-indigo-400'
-        : 'text-gray-500 group-hover:text-indigo-400',
-      iconLocked: 'text-gray-600',
-    },
-  };
-
-  const colors = colorClasses[color];
-
-  const content = locked ? (
+  const content = (
     <div
       className={cn(
-        'group relative flex items-center rounded-lg border transition-all duration-200',
-        isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2',
-        colors.locked
+        'group flex items-center gap-3 rounded-md active:border-2 active:border-purple-500/10 px-3 py-2 font-medium text-sm transition-all duration-200',
+        active
+          ? 'bg-linear-to-r from-purple-500/10 to-blue-500/10 text-purple-300 shadow-lg shadow-purple-500/5'
+          : 'text-gray-400 hover:bg-white/5 hover:text-gray-200',
+        locked && 'cursor-not-allowed opacity-50'
       )}
     >
-      <div className="shrink-0">
-        <Icon
-          className={cn(
-            'h-4 w-4 transition-colors duration-200',
-            colors.iconLocked
-          )}
-        />
-      </div>
-
-      {!isCollapsed && <span className="truncate text-sm">{label}</span>}
-    </div>
-  ) : (
-    <Link
-      href={href}
-      className={cn(
-        'group relative flex items-center rounded-lg border transition-all duration-200',
-        isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2',
-        active ? colors.active : colors.inactive
-      )}
-    >
-      <div className="shrink-0">
-        <Icon
-          className={cn('h-4 w-4 transition-colors duration-200', colors.icon)}
-        />
+      <div
+        className={cn(
+          'flex items-center justify-center transition-colors duration-200',
+          active ? 'text-purple-400' : 'text-gray-500 group-hover:text-gray-300'
+        )}
+      >
+        <Icon className="h-4 w-4" />
       </div>
 
       {!isCollapsed && (
-        <>
-          <span className="flex-1 truncate text-sm">{label}</span>
-          {comingSoon ? (
-            <span className="flex h-5 items-center justify-center rounded-md bg-amber-500/90 px-2 font-semibold text-[10px] text-white uppercase tracking-wide">
-              Soon
-            </span>
-          ) : (
-            badge !== undefined &&
-            badge > 0 && (
-              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-md bg-red-500 px-1.5 font-semibold text-white text-xs">
+        <div className="flex flex-1 items-center justify-between overflow-hidden">
+          <span className="truncate">{label}</span>
+          <div className="flex items-center gap-2">
+            {locked && <Shield className="h-3 w-3 text-gray-600" />}
+            {comingSoon && (
+              <span className="rounded-full bg-blue-500/10 px-1.5 py-0.5 font-medium text-[10px] text-blue-400 leading-none">
+                SOON
+              </span>
+            )}
+            {badge && badge > 0 && (
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-purple-500 px-1.5 font-bold text-[10px] text-white">
                 {badge > 99 ? '99+' : badge}
               </span>
-            )
-          )}
-        </>
+            )}
+            {label === 'Departments' && (
+              <span className="rounded-full bg-green-500/10 px-1.5 py-0.5 font-medium text-[10px] text-green-400 leading-none">
+                NEW
+              </span>
+            )}
+            {label === 'Resources' && (
+              <span className="rounded-full bg-green-500/10 px-1.5 py-0.5 font-medium text-[10px] text-green-400 leading-none">
+                NEW
+              </span>
+            )}
+          </div>
+        </div>
       )}
-    </Link>
+    </div>
   );
 
-  if (isCollapsed || locked) {
+  if (isCollapsed) {
     return (
-      <TooltipProvider>
+      <TooltipProvider delayDuration={0}>
         <Tooltip>
-          <TooltipTrigger asChild>{content}</TooltipTrigger>
+          <TooltipTrigger asChild>
+            <Link
+              href={locked ? '#' : href}
+              className="block w-full outline-none"
+            >
+              {content}
+            </Link>
+          </TooltipTrigger>
           <TooltipContent
             side="right"
-            className="ml-2 rounded-lg border-gray-800 bg-gray-900 px-3 py-2 text-gray-200 text-sm"
+            className="flex items-center gap-2 border-gray-800 bg-gray-900 text-gray-200"
           >
-            {locked ? (
-              <div className="space-y-0.5">
-                <p className="font-medium">{label}</p>
-                <p className="text-gray-400 text-xs">{lockReason}</p>
-              </div>
-            ) : (
-              <p>{label}</p>
+            {label}
+            {locked && <Shield className="h-3 w-3 text-gray-500" />}
+            {comingSoon && (
+              <span className="rounded bg-blue-500/20 px-1 py-0.5 text-[10px] text-blue-400">
+                SOON
+              </span>
             )}
           </TooltipContent>
         </Tooltip>
@@ -261,7 +181,29 @@ function SidebarNavItem({
     );
   }
 
-  return content;
+  if (locked) {
+    return (
+      <TooltipProvider delayDuration={0}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="w-full cursor-not-allowed">{content}</div>
+          </TooltipTrigger>
+          <TooltipContent
+            side="right"
+            className="border-gray-800 bg-gray-900 text-gray-200"
+          >
+            <p>{lockReason}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
+
+  return (
+    <Link href={href} className="block w-full outline-none">
+      {content}
+    </Link>
+  );
 }
 
 interface SidebarSectionProps {
@@ -295,7 +237,7 @@ function SidebarSection({
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
         >
-          <ChevronRight className="h-3 w-3" />
+          <ChevronLeft className="h-3 w-3" />
         </motion.div>
       </button>
 
@@ -325,6 +267,7 @@ export function HubSidebar({
   pendingCounts,
 }: HubSidebarProps) {
   const pathname = usePathname();
+  const { hub } = useHub();
 
   // Simplified configuration
   const sidebarConfig: SidebarSection[] = [
@@ -448,12 +391,27 @@ export function HubSidebar({
   return (
     <div
       className={cn(
-        'flex h-full flex-col overflow-hidden border-gray-800/60 border-r bg-[#0b0f1a] transition-all duration-300',
+        'flex h-full flex-col overflow-hidden bg-[#0b0f1a] transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >
+      {/* Hub Header */}
+      {!isCollapsed && (
+        <div className="flex h-16 shrink-0 items-center px-4">
+          <button
+            type="button"
+            className="group flex w-full items-center justify-between rounded-lg p-2 transition-colors hover:bg-white/5"
+          >
+            <span className="truncate font-bold text-gray-200 group-hover:text-white">
+              {hub?.name || 'Loading...'}
+            </span>
+            <ChevronDown className="h-4 w-4 text-gray-500 transition-colors group-hover:text-gray-300" />
+          </button>
+        </div>
+      )}
+
       {/* Navigation */}
-      <div className="scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-transparent hover:scrollbar-thumb-gray-700 flex-1 space-y-6 overflow-y-auto px-3 pt-20 pb-4 transition-colors">
+      <div className="scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-transparent hover:scrollbar-thumb-gray-700 flex-1 space-y-6 overflow-y-auto px-3 py-4 transition-colors">
         {visibleSections.map((section) => {
           const sectionItems = section.items.map((item) => {
             const isLocked =
@@ -484,7 +442,6 @@ export function HubSidebar({
                 lockReason={item.lockReason}
                 badge={badgeCount}
                 comingSoon={item.comingSoon}
-                color={item.color}
               />
             );
           });
@@ -515,7 +472,7 @@ export function HubSidebar({
 
       {/* Collapse Button */}
       {onToggleCollapse && (
-        <div className="border-gray-800/80 border-t p-3">
+        <div className="p-3">
           <Button
             variant="ghost"
             size="icon"
@@ -526,7 +483,7 @@ export function HubSidebar({
               animate={{ rotate: isCollapsed ? 0 : 180 }}
               transition={{ duration: 0.3 }}
             >
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronRight className="h-4 w-4" />
             </motion.div>
           </Button>
         </div>
