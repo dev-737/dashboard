@@ -1,6 +1,14 @@
 'use client';
 
-import { Bell, HelpCircle, Home, Scale, Settings, X } from 'lucide-react';
+import {
+  Bell,
+  HelpCircle,
+  Home,
+  Scale,
+  Settings,
+  Trophy,
+  X,
+} from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -17,7 +25,6 @@ import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { UrlObject } from 'url';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
 import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/OnboardingHelpMenu';
 import { cn } from '@/lib/utils';
@@ -76,6 +83,13 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
       label: 'My Appeals',
       color: 'purple',
       active: pathname.startsWith('/dashboard/my-appeals'),
+    },
+    {
+      href: '/leaderboard',
+      icon: Trophy,
+      label: 'Leaderboard',
+      color: 'yellow',
+      active: pathname.startsWith('/leaderboard'),
     },
     {
       href: '/dashboard/settings',

@@ -61,11 +61,11 @@ function HubLayoutContent({
   };
 
   return (
-    <div className="relative min-h-screen pb-6">
+    <div className="relative min-h-screen bg-[#0b0f1a]">
       {/* Fixed Hub Sidebar - Desktop only extending to very top */}
       {isHydrated && (
         <div
-          className={`fixed top-0 bottom-0 left-0 z-30 hidden transition-all duration-300 lg:block ${
+          className={`fixed top-16 bottom-0 left-0 z-30 hidden transition-all duration-300 lg:block ${
             hubSidebarCollapsed ? 'w-16' : 'w-64'
           }`}
         >
@@ -82,14 +82,14 @@ function HubLayoutContent({
         </div>
       )}
 
-      {/* Main Content Area with proper margin and spacing */}
+      {/* Main Content Area */}
       <div
-        className={`min-h-screen bg-[#141b2b] px-4 pt-20 transition-all duration-300 lg:rounded-l-3xl lg:pr-4 ${
+        className={`mt-10 min-h-[calc(100vh-2.5rem)] rounded-tl-2xl border-white/10 border-t border-l bg-linear-to-br from-gray-900 via-gray-900/95 to-gray-950 px-4 pt-4 transition-all duration-300 lg:pr-4 ${
           isHydrated
             ? hubSidebarCollapsed
               ? 'lg:ml-16'
-              : 'lg:ml-64'
-            : 'lg:ml-64'
+              : 'lg:ml-58'
+            : 'lg:ml-58'
         }`}
       >
         {/* Unified Hub Header */}
