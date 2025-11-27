@@ -45,7 +45,7 @@ export default function LeaderboardComingSoon() {
               Leaderboards
             </span>
             <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-purple-600 to-brand-blue-600">
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-(--color-brand-purple-600) to-(--color-blue-600)">
               Coming Soon
             </span>
           </h1>
