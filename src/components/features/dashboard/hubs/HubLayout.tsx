@@ -32,7 +32,6 @@ interface HubLayoutProps {
   children: React.ReactNode;
 }
 
-// Internal component that uses the hub context
 function HubLayoutContent({
   canModerate = false,
   canEdit = false,
@@ -62,7 +61,7 @@ function HubLayoutContent({
 
   return (
     <div className="relative min-h-screen bg-[#0b0f1a]">
-      {/* Fixed Hub Sidebar - Desktop only extending to very top */}
+      {/* Fixed Hub Sidebar */}
       {isHydrated && (
         <div
           className={`fixed top-16 bottom-0 left-0 z-30 hidden transition-all duration-300 lg:block ${
@@ -84,12 +83,12 @@ function HubLayoutContent({
 
       {/* Main Content Area */}
       <div
-        className={`mt-10 min-h-[calc(100vh-2.5rem)] rounded-tl-2xl border-white/10 border-t border-l bg-linear-to-br from-gray-900 via-gray-900/95 to-gray-950 px-4 pt-4 transition-all duration-300 lg:pr-4 ${
+        className={`mt-16 rounded-tl-2xl border-white/10 border-t border-l bg-linear-to-br from-gray-900 via-gray-900/95 to-gray-950 px-4 pt-6 transition-all duration-300 lg:pr-4 ${
           isHydrated
             ? hubSidebarCollapsed
               ? 'lg:ml-16'
-              : 'lg:ml-58'
-            : 'lg:ml-58'
+              : 'lg:ml-64'
+            : 'lg:ml-64'
         }`}
       >
         {/* Unified Hub Header */}

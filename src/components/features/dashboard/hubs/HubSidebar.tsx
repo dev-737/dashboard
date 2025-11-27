@@ -1,5 +1,6 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import {
   Bell,
   ChevronDown,
@@ -18,7 +19,14 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/DropdownMenu';
 import {
   Tooltip,
   TooltipContent,
@@ -26,6 +34,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
+import { useTRPC } from '@/utils/trpc';
 import { useHub } from './HubContext';
 
 interface HubSidebarProps {
@@ -105,9 +114,9 @@ function SidebarNavItem({
   const content = (
     <div
       className={cn(
-        'group flex items-center gap-3 rounded-md active:border-2 active:border-purple-500/10 px-3 py-2 font-medium text-sm transition-all duration-200',
+        'group flex items-center gap-3 rounded-md px-3 py-2 font-medium text-sm transition-all duration-200',
         active
-          ? 'bg-linear-to-r from-purple-500/10 to-blue-500/10 text-purple-300 shadow-lg shadow-purple-500/5'
+          ? 'bg-linear-to-r from-purple-500/10 to-blue-500/10 text-purple-300 shadow-lg shadow-purple-500/5 active:border-2 active:border-purple-500/10'
           : 'text-gray-400 hover:bg-white/5 hover:text-gray-200',
         locked && 'cursor-not-allowed opacity-50'
       )}
@@ -268,6 +277,10 @@ export function HubSidebar({
 }: HubSidebarProps) {
   const pathname = usePathname();
   const { hub } = useHub();
+  const trpc = useTRPC();
+  const { data: accessibleHubsData } = useQuery(
+    trpc.user.getAccessibleHubs.queryOptions()
+  );
 
   // Simplified configuration
   const sidebarConfig: SidebarSection[] = [
@@ -398,15 +411,58 @@ export function HubSidebar({
       {/* Hub Header */}
       {!isCollapsed && (
         <div className="flex h-16 shrink-0 items-center px-4">
-          <button
-            type="button"
-            className="group flex w-full items-center justify-between rounded-lg p-2 transition-colors hover:bg-white/5"
-          >
-            <span className="truncate font-bold text-gray-200 group-hover:text-white">
-              {hub?.name || 'Loading...'}
-            </span>
-            <ChevronDown className="h-4 w-4 text-gray-500 transition-colors group-hover:text-gray-300" />
-          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                className="group flex w-full items-center justify-between rounded-lg p-2 outline-none transition-colors hover:bg-white/5"
+              >
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <Avatar className="h-8 w-8 shrink-0 rounded-md">
+                    <AvatarImage src={hub?.iconUrl} alt={hub?.name} />
+                    <AvatarFallback className="bg-purple-500/20 text-purple-300 text-xs">
+                      {hub?.name?.substring(0, 2).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="truncate text-left font-bold text-gray-200 group-hover:text-white">
+                    {hub?.name || 'Loading...'}
+                  </span>
+                </div>
+                <ChevronDown className="h-4 w-4 shrink-0 text-gray-500 transition-colors group-hover:text-gray-300" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className="w-56 border-gray-800 bg-[#0b0f1a] text-gray-200"
+              align="start"
+            >
+              <div className="px-2 py-1.5 font-semibold text-gray-500 text-xs uppercase tracking-wider">
+                Switch Hub
+              </div>
+              {accessibleHubsData?.hubs.map((h) => (
+                <DropdownMenuItem
+                  key={h.id}
+                  asChild
+                  className="cursor-pointer focus:bg-white/5 focus:text-white"
+                >
+                  <Link
+                    href={`/dashboard/hubs/${h.id}`}
+                    className="flex w-full items-center gap-2"
+                  >
+                    <Avatar className="h-6 w-6 shrink-0 rounded-md">
+                      <AvatarImage src={h.iconUrl} alt={h.name} />
+                      <AvatarFallback className="bg-purple-500/20 text-[10px] text-purple-300">
+                        {h.name.substring(0, 2).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="flex-1 truncate">{h.name}</span>
+                    {h.id === hubId && (
+                      <div className="h-1.5 w-1.5 shrink-0 rounded-full bg-purple-500" />
+                    )}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       )}
 
