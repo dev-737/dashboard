@@ -1,6 +1,7 @@
 import { AlertCircle } from 'lucide-react';
 import { notFound, redirect } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { HubModulesForm } from '@/components/features/dashboard/hubs/HubModulesForm';
 import {
@@ -22,7 +23,9 @@ interface HubModulesPageProps {
 
 export default async function HubModulesPage({ params }: HubModulesPageProps) {
   const { hubId } = await params;
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session?.user?.id) {
     redirect(`/login?callbackUrl=/dashboard/hubs/${hubId}/modules`);

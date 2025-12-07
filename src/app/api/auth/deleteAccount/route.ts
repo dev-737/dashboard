@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { db } from '@/lib/prisma';
 import {
   createCustomRateLimit,
@@ -7,7 +8,9 @@ import {
 } from '@/lib/rate-limit-middleware';
 
 async function handleDELETE() {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   // Only allow authenticated users
   if (!session?.user?.id) {

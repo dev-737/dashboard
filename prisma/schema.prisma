@@ -2,8 +2,8 @@ generator client {
   provider        = "prisma-client"
   output          = "../src/lib/generated/prisma/client"
   previewFeatures = ["postgresqlExtensions", "relationJoins"]
-  runtime  = "vercel-edge"
-  moduleFormat = "esm"
+  runtime         = "vercel-edge"
+  moduleFormat    = "esm"
 }
 
 datasource db {
@@ -378,58 +378,58 @@ model Tag {
 }
 
 model User {
-  id                      String                    @id
-  name                    String?
-  image                   String?
-  lastMessageAt           DateTime?                 @default(now())
-  inboxLastReadDate       DateTime?                 @default(now())
-  createdAt               DateTime?                 @default(now())
-  updatedAt               DateTime?                 @default(now())
-  activityLevel           HubActivityLevel?
-  lastHubJoinAt           DateTime?
-  email                   String?
-  emailVerified           Boolean?
-  showBadges              Boolean                   @default(true)
-  mentionOnReply          Boolean                   @default(true)
-  showNsfwHubs            Boolean                   @default(false)
-  voteCount               Int                       @default(0)
-  reputation              Int                       @default(0)
-  messageCount            Int                       @default(0)
-  hubJoinCount            Int                       @default(0)
-  hubEngagementScore      Float                     @default(0.0)
-  locale                  String?
-  lastVoted               DateTime?
-  badges                  Badges[]                  @default([])
-  preferredLanguages      String[]                  @default([])
-  voteRemindersEnabled    Boolean                   @default(true)
-  lastVoteReminderSent    DateTime?
-  accounts                Account[]
-  antiSwearRulesCreated   AntiSwearRule[]
-  AntiSwearWhitelist      AntiSwearWhitelist[]
-  appeals                 Appeal[]
-  issuedBlacklists        Blacklist[]               @relation("Blacklist_moderatorIdToUser")
-  blacklists              Blacklist[]               @relation("Blacklist_userIdToUser")
-  blockWordsCreated       BlockWord[]
-  globalReportsSubmitted  GlobalReport[]            @relation("GlobalReport_handledByToUser")
-  globalReportsReceived   GlobalReport[]            @relation("GlobalReport_reportedUserIdToUser")
-  globalReportsHandled    GlobalReport[]            @relation("GlobalReport_reporterIdToUser")
-  ownedHubs               Hub[]
-  modPositions            HubModerator[]
-  hubReportsSubmitted     HubReport[]               @relation("HubReport_handledByToUser")
-  hubReportsReceived      HubReport[]               @relation("HubReport_reportedUserIdToUser")
-  hubReportsHandled       HubReport[]               @relation("HubReport_reporterIdToUser")
-  reviews                 HubReview[]
-  rulesAcceptances        HubRulesAcceptance[]
-  upvotedHubs             HubUpvote[]
-  issuedInfractions       Infraction[]              @relation("Infraction_moderatorIdToUser")
-  infractions             Infraction[]              @relation("Infraction_userIdToUser")
-  leaderboardEntries      LeaderboardEntry[]
-  reputationLog           ReputationLog[]
-  issuedServerBlacklists  ServerBlacklist[]
-  ServerBlocklist         ServerBlocklist[]
-  sessions                Session[]
-  achievements            UserAchievement[]
-  achievementProgress     UserAchievementProgress[]
+  id                     String                    @id
+  name                   String?
+  image                  String?
+  lastMessageAt          DateTime?                 @default(now())
+  inboxLastReadDate      DateTime?                 @default(now())
+  createdAt              DateTime?                 @default(now())
+  updatedAt              DateTime?                 @default(now())
+  activityLevel          HubActivityLevel?
+  lastHubJoinAt          DateTime?
+  email                  String?
+  emailVerified          Boolean?
+  showBadges             Boolean                   @default(true)
+  mentionOnReply         Boolean                   @default(true)
+  showNsfwHubs           Boolean                   @default(false)
+  voteCount              Int                       @default(0)
+  reputation             Int                       @default(0)
+  messageCount           Int                       @default(0)
+  hubJoinCount           Int                       @default(0)
+  hubEngagementScore     Float                     @default(0.0)
+  locale                 String?
+  lastVoted              DateTime?
+  badges                 Badges[]                  @default([])
+  preferredLanguages     String[]                  @default([])
+  voteRemindersEnabled   Boolean                   @default(true)
+  lastVoteReminderSent   DateTime?
+  accounts               Account[]
+  antiSwearRulesCreated  AntiSwearRule[]
+  AntiSwearWhitelist     AntiSwearWhitelist[]
+  appeals                Appeal[]
+  issuedBlacklists       Blacklist[]               @relation("Blacklist_moderatorIdToUser")
+  blacklists             Blacklist[]               @relation("Blacklist_userIdToUser")
+  blockWordsCreated      BlockWord[]
+  globalReportsSubmitted GlobalReport[]            @relation("GlobalReport_handledByToUser")
+  globalReportsReceived  GlobalReport[]            @relation("GlobalReport_reportedUserIdToUser")
+  globalReportsHandled   GlobalReport[]            @relation("GlobalReport_reporterIdToUser")
+  ownedHubs              Hub[]
+  modPositions           HubModerator[]
+  hubReportsSubmitted    HubReport[]               @relation("HubReport_handledByToUser")
+  hubReportsReceived     HubReport[]               @relation("HubReport_reportedUserIdToUser")
+  hubReportsHandled      HubReport[]               @relation("HubReport_reporterIdToUser")
+  reviews                HubReview[]
+  rulesAcceptances       HubRulesAcceptance[]
+  upvotedHubs            HubUpvote[]
+  issuedInfractions      Infraction[]              @relation("Infraction_moderatorIdToUser")
+  infractions            Infraction[]              @relation("Infraction_userIdToUser")
+  leaderboardEntries     LeaderboardEntry[]
+  reputationLog          ReputationLog[]
+  issuedServerBlacklists ServerBlacklist[]
+  ServerBlocklist        ServerBlocklist[]
+  sessions               Session[]
+  achievements           UserAchievement[]
+  achievementProgress    UserAchievementProgress[]
 
   @@index([email])
   @@index([lastVoted])
@@ -619,31 +619,41 @@ model AntiSwearWhitelist {
 }
 
 model Account {
-  userId            String   @db.VarChar
-  type              String   @db.VarChar
-  provider          String   @db.VarChar
-  providerAccountId String   @db.VarChar
-  refresh_token     String?  @db.VarChar
-  access_token      String?  @db.VarChar
-  expires_at        Int?
-  token_type        String?  @db.VarChar
-  scope             String?  @db.VarChar
-  id_token          String?  @db.VarChar
-  session_state     String?  @db.VarChar
-  createdAt         DateTime @default(now()) @db.Timestamptz(6)
-  updatedAt         DateTime @default(now()) @updatedAt @db.Timestamptz(6)
-  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@id([provider, providerAccountId])
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
 }
 
 model Session {
-  sessionToken String   @id @db.VarChar
-  userId       String   @db.VarChar
-  expires      DateTime @db.Timestamptz(6)
-  createdAt    DateTime @default(now()) @db.Timestamptz(6)
-  updatedAt    DateTime @default(now()) @updatedAt @db.Timestamptz(6)
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Verification {
+  id         String    @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.

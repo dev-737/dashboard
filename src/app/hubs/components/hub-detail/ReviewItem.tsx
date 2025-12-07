@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Star, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { authClient } from '@/lib/auth-client';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
@@ -19,7 +19,7 @@ interface ReviewItemProps {
 
 export default function ReviewItem({ review, hubId }: ReviewItemProps) {
   const trpc = useTRPC();
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const [isDeleting, setIsDeleting] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
@@ -33,10 +33,10 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
         });
         queryClient
           .invalidateQueries(trpc.hub.getHubReviews.queryFilter({ hubId }))
-          .catch(() => {});
+          .catch(() => { });
         queryClient
           .invalidateQueries(trpc.hub.getHub.queryFilter({ id: hubId }))
-          .catch(() => {});
+          .catch(() => { });
       },
       onError: (error) => {
         toast({

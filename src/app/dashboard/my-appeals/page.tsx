@@ -4,7 +4,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -43,7 +44,9 @@ interface AppealWithInfraction {
 
 // Server-side function to fetch user's appeals
 async function getMyAppealsData(searchParams: { page?: string }) {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
   if (!session?.user?.id) {
     redirect('/login?callbackUrl=/dashboard/my-appeals');
   }

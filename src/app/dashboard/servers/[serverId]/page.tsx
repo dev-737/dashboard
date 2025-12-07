@@ -12,7 +12,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { getServerDetails } from '@/actions/server-actions';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { ServerConnectionsTable } from '@/components/features/dashboard/servers/ServerConnectionsTable';
 import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
 import { LogoutButton } from '@/components/LogoutButton';
@@ -36,7 +37,9 @@ export default async function ServerDetailPage(props: {
 }) {
   const { serverId } = await props.params;
 
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session?.user?.id) {
     redirect(`/login?callbackUrl=/dashboard/servers/${serverId}`);
@@ -155,8 +158,8 @@ export default async function ServerDetailPage(props: {
 
   const lastActive = serverData.lastMessageAt
     ? formatDistanceToNow(new Date(serverData.lastMessageAt), {
-        addSuffix: true,
-      })
+      addSuffix: true,
+    })
     : 'Never';
 
   return (
@@ -249,7 +252,7 @@ export default async function ServerDetailPage(props: {
                     <span className="text-gray-200">
                       {
                         ['None', 'Low', 'Medium', 'High', 'Very High'][
-                          discordServer.verification_level || 0
+                        discordServer.verification_level || 0
                         ]
                       }
                     </span>

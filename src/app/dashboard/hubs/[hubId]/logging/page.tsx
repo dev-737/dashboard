@@ -1,6 +1,7 @@
 import { AlertCircle, CheckCircle, FileText } from 'lucide-react';
 import { notFound, redirect } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { HubLoggingForm } from '@/components/features/dashboard/hubs/HubLoggingForm';
 import { Card, CardContent } from '@/components/ui/card';
@@ -18,7 +19,9 @@ export default async function HubLoggingPage({
   params: paramsPromise,
 }: HubLoggingPageProps) {
   const { hubId } = await paramsPromise;
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session?.user?.id) {
     redirect('/login');

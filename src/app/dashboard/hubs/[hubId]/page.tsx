@@ -2,7 +2,8 @@ import { Bell, FileText, Gavel, Globe, Home, Shield } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { DeleteHubDialog } from '@/components/features/dashboard/hubs/DeleteHubDialog';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { HubEditForm } from '@/components/forms/HubEditForm';
@@ -40,7 +41,9 @@ export default async function HubOverviewPage({
   params,
 }: HubOverviewPageProps) {
   const { hubId } = await params;
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session?.user?.id) {
     notFound();
@@ -93,22 +96,22 @@ export default async function HubOverviewPage({
   // Fetch moderation stats for moderators
   const moderationStats = canModerate
     ? await db.$transaction([
-        db.hubReport.count({
-          where: { hubId, status: 'PENDING' },
-        }),
-        db.appeal.count({
-          where: {
-            status: 'PENDING',
-            infraction: { hubId },
-          },
-        }),
-        db.infraction.count({
-          where: {
-            hubId,
-            status: 'ACTIVE',
-          },
-        }),
-      ])
+      db.hubReport.count({
+        where: { hubId, status: 'PENDING' },
+      }),
+      db.appeal.count({
+        where: {
+          status: 'PENDING',
+          infraction: { hubId },
+        },
+      }),
+      db.infraction.count({
+        where: {
+          hubId,
+          status: 'ACTIVE',
+        },
+      }),
+    ])
     : [0, 0, 0];
 
   const [pendingReports, pendingAppeals, activeInfractions] = moderationStats;

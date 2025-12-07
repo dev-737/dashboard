@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { getServers } from '@/actions/server-actions';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { ConnectionNavigationTabs } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
 import { ConnectionEditFormClient } from '@/components/forms/ConnectionEditForm';
 import { Button } from '@/components/ui/button';
@@ -42,7 +43,9 @@ export async function generateMetadata(
 }
 
 async function getConnectionForEdit(connectionId: string) {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
   if (!session?.user?.id) {
     redirect('/login');
   }

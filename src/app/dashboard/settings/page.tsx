@@ -2,7 +2,8 @@ import { Settings, User } from 'lucide-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { UserSettingsForm } from '@/components/forms/UserSettingsForm';
 
 export const metadata: Metadata = {
@@ -11,10 +12,12 @@ export const metadata: Metadata = {
 };
 
 export default async function SettingsPage() {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session?.user?.id) {
-    redirect(`/login?callbackUrl=/${window.location.pathname}`);
+    redirect('/login?callbackUrl=/dashboard/settings');
   }
 
   return (

@@ -5,7 +5,8 @@
 import { initTRPC, TRPCError } from '@trpc/server';
 import superjson from 'superjson';
 import z, { ZodError } from 'zod/v4';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 /**
  * Context type for tRPC procedures
@@ -26,8 +27,10 @@ export interface Context {
  */
 export async function createContext(): Promise<Context> {
   // We don't use the opts parameter in this implementation
-  const session = await auth();
-  return { session: session as Context['session'] };
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
+  return { session: session ? { user: session.user } : null };
 }
 
 /**

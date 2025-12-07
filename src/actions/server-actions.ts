@@ -1,7 +1,7 @@
 'use server';
 
-import type { Session } from 'next-auth';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import type {
   Connection,
   Hub,
@@ -36,7 +36,7 @@ export interface ServerDataWithConnections extends ServerDataWithDiscordGuild {
 }
 
 export async function getServers(
-  session: Omit<Session, 'expires'> | null
+  session: { user: { id: string } } | null
 ): Promise<
   | { error: string; status: number }
   | {
@@ -50,12 +50,10 @@ export async function getServers(
     }
 
     // Get the user's Discord account to get the access token
-    const account = await db.account.findUnique({
+    const account = await db.account.findFirst({
       where: {
-        provider_providerAccountId: {
-          provider: 'discord',
-          providerAccountId: session.user.id,
-        },
+        providerId: 'discord',
+        userId: session.user.id,
       },
     });
 
@@ -66,7 +64,7 @@ export async function getServers(
       };
     }
 
-    if (!account.access_token) {
+    if (!account.accessToken) {
       return {
         error: 'Missing access token. Please log out and log back in.',
         status: 400,
@@ -133,12 +131,12 @@ export async function getServers(
     }
 
     // Check if the token is expired and refresh if needed
-    let accessToken = account.access_token;
+    let accessToken = account.accessToken;
 
     if (
-      account.expires_at &&
-      account.expires_at * 1000 < Date.now() &&
-      account.refresh_token
+      account.accessTokenExpiresAt &&
+      account.accessTokenExpiresAt.getTime() < Date.now() &&
+      account.refreshToken
     ) {
       try {
         // Token is expired, refresh it
@@ -153,7 +151,7 @@ export async function getServers(
             // biome-ignore lint/style/noNonNullAssertion: Environment variables are validated at build time
             client_secret: process.env.DISCORD_CLIENT_SECRET!,
             grant_type: 'refresh_token',
-            refresh_token: account.refresh_token,
+            refresh_token: account.refreshToken,
           }),
         });
         const tokens = await response.json();
@@ -166,16 +164,13 @@ export async function getServers(
         // Update the account with the new tokens
         await db.account.update({
           where: {
-            provider_providerAccountId: {
-              provider: 'discord',
-              providerAccountId: session.user.id,
-            },
+            id: account.id,
           },
           data: {
-            access_token: tokens.access_token,
-            refresh_token: tokens.refresh_token ?? account.refresh_token,
-            expires_at: tokens.expires_in
-              ? Math.floor(Date.now() / 1000) + tokens.expires_in
+            accessToken: tokens.access_token,
+            refreshToken: tokens.refresh_token ?? account.refreshToken,
+            accessTokenExpiresAt: tokens.expires_in
+              ? new Date(Date.now() + tokens.expires_in * 1000)
               : null,
           },
         });
@@ -329,7 +324,9 @@ export async function getServerDetails(
   | { data: ServerDataWithConnections; status: number }
 > {
   try {
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers()
+    });
 
     if (!session?.user?.id) {
       return { error: 'Unauthorized', status: 401 };
@@ -428,7 +425,9 @@ export async function getServerDetails(
 
 export async function revokeInfraction(infractionId: string) {
   try {
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers()
+    });
 
     if (!session?.user?.id) {
       return { error: 'Unauthorized', status: 401 };

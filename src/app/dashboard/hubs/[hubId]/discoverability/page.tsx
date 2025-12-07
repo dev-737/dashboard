@@ -1,7 +1,8 @@
 import { Globe, Palette } from 'lucide-react';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { HubDiscoverabilityForm } from '@/components/forms/HubDiscoverabilityForm';
 import { PermissionLevel } from '@/lib/constants';
@@ -36,7 +37,9 @@ export default async function HubDiscoverabilityPage({
   params,
 }: HubDiscoverabilityPageProps) {
   const { hubId } = await params;
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session?.user?.id) {
     redirect(`/login?callbackUrl=/dashboard/hubs/${hubId}/discoverability`);

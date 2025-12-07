@@ -1,13 +1,16 @@
 import { redirect } from 'next/navigation';
 import type { ReactNode } from 'react';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 export default async function AdminLayout({
   children,
 }: {
   children: ReactNode;
 }) {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   // Redirect to login if not authenticated
   if (!session?.user?.id) {

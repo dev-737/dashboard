@@ -2,7 +2,7 @@
 
 import { Check, ChevronDown, Copy, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { authClient } from '@/lib/auth-client';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -22,7 +22,7 @@ export default function JoinButton({ hubName, hubId }: JoinButtonProps) {
   const [copied, setCopied] = useState(false);
   const joinHubCommand = `/connection add hub:${hubName}`;
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
 
   const handleJoin = async () => {
     try {

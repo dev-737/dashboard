@@ -1,5 +1,6 @@
 import type { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import {
   addRateLimitHeaders,
   burstRateLimit,
@@ -26,8 +27,7 @@ export type RateLimitMiddlewareOptions = {
 // Simple type for any Next.js route handler
 export type ApiHandler = (
   request: NextRequest,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  context?: any
+  context?: unknown
 ) => Promise<NextResponse> | NextResponse | Promise<NextResponse>;
 
 /**
@@ -39,8 +39,7 @@ export function withRateLimit(
 ): ApiHandler {
   return async (
     request: NextRequest,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    context?: any
+    context?: unknown
   ): Promise<NextResponse> => {
     return await executeWithRateLimit(request, options, () =>
       handler(request, context)
@@ -67,7 +66,9 @@ async function executeWithRateLimit(
     // Get user session if needed
     let userId: string | null = null;
     if (useUserId || skipAuthenticated) {
-      const session = await auth();
+      const session = await auth.api.getSession({
+        headers: await headers()
+      });
       userId = session?.user?.id || null;
 
       // Skip rate limiting for authenticated users if configured

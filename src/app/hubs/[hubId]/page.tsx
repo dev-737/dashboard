@@ -13,7 +13,8 @@ import {
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PermissionLevel } from '@/lib/constants';
@@ -91,7 +92,9 @@ export default async function HubDetailView(props: {
 }) {
   const { hubId } = await props.params;
 
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
   const userId = session?.user?.id;
 
   const [hub, connections] = await Promise.all([
@@ -147,7 +150,7 @@ export default async function HubDetailView(props: {
   return (
     <div className="flex min-h-screen flex-col bg-linear-to-b from-gray-950 to-gray-900 text-gray-200">
       {/* Main Content */}
-      <div className="flex-grow">
+      <div className="grow">
         <HubBanner bannerUrl={hub.bannerUrl} name={hub.name} />
 
         <div className="container mx-auto max-w-7xl px-4 pt-4">

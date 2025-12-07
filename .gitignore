@@ -20,3 +20,4 @@ tsconfig.tsbuildinfo
 src/lib/generated/prisma
 # Sentry Config File
 .env.sentry-build-plugin
+.direnv

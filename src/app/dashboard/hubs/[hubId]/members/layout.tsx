@@ -1,5 +1,6 @@
 import { notFound, redirect } from 'next/navigation';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { PermissionLevel } from '@/lib/constants';
 import { getUserHubPermission } from '@/lib/permissions';
 
@@ -15,7 +16,9 @@ export default async function MembersLayout({
   params,
 }: MembersLayoutProps) {
   const { hubId } = await params;
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session?.user?.id) {
     redirect(`/login?callbackUrl=/dashboard/hubs/${hubId}/members`);
