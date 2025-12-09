@@ -13,7 +13,7 @@
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
-    "@better-auth/cli": "^1.4.5",
+    "@better-auth/cli": "^1.4.6",
     "@discordjs/rest": "^2.6.0",
     "@prisma/adapter-pg": "^7.1.0",
     "@prisma/client": "^7.1.0",
@@ -44,7 +44,7 @@
     "@trpc/server": "^11.7.2",
     "@trpc/tanstack-react-query": "^11.7.2",
     "@uploadthing/react": "^7.3.3",
-    "better-auth": "^1.4.5",
+    "better-auth": "^1.4.6",
     "class-variance-authority": "^0.7.1",
     "cmdk": "^1.1.1",
     "critters": "^0.0.25",

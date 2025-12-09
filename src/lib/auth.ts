@@ -19,7 +19,6 @@ export const auth = betterAuth({
           },
         });
         const profile = await response.json();
-        console.log(profile);
         return {
           user: {
             id: profile.id, // Discord ID
