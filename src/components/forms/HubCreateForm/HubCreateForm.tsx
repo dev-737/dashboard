@@ -1,28 +1,20 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  MessageSquare,
-  Settings,
-  Shield,
-  Sparkles,
-  Upload,
-} from 'lucide-react';
+import { Settings, Shield, Sparkles, Upload } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import { useTRPC } from '@/utils/trpc';
-import { BasicInfoStep } from './BasicInfoStep';
-import { DescriptionSettingsStep } from './DescriptionSettingsStep';
+import { EssentialsStep } from './EssentialsStep';
 import { MediaUploadStep } from './MediaUploadStep';
 import { ModulesSettingsStep } from './ModulesSettingsStep';
 import { RulesWelcomeStep } from './RulesWelcomeStep';
 import { StepIndicator } from './StepIndicator';
 
 const STEP_ICONS = [
-  { icon: Sparkles, label: 'Name', color: 'text-purple-400' },
-  { icon: MessageSquare, label: 'Details', color: 'text-blue-400' },
+  { icon: Sparkles, label: 'Essentials', color: 'text-purple-400' },
   { icon: Upload, label: 'Media', color: 'text-pink-400' },
   { icon: Settings, label: 'Modules', color: 'text-orange-400' },
   { icon: Shield, label: 'Rules', color: 'text-green-400' },
@@ -37,7 +29,9 @@ export function HubCreateForm() {
   const [isPrivate, setIsPrivate] = useState(true);
   const [modules, setModules] = useState<number>(0);
   const [welcomeMessage, setWelcomeMessage] = useState('');
-  const [rules, setRules] = useState<string[]>(['']);
+  const [rules, setRules] = useState<{ id: string; value: string }[]>([
+    { id: crypto.randomUUID(), value: '' },
+  ]);
   const [iconUrl, setIconUrl] = useState<string | null>(null);
   const [bannerUrl, setBannerUrl] = useState<string | null>(null);
   const [nameError, setNameError] = useState('');
@@ -134,9 +128,7 @@ export function HubCreateForm() {
     return () => clearTimeout(timeoutId);
   }, [name, checkHubName]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const submitHub = () => {
     // Validate inputs
     if (name.length < 3) {
       toast({
@@ -167,7 +159,9 @@ export function HubCreateForm() {
     }
 
     // Filter out empty rules
-    const filteredRules = rules.filter((rule) => rule.trim() !== '');
+    const filteredRules = rules
+      .map((r) => r.value)
+      .filter((r) => r.trim().length > 0);
 
     // Use tRPC mutation to create hub
     createHubMutation.mutate({
@@ -180,26 +174,31 @@ export function HubCreateForm() {
     });
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    submitHub();
+  };
+
   const nextStep = () => {
-    if (
-      step === 1 &&
-      name.length >= 3 &&
-      !nameError &&
-      isNameValid &&
-      !isValidatingName
-    ) {
-      setStep(2);
-    } else if (step === 2 && description.length >= 10) {
+    if (step === 1) {
+      if (
+        name.length >= 3 &&
+        !nameError &&
+        isNameValid &&
+        !isValidatingName &&
+        description.length >= 10
+      ) {
+        setStep(2);
+      }
+    } else if (step === 2) {
       setStep(3);
     } else if (step === 3) {
       setStep(4);
-    } else if (step === 4) {
-      setStep(5);
     }
   };
 
   const skipModulesAndContinue = () => {
-    setStep(5);
+    setStep(4);
   };
 
   const prevStep = () => {
@@ -209,16 +208,18 @@ export function HubCreateForm() {
       setStep(2);
     } else if (step === 4) {
       setStep(3);
-    } else if (step === 5) {
-      setStep(4);
     }
   };
 
   const canProceed = () => {
     if (step === 1) {
-      return name.length >= 3 && !nameError && isNameValid && !isValidatingName;
-    } else if (step === 2) {
-      return description.length >= 10;
+      return (
+        name.length >= 3 &&
+        !nameError &&
+        isNameValid &&
+        !isValidatingName &&
+        description.length >= 10
+      );
     }
     return true;
   };
@@ -230,21 +231,12 @@ export function HubCreateForm() {
       <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 shadow-2xl backdrop-blur-sm">
         <form onSubmit={handleSubmit}>
           {step === 1 && (
-            <BasicInfoStep
+            <EssentialsStep
               name={name}
               setName={setName}
               nameError={nameError}
               isValidatingName={isValidatingName}
               isNameValid={isNameValid}
-              onNext={nextStep}
-              canProceed={canProceed()}
-              nameInputRef={nameInputRef}
-              nameFieldId={nameFieldId}
-            />
-          )}
-
-          {step === 2 && (
-            <DescriptionSettingsStep
               description={description}
               setDescription={setDescription}
               shortDescription={shortDescription}
@@ -252,15 +244,18 @@ export function HubCreateForm() {
               isPrivate={isPrivate}
               setIsPrivate={setIsPrivate}
               onNext={nextStep}
-              onPrev={prevStep}
+              onFinish={submitHub}
               canProceed={canProceed()}
+              nameInputRef={nameInputRef}
+              nameFieldId={nameFieldId}
               descriptionFieldId={descriptionFieldId}
               shortDescriptionFieldId={shortDescriptionFieldId}
               privateFieldId={privateFieldId}
+              isSubmitting={createHubMutation.isPending}
             />
           )}
 
-          {step === 3 && (
+          {step === 2 && (
             <MediaUploadStep
               iconUrl={iconUrl}
               setIconUrl={setIconUrl}
@@ -271,7 +266,7 @@ export function HubCreateForm() {
             />
           )}
 
-          {step === 4 && (
+          {step === 3 && (
             <ModulesSettingsStep
               modules={modules}
               setModules={setModules}
@@ -281,7 +276,7 @@ export function HubCreateForm() {
             />
           )}
 
-          {step === 5 && (
+          {step === 4 && (
             <RulesWelcomeStep
               welcomeMessage={welcomeMessage}
               setWelcomeMessage={setWelcomeMessage}

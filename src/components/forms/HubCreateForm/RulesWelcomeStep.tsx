@@ -13,8 +13,10 @@ import { Textarea } from '@/components/ui/textarea';
 interface RulesWelcomeStepProps {
   welcomeMessage: string;
   setWelcomeMessage: (message: string) => void;
-  rules: string[];
-  setRules: React.Dispatch<React.SetStateAction<string[]>>;
+  rules: { id: string; value: string }[];
+  setRules: React.Dispatch<
+    React.SetStateAction<{ id: string; value: string }[]>
+  >;
   onPrev: () => void;
   isSubmitting: boolean;
   welcomeMessageFieldId: string;
@@ -31,13 +33,13 @@ export function RulesWelcomeStep({
 }: RulesWelcomeStepProps) {
   const addRule = () => {
     if (rules.length < 10) {
-      setRules([...rules, '']);
+      setRules([...rules, { id: crypto.randomUUID(), value: '' }]);
     }
   };
 
   const updateRule = (index: number, value: string) => {
     const updatedRules = [...rules];
-    updatedRules[index] = value;
+    updatedRules[index] = { ...updatedRules[index], value };
     setRules(updatedRules);
   };
 
@@ -108,14 +110,11 @@ export function RulesWelcomeStep({
 
           <div className="space-y-3">
             {rules.map((rule, index) => (
-              <div
-                key={`rule-${index}-${rule.slice(0, 10)}`}
-                className="flex gap-3"
-              >
+              <div key={rule.id} className="flex gap-3">
                 <div className="flex-1">
                   <Input
                     placeholder={`Rule ${index + 1}: e.g., Be respectful to all members`}
-                    value={rule}
+                    value={rule.value}
                     onChange={(e) => updateRule(index, e.target.value)}
                     className="border-gray-700/50 bg-gray-800/50 focus-visible:ring-indigo-500/50"
                     maxLength={200}

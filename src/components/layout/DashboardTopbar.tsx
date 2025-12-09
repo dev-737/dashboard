@@ -24,7 +24,7 @@ export function DashboardTopBar({ user }: { user: User }) {
   const pathname = usePathname();
 
   return (
-    <div className="fixed top-0 right-0 left-0 z-50 flex h-16 shrink-0 bg-[#0b0f1a] transition-all duration-300">
+    <div className="fixed top-0 right-0 left-0 z-50 flex h-16 shrink-0 bg-[#030812] transition-all duration-300">
       <div className="flex flex-1 items-center px-4">
         <div className="flex items-center gap-3">
           <Link href="/" className="group flex items-center gap-3">

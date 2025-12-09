@@ -78,15 +78,6 @@ class RedisManager {
         lazyConnect: true,
       });
 
-      // Set up event handlers
-      this.client.on('connect', () => {
-        console.log('Redis connected successfully for rate limiting');
-      });
-
-      this.client.on('ready', () => {
-        console.log('Redis ready for rate limiting operations');
-      });
-
       this.client.on('error', (error) => {
         console.error('Redis connection error:', error.message);
       });

@@ -192,7 +192,7 @@ export function TagSelector({
             onFocus={() => setIsOpen(true)}
             onKeyDown={handleKeyDown}
             disabled={!canAddMore}
-            className="border-gray-600 bg-gray-800 pl-10 text-white focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+            className="bg-[#030812] pl-10 text-white focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
           />
           {searchQuery && (
             <Button
@@ -219,9 +219,9 @@ export function TagSelector({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-full right-0 left-0 z-[9999] mt-2"
+              className="absolute top-full right-0 left-0 z-9999 mt-2"
             >
-              <Card className="relative z-[9999] max-h-64 overflow-hidden border-gray-700 bg-gray-800 shadow-xl">
+              <Card className="relative z-9999 max-h-64 overflow-hidden border-gray-700 bg-[#030812] shadow-xl">
                 <CardContent className="p-0">
                   {/* Custom tag creation - only show if allowed */}
                   {allowTagCreation &&

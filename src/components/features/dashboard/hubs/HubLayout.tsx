@@ -60,7 +60,8 @@ function HubLayoutContent({
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0b0f1a]">
+    // Outer Shell: Fixed height, no scroll on body
+    <div className="relative h-screen overflow-hidden bg-[#030812]">
       {/* Fixed Hub Sidebar */}
       {isHydrated && (
         <div
@@ -81,14 +82,13 @@ function HubLayoutContent({
         </div>
       )}
 
-      {/* Main Content Area */}
       <div
-        className={`mt-16 rounded-tl-2xl border-white/10 border-t border-l bg-linear-to-br from-gray-900 via-gray-900/95 to-gray-950 px-4 pt-6 transition-all duration-300 lg:pr-4 ${
+        className={`fixed top-16 right-0 bottom-0 mr-3 mb-3 overflow-y-auto rounded-r-2xl rounded-l-2xl border-white/10 border-t border-l bg-linear-to-br from-gray-900 via-gray-900/95 to-gray-950 px-4 pt-6 transition-all duration-300 ${
           isHydrated
             ? hubSidebarCollapsed
-              ? 'lg:ml-16'
-              : 'lg:ml-64'
-            : 'lg:ml-64'
+              ? 'left-0 lg:left-16'
+              : 'left-0 lg:left-64'
+            : 'left-0 lg:left-64'
         }`}
       >
         {/* Unified Hub Header */}
@@ -119,8 +119,7 @@ function HubLayoutContent({
           </div>
         </div>
 
-        {/* Page Content with rounded container */}
-        <div className="mt-6">
+        <div className="mt-6 pb-6">
           <div className="space-y-6">{children}</div>
         </div>
       </div>
