@@ -26,7 +26,39 @@ export const auth = betterAuth({
             throw new Error("Failed to fetch user info from Discord");
           }
 
+
           const profile = await response.json();
+
+          try {
+            const existingUser = await db.user.findUnique({
+              where: { id: profile.id },
+              include: { accounts: true },
+            });
+
+            if (existingUser) {
+              const hasDiscordAccount = existingUser.accounts.some(
+                (acc) => acc.providerId === "discord" && acc.accountId === profile.id
+              );
+
+              if (!hasDiscordAccount) {
+                console.log(`Linking Discord account for existing user ${existingUser.id}`);
+                await db.account.create({
+                  data: {
+                    userId: existingUser.id,
+                    providerId: "discord",
+                    accountId: profile.id,
+                    accessToken: token.accessToken,
+                    refreshToken: token.refreshToken,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                  },
+                });
+              }
+            }
+          } catch (err) {
+            console.error("Error checking/linking existing user:", err);
+          }
+
           return {
             user: {
               id: profile.id, // Discord ID
