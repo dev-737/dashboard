@@ -31,7 +31,7 @@ export function AutomodDashboard({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="border border-purple-800/30 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-purple-800/30 bg-dash-hub-main backdrop-blur-sm">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">

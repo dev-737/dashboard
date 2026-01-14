@@ -248,7 +248,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
         </Dialog>
       </div>
 
-      <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-dash-hub-main backdrop-blur-sm">
         <CardHeader className="border-gray-800/50 border-b">
           <CardTitle className="flex items-center">
             <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-yellow-900/30">
@@ -291,7 +291,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
         </CardContent>
       </Card>
 
-      <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-dash-hub-main backdrop-blur-sm">
         <CardHeader className="border-gray-800/50 border-b">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div>

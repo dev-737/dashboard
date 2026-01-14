@@ -116,7 +116,7 @@ export default function AnnouncementsPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <Card className="border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+        <Card className="border-gray-800 bg-dash-hub-main backdrop-blur-sm">
           <CardHeader>
             <CardTitle>Create Announcement</CardTitle>
           </CardHeader>
@@ -178,7 +178,7 @@ export default function AnnouncementsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+        <Card className="border-gray-800 bg-dash-hub-main backdrop-blur-sm">
           <CardHeader>
             <CardTitle>Recent Announcements</CardTitle>
           </CardHeader>

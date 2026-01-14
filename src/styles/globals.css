@@ -1,112 +1,6 @@
 @import "tailwindcss";
 
 @layer base {
-  :root {
-    --radius: 0.5rem;
-    /* 8px - Base radius for cards */
-    --radius-button: 0.75rem;
-    /* 12px - Enhanced button radius */
-    --radius-modal: 1rem;
-    /* 16px - Modal and dialog radius */
-    --radius-input: 0.5rem;
-    /* 8px - Input field radius */
-    --radius-badge: 9999px;
-    /* Full rounded for badges */
-    --radius-avatar: 9999px;
-    /* Full rounded for avatars */
-    --radius-sm: 0.375rem;
-    /* 6px - Small radius for skeleton and small elements */
-    --radius-xs: 0.25rem;
-    /* 4px - Extra small radius for checkboxes */
-
-    /* Primary Brand Colors */
-    --color-brand-purple-50: #f8f6ff;
-    --color-brand-purple-100: #ede9ff;
-    --color-brand-purple-200: #ddd6ff;
-    --color-brand-purple-300: #c4b5ff;
-    --color-brand-purple-400: #a78bff;
-    --color-brand-purple-500: #9172d8;
-    --color-brand-purple-600: #7c5ce0;
-    --color-brand-purple-700: #6b46c1;
-    --color-brand-purple-800: #553c9a;
-    --color-brand-purple-900: #44337a;
-
-    /* Secondary Brand Colors */
-    --color-brand-blue-400: #60a5fa;
-    --color-brand-blue-500: #5e7de5;
-    /* InterChat logo blue */
-    --color-brand-blue-600: #2563eb;
-    --color-brand-indigo-400: #818cf8;
-    --color-brand-indigo-500: #6366f1;
-    --color-brand-indigo-600: #4f46e5;
-    --color-brand-pink-400: #f472b6;
-    --color-brand-pink-500: #ec4899;
-    --color-brand-pink-600: #db2777;
-    --color-brand-emerald-400: #34d399;
-    --color-brand-emerald-500: #10b981;
-    --color-brand-emerald-600: #059669;
-    --color-brand-orange-400: #fb923c;
-    --color-brand-orange-500: #f97316;
-    --color-brand-orange-600: #ea580c;
-
-    --color-bg-primary: #0a0a0c;
-    --color-bg-secondary: #111827;
-    --color-bg-tertiary: #1f2937;
-    --color-bg-card: rgba(17, 24, 39, 0.8);
-    --color-bg-card-hover: rgba(31, 41, 55, 0.8);
-
-    /* Glass Morphism Effects */
-    --glass-bg-light: rgba(255, 255, 255, 0.05);
-    --glass-bg-medium: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: rgba(0, 0, 0, 0.3);
-
-    --shadow-glow-purple: 0 0 20px rgba(147, 114, 216, 0.3);
-    --shadow-glow-blue: 0 0 20px rgba(59, 130, 246, 0.3);
-    --shadow-glow-indigo: 0 0 20px rgba(99, 102, 241, 0.3);
-    --shadow-glow-pink: 0 0 20px rgba(236, 72, 153, 0.3);
-    --shadow-glow-emerald: 0 0 20px rgba(16, 185, 129, 0.3);
-    --shadow-glow-orange: 0 0 20px rgba(249, 115, 22, 0.3);
-
-    /* Premium Gradient Definitions */
-    --gradient-purple: linear-gradient(135deg,
-        rgba(147, 114, 216, 0.2) 0%,
-        rgba(124, 92, 224, 0.1) 50%,
-        rgba(147, 114, 216, 0.2) 100%);
-    --gradient-blue: linear-gradient(135deg,
-        rgba(59, 130, 246, 0.2) 0%,
-        rgba(6, 182, 212, 0.1) 50%,
-        rgba(59, 130, 246, 0.2) 100%);
-    --gradient-indigo: linear-gradient(135deg,
-        rgba(99, 102, 241, 0.2) 0%,
-        rgba(59, 130, 246, 0.1) 50%,
-        rgba(99, 102, 241, 0.2) 100%);
-    --gradient-pink: linear-gradient(135deg,
-        rgba(236, 72, 153, 0.2) 0%,
-        rgba(251, 113, 133, 0.1) 50%,
-        rgba(236, 72, 153, 0.2) 100%);
-    --gradient-emerald: linear-gradient(135deg,
-        rgba(16, 185, 129, 0.2) 0%,
-        rgba(20, 184, 166, 0.1) 50%,
-        rgba(16, 185, 129, 0.2) 100%);
-    --gradient-orange: linear-gradient(135deg,
-        rgba(249, 115, 22, 0.2) 0%,
-        rgba(245, 158, 11, 0.1) 50%,
-        rgba(249, 115, 22, 0.2) 100%);
-
-    --bg-gradient-primary:
-      radial-gradient(circle at 20% 20%,
-        rgba(147, 114, 216, 0.1) 0%,
-        transparent 50%), linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
-    --bg-gradient-secondary:
-      radial-gradient(circle at 80% 80%,
-        rgba(59, 130, 246, 0.1) 0%,
-        transparent 50%),
-      linear-gradient(135deg,
-        rgba(17, 24, 39, 0.9) 0%,
-        rgba(31, 41, 55, 0.9) 100%);
-  }
-
   @keyframes shiny-text {
 
     0%,
@@ -285,14 +179,121 @@
   --color-destructive: hsl(0 62.8% 50%);
   --color-destructive-foreground: hsl(210 40% 98%);
 
-  --radius-lg: var(--radius-modal);
+  --color-dash-hub-main: rgb(11, 11, 24);
+  --color-dash-hub-sidebar: rgb(8, 8, 18);
+  --color-dash-hub-header: rgb(11, 13, 28);
+  --color-dash-hub-banner: rgb(23, 24, 41);
+  --color-dash-hub-input: rgb(14, 17, 33);
+
+  /* Primary Brand Colors */
+  --color-brand-purple-50: #f8f6ff;
+  --color-brand-purple-100: #ede9ff;
+  --color-brand-purple-200: #ddd6ff;
+  --color-brand-purple-300: #c4b5ff;
+  --color-brand-purple-400: #a78bff;
+  --color-brand-purple-500: #9172d8;
+  --color-brand-purple-600: #7c5ce0;
+  --color-brand-purple-700: #6b46c1;
+  --color-brand-purple-800: #553c9a;
+  --color-brand-purple-900: #44337a;
+
+  /* Secondary Brand Colors */
+  --color-brand-blue-400: #60a5fa;
+  --color-brand-blue-500: #5e7de5;
+  /* InterChat logo blue */
+  --color-brand-blue-600: #2563eb;
+  --color-brand-indigo-400: #818cf8;
+  --color-brand-indigo-500: #6366f1;
+  --color-brand-indigo-600: #4f46e5;
+  --color-brand-pink-400: #f472b6;
+  --color-brand-pink-500: #ec4899;
+  --color-brand-pink-600: #db2777;
+  --color-brand-emerald-400: #34d399;
+  --color-brand-emerald-500: #10b981;
+  --color-brand-emerald-600: #059669;
+  --color-brand-orange-400: #fb923c;
+  --color-brand-orange-500: #f97316;
+  --color-brand-orange-600: #ea580c;
+
+  --color-bg-primary: #0a0a0c;
+  --color-bg-secondary: #111827;
+  --color-bg-tertiary: #1f2937;
+  --color-bg-card: rgba(17, 24, 39, 0.8);
+  --color-bg-card-hover: rgba(31, 41, 55, 0.8);
+
+  /* Glass Morphism Effects */
+  --glass-bg-light: rgba(255, 255, 255, 0.05);
+  --glass-bg-medium: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+
+  --shadow-glow-purple: 0 0 20px rgba(147, 114, 216, 0.3);
+  --shadow-glow-blue: 0 0 20px rgba(59, 130, 246, 0.3);
+  --shadow-glow-indigo: 0 0 20px rgba(99, 102, 241, 0.3);
+  --shadow-glow-pink: 0 0 20px rgba(236, 72, 153, 0.3);
+  --shadow-glow-emerald: 0 0 20px rgba(16, 185, 129, 0.3);
+  --shadow-glow-orange: 0 0 20px rgba(249, 115, 22, 0.3);
+
+  /* Premium Gradient Definitions */
+  --gradient-purple: linear-gradient(135deg,
+      rgba(147, 114, 216, 0.2) 0%,
+      rgba(124, 92, 224, 0.1) 50%,
+      rgba(147, 114, 216, 0.2) 100%);
+  --gradient-blue: linear-gradient(135deg,
+      rgba(59, 130, 246, 0.2) 0%,
+      rgba(6, 182, 212, 0.1) 50%,
+      rgba(59, 130, 246, 0.2) 100%);
+  --gradient-indigo: linear-gradient(135deg,
+      rgba(99, 102, 241, 0.2) 0%,
+      rgba(59, 130, 246, 0.1) 50%,
+      rgba(99, 102, 241, 0.2) 100%);
+  --gradient-pink: linear-gradient(135deg,
+      rgba(236, 72, 153, 0.2) 0%,
+      rgba(251, 113, 133, 0.1) 50%,
+      rgba(236, 72, 153, 0.2) 100%);
+  --gradient-emerald: linear-gradient(135deg,
+      rgba(16, 185, 129, 0.2) 0%,
+      rgba(20, 184, 166, 0.1) 50%,
+      rgba(16, 185, 129, 0.2) 100%);
+  --gradient-orange: linear-gradient(135deg,
+      rgba(249, 115, 22, 0.2) 0%,
+      rgba(245, 158, 11, 0.1) 50%,
+      rgba(249, 115, 22, 0.2) 100%);
+
+  --bg-gradient-primary:
+    radial-gradient(circle at 20% 20%,
+      rgba(147, 114, 216, 0.1) 0%,
+      transparent 50%), linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
+  --bg-gradient-secondary:
+    radial-gradient(circle at 80% 80%,
+      rgba(59, 130, 246, 0.1) 0%,
+      transparent 50%),
+    linear-gradient(135deg,
+      rgba(17, 24, 39, 0.9) 0%,
+      rgba(31, 41, 55, 0.9) 100%);
+
+
+  --radius: 0.5rem;
+  /* 8px - Base radius for cards */
+  --radius-button: 0.75rem;
+  /* 12px - Enhanced button radius */
+  --radius-modal: 1rem;
+  /* 16px - Modal and dialog radius */
+  --radius-input: 0.5rem;
+  /* 8px - Input field radius */
+  --radius-badge: 9999px;
+  /* Full rounded for badges */
+  --radius-avatar: 9999px;
+  /* Full rounded for avatars */
+
+  --radius-lg: 1rem;
   /* 16px for large elements like modals */
-  --radius-md: var(--radius-button);
+  --radius-md: 0.75rem;
   /* 12px for medium elements like buttons */
-  --radius-sm: var(--radius);
-  /* 8px for small elements like inputs */
-  --radius-xs: calc(var(--radius) - 2px);
-  /* 6px for extra small elements */
+  --radius-sm: 0.375rem;
+  /* 6px - Small radius for skeleton and small elements */
+  --radius-xs: 0.25rem;
+  /* 4px - Extra small radius for checkboxes */
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
@@ -404,7 +405,7 @@
 }
 
 .premium-card {
-  @apply bg-linear-to-br from-gray-900/90 to-gray-950/90;
+  @apply bg-dash-hub-main;
   @apply backdrop-blur-sm border border-gray-700/50;
   @apply rounded-2xl shadow-xl;
   @apply hover:shadow-2xl transition-all duration-300;

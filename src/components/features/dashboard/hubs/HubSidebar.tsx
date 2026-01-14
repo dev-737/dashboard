@@ -132,7 +132,7 @@ function SidebarNavItem({
 
       {!isCollapsed && (
         <div className="flex flex-1 items-center justify-between overflow-hidden">
-          <span className="truncate">{label}</span>
+          <span className="truncate text-md">{label}</span>
           <div className="flex items-center gap-2">
             {locked && <Shield className="h-3 w-3 text-gray-600" />}
             {comingSoon && (
@@ -404,7 +404,7 @@ export function HubSidebar({
   return (
     <div
       className={cn(
-        'flex h-full flex-col overflow-hidden bg-[#030812] transition-all duration-300',
+        'flex h-full flex-col overflow-hidden bg-dash-hub-sidebar transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >

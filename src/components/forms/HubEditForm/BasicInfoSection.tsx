@@ -41,7 +41,7 @@ export function BasicInfoSection({
             required
             minLength={3}
             maxLength={32}
-            className="border-gray-700/50 bg-gray-800/50 focus-visible:ring-indigo-500/50"
+            className="border-gray-700/50 bg-transparent focus-visible:ring-indigo-500/50"
           />
           <p className="text-gray-400 text-xs">
             Choose a unique name between 3-32 characters.
@@ -78,7 +78,7 @@ export function BasicInfoSection({
           required
           minLength={10}
           maxLength={500}
-          className="min-h-[100px] resize-none border-gray-700/50 bg-gray-800/50 focus-visible:ring-indigo-500/50"
+          className="min-h-25 resize-none border-gray-700/50 bg-transparent focus-visible:ring-indigo-500/50"
         />
         <div className="flex justify-between text-gray-400 text-xs">
           <p>Tell users what your hub is about and what they can expect.</p>

@@ -192,7 +192,7 @@ export function WhitelistManager({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="border border-green-800/30 bg-linear-to-b from-gray-900/80 to-gray-950/80">
+      <Card className="border border-green-800/30 bg-dash-hub-main">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">

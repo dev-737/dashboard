@@ -157,7 +157,7 @@ export default async function ConnectionPage(props: {
 
         <div className="space-y-6">
           {/* Hub Information Card */}
-          <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-dash-hub-main backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <Globe className="h-5 w-5 text-purple-400" />
@@ -201,7 +201,7 @@ export default async function ConnectionPage(props: {
           </Card>
 
           {/* Server Information Card */}
-          <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-dash-hub-main backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <Server className="h-5 w-5 text-indigo-400" />
@@ -243,7 +243,7 @@ export default async function ConnectionPage(props: {
           </Card>
 
           {/* Quick Actions Card */}
-          <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-dash-hub-main backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <Edit className="h-5 w-5 text-blue-400" />

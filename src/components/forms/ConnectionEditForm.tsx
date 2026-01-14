@@ -125,7 +125,7 @@ export function ConnectionEditFormClient({
   };
 
   return (
-    <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+    <Card className="border border-gray-800/50 bg-dash-hub-main backdrop-blur-sm">
       <CardHeader className="px-4 sm:px-6">
         <div className="flex items-center gap-3">
           <div className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-2">

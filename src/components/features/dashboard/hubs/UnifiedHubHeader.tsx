@@ -49,7 +49,7 @@ export function UnifiedHubHeader({
     <>
       <div className="space-y-6">
         {/* Hub Header Card */}
-        <div className="overflow-hidden rounded-2xl border border-gray-800/50 bg-linear-to-r from-gray-900/90 via-gray-900/80 to-gray-950/90 shadow-lg backdrop-blur-sm">
+        <div className="overflow-hidden rounded-2xl border border-gray-800/50 bg-dash-hub-main shadow-lg backdrop-blur-sm">
           {/* Banner Section */}
           <div className="relative h-32 bg-linear-to-r from-gray-800 to-gray-700 sm:h-40">
             {hub.bannerUrl ? (
@@ -60,7 +60,7 @@ export function UnifiedHubHeader({
                 className="object-cover"
               />
             ) : (
-              <div className="h-full w-full bg-linear-to-r from-gray-800 to-gray-700" />
+              <div className="h-full w-full bg-dash-hub-banner" />
             )}
 
             {/* Banner Upload Overlay */}

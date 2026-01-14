@@ -228,7 +228,7 @@ export function HubCreateForm() {
     <div className="mx-auto max-w-2xl">
       <StepIndicator currentStep={step} steps={STEP_ICONS} />
 
-      <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 shadow-2xl backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-dash-hub-main shadow-2xl backdrop-blur-sm">
         <form onSubmit={handleSubmit}>
           {step === 1 && (
             <EssentialsStep

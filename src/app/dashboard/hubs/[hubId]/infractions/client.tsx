@@ -689,7 +689,7 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
   };
 
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+    <div className="overflow-hidden rounded-lg border border-gray-800 bg-dash-hub-main backdrop-blur-sm">
       <div className="flex flex-col justify-between gap-2 border-gray-800 border-b bg-gray-900/50 px-4 py-3 sm:flex-row sm:items-center sm:gap-0">
         <div className="flex items-center gap-3">
           <div className="relative">
@@ -851,7 +851,7 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
 
 function InfractionSkeleton() {
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+    <div className="overflow-hidden rounded-lg border border-gray-800 bg-dash-hub-main backdrop-blur-sm">
       <div className="flex flex-col justify-between gap-2 border-gray-800 border-b bg-gray-900/50 px-4 py-3 sm:flex-row sm:items-center sm:gap-0">
         <div className="flex items-center gap-3">
           <Skeleton className="h-10 w-10 rounded-full" />

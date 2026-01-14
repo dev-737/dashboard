@@ -61,7 +61,7 @@ function HubLayoutContent({
 
   return (
     // Outer Shell: Fixed height, no scroll on body
-    <div className="relative h-screen overflow-hidden bg-[#030812]">
+    <div className="relative h-screen overflow-hidden bg-dash-hub-sidebar">
       {/* Fixed Hub Sidebar */}
       {isHydrated && (
         <div
@@ -83,7 +83,7 @@ function HubLayoutContent({
       )}
 
       <div
-        className={`fixed top-16 right-0 bottom-0 mr-3 mb-3 overflow-y-auto rounded-r-2xl rounded-l-2xl border-white/10 border-t border-l bg-linear-to-br from-gray-900 via-gray-900/95 to-gray-950 px-4 pt-6 transition-all duration-300 ${
+        className={`fixed top-16 right-0 bottom-0 mr-3 mb-3 overflow-y-auto rounded-r-2xl rounded-l-2xl border-white/10 border-t border-l bg-[rgb(11,11,24)] px-4 pt-6 transition-all duration-300 ${
           isHydrated
             ? hubSidebarCollapsed
               ? 'left-0 lg:left-16'

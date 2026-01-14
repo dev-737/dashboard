@@ -82,7 +82,7 @@ export default async function AnnouncementsPage() {
       </div>
 
       {announcements.length === 0 ? (
-        <Card className="border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+        <Card className="border-gray-800 bg-dash-hub-main backdrop-blur-sm">
           <CardContent className="flex flex-col items-center justify-center py-12">
             <Bell className="mb-4 h-12 w-12 text-gray-500" />
             <h3 className="mb-2 font-medium text-gray-300 text-xl">
@@ -99,7 +99,7 @@ export default async function AnnouncementsPage() {
           {announcements.map((announcement) => (
             <Card
               key={announcement.id}
-              className={`border-gray-800 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm ${announcement.isUnread ? 'border-l-4 border-l-indigo-500' : ''
+              className={`border-gray-800 bg-dash-hub-main backdrop-blur-sm ${announcement.isUnread ? 'border-l-4 border-l-indigo-500' : ''
                 }`}
             >
               <CardHeader>

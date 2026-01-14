@@ -31,7 +31,7 @@ export function WelcomeMessageSection({
         value={welcomeMessage}
         onChange={(e) => setWelcomeMessage(e.target.value)}
         maxLength={1000}
-        className="min-h-[100px] resize-none border-gray-700/50 bg-gray-800/50 focus-visible:ring-indigo-500/50"
+        className="min-h-25 resize-none border-gray-700/50 bg-transparent focus-visible:ring-indigo-500/50"
       />
       <div className="flex items-start justify-between">
         <div className="space-y-1">

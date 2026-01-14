@@ -76,7 +76,7 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
               handleAddRule();
             }
           }}
-          className="min-h-[80px] flex-1 resize-none border-gray-700/50 bg-gray-800/50 focus-visible:ring-indigo-500/50"
+          className="min-h-20 flex-1 resize-none border-gray-700/50 bg-transparent focus-visible:ring-indigo-500/50"
           maxLength={200}
         />
       </div>

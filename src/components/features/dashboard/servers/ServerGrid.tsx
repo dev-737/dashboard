@@ -140,7 +140,7 @@ function ServerCard({
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Card className="flex h-full min-h-[280px] flex-col overflow-hidden rounded-2xl border border-gray-800/50 bg-linear-to-br from-gray-900/80 via-gray-900/70 to-gray-950/80 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/30 hover:shadow-blue-500/10 hover:shadow-lg">
+      <Card className="flex h-full min-h-70 flex-col overflow-hidden rounded-2xl border border-gray-800/50 bg-linear-to-br from-gray-900/80 via-gray-900/70 to-gray-950/80 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/30 hover:shadow-blue-500/10 hover:shadow-lg">
         <CardHeader className="relative pb-2">
           <div className="absolute top-3 right-3">
             {isOwner && (

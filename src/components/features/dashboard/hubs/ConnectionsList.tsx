@@ -165,7 +165,7 @@ export function ConnectionsList({
 
   if (isLoading) {
     return (
-      <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-dash-hub-main backdrop-blur-sm">
         <CardHeader>
           <CardTitle>Server Connections</CardTitle>
           <CardDescription>Loading connections...</CardDescription>
@@ -192,7 +192,7 @@ export function ConnectionsList({
   }
 
   return (
-    <Card className="border border-gray-800/50 bg-linear-to-b from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+    <Card className="border border-gray-800/50 bg-dash-hub-main backdrop-blur-sm">
       <CardHeader className="border-gray-800/30 border-b pb-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
