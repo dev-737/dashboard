@@ -600,22 +600,6 @@ export default function AdvancedSearchPage() {
               </section>
             )}
 
-            {/* Popular New Hubs */}
-            {newHubsData && newHubsData.items.length > 0 && (
-              <section className="space-y-6">
-                <div className="flex items-center gap-2 text-indigo-400">
-                  <Clock className="h-6 w-6" />
-                  <h2 className="font-bold text-2xl text-gray-100">
-                    Fresh & Popular
-                  </h2>
-                </div>
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {newHubsData.items.map((hub) => (
-                    <DiscoverHubCard key={hub.id} {...hub} />
-                  ))}
-                </div>
-              </section>
-            )}
 
             {/* Trending Hubs */}
             {trendingHubsData && trendingHubsData.items.length > 0 && (
@@ -628,6 +612,23 @@ export default function AdvancedSearchPage() {
                 </div>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {trendingHubsData.items.map((hub) => (
+                    <DiscoverHubCard key={hub.id} {...hub} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Popular New Hubs */}
+            {newHubsData && newHubsData.items.length > 0 && (
+              <section className="space-y-6">
+                <div className="flex items-center gap-2 text-indigo-400">
+                  <Clock className="h-6 w-6" />
+                  <h2 className="font-bold text-2xl text-gray-100">
+                    Fresh & Popular
+                  </h2>
+                </div>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {newHubsData.items.map((hub) => (
                     <DiscoverHubCard key={hub.id} {...hub} />
                   ))}
                 </div>
