@@ -226,9 +226,9 @@
   --color-destructive: hsl(0 62.8% 50%);
   --color-destructive-foreground: hsl(210 40% 98%);
 
-  --color-dash-main: rgb(11, 11, 24);
-  --color-dash-card: rgb(11, 13, 28);
-  --color-dash-hub-sidebar: rgb(8, 8, 18);
+  --color-dash-main: #12121f;
+  --color-dash-card: #161627;
+  --color-dash-hub-sidebar: #141421;
   --color-dash-hub-banner: rgb(23, 24, 41);
   --color-dash-hub-input: rgb(14, 17, 33);
 
