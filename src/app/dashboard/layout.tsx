@@ -25,7 +25,7 @@ export default async function DashboardLayout({
   return (
     <DashboardLayoutProvider>
       <GuidedTourProvider>
-        <div className="min-h-screen bg-gradient-primary">
+        <div className="min-h-screen bg-dash-main">
           <div className="flex h-screen flex-col overflow-hidden">
             {/* Top bar */}
             <DashboardTopBar user={session.user} />
@@ -34,22 +34,6 @@ export default async function DashboardLayout({
             <main className="dashboard-scrollbar relative flex-1 overflow-y-auto">
               {/* background layers */}
               <div className="pointer-events-none fixed inset-0 z-0">
-                {/* Primary gradient background */}
-                <div className="absolute inset-0 bg-linear-to-br from-gray-900 via-gray-900/95 to-gray-950" />
-
-                {/* Radial gradient overlays for depth */}
-                <div className="absolute inset-0 bg-linear-to-br from-purple-900/10 via-transparent to-blue-900/10" />
-                <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-purple-500/5 blur-3xl" />
-                <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-blue-500/5 blur-3xl" />
-
-                {/* grid pattern */}
-                <div
-                  className="mask-[radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_120%)] absolute inset-0 bg-grid-white bg-size-[40px_40px] opacity-[0.02]"
-                  style={{ zIndex: -1 }}
-                />
-
-                {/* Film grain effect */}
-                <div className="film-grain" />
               </div>
 
               {/* Content with */}

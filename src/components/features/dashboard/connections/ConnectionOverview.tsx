@@ -190,7 +190,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
       </Card>
 
       {/* Additional Details */}
-      <Card className="border border-gray-800/50 bg-dash-hub-main backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
         <CardHeader className="px-6 py-4">
           <CardTitle className="text-lg">Additional Details</CardTitle>
           <CardDescription className="text-gray-400">

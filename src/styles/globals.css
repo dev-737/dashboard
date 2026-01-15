@@ -179,7 +179,7 @@
   --color-destructive: hsl(0 62.8% 50%);
   --color-destructive-foreground: hsl(210 40% 98%);
 
-  --color-dash-hub-main: rgb(11, 11, 24);
+  --color-dash-main: rgb(11, 11, 24);
   --color-dash-hub-sidebar: rgb(8, 8, 18);
   --color-dash-hub-header: rgb(11, 13, 28);
   --color-dash-hub-banner: rgb(23, 24, 41);
@@ -405,7 +405,7 @@
 }
 
 .premium-card {
-  @apply bg-dash-hub-main;
+  @apply bg-dash-main;
   @apply backdrop-blur-sm border border-gray-700/50;
   @apply rounded-2xl shadow-xl;
   @apply hover:shadow-2xl transition-all duration-300;
