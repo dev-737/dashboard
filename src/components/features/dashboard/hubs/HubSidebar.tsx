@@ -46,7 +46,6 @@ interface HubSidebarProps {
   pendingCounts?: {
     reports?: number;
     appeals?: number;
-    infractions?: number;
   };
 }
 
@@ -482,8 +481,6 @@ export function HubSidebar({
               if (item.value === 'reports') badgeCount = pendingCounts.reports;
               else if (item.value === 'appeals')
                 badgeCount = pendingCounts.appeals;
-              else if (item.value === 'infractions')
-                badgeCount = pendingCounts.infractions;
             }
 
             return (
