@@ -45,7 +45,7 @@ export function ServerGrid({
           placeholder="Search servers..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="border-gray-700/50 bg-gray-800/50 pl-10 focus-visible:ring-indigo-500/50"
+          className="border-gray-700/50 bg-transparent pl-10 focus-visible:ring-indigo-500/50"
         />
         <div className="-translate-y-1/2 absolute top-1/2 left-3 transform text-gray-400">
           <svg
@@ -140,7 +140,7 @@ function ServerCard({
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Card className="flex h-full min-h-70 flex-col overflow-hidden rounded-2xl border border-gray-800/50 bg-linear-to-br from-gray-900/80 via-gray-900/70 to-gray-950/80 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/30 hover:shadow-blue-500/10 hover:shadow-lg">
+      <Card className="flex h-full min-h-70 flex-col overflow-hidden rounded-2xl border border-gray-800/50 bg-dash-card backdrop-blur-sm transition-all duration-300 hover:border-blue-500/30 hover:shadow-blue-500/10 hover:shadow-lg">
         <CardHeader className="relative pb-2">
           <div className="absolute top-3 right-3">
             {isOwner && (
@@ -172,7 +172,7 @@ function ServerCard({
             </div>
           </div>
         </CardHeader>
-        <CardContent className="flex-grow py-3 sm:py-4">
+        <CardContent className="grow py-3 sm:py-4">
           <div className="max-w-full space-y-2 text-xs sm:space-y-3 sm:text-sm">
             <div className="flex w-full items-center justify-between">
               <span className="flex items-center gap-1 text-gray-400">
@@ -192,7 +192,7 @@ function ServerCard({
                 <span className="hidden sm:inline">Last Active</span>
                 <span className="sm:hidden">Active</span>
               </span>
-              <span className="max-w-[120px] truncate text-right font-medium text-white sm:max-w-none">
+              <span className="max-w-30 truncate text-right font-medium text-white sm:max-w-none">
                 {lastActive}
               </span>
             </div>
@@ -243,7 +243,7 @@ function ServerCard({
           ) : server.botAdded ? (
             <Button
               asChild
-              className="mt-2 w-full rounded-xl border-none bg-linear-to-r from-gray-700 to-gray-800 shadow-lg transition-all duration-200 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"
+              className="mt-2 w-full rounded-xl border-none bg-linear-to-r from-gray-800 to-gray-800 shadow-lg transition-all duration-200 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"
             >
               <Link href={`/dashboard/servers/${server.id}`}>
                 <Home className="mr-2 h-4 w-4" />

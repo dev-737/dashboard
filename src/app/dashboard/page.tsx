@@ -9,7 +9,6 @@ import {
 } from '@/actions/server-actions';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
-import { AnimatedDashboardSkeleton } from '@/components/features/dashboard/AnimatedDashboardSkeleton';
 import { AnimatedWelcome } from '@/components/features/dashboard/AnimatedWelcome';
 import { AnimatedEmptyState } from '@/components/features/dashboard/hubs/AnimatedEmptyState';
 import { AnimatedHubCard } from '@/components/features/dashboard/hubs/AnimatedHubCard';
@@ -33,26 +32,13 @@ export const metadata: Metadata = {
   description: 'InterChat Dashboard - Manage your hubs, servers, and users',
 };
 
-export default function DashboardPage(props: {
-  searchParams: Promise<{ hubId?: string; tab?: string }>;
-}) {
-  return (
-    <Suspense fallback={<AnimatedDashboardSkeleton />}>
-      <DashboardContent searchParams={props.searchParams} />
-    </Suspense>
-  );
-}
-
-async function DashboardContent({
-  searchParams,
-}: {
+export default async function DashboardPage(props: {
   searchParams: Promise<{ hubId?: string; tab?: string }>;
 }) {
   const session = await auth.api.getSession({
     headers: await headers()
   });
-  const { hubId, tab } = await searchParams;
-
+  const { hubId, tab } = await props.searchParams;
   if (!session?.user?.id) {
     redirect('/login?callbackUrl=/dashboard');
   }

@@ -55,38 +55,24 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
     ? formatDistanceToNow(new Date(hub.lastActive), { addSuffix: true })
     : 'Never';
 
-  // Determine card color based on permission level
-  const getCardColor = () => {
-    switch (hub.permissionLevel) {
-      case PermissionLevel.OWNER:
-        return 'from-purple-500/10 to-purple-900/5 border-purple-500/20 hover:border-purple-500/40';
-      case PermissionLevel.MANAGER:
-        return 'from-blue-500/10 to-blue-900/5 border-blue-500/20 hover:border-blue-500/40';
-      case PermissionLevel.MODERATOR:
-        return 'from-indigo-500/10 to-indigo-900/5 border-indigo-500/20 hover:border-indigo-500/40';
-      default:
-        return 'from-gray-500/10 to-gray-900/5 border-gray-500/20 hover:border-gray-500/40';
-    }
-  };
-
   // Determine role badge based on permission level
   const getRoleBadge = () => {
     switch (hub.permissionLevel) {
       case PermissionLevel.OWNER:
         return (
-          <span className="rounded-(--radius-badge) border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-purple-600/20 px-3 py-1 font-medium text-purple-300 text-xs shadow-lg">
+          <span className="rounded-(--radius-badge) border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-purple-600/20 px-3 py-1 font-medium text-purple-300 text-xs">
             Owner
           </span>
         );
       case PermissionLevel.MANAGER:
         return (
-          <span className="rounded-(--radius-badge) border border-blue-500/30 bg-linear-to-r from-blue-500/20 to-blue-600/20 px-3 py-1 font-medium text-blue-300 text-xs shadow-lg">
+          <span className="rounded-(--radius-badge) border border-blue-500/30 bg-linear-to-r from-blue-500/20 to-blue-600/20 px-3 py-1 font-medium text-blue-300 text-xs">
             Manager
           </span>
         );
       case PermissionLevel.MODERATOR:
         return (
-          <span className="rounded-(--radius-badge) border border-indigo-500/30 bg-linear-to-r from-indigo-500/20 to-indigo-600/20 px-3 py-1 font-medium text-indigo-300 text-xs shadow-lg">
+          <span className="rounded-(--radius-badge) border border-indigo-500/30 bg-linear-to-r from-indigo-500/20 to-indigo-600/20 px-3 py-1 font-medium text-indigo-300 text-xs">
             Moderator
           </span>
         );
@@ -98,18 +84,14 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      whileHover={{
-        y: -8,
-        scale: 1.02,
-        transition: { duration: 0.2, type: 'spring' },
-      }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+      transition={{ duration: 0.3, delay: Math.min(index * 0.03, 0.3) }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="h-full"
     >
       <Card
-        className={`border bg-linear-to-br ${getCardColor()} group flex h-full min-h-[320px] flex-col overflow-hidden transition-all duration-200 hover:shadow-purple-500/10 hover:shadow-xl`}
+        className='border bg-dash-card border-gray-500/20 hover:border-purple-500/30 hover:shadow-purple-500/10 hover:shadow-2xl group flex h-full min-h-80 flex-col overflow-hidden transition-all duration-200  rounded-2xl'
       >
         <CardHeader className="relative pb-3">
           <div className="absolute top-4 right-4 z-10">{getRoleBadge()}</div>
@@ -173,7 +155,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
             </div>
           </div>
         </CardHeader>
-        <CardContent className="flex-grow py-4">
+        <CardContent className="grow py-4">
           <div className="space-y-3 text-sm">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-gray-400">
@@ -219,7 +201,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
                 </div>
                 <span>Last Active</span>
               </span>
-              <span className="max-w-[120px] truncate text-right font-medium text-gray-200">
+              <span className="max-w-30 truncate text-right font-medium text-gray-200">
                 {lastActive}
               </span>
             </div>
@@ -228,7 +210,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
         <CardFooter className="border-gray-800/50 border-t pt-0 pb-4">
           <Button
             asChild
-            className="mt-3 w-full rounded-xl border-none bg-linear-to-r from-purple-600 to-blue-600 font-medium text-white shadow-lg transition-all duration-300 hover:from-purple-700 hover:to-blue-700 hover:shadow-purple-500/25"
+            className="mt-3 w-full rounded-xl border-none bg-linear-to-r from-gray-800 to-gray-800 font-medium text-white shadow-md transition-all duration-300 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"
           >
             <Link href={`/dashboard/hubs/${hub.id}`}>
               <MessageSquare className="mr-2 h-4 w-4" />
