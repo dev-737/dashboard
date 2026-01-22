@@ -1,5 +1,6 @@
 'use client';
 
+import type { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { Globe } from 'lucide-react';
 import { HubLanguageManagement } from '@/components/features/dashboard/hubs/HubLanguageManagement';
 import { HubNSFWToggle } from '@/components/features/dashboard/hubs/HubNSFWToggle';
@@ -16,7 +17,7 @@ interface HubData {
   id: string;
   name: string;
   description: string;
-  private: boolean;
+  visibility: HubVisibility;
   welcomeMessage: string | null;
   rules: string[];
   bannerUrl: string | null;

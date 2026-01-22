@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PermissionLevel } from "@/lib/constants";
 import { getUserHubPermission } from "@/lib/permissions";
+import { HubVisibility } from "@/lib/generated/prisma/client/client";
 import { db } from "@/lib/prisma";
 
 interface HubOverviewPageProps {
@@ -88,7 +89,7 @@ export default async function HubOverviewPage({
         description: hub.description,
         iconUrl: hub.iconUrl,
         bannerUrl: hub.bannerUrl,
-        private: hub.private,
+        visibility: hub.visibility,
         nsfw: hub.nsfw,
         connectionCount: hub._count.connections,
     };
@@ -167,7 +168,7 @@ export default async function HubOverviewPage({
                                             Visibility
                                         </p>
                                         <p className="font-bold text-2xl text-white">
-                                            {hub.private ? "Private" : "Public"}
+                                            {hub.visibility === HubVisibility.PRIVATE ? "Private" : "Public"}
                                         </p>
                                         <p className="text-gray-400 text-xs">
                                             {hub.nsfw
@@ -322,7 +323,7 @@ export default async function HubOverviewPage({
         id: hub.id,
         name: hub.name,
         description: hub.description,
-        private: hub.private,
+        visibility: hub.visibility,
         welcomeMessage: hub.welcomeMessage,
         rules: hub.rules,
         bannerUrl: hub.bannerUrl,

@@ -9,6 +9,7 @@ import { buildWhereClause, getSortedHubs } from '@/app/hubs/utils';
 import { PermissionLevel } from '@/lib/constants';
 import {
   BlockWordAction,
+  HubVisibility,
   type Prisma,
 } from '@/lib/generated/prisma/client/client';
 import { getUserHubPermission } from '@/lib/permissions';
@@ -21,7 +22,7 @@ const createHubSchema = z.object({
   name: z.string().min(3).max(32),
   description: z.string().min(10).max(500),
   shortDescription: z.string().min(10).max(100).optional(),
-  private: z.boolean().prefault(true),
+  visibility: z.nativeEnum(HubVisibility).optional().prefault(HubVisibility.PRIVATE),
   rules: z.array(z.string()).optional(),
   settings: z.any().optional(),
 });
@@ -69,7 +70,7 @@ export const hubRouter = router({
               name: true,
               description: true,
               iconUrl: true,
-              private: true,
+              visibility: true,
             },
           },
         },
@@ -110,7 +111,7 @@ export const hubRouter = router({
         hubId: z.string(),
         name: z.string().min(3).max(32).optional(),
         description: z.string().min(10).max(500).optional(),
-        private: z.boolean().optional(),
+        visibility: z.nativeEnum(HubVisibility).optional(),
         welcomeMessage: z.string().max(1000).nullable().optional(),
         rules: z.array(z.string()).max(100).optional(),
         language: z.string().optional(),
@@ -122,7 +123,7 @@ export const hubRouter = router({
         hubId,
         name,
         description,
-        private: isPrivate,
+        visibility,
         welcomeMessage,
         rules,
         language,
@@ -163,7 +164,7 @@ export const hubRouter = router({
         data: {
           ...(name !== undefined && { name }),
           ...(description !== undefined && { description }),
-          ...(isPrivate !== undefined && { private: isPrivate }),
+          ...(visibility !== undefined && { visibility }),
           ...(welcomeMessage !== undefined && {
             welcomeMessage: welcomeMessage ?? null,
           }),
@@ -645,7 +646,7 @@ export const hubRouter = router({
 
       const hubs = await db.hub.findMany({
         where: {
-          private: false,
+          visibility: HubVisibility.PUBLIC,
           OR: [
             { name: { contains: term, mode: 'insensitive' } },
             { description: { contains: term, mode: 'insensitive' } },
@@ -660,7 +661,7 @@ export const hubRouter = router({
           shortDescription: true,
           iconUrl: true,
           bannerUrl: true,
-          private: true,
+          visibility: true,
           locked: true,
           nsfw: true,
           verified: true,
@@ -903,7 +904,7 @@ export const hubRouter = router({
           ownerId: true,
           iconUrl: true,
           bannerUrl: true,
-          private: true,
+          visibility: true,
           locked: true,
           nsfw: true,
           verified: true,
@@ -981,7 +982,7 @@ export const hubRouter = router({
         name,
         description,
         shortDescription,
-        private: isPrivate,
+        visibility,
         rules,
       } = input;
 
@@ -1007,7 +1008,7 @@ export const hubRouter = router({
           shortDescription,
           ownerId: ctx.session.user.id,
           iconUrl: `https://api.dicebear.com/7.x/shapes/svg?seed=${encodeURIComponent(name)}`,
-          private: isPrivate,
+          visibility,
           settings: 0,
           rules: rules || [],
         },
@@ -1019,7 +1020,7 @@ export const hubRouter = router({
           ownerId: true,
           iconUrl: true,
           bannerUrl: true,
-          private: true,
+          visibility: true,
           locked: true,
           settings: true,
           createdAt: true,
@@ -1374,7 +1375,7 @@ export const hubRouter = router({
       }
 
       const baseWhere = {
-        private: false,
+        visibility: HubVisibility.PUBLIC,
         locked: false,
         connections: {
           some: { connected: true },

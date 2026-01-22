@@ -168,10 +168,12 @@ export function useHubTagManagement() {
           trpc.hub.getHub.queryKey({ id: variables.hubId }),
           (old) => {
             if (!old) return old;
+            const existingTags =
+              (old as { tags?: Array<{ name: string }> }).tags || [];
             return {
               ...old,
               tags: [
-                ...(old.tags || []),
+                ...existingTags,
                 ...variables.tags.map((tag: string) => ({ name: tag })),
               ],
             };
@@ -230,10 +232,12 @@ export function useHubTagManagement() {
           trpc.hub.getHub.queryKey({ id: variables.hubId }),
           (old) => {
             if (!old) return old;
+            const existingTags =
+              (old as { tags?: Array<{ name: string }> }).tags || [];
             return {
               ...old,
-              tags: (old.tags || []).filter(
-                (tag) => !variables.tags.includes(tag.name)
+              tags: existingTags.filter(
+                (tag: { name: string }) => !variables.tags.includes(tag.name)
               ),
             };
           }

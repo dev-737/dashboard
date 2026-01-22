@@ -56,7 +56,7 @@ export default async function DashboardPage(props: {
         name: true,
         description: true,
         iconUrl: true,
-        private: true,
+        visibility: true,
       },
     });
   }

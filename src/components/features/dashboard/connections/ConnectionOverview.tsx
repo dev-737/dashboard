@@ -21,19 +21,18 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import type {
-  Connection,
-  ServerData,
-} from '@/lib/generated/prisma/client/client';
+import { HubVisibility } from '@/lib/generated/prisma/client/client';
+import type { Connection, ServerData } from '@/lib/generated/prisma/client/client';
 
 interface ConnectionOverviewProps {
   connection: Connection & {
-    hub: { name: string; description: string; private: boolean };
+    hub: { name: string; description: string; visibility: HubVisibility };
     server: ServerData;
   };
 }
 
 export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
+  const isPrivate = connection.hub.visibility === HubVisibility.PRIVATE;
   const formatDate = (date: Date | string) => {
     const dateObj = typeof date === 'string' ? new Date(date) : date;
     return formatDistanceToNow(dateObj, { addSuffix: true });
@@ -103,12 +102,12 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
                   <Badge
                     variant="outline"
                     className={`text-xs ${
-                      connection.hub.private
+                      isPrivate
                         ? 'border-purple-500/30 bg-purple-500/10 text-purple-400'
                         : 'border-green-500/30 bg-green-500/10 text-green-400'
                     }`}
                   >
-                    {connection.hub.private ? 'Private' : 'Public'}
+                    {isPrivate ? 'Private' : 'Public'}
                   </Badge>
                 </div>
                 <p className="line-clamp-2 text-gray-400 text-sm">

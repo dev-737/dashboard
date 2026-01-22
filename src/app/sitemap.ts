@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -42,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // all public hubs
   const hubs = await db.hub.findMany({
     where: {
-      private: false,
+      visibility: HubVisibility.PUBLIC,
     },
     orderBy: {
       updatedAt: 'desc',

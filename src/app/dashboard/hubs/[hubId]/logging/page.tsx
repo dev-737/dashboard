@@ -63,7 +63,7 @@ export default async function HubLoggingPage({
     description: hub.description,
     iconUrl: hub.iconUrl,
     bannerUrl: hub.bannerUrl,
-    private: hub.private,
+    visibility: hub.visibility,
     nsfw: hub.nsfw,
     connectionCount: hub._count.connections,
   };

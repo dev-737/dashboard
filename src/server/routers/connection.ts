@@ -3,6 +3,7 @@ import { z } from 'zod/v4';
 import { getServers } from '@/actions/server-actions';
 import { PermissionLevel } from '@/lib/constants';
 import { getUserHubPermission } from '@/lib/permissions';
+import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 import { protectedProcedure, router } from '../trpc';
 
@@ -15,9 +16,9 @@ export const connectionRouter = router({
 
       const hub = await db.hub.findUnique({
         where: { id: input.hubId },
-        select: { private: true },
+        select: { visibility: true },
       });
-      if (hub?.private && permission === PermissionLevel.NONE) {
+      if (hub?.visibility === HubVisibility.PRIVATE && permission === PermissionLevel.NONE) {
         // Match previous API semantics: 404 for private without access
         throw Object.assign(new Error('Hub not found'), {
           code: 'NOT_FOUND' as const,

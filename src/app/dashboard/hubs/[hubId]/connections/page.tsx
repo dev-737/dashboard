@@ -38,7 +38,7 @@ export default async function HubConnectionsPage({
       queryFn: async () => {
         const connections = await db.connection.findMany({
           where: { hubId },
-          select: {
+      visibility: true,
             id: true,
             serverId: true,
             channelId: true,
@@ -74,7 +74,7 @@ export default async function HubConnectionsPage({
       id: true,
       name: true,
       description: true,
-      private: true,
+      visibility: true,
       ownerId: true,
       nsfw: true,
       iconUrl: true,
@@ -85,7 +85,6 @@ export default async function HubConnectionsPage({
   if (!hub) {
     return notFound();
   }
-
   // Only allow users with at least moderator permissions
   if (permissionLevel < PermissionLevel.MODERATOR) {
     return notFound();
@@ -121,7 +120,7 @@ export default async function HubConnectionsPage({
     description: hub.description,
     iconUrl: hub.iconUrl,
     bannerUrl: hub.bannerUrl,
-    private: hub.private,
+    visibility: hub.visibility,
     nsfw: hub.nsfw,
     connectionCount: connections.filter((c) => c.connected).length,
   };

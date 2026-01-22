@@ -1,5 +1,6 @@
 'use client';
 
+import type { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { motion } from 'motion/react';
 import { useDashboardLayout } from '../LayoutProvider';
 import { HubProvider, useHub } from './HubContext';
@@ -14,7 +15,7 @@ interface HubLayoutProps {
     description: string;
     iconUrl: string;
     bannerUrl: string | null;
-    private: boolean;
+    visibility: HubVisibility;
     nsfw: boolean;
     connectionCount: number;
   };

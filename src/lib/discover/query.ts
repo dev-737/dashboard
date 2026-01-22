@@ -1,5 +1,6 @@
 import { cacheLife, cacheTag } from 'next/cache';
 import type { Prisma } from '@/lib/generated/prisma/client/client';
+import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { PerformanceCache } from '@/lib/performance-cache';
 import { db } from '@/lib/prisma';
 
@@ -129,7 +130,7 @@ function getBaseSelect(userId?: string) {
 
 function buildWhere(p: DiscoverParams): Prisma.HubWhereInput {
   const and: Prisma.HubWhereInput[] = [
-    { private: false, connections: { some: { connected: true } } },
+    { visibility: HubVisibility.PUBLIC, connections: { some: { connected: true } } },
   ];
 
   if (p.q) {

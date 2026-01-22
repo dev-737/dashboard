@@ -80,7 +80,7 @@ export default async function HubDiscoverabilityPage({
     id: hub.id,
     name: hub.name,
     description: hub.description,
-    private: hub.private,
+    visibility: hub.visibility,
     welcomeMessage: hub.welcomeMessage,
     rules: hub.rules,
     bannerUrl: hub.bannerUrl,

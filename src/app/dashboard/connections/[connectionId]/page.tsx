@@ -43,7 +43,7 @@ async function getConnectionData(connectionId: string) {
           iconUrl: true,
           bannerUrl: true,
           welcomeMessage: true,
-          private: true,
+          visibility: true,
           locked: true,
           appealCooldownHours: true,
           lastActive: true,

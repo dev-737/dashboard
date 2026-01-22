@@ -41,7 +41,7 @@ export default async function HubAntiSwearPage({
       description: true,
       iconUrl: true,
       bannerUrl: true,
-      private: true,
+      visibility: true,
       nsfw: true,
       _count: {
         select: {
@@ -63,7 +63,7 @@ export default async function HubAntiSwearPage({
     description: hub.description,
     iconUrl: hub.iconUrl,
     bannerUrl: hub.bannerUrl,
-    private: hub.private,
+    visibility: hub.visibility,
     nsfw: hub.nsfw,
     connectionCount: hub._count.connections,
   };

@@ -3,13 +3,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
+import type { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 
 // Interface for hub update data
 export interface HubUpdateData {
   name?: string;
   description?: string;
-  private?: boolean;
+  visibility?: HubVisibility;
   welcomeMessage?: string | null;
   rules?: string[];
   language?: string;

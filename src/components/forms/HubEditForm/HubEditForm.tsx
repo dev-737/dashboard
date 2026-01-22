@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
+import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 import { BasicInfoSection } from './BasicInfoSection';
 import { RulesSection } from './RulesSection';
@@ -21,7 +22,7 @@ export interface HubData {
   id: string;
   name: string;
   description: string;
-  private: boolean;
+  visibility: HubVisibility;
   welcomeMessage: string | null;
   rules: string[];
   bannerUrl: string | null;
@@ -40,6 +41,7 @@ interface HubEditFormProps {
 
 export function HubEditForm({ hubData }: HubEditFormProps) {
   const trpc = useTRPC();
+  const initialIsPrivate = hubData.visibility === HubVisibility.PRIVATE;
 
   // Generate unique IDs for form fields
   const nameId = useId();
@@ -51,7 +53,7 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
   const originalValues = {
     name: hubData.name,
     description: hubData.description,
-    private: hubData.private,
+    isPrivate: initialIsPrivate,
     welcomeMessage: hubData.welcomeMessage || '',
     rules: hubData.rules || [],
   };
@@ -59,7 +61,7 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
   // Form state
   const [name, setName] = useState(hubData.name);
   const [description, setDescription] = useState(hubData.description);
-  const [isPrivate, setIsPrivate] = useState(hubData.private);
+  const [isPrivate, setIsPrivate] = useState(initialIsPrivate);
   const [welcomeMessage, setWelcomeMessage] = useState(
     hubData.welcomeMessage || ''
   );
@@ -93,7 +95,7 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
   const hasUnsavedChanges =
     name !== originalValues.name ||
     description !== originalValues.description ||
-    isPrivate !== originalValues.private ||
+    isPrivate !== originalValues.isPrivate ||
     welcomeMessage !== originalValues.welcomeMessage ||
     JSON.stringify(rules) !== JSON.stringify(originalValues.rules);
 
@@ -101,7 +103,7 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
   const resetForm = () => {
     setName(originalValues.name);
     setDescription(originalValues.description);
-    setIsPrivate(originalValues.private);
+    setIsPrivate(originalValues.isPrivate);
     setWelcomeMessage(originalValues.welcomeMessage);
     setRules(originalValues.rules);
   };
@@ -115,7 +117,7 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
       hubId: hubData.id,
       name,
       description,
-      private: isPrivate,
+      visibility: isPrivate ? HubVisibility.PRIVATE : HubVisibility.PUBLIC,
       welcomeMessage: welcomeMessage || null,
       rules,
     });

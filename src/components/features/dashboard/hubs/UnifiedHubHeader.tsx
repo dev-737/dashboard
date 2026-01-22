@@ -1,5 +1,6 @@
 'use client';
 
+import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { Camera, EyeOff, Globe, Lock, Upload, Users } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -15,7 +16,7 @@ interface UnifiedHubHeaderProps {
     description: string;
     iconUrl: string;
     bannerUrl: string | null;
-    private: boolean;
+    visibility: HubVisibility;
     nsfw: boolean;
     connectionCount: number;
   };
@@ -32,6 +33,7 @@ export function UnifiedHubHeader({
 }: UnifiedHubHeaderProps) {
   const [iconUploadOpen, setIconUploadOpen] = useState(false);
   const [bannerUploadOpen, setBannerUploadOpen] = useState(false);
+  const isPrivate = hub.visibility === HubVisibility.PRIVATE;
 
   const handleIconUpdate = (iconUrl: string | null) => {
     if (iconUrl && onHubUpdate) {
@@ -110,7 +112,7 @@ export function UnifiedHubHeader({
 
                   {/* Privacy indicator */}
                   <div className="-bottom-1 -right-1 absolute rounded-full border border-gray-700/50 bg-gray-950 p-1.5 shadow-md">
-                    {hub.private ? (
+                    {isPrivate ? (
                       <Lock className="h-3 w-3 text-amber-400" />
                     ) : (
                       <Globe className="h-3 w-3 text-green-400" />
@@ -124,7 +126,7 @@ export function UnifiedHubHeader({
                       {hub.name}
                     </h1>
                     <div className="flex items-center gap-2">
-                      {hub.private && (
+                      {isPrivate && (
                         <Badge
                           variant="secondary"
                           className="border-amber-500/30 bg-amber-500/20 text-amber-400"

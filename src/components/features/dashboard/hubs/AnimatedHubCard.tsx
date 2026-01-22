@@ -25,6 +25,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { PermissionLevel } from '@/lib/constants';
+import { HubVisibility } from '@/lib/generated/prisma/client/client';
 
 interface HubWithPermission {
   id: string;
@@ -34,7 +35,7 @@ interface HubWithPermission {
   connections: { id: string }[];
   upvotes: { id: string }[];
   lastActive: Date | null;
-  private: boolean;
+  visibility: HubVisibility;
   permissionLevel: PermissionLevel;
 }
 
@@ -50,6 +51,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
   });
 
   const [isHovering, setIsHovering] = useState(false);
+  const isPrivate = hub.visibility === HubVisibility.PRIVATE;
 
   const lastActive = hub.lastActive
     ? formatDistanceToNow(new Date(hub.lastActive), { addSuffix: true })
@@ -120,7 +122,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
 
               {/* Privacy indicator */}
               <div className="-bottom-1 -right-1 absolute flex h-6 w-6 items-center justify-center rounded-(--radius-avatar) border-2 border-gray-700 bg-gray-900">
-                {hub.private ? (
+                {isPrivate ? (
                   <Lock className="h-3 w-3 text-orange-400" />
                 ) : (
                   <Globe className="h-3 w-3 text-green-400" />
@@ -160,7 +162,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-gray-400">
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
-                  {hub.private ? (
+                  {isPrivate ? (
                     <Lock className="h-3 w-3 text-purple-400" />
                   ) : (
                     <Globe className="h-3 w-3 text-green-400" />
@@ -169,7 +171,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
                 <span>Privacy</span>
               </span>
               <span className="flex items-center font-medium text-gray-200">
-                {hub.private ? 'Private' : 'Public'}
+                {isPrivate ? 'Private' : 'Public'}
               </span>
             </div>
             <div className="flex items-center justify-between">

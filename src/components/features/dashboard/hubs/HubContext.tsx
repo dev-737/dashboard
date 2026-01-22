@@ -7,6 +7,7 @@ import {
   useContext,
   useState,
 } from 'react';
+import type { HubVisibility } from '@/lib/generated/prisma/client/client';
 
 interface HubData {
   id: string;
@@ -14,7 +15,7 @@ interface HubData {
   description: string;
   iconUrl: string;
   bannerUrl: string | null;
-  private: boolean;
+  visibility: HubVisibility;
   nsfw: boolean;
   connectionCount: number;
 }

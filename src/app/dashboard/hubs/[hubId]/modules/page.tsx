@@ -45,7 +45,7 @@ export default async function HubModulesPage({ params }: HubModulesPageProps) {
       id: true,
       name: true,
       description: true,
-      private: true,
+      visibility: true,
       settings: true,
       iconUrl: true,
       bannerUrl: true,
@@ -71,7 +71,7 @@ export default async function HubModulesPage({ params }: HubModulesPageProps) {
     description: hub.description,
     iconUrl: hub.iconUrl,
     bannerUrl: hub.bannerUrl,
-    private: hub.private,
+    visibility: hub.visibility,
     nsfw: hub.nsfw,
     connectionCount: hub._count.connections,
   };

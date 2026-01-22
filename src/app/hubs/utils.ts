@@ -1,5 +1,6 @@
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 import type { Prisma } from '@/lib/generated/prisma/client/client';
+import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 import {
   ActivityLevel,
@@ -50,7 +51,7 @@ export function buildWhereClause({
   const searchTerms = search?.trim().split(/\s+/).filter(Boolean) || [];
 
   const filterConditions: Prisma.HubWhereInput[] = [
-    { private: false }, // Always filter out private hubs
+    { visibility: HubVisibility.PUBLIC }, // Always filter out private hubs
   ];
 
   // Filter by tags - hub must have ALL selected tags
