@@ -76,7 +76,7 @@ export function Hero() {
                 whileTap={{ scale: 0.98 }}
                 className="group relative"
               >
-                <div className="absolute inset-0 rounded-full bg-none opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-70" />
+                <div className="absolute inset-0 rounded-full bg-none" />
                 <Button
                   size="lg"
                   className="relative h-14 rounded-full bg-linear-to-r from-purple-600 to-blue-600 px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/25"
