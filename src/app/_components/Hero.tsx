@@ -19,9 +19,9 @@ export function Hero() {
     >
       {/* Background Gradients */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] h-[800px] w-[800px] rounded-full bg-purple-600/10 blur-[120px]" />
-        <div className="absolute right-[-10%] bottom-[-10%] h-[800px] w-[800px] rounded-full bg-blue-600/10 blur-[120px]" />
-        <div className="absolute inset-0 bg-[url('/assets/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+        <div className="absolute top-[-10%] left-[-10%] h-200 w-200 rounded-full bg-purple-600/10 blur-[120px]" />
+        <div className="absolute right-[-10%] bottom-[-10%] h-200 w-200 rounded-full bg-blue-600/10 blur-[120px]" />
+        <div className="absolute inset-0 bg-[url('/assets/grid.svg')] bg-center mask-[linear-gradient(180deg,white,rgba(255,255,255,0))]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
@@ -76,7 +76,7 @@ export function Hero() {
                 whileTap={{ scale: 0.98 }}
                 className="group relative"
               >
-                <div className="absolute inset-0 rounded-full bg-linear-to-r from-purple-600 to-blue-600 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-70" />
+                <div className="absolute inset-0 rounded-full bg-none opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-70" />
                 <Button
                   size="lg"
                   className="relative h-14 rounded-full bg-linear-to-r from-purple-600 to-blue-600 px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/25"
