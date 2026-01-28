@@ -58,7 +58,7 @@ export function CTA() {
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.02] p-4 backdrop-blur-sm transition-all hover:bg-white/[0.04]"
+                className="flex items-center gap-4 rounded-2xl border border-white/5 bg-white/2 p-4 backdrop-blur-sm transition-all hover:bg-white/4"
               >
                 <div className="rounded-xl bg-blue-500/10 p-3 text-blue-400 ring-1 ring-blue-500/20">
                   <stat.icon className="h-5 w-5" />
@@ -85,7 +85,7 @@ export function CTA() {
               whileTap={{ scale: 0.98 }}
               className="group relative"
             >
-              <div className="absolute inset-0 rounded-full bg-linear-to-r from-blue-600 to-purple-600 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-70" />
+              <div className="absolute inset-0 rounded-full bg-none" />
               <Button
                 asChild
                 size="lg"
