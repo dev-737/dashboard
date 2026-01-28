@@ -56,7 +56,6 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
   useEffect(() => {
     setMounted(true);
 
-    // Prevent body scrolling when sidebar is open
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -70,57 +69,58 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
 
   if (!mounted) return null;
 
-  // Navigation items matching the topbar
   const navigationItems = [
     {
       href: '/dashboard',
       icon: Home,
       label: 'Dashboard',
-      color: 'text-indigo-400',
-      activeColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
-      active: pathname === '/dashboard',
+      gradient: 'from-blue-500/20 to-indigo-500/20',
+      activeBorder: 'border-blue-500/30',
+      iconColor: 'text-blue-400',
     },
     {
       href: '/dashboard/my-appeals',
       icon: Scale,
       label: 'My Appeals',
-      color: 'text-purple-400',
-      activeColor: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-      active: pathname.startsWith('/dashboard/my-appeals'),
+      gradient: 'from-purple-500/20 to-pink-500/20',
+      activeBorder: 'border-purple-500/30',
+      iconColor: 'text-purple-400',
     },
     {
       href: '/leaderboard',
       icon: Trophy,
       label: 'Leaderboard',
-      color: 'text-yellow-400',
-      activeColor: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
-      active: pathname.startsWith('/leaderboard'),
+      gradient: 'from-yellow-500/20 to-orange-500/20',
+      activeBorder: 'border-yellow-500/30',
+      iconColor: 'text-yellow-400',
     },
     {
       href: '/dashboard/settings',
       icon: Settings,
       label: 'Settings',
-      color: 'text-gray-400',
-      activeColor: 'bg-gray-500/10 text-gray-400 border-gray-500/20',
-      active: pathname.startsWith('/dashboard/settings'),
+      gradient: 'from-gray-500/20 to-slate-500/20',
+      activeBorder: 'border-gray-500/30',
+      iconColor: 'text-gray-400',
     },
   ];
 
   const sidebarVariants: Variants = {
     closed: {
       x: '-100%',
+      opacity: 0.5,
       transition: {
         type: 'spring',
-        stiffness: 300,
-        damping: 30,
+        stiffness: 400,
+        damping: 40,
       },
     },
     open: {
       x: 0,
+      opacity: 1,
       transition: {
         type: 'spring',
-        stiffness: 300,
-        damping: 30,
+        stiffness: 400,
+        damping: 40,
         staggerChildren: 0.05,
         delayChildren: 0.1,
       },
@@ -136,170 +136,210 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
     <AnimatePresence mode="wait">
       {isOpen && (
         <>
-          {/* Overlay - covers the entire viewport */}
+          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-9998 bg-black/60 backdrop-blur-sm"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[9998] bg-[#030812]/80 backdrop-blur-md"
             onClick={onClose}
           />
 
-          {/* Sidebar - positioned relative to the viewport */}
+          {/* Sidebar */}
           <motion.div
             initial="closed"
             animate="open"
             exit="closed"
             variants={sidebarVariants}
-            className="fixed top-0 bottom-0 left-0 z-9999 flex w-[300px] max-w-[85vw] flex-col overflow-hidden border-white/5 border-r bg-[#0a0a0c]/95 shadow-2xl backdrop-blur-xl"
+            className="fixed top-0 bottom-0 left-0 z-[9999] flex w-[320px] max-w-[85vw] flex-col overflow-hidden border-r border-white/5 bg-[#030812] shadow-2xl"
           >
             {/* Header */}
-            <div className="flex h-20 shrink-0 items-center justify-between px-6">
+            <div className="relative flex h-24 shrink-0 items-center justify-between px-6 pt-4">
+              <div className="absolute inset-0 bg-linear-to-b from-purple-500/5 to-transparent opacity-50" />
               <Link
                 href="/"
-                className="group flex items-center gap-3"
+                className="group relative flex items-center gap-3"
                 onClick={onClose}
               >
-                <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 shadow-lg shadow-purple-500/20 transition-transform duration-300 group-hover:scale-105">
+                <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-purple-500/10 to-blue-500/10 ring-1 ring-white/10 transition-transform duration-500 group-hover:rotate-12">
                   <Image
                     src="/assets/images/logos/interchat.png"
                     alt="InterChat"
-                    fill
-                    className="object-cover"
+                    width={24}
+                    height={24}
+                    className="object-contain"
                   />
-                  <div className="absolute inset-0 bg-linear-to-tr from-purple-500/20 to-transparent" />
                 </div>
-                <span className="bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text font-bold text-transparent text-xl tracking-tight">
-                  InterChat
-                </span>
+                <div>
+                  <h1 className="bg-linear-to-r from-white via-white to-gray-400 bg-clip-text font-bold text-lg text-transparent tracking-tight">
+                    InterChat
+                  </h1>
+                  <p className="font-medium text-[10px] text-gray-500 uppercase tracking-widest">
+                    Dashboard
+                  </p>
+                </div>
               </Link>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={onClose}
-                className="h-8 w-8 rounded-full border border-white/5 bg-white/5 text-gray-400 hover:border-white/10 hover:bg-white/10 hover:text-white"
+                className="relative z-10 h-8 w-8 rounded-full text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
               >
-                <X className="h-4 w-4" />
-                <span className="sr-only">Close sidebar</span>
+                <X className="h-5 w-5" />
               </Button>
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto px-4 py-4">
-              <div className="space-y-6">
-                {/* Main Navigation */}
-                <div className="space-y-1">
-                  <h3 className="px-4 pb-2 font-medium text-gray-500 text-xs uppercase tracking-wider">
-                    Menu
-                  </h3>
-                  {navigationItems.map((item) => (
-                    <motion.div key={item.href} variants={itemVariants}>
-                      <Link
-                        href={item.href}
-                        onClick={onClose}
-                        className={cn(
-                          'group relative flex items-center gap-3 rounded-xl border border-transparent px-4 py-3 font-medium text-sm transition-all duration-300',
-                          item.active
-                            ? item.activeColor
-                            : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'
-                        )}
-                      >
-                        {item.active && (
-                          <motion.div
-                            layoutId="active-pill"
-                            className="absolute left-0 h-8 w-1 rounded-r-full bg-current opacity-50"
-                            transition={{
-                              type: 'spring',
-                              stiffness: 300,
-                              damping: 30,
-                            }}
-                          />
-                        )}
-                        <item.icon
-                          className={cn(
-                            'h-5 w-5 transition-transform duration-300 group-hover:scale-110',
-                            item.active
-                              ? 'text-current'
-                              : 'text-gray-500 group-hover:text-gray-300'
-                          )}
-                        />
-                        <span>{item.label}</span>
-                      </Link>
-                    </motion.div>
-                  ))}
+            <div className="flex-1 overflow-y-auto px-4 py-2">
+              <div className="space-y-8">
+                {/* Navigation */}
+                <div className="space-y-2">
+                  <h2 className="px-2 font-semibold text-gray-500 text-xs uppercase tracking-wider">
+                    Navigation
+                  </h2>
+                  <div className="space-y-1">
+                    {navigationItems.map((item) => {
+                      const isActive =
+                        pathname === item.href ||
+                        (item.href !== '/dashboard' &&
+                          pathname.startsWith(item.href));
+
+                      return (
+                        <motion.div key={item.href} variants={itemVariants}>
+                          <Link
+                            href={item.href}
+                            onClick={onClose}
+                            className={cn(
+                              'group relative flex items-center gap-3 overflow-hidden rounded-xl px-4 py-3.5 transition-all duration-300',
+                              isActive
+                                ? 'bg-white/[0.03] shadow-inner'
+                                : 'hover:bg-white/[0.02]'
+                            )}
+                          >
+                            {/* Active/Hover Background Gradient */}
+                            <div
+                              className={cn(
+                                'absolute inset-0 bg-linear-to-r opacity-0 transition-opacity duration-300',
+                                item.gradient,
+                                isActive
+                                  ? 'opacity-100'
+                                  : 'group-hover:opacity-50'
+                              )}
+                            />
+
+                            {/* Active Left Border Indicator */}
+                            {isActive && (
+                              <motion.div
+                                layoutId="active-indicator"
+                                className={cn(
+                                  'absolute left-0 top-1.5 bottom-1.5 w-1 rounded-full bg-linear-to-b from-blue-400 to-purple-400',
+                                  item.activeBorder
+                                )}
+                              />
+                            )}
+
+                            {/* Icon */}
+                            <div
+                              className={cn(
+                                'relative z-10 transition-colors duration-300',
+                                isActive ? 'text-white' : 'text-gray-500',
+                                !isActive &&
+                                  'group-hover:' +
+                                    item.iconColor.replace('text-', 'text-')
+                              )}
+                            >
+                              <item.icon className="h-5 w-5 transform transition-transform duration-300 group-hover:scale-110" />
+                            </div>
+
+                            {/* Label */}
+                            <span
+                              className={cn(
+                                'relative z-10 font-medium text-sm transition-colors duration-300',
+                                isActive
+                                  ? 'text-white'
+                                  : 'text-gray-400 group-hover:text-gray-200'
+                              )}
+                            >
+                              {item.label}
+                            </span>
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {/* Quick Actions */}
-                <motion.div variants={itemVariants} className="space-y-1">
-                  <h3 className="px-4 pb-2 font-medium text-gray-500 text-xs uppercase tracking-wider">
+                <motion.div variants={itemVariants} className="space-y-2">
+                  <h2 className="px-2 font-semibold text-gray-500 text-xs uppercase tracking-wider">
                     Quick Actions
-                  </h3>
+                  </h2>
 
-                  {/* Notifications */}
-                  <div className="group relative flex items-center justify-between rounded-xl border border-transparent px-4 py-2.5 transition-all duration-300 hover:bg-white/5">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 group-hover:bg-blue-500/20 group-hover:text-blue-300">
-                        <Bell className="h-4 w-4" />
+                  <div className="grid gap-2">
+                    {/* Notifications Card */}
+                    <div className="group relative flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] p-3 transition-all hover:bg-white/[0.04]">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
+                          <Bell className="h-4 w-4" />
+                        </div>
+                        <span className="font-medium text-gray-300 text-sm">
+                          Inbox
+                        </span>
                       </div>
-                      <span className="font-medium text-gray-300 text-sm group-hover:text-white">
-                        Notifications
-                      </span>
+                      <div className="relative z-20">
+                        <NotificationDropdown />
+                      </div>
                     </div>
-                    <div className="relative z-20">
-                      <NotificationDropdown />
-                    </div>
-                  </div>
 
-                  {/* Help */}
-                  <div className="group relative flex items-center justify-between rounded-xl border border-transparent px-4 py-2.5 transition-all duration-300 hover:bg-white/5">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-500/10 text-green-400 group-hover:bg-green-500/20 group-hover:text-green-300">
-                        <HelpCircle className="h-4 w-4" />
+                    {/* Help Card */}
+                    <div className="group relative flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] p-3 transition-all hover:bg-white/[0.04]">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-500/10 text-green-400">
+                          <HelpCircle className="h-4 w-4" />
+                        </div>
+                        <span className="font-medium text-gray-300 text-sm">
+                          Support
+                        </span>
                       </div>
-                      <span className="font-medium text-gray-300 text-sm group-hover:text-white">
-                        Help & Support
-                      </span>
-                    </div>
-                    <div className="relative z-20">
-                      <OnboardingHelpMenu />
+                      <div className="relative z-20">
+                        <OnboardingHelpMenu />
+                      </div>
                     </div>
                   </div>
                 </motion.div>
               </div>
             </div>
 
-            {/* Footer / User Profile */}
+            {/* User Profile Footer */}
             <motion.div
               variants={itemVariants}
-              className="border-white/5 border-t bg-black/20 p-4 backdrop-blur-md"
+              className="mt-auto border-t border-white/5 bg-[#030812]/50 p-6 backdrop-blur-xl"
             >
-              <div className="mb-4 flex items-center gap-3 rounded-xl border border-white/5 bg-white/5 p-3 shadow-inner">
-                <Avatar className="h-10 w-10 border border-white/10 shadow-lg">
+              <div className="flex items-center gap-3">
+                <Avatar className="h-10 w-10 ring-2 ring-white/10 transition-all duration-300 hover:ring-purple-500/50">
                   <AvatarImage
                     src={user.image || undefined}
                     alt={user.name || 'User'}
                   />
-                  <AvatarFallback className="bg-linear-to-br from-purple-500 to-indigo-600 font-bold text-white">
+                  <AvatarFallback className="bg-linear-to-br from-purple-600 to-blue-600 font-bold text-white">
                     {getInitials(user.name)}
                   </AvatarFallback>
                 </Avatar>
-                <div className="min-w-0 flex-1 overflow-hidden">
-                  <p className="truncate font-medium text-sm text-white">
+                <div className="min-w-0 flex-1">
+                  <p className="truncate font-semibold text-sm text-white">
                     {user.name}
                   </p>
                   <p className="truncate text-gray-500 text-xs">{user.email}</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
+              <div className="mt-4 grid grid-cols-2 gap-3">
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => {
-                    onClose();
-                  }}
-                  className="w-full border-white/10 bg-transparent text-gray-300 hover:bg-white/5 hover:text-white"
+                  onClick={onClose}
+                  className="w-full border-white/10 bg-white/5 text-gray-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
                 >
                   <UserIcon className="mr-2 h-3.5 w-3.5" />
                   Profile
@@ -312,7 +352,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                     await authClient.signOut();
                     window.location.href = '/';
                   }}
-                  className="w-full border-red-500/20 bg-red-500/5 text-red-400 hover:border-red-500/30 hover:bg-red-500/10"
+                  className="w-full border-red-500/10 bg-red-500/5 text-red-400 hover:border-red-500/20 hover:bg-red-500/10"
                 >
                   <LogOut className="mr-2 h-3.5 w-3.5" />
                   Sign out

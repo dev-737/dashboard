@@ -13,13 +13,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from '@/components/ui/NavigationMenu';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+import { HomepageMobileSidebar } from './HomepageMobileSidebar';
 
 const links = [
   {
@@ -58,6 +52,7 @@ export function Navbar({ session }: NavbarProps) {
 
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const isDashboardPage = pathname.startsWith('/dashboard');
 
   useEffect(() => {
@@ -139,110 +134,22 @@ export function Navbar({ session }: NavbarProps) {
           )}
 
           {/* Mobile/Tablet Menu Button */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="group rounded-full border border-gray-700/30 text-gray-400 backdrop-blur-sm transition-all duration-300 hover:border-gray-600/50 hover:bg-white/5 hover:text-white hover:shadow-lg hover:shadow-purple-500/10 lg:hidden"
-              >
-                <Menu className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-[280px] overflow-hidden border-gray-700/40 border-l bg-linear-to-b from-gray-900/98 to-gray-950/98 p-0 shadow-2xl shadow-black/20 backdrop-blur-xl sm:w-[320px]"
-            >
-              <SheetHeader className="border-gray-700/40 border-b bg-linear-to-r from-gray-900/50 to-gray-800/50 p-6 backdrop-blur-sm">
-                <SheetTitle className="flex items-center gap-3 text-white">
-                  <div className="relative">
-                    <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500/20 blur-md" />
-                    <Image
-                      alt="InterChat"
-                      src="/assets/images/logos/interchat.png"
-                      height={24}
-                      width={24}
-                      className="relative rounded-full transition-transform duration-300 hover:scale-110"
-                    />
-                  </div>
-                  <span className="bg-linear-to-r from-white via-gray-100 to-gray-200 bg-clip-text font-semibold text-transparent">
-                    InterChat Menu
-                  </span>
-                </SheetTitle>
-              </SheetHeader>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsOpen(true)}
+            className="group rounded-full border border-white/5 bg-white/5 text-gray-400 backdrop-blur-sm transition-all duration-300 hover:border-white/10 hover:bg-white/10 hover:text-white lg:hidden"
+          >
+            <Menu className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+            <span className="sr-only">Toggle menu</span>
+          </Button>
 
-              <div className="flex h-full flex-col">
-                <nav className="relative flex flex-col space-y-2 px-4 py-6">
-                  {/* Vertical line connecting bullets */}
-                  <div className="absolute top-9 bottom-5 left-9 w-[2px] bg-linear-to-b from-purple-500/40 via-indigo-500/30 to-purple-500/40" />
-
-                  {links.map((link, index) => (
-                    <Link
-                      key={link.url}
-                      href={link.url}
-                      className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border px-4 py-3 font-medium text-sm transition-all duration-300 ${
-                        pathname === link.url
-                          ? 'border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
-                          : 'border-transparent text-gray-400 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-black/5 hover:shadow-md'
-                      }`}
-                      style={{
-                        animationDelay: `${index * 50}ms`,
-                      }}
-                    >
-                      <div
-                        className={`relative z-10 flex h-2 w-2 shrink-0 rounded-full transition-all duration-300 ${
-                          pathname === link.url
-                            ? 'bg-purple-400 shadow-lg shadow-purple-400/50'
-                            : 'bg-gray-600 group-hover:bg-purple-400 group-hover:shadow-md group-hover:shadow-purple-400/30'
-                        }`}
-                      />
-                      <span className="truncate">{link.text}</span>
-                      {link.external && (
-                        <ExternalLink className="ml-auto h-3.5 w-3.5 opacity-50 transition-opacity duration-300 group-hover:opacity-100" />
-                      )}
-                    </Link>
-                  ))}
-                </nav>
-
-                <div className="mt-auto space-y-3 border-gray-700/40 border-t bg-linear-to-t from-gray-950/80 to-transparent p-6 backdrop-blur-sm">
-                  <div className="space-y-3">
-                    <div className="group relative">
-                      <div className="absolute inset-0 rounded-xl bg-linear-to-r from-primary to-primary-alt opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-30" />
-                      <Button
-                        asChild
-                        className="relative w-full bg-linear-to-r from-primary to-primary-alt font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:from-primary-alt hover:to-primary hover:shadow-primary/20 hover:shadow-xl"
-                      >
-                        <Link
-                          href="/invite"
-                          className="group/btn flex items-center justify-center gap-2"
-                        >
-                          Invite Bot
-                          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
-                        </Link>
-                      </Button>
-                    </div>
-
-                    {isLoading ? (
-                      <div className="h-10 w-full animate-pulse rounded-md bg-gray-800/50" />
-                    ) : !actualUser ? (
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="w-full border-gray-700/50 bg-gray-800/30 text-gray-300 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-gray-600/50 hover:bg-gray-700/50 hover:text-white"
-                      >
-                        <Link
-                          href={`/login?callbackUrl=${encodeURIComponent(pathname)}`}
-                        >
-                          Login
-                        </Link>
-                      </Button>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+          <HomepageMobileSidebar
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            user={actualUser}
+            links={links}
+          />
         </div>
       </div>
     </header>

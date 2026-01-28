@@ -37,7 +37,7 @@ export function FeaturesShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.04] md:col-span-2 md:row-span-2"
+            className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/2 p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/4 md:col-span-2 md:row-span-2"
           >
             <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-blue-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10 flex h-full flex-col">
@@ -70,7 +70,7 @@ export function FeaturesShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.04] md:col-span-1 md:row-span-1"
+            className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/2 p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/4 md:col-span-1 md:row-span-1"
           >
             <div className="absolute inset-0 bg-linear-to-br from-red-500/5 to-orange-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10">
@@ -95,7 +95,7 @@ export function FeaturesShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.04] md:col-span-1 md:row-span-1"
+            className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/2 p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/4 md:col-span-1 md:row-span-1"
           >
             <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 to-pink-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10">
@@ -120,7 +120,7 @@ export function FeaturesShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.04] md:col-span-2 md:row-span-1"
+            className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/2 p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/4 md:col-span-2 md:row-span-1"
           >
             <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 to-cyan-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10 flex h-full items-center gap-8">
@@ -155,7 +155,7 @@ export function FeaturesShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.04] md:col-span-1 md:row-span-1"
+            className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/2 p-8 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/4 md:col-span-1 md:row-span-1"
           >
             <div className="absolute inset-0 bg-linear-to-br from-yellow-500/5 to-orange-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative z-10">
