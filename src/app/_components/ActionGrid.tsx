@@ -76,7 +76,7 @@ export function ActionGrid() {
               <Link href={action.href} className="block h-full">
                 <div
                   className={cn(
-                    'group hover:-translate-y-1 relative h-full overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all duration-300 hover:shadow-2xl',
+                    'group relative h-full overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl',
                     action.border
                   )}
                 >

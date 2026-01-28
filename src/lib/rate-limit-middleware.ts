@@ -67,7 +67,7 @@ async function executeWithRateLimit(
     let userId: string | null = null;
     if (useUserId || skipAuthenticated) {
       const session = await auth.api.getSession({
-        headers: await headers()
+        headers: await headers(),
       });
       userId = session?.user?.id || null;
 

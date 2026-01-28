@@ -38,7 +38,7 @@ export default async function ServerDetailPage(props: {
   const { serverId } = await props.params;
 
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {
@@ -158,8 +158,8 @@ export default async function ServerDetailPage(props: {
 
   const lastActive = serverData.lastMessageAt
     ? formatDistanceToNow(new Date(serverData.lastMessageAt), {
-      addSuffix: true,
-    })
+        addSuffix: true,
+      })
     : 'Never';
 
   return (
@@ -252,7 +252,7 @@ export default async function ServerDetailPage(props: {
                     <span className="text-gray-200">
                       {
                         ['None', 'Low', 'Medium', 'High', 'Very High'][
-                        discordServer.verification_level || 0
+                          discordServer.verification_level || 0
                         ]
                       }
                     </span>

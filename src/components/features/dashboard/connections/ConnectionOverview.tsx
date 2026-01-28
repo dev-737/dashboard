@@ -22,7 +22,10 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { HubVisibility } from '@/lib/generated/prisma/client/client';
-import type { Connection, ServerData } from '@/lib/generated/prisma/client/client';
+import type {
+  Connection,
+  ServerData,
+} from '@/lib/generated/prisma/client/client';
 
 interface ConnectionOverviewProps {
   connection: Connection & {

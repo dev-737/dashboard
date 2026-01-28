@@ -325,7 +325,7 @@ export async function getServerDetails(
 > {
   try {
     const session = await auth.api.getSession({
-      headers: await headers()
+      headers: await headers(),
     });
 
     if (!session?.user?.id) {
@@ -426,7 +426,7 @@ export async function getServerDetails(
 export async function revokeInfraction(infractionId: string) {
   try {
     const session = await auth.api.getSession({
-      headers: await headers()
+      headers: await headers(),
     });
 
     if (!session?.user?.id) {

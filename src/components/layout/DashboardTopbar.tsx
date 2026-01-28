@@ -37,7 +37,7 @@ export function DashboardTopBar({ user }: { user: User }) {
                 className="rounded-(--radius-avatar) border border-white/20 transition-all duration-300 group-hover:border-purple-400/50 group-hover:shadow-lg group-hover:shadow-purple-500/20"
               />
               {/* Subtle glow effect */}
-              <div className="-z-10 absolute inset-0 rounded-(--radius-avatar) bg-linear-to-r from-purple-400/20 to-blue-400/20 opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="absolute inset-0 -z-10 rounded-(--radius-avatar) bg-linear-to-r from-purple-400/20 to-blue-400/20 opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100" />
             </div>
             <span className="hidden bg-linear-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text font-bold text-lg text-transparent transition-all duration-300 group-hover:from-purple-300 group-hover:via-indigo-300 group-hover:to-blue-300 lg:block">
               InterChat
@@ -60,7 +60,7 @@ export function DashboardTopBar({ user }: { user: User }) {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
+                  'flex items-center gap-2 rounded-lg px-3 py-2 font-medium text-sm transition-all duration-200',
                   pathname === item.href ||
                     (item.href !== '/dashboard' &&
                       pathname.startsWith(item.href))

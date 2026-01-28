@@ -221,7 +221,7 @@ export default function AdvancedSearchPage() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center">
             {/* Search Bar */}
             <div className="relative flex-1">
-              <Search className="-translate-y-1/2 absolute top-1/2 left-3 h-4 w-4 text-gray-500" />
+              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-500" />
               <Input
                 placeholder="Search hubs..."
                 className="h-11 border-white/5 bg-white/5 pl-10 text-base text-gray-200 transition-colors placeholder:text-gray-500 focus:border-indigo-500/50 focus:bg-white/10 focus:ring-indigo-500/20"
@@ -234,7 +234,7 @@ export default function AdvancedSearchPage() {
                     setSearchTerm('');
                     setPage(1);
                   }}
-                  className="-translate-y-1/2 absolute top-1/2 right-3 text-gray-500 hover:text-gray-300"
+                  className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-300"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -599,7 +599,6 @@ export default function AdvancedSearchPage() {
                 </ScrollArea>
               </section>
             )}
-
 
             {/* Trending Hubs */}
             {trendingHubsData && trendingHubsData.items.length > 0 && (

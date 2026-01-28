@@ -20,7 +20,7 @@ export default async function HubInfractionsPage({
 }: HubInfractionsPageProps) {
   const { hubId } = await params;
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {

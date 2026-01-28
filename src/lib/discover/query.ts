@@ -130,7 +130,10 @@ function getBaseSelect(userId?: string) {
 
 function buildWhere(p: DiscoverParams): Prisma.HubWhereInput {
   const and: Prisma.HubWhereInput[] = [
-    { visibility: HubVisibility.PUBLIC, connections: { some: { connected: true } } },
+    {
+      visibility: HubVisibility.PUBLIC,
+      connections: { some: { connected: true } },
+    },
   ];
 
   if (p.q) {

@@ -192,7 +192,7 @@ const InterChatRules = () => {
 
         {/* Enforcement Section */}
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-xl md:p-12">
-          <div className="-mt-20 -mr-20 absolute top-0 right-0 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
+          <div className="absolute top-0 right-0 -mt-20 -mr-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
 
           <div className="relative z-10 grid items-center gap-12 lg:grid-cols-2">
             <div>

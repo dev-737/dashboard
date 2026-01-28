@@ -7,12 +7,12 @@ import { Button } from '@/components/ui/button';
 interface LogoutButtonProps {
   children: React.ReactNode;
   variant?:
-  | 'default'
-  | 'destructive'
-  | 'outline'
-  | 'secondary'
-  | 'ghost'
-  | 'link';
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link';
   className?: string;
 }
 

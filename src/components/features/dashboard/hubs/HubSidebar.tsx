@@ -403,7 +403,7 @@ export function HubSidebar({
   return (
     <div
       className={cn(
-        'flex h-full flex-col overflow-hidden bg-dash-hub-sidebar transition-all duration-300',
+        'flex h-full flex-col overflow-hidden border-white/5 border-r bg-[#0a0a0c]/95 backdrop-blur-xl transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >

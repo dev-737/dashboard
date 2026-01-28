@@ -1,14 +1,12 @@
 import { MessageSquare, PlusCircle, Server } from 'lucide-react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { Suspense } from 'react';
 import {
   getServers,
   type ServerDataWithConnections,
 } from '@/actions/server-actions';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { AnimatedWelcome } from '@/components/features/dashboard/AnimatedWelcome';
 import { AnimatedEmptyState } from '@/components/features/dashboard/hubs/AnimatedEmptyState';
 import { AnimatedHubCard } from '@/components/features/dashboard/hubs/AnimatedHubCard';
@@ -24,6 +22,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { TabsContent } from '@/components/ui/tabs';
+import { auth } from '@/lib/auth';
 import { getUserHubs } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 
@@ -36,7 +35,7 @@ export default async function DashboardPage(props: {
   searchParams: Promise<{ hubId?: string; tab?: string }>;
 }) {
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
   const { hubId, tab } = await props.searchParams;
   if (!session?.user?.id) {

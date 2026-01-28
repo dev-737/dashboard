@@ -20,7 +20,7 @@ interface HubMembersPageProps {
 export default async function HubMembersPage({ params }: HubMembersPageProps) {
   const { hubId } = await params;
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {

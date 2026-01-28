@@ -126,7 +126,7 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
   return (
     <div className="space-y-8">
       {/* Basic Information Section */}
-      <Card className="bg-dash-main border-none shadow-none hover:shadow-none">
+      <Card className="border-none bg-dash-main shadow-none hover:shadow-none">
         <CardHeader>
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-md bg-linear-to-br from-blue-500 to-cyan-600">

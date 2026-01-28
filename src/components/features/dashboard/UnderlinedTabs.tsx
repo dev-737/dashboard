@@ -98,7 +98,7 @@ export function UnderlinedTabs({
           {canScrollLeft && (
             <Button
               onClick={scrollLeft}
-              className="-translate-y-1/2 absolute top-1/2 left-2 z-20 hidden h-8 w-8 items-center justify-center rounded-lg border border-gray-600/50 bg-gray-800/80 transition-all duration-200 hover:bg-gray-700/80 sm:flex"
+              className="absolute top-1/2 left-2 z-20 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg border border-gray-600/50 bg-gray-800/80 transition-all duration-200 hover:bg-gray-700/80 sm:flex"
               aria-label="Scroll tabs left"
             >
               <ChevronLeft className="h-4 w-4 text-gray-300" />
@@ -108,7 +108,7 @@ export function UnderlinedTabs({
           {canScrollRight && (
             <Button
               onClick={scrollRight}
-              className="-translate-y-1/2 absolute top-1/2 right-2 z-20 hidden h-8 w-8 items-center justify-center rounded-lg border border-gray-600/50 bg-gray-800/80 transition-all duration-200 hover:bg-gray-700/80 sm:flex"
+              className="absolute top-1/2 right-2 z-20 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg border border-gray-600/50 bg-gray-800/80 transition-all duration-200 hover:bg-gray-700/80 sm:flex"
               aria-label="Scroll tabs right"
             >
               <ChevronRight className="h-4 w-4 text-gray-300" />

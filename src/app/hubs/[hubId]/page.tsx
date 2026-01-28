@@ -93,7 +93,7 @@ export default async function HubDetailView(props: {
   const { hubId } = await props.params;
 
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
   const userId = session?.user?.id;
 
@@ -142,7 +142,7 @@ export default async function HubDetailView(props: {
       percentage: Math.round(
         ((hub.reviews?.filter((r) => r.rating === rating).length || 0) /
           (hub.reviews?.length || 1)) *
-        100
+          100
       ),
     })),
   };
@@ -177,7 +177,7 @@ export default async function HubDetailView(props: {
 
         {/* Page Content */}
         <div className="container mx-auto max-w-7xl px-4 pb-16">
-          <div className="-mt-32 md:-mt-40 relative mb-12 transform transition-all duration-300">
+          <div className="relative -mt-32 mb-12 transform transition-all duration-300 md:-mt-40">
             <div className="rounded-2xl border border-gray-800/70 bg-gray-900/90 p-6 shadow-xl backdrop-blur-xl md:p-8">
               <div className="flex w-full flex-col md:flex-row md:items-start md:justify-between">
                 <HubInfoCard hub={hub} />

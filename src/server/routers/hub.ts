@@ -22,7 +22,10 @@ const createHubSchema = z.object({
   name: z.string().min(3).max(32),
   description: z.string().min(10).max(500),
   shortDescription: z.string().min(10).max(100).optional(),
-  visibility: z.nativeEnum(HubVisibility).optional().prefault(HubVisibility.PRIVATE),
+  visibility: z
+    .nativeEnum(HubVisibility)
+    .optional()
+    .prefault(HubVisibility.PRIVATE),
   rules: z.array(z.string()).optional(),
   settings: z.any().optional(),
 });
@@ -978,13 +981,7 @@ export const hubRouter = router({
   createHub: protectedProcedure
     .input(createHubSchema)
     .mutation(async ({ input, ctx }) => {
-      const {
-        name,
-        description,
-        shortDescription,
-        visibility,
-        rules,
-      } = input;
+      const { name, description, shortDescription, visibility, rules } = input;
 
       // Check if the hub name is already taken (case insensitive)
       const existingHub = await db.hub.findFirst({

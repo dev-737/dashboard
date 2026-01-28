@@ -334,7 +334,7 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
             <div className="space-y-2">
               <Label className="font-medium text-sm">Search</Label>
               <div className="relative">
-                <Search className="-translate-y-1/2 absolute top-1/2 left-3 h-4 w-4 transform text-gray-400" />
+                <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
                 <Input
                   placeholder="Search reports..."
                   value={searchTerm}

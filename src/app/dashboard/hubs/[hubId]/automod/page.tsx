@@ -18,7 +18,7 @@ export default async function HubAntiSwearPage({
 }: HubAntiSwearPageProps) {
   const { hubId } = await params;
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {

@@ -16,7 +16,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
     <section className="relative overflow-hidden bg-[#030812] py-24 md:py-32">
       {/* Background Elements */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 h-[600px] w-[600px] rounded-full bg-indigo-500/5 blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/5 blur-[120px]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
@@ -79,7 +79,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                   {/* Content */}
                   <div className="relative flex flex-1 flex-col p-8 pt-0">
                     {/* Icon - Overlapping Banner */}
-                    <div className="-mt-12 relative mb-6 h-24 w-24 overflow-hidden rounded-2xl border-4 border-[#030812] bg-[#030812] shadow-lg">
+                    <div className="relative -mt-12 mb-6 h-24 w-24 overflow-hidden rounded-2xl border-4 border-[#030812] bg-[#030812] shadow-lg">
                       {hub.iconUrl ? (
                         <Image
                           src={hub.iconUrl}

@@ -19,8 +19,6 @@ const DESTINATION_SERVERS = [
 
 const channelNames = ['portal-into-discords', 'general', 'global'];
 
-
-
 export function HeroAnimation() {
   const { data: session } = authClient.useSession();
   const [showSourceMessage, setShowSourceMessage] = useState(false);

@@ -9,7 +9,7 @@ import {
 
 async function handleDELETE() {
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   // Only allow authenticated users

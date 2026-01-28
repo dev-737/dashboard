@@ -101,7 +101,7 @@ const SimilarHubsCard = ({
                   unoptimized
                 />
                 {rec.hub.verified && (
-                  <div className="-top-1 -right-1 absolute flex h-4 w-4 items-center justify-center rounded-full bg-blue-500">
+                  <div className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-blue-500">
                     <span className="text-white text-xs">✓</span>
                   </div>
                 )}

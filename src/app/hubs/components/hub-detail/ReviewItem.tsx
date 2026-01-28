@@ -33,10 +33,10 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
         });
         queryClient
           .invalidateQueries(trpc.hub.getHubReviews.queryFilter({ hubId }))
-          .catch(() => { });
+          .catch(() => {});
         queryClient
           .invalidateQueries(trpc.hub.getHub.queryFilter({ id: hubId }))
-          .catch(() => { });
+          .catch(() => {});
       },
       onError: (error) => {
         toast({

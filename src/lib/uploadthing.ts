@@ -25,7 +25,7 @@ export const ourFileRouter = {
     .middleware(async ({ input }) => {
       // Get the session
       const session = await auth.api.getSession({
-        headers: await headers()
+        headers: await headers(),
       });
       if (!session?.user?.id) {
         throw new UploadThingError('Unauthorized');
@@ -83,7 +83,7 @@ export const ourFileRouter = {
     .middleware(async ({ input }) => {
       // Get the session
       const session = await auth.api.getSession({
-        headers: await headers()
+        headers: await headers(),
       });
       if (!session?.user?.id) {
         throw new UploadThingError('Unauthorized');

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { authClient } from "@/lib/auth-client";
+import { authClient } from '@/lib/auth-client';
 import { Suspense, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -17,9 +17,9 @@ function LoginContent() {
     setIsLoading(true);
     try {
       await authClient.signIn.social({
-        provider: "discord",
+        provider: 'discord',
         callbackURL: callbackUrl,
-      })
+      });
     } catch (error) {
       console.error('Login error:', error);
       setIsLoading(false);

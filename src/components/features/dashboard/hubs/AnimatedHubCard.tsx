@@ -92,9 +92,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Card
-        className='border bg-dash-card border-gray-500/20 hover:border-purple-500/30 hover:shadow-purple-500/10 hover:shadow-2xl group flex h-full min-h-80 flex-col overflow-hidden transition-all duration-200  rounded-2xl'
-      >
+      <Card className="group flex h-full min-h-80 flex-col overflow-hidden rounded-2xl border border-gray-500/20 bg-dash-card transition-all duration-200 hover:border-purple-500/30 hover:shadow-2xl hover:shadow-purple-500/10">
         <CardHeader className="relative pb-3">
           <div className="absolute top-4 right-4 z-10">{getRoleBadge()}</div>
           <div className="relative z-10 flex items-center gap-3">
@@ -121,7 +119,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
               </Avatar>
 
               {/* Privacy indicator */}
-              <div className="-bottom-1 -right-1 absolute flex h-6 w-6 items-center justify-center rounded-(--radius-avatar) border-2 border-gray-700 bg-gray-900">
+              <div className="absolute -right-1 -bottom-1 flex h-6 w-6 items-center justify-center rounded-(--radius-avatar) border-2 border-gray-700 bg-gray-900">
                 {isPrivate ? (
                   <Lock className="h-3 w-3 text-orange-400" />
                 ) : (

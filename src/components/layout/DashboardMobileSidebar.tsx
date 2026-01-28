@@ -4,22 +4,16 @@ import {
   Bell,
   HelpCircle,
   Home,
+  LogOut,
   Scale,
   Settings,
   Trophy,
+  User as UserIcon,
   X,
 } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, type Variants } from 'motion/react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-
-interface User {
-  id: string;
-  name?: string | null;
-  image?: string | null;
-  email?: string | null;
-}
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
@@ -28,6 +22,14 @@ import { createPortal } from 'react-dom';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
 import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/OnboardingHelpMenu';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
+
+interface User {
+  id: string;
+  name?: string | null;
+  image?: string | null;
+  email?: string | null;
+}
 
 interface MobileSidebarProps {
   isOpen: boolean;
@@ -66,7 +68,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
     };
   }, [isOpen]);
 
-  if (!mounted || !isOpen) return null;
+  if (!mounted) return null;
 
   // Navigation items matching the topbar
   const navigationItems = [
@@ -74,239 +76,252 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
       href: '/dashboard',
       icon: Home,
       label: 'Dashboard',
-      color: 'indigo',
+      color: 'text-indigo-400',
+      activeColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
       active: pathname === '/dashboard',
     },
     {
       href: '/dashboard/my-appeals',
       icon: Scale,
       label: 'My Appeals',
-      color: 'purple',
+      color: 'text-purple-400',
+      activeColor: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
       active: pathname.startsWith('/dashboard/my-appeals'),
     },
     {
       href: '/leaderboard',
       icon: Trophy,
       label: 'Leaderboard',
-      color: 'yellow',
+      color: 'text-yellow-400',
+      activeColor: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
       active: pathname.startsWith('/leaderboard'),
     },
     {
       href: '/dashboard/settings',
       icon: Settings,
       label: 'Settings',
-      color: 'gray',
+      color: 'text-gray-400',
+      activeColor: 'bg-gray-500/10 text-gray-400 border-gray-500/20',
       active: pathname.startsWith('/dashboard/settings'),
     },
   ];
 
-  // Use createPortal to render the sidebar at the document body level
+  const sidebarVariants: Variants = {
+    closed: {
+      x: '-100%',
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 30,
+      },
+    },
+    open: {
+      x: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 30,
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    closed: { x: -20, opacity: 0 },
+    open: { x: 0, opacity: 1 },
+  };
+
   return createPortal(
-    <AnimatePresence>
-      {/* Overlay - covers the entire viewport */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-[9998] bg-black/85 backdrop-blur-md"
-        onClick={onClose}
-        style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
-      />
-
-      {/* Sidebar - positioned relative to the viewport */}
-      <motion.div
-        initial={{ x: '-100%' }}
-        animate={{ x: 0 }}
-        exit={{ x: '-100%' }}
-        transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-        className="fixed top-0 bottom-0 left-0 z-[9999] flex w-[300px] max-w-[85vw] flex-col overflow-hidden border-gray-700/40 border-r bg-linear-to-b from-gray-900/98 to-gray-950/98 shadow-2xl shadow-black/30 backdrop-blur-xl"
-        style={{ position: 'fixed', top: 0, left: 0, bottom: 0 }}
-      >
-        {/* Mobile sidebar header */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.3 }}
-          className="flex h-16 items-center justify-between border-gray-700/40 border-b bg-linear-to-r from-gray-900/50 to-gray-800/50 px-4 backdrop-blur-sm"
-        >
-          <Link
-            href="/"
-            className="group flex items-center gap-3"
+    <AnimatePresence mode="wait">
+      {isOpen && (
+        <>
+          {/* Overlay - covers the entire viewport */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-9998 bg-black/60 backdrop-blur-sm"
             onClick={onClose}
-          >
-            <span className="bg-linear-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text font-bold text-lg text-transparent transition-all duration-300 group-hover:scale-105 group-hover:from-purple-300 group-hover:via-indigo-300 group-hover:to-blue-300">
-              InterChat
-            </span>
-          </Link>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            className="group h-8 w-8 shrink-0 rounded-xl border border-transparent text-gray-400 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-gray-600/40 hover:bg-gray-700/50 hover:text-white hover:shadow-lg hover:shadow-purple-500/10"
-          >
-            <X className="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />
-            <span className="sr-only">Close sidebar</span>
-          </Button>
-        </motion.div>
+          />
 
-        {/* Mobile menu items */}
-        <div className="flex-1 overflow-y-auto px-4 py-6">
-          <div className="space-y-3">
-            {/* Main Navigation */}
-            <div className="space-y-2">
-              {navigationItems.map((item, index) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.15 + index * 0.05, duration: 0.3 }}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={onClose}
-                    className={cn(
-                      'group relative flex items-center gap-3 rounded-2xl border px-4 py-3 font-medium text-sm transition-all duration-300 hover:scale-[1.02]',
-                      item.active
-                        ? 'border border-purple-500/30 bg-linear-to-r from-purple-500/20 to-blue-500/20 text-purple-300 shadow-lg shadow-purple-500/10'
-                        : 'border border-transparent text-gray-300 hover:border-white/10 hover:bg-white/5 hover:text-white hover:shadow-black/5 hover:shadow-md'
-                    )}
-                  >
-                    <motion.div
-                      className={cn(
-                        'shrink-0 rounded-xl p-2 transition-all duration-300',
-                        item.active
-                          ? 'bg-purple-400/20 text-purple-300 shadow-purple-500/20 shadow-sm'
-                          : 'text-gray-400 group-hover:bg-purple-400/15 group-hover:text-white'
-                      )}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <item.icon className="h-5 w-5" />
-                    </motion.div>
-                    <span className="truncate">{item.label}</span>
-                  </Link>
-                </motion.div>
-              ))}
+          {/* Sidebar - positioned relative to the viewport */}
+          <motion.div
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={sidebarVariants}
+            className="fixed top-0 bottom-0 left-0 z-9999 flex w-[300px] max-w-[85vw] flex-col overflow-hidden border-white/5 border-r bg-[#0a0a0c]/95 shadow-2xl backdrop-blur-xl"
+          >
+            {/* Header */}
+            <div className="flex h-20 shrink-0 items-center justify-between px-6">
+              <Link
+                href="/"
+                className="group flex items-center gap-3"
+                onClick={onClose}
+              >
+                <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 shadow-lg shadow-purple-500/20 transition-transform duration-300 group-hover:scale-105">
+                  <Image
+                    src="/assets/images/logos/interchat.png"
+                    alt="InterChat"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-tr from-purple-500/20 to-transparent" />
+                </div>
+                <span className="bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text font-bold text-transparent text-xl tracking-tight">
+                  InterChat
+                </span>
+              </Link>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onClose}
+                className="h-8 w-8 rounded-full border border-white/5 bg-white/5 text-gray-400 hover:border-white/10 hover:bg-white/10 hover:text-white"
+              >
+                <X className="h-4 w-4" />
+                <span className="sr-only">Close sidebar</span>
+              </Button>
             </div>
 
-            {/* Separator */}
-            <div className="my-6 h-px bg-linear-to-r from-transparent via-gray-700/40 to-transparent" />
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto px-4 py-4">
+              <div className="space-y-6">
+                {/* Main Navigation */}
+                <div className="space-y-1">
+                  <h3 className="px-4 pb-2 font-medium text-gray-500 text-xs uppercase tracking-wider">
+                    Menu
+                  </h3>
+                  {navigationItems.map((item) => (
+                    <motion.div key={item.href} variants={itemVariants}>
+                      <Link
+                        href={item.href}
+                        onClick={onClose}
+                        className={cn(
+                          'group relative flex items-center gap-3 rounded-xl border border-transparent px-4 py-3 font-medium text-sm transition-all duration-300',
+                          item.active
+                            ? item.activeColor
+                            : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'
+                        )}
+                      >
+                        {item.active && (
+                          <motion.div
+                            layoutId="active-pill"
+                            className="absolute left-0 h-8 w-1 rounded-r-full bg-current opacity-50"
+                            transition={{
+                              type: 'spring',
+                              stiffness: 300,
+                              damping: 30,
+                            }}
+                          />
+                        )}
+                        <item.icon
+                          className={cn(
+                            'h-5 w-5 transition-transform duration-300 group-hover:scale-110',
+                            item.active
+                              ? 'text-current'
+                              : 'text-gray-500 group-hover:text-gray-300'
+                          )}
+                        />
+                        <span>{item.label}</span>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
 
-            {/* Additional Actions */}
+                {/* Quick Actions */}
+                <motion.div variants={itemVariants} className="space-y-1">
+                  <h3 className="px-4 pb-2 font-medium text-gray-500 text-xs uppercase tracking-wider">
+                    Quick Actions
+                  </h3>
+
+                  {/* Notifications */}
+                  <div className="group relative flex items-center justify-between rounded-xl border border-transparent px-4 py-2.5 transition-all duration-300 hover:bg-white/5">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 group-hover:bg-blue-500/20 group-hover:text-blue-300">
+                        <Bell className="h-4 w-4" />
+                      </div>
+                      <span className="font-medium text-gray-300 text-sm group-hover:text-white">
+                        Notifications
+                      </span>
+                    </div>
+                    <div className="relative z-20">
+                      <NotificationDropdown />
+                    </div>
+                  </div>
+
+                  {/* Help */}
+                  <div className="group relative flex items-center justify-between rounded-xl border border-transparent px-4 py-2.5 transition-all duration-300 hover:bg-white/5">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-500/10 text-green-400 group-hover:bg-green-500/20 group-hover:text-green-300">
+                        <HelpCircle className="h-4 w-4" />
+                      </div>
+                      <span className="font-medium text-gray-300 text-sm group-hover:text-white">
+                        Help & Support
+                      </span>
+                    </div>
+                    <div className="relative z-20">
+                      <OnboardingHelpMenu />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Footer / User Profile */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.3 }}
-              className="space-y-2"
+              variants={itemVariants}
+              className="border-white/5 border-t bg-black/20 p-4 backdrop-blur-md"
             >
-              <div className="flex items-center gap-2 px-3 font-bold text-gray-400 text-xs uppercase tracking-wider">
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: 'easeInOut',
+              <div className="mb-4 flex items-center gap-3 rounded-xl border border-white/5 bg-white/5 p-3 shadow-inner">
+                <Avatar className="h-10 w-10 border border-white/10 shadow-lg">
+                  <AvatarImage
+                    src={user.image || undefined}
+                    alt={user.name || 'User'}
+                  />
+                  <AvatarFallback className="bg-linear-to-br from-purple-500 to-indigo-600 font-bold text-white">
+                    {getInitials(user.name)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="min-w-0 flex-1 overflow-hidden">
+                  <p className="truncate font-medium text-sm text-white">
+                    {user.name}
+                  </p>
+                  <p className="truncate text-gray-500 text-xs">{user.email}</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    onClose();
                   }}
-                  className="h-1.5 w-1.5 rounded-full bg-linear-to-r from-purple-400 to-indigo-400 opacity-60"
-                />
-                <span className="bg-linear-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">
-                  Quick Actions
-                </span>
-              </div>
-
-              {/* Notifications */}
-              <div className="group relative flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3 font-medium text-sm transition-all duration-300 hover:scale-[1.02] hover:border-white/10 hover:bg-white/5 hover:shadow-blue-500/5 hover:shadow-md">
-                <motion.div
-                  className="shrink-0 rounded-xl p-2 text-gray-400 transition-all duration-300 group-hover:bg-blue-400/15 group-hover:text-white"
-                  whileHover={{ rotate: [0, -15, 15, 0] }}
-                  transition={{ duration: 0.4 }}
+                  className="w-full border-white/10 bg-transparent text-gray-300 hover:bg-white/5 hover:text-white"
                 >
-                  <Bell className="h-5 w-5" />
-                </motion.div>
-                <span className="truncate text-gray-300 group-hover:text-white">
-                  Notifications
-                </span>
-                <div className="ml-auto">
-                  <NotificationDropdown />
-                </div>
-              </div>
-
-              {/* Help */}
-              <div className="group relative flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3 font-medium text-sm transition-all duration-300 hover:scale-[1.02] hover:border-white/10 hover:bg-white/5 hover:shadow-green-500/5 hover:shadow-md">
-                <motion.div
-                  className="shrink-0 rounded-xl p-2 text-gray-400 transition-all duration-300 group-hover:bg-green-400/15 group-hover:text-white"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
+                  <UserIcon className="mr-2 h-3.5 w-3.5" />
+                  Profile
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={async () => {
+                    onClose();
+                    await authClient.signOut();
+                    window.location.href = '/';
+                  }}
+                  className="w-full border-red-500/20 bg-red-500/5 text-red-400 hover:border-red-500/30 hover:bg-red-500/10"
                 >
-                  <HelpCircle className="h-5 w-5" />
-                </motion.div>
-                <span className="truncate text-gray-300 group-hover:text-white">
-                  Help & Support
-                </span>
-                <div className="ml-auto">
-                  <OnboardingHelpMenu />
-                </div>
+                  <LogOut className="mr-2 h-3.5 w-3.5" />
+                  Sign out
+                </Button>
               </div>
             </motion.div>
-          </div>
-        </div>
-
-        {/* Mobile user section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.3 }}
-          className="mt-auto border-gray-700/40 border-t bg-linear-to-t from-gray-950/80 to-transparent p-4 backdrop-blur-sm"
-        >
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500/20 blur-md" />
-              <Avatar className="relative h-12 w-12 border-2 border-purple-500/30 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:scale-110 hover:border-purple-500/50">
-                <AvatarImage
-                  src={user.image || undefined}
-                  alt={user.name || 'User'}
-                />
-                <AvatarFallback className="bg-linear-to-br from-purple-500/80 to-indigo-500/80 font-bold text-white">
-                  {getInitials(user.name)}
-                </AvatarFallback>
-              </Avatar>
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate font-semibold text-sm text-white">
-                {user.name}
-              </p>
-              <p className="truncate text-gray-400 text-xs">{user.email}</p>
-            </div>
-          </div>
-
-          <div className="mt-4 flex gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                onClose();
-                // Handle profile navigation if needed
-              }}
-              className="flex-1 border-gray-700/50 bg-gray-800/30 text-gray-300 transition-all duration-300 hover:scale-[1.02] hover:border-gray-600/50 hover:bg-gray-700/50 hover:text-white"
-            >
-              Profile
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={async () => {
-                onClose();
-                await authClient.signOut();
-                window.location.href = '/';
-              }}
-              className="flex-1 border-red-700/50 bg-red-900/20 text-red-400 transition-all duration-300 hover:scale-[1.02] hover:border-red-600/50 hover:bg-red-800/30 hover:text-red-300"
-            >
-              Sign out
-            </Button>
-          </div>
-        </motion.div>
-      </motion.div>
+          </motion.div>
+        </>
+      )}
     </AnimatePresence>,
     document.body
   );

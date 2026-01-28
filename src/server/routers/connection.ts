@@ -18,7 +18,10 @@ export const connectionRouter = router({
         where: { id: input.hubId },
         select: { visibility: true },
       });
-      if (hub?.visibility === HubVisibility.PRIVATE && permission === PermissionLevel.NONE) {
+      if (
+        hub?.visibility === HubVisibility.PRIVATE &&
+        permission === PermissionLevel.NONE
+      ) {
         // Match previous API semantics: 404 for private without access
         throw Object.assign(new Error('Hub not found'), {
           code: 'NOT_FOUND' as const,

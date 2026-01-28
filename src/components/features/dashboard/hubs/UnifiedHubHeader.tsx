@@ -86,7 +86,7 @@ export function UnifiedHubHeader({
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
               {/* Hub Icon and Basic Info */}
               <div className="flex items-center gap-4">
-                <div className="-mt-16 sm:-mt-20 relative">
+                <div className="relative -mt-16 sm:-mt-20">
                   <div className="group relative">
                     <div className="h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-4 border-gray-900 bg-gray-800 shadow-lg sm:h-24 sm:w-24">
                       <Image
@@ -111,7 +111,7 @@ export function UnifiedHubHeader({
                   </div>
 
                   {/* Privacy indicator */}
-                  <div className="-bottom-1 -right-1 absolute rounded-full border border-gray-700/50 bg-gray-950 p-1.5 shadow-md">
+                  <div className="absolute -right-1 -bottom-1 rounded-full border border-gray-700/50 bg-gray-950 p-1.5 shadow-md">
                     {isPrivate ? (
                       <Lock className="h-3 w-3 text-amber-400" />
                     ) : (

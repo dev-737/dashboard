@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default async function SettingsPage() {
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {
@@ -49,7 +49,7 @@ export default async function SettingsPage() {
                 height={64}
                 className="rounded-full border-2 border-purple-500/30"
               />
-              <div className="-bottom-1 -right-1 absolute h-4 w-4 rounded-full border-2 border-gray-900 bg-emerald-500"></div>
+              <div className="absolute -right-1 -bottom-1 h-4 w-4 rounded-full border-2 border-gray-900 bg-emerald-500"></div>
             </div>
             <div className="flex-1">
               <h3 className="font-medium text-lg text-white">

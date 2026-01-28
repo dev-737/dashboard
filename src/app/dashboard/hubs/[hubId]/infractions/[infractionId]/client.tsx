@@ -371,10 +371,11 @@ export function AddInfractionClient({
               <Button
                 type="submit"
                 disabled={!isFormValid() || isSubmitting}
-                className={`px-8 py-2.5 font-semibold transition-all duration-300 ${isFormValid() && !isSubmitting
+                className={`px-8 py-2.5 font-semibold transition-all duration-300 ${
+                  isFormValid() && !isSubmitting
                     ? 'bg-linear-to-r from-red-500 to-purple-500 shadow-lg shadow-red-500/25 hover:from-red-600 hover:to-purple-600'
                     : 'cursor-not-allowed bg-gray-600/50 text-gray-400'
-                  }`}
+                }`}
               >
                 {isSubmitting ? (
                   <>

@@ -118,7 +118,6 @@ export function usePopularTags(
   };
 }
 
-
 /**
  * Hook for tag suggestions based on content
  */

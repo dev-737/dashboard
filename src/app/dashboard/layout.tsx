@@ -1,7 +1,7 @@
+import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import './dashboard.css';
 import { DashboardContentWrapper } from '@/app/dashboard/components/layout/DashboardContentWrapper';
 import { DashboardLayoutProvider } from '@/components/features/dashboard/LayoutProvider';
@@ -14,7 +14,7 @@ export default async function DashboardLayout({
   children: ReactNode;
 }) {
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   // Redirect to login if not authenticated
@@ -33,8 +33,7 @@ export default async function DashboardLayout({
             {/* Main content area */}
             <main className="dashboard-scrollbar relative flex-1 overflow-y-auto">
               {/* background layers */}
-              <div className="pointer-events-none fixed inset-0 z-0">
-              </div>
+              <div className="pointer-events-none fixed inset-0 z-0"></div>
 
               {/* Content with */}
               <DashboardContentWrapper>{children}</DashboardContentWrapper>

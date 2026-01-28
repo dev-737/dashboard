@@ -23,7 +23,7 @@ export default async function AddInfractionPage({
 }: AddInfractionPageProps) {
   const { hubId, type, userId, serverId } = await searchParams;
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {

@@ -139,7 +139,7 @@ export function EssentialsStep({
             className="font-medium text-base"
           >
             Short Description{' '}
-            <span className="text-gray-400 text-sm font-normal">
+            <span className="font-normal text-gray-400 text-sm">
               (Optional)
             </span>
           </Label>
@@ -180,7 +180,7 @@ export function EssentialsStep({
             variant="ghost"
             onClick={onFinish}
             disabled={!canProceed || isSubmitting}
-            className="text-gray-400 hover:text-white hover:bg-gray-800/50"
+            className="text-gray-400 hover:bg-gray-800/50 hover:text-white"
           >
             {isSubmitting ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -9,7 +9,7 @@ export default async function AdminLayout({
   children: ReactNode;
 }) {
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   // Redirect to login if not authenticated

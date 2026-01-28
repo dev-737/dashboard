@@ -582,7 +582,7 @@ export default function ServerConnectPage() {
                               height={64}
                               className="rounded-full ring-2 ring-indigo-500/30"
                             />
-                            <div className="-bottom-1 -right-1 absolute flex h-6 w-6 items-center justify-center rounded-full bg-green-500">
+                            <div className="absolute -right-1 -bottom-1 flex h-6 w-6 items-center justify-center rounded-full bg-green-500">
                               <Check className="h-3 w-3 text-white" />
                             </div>
                           </div>
@@ -667,7 +667,7 @@ export default function ServerConnectPage() {
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="input-standard pl-10"
                       />
-                      <div className="-translate-y-1/2 absolute top-1/2 left-3 transform">
+                      <div className="absolute top-1/2 left-3 -translate-y-1/2 transform">
                         <Search className="h-4 w-4 text-gray-400" />
                       </div>
                     </div>
@@ -691,10 +691,11 @@ export default function ServerConnectPage() {
                           <button
                             key={hub.id}
                             type="button"
-                            className={`group w-full cursor-pointer rounded-(--radius) p-4 text-left transition-all duration-200 ${selectedHub === hub.id
-                              ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
-                              : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
-                              }`}
+                            className={`group w-full cursor-pointer rounded-(--radius) p-4 text-left transition-all duration-200 ${
+                              selectedHub === hub.id
+                                ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
+                                : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
+                            }`}
                             onClick={() => {
                               setSelectedHub(hub.id);
                               setPreselectedHub(hub);
@@ -714,7 +715,7 @@ export default function ServerConnectPage() {
                                   className="rounded-full ring-2 ring-gray-600/50 transition-all group-hover:ring-gray-500/50"
                                 />
                                 {selectedHub === hub.id && (
-                                  <div className="-bottom-1 -right-1 absolute flex h-5 w-5 items-center justify-center rounded-full bg-indigo-500">
+                                  <div className="absolute -right-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full bg-indigo-500">
                                     <Check className="h-3 w-3 text-white" />
                                   </div>
                                 )}
@@ -752,7 +753,7 @@ export default function ServerConnectPage() {
                       onChange={(e) => setChannelSearchQuery(e.target.value)}
                       className="input-standard pl-10"
                     />
-                    <div className="-translate-y-1/2 absolute top-1/2 left-3 transform">
+                    <div className="absolute top-1/2 left-3 -translate-y-1/2 transform">
                       <Search className="h-4 w-4 text-gray-400" />
                     </div>
                   </div>
@@ -773,10 +774,11 @@ export default function ServerConnectPage() {
                         <button
                           key={channel.id}
                           type="button"
-                          className={`group flex w-full cursor-pointer items-center rounded-(--radius) p-3 text-left transition-all duration-200 ${selectedChannel === channel.id
-                            ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
-                            : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
-                            }`}
+                          className={`group flex w-full cursor-pointer items-center rounded-(--radius) p-3 text-left transition-all duration-200 ${
+                            selectedChannel === channel.id
+                              ? 'border border-indigo-500/30 bg-linear-to-r from-indigo-900/30 to-purple-900/30 ring-1 ring-indigo-500/20'
+                              : 'border border-gray-700/50 bg-gray-800/30 hover:border-gray-600/50 hover:bg-gray-700/40'
+                          }`}
                           onClick={() => setSelectedChannel(channel.id)}
                         >
                           <ChannelIcon
@@ -860,7 +862,7 @@ export default function ServerConnectPage() {
                       height={64}
                       className="rounded-full ring-2 ring-gray-600/50"
                     />
-                    <div className="-bottom-1 -right-1 absolute flex h-6 w-6 items-center justify-center rounded-full bg-green-500">
+                    <div className="absolute -right-1 -bottom-1 flex h-6 w-6 items-center justify-center rounded-full bg-green-500">
                       <Check className="h-3 w-3 text-white" />
                     </div>
                   </div>

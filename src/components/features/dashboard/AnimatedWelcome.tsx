@@ -117,8 +117,8 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
       </div>
 
       {/* Gradient orbs */}
-      <div className="-right-20 -top-20 absolute h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
-      <div className="-bottom-20 -left-20 absolute h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
+      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
 
       {/* Content container */}
       <div className="relative z-10 flex min-h-[30vh] flex-col items-center justify-center px-6 py-12 md:min-h-[40vh]">

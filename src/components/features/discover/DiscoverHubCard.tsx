@@ -68,7 +68,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
   });
 
   return (
-    <Card className="group hover:-translate-y-1 relative flex h-full flex-col overflow-hidden rounded-xl border border-gray-800/70 bg-gray-900/40 backdrop-blur-sm transition-all duration-300 hover:border-indigo-500/30 hover:bg-gray-800/60 hover:shadow-2xl hover:shadow-indigo-500/10">
+    <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-gray-800/70 bg-gray-900/40 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-gray-800/60 hover:shadow-2xl hover:shadow-indigo-500/10">
       {/* Banner */}
       {bannerUrl && (
         <div className="relative h-32 w-full overflow-hidden">

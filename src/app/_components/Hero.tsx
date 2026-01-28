@@ -21,7 +21,7 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] h-200 w-200 rounded-full bg-purple-600/10 blur-[120px]" />
         <div className="absolute right-[-10%] bottom-[-10%] h-200 w-200 rounded-full bg-blue-600/10 blur-[120px]" />
-        <div className="absolute inset-0 bg-[url('/assets/grid.svg')] bg-center mask-[linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+        <div className="mask-[linear-gradient(180deg,white,rgba(255,255,255,0))] absolute inset-0 bg-[url('/assets/grid.svg')] bg-center" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
@@ -124,7 +124,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="relative mx-auto w-full max-w-5xl"
           >
-            <div className="-z-10 absolute inset-0 rounded-full bg-purple-500/5 blur-3xl" />
+            <div className="absolute inset-0 -z-10 rounded-full bg-purple-500/5 blur-3xl" />
             <HeroAnimation />
           </motion.div>
         </div>

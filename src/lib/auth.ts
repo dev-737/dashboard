@@ -1,20 +1,19 @@
-import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-import { db } from "@/lib/prisma";
+import { betterAuth } from 'better-auth';
+import { prismaAdapter } from 'better-auth/adapters/prisma';
+import { db } from '@/lib/prisma';
 
 export const auth = betterAuth({
   database: prismaAdapter(db, {
-    provider: "postgresql",
+    provider: 'postgresql',
   }),
   socialProviders: {
     discord: {
-
       clientId: process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID!,
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
-      scope: ["guilds", "identify"],
+      scope: ['guilds', 'identify'],
       getUserInfo: async (token) => {
         try {
-          const response = await fetch("https://discord.com/api/users/@me", {
+          const response = await fetch('https://discord.com/api/users/@me', {
             headers: {
               Authorization: `Bearer ${token.accessToken}`,
             },
@@ -23,9 +22,8 @@ export const auth = betterAuth({
           if (!response.ok) {
             console.error(`Status: ${response.status} ${response.statusText}`);
             console.error(await response.text());
-            throw new Error("Failed to fetch user info from Discord");
+            throw new Error('Failed to fetch user info from Discord');
           }
-
 
           const profile = await response.json();
 
@@ -37,15 +35,18 @@ export const auth = betterAuth({
 
             if (existingUser) {
               const hasDiscordAccount = existingUser.accounts.some(
-                (acc) => acc.providerId === "discord" && acc.accountId === profile.id
+                (acc) =>
+                  acc.providerId === 'discord' && acc.accountId === profile.id
               );
 
               if (!hasDiscordAccount) {
-                console.log(`Linking Discord account for existing user ${existingUser.id}`);
+                console.log(
+                  `Linking Discord account for existing user ${existingUser.id}`
+                );
                 await db.account.create({
                   data: {
                     userId: existingUser.id,
-                    providerId: "discord",
+                    providerId: 'discord',
                     accountId: profile.id,
                     accessToken: token.accessToken,
                     refreshToken: token.refreshToken,
@@ -56,7 +57,7 @@ export const auth = betterAuth({
               }
             }
           } catch (err) {
-            console.error("Error checking/linking existing user:", err);
+            console.error('Error checking/linking existing user:', err);
           }
 
           return {
@@ -71,7 +72,7 @@ export const auth = betterAuth({
             data: profile,
           };
         } catch (e) {
-          console.error("Discord Auth Error:", e);
+          console.error('Discord Auth Error:', e);
           throw e; // Rethrow to let Better Auth handle it, but now we have logs
         }
       },
@@ -83,7 +84,7 @@ export const auth = betterAuth({
         before: async (user) => {
           console.log(user);
           return {
-            data: {...user, id: user.discordId as string},
+            data: { ...user, id: user.discordId as string },
             forceAllowId: true,
           };
         },

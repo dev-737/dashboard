@@ -61,7 +61,7 @@ export function ConnectionNavigationTabsSkeleton({
     };
 
   return (
-    <div className="-mx-6 no-scrollbar z-10 overflow-x-auto border-gray-800/50 border-b bg-gray-900/80 px-0 shadow-sm backdrop-blur-md transition-all duration-200">
+    <div className="no-scrollbar z-10 -mx-6 overflow-x-auto border-gray-800/50 border-b bg-gray-900/80 px-0 shadow-sm backdrop-blur-md transition-all duration-200">
       <div className="w-full px-4 sm:px-6">
         <div className="mx-auto flex h-auto w-full max-w-screen-xl flex-nowrap justify-start gap-2 rounded-none bg-transparent p-0 sm:justify-center sm:gap-6">
           {[

@@ -7,14 +7,14 @@ import { Button } from '@/components/ui/button';
 
 export default function LeaderboardComingSoon() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white overflow-hidden relative">
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black text-white">
       {/* Background Gradients */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-600/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-600/20 rounded-full blur-[120px]" />
+      <div className="pointer-events-none absolute top-0 left-0 z-0 h-full w-full overflow-hidden">
+        <div className="absolute top-[-20%] left-[-10%] h-[50%] w-[50%] rounded-full bg-purple-600/20 blur-[120px]" />
+        <div className="absolute right-[-10%] bottom-[-20%] h-[50%] w-[50%] rounded-full bg-blue-600/20 blur-[120px]" />
       </div>
 
-      <div className="z-10 container mx-auto px-4 text-center">
+      <div className="container z-10 mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -25,10 +25,10 @@ export default function LeaderboardComingSoon() {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-full blur-xl opacity-50"
+              className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 opacity-50 blur-xl"
             />
-            <div className="relative bg-zinc-900 p-6 rounded-full border border-zinc-800 shadow-2xl">
-              <Trophy className="w-16 h-16 text-yellow-400" />
+            <div className="relative rounded-full border border-zinc-800 bg-zinc-900 p-6 shadow-2xl">
+              <Trophy className="h-16 w-16 text-yellow-400" />
             </div>
             <motion.div
               initial={{ scale: 0 }}
@@ -36,33 +36,32 @@ export default function LeaderboardComingSoon() {
               transition={{ delay: 0.5, type: 'spring' }}
               className="absolute -top-2 -right-2"
             >
-              <Sparkles className="w-8 h-8 text-yellow-200 fill-yellow-200" />
+              <Sparkles className="h-8 w-8 fill-yellow-200 text-yellow-200" />
             </motion.div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-200 to-zinc-500">
+          <h1 className="mb-6 font-bold text-5xl tracking-tight md:text-7xl">
+            <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-transparent">
               Leaderboards
             </span>
             <br />
-            <span className="bg-clip-text text-transparent bg-linear-to-r from-(--color-brand-purple-600) to-(--color-blue-600)">
+            <span className="bg-linear-to-r from-(--color-brand-purple-600) to-(--color-blue-600) bg-clip-text text-transparent">
               Coming Soon
             </span>
           </h1>
 
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="mx-auto mb-10 max-w-2xl text-xl text-zinc-400 leading-relaxed">
             We're building the ultimate way to track top hubs, most active
-            servers, and rising stars. Get ready to compete and climb the
-            ranks!
+            servers, and rising stars. Get ready to compete and climb the ranks!
           </p>
 
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link href="/">
               <Button
                 size="lg"
-                className="bg-white text-black hover:bg-zinc-200 rounded-full px-8 py-6 text-lg font-medium"
+                className="rounded-full bg-white px-8 py-6 font-medium text-black text-lg hover:bg-zinc-200"
               >
-                <ArrowLeft className="mr-2 w-5 h-5" />
+                <ArrowLeft className="mr-2 h-5 w-5" />
                 Return Home
               </Button>
             </Link>
@@ -72,14 +71,14 @@ export default function LeaderboardComingSoon() {
 
       {/* Grid Pattern Overlay */}
       <div
-        className="absolute inset-0 opacity-20 pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-20"
         style={{
           backgroundImage: `linear-gradient(to right, #333 1px, transparent 1px),
                             linear-gradient(to bottom, #333 1px, transparent 1px)`,
           backgroundSize: '40px 40px',
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
     </div>
   );
 }

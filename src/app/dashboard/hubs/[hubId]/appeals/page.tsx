@@ -18,7 +18,7 @@ interface HubAppealsPageProps {
 export default async function HubAppealsPage({ params }: HubAppealsPageProps) {
   const { hubId } = await params;
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {

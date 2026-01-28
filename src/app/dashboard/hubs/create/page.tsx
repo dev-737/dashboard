@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default async function CreateHubPage() {
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {

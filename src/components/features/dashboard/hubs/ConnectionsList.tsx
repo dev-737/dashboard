@@ -244,7 +244,7 @@ export function ConnectionsList({
       <CardContent className="space-y-6 pt-6">
         {/* Simple Search */}
         <div className="relative">
-          <Search className="-translate-y-1/2 absolute top-1/2 left-3 h-4 w-4 text-gray-400" />
+          <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
           <Input
             placeholder="Search servers by name or ID..."
             value={searchQuery}
@@ -255,7 +255,7 @@ export function ConnectionsList({
             <Button
               variant="ghost"
               size="sm"
-              className="-translate-y-1/2 absolute top-1/2 right-2 h-8 w-8 rounded-lg p-0 hover:bg-gray-700/50"
+              className="absolute top-1/2 right-2 h-8 w-8 -translate-y-1/2 rounded-lg p-0 hover:bg-gray-700/50"
               onClick={() => setSearchQuery('')}
             >
               <X className="h-4 w-4" />
@@ -381,7 +381,7 @@ function ConnectionItem({
           </div>
 
           {/* Status Indicator */}
-          <div className="-bottom-1 -right-1 absolute flex h-4 w-4 items-center justify-center rounded-full border-2 border-gray-900">
+          <div className="absolute -right-1 -bottom-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-gray-900">
             {connection.connected ? (
               <div className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
             ) : (
@@ -398,10 +398,11 @@ function ConnectionItem({
             </h4>
             <Badge
               variant={connection.connected ? 'default' : 'secondary'}
-              className={`w-fit rounded-full px-2 py-1 font-medium text-xs ${connection.connected
+              className={`w-fit rounded-full px-2 py-1 font-medium text-xs ${
+                connection.connected
                   ? 'border-green-500/40 bg-green-500/20 text-green-300'
                   : 'border-amber-500/40 bg-amber-500/20 text-amber-300'
-                }`}
+              }`}
             >
               {connection.connected ? (
                 <>

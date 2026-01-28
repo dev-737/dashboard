@@ -21,7 +21,7 @@ export default async function ViewInfractionPage({
 }: ViewInfractionPageProps) {
   const { hubId, infractionId } = await params;
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {

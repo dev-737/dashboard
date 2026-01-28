@@ -48,7 +48,7 @@ export default function HubDetailLoading() {
         {/* Page Content */}
         <div className="container mx-auto max-w-7xl px-4 pb-16">
           {/* Header Card (Overlaps Banner) */}
-          <div className="-mt-24 md:-mt-32 relative mb-12">
+          <div className="relative -mt-24 mb-12 md:-mt-32">
             <div className="rounded-xl border border-gray-800 bg-gray-900/80 p-6 shadow-xl backdrop-blur-lg md:p-8">
               <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
                 {/* Hub Icon */}

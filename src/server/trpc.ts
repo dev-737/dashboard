@@ -28,7 +28,7 @@ export interface Context {
 export async function createContext(): Promise<Context> {
   // We don't use the opts parameter in this implementation
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
   return { session: session ? { user: session.user } : null };
 }

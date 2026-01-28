@@ -25,7 +25,7 @@ export async function generateMetadata(props: {
 // Server-side function to fetch connection data
 async function getConnectionData(connectionId: string) {
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
   if (!session?.user?.id) {
     redirect(`/login?callbackUrl=/dashboard/connections/${connectionId}`);

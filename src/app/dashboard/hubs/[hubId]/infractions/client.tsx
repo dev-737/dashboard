@@ -706,7 +706,7 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
                 <HomeIcon className="h-5 w-5 text-gray-300" />
               </div>
             )}
-            <div className="-bottom-1 -right-1 absolute rounded-full border border-gray-700 bg-gray-950 p-0.5 shadow-md">
+            <div className="absolute -right-1 -bottom-1 rounded-full border border-gray-700 bg-gray-950 p-0.5 shadow-md">
               {isUserInfraction ? (
                 <User className="h-3 w-3 text-blue-400" />
               ) : (

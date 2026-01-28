@@ -176,7 +176,7 @@ export function TagSelector({
       {/* Search Input */}
       <div className="relative">
         <div className="relative">
-          <Search className="-translate-y-1/2 absolute top-1/2 left-3 h-4 w-4 transform text-gray-400" />
+          <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
           <Input
             ref={inputRef}
             type="text"
@@ -203,7 +203,7 @@ export function TagSelector({
                 setFocusedIndex(-1);
                 inputRef.current?.focus();
               }}
-              className="-translate-y-1/2 absolute top-1/2 right-2 h-auto transform p-1 text-gray-400 hover:text-white"
+              className="absolute top-1/2 right-2 h-auto -translate-y-1/2 transform p-1 text-gray-400 hover:text-white"
             >
               <X className="h-4 w-4" />
             </Button>

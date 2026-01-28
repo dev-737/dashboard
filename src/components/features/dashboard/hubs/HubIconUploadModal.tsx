@@ -256,7 +256,7 @@ export function HubIconUploadModal({
                 <Button
                   variant="destructive"
                   size="sm"
-                  className="-top-2 -right-2 absolute h-6 w-6 rounded-full p-0"
+                  className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0"
                   onClick={handleRemoveIcon}
                   disabled={isUploading}
                 >

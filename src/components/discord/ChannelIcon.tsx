@@ -40,7 +40,7 @@ export function ChannelIcon({
       icon = (
         <div className="relative">
           <MessageSquare className={className} />
-          <Lock className="-top-1 -right-1 absolute h-2 w-2" />
+          <Lock className="absolute -top-1 -right-1 h-2 w-2" />
         </div>
       );
       tooltipText = 'Private Thread';

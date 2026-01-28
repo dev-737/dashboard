@@ -24,7 +24,7 @@ interface HubModulesPageProps {
 export default async function HubModulesPage({ params }: HubModulesPageProps) {
   const { hubId } = await params;
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user?.id) {

@@ -32,7 +32,7 @@ async function getAnnouncementsData(): Promise<{
   unreadCount: number;
 }> {
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
   if (!session?.user?.id) {
     redirect('/login?callbackUrl=/dashboard/announcements');
@@ -99,8 +99,9 @@ export default async function AnnouncementsPage() {
           {announcements.map((announcement) => (
             <Card
               key={announcement.id}
-              className={`border-gray-800 bg-dash-main backdrop-blur-sm ${announcement.isUnread ? 'border-l-4 border-l-indigo-500' : ''
-                }`}
+              className={`border-gray-800 bg-dash-main backdrop-blur-sm ${
+                announcement.isUnread ? 'border-l-4 border-l-indigo-500' : ''
+              }`}
             >
               <CardHeader>
                 <div className="flex items-center justify-between">
