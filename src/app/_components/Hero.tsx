@@ -34,9 +34,9 @@ export function Hero() {
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/20"
             >
               <Sparkles className="h-4 w-4 animate-pulse text-purple-400" />
-              <Link href="https://docs.interchat.dev/changelog">
+              <Link href="https://interchat.dev/invite">
                 <AnimatedShinyText className="font-semibold text-sm tracking-wide">
-                  InterChat v5 is here
+                  InterChat v5.4.0 is out
                 </AnimatedShinyText>
               </Link>
             </motion.div>
