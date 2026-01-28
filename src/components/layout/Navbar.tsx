@@ -72,7 +72,7 @@ export function Navbar({ session }: NavbarProps) {
     <header
       className={`${isDashboardPage ? 'hidden' : ''} fixed top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? 'border-white/5 border-b bg-[#030812]/80 shadow-lg shadow-purple-500/5 backdrop-blur-md'
+          ? 'border-none bg-[#030812]/80 shadow-lg shadow-purple-500/5 backdrop-blur-md'
           : 'bg-transparent'
       }`}
     >
