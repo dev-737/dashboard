@@ -44,7 +44,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
   return (
     <div className="space-y-6">
       {/* Comprehensive Connection Overview */}
-      <Card className="relative overflow-hidden border border-gray-800/50 bg-linear-to-r from-gray-900/80 to-gray-950/80 backdrop-blur-sm">
+      <Card className="relative overflow-hidden border border-gray-800/50 bg-dash-surface backdrop-blur-sm">
         <div className="absolute inset-0 bg-linear-to-r from-blue-500/5 to-purple-500/5" />
         <CardHeader className="relative px-6 py-4">
           <div className="mb-4 flex items-center justify-between">

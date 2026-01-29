@@ -53,9 +53,6 @@ export function PageFooter({
       className={`w-full ${heightClasses[height]} relative flex shrink-0 items-center justify-center overflow-hidden`}
       aria-hidden="true"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-linear-to-t from-gray-950/80 via-gray-950/40 to-transparent" />
-
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <motion.div
