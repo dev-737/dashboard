@@ -2,15 +2,13 @@
 
 import {
   Activity,
-  BarChart3,
+  type LucideIcon,
   MessageSquare,
-  Sparkles,
+  Hand,
   Users,
-  Zap,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 interface User {
   id: string;
@@ -24,202 +22,104 @@ interface AnimatedWelcomeProps {
 }
 
 export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   const router = useRouter();
-
-  // Only render content after component is mounted on client
-  if (!isMounted) {
-    return (
-      <div className="relative mb-8 h-[30vh] overflow-hidden rounded-2xl border border-gray-800/50 md:h-[40vh]">
-        <div className="absolute inset-0 bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30" />
-      </div>
-    );
-  }
-
-  const floatingIcons = [
-    {
-      Icon: MessageSquare,
-      className:
-        'absolute top-[10%] left-[5%] h-16 w-16 text-purple-400/20 md:h-20 md:w-20',
-      delay: 0,
-    },
-    {
-      Icon: BarChart3,
-      className:
-        'absolute top-[15%] right-[8%] h-12 w-12 text-blue-400/20 md:h-16 md:w-16',
-      delay: 0.1,
-    },
-    {
-      Icon: Users,
-      className:
-        'absolute bottom-[12%] left-[8%] h-14 w-14 text-indigo-400/20 md:h-18 md:w-18',
-      delay: 0.2,
-    },
-    {
-      Icon: Activity,
-      className:
-        'absolute bottom-[15%] right-[5%] h-16 w-16 text-pink-400/20 md:h-20 md:w-20',
-      delay: 0.15,
-    },
-    {
-      Icon: Zap,
-      className:
-        'absolute top-[50%] left-[15%] h-10 w-10 text-yellow-400/15 md:h-12 md:w-12',
-      delay: 0.25,
-    },
-    {
-      Icon: Sparkles,
-      className:
-        'absolute top-[40%] right-[12%] h-10 w-10 text-cyan-400/15 md:h-12 md:w-12',
-      delay: 0.3,
-    },
-  ];
 
   return (
     <motion.div
-      className="relative mb-8 overflow-hidden rounded-2xl border border-gray-800/30 bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30"
-      initial={{ opacity: 0, y: 20 }}
+      className="relative mb-8 overflow-hidden rounded-xl border border-gray-800/50 bg-dash-surface"
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.4 }}
     >
-      {/* Animated gradient overlay */}
-      <div className="absolute inset-0 bg-linear-to-r from-purple-600/10 via-transparent to-blue-600/10" />
+      {/* Subtle background grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]" />
 
-      {/* Floating decorative icons */}
-      <div className="absolute inset-0">
-        {floatingIcons.map(({ Icon, className, delay }, index) => (
+      {/* Subtle glow */}
+      <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-purple-500/5 blur-3xl" />
+
+      <div className="relative z-10 flex flex-col items-center justify-between gap-6 px-6 py-8 md:flex-row md:px-8">
+        <div className="flex flex-col gap-3">
           <motion.div
-            key={index}
-            className={className}
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: delay,
-              duration: 0.8,
-              ease: 'easeOut',
-              repeat: Number.POSITIVE_INFINITY,
-              repeatType: 'reverse',
-              repeatDelay: 3,
-            }}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 }}
+            className="flex items-center gap-2 font-medium text-purple-400 text-sm"
           >
-            <Icon className="h-full w-full" />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Gradient orbs */}
-      <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
-      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
-
-      {/* Content container */}
-      <div className="relative z-10 flex min-h-[30vh] flex-col items-center justify-center px-6 py-12 md:min-h-[40vh]">
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
-          {/* Greeting badge */}
-          <motion.div
-            className="mb-4 inline-flex items-center gap-2 rounded-full border border-purple-400/30 bg-purple-500/10 px-4 py-1.5 backdrop-blur-sm"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-          >
-            <Sparkles className="h-4 w-4 text-purple-300" />
-            <span className="font-medium text-purple-200 text-sm">
-              Dashboard
-            </span>
+            <Hand className="h-4 w-4" />
+            <span>InterChat Dashboard</span>
           </motion.div>
 
-          {/* Main heading */}
           <motion.h1
-            className="mb-4 font-bold text-3xl text-white md:text-5xl"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
+            className="font-bold text-2xl text-white md:text-3xl"
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
           >
             Welcome back,{' '}
-            <span className="bg-linear-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               {user.name || 'User'}
             </span>
-            !
           </motion.h1>
 
-          {/* Description */}
           <motion.p
-            className="mx-auto max-w-2xl text-base text-gray-300 leading-relaxed md:text-lg"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
+            className="max-w-md text-gray-400"
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
           >
-            Manage your cross-server communities and connect Discord servers
-            worldwide with InterChat
+            Manage your communities and explore new possibilities.
           </motion.p>
+        </div>
 
-          {/* Quick stats */}
-          <motion.div
-            className="mt-8 flex flex-wrap items-center justify-center gap-6"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-          >
-            {[
-              {
-                icon: MessageSquare,
-                label: 'Hubs',
-                color: 'purple',
-                href: '/dashboard?tab=hubs',
-              },
-              {
-                icon: Users,
-                label: 'Servers',
-                color: 'blue',
-                href: '/dashboard?tab=servers',
-              },
-              {
-                icon: Activity,
-                label: 'Profile',
-                color: 'pink',
-                href: '/dashboard/settings',
-              },
-            ].map(({ icon: Icon, label, color, href }, index) => (
-              <motion.div
-                key={label}
-                className="flex cursor-pointer items-center gap-2 rounded-xl border border-gray-700/50 bg-gray-900/30 px-4 py-2 backdrop-blur-sm transition-all hover:scale-105 hover:bg-gray-900/50"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
-                whileHover={{ scale: 1.05 }}
-                // take them to the link on click
-                onClick={() => router.push(href)}
-              >
-                <Icon
-                  className={`h-4 w-4 ${
-                    color === 'purple'
-                      ? 'text-purple-400'
-                      : color === 'blue'
-                        ? 'text-blue-400'
-                        : 'text-pink-400'
-                  }`}
-                />
-                <span className="font-medium text-gray-300 text-sm">
-                  {label}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
+        <motion.div
+          className="flex w-full flex-wrap gap-3 md:w-auto"
+          initial={{ opacity: 0, x: 10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          {/* Quick Action Cards */}
+          <div className="grid w-full grid-cols-2 gap-3 sm:flex sm:w-auto">
+            <QuickAction
+              icon={MessageSquare}
+              label="Hubs"
+              onClick={() => router.push('/dashboard?tab=hubs')}
+            />
+            <QuickAction
+              icon={Users}
+              label="Servers"
+              onClick={() => router.push('/dashboard?tab=servers')}
+            />
+            <QuickAction
+              icon={Activity}
+              label="Profile"
+              onClick={() => router.push('/dashboard/settings')}
+            />
+          </div>
         </motion.div>
       </div>
     </motion.div>
+  );
+}
+
+function QuickAction({
+  icon: Icon,
+  label,
+  onClick,
+}: {
+  icon: LucideIcon;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="group flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-700/50 bg-gray-900/50 px-4 py-3 transition-all hover:border-purple-500/30 hover:bg-gray-800 sm:flex-none"
+    >
+      <Icon className="h-4 w-4 text-gray-400 transition-colors group-hover:text-purple-400" />
+      <span className="text-sm font-medium text-gray-300 group-hover:text-white">
+        {label}
+      </span>
+    </button>
   );
 }

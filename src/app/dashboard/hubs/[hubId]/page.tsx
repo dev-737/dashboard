@@ -158,7 +158,7 @@ export default async function HubOverviewPage({
               </CardContent>
             </Card>
 
-            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-linear-to-br from-purple-900/20 to-purple-950/20 transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10">
+            <Card className="group overflow-hidden rounded-2xl border-gray-700/50 bg-linear-to-br from-purple-900/20 to-purple-950/20 transition-all hover:border-purple-500/50">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
