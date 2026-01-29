@@ -124,7 +124,7 @@ export default async function ServerDetailPage(props: {
             <p className="mb-4 text-red-400">{result.error}</p>
             <Button
               asChild
-              className="border-none bg-linear-to-br from-[#6352BE] to-[#463988] hover:from-[#6352BE]/40 hover:to-[#463988]/40"
+              className="border-none btn-primary "
             >
               <Link href="/dashboard">Back to Servers</Link>
             </Button>
@@ -342,7 +342,7 @@ export default async function ServerDetailPage(props: {
                     <div className="mt-4">
                       <Button
                         asChild
-                        className="w-full border-none bg-linear-to-br from-[#6352BE] to-[#463988] hover:from-[#6352BE]/40 hover:to-[#463988]/40"
+                        className="w-full border-none btn-primary "
                       >
                         <Link
                           href={`https://discord.com/oauth2/authorize?client_id=769921109209907241&guild_id=${serverId}`}
@@ -407,7 +407,7 @@ export default async function ServerDetailPage(props: {
                   </p>
                   <Button
                     asChild
-                    className="border-none bg-linear-to-br from-[#6352BE] to-[#463988] hover:from-[#6352BE]/40 hover:to-[#463988]/40"
+                    className="border-none btn-primary "
                   >
                     <Link
                       href={`https://discord.com/oauth2/authorize?client_id=769921109209907241&guild_id=${serverId}`}

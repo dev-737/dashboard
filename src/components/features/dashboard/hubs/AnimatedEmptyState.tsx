@@ -104,7 +104,7 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
             >
               <Button
                 asChild
-                className="rounded-xl border-none bg-linear-to-r from-[#6352BE] to-[#463988] text-white shadow-lg hover:from-purple-700 hover:to-blue-700 hover:shadow-purple-500/25"
+                className="btn-primary border-none bg-linear-to-r text-white"
               >
                 <Link href="/dashboard/hubs/create">
                   <PlusCircle className="mr-2 h-4 w-4" />

@@ -92,7 +92,7 @@ export function HomepageMobileSidebar({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[9998] bg-[#030812]/80 backdrop-blur-md"
+            className="fixed inset-0 z-9998 bg-[#030812]/80 backdrop-blur-md"
             onClick={onClose}
           />
 
@@ -102,7 +102,7 @@ export function HomepageMobileSidebar({
             animate="open"
             exit="closed"
             variants={sidebarVariants}
-            className="fixed top-0 right-0 bottom-0 z-[9999] flex w-[320px] max-w-[85vw] flex-col overflow-hidden border-white/5 border-l bg-[#030812] shadow-2xl"
+            className="fixed top-0 right-0 bottom-0 z-9999 flex w-[320px] max-w-[85vw] flex-col overflow-hidden border-white/5 border-l bg-[#030812] shadow-2xl"
           >
             {/* Header */}
             <div className="relative flex h-20 shrink-0 items-center justify-between px-6">
@@ -146,8 +146,8 @@ export function HomepageMobileSidebar({
                       className={cn(
                         'group relative flex items-center gap-3 overflow-hidden rounded-xl px-4 py-3.5 transition-all duration-300',
                         pathname === link.url
-                          ? 'bg-white/[0.03] text-white shadow-inner'
-                          : 'text-gray-400 hover:bg-white/[0.02] hover:text-gray-200'
+                          ? 'bg-white/3 text-white shadow-inner'
+                          : 'text-gray-400 hover:bg-white/2 hover:text-gray-200'
                       )}
                     >
                       {pathname === link.url && (
@@ -173,7 +173,7 @@ export function HomepageMobileSidebar({
                   <div className="absolute inset-0 rounded-xl bg-linear-to-r from-purple-500/20 to-blue-500/20 opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-100" />
                   <Button
                     asChild
-                    className="relative w-full border border-white/10 bg-linear-to-r from-[#6352BE] to-[#463988] font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20"
+                    className="btn-primary relative w-full border border-white/10 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20"
                   >
                     <Link
                       href="/invite"

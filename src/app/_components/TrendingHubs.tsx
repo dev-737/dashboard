@@ -16,7 +16,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
     <section className="relative overflow-hidden bg-[#030812] py-24 md:py-32">
       {/* Background Elements */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/5 blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/5 blur-[120px]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
@@ -53,7 +53,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Link href={`/hubs/${hub.id}`} className="group block h-full">
-                <div className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04] hover:shadow-2xl hover:shadow-indigo-500/5">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/5 bg-white/2 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-white/10 hover:bg-white/4 hover:shadow-2xl hover:shadow-indigo-500/5">
                   {/* Banner/Image */}
                   <div className="relative h-56 w-full overflow-hidden">
                     {hub.bannerUrl ? (

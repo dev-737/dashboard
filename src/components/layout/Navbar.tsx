@@ -94,7 +94,7 @@ export function Navbar({ session }: NavbarProps) {
                 <NavigationMenuItem key={link.url}>
                   <NavigationMenuLink
                     href={link.url}
-                    className={`group relative inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 font-medium text-gray-400 text-sm transition-colors duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:translate-x-[-50%] after:bg-primary after:transition-all after:duration-300 hover:text-white hover:after:w-[80%] ${
+                    className={`group relative inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 font-medium text-gray-400 text-sm transition-colors duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:translate-x-[-50%] after:bg-primary after:transition-all after:duration-300 hover:text-white hover:after:w-[80%] ${
                       pathname === link.url ? 'text-white after:w-[80%]' : ''
                     }`}
                   >
@@ -109,7 +109,7 @@ export function Navbar({ session }: NavbarProps) {
         <div className="flex items-center gap-2">
           <Button
             asChild
-            className="hidden bg-linear-to-r from-primary to-primary-alt font-medium text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-primary/20 lg:flex"
+            className="hidden btn-primary font-medium text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-primary/20 lg:flex"
           >
             <Link href="/invite" className="items-center gap-2">
               Invite

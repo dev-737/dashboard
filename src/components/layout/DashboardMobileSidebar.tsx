@@ -322,7 +322,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                     src={user.image || undefined}
                     alt={user.name || 'User'}
                   />
-                  <AvatarFallback className="bg-linear-to-br from-[#6352BE] to-[#463988] font-bold text-white">
+                  <AvatarFallback className="btn-primary font-bold text-white">
                     {getInitials(user.name)}
                   </AvatarFallback>
                 </Avatar>

@@ -232,16 +232,16 @@
   --color-dash-hub-input: rgb(14, 17, 33);
 
   /* Primary Brand Colors */
-  --color-brand-purple-50: #f8f6ff;
-  --color-brand-purple-100: #ede9ff;
-  --color-brand-purple-200: #ddd6ff;
-  --color-brand-purple-300: #c4b5ff;
-  --color-brand-purple-400: #a78bff;
-  --color-brand-purple-500: #9172d8;
-  --color-brand-purple-600: #7c5ce0;
-  --color-brand-purple-700: #6b46c1;
-  --color-brand-purple-800: #553c9a;
-  --color-brand-purple-900: #44337a;
+  --color-brand-purple-50:  #F4F2FF;
+  --color-brand-purple-100: #E6E2FF;
+  --color-brand-purple-200: #CFC8FF;
+  --color-brand-purple-300: #B3A9F2;
+  --color-brand-purple-400: #8A78DB;
+  --color-brand-purple-500: #6352BE; /* base */
+  --color-brand-purple-600: #5446A3;
+  --color-brand-purple-700: #463A87;
+  --color-brand-purple-800: #352D66;
+  --color-brand-purple-900: #241F45;
 
   /* Secondary Brand Colors */
   --color-brand-blue-400: #60a5fa;
@@ -421,8 +421,8 @@
 
 /* Button Utility Classes */
 .btn-primary {
-  @apply bg-linear-to-br from-[#6352BE] to-[#463988];
-  @apply hover:from-[#6352BE]/40 to-[#463988]/40;
+  @apply bg-[#6352BE];
+  @apply hover:bg-[#6352BE]/80;
   @apply text-white border-none rounded-(--radius-button);
   @apply transition-all duration-200;
 }

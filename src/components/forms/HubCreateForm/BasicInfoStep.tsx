@@ -85,7 +85,7 @@ export function BasicInfoStep({
             type="button"
             onClick={onNext}
             disabled={!canProceed}
-            className="border-none bg-linear-to-br from-[#6352BE] to-[#463988] px-8 py-3 hover:from-[#6352BE]/40 hover:to-[#463988]/40"
+            className="border-none btn-primary px-8 py-3 "
           >
             Continue
             <ArrowRight className="ml-2 h-4 w-4" />

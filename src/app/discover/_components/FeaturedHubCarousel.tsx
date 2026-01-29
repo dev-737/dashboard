@@ -32,7 +32,7 @@ export function FeaturedHubCarousel({
   return (
     <div
       className={cn(
-        'group relative flex h-[300px] w-[85vw] shrink-0 overflow-hidden rounded-2xl border border-gray-800/70 bg-[#0a101d] md:w-[600px] lg:w-[800px]',
+        'group relative flex h-75 w-[85vw] shrink-0 overflow-hidden rounded-2xl border border-gray-800/70 bg-[#0a101d] md:w-150 lg:w-200',
         className
       )}
     >
@@ -124,7 +124,7 @@ export function FeaturedHubCarousel({
           <Link href={`/hubs/${id}`}>
             <Button
               size="default"
-              className="btn-primary shadow-indigo-500/20 shadow-lg"
+              className="btn-primary"
             >
               <Eye className="mr-2 h-5 w-5" />
               View Hub

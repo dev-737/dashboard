@@ -181,7 +181,7 @@ export function GuidedTour({
   const progress = ((currentStep + 1) / steps.length) * 100;
 
   return createPortal(
-    <div className="fixed inset-0 z-[10000]">
+    <div className="fixed inset-0 z-10000">
       {/* Dark overlay with cutout for highlighted element - pointer events enabled for overlay but not for cutout */}
       <div className="pointer-events-auto absolute inset-0 bg-black/60">
         <svg className="pointer-events-none h-full w-full">
@@ -309,7 +309,7 @@ export function GuidedTour({
               {/* Progress bar */}
               <div className="h-2 w-full rounded-full bg-gray-800">
                 <div
-                  className="h-2 rounded-full bg-linear-to-r from-purple-500 to-blue-500 transition-all duration-300"
+                  className="h-2 rounded-full bg-linear-to-r from-[#6352BE] to-[#463988] transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -358,7 +358,7 @@ export function GuidedTour({
                   <Button
                     onClick={canGoNext ? onNext : onComplete}
                     size="sm"
-                    className="bg-linear-to-r from-[#6352BE] to-[#463988] text-white hover:from-purple-700 hover:to-blue-700"
+                    className="btn-primary text-white"
                   >
                     {canGoNext ? (
                       <>

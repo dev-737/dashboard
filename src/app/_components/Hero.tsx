@@ -79,7 +79,7 @@ export function Hero() {
                 <div className="absolute inset-0 rounded-full bg-none" />
                 <Button
                   size="lg"
-                  className="relative h-14 rounded-full bg-linear-to-r from-[#6352BE] to-[#463988] px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/25"
+                  className="relative h-14 rounded-full btn-primary px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/25"
                 >
                   <Link href="/invite" className="flex items-center gap-2">
                     Start Connecting

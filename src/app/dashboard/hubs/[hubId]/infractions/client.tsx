@@ -255,7 +255,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
         </div>
         <Button
           asChild
-          className="w-full border-none bg-linear-to-br from-[#6352BE] to-[#463988] text-white hover:from-[#6352BE]/40 hover:to-[#463988]/40 sm:w-auto"
+          className="w-full border-none btn-primary text-white  sm:w-auto"
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions/add`}>
             <PlusCircle className="mr-2 h-4 w-4" />
@@ -717,7 +717,7 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
           <div>
             <div className="font-medium text-white">{targetName}</div>
             <div
-              className="max-w-[150px] truncate text-gray-400 text-xs sm:max-w-[200px] md:max-w-[250px] lg:max-w-none"
+              className="max-w-37.5 truncate text-gray-400 text-xs sm:max-w-50 md:max-w-62.5 lg:max-w-none"
               title={
                 (isUserInfraction ? infraction.userId : infraction.serverId) ||
                 undefined
