@@ -43,7 +43,7 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="flex items-center gap-2 font-medium text-purple-400 text-sm"
+            className="flex items-center gap-2 font-medium text-primary text-sm"
           >
             <Hand className="h-4 w-4" />
             <span>InterChat Dashboard</span>
