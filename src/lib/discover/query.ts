@@ -77,7 +77,7 @@ class CacheService {
 
 const cacheService = new CacheService();
 
-function getBaseSelect(userId?: string) {
+function getBaseSelect() {
   const baseSelect = {
     id: true,
     name: true,
@@ -117,13 +117,6 @@ function getBaseSelect(userId?: string) {
       },
     },
   } as const;
-
-  if (userId) {
-    return {
-      ...baseSelect,
-      upvotes: { where: { userId }, select: { userId: true }, take: 1 },
-    };
-  }
 
   return baseSelect;
 }
@@ -227,9 +220,7 @@ function buildOrderBy(
   }
 }
 
-// MIGRATED: Moved auth() call outside cache scope to comply with Cache Components
-// Pass userId as a parameter instead of calling auth() inside cached function
-export async function getDiscoverHubs(params: DiscoverParams, userId?: string) {
+export async function getPublicDiscoverHubs(params: DiscoverParams) {
   'use cache';
   cacheLife('discover-data');
   cacheTag('discover', `discover-${params.sort || 'trending'}`);
@@ -242,17 +233,18 @@ export async function getDiscoverHubs(params: DiscoverParams, userId?: string) {
 
   const where = buildWhere(params);
   const orderBy = buildOrderBy(params.sort);
-  const select = getBaseSelect(userId);
 
-  const baseCacheParams = { ...params, userId };
-  const pageCacheKey = cacheService.generateCacheKey('discover:v3', {
-    ...baseCacheParams,
+  // Base select without user-specific fields (upvotes)
+  const select = getBaseSelect();
+
+  const pageCacheKey = cacheService.generateCacheKey('discover:v4', {
+    ...params,
     page,
     pageSize,
   });
   const countCacheKey = cacheService.generateCacheKey(
-    'discover:count:v3',
-    baseCacheParams
+    'discover:count:v4',
+    params
   );
 
   type PaginatedResult = {
@@ -288,15 +280,11 @@ export async function getDiscoverHubs(params: DiscoverParams, userId?: string) {
   const [items, total] = await Promise.all([itemsPromise, totalPromise]);
   const hasMore = page * pageSize < total;
 
-  let processedItems = items.map((item) => {
-    const typedItem = item as typeof item & {
-      upvotes?: { userId: string }[];
-    };
-
+  let processedItems: HubCardDTO[] = items.map((item) => {
     return {
       ...item,
       weeklyMessageCount: item._count.messages,
-      isUpvoted: !!(userId && typedItem.upvotes?.length),
+      isUpvoted: false, // Default to false, will be enriched later
       averageRating: item.averageRating,
     };
   });
@@ -348,4 +336,42 @@ export async function getDiscoverHubs(params: DiscoverParams, userId?: string) {
   ]);
 
   return result;
+}
+
+/**
+ * Main entry point: Fetches public data then enriches with user data
+ */
+export async function getDiscoverHubs(params: DiscoverParams, userId?: string) {
+  // 1. Get cached public data
+  const result = await getPublicDiscoverHubs(params);
+
+  // 2. If no user, return as is
+  if (!userId || result.items.length === 0) {
+    return result;
+  }
+
+  // 3. Enrich with user data (Upvotes)
+  // fetch upvotes for the displayed hubs
+  const hubIds = result.items.map((h) => h.id);
+
+  const userUpvotes = await db.hubUpvote.findMany({
+    where: {
+      userId,
+      hubId: { in: hubIds },
+    },
+    select: {
+      hubId: true,
+    },
+  });
+
+  const upvotedHubIds = new Set(userUpvotes.map((u) => u.hubId));
+
+  // Return new object with updated items
+  return {
+    ...result,
+    items: result.items.map((item) => ({
+      ...item,
+      isUpvoted: upvotedHubIds.has(item.id),
+    })),
+  };
 }
