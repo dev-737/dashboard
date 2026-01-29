@@ -68,9 +68,9 @@ export function useAddHubMember(hubId: string) {
     trpc.hub.addMember.mutationOptions({
       onSuccess: async (_data, variables) => {
         // Wait for the refetch to complete before considering the mutation successful
-        await queryClient.invalidateQueries(
-          trpc.hub.getMembers.queryFilter({ hubId })
-        );
+        await queryClient.invalidateQueries({
+          queryKey: trpc.hub.getMembers.queryKey({ hubId }),
+        });
 
         toast({
           title: 'Member Added',
@@ -101,10 +101,9 @@ export function useUpdateMemberRole(hubId: string) {
     trpc.hub.updateMemberRole.mutationOptions({
       onSuccess: async (_data, variables) => {
         // Wait for the refetch to complete
-        console.log('Invalidating members query for hub:', hubId);
-        await queryClient.invalidateQueries(
-          trpc.hub.getMembers.queryFilter({ hubId })
-        );
+        await queryClient.invalidateQueries({
+          queryKey: trpc.hub.getMembers.queryKey({ hubId }),
+        });
         console.log('Members query invalidated');
 
         toast({
@@ -136,9 +135,9 @@ export function useRemoveMember(hubId: string) {
     trpc.hub.removeMember.mutationOptions({
       onSuccess: async (_data, variables) => {
         // Wait for the refetch to complete
-        await queryClient.invalidateQueries(
-          trpc.hub.getMembers.queryFilter({ hubId })
-        );
+        await queryClient.invalidateQueries({
+          queryKey: trpc.hub.getMembers.queryKey({ hubId }),
+        });
 
         toast({
           title: 'Member Removed',

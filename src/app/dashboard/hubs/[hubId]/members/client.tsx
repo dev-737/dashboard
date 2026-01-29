@@ -41,6 +41,7 @@ import {
 } from '@/hooks/use-hub-members';
 import { cn } from '@/lib/utils';
 import { useTRPC } from '@/utils/trpc';
+import { Label } from '@/components/ui/label';
 
 export function MembersClient({ hubId }: { hubId: string }) {
   // State for the dialog
@@ -213,9 +214,9 @@ export function MembersClient({ hubId }: { hubId: string }) {
             <div className="space-y-6 p-6 pt-2">
               {/* ID Input Section */}
               <div className="space-y-3">
-                <label className="font-semibold text-gray-500 text-xs uppercase tracking-wider">
+                <Label className="font-semibold text-gray-500 text-xs uppercase tracking-wider">
                   User ID
-                </label>
+                </Label>
                 <div className="group relative flex gap-2">
                   <div className="relative flex-1">
                     <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-500 transition-colors group-focus-within:text-indigo-400" />
@@ -296,9 +297,9 @@ export function MembersClient({ hubId }: { hubId: string }) {
                   !selectedUser && 'pointer-events-none opacity-50'
                 )}
               >
-                <label className="font-semibold text-gray-500 text-xs uppercase tracking-wider">
+                <Label className="font-semibold text-gray-500 text-xs uppercase tracking-wider">
                   Select Role
-                </label>
+                </Label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
