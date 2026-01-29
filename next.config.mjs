@@ -212,8 +212,12 @@ export default withSentryConfig(config, {
   silent: !process.env.CI,
   widenClientFileUpload: true,
   tunnelRoute: '/monitoring',
-  disableLogger: true,
-  automaticVercelMonitors: true,
+  webpack: {
+    treeshake: {
+      removeDebugLogging: true
+    },
+    automaticVercelMonitors: true
+  },
   telemetry: false,
   sourcemaps: {
     disable: !process.env.CI,

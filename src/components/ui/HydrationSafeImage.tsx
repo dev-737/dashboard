@@ -28,6 +28,18 @@ const DEFAULT_FALLBACKS = {
   hub: '/assets/images/logos/InterChatLogo.svg',
 } as const;
 
+// Domains that should skip Next.js Image Optimization to save Vercel CPU usage
+const SKIPPED_OPTIMIZATION_DOMAINS = [
+  'discord.com',
+  'discordapp.com',
+  'cdn.discordapp.com',
+  'media.discordapp.net',
+  'imgur.com',
+  'i.imgur.com',
+  'media.tenor.com',
+  'media.giphy.com',
+];
+
 export function HydrationSafeImage({
   src,
   alt,
@@ -45,6 +57,24 @@ export function HydrationSafeImage({
   ...props
 }: HydrationSafeImageProps) {
   const [error, setError] = useState(false);
+
+  // Determine if we should skip optimization based on the domain
+  const shouldSkipOptimization = (() => {
+    if (!src || typeof src !== 'string') return false;
+    try {
+      // Handle relative URLs
+      if (src.startsWith('/')) return false;
+
+      const url = new URL(src);
+      return SKIPPED_OPTIMIZATION_DOMAINS.some(
+        (domain) =>
+          url.hostname === domain || url.hostname.endsWith('.' + domain)
+      );
+    } catch {
+      // If URL parsing fails, stick to default behavior
+      return false;
+    }
+  })();
 
   // Determine fallback image based on alt text or use provided fallback
   const determinedFallback =
@@ -92,6 +122,7 @@ export function HydrationSafeImage({
       onError={handleError}
       onLoad={handleLoad}
       fetchPriority={fetchPriority}
+      unoptimized={shouldSkipOptimization}
       {...props}
     />
   );

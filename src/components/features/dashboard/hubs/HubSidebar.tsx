@@ -59,29 +59,12 @@ interface SidebarNavItemProps {
   lockReason?: string;
   badge?: number;
   comingSoon?: boolean;
-  color?:
-    | 'default'
-    | 'blue'
-    | 'green'
-    | 'purple'
-    | 'red'
-    | 'orange'
-    | 'yellow'
-    | 'indigo';
+  color?: string; // Kept for compatibility but not strictly used in new design
 }
 
 interface NavigationItem {
   value: string;
   label: string;
-  color:
-    | 'default'
-    | 'blue'
-    | 'green'
-    | 'purple'
-    | 'red'
-    | 'orange'
-    | 'yellow'
-    | 'indigo';
   icon: React.ComponentType<{ className?: string }>;
   href: string;
   show:
@@ -113,25 +96,29 @@ function SidebarNavItem({
   const content = (
     <div
       className={cn(
-        'group flex items-center gap-3 rounded-md px-3 py-2 font-medium text-sm transition-all duration-200',
+        'group relative flex items-center gap-3 overflow-hidden rounded-xl px-3 py-2.5 transition-all duration-300',
         active
-          ? 'bg-linear-to-r from-purple-500/10 to-blue-500/10 text-purple-300 shadow-lg shadow-purple-500/5 active:border-2 active:border-purple-500/10'
-          : 'text-gray-400 hover:bg-white/5 hover:text-gray-200',
+          ? 'bg-white/[0.03] shadow-inner text-white'
+          : 'text-gray-400 hover:bg-white/[0.02] hover:text-gray-200',
         locked && 'cursor-not-allowed opacity-50'
       )}
     >
+      {active && (
+        <div className="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-full bg-linear-to-b from-purple-500 to-blue-500" />
+      )}
+
       <div
         className={cn(
           'flex items-center justify-center transition-colors duration-200',
           active ? 'text-purple-400' : 'text-gray-500 group-hover:text-gray-300'
         )}
       >
-        <Icon className="h-4 w-4" />
+        <Icon className="h-5 w-5" />
       </div>
 
       {!isCollapsed && (
         <div className="flex flex-1 items-center justify-between overflow-hidden">
-          <span className="truncate text-md">{label}</span>
+          <span className="truncate font-medium text-sm">{label}</span>
           <div className="flex items-center gap-2">
             {locked && <Shield className="h-3 w-3 text-gray-600" />}
             {comingSoon && (
@@ -142,16 +129,6 @@ function SidebarNavItem({
             {badge && badge > 0 && (
               <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-purple-500 px-1.5 font-bold text-[10px] text-white">
                 {badge > 99 ? '99+' : badge}
-              </span>
-            )}
-            {label === 'Departments' && (
-              <span className="rounded-full bg-green-500/10 px-1.5 py-0.5 font-medium text-[10px] text-green-400 leading-none">
-                NEW
-              </span>
-            )}
-            {label === 'Resources' && (
-              <span className="rounded-full bg-green-500/10 px-1.5 py-0.5 font-medium text-[10px] text-green-400 leading-none">
-                NEW
               </span>
             )}
           </div>
@@ -230,11 +207,11 @@ function SidebarSection({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   if (isCollapsed) {
-    return <div className="space-y-2">{children}</div>;
+    return <div className="space-y-1">{children}</div>;
   }
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -245,7 +222,7 @@ function SidebarSection({
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
         >
-          <ChevronLeft className="h-3 w-3" />
+          <ChevronRight className="h-3 w-3" />
         </motion.div>
       </button>
 
@@ -281,7 +258,6 @@ export function HubSidebar({
     trpc.user.getAccessibleHubs.queryOptions()
   );
 
-  // Simplified configuration
   const sidebarConfig: SidebarSection[] = [
     {
       key: 'main',
@@ -289,7 +265,6 @@ export function HubSidebar({
         {
           value: 'overview',
           label: 'Overview',
-          color: 'default',
           icon: MessageSquare,
           href: `/dashboard/hubs/${hubId}`,
           show: true,
@@ -297,7 +272,6 @@ export function HubSidebar({
         {
           value: 'discovery',
           label: 'Discovery',
-          color: 'yellow',
           icon: Globe,
           href: `/dashboard/hubs/${hubId}/discoverability`,
           show: true,
@@ -314,7 +288,6 @@ export function HubSidebar({
         {
           value: 'members',
           label: 'Team',
-          color: 'blue',
           icon: Users,
           href: `/dashboard/hubs/${hubId}/members`,
           show: ({ canEdit }) => canEdit,
@@ -322,7 +295,6 @@ export function HubSidebar({
         {
           value: 'connections',
           label: 'Connections',
-          color: 'green',
           icon: Home,
           href: `/dashboard/hubs/${hubId}/connections`,
           show: ({ canModerate }) => canModerate,
@@ -330,7 +302,6 @@ export function HubSidebar({
         {
           value: 'logging',
           label: 'Logging',
-          color: 'indigo',
           icon: FileText,
           href: `/dashboard/hubs/${hubId}/logging`,
           show: true,
@@ -340,7 +311,6 @@ export function HubSidebar({
         {
           value: 'modules',
           label: 'Modules',
-          color: 'default',
           icon: Package,
           href: `/dashboard/hubs/${hubId}/modules`,
           show: true,
@@ -355,7 +325,6 @@ export function HubSidebar({
         {
           value: 'reports',
           label: 'Reports',
-          color: 'red',
           icon: Shield,
           href: `/dashboard/hubs/${hubId}/reports`,
           show: ({ canModerate }) => canModerate,
@@ -363,7 +332,6 @@ export function HubSidebar({
         {
           value: 'appeals',
           label: 'Appeals',
-          color: 'orange',
           icon: Bell,
           href: `/dashboard/hubs/${hubId}/appeals`,
           show: ({ canModerate }) => canModerate,
@@ -371,7 +339,6 @@ export function HubSidebar({
         {
           value: 'infractions',
           label: 'Infractions',
-          color: 'purple',
           icon: Gavel,
           href: `/dashboard/hubs/${hubId}/infractions`,
           show: ({ canModerate }) => canModerate,
@@ -379,7 +346,6 @@ export function HubSidebar({
         {
           value: 'automod',
           label: 'AutoMod',
-          color: 'green',
           icon: Shield,
           href: `/dashboard/hubs/${hubId}/automod`,
           show: ({ canModerate }) => canModerate,
@@ -390,7 +356,6 @@ export function HubSidebar({
 
   const permissions = { canModerate, canEdit };
 
-  // Filter sections based on permissions
   const visibleSections = sidebarConfig
     .map((section) => ({
       ...section,
@@ -403,21 +368,21 @@ export function HubSidebar({
   return (
     <div
       className={cn(
-        'flex h-full flex-col overflow-hidden border-white/5 border-r bg-[#0a0a0c]/95 backdrop-blur-xl transition-all duration-300',
+        'flex h-full flex-col overflow-hidden bg-dash-hub-sidebar transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >
       {/* Hub Header */}
-      {!isCollapsed && (
+      {!isCollapsed ? (
         <div className="flex h-16 shrink-0 items-center px-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
-                className="group flex w-full items-center justify-between rounded-lg p-2 outline-none transition-colors hover:bg-white/5"
+                className="group flex w-full items-center justify-between rounded-xl bg-white/5 p-2 outline-none transition-all hover:bg-white/10"
               >
                 <div className="flex items-center gap-3 overflow-hidden">
-                  <Avatar className="h-8 w-8 shrink-0 rounded-md">
+                  <Avatar className="h-8 w-8 shrink-0 rounded-lg">
                     <AvatarImage src={hub?.iconUrl} alt={hub?.name} />
                     <AvatarFallback className="bg-purple-500/20 text-purple-300 text-xs">
                       {hub?.name?.substring(0, 2).toUpperCase()}
@@ -463,10 +428,23 @@ export function HubSidebar({
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
+      ) : (
+        <div className="flex h-16 shrink-0 items-center justify-center">
+          <Avatar className="h-10 w-10 shrink-0 rounded-lg bg-white/5 p-1">
+            <AvatarImage
+              src={hub?.iconUrl}
+              alt={hub?.name}
+              className="rounded"
+            />
+            <AvatarFallback className="text-[10px]">
+              {hub?.name?.substring(0, 2).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+        </div>
       )}
 
       {/* Navigation */}
-      <div className="scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-transparent hover:scrollbar-thumb-gray-700 flex-1 space-y-6 overflow-y-auto px-3 py-4 transition-colors">
+      <div className="hub-sidebar-scrollbar flex-1 space-y-4 overflow-y-auto px-2 py-2">
         {visibleSections.map((section) => {
           const sectionItems = section.items.map((item) => {
             const isLocked =
@@ -475,7 +453,6 @@ export function HubSidebar({
                 ? item.locked(permissions)
                 : item.locked);
 
-            // Get badge count for this item
             let badgeCount: number | undefined;
             if (pendingCounts) {
               if (item.value === 'reports') badgeCount = pendingCounts.reports;
@@ -499,7 +476,6 @@ export function HubSidebar({
             );
           });
 
-          // Render items directly if no title
           if (!section.title) {
             return (
               <div key={section.key} className="space-y-1">
@@ -508,7 +484,6 @@ export function HubSidebar({
             );
           }
 
-          // Render as collapsible section
           return (
             <div key={section.key}>
               <SidebarSection
@@ -530,13 +505,13 @@ export function HubSidebar({
             variant="ghost"
             size="icon"
             onClick={onToggleCollapse}
-            className="h-9 w-full rounded-lg text-gray-500 transition-colors duration-200 hover:bg-gray-800/50 hover:text-gray-300"
+            className="h-9 w-full rounded-lg text-gray-500 transition-colors duration-200 hover:bg-white/5 hover:text-gray-300"
           >
             <motion.div
               animate={{ rotate: isCollapsed ? 0 : 180 }}
               transition={{ duration: 0.3 }}
             >
-              <ChevronRight className="h-4 w-4" />
+              <ChevronLeft className="h-4 w-4" />
             </motion.div>
           </Button>
         </div>
