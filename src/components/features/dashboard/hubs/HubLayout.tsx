@@ -62,7 +62,7 @@ function HubLayoutContent({
 
   return (
     // Outer Shell: Fixed height, no scroll on body
-    <div className="relative h-screen overflow-hidden bg-dash-hub-sidebar">
+    <div className="relative h-screen overflow-hidden bg-dash-surface">
       {/* Fixed Hub Sidebar */}
       {isHydrated && (
         <div

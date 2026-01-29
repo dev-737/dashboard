@@ -92,7 +92,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Card className="group flex h-full min-h-80 flex-col overflow-hidden rounded-2xl border border-gray-500/20 bg-dash-card transition-all duration-200 hover:border-purple-500/30 hover:shadow-2xl hover:shadow-purple-500/10">
+      <Card className="group flex h-full min-h-80 flex-col overflow-hidden rounded-2xl border border-gray-500/20 bg-dash-surface transition-all duration-200 hover:border-purple-500/30 hover:shadow-2xl hover:shadow-purple-500/10">
         <CardHeader className="relative pb-3">
           <div className="absolute top-4 right-4 z-10">{getRoleBadge()}</div>
           <div className="relative z-10 flex items-center gap-3">

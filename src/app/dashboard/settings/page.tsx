@@ -31,7 +31,7 @@ export default async function SettingsPage() {
       {/* Main Content */}
       <div className="mx-auto max-w-2xl space-y-6">
         {/* Profile Section */}
-        <div className="rounded-xl border border-gray-700/50 bg-dash-card p-6 backdrop-blur-sm">
+        <div className="rounded-xl border border-gray-700/50 bg-dash-surface p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-2">
             <User className="h-5 w-5 text-purple-400" />
             <h2 className="font-semibold text-white text-xl">Profile</h2>

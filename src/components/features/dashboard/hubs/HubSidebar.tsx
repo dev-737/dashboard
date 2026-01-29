@@ -368,7 +368,7 @@ export function HubSidebar({
   return (
     <div
       className={cn(
-        'flex h-full flex-col overflow-hidden bg-dash-hub-sidebar transition-all duration-300',
+        'flex h-full flex-col overflow-hidden bg-dash-surface transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >

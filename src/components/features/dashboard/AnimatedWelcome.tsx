@@ -82,7 +82,7 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
 
   return (
     <motion.div
-      className="relative mb-8 overflow-hidden rounded-2xl border border-gray-800/30 bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30 shadow-2xl shadow-purple-900/20"
+      className="relative mb-8 overflow-hidden rounded-2xl border border-gray-800/30 bg-linear-to-br from-purple-900/30 via-blue-900/20 to-indigo-900/30"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
