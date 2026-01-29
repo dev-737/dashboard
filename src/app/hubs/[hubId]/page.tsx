@@ -187,7 +187,7 @@ export default async function HubDetailView(props: {
                   {canManageHub && (
                     <Link href={`/dashboard/hubs/${hubId}`}>
                       <Button
-                        className="flex cursor-pointer items-center gap-2 rounded-lg border-0 bg-linear-to-r from-indigo-600 to-purple-600 px-4 py-2 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-indigo-600/80 hover:to-purple-600/80"
+                        className="flex cursor-pointer items-center gap-2 rounded-lg border-0 bg-linear-to-r from-[#6352BE]/70 to-[#6352BE]/40 px-4 py-2 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-[#6352BE]/40 hover:to-[#6352BE]/40"
                         size="sm"
                         variant="outline"
                       >

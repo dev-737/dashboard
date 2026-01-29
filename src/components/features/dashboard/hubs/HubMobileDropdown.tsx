@@ -201,7 +201,7 @@ export function HubMobileDropdown({
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
         >
-          <Button className="group relative w-full justify-between gap-3 overflow-hidden rounded-xl border-0 bg-linear-to-r from-indigo-600 to-purple-600 px-4 py-3 font-medium text-white shadow-lg transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:shadow-xl">
+          <Button className="group relative w-full justify-between gap-3 overflow-hidden rounded-xl border-0 bg-linear-to-r from-[#6352BE]/70 to-[#6352BE]/40 px-4 py-3 font-medium text-white ">
             {/* Background animation */}
             <div className="absolute inset-0 bg-linear-to-r from-indigo-400/20 to-purple-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 

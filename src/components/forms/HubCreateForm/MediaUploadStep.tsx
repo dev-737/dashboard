@@ -149,7 +149,7 @@ export function MediaUploadStep({
           <Button
             type="button"
             onClick={onNext}
-            className="border-none bg-linear-to-r from-indigo-600 to-purple-600 px-8 py-3 hover:from-indigo-600/80 hover:to-purple-600/80"
+            className="border-none bg-linear-to-r from-[#6352BE]/70 to-[#6352BE]/40 px-8 py-3 hover:from-[#6352BE]/40 hover:to-[#6352BE]/40"
           >
             Continue
             <ArrowRight className="ml-2 h-4 w-4" />

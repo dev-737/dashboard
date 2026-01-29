@@ -254,7 +254,7 @@ function ServerCard({
           ) : (
             <Button
               asChild
-              className="w-full rounded-xl border-none bg-linear-to-r from-indigo-600 to-purple-600 shadow-lg transition-all duration-200 hover:from-indigo-700 hover:to-purple-700 hover:shadow-indigo-500/25"
+              className="w-full rounded-xl border-none bg-linear-to-r from-[#6352BE]/70 to-[#6352BE]/40 shadow-lg transition-all duration-200 hover:from-[#6352BE]/40 hover:to-[#6352BE]/40"
             >
               <Link
                 href={`https://discord.com/oauth2/authorize?client_id=769921109209907241&guild_id=${server.id}`}
