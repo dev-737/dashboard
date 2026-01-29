@@ -193,7 +193,7 @@ export function EssentialsStep({
             type="button"
             onClick={onNext}
             disabled={!canProceed || isSubmitting}
-            className="border-none bg-linear-to-r from-[#6352BE]/70 to-[#6352BE]/40 px-8 hover:from-[#6352BE]/40 hover:to-[#6352BE]/40"
+            className="border-none bg-linear-to-br from-[#6352BE] to-[#463988] px-8 hover:from-[#6352BE]/40 hover:to-[#6352BE]/40"
           >
             Customize More
             <ArrowRight className="ml-2 h-4 w-4" />

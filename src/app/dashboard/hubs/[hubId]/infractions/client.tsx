@@ -255,7 +255,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
         </div>
         <Button
           asChild
-          className="w-full border-none bg-linear-to-r from-[#6352BE]/70 to-[#6352BE]/40 text-white hover:from-[#6352BE]/40 hover:to-[#6352BE]/40 sm:w-auto"
+          className="w-full border-none bg-linear-to-br from-[#6352BE] to-[#463988] text-white hover:from-[#6352BE]/40 hover:to-[#6352BE]/40 sm:w-auto"
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions/add`}>
             <PlusCircle className="mr-2 h-4 w-4" />
