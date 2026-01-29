@@ -358,7 +358,7 @@ export function GuidedTour({
                   <Button
                     onClick={canGoNext ? onNext : onComplete}
                     size="sm"
-                    className="bg-linear-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700"
+                    className="bg-linear-to-r from-[#6352BE] to-[#463988] text-white hover:from-purple-700 hover:to-blue-700"
                   >
                     {canGoNext ? (
                       <>

@@ -173,7 +173,7 @@ export function HomepageMobileSidebar({
                   <div className="absolute inset-0 rounded-xl bg-linear-to-r from-purple-500/20 to-blue-500/20 opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-100" />
                   <Button
                     asChild
-                    className="relative w-full border border-white/10 bg-linear-to-r from-purple-600 to-blue-600 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20"
+                    className="relative w-full border border-white/10 bg-linear-to-r from-[#6352BE] to-[#463988] font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20"
                   >
                     <Link
                       href="/invite"
