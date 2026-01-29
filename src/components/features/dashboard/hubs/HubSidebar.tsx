@@ -98,13 +98,13 @@ function SidebarNavItem({
       className={cn(
         'group relative flex items-center gap-3 overflow-hidden rounded-xl px-3 py-2.5 transition-all duration-300',
         active
-          ? 'bg-white/[0.03] shadow-inner text-white'
+          ? 'bg-white/[0.03] text-white shadow-inner'
           : 'text-gray-400 hover:bg-white/[0.02] hover:text-gray-200',
         locked && 'cursor-not-allowed opacity-50'
       )}
     >
       {active && (
-        <div className="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-full bg-linear-to-b from-purple-500 to-blue-500" />
+        <div className="absolute top-1.5 bottom-1.5 left-0 w-1 rounded-full bg-linear-to-b from-purple-500 to-blue-500" />
       )}
 
       <div

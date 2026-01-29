@@ -102,7 +102,7 @@ export function HomepageMobileSidebar({
             animate="open"
             exit="closed"
             variants={sidebarVariants}
-            className="fixed top-0 bottom-0 right-0 z-[9999] flex w-[320px] max-w-[85vw] flex-col overflow-hidden border-l border-white/5 bg-[#030812] shadow-2xl"
+            className="fixed top-0 right-0 bottom-0 z-[9999] flex w-[320px] max-w-[85vw] flex-col overflow-hidden border-white/5 border-l bg-[#030812] shadow-2xl"
           >
             {/* Header */}
             <div className="relative flex h-20 shrink-0 items-center justify-between px-6">
@@ -146,12 +146,12 @@ export function HomepageMobileSidebar({
                       className={cn(
                         'group relative flex items-center gap-3 overflow-hidden rounded-xl px-4 py-3.5 transition-all duration-300',
                         pathname === link.url
-                          ? 'bg-white/[0.03] shadow-inner text-white'
+                          ? 'bg-white/[0.03] text-white shadow-inner'
                           : 'text-gray-400 hover:bg-white/[0.02] hover:text-gray-200'
                       )}
                     >
                       {pathname === link.url && (
-                        <div className="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-full bg-linear-to-b from-purple-500 to-blue-500" />
+                        <div className="absolute top-1.5 bottom-1.5 left-0 w-1 rounded-full bg-linear-to-b from-purple-500 to-blue-500" />
                       )}
 
                       <span className="truncate font-medium text-sm">
@@ -167,7 +167,7 @@ export function HomepageMobileSidebar({
 
               <motion.div
                 variants={itemVariants}
-                className="mt-8 space-y-4 border-t border-white/5 pt-8"
+                className="mt-8 space-y-4 border-white/5 border-t pt-8"
               >
                 <div className="group relative">
                   <div className="absolute inset-0 rounded-xl bg-linear-to-r from-purple-500/20 to-blue-500/20 opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-100" />

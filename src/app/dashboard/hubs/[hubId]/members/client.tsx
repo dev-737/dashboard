@@ -1,25 +1,20 @@
 'use client';
-
+import { useQueryClient } from '@tanstack/react-query';
 import {
+  Check,
   Crown,
   Loader2,
   MoreHorizontal,
-  PlusCircle,
   Search,
   Shield,
   Trash,
   UserPlus,
+  X,
 } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,14 +31,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { useDebounce } from '@/hooks/use-debounce';
+import { useToast } from '@/components/ui/use-toast';
 import {
   type User,
   useAddHubMember,
@@ -51,26 +39,80 @@ import {
   useRemoveMember,
   useUpdateMemberRole,
 } from '@/hooks/use-hub-members';
-import { useFilteredUserSearch } from '@/hooks/use-user-search';
+import { cn } from '@/lib/utils';
+import { useTRPC } from '@/utils/trpc';
 
 export function MembersClient({ hubId }: { hubId: string }) {
   // State for the dialog
-  const [searchQuery, setSearchQuery] = useState('');
+  const [userIdInput, setUserIdInput] = useState('');
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [selectedRole, setSelectedRole] = useState<'MODERATOR' | 'MANAGER'>(
     'MODERATOR'
   );
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const debouncedSearchQuery = useDebounce(searchQuery, 300);
+  const [isValidating, setIsValidating] = useState(false);
+  const [updatingMemberId, setUpdatingMemberId] = useState<string | null>(null);
+
+  // Focus ref for input
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Fetch hub members using Tanstack Query
-  const { data: members } = useHubMembers(hubId);
+  const { data: members, isLoading: isLoadingMembers } = useHubMembers(hubId);
 
-  // Search for users using Tanstack Query
-  const { data: searchResults = [], isLoading: isSearching } =
-    useFilteredUserSearch(debouncedSearchQuery, members, {
-      enabled: debouncedSearchQuery.length > 0,
-    });
+  // tRPC utils for manual fetching
+  const trpc = useTRPC();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  // Handle validating user ID
+  const handleValidateId = async () => {
+    if (!userIdInput.trim()) return;
+
+    setIsValidating(true);
+    try {
+      // Manually fetch user by ID
+      const result = await queryClient.fetchQuery(
+        trpc.user.getById.queryOptions({
+          id: userIdInput.trim(),
+        })
+      );
+
+      // Check if user is already a member
+      const isOwner = members?.owner.id === result.user.id;
+      const isAlreadyMember = members?.moderators.some(
+        (mod) => mod.userId === result.user.id
+      );
+
+      if (isOwner) {
+        toast({
+          title: 'Cannot Add User',
+          description: 'This user is the owner of the hub.',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      if (isAlreadyMember) {
+        toast({
+          title: 'Cannot Add User',
+          description: 'This user is already a member of the hub.',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      setSelectedUser(result.user);
+      setUserIdInput(''); // Clear input on success
+    } catch (error) {
+      toast({
+        title: 'User Not Found',
+        description: 'Could not find a user with that ID.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsValidating(false);
+    }
+  };
 
   // Mutations for member management
   const addMemberMutation = useAddHubMember(hubId);
@@ -92,7 +134,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
           // Reset the form
           setSelectedUser(null);
           setSelectedRole('MODERATOR');
-          setSearchQuery('');
+          setUserIdInput('');
           setIsDialogOpen(false);
         },
       }
@@ -104,7 +146,15 @@ export function MembersClient({ hubId }: { hubId: string }) {
     memberId: string,
     newRole: 'MODERATOR' | 'MANAGER'
   ) => {
-    updateRoleMutation.mutate({ hubId, memberId, role: newRole });
+    setUpdatingMemberId(memberId);
+    updateRoleMutation.mutate(
+      { hubId, memberId, role: newRole },
+      {
+        onSettled: () => {
+          setUpdatingMemberId(null);
+        },
+      }
+    );
   };
 
   // Handle removing a member
@@ -112,124 +162,224 @@ export function MembersClient({ hubId }: { hubId: string }) {
     removeMemberMutation.mutate({ hubId, memberId });
   };
 
+  // Reset state when dialog closes
+  useEffect(() => {
+    if (!isDialogOpen) {
+      const timer = setTimeout(() => {
+        setUserIdInput('');
+        setSelectedUser(null);
+        setSelectedRole('MODERATOR');
+      }, 300);
+      return () => clearTimeout(timer);
+    } else {
+      // Focus input when dialog opens
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+    }
+  }, [isDialogOpen]);
+
   return (
-    <>
-      <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row sm:items-center">
-        <div className="flex items-center" />
+    <div className="space-y-8">
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <h2 className="font-bold text-2xl text-white tracking-tight">
+            Team Members
+          </h2>
+          <p className="text-gray-400">
+            Manage who has access to your hub and their permissions.
+          </p>
+        </div>
+
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="w-full border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80 sm:w-auto">
+            <Button className="w-full border-none bg-indigo-600 font-medium text-white shadow-indigo-900/20 shadow-lg hover:bg-indigo-500 sm:w-auto">
               <UserPlus className="mr-2 h-4 w-4" />
               Add Member
             </Button>
           </DialogTrigger>
-          <DialogContent className="border border-gray-800/50 bg-linear-to-b from-gray-900/95 to-gray-950/95 backdrop-blur-md">
-            <DialogHeader>
-              <DialogTitle>Add New Member</DialogTitle>
-              <DialogDescription>
-                Search for a user to add as a moderator or manager.
-              </DialogDescription>
-            </DialogHeader>
+          <DialogContent className="max-w-md overflow-hidden border border-gray-800 bg-dash-surface p-0 text-gray-100 shadow-2xl sm:rounded-xl">
+            <div className="bg-gray-900/50 p-6 pb-2">
+              <DialogHeader>
+                <DialogTitle className="text-xl">
+                  Promote Team Member
+                </DialogTitle>
+                <DialogDescription className="text-gray-400">
+                  Enter a User ID to add them to your staff team.
+                </DialogDescription>
+              </DialogHeader>
+            </div>
 
-            <div className="space-y-4 py-4">
-              <div className="relative">
-                <Search className="absolute top-2.5 left-2 h-4 w-4 text-gray-500" />
-                <Input
-                  placeholder="Search users by name..."
-                  className="border-gray-800 bg-gray-900/50 pl-8 transition-colors hover:bg-gray-900"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-
-              <div className="max-h-60 space-y-2 overflow-y-auto">
-                {isSearching ? (
-                  <div className="flex justify-center py-4">
-                    <Loader2 className="h-6 w-6 animate-spin text-primary" />
+            <div className="space-y-6 p-6 pt-2">
+              {/* ID Input Section */}
+              <div className="space-y-3">
+                <label className="font-semibold text-gray-500 text-xs uppercase tracking-wider">
+                  User ID
+                </label>
+                <div className="group relative flex gap-2">
+                  <div className="relative flex-1">
+                    <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-500 transition-colors group-focus-within:text-indigo-400" />
+                    <Input
+                      ref={inputRef}
+                      placeholder="e.g. 123456789..."
+                      className="h-11 border-gray-800 bg-gray-900/50 pl-10 text-gray-100 placeholder:text-gray-600 focus-visible:border-indigo-500/50 focus-visible:bg-gray-900 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      value={userIdInput}
+                      onChange={(e) => setUserIdInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') handleValidateId();
+                      }}
+                      disabled={!!selectedUser}
+                    />
                   </div>
-                ) : searchResults.length > 0 ? (
-                  searchResults.map((user) => (
-                    <button
-                      key={user.id}
-                      type="button"
-                      className={`flex w-full cursor-pointer items-center gap-3 rounded-md p-2 text-left ${
-                        selectedUser?.id === user.id
-                          ? 'border border-indigo-700/30 bg-indigo-900/30'
-                          : 'hover:bg-gray-800/50'
-                      }`}
-                      onClick={() => setSelectedUser(user)}
+                  {!selectedUser && (
+                    <Button
+                      onClick={handleValidateId}
+                      disabled={!userIdInput.trim() || isValidating}
+                      className="h-11 bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white"
                     >
-                      <Image
-                        src={
-                          user.image ||
-                          'https://api.dicebear.com/7.x/shapes/svg?seed=user'
-                        }
-                        alt={user.name || 'User'}
-                        width={32}
-                        height={32}
-                        className="rounded-full"
-                        unoptimized
-                      />
-                      <div className="flex-1">
-                        <div className="font-medium">{user.name}</div>
+                      {isValidating ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Search className="h-4 w-4" />
+                      )}
+                    </Button>
+                  )}
+                </div>
+
+                {/* Selected User Display */}
+                {selectedUser && (
+                  <div className="relative min-h-[60px] rounded-lg border border-gray-800 bg-gray-900/30 p-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-indigo-500/50">
+                          <Image
+                            src={
+                              selectedUser.image ||
+                              'https://api.dicebear.com/7.x/shapes/svg?seed=user'
+                            }
+                            alt={selectedUser.name || 'User'}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                        </div>
+                        <div>
+                          <div className="font-medium text-white">
+                            {selectedUser.name}
+                          </div>
+                          <div className="text-indigo-400 text-xs">
+                            Verified User
+                          </div>
+                        </div>
                       </div>
-                    </button>
-                  ))
-                ) : searchQuery ? (
-                  <p className="py-4 text-center text-gray-400">
-                    No users found
-                  </p>
-                ) : (
-                  <p className="py-4 text-center text-gray-400">
-                    Start typing to search for users
-                  </p>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => {
+                          setSelectedUser(null);
+                          setUserIdInput('');
+                          setTimeout(() => inputRef.current?.focus(), 0);
+                        }}
+                        className="h-8 w-8 rounded-full p-0 text-gray-400 hover:bg-gray-800 hover:text-white"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                 )}
               </div>
 
-              {selectedUser && (
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-sm">Selected User:</span>
-                    <span className="text-sm">{selectedUser.name}</span>
-                  </div>
+              {/* Role Selection */}
+              <div
+                className={cn(
+                  'space-y-3 transition-opacity duration-200',
+                  !selectedUser && 'pointer-events-none opacity-50'
+                )}
+              >
+                <label className="font-semibold text-gray-500 text-xs uppercase tracking-wider">
+                  Select Role
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedRole('MODERATOR')}
+                    className={cn(
+                      'w-full text-left cursor-pointer rounded-lg border p-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+                      selectedRole === 'MODERATOR'
+                        ? 'border-purple-500/50 bg-purple-500/10 ring-1 ring-purple-500/20'
+                        : 'border-gray-800 bg-gray-900/30 hover:border-gray-700 hover:bg-gray-900/50'
+                    )}
+                  >
+                    <div className="mb-2 flex items-center justify-between">
+                      <Shield
+                        className={cn(
+                          'h-4 w-4',
+                          selectedRole === 'MODERATOR'
+                            ? 'text-purple-400'
+                            : 'text-gray-500'
+                        )}
+                      />
+                      {selectedRole === 'MODERATOR' && (
+                        <Check className="h-3 w-3 text-purple-400" />
+                      )}
+                    </div>
+                    <div className="font-medium text-gray-200 text-sm">
+                      Moderator
+                    </div>
+                    <div className="mt-1 text-gray-500 text-xs">
+                      Can moderate content
+                    </div>
+                  </button>
 
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-sm">Role:</span>
-                    <Select
-                      value={selectedRole}
-                      onValueChange={(value) =>
-                        setSelectedRole(value as 'MODERATOR' | 'MANAGER')
-                      }
-                    >
-                      <SelectTrigger className="w-32 border-gray-800 bg-gray-900/50 transition-colors hover:bg-gray-900">
-                        <SelectValue placeholder="Select role" />
-                      </SelectTrigger>
-                      <SelectContent className="border-gray-800 bg-gray-900">
-                        <SelectItem value="MODERATOR">Moderator</SelectItem>
-                        <SelectItem value="MANAGER">Manager</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedRole('MANAGER')}
+                    className={cn(
+                      'w-full text-left cursor-pointer rounded-lg border p-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+                      selectedRole === 'MANAGER'
+                        ? 'border-blue-500/50 bg-blue-500/10 ring-1 ring-blue-500/20'
+                        : 'border-gray-800 bg-gray-900/30 hover:border-gray-700 hover:bg-gray-900/50'
+                    )}
+                  >
+                    <div className="mb-2 flex items-center justify-between">
+                      <Shield
+                        className={cn(
+                          'h-4 w-4',
+                          selectedRole === 'MANAGER'
+                            ? 'text-blue-400'
+                            : 'text-gray-500'
+                        )}
+                      />
+                      {selectedRole === 'MANAGER' && (
+                        <Check className="h-3 w-3 text-blue-400" />
+                      )}
+                    </div>
+                    <div className="font-medium text-gray-200 text-sm">
+                      Manager
+                    </div>
+                    <div className="mt-1 text-gray-500 text-xs">
+                      Full access to settings
+                    </div>
+                  </button>
                 </div>
-              )}
+              </div>
             </div>
 
-            <DialogFooter>
+            <DialogFooter className="border-gray-800 border-t bg-gray-900/50 p-4">
               <Button
-                variant="outline"
-                onClick={() => {
-                  setIsDialogOpen(false);
-                  setSelectedUser(null);
-                  setSearchQuery('');
-                }}
-                className="border-gray-700 hover:bg-gray-800 hover:text-white"
+                variant="ghost"
+                onClick={() => setIsDialogOpen(false)}
+                className="text-gray-400 hover:bg-gray-800 hover:text-white"
               >
                 Cancel
               </Button>
               <Button
                 onClick={handleAddMember}
                 disabled={!selectedUser || addMemberMutation.isPending}
-                className="border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
+                className={cn(
+                  'border-none bg-indigo-600 text-white transition-all hover:bg-indigo-500',
+                  addMemberMutation.isPending && 'opacity-80'
+                )}
               >
                 {addMemberMutation.isPending ? (
                   <>
@@ -237,10 +387,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                     Adding...
                   </>
                 ) : (
-                  <>
-                    <PlusCircle className="mr-2 h-4 w-4" />
-                    Add Member
-                  </>
+                  <>Add Member</>
                 )}
               </Button>
             </DialogFooter>
@@ -248,168 +395,174 @@ export function MembersClient({ hubId }: { hubId: string }) {
         </Dialog>
       </div>
 
-      <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
-        <CardHeader className="border-gray-800/50 border-b">
-          <CardTitle className="flex items-center">
-            <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-yellow-900/30">
-              <Crown className="h-3.5 w-3.5 text-yellow-400" />
-            </div>
-            Owner
-          </CardTitle>
-          <CardDescription>
-            The owner has full control over the hub
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="pt-4">
-          <div className="rounded-lg border border-gray-800/50 bg-gray-900/30 p-4">
-            <div className="flex items-center gap-4">
-              <div className="h-12 w-12 overflow-hidden rounded-full border-2 border-yellow-500/20">
-                <Image
-                  src={
-                    members?.owner.image ||
-                    'https://api.dicebear.com/7.x/shapes/svg?seed=owner'
-                  }
-                  alt={members?.owner.name || 'Owner'}
-                  width={48}
-                  height={48}
-                  className="object-cover"
-                  style={{ width: '100%', height: '100%' }}
-                  unoptimized
-                />
-              </div>
-              <div>
-                <div className="font-medium text-lg">
-                  {members?.owner.name || 'Unknown'}
-                </div>
-                <div className="flex items-center text-sm text-yellow-400">
-                  <Crown className="mr-1.5 h-3.5 w-3.5" />
-                  Owner
-                </div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="grid gap-6">
+        <div className="rounded-xl border border-gray-800 bg-none p-6 shadow-sm">
+          {/* Owner Section */}
+          <div className="mb-8">
+            <h3 className="mb-4 flex items-center font-semibold text-gray-500 text-sm uppercase tracking-wider">
+              <Crown className="mr-2 h-4 w-4 text-yellow-500" />
+              Hub Owner
+            </h3>
 
-      <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
-        <CardHeader className="border-gray-800/50 border-b">
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-            <div>
-              <CardTitle className="flex items-center">
-                <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-purple-900/30">
-                  <Shield className="h-3.5 w-3.5 text-purple-400" />
-                </div>
-                Moderators & Managers
-              </CardTitle>
-              <CardDescription>
-                Managers can edit hub modules and manage members. Moderators can
-                only moderate content.
-              </CardDescription>
-            </div>
-            <Button
-              onClick={() => setIsDialogOpen(true)}
-              className="w-full border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80 sm:w-auto"
-            >
-              <UserPlus className="mr-2 h-4 w-4" />
-              Add Member
-            </Button>
-          </div>
-        </CardHeader>
-        <CardContent className="pt-4">
-          {members?.moderators && members.moderators.length > 0 ? (
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {members.moderators.map((mod) => (
-                <div
-                  key={mod.id}
-                  className="flex items-center justify-between rounded-lg border border-gray-800/50 bg-gray-900/30 p-4"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 overflow-hidden rounded-full border-2 border-purple-500/20">
-                      <Image
-                        src={
-                          mod.user?.image ||
-                          'https://api.dicebear.com/7.x/shapes/svg?seed=mod'
-                        }
-                        alt={mod.user.name || 'Moderator'}
-                        width={40}
-                        height={40}
-                        className="object-cover"
-                        style={{ width: '100%', height: '100%' }}
-                        unoptimized
-                      />
-                    </div>
-                    <div>
-                      <div className="font-medium">{mod.user.name}</div>
-                      <div className="flex items-center text-xs">
-                        {mod.role === 'MANAGER' ? (
-                          <span className="flex items-center text-blue-400">
-                            <Shield className="mr-1 h-3 w-3" />
-                            Manager
-                          </span>
-                        ) : (
-                          <span className="flex items-center text-purple-400">
-                            <Shield className="mr-1 h-3 w-3" />
-                            Moderator
-                          </span>
-                        )}
-                      </div>
-                    </div>
+            {members?.owner ? (
+              <div className="flex items-center gap-4 rounded-lg border border-gray-800/50 bg-gray-900/20 p-4 transition-all hover:bg-gray-900/40">
+                <div className="relative h-12 w-12 shrink-0">
+                  <Image
+                    src={
+                      members.owner.image ||
+                      'https://api.dicebear.com/7.x/shapes/svg?seed=owner'
+                    }
+                    alt={members.owner.name || 'Owner'}
+                    fill
+                    className="rounded-full object-cover ring-2 ring-yellow-500/20"
+                    unoptimized
+                  />
+                  <div className="absolute -right-1 -bottom-1 rounded-full bg-gray-900 p-0.5">
+                    <Crown className="h-4 w-4 fill-yellow-500/20 text-yellow-500" />
                   </div>
-
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      align="end"
-                      className="border-gray-800 bg-gray-900"
-                    >
-                      <DropdownMenuItem
-                        onClick={() =>
-                          handleUpdateRole(
-                            mod.id,
-                            mod.role === 'MANAGER' ? 'MODERATOR' : 'MANAGER'
-                          )
-                        }
-                        className="cursor-pointer hover:bg-gray-800"
-                      >
-                        <Shield className="mr-2 h-4 w-4" />
-                        {mod.role === 'MANAGER'
-                          ? 'Change to Moderator'
-                          : 'Change to Manager'}
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => handleRemoveMember(mod.id)}
-                        className="cursor-pointer text-red-500 hover:bg-red-950/30 focus:text-red-500"
-                      >
-                        <Trash className="mr-2 h-4 w-4" />
-                        Remove
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
                 </div>
-              ))}
+                <div>
+                  <div className="font-medium text-lg text-white">
+                    {members.owner.name}
+                  </div>
+                  <div className="text-gray-400 text-sm">Full Access</div>
+                </div>
+              </div>
+            ) : (
+              <div className="flex h-20 items-center justify-center text-gray-500">
+                <Loader2 className="h-5 w-5 animate-spin" />
+              </div>
+            )}
+          </div>
+
+          <div className="mb-8 h-px w-full bg-gray-800/50" />
+
+          {/* Staff Section */}
+          <div>
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="flex items-center font-semibold text-gray-500 text-sm uppercase tracking-wider">
+                <Shield className="mr-2 h-4 w-4 text-indigo-400" />
+                Staff Team
+              </h3>
+              <span className="flex h-6 items-center justify-center rounded-full bg-indigo-500/10 px-2.5 font-medium text-indigo-400 text-xs">
+                {members?.moderators?.length || 0} Members
+              </span>
             </div>
-          ) : (
-            <div className="rounded-lg border border-gray-800/50 bg-gray-900/30 p-6 py-8 text-center">
-              <Shield className="mx-auto mb-4 h-12 w-12 text-gray-500" />
-              <h3 className="mb-2 font-medium text-lg">No Members Yet</h3>
-              <p className="mb-4 text-gray-400">
-                No moderators or managers have been added yet.
-              </p>
-              <Button
-                onClick={() => setIsDialogOpen(true)}
-                className="border-none bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-600/80 hover:to-purple-600/80"
-              >
-                <UserPlus className="mr-2 h-4 w-4" />
-                Add Member
-              </Button>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </>
+
+            {isLoadingMembers ? (
+              <div className="flex h-32 items-center justify-center">
+                <Loader2 className="h-8 w-8 animate-spin text-gray-600" />
+              </div>
+            ) : members?.moderators && members.moderators.length > 0 ? (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <AnimatePresence mode="popLayout">
+                  {members.moderators.map((mod) => (
+                    <motion.div
+                      key={mod.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      layout
+                      className="group relative flex items-center justify-between rounded-xl border border-gray-800/50 bg-gray-900/20 p-4 transition-all hover:border-gray-700 hover:bg-gray-900/40 hover:shadow-indigo-900/5 hover:shadow-lg"
+                    >
+                      <div className="flex items-center gap-3 overflow-hidden">
+                        <div className="relative h-10 w-10 flex-shrink-0">
+                          <Image
+                            src={
+                              mod.user.image ||
+                              'https://api.dicebear.com/7.x/shapes/svg?seed=user'
+                            }
+                            alt={mod.user.name || 'User'}
+                            fill
+                            className="rounded-full object-cover"
+                            unoptimized
+                          />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="truncate font-medium text-gray-200 transition-colors group-hover:text-white">
+                            {mod.user.name}
+                          </div>
+                          <div
+                            className={cn(
+                              'flex items-center truncate text-xs',
+                              mod.role === 'MANAGER'
+                                ? 'text-blue-400'
+                                : 'text-purple-400'
+                            )}
+                          >
+                            {mod.role === 'MANAGER' ? 'Manager' : 'Moderator'}
+                            {updatingMemberId === mod.id && (
+                              <Loader2 className="ml-2 h-3 w-3 animate-spin text-gray-400" />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0 text-gray-400 opacity-0 transition-opacity hover:bg-gray-800 hover:text-white group-hover:opacity-100 data-[state=open]:opacity-100"
+                          >
+                            <MoreHorizontal className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                          align="end"
+                          className="border-gray-800 bg-gray-900 text-gray-200"
+                        >
+                          <DropdownMenuItem
+                            onClick={() =>
+                              handleUpdateRole(
+                                mod.id,
+                                mod.role === 'MANAGER' ? 'MODERATOR' : 'MANAGER'
+                              )
+                            }
+                            className="cursor-pointer text-gray-300 focus:bg-gray-800 focus:text-white"
+                          >
+                            <Shield className="mr-2 h-4 w-4" />
+                            {mod.role === 'MANAGER'
+                              ? 'Demote to Moderator'
+                              : 'Promote to Manager'}
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => handleRemoveMember(mod.id)}
+                            className="cursor-pointer text-red-400 focus:bg-red-500/10 focus:text-red-400"
+                          >
+                            <Trash className="mr-2 h-4 w-4" />
+                            Remove from Hub
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <div className="rounded-xl border border-gray-800 border-dashed bg-gray-900/10 p-12 text-center">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gray-800">
+                  <UserPlus className="h-6 w-6 text-gray-500" />
+                </div>
+                <h3 className="mb-1 font-medium text-lg text-white">
+                  No Team Members
+                </h3>
+                <p className="mx-auto mb-6 max-w-sm text-gray-400 text-sm">
+                  Add moderators and managers to help you keep your hub safe and
+                  organized.
+                </p>
+                <Button
+                  onClick={() => setIsDialogOpen(true)}
+                  variant="outline"
+                  className="border-gray-700 bg-transparent text-gray-300 hover:bg-gray-800 hover:text-white"
+                >
+                  Add First Member
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -117,7 +117,7 @@ function QuickAction({
       className="group flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-700/50 bg-gray-900/50 px-4 py-3 transition-all hover:border-purple-500/30 hover:bg-gray-800 sm:flex-none"
     >
       <Icon className="h-4 w-4 text-gray-400 transition-colors group-hover:text-purple-400" />
-      <span className="text-sm font-medium text-gray-300 group-hover:text-white">
+      <span className="font-medium text-gray-300 text-sm group-hover:text-white">
         {label}
       </span>
     </button>

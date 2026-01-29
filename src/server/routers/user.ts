@@ -22,37 +22,29 @@ const supportedLanguages = ['en', 'hi', 'es', 'pt', 'zh', 'ru', 'et'] as const;
 
 export const userRouter = router({
   // Search for users
-  search: protectedProcedure
-    .input(
-      z.object({
-        query: z.string().min(1),
-        limit: z.number().optional().prefault(10),
-      })
-    )
+  // Get user by ID
+  getById: protectedProcedure
+    .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
-      const { query, limit } = input;
+      const { id } = input;
 
-      if (!query) {
-        return { users: [] };
-      }
-
-      // Search for users by name
-      const users = await db.user.findMany({
-        where: {
-          name: {
-            contains: query,
-            mode: 'insensitive',
-          },
-        },
+      const user = await db.user.findUnique({
+        where: { id },
         select: {
           id: true,
           name: true,
           image: true,
         },
-        take: limit,
       });
 
-      return { users };
+      if (!user) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'User not found',
+        });
+      }
+
+      return { user };
     }),
 
   // Get accessible hubs for the current user

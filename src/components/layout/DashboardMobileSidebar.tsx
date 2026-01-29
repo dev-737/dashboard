@@ -152,7 +152,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
             animate="open"
             exit="closed"
             variants={sidebarVariants}
-            className="fixed top-0 bottom-0 left-0 z-[9999] flex w-[320px] max-w-[85vw] flex-col overflow-hidden border-r border-white/5 bg-[#030812] shadow-2xl"
+            className="fixed top-0 bottom-0 left-0 z-[9999] flex w-[320px] max-w-[85vw] flex-col overflow-hidden border-white/5 border-r bg-[#030812] shadow-2xl"
           >
             {/* Header */}
             <div className="relative flex h-24 shrink-0 items-center justify-between px-6 pt-4">
@@ -233,7 +233,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                               <motion.div
                                 layoutId="active-indicator"
                                 className={cn(
-                                  'absolute left-0 top-1.5 bottom-1.5 w-1 rounded-full bg-linear-to-b from-blue-400 to-purple-400',
+                                  'absolute top-1.5 bottom-1.5 left-0 w-1 rounded-full bg-linear-to-b from-blue-400 to-purple-400',
                                   item.activeBorder
                                 )}
                               />
@@ -314,7 +314,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
             {/* User Profile Footer */}
             <motion.div
               variants={itemVariants}
-              className="mt-auto border-t border-white/5 bg-[#030812]/50 p-6 backdrop-blur-xl"
+              className="mt-auto border-white/5 border-t bg-[#030812]/50 p-6 backdrop-blur-xl"
             >
               <div className="flex items-center gap-3">
                 <Avatar className="h-10 w-10 ring-2 ring-white/10 transition-all duration-300 hover:ring-purple-500/50">
