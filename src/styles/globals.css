@@ -421,8 +421,8 @@
 
 /* Button Utility Classes */
 .btn-primary {
-  @apply bg-linear-to-r from-purple-500 to-indigo-500;
-  @apply hover:from-purple-600 hover:to-indigo-600;
+  @apply bg-linear-to-br from-[#6352BE] to-[#463988];
+  @apply hover:from-[#6352BE]/40 to-[#463988]/40;
   @apply text-white border-none rounded-(--radius-button);
   @apply transition-all duration-200;
 }
