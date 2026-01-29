@@ -73,7 +73,7 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="rounded-2xl border-gray-800/50 bg-dash-surface backdrop-blur-sm">
+      <Card className="rounded-2xl border-gray-800/50 bg-transparent backdrop-blur-sm">
         <CardHeader className="flex flex-col items-center pb-2 text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
