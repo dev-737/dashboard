@@ -107,7 +107,7 @@ const config = {
     const cspHeader = {
       key: 'Content-Security-Policy',
       value:
-        "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cloud.umami.is/script.js",
+        "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cloud.umami.is/script.js; worker-src 'self' blob:;",
     };
 
     return [

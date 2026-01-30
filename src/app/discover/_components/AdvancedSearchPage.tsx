@@ -48,7 +48,7 @@ import {
 } from '@/components/ui/sheet';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
-import type { DiscoverSort } from '@/lib/discover/query';
+import type { DiscoverSort, getDiscoverHubs } from '@/lib/discover/query';
 import { cn } from '@/lib/utils';
 import { useTRPC } from '@/utils/trpc';
 import { FeaturedHubCarousel } from './FeaturedHubCarousel';
@@ -65,7 +65,13 @@ const SORT_OPTIONS = [
   { value: 'growing', label: 'Fastest Growing' },
 ];
 
-export default function AdvancedSearchPage() {
+interface AdvancedSearchPageProps {
+  initialData?: Awaited<ReturnType<typeof getDiscoverHubs>>;
+}
+
+export default function AdvancedSearchPage({
+  initialData,
+}: AdvancedSearchPageProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -150,9 +156,10 @@ export default function AdvancedSearchPage() {
   };
 
   // Main list
-  const { data, isLoading } = useQuery(
-    trpc.discover.list.queryOptions(queryOptions)
-  );
+  const { data, isLoading } = useQuery({
+    ...trpc.discover.list.queryOptions(queryOptions),
+    initialData: !hasActiveFilters && page === 1 ? initialData : undefined,
+  });
 
   // Staff Picks (only fetch if no active filters)
   const { data: featuredData } = useQuery({
@@ -657,6 +664,7 @@ export default function AdvancedSearchPage() {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
               {Array.from({ length: 9 }).map((_, i) => (
                 <div
+                  // biome-ignore lint/suspicious/noArrayIndexKey: ur mum
                   key={i}
                   className="h-[320px] animate-pulse rounded-xl border border-gray-800 bg-gray-900/40"
                 />

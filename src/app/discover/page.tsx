@@ -1,6 +1,7 @@
 import { Loader2 } from 'lucide-react';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
+import { getDiscoverHubs } from '@/lib/discover/query';
 import AdvancedSearchPage from './_components/AdvancedSearchPage';
 
 export const metadata: Metadata = {
@@ -9,7 +10,13 @@ export const metadata: Metadata = {
     'Advanced search to find the perfect Discord hub for your community.',
 };
 
-export default function Page() {
+export default async function Page() {
+  const initialData = await getDiscoverHubs({
+    sort: 'trending',
+    page: 1,
+    pageSize: 24,
+  });
+
   return (
     <Suspense
       fallback={
@@ -18,7 +25,7 @@ export default function Page() {
         </div>
       }
     >
-      <AdvancedSearchPage />
+      <AdvancedSearchPage initialData={initialData} />
     </Suspense>
   );
 }

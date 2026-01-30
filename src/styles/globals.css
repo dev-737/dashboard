@@ -232,16 +232,16 @@
   --color-dash-hub-input: rgb(14, 17, 33);
 
   /* Primary Brand Colors */
-  --color-brand-purple-50:  #F4F2FF;
-  --color-brand-purple-100: #E6E2FF;
-  --color-brand-purple-200: #CFC8FF;
-  --color-brand-purple-300: #B3A9F2;
-  --color-brand-purple-400: #8A78DB;
-  --color-brand-purple-500: #6352BE; /* base */
-  --color-brand-purple-600: #5446A3;
-  --color-brand-purple-700: #463A87;
-  --color-brand-purple-800: #352D66;
-  --color-brand-purple-900: #241F45;
+  --colors-brand-50:  #f3f2fa;
+  --colors-brand-100: #e5e3f4;
+  --colors-brand-200: #c9c4ea;
+  --colors-brand-300: #ada5df;
+  --colors-brand-400: #7e74c4;
+  --colors-brand-500: #56499d; /* base */
+  --colors-brand-600: #4d428d;
+  --colors-brand-700: #403776;
+  --colors-brand-800: #332c5e;
+  --colors-brand-900: #241f42;
 
   /* Secondary Brand Colors */
   --color-brand-blue-400: #60a5fa;
