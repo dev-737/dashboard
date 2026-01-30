@@ -61,7 +61,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mx-auto mb-10 max-w-3xl text-gray-400 text-lg leading-relaxed md:text-xl"
             >
-              InterChat builds bridges between them. Share messages, memes, and
+              InterChat builds bridges between Discord servers. Share messages, memes and
               chaos across thousands of communities instantly.
             </motion.p>
 
