@@ -51,7 +51,7 @@ export function Hero() {
               are{' '}
               <GradientText
                 text="lonely."
-                gradient="linear-gradient(90deg, var(--color-brand-blue-500) 0%, var(--color-brand-purple-500) 25%, #a78bff 50%, var(--color-brand-purple-500) 75%, var(--color-brand-blue-500) 100%)"
+                gradient="linear-gradient(90deg, var(--color-brand-blue-500) 0%, var(--color-brand-purple-500) 25%, #a78bff 50%, var(--color-primary) 75%, var(--color-brand-blue-500) 100%)"
               />
             </motion.h1>
 

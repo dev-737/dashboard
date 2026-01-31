@@ -84,7 +84,7 @@ function HubLayoutContent({
       )}
 
       <div
-        className={`fixed top-16 right-0 bottom-0 mr-3 mb-3 overflow-y-auto rounded-r-2xl rounded-l-2xl border-white/10 border-t border-l bg-dash-main px-4 pt-6 transition-all duration-300 ${
+        className={`fixed top-16 right-0 bottom-0 mr-3 mb-3 overflow-y-auto rounded-r-2xl rounded-l-2xl border-white/10 border bg-dash-main px-4 pt-6 transition-all duration-300 ${
           isHydrated
             ? hubSidebarCollapsed
               ? 'left-0 lg:left-16'
