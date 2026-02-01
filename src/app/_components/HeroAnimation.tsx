@@ -191,6 +191,9 @@ const Portal = ({ isActive }: { isActive: boolean }) => {
                 ))}
               </AnimatePresence>
             </div>
+            <div className="mt-8 animate-pulse font-mono text-[#7c72c0] text-sm tracking-widest opacity-60">
+              INTERCHAT HUB
+            </div>
           </motion.div>
         </motion.div>
       </div>
