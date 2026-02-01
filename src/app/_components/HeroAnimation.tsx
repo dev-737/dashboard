@@ -191,9 +191,6 @@ const Portal = ({ isActive }: { isActive: boolean }) => {
                 ))}
               </AnimatePresence>
             </div>
-            <div className="mt-8 animate-pulse font-mono text-[#7c72c0] text-sm tracking-widest opacity-60">
-              INTERCHAT HUB
-            </div>
           </motion.div>
         </motion.div>
       </div>
@@ -282,7 +279,14 @@ export function HeroAnimation() {
         {/* CENTER: The Portal */}
         <div className="relative z-10 flex shrink-0 items-center justify-center px-4 md:px-12">
           {/* PASSING THE STATE DOWN */}
-          <Portal isActive={isPortalActive} />
+          <div className="relative">
+            <Portal isActive={isPortalActive} />
+            <div className="absolute -bottom-13 left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap">
+              <p className="animate-pulse font-mono text-[#7c72c0] text-sm tracking-[0.2em] drop-shadow-md">
+                INTERCHAT HUB
+              </p>
+            </div>
+          </div>
 
           {/* Connection Line Left */}
           <div className="absolute top-1/2 left-0 -z-10 h-px w-full bg-linear-to-r from-transparent via-purple-500/30 to-transparent" />
@@ -344,7 +348,7 @@ export function HeroAnimation() {
             <div className="h-1 w-1 rounded-full bg-white/20" />
             <div className="h-1 w-1 rounded-full bg-white/20" />
             <p className="mt-2 text-[10px] text-gray-500 uppercase tracking-widest">
-              + more connected servers
+              + connected servers
             </p>
           </motion.div>
         </div>
