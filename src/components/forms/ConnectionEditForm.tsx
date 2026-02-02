@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useId, useState } from 'react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -27,7 +28,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
-import { useToast } from '@/components/ui/use-toast';
 import type {
   Connection,
   Hub,
@@ -50,15 +50,13 @@ export function ConnectionEditFormClient({
   );
   const [inviteUrl, setInviteUrl] = useState(connection?.invite || '');
 
-  const { toast } = useToast();
   const router = useRouter();
 
   // tRPC mutations
   const updateConnectionMutation = useMutation(
     trpc.connection.update.mutationOptions({
       onSuccess: () => {
-        toast({
-          title: 'Connection Updated',
+        toast.success('Connection Updated', {
           description: 'The connection has been updated successfully.',
         });
         // Redirect back to connection overview
@@ -66,10 +64,8 @@ export function ConnectionEditFormClient({
       },
       onError: (error) => {
         console.error('Error updating connection:', error);
-        toast({
-          title: 'Update Failed',
+        toast.error('Update Failed', {
           description: error.message || 'Failed to update connection',
-          variant: 'destructive',
         });
       },
     })
@@ -79,17 +75,14 @@ export function ConnectionEditFormClient({
     trpc.connection.generateInvite.mutationOptions({
       onSuccess: (data) => {
         setInviteUrl(data.invite);
-        toast({
-          title: 'Invite Generated',
+        toast.success('Invite Generated', {
           description: 'A new server invite has been generated.',
         });
       },
       onError: (error) => {
         console.error('Error generating invite:', error);
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to generate invite',
-          variant: 'destructive',
         });
       },
     })
@@ -98,16 +91,11 @@ export function ConnectionEditFormClient({
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(
       () => {
-        toast({
-          description: `${label} copied to clipboard`,
-        });
+        toast.success(`${label} copied to clipboard`);
       },
       (err) => {
         console.error('Could not copy text: ', err);
-        toast({
-          variant: 'destructive',
-          description: 'Failed to copy to clipboard',
-        });
+        toast.error('Failed to copy to clipboard');
       }
     );
   };

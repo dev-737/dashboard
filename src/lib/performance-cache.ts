@@ -94,12 +94,5 @@ export class PerformanceCache {
 }
 
 // Cache keys
-export const CACHE_KEYS = {
-  PLATFORM_STATS: 'platform:stats:v2',
-  TRENDING_HUBS: 'hubs:trending:v1',
-  FEATURED_HUBS: 'hubs:featured:v1',
-  LEADERBOARD: 'hubs:leaderboard:v1',
-  HUB_COUNTS: 'hubs:counts:v1',
-} as const;
 
 export const cache = PerformanceCache.getInstance();

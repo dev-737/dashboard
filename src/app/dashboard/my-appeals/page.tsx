@@ -1,11 +1,10 @@
 import { formatDistanceToNow } from 'date-fns';
 import { Check, Clock, MessageCircle, Shield, X } from 'lucide-react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -14,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { auth } from '@/lib/auth';
 import { db } from '@/lib/prisma';
 import { MyAppealsPagination } from './components/MyAppealsPagination';
 

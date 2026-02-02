@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Loader2, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -16,7 +17,6 @@ import {
 } from '@/components/ui/AlertDialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
 import { useTRPC } from '@/utils/trpc';
 
 interface DeleteHubDialogProps {
@@ -29,7 +29,6 @@ export function DeleteHubDialog({ hubId, hubName }: DeleteHubDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [confirmText, setConfirmText] = useState('');
   const router = useRouter();
-  const { toast } = useToast();
 
   const deleteMutation = useMutation(trpc.hub.deleteHub.mutationOptions());
 
@@ -39,8 +38,7 @@ export function DeleteHubDialog({ hubId, hubName }: DeleteHubDialogProps) {
     try {
       await deleteMutation.mutateAsync({ hubId, confirmName: confirmText });
 
-      toast({
-        title: 'Hub Deleted',
+      toast.success('Hub Deleted', {
         description: 'Your hub has been permanently deleted.',
       });
 
@@ -50,11 +48,9 @@ export function DeleteHubDialog({ hubId, hubName }: DeleteHubDialogProps) {
       router.refresh();
     } catch (error) {
       console.error('Error deleting hub:', error);
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description:
           error instanceof Error ? error.message : 'Failed to delete hub',
-        variant: 'destructive',
       });
     }
   };

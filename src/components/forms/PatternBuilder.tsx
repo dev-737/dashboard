@@ -24,7 +24,7 @@ import {
   MatchPatternDescriptions,
   MatchPatternExamples,
   MatchPatternLabels,
-} from '@/lib/types/anti-swear';
+} from '@/lib/types/automod';
 
 interface PatternBuilderProps {
   patterns: { pattern: string }[];
@@ -159,6 +159,7 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {patterns.map((pattern, index) => (
               <div
+                // biome-ignore lint/suspicious/noArrayIndexKey: nah idc
                 key={index}
                 className="flex items-center justify-between rounded-md border border-gray-700 bg-gray-800/50 p-2"
               >

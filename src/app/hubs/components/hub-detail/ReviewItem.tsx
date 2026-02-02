@@ -4,11 +4,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Star, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { authClient } from '@/lib/auth-client';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
-import { useToast } from '@/hooks/use-toast';
+import { authClient } from '@/lib/auth-client';
 import { cn } from '@/lib/utils';
 import { useTRPC } from '@/utils/trpc';
 
@@ -21,14 +21,13 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
   const trpc = useTRPC();
   const { data: session } = authClient.useSession();
   const [isDeleting, setIsDeleting] = useState(false);
-  const { toast } = useToast();
+
   const router = useRouter();
   const queryClient = useQueryClient();
   const deleteReview = useMutation(
     trpc.hub.deleteHubReview.mutationOptions({
       onSuccess: () => {
-        toast({
-          title: 'Review deleted',
+        toast.success('Review deleted', {
           description: 'Your review has been successfully deleted.',
         });
         queryClient
@@ -39,13 +38,11 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
           .catch(() => {});
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description:
             error instanceof Error
               ? error.message
               : 'Failed to delete review. Please try again.',
-          variant: 'destructive',
         });
       },
     })

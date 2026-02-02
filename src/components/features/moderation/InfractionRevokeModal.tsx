@@ -10,6 +10,7 @@ import {
   User,
 } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { revokeInfraction } from '@/actions/server-actions';
 import {
   AlertDialog,
@@ -21,7 +22,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/AlertDialog';
-import { useToast } from '@/components/ui/use-toast';
 import type {
   InfractionStatus,
   InfractionType,
@@ -58,7 +58,6 @@ export function InfractionRevokeModal({
   onSuccess,
 }: InfractionRevokeModalProps) {
   const [isRevoking, setIsRevoking] = useState(false);
-  const { toast } = useToast();
 
   const isUserInfraction = !!infraction.userId;
   const targetName = isUserInfraction
@@ -72,25 +71,19 @@ export function InfractionRevokeModal({
       const result = await revokeInfraction(infraction.id);
 
       if (result.error) {
-        toast({
-          title: 'Failed to revoke infraction',
+        toast.error('Failed to revoke infraction', {
           description: result.error,
-          variant: 'destructive',
         });
       } else {
-        toast({
-          title: 'Infraction revoked',
+        toast.success('Infraction revoked', {
           description: `Successfully revoked the ${infraction.type.toLowerCase()} infraction for ${targetName}.`,
-          variant: 'default',
         });
         onSuccess();
         onClose();
       }
     } catch (_error) {
-      toast({
-        title: 'Failed to revoke infraction',
+      toast.error('Failed to revoke infraction', {
         description: 'An unexpected error occurred. Please try again.',
-        variant: 'destructive',
       });
     } finally {
       setIsRevoking(false);

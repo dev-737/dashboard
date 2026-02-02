@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 import { getBeginnerFriendlyError } from '@/lib/error-messages';
 
 interface ErrorNotificationProps {
@@ -31,33 +31,44 @@ export function useErrorNotification({
   context,
   useBeginnerFriendly = true,
 }: ErrorNotificationProps) {
-  const { toast } = useToast();
-
   useEffect(() => {
     if (isError) {
       if (useBeginnerFriendly) {
         const friendlyError = getBeginnerFriendlyError(error, context);
 
-        toast({
-          title: title || friendlyError.title,
-          description: description || friendlyError.description,
-          variant:
-            friendlyError.severity === 'error' ||
-            friendlyError.severity === 'critical'
-              ? 'destructive'
-              : 'default',
-        });
+        const message = title || friendlyError.title;
+        const descriptionText = description || friendlyError.description;
+        const isDestructive =
+          friendlyError.severity === 'error' ||
+          friendlyError.severity === 'critical';
+
+        if (isDestructive) {
+          toast.error(message, {
+            description: descriptionText,
+          });
+        } else {
+          toast(message, {
+            description: descriptionText,
+          });
+        }
       } else {
         // Fallback to original behavior
-        toast({
-          title: title || 'Error',
-          description:
-            description ||
-            (error instanceof Error
-              ? error.message
-              : 'An unknown error occurred'),
-          variant,
-        });
+        const message = title || 'Error';
+        const descriptionText =
+          description ||
+          (error instanceof Error
+            ? error.message
+            : 'An unknown error occurred');
+
+        if (variant === 'destructive') {
+          toast.error(message, {
+            description: descriptionText,
+          });
+        } else {
+          toast(message, {
+            description: descriptionText,
+          });
+        }
       }
     }
   }, [
@@ -68,22 +79,5 @@ export function useErrorNotification({
     variant,
     context,
     useBeginnerFriendly,
-    toast,
   ]);
-}
-
-/**
- * A hook to show error notifications for query errors
- */
-export function useQueryErrorNotification(
-  query: { isError: boolean; error: unknown },
-  title: string,
-  description?: string
-) {
-  useErrorNotification({
-    isError: query.isError,
-    error: query.error,
-    title,
-    description,
-  });
 }

@@ -9,7 +9,7 @@ import type { AppRouter } from '@/server/routers';
 
 export const { TRPCProvider, useTRPC } = createTRPCContext<AppRouter>();
 
-export function getBaseUrl() {
+function getBaseUrl() {
   if (typeof window !== 'undefined') {
     // In the browser, we return a relative URL
     return '';

@@ -1,10 +1,10 @@
 import { Settings, User } from 'lucide-react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { UserSettingsForm } from '@/components/forms/UserSettingsForm';
+import { auth } from '@/lib/auth';
 
 export const metadata: Metadata = {
   title: 'Settings | InterChat Dashboard',

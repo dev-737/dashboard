@@ -10,6 +10,7 @@ import {
 import Image from 'next/image';
 import type React from 'react';
 import { useCallback, useRef, useState } from 'react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -19,7 +20,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { useToast } from '@/components/ui/use-toast';
 import { useUploadThing } from '@/lib/uploadthing-utils';
 import { cn } from '@/lib/utils';
 
@@ -40,7 +40,6 @@ export function HubBannerUploadModal({
   hubName,
   onBannerUpdate,
 }: HubBannerUploadModalProps) {
-  const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(
@@ -69,8 +68,7 @@ export function HubBannerUploadModal({
           onBannerUpdate(uploadedFile.ufsUrl);
         }
 
-        toast({
-          title: 'Banner Updated',
+        toast.success('Banner Updated', {
           description: 'Your hub banner has been successfully updated.',
         });
 
@@ -86,10 +84,8 @@ export function HubBannerUploadModal({
         onBannerUpdate(currentBannerUrl);
       }
 
-      toast({
-        title: 'Upload Failed',
+      toast.error('Upload Failed', {
         description: error.message || 'Failed to upload banner',
-        variant: 'destructive',
       });
       setIsUploading(false);
     },
@@ -100,20 +96,16 @@ export function HubBannerUploadModal({
     (file: File) => {
       // Validate file type
       if (!file.type.startsWith('image/')) {
-        toast({
-          title: 'Invalid File Type',
+        toast.error('Invalid File Type', {
           description: 'Please select an image file (PNG, JPG, GIF, etc.)',
-          variant: 'destructive',
         });
         return;
       }
 
       // Validate file size (4MB limit)
       if (file.size > 4 * 1024 * 1024) {
-        toast({
-          title: 'File Too Large',
+        toast.error('File Too Large', {
           description: 'Please select an image smaller than 4MB',
-          variant: 'destructive',
         });
         return;
       }
@@ -128,7 +120,7 @@ export function HubBannerUploadModal({
       }
       setPreviewUrl(url);
     },
-    [previewUrl, toast]
+    [previewUrl]
   );
 
   // Handle drag and drop
@@ -185,11 +177,9 @@ export function HubBannerUploadModal({
         onBannerUpdate(currentBannerUrl);
       }
 
-      toast({
-        title: 'Upload Failed',
+      toast.error('Upload Failed', {
         description:
           error instanceof Error ? error.message : 'Failed to start upload',
-        variant: 'destructive',
       });
       setIsUploading(false);
     }
@@ -242,7 +232,7 @@ export function HubBannerUploadModal({
         <div className="space-y-6">
           {/* Current/Preview Banner */}
           <div className="relative">
-            <div className="aspect-[16/9] overflow-hidden rounded-lg border-2 border-gray-700/50 bg-gray-800 shadow-lg">
+            <div className="aspect-video overflow-hidden rounded-lg border-2 border-gray-700/50 bg-gray-800 shadow-lg">
               {previewUrl ? (
                 <Image
                   src={previewUrl}

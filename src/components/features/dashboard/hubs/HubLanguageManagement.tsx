@@ -2,6 +2,7 @@
 
 import { Check, Globe, Save } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { LANGUAGES } from '@/app/hubs/constants';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -12,7 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useToast } from '@/components/ui/use-toast';
 import { useUpdateHub } from '@/hooks/use-hub-settings';
 
 interface HubLanguageManagementProps {
@@ -24,7 +24,6 @@ export function HubLanguageManagement({
   hubId,
   currentLanguage,
 }: HubLanguageManagementProps) {
-  const { toast } = useToast();
   const [selectedLanguage, setSelectedLanguage] = useState<string>(
     currentLanguage || 'en'
   );
@@ -47,16 +46,13 @@ export function HubLanguageManagement({
       });
 
       setHasChanges(false);
-      toast({
-        title: 'Language Updated',
+      toast.success('Language Updated', {
         description: 'Hub language has been updated successfully.',
       });
     } catch (error) {
       console.error('Error updating language:', error);
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Failed to update hub language. Please try again.',
-        variant: 'destructive',
       });
     }
   };

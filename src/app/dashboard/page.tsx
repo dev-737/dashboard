@@ -209,7 +209,7 @@ export default async function DashboardPage(props: {
               </div>
               <Button
                 asChild
-                className="border-none bg-linear-to-r from-[#6352BE]/80 to-[#6352BE]/50 text-white shadow-lg "
+                className="border-none bg-linear-to-r from-[#6352BE]/80 to-[#6352BE]/50 text-white shadow-lg"
               >
                 <Link href="/dashboard/hubs/create">
                   <PlusCircle className="mr-2 h-4 w-4" />

@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { authClient } from '@/lib/auth-client';
 import { useCallback, useState } from 'react';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
+import { authClient } from '@/lib/auth-client';
 import { useTRPC } from '@/utils/trpc';
 
 interface UseDiscoverUpvoteProps {
@@ -19,7 +19,7 @@ export function useDiscoverUpvote({
   const trpc = useTRPC();
   const { data: session } = authClient.useSession();
   const router = useRouter();
-  const { toast } = useToast();
+
   const [isUpvoted, setIsUpvoted] = useState(initialUpvoted);
   const [upvoteCount, setUpvoteCount] = useState(initialCount);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,8 +27,7 @@ export function useDiscoverUpvote({
   const upvoteMutation = useMutation(
     trpc.hub.upvoteHub.mutationOptions({
       onSuccess: (res) => {
-        toast({
-          title: res.upvoted ? 'Upvoted hub' : 'Removed upvote',
+        toast(res.upvoted ? 'Upvoted hub' : 'Removed upvote', {
           description: res.upvoted
             ? 'Thanks for your support!'
             : "You've removed your upvote",
@@ -40,10 +39,8 @@ export function useDiscoverUpvote({
           .catch(() => {});
       },
       onError: () => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: 'Failed to update upvote status',
-          variant: 'destructive',
         });
       },
     })
@@ -55,8 +52,7 @@ export function useDiscoverUpvote({
       e?.stopPropagation();
 
       if (!session?.user?.id) {
-        toast({
-          title: 'Authentication required',
+        toast.error('Authentication required', {
           description: 'Please sign in to upvote hubs',
         });
         router.push('/login');
@@ -96,7 +92,7 @@ export function useDiscoverUpvote({
         setIsLoading(false);
       }
     },
-    [hubId, isUpvoted, router, session, toast, isLoading, upvoteMutation]
+    [hubId, isUpvoted, router, session, isLoading, upvoteMutation]
   );
 
   return {

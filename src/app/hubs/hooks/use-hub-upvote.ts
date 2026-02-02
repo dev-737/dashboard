@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { authClient } from '@/lib/auth-client';
 import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
-import { useToast } from '@/hooks/use-toast';
+import { authClient } from '@/lib/auth-client';
 import { useTRPC } from '@/utils/trpc';
 
 export function useHubUpvote(
@@ -12,7 +12,7 @@ export function useHubUpvote(
 ) {
   const { data: session } = authClient.useSession();
   const router = useRouter();
-  const { toast } = useToast();
+
   const trpc = useTRPC();
   const [liked, setLiked] = useState(false);
   const [upvoteCount, setUpvoteCount] = useState(initialUpvotes.length);
@@ -32,8 +32,7 @@ export function useHubUpvote(
         const newLikeState = data.upvoted;
         setLiked(newLikeState);
 
-        toast({
-          title: newLikeState ? 'Upvoted hub' : 'Removed upvote',
+        toast(newLikeState ? 'Upvoted hub' : 'Removed upvote', {
           description: newLikeState
             ? 'Thanks for your support!'
             : "You've removed your upvote",
@@ -47,10 +46,8 @@ export function useHubUpvote(
         setLiked(!liked);
         setUpvoteCount((prevCount) => (liked ? prevCount + 1 : prevCount - 1));
 
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to update upvote status',
-          variant: 'destructive',
         });
       },
     })
@@ -62,8 +59,7 @@ export function useHubUpvote(
       e?.stopPropagation();
 
       if (!session?.user?.id) {
-        toast({
-          title: 'Authentication required',
+        toast.error('Authentication required', {
           description: 'Please sign in to upvote hubs',
         });
         router.push('/login');
@@ -80,7 +76,7 @@ export function useHubUpvote(
       // Trigger the mutation
       upvoteMutation.mutate({ hubId });
     },
-    [hubId, liked, router, session, toast, upvoteMutation]
+    [hubId, liked, router, session, upvoteMutation]
   );
 
   return {

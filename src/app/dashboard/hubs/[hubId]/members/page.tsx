@@ -1,8 +1,8 @@
-import { notFound } from 'next/navigation';
-import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
+import { notFound } from 'next/navigation';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { HydrationBoundaryProvider } from '@/components/providers/HydrationBoundary';
+import { auth } from '@/lib/auth';
 import { PermissionLevel } from '@/lib/constants';
 import { createDehydratedState } from '@/lib/create-dehydrated-state';
 import { getUserHubPermission } from '@/lib/permissions';

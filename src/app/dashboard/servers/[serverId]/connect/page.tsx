@@ -15,8 +15,8 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import { authClient } from '@/lib/auth-client';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { toast } from 'sonner';
 import { ChannelIcon } from '@/components/discord/ChannelIcon';
 import { Button } from '@/components/ui/button';
 import {
@@ -29,7 +29,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
+import { authClient } from '@/lib/auth-client';
 import { useTRPC } from '@/utils/trpc';
 
 interface ServerData {
@@ -91,7 +91,6 @@ export default function ServerConnectPage() {
     preselectedHub: false,
   });
 
-  const { toast } = useToast();
   const router = useRouter();
   const { data: session } = authClient.useSession();
   const searchParams = useSearchParams();
@@ -138,28 +137,21 @@ export default function ServerConnectPage() {
   // Utility functions
   const showError = useCallback(
     (title: string, description: string, redirectAfter?: number) => {
-      toast({
-        title,
+      toast.error(title, {
         description,
-        variant: 'destructive',
       });
       if (redirectAfter) {
         setTimeout(() => router.push('/discover'), redirectAfter * 1000);
       }
     },
-    [toast, router]
+    [router]
   );
 
-  const showSuccess = useCallback(
-    (title: string, description: string) => {
-      toast({
-        title,
-        description,
-        variant: 'dashboard',
-      });
-    },
-    [toast]
-  );
+  const showSuccess = useCallback((title: string, description: string) => {
+    toast.success(title, {
+      description,
+    });
+  }, []);
 
   // Enhanced hub fetching with better error handling
   const fetchHubDetails = useCallback(

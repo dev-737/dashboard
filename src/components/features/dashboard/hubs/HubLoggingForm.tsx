@@ -14,6 +14,7 @@ import {
   Users,
 } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { DiscordChannelSelector } from '@/components/discord/DiscordChannelSelector';
 import { DiscordRoleSelector } from '@/components/discord/DiscordRoleSelector';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
@@ -24,7 +25,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import { useToast } from '@/components/ui/use-toast';
 import type { ResolvedLogConfigs } from '@/types/logging';
 import { useTRPC } from '@/utils/trpc';
 import { UnsavedChangesPrompt } from '../UnsavedChangesPrompt';
@@ -101,7 +101,7 @@ export function HubLoggingForm({
   initialLogConfig,
 }: HubLoggingFormProps) {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const queryClient = useQueryClient();
   const [logConfig, setLogConfig] = useState<LogConfig>(
     initialLogConfig || {
@@ -246,21 +246,18 @@ export function HubLoggingForm({
         ...configWithoutHubId,
       });
 
-      toast({
-        title: 'Success',
+      toast.success('Success', {
         description: 'Logging configuration saved successfully.',
       });
 
       setHasChanges(false);
     } catch (error) {
       console.error('Error saving logging configuration:', error);
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description:
           error instanceof Error
             ? error.message
             : 'Failed to save logging configuration',
-        variant: 'destructive',
       });
     } finally {
       setIsSaving(false);
@@ -408,8 +405,7 @@ export function HubLoggingForm({
                           initialServerName={resolved?.channel?.serverName}
                           isAccessible={resolved?.userHasAccess ?? true}
                           onAccessDenied={() => {
-                            toast({
-                              title: 'Configuration Cleared',
+                            toast.error('Configuration Cleared', {
                               description:
                                 'The log configuration has been removed.',
                             });
@@ -435,8 +431,7 @@ export function HubLoggingForm({
                           initialRoleColor={resolved?.role?.color}
                           isAccessible={resolved?.userHasAccess ?? true}
                           onAccessDenied={() => {
-                            toast({
-                              title: 'Configuration Cleared',
+                            toast.error('Configuration Cleared', {
                               description:
                                 'The role configuration has been removed.',
                             });

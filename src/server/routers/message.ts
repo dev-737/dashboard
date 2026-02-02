@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { Prisma } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 import { protectedProcedure, router } from '@/server/trpc';
 
@@ -87,7 +88,7 @@ export const messageRouter = router({
     .query(async ({ input }) => {
       const { hubId, query, sortBy } = input;
 
-      const whereClause = { hubId, AND: [] as any[] };
+      const whereClause: Prisma.MessageWhereInput & { AND: Prisma.MessageWhereInput[] } = { hubId, AND: []};
 
       if (sortBy === 'author') {
         whereClause.AND.push({

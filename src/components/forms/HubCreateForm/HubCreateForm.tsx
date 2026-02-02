@@ -4,8 +4,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Settings, Shield, Sparkles, Upload } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { toast } from 'sonner';
 import { Card } from '@/components/ui/card';
-import { useToast } from '@/components/ui/use-toast';
 import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 import { EssentialsStep } from './EssentialsStep';
@@ -38,7 +38,7 @@ export function HubCreateForm() {
   const [nameError, setNameError] = useState('');
   const [isValidatingName, setIsValidatingName] = useState(false);
   const [isNameValid, setIsNameValid] = useState(false);
-  const { toast } = useToast();
+
   const router = useRouter();
   const nameInputRef = useRef<HTMLInputElement>(null);
 
@@ -56,8 +56,7 @@ export function HubCreateForm() {
   const createHubMutation = useMutation(
     trpc.hub.createHub.mutationOptions({
       onSuccess: (data) => {
-        toast({
-          title: '🎉 Hub Created Successfully!',
+        toast.success('🎉 Hub Created Successfully!', {
           description: `${name} is ready to connect communities worldwide.`,
         });
 
@@ -66,10 +65,8 @@ export function HubCreateForm() {
       },
       onError: (error) => {
         console.error('Error creating hub:', error);
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to create hub',
-          variant: 'destructive',
         });
       },
     })
@@ -132,29 +129,23 @@ export function HubCreateForm() {
   const submitHub = () => {
     // Validate inputs
     if (name.length < 3) {
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Hub name must be at least 3 characters',
-        variant: 'destructive',
       });
       return;
     }
 
     if (description.length < 10) {
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Description must be at least 10 characters',
-        variant: 'destructive',
       });
       return;
     }
 
     if (nameError || !isNameValid || isValidatingName) {
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description:
           nameError || 'Please ensure the hub name is valid and unique',
-        variant: 'destructive',
       });
       return;
     }

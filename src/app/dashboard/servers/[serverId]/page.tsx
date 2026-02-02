@@ -8,12 +8,11 @@ import {
   Shield,
 } from 'lucide-react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { getServerDetails } from '@/actions/server-actions';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { ServerConnectionsTable } from '@/components/features/dashboard/servers/ServerConnectionsTable';
 import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
 import { LogoutButton } from '@/components/LogoutButton';
@@ -26,6 +25,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { TabsContent } from '@/components/ui/tabs';
+import { auth } from '@/lib/auth';
 
 export const metadata: Metadata = {
   title: 'Server Details | InterChat Dashboard',
@@ -122,10 +122,7 @@ export default async function ServerDetailPage(props: {
           </CardHeader>
           <CardContent>
             <p className="mb-4 text-red-400">{result.error}</p>
-            <Button
-              asChild
-              className="border-none btn-primary "
-            >
+            <Button asChild className="btn-primary border-none">
               <Link href="/dashboard">Back to Servers</Link>
             </Button>
           </CardContent>
@@ -342,7 +339,7 @@ export default async function ServerDetailPage(props: {
                     <div className="mt-4">
                       <Button
                         asChild
-                        className="w-full border-none btn-primary "
+                        className="btn-primary w-full border-none"
                       >
                         <Link
                           href={`https://discord.com/oauth2/authorize?client_id=769921109209907241&guild_id=${serverId}`}
@@ -405,10 +402,7 @@ export default async function ServerDetailPage(props: {
                     You need to add InterChat to this server before you can
                     connect to hubs.
                   </p>
-                  <Button
-                    asChild
-                    className="border-none btn-primary "
-                  >
+                  <Button asChild className="btn-primary border-none">
                     <Link
                       href={`https://discord.com/oauth2/authorize?client_id=769921109209907241&guild_id=${serverId}`}
                       target="_blank"

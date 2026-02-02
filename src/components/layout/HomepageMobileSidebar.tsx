@@ -2,13 +2,13 @@
 
 import { ArrowRight, ExternalLink, Menu, X } from 'lucide-react';
 import { AnimatePresence, motion, type Variants } from 'motion/react';
-import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
 
 interface User {
   id: string;

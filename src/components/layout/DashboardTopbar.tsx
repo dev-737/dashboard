@@ -1,8 +1,6 @@
 'use client';
 
 import { Home, Menu, Scale, Settings, Trophy } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -10,6 +8,8 @@ import { useState } from 'react';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
 import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/OnboardingHelpMenu';
 import { UserNav } from '@/components/layout/UserNav';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { MobileSidebar } from './DashboardMobileSidebar';
 
 interface User {

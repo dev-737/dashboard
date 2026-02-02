@@ -1,11 +1,10 @@
 import { ArrowLeft, Trash } from 'lucide-react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { getServers } from '@/actions/server-actions';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { ConnectionNavigationTabs } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
 import { ConnectionEditFormClient } from '@/components/forms/ConnectionEditForm';
 import { Button } from '@/components/ui/button';
@@ -16,6 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { auth } from '@/lib/auth';
 import { db } from '@/lib/prisma';
 
 interface ConnectionEditPageProps {

@@ -1,10 +1,10 @@
 'use client';
 
-import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { Camera, EyeOff, Globe, Lock, Upload, Users } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
+import { HubVisibility } from '@/lib/generated/prisma/client/client';
 
 import { HubBannerUploadModal } from './HubBannerUploadModal';
 import { HubIconUploadModal } from './HubIconUploadModal';

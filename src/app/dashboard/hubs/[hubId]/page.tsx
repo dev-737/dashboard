@@ -1,17 +1,17 @@
 import { Bell, FileText, Gavel, Globe, Home, Shield } from 'lucide-react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { DeleteHubDialog } from '@/components/features/dashboard/hubs/DeleteHubDialog';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { HubEditForm } from '@/components/forms/HubEditForm';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { auth } from '@/lib/auth';
 import { PermissionLevel } from '@/lib/constants';
-import { getUserHubPermission } from '@/lib/permissions';
 import { HubVisibility } from '@/lib/generated/prisma/client/client';
+import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 
 interface HubOverviewPageProps {

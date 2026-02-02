@@ -109,7 +109,7 @@ export function Navbar({ session }: NavbarProps) {
         <div className="flex items-center gap-2">
           <Button
             asChild
-            className="hidden btn-primary font-medium text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-primary/20 lg:flex"
+            className="btn-primary hidden font-medium text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-primary/20 lg:flex"
           >
             <Link href="/invite" className="items-center gap-2">
               Invite

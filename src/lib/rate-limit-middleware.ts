@@ -1,6 +1,6 @@
+import { headers } from 'next/headers';
 import type { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import {
   addRateLimitHeaders,
   burstRateLimit,
@@ -33,7 +33,7 @@ export type ApiHandler = (
 /**
  * Higher-order function that wraps API route handlers with rate limiting
  */
-export function withRateLimit(
+function withRateLimit(
   handler: ApiHandler,
   options: RateLimitMiddlewareOptions = {}
 ): ApiHandler {
@@ -115,48 +115,6 @@ async function executeWithRateLimit(
 }
 
 /**
- * Middleware specifically for public endpoints (high limits)
- */
-export function withPublicRateLimit(
-  handler: ApiHandler,
-  customOptions: Partial<RateLimitMiddlewareOptions> = {}
-): ApiHandler {
-  return withRateLimit(handler, {
-    tier: RATE_LIMIT_TIERS.PUBLIC,
-    skipOnSuccess: true,
-    ...customOptions,
-  });
-}
-
-/**
- * Middleware for authenticated endpoints (moderate limits)
- */
-export function withAuthRateLimit(
-  handler: ApiHandler,
-  customOptions: Partial<RateLimitMiddlewareOptions> = {}
-): ApiHandler {
-  return withRateLimit(handler, {
-    tier: RATE_LIMIT_TIERS.MODERATE,
-    useUserId: true,
-    ...customOptions,
-  });
-}
-
-/**
- * Middleware for write operations (strict limits)
- */
-export function withStrictRateLimit(
-  handler: ApiHandler,
-  customOptions: Partial<RateLimitMiddlewareOptions> = {}
-): ApiHandler {
-  return withRateLimit(handler, {
-    tier: RATE_LIMIT_TIERS.STRICT,
-    useUserId: true,
-    ...customOptions,
-  });
-}
-
-/**
  * Middleware for critical operations (very strict limits)
  */
 export function withCriticalRateLimit(
@@ -168,28 +126,6 @@ export function withCriticalRateLimit(
     useUserId: true,
     customMessage:
       'This operation is heavily rate limited. Please wait before trying again.',
-    ...customOptions,
-  });
-}
-
-/**
- * Middleware with burst protection for endpoints that might receive sudden traffic
- */
-export function withBurstRateLimit(
-  handler: ApiHandler,
-  shortTerm: { limit: number; timeframe: number } = {
-    limit: 10,
-    timeframe: 10,
-  },
-  longTerm: { limit: number; timeframe: number } = {
-    limit: 100,
-    timeframe: 3600,
-  },
-  customOptions: Partial<RateLimitMiddlewareOptions> = {}
-): ApiHandler {
-  return withRateLimit(handler, {
-    burst: { shortTerm, longTerm },
-    useUserId: true,
     ...customOptions,
   });
 }
@@ -211,20 +147,4 @@ export function createCustomRateLimit(
       skipFailedRequests: true,
     },
   };
-}
-
-/**
- * Middleware for upload endpoints with strict limits
- */
-export function withUploadRateLimit(
-  handler: ApiHandler,
-  customOptions: Partial<RateLimitMiddlewareOptions> = {}
-): ApiHandler {
-  return withRateLimit(handler, {
-    tier: createCustomRateLimit(5, 300), // 5 uploads per 5 minutes
-    useUserId: true,
-    customMessage:
-      'Upload rate limit exceeded. Please wait before uploading again.',
-    ...customOptions,
-  });
 }

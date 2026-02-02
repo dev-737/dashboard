@@ -1,7 +1,7 @@
+import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { PermissionLevel } from '@/lib/constants';
 import { getUserHubPermission } from '@/lib/permissions';
 

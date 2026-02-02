@@ -14,6 +14,7 @@ import {
 import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -31,7 +32,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
+import { Label } from '@/components/ui/label';
 import {
   type User,
   useAddHubMember,
@@ -41,7 +42,6 @@ import {
 } from '@/hooks/use-hub-members';
 import { cn } from '@/lib/utils';
 import { useTRPC } from '@/utils/trpc';
-import { Label } from '@/components/ui/label';
 
 export function MembersClient({ hubId }: { hubId: string }) {
   // State for the dialog
@@ -63,7 +63,6 @@ export function MembersClient({ hubId }: { hubId: string }) {
   // tRPC utils for manual fetching
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-  const { toast } = useToast();
 
   // Handle validating user ID
   const handleValidateId = async () => {
@@ -85,30 +84,24 @@ export function MembersClient({ hubId }: { hubId: string }) {
       );
 
       if (isOwner) {
-        toast({
-          title: 'Cannot Add User',
+        toast.error('Cannot Add User', {
           description: 'This user is the owner of the hub.',
-          variant: 'destructive',
         });
         return;
       }
 
       if (isAlreadyMember) {
-        toast({
-          title: 'Cannot Add User',
+        toast.error('Cannot Add User', {
           description: 'This user is already a member of the hub.',
-          variant: 'destructive',
         });
         return;
       }
 
       setSelectedUser(result.user);
       setUserIdInput(''); // Clear input on success
-    } catch (error) {
-      toast({
-        title: 'User Not Found',
+    } catch {
+      toast.error('User Not Found', {
         description: 'Could not find a user with that ID.',
-        variant: 'destructive',
       });
     } finally {
       setIsValidating(false);
@@ -305,7 +298,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                     type="button"
                     onClick={() => setSelectedRole('MODERATOR')}
                     className={cn(
-                      'w-full text-left cursor-pointer rounded-lg border p-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+                      'w-full cursor-pointer rounded-lg border p-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
                       selectedRole === 'MODERATOR'
                         ? 'border-purple-500/50 bg-purple-500/10 ring-1 ring-purple-500/20'
                         : 'border-gray-800 bg-gray-900/30 hover:border-gray-700 hover:bg-gray-900/50'
@@ -336,7 +329,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                     type="button"
                     onClick={() => setSelectedRole('MANAGER')}
                     className={cn(
-                      'w-full text-left cursor-pointer rounded-lg border p-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+                      'w-full cursor-pointer rounded-lg border p-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
                       selectedRole === 'MANAGER'
                         ? 'border-blue-500/50 bg-blue-500/10 ring-1 ring-blue-500/20'
                         : 'border-gray-800 bg-gray-900/30 hover:border-gray-700 hover:bg-gray-900/50'
@@ -467,7 +460,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                       className="group relative flex items-center justify-between rounded-xl border border-gray-800/50 bg-gray-900/20 p-4 transition-all hover:border-gray-700 hover:bg-gray-900/40 hover:shadow-indigo-900/5 hover:shadow-lg"
                     >
                       <div className="flex items-center gap-3 overflow-hidden">
-                        <div className="relative h-10 w-10 flex-shrink-0">
+                        <div className="relative h-10 w-10 shrink-0">
                           <Image
                             src={
                               mod.user.image ||

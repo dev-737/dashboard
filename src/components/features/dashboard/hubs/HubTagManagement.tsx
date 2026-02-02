@@ -13,10 +13,10 @@ import {
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { TagSelector } from '@/components/features/hubs/TagSelector';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from '@/components/ui/use-toast';
 import { useHubTagManagement, usePopularTags } from '@/hooks/use-tags';
 import { cn } from '@/lib/utils';
 
@@ -37,7 +37,6 @@ export function HubTagManagement({
   onTagsUpdate,
   className,
 }: HubTagManagementProps) {
-  const { toast } = useToast();
   const [selectedTags, setSelectedTags] = useState<string[]>(currentTags);
   const [hasChanges, setHasChanges] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -87,18 +86,15 @@ export function HubTagManagement({
         onTagsUpdate(selectedTags);
       }
 
-      toast({
-        title: 'Tags Updated',
+      toast.success('Tags Updated', {
         description: `Successfully updated hub tags. Added ${tagsToAdd.length}, removed ${tagsToRemove.length}.`,
       });
 
       setHasChanges(false);
     } catch (error) {
       console.error('Error saving tags:', error);
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Failed to update hub tags. Please try again.',
-        variant: 'destructive',
       });
     } finally {
       setIsSaving(false);

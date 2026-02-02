@@ -1,1 +1,1 @@
-export { type HubData, HubEditForm } from './HubEditForm';
+export { HubEditForm } from './HubEditForm';

@@ -3,7 +3,7 @@ import { Redis } from 'ioredis';
 /**
  * Redis configuration for rate limiting
  */
-export interface RedisConfig {
+interface RedisConfig {
   url: string;
   retryDelayOnFailover: number;
   maxRetriesPerRequest: number;
@@ -16,7 +16,7 @@ export interface RedisConfig {
 /**
  * Default Redis configuration optimized for rate limiting
  */
-export const DEFAULT_REDIS_CONFIG: Omit<RedisConfig, 'url'> = {
+const DEFAULT_REDIS_CONFIG: Omit<RedisConfig, 'url'> = {
   retryDelayOnFailover: 100,
   maxRetriesPerRequest: 3,
   lazyConnect: true,
@@ -163,51 +163,6 @@ export async function getRedisClient(): Promise<Redis | null> {
   const manager = RedisManager.getInstance();
   return await manager.getClient();
 }
-
-/**
- * Disconnect Redis client (useful for cleanup in tests or shutdown)
- */
-export async function disconnectRedis(): Promise<void> {
-  const manager = RedisManager.getInstance();
-  await manager.disconnect();
-}
-
-/**
- * Get Redis connection status
- */
-export function getRedisStatus(): string {
-  const manager = RedisManager.getInstance();
-  return manager.getConnectionStatus();
-}
-
-/**
- * Perform Redis health check
- */
-export async function checkRedisHealth(): Promise<{
-  connected: boolean;
-  status: string;
-  latency?: number;
-  error?: string;
-}> {
-  const manager = RedisManager.getInstance();
-  return await manager.healthCheck();
-}
-
-/**
- * Redis key utilities for rate limiting
- */
-export const RedisKeys = {
-  rateLimit: (identifier: string, endpoint: string) =>
-    `rate_limit:${identifier}:${endpoint}`,
-
-  rateLimitGlobal: (endpoint: string) => `rate_limit:global:${endpoint}`,
-
-  rateLimitUser: (userId: string, endpoint: string) =>
-    `rate_limit:user:${userId}:${endpoint}`,
-
-  rateLimitIP: (ip: string, endpoint: string) =>
-    `rate_limit:ip:${ip}:${endpoint}`,
-};
 
 /**
  * Redis rate limiting operations

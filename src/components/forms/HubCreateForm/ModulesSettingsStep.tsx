@@ -110,7 +110,7 @@ export function ModulesSettingsStep({
           <Button
             type="button"
             onClick={onNext}
-            className="border-none btn-primary px-8 py-3 "
+            className="btn-primary border-none px-8 py-3"
           >
             Continue
             <ArrowRight className="ml-2 h-4 w-4" />

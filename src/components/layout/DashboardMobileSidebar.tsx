@@ -12,17 +12,17 @@ import {
   X,
 } from 'lucide-react';
 import { AnimatePresence, motion, type Variants } from 'motion/react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { authClient } from '@/lib/auth-client';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
 import { OnboardingHelpMenu } from '@/components/features/dashboard/onboarding/OnboardingHelpMenu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { authClient } from '@/lib/auth-client';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
 
 interface User {
   id: string;

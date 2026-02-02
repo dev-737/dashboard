@@ -1,7 +1,7 @@
 import { db } from '@/lib/prisma';
 import { getRedisClient } from '@/lib/redis-config';
 
-export class TagManagementService {
+class TagManagementService {
   private readonly MAX_TAGS_PER_HUB = 5;
   private readonly CACHE_TTL = 3600; // 1 hour
 

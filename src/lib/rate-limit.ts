@@ -330,55 +330,6 @@ export function addRateLimitHeaders(
   return response;
 }
 
-export async function getRateLimitStatus(
-  request: NextRequest,
-  tier: RateLimitTier = RATE_LIMIT_TIERS.MODERATE,
-  customIdentifier?: string
-): Promise<RateLimitContextBase | null> {
-  const identifier = customIdentifier || getIdentifier(request);
-  const key = generateKey(request, identifier, tier.config);
-
-  const redis = await getRedisClient();
-
-  if (redis) {
-    try {
-      return await RedisRateLimitOps.get(redis, key);
-    } catch (error) {
-      console.error('Failed to get rate limit status from Redis:', error);
-    }
-  }
-
-  // Fallback to memory cache
-  return fallbackCache[key] || null;
-}
-
-export async function clearRateLimit(
-  request: NextRequest,
-  tier: RateLimitTier = RATE_LIMIT_TIERS.MODERATE,
-  customIdentifier?: string
-): Promise<boolean> {
-  const identifier = customIdentifier || getIdentifier(request);
-  const key = generateKey(request, identifier, tier.config);
-
-  const redis = await getRedisClient();
-
-  if (redis) {
-    try {
-      return await RedisRateLimitOps.delete(redis, key);
-    } catch (error) {
-      console.error('Failed to clear rate limit in Redis:', error);
-    }
-  }
-
-  // Fallback to memory cache
-  if (fallbackCache[key]) {
-    delete fallbackCache[key];
-    return true;
-  }
-
-  return false;
-}
-
 // Advanced rate limiting with user-based identification
 export async function rateLimitWithUser(
   request: NextRequest,

@@ -17,6 +17,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useId, useState } from 'react';
+import { toast } from 'sonner';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -31,7 +32,6 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
 import { useTRPC } from '@/utils/trpc';
 
 interface Infraction {
@@ -81,7 +81,6 @@ export function ViewInfractionClient({
   canModifyDuration,
 }: ViewInfractionClientProps) {
   const trpc = useTRPC();
-  const { toast } = useToast();
 
   // Generate unique IDs for form fields
   const permanentCheckboxId = useId();
@@ -142,19 +141,15 @@ export function ViewInfractionClient({
       setInfraction(result.infraction);
       setIsEditDurationOpen(false);
 
-      toast({
-        title: 'Duration Updated',
+      toast.success('Duration Updated', {
         description: isPermanent
           ? 'Infraction is now permanent'
           : 'Infraction duration has been updated',
-        variant: 'default',
       });
     } catch (error) {
       console.error('Error updating duration:', error);
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Failed to update infraction duration',
-        variant: 'destructive',
       });
     } finally {
       setIsUpdating(false);

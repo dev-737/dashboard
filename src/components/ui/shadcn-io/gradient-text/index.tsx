@@ -31,7 +31,7 @@ function GradientText({
       {...props}
     >
       <motion.span
-        className="m-0 bg-[length:200%_100%] bg-clip-text text-transparent"
+        className="m-0 bg-size-[200%_100%] bg-clip-text text-transparent"
         style={baseStyle}
         animate={{ backgroundPositionX: ['0%', '200%'] }}
         transition={transition}
@@ -41,7 +41,7 @@ function GradientText({
 
       {neon && (
         <motion.span
-          className="absolute top-0 left-0 m-0 bg-[length:200%_100%] bg-clip-text text-transparent mix-blend-plus-lighter blur-[8px]"
+          className="absolute top-0 left-0 m-0 bg-size-[200%_100%] bg-clip-text text-transparent mix-blend-plus-lighter blur-sm"
           style={baseStyle}
           animate={{ backgroundPositionX: ['0%', '200%'] }}
           transition={transition}
@@ -53,4 +53,4 @@ function GradientText({
   );
 }
 
-export { GradientText, type GradientTextProps };
+export { GradientText };

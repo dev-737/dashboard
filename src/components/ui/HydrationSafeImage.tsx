@@ -40,7 +40,7 @@ const SKIPPED_OPTIMIZATION_DOMAINS = [
   'media.giphy.com',
 ];
 
-export function HydrationSafeImage({
+function HydrationSafeImage({
   src,
   alt,
   width,
@@ -182,32 +182,6 @@ export function SafeHubBanner({
       className={cn('object-cover', className)}
       fallbackSrc={DEFAULT_FALLBACKS.banner}
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      {...props}
-    />
-  );
-}
-
-// Specialized server icon component
-export function SafeServerIcon({
-  src,
-  name,
-  size = 48,
-  className,
-  ...props
-}: {
-  src: string;
-  name: string;
-  size?: number;
-  className?: string;
-} & Omit<HydrationSafeImageProps, 'src' | 'alt' | 'width' | 'height'>) {
-  return (
-    <HydrationSafeImage
-      src={src}
-      alt={`${name} server icon`}
-      width={size}
-      height={size}
-      className={cn('rounded-lg', className)}
-      fallbackSrc={DEFAULT_FALLBACKS.server}
       {...props}
     />
   );

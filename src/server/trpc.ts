@@ -3,10 +3,10 @@
  */
 
 import { initTRPC, TRPCError } from '@trpc/server';
+import { headers } from 'next/headers';
 import superjson from 'superjson';
 import z, { ZodError } from 'zod/v4';
 import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 
 /**
  * Context type for tRPC procedures

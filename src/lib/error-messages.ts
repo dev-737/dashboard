@@ -6,7 +6,7 @@
 import type { LucideIcon } from 'lucide-react';
 import { Clock, ExternalLink, HelpCircle, Shield, Wifi } from 'lucide-react';
 
-export interface ErrorSolution {
+interface ErrorSolution {
   id: string;
   title: string;
   description: string;
@@ -44,7 +44,7 @@ export interface BeginnerFriendlyError {
 /**
  * Maps technical error codes/messages to beginner-friendly explanations
  */
-export const ERROR_MAPPINGS: Record<string, BeginnerFriendlyError> = {
+const ERROR_MAPPINGS: Record<string, BeginnerFriendlyError> = {
   // Permission Errors
   INSUFFICIENT_PERMISSIONS: {
     title: 'Permission Problem',

@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Edit3 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useId, useState } from 'react';
+import { toast } from 'sonner';
 import {
   Card,
   CardContent,
@@ -11,14 +12,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { useToast } from '@/components/ui/use-toast';
 import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 import { BasicInfoSection } from './BasicInfoSection';
 import { RulesSection } from './RulesSection';
 import { WelcomeMessageSection } from './WelcomeMessageSection';
 
-export interface HubData {
+interface HubData {
   id: string;
   name: string;
   description: string;
@@ -67,25 +67,21 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
   );
   const [rules, setRules] = useState<string[]>(hubData.rules || []);
 
-  const { toast } = useToast();
   const router = useRouter();
 
   // tRPC mutation for updating hub
   const updateHubMutation = useMutation(
     trpc.hub.updateHub.mutationOptions({
       onSuccess: () => {
-        toast({
-          title: 'Hub Updated',
+        toast.success('Hub Updated', {
           description: 'Your hub has been successfully updated.',
         });
         router.refresh();
       },
       onError: (error) => {
         console.error('Error updating hub:', error);
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to update hub',
-          variant: 'destructive',
         });
       },
     })

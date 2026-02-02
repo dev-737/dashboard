@@ -17,7 +17,7 @@ import {
   BlockWordActionColors,
   BlockWordActionDescriptions,
   BlockWordActionLabels,
-} from '@/lib/types/anti-swear';
+} from '@/lib/types/automod';
 
 interface ActionSelectorProps {
   selectedActions: BlockWordAction[];

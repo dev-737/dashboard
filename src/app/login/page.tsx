@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { authClient } from '@/lib/auth-client';
 import { Suspense, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Spinner } from '@/components/ui/spinner';
+import { authClient } from '@/lib/auth-client';
 
 function LoginContent() {
   const searchParams = useSearchParams();

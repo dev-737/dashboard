@@ -193,7 +193,7 @@ export function EssentialsStep({
             type="button"
             onClick={onNext}
             disabled={!canProceed || isSubmitting}
-            className="border-none btn-primary px-8 "
+            className="btn-primary border-none px-8"
           >
             Customize More
             <ArrowRight className="ml-2 h-4 w-4" />

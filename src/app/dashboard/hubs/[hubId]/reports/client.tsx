@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -44,7 +45,6 @@ import {
 } from '@/components/ui/select';
 import { TabsContent } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
 import type { ReportStatus } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 
@@ -153,7 +153,6 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
       },
     })
   );
-  const { toast } = useToast();
 
   // Get pending state from mutations
   const isPending = updateReport.isPending || createInfraction.isPending;
@@ -222,10 +221,8 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
         resolution,
       });
 
-      toast({
-        title: 'Report Updated',
+      toast.success('Report Updated', {
         description: `Report has been ${String(status).toLowerCase()} successfully.`,
-        variant: 'default',
       });
 
       setIsActionDialogOpen(false);
@@ -234,10 +231,8 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
       setSelectedReport(null);
     } catch (error) {
       console.error('Failed to execute action:', error);
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Failed to update report status.',
-        variant: 'destructive',
       });
     }
   };
@@ -249,10 +244,8 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
         ? Number(createDuration)
         : undefined;
       if (createDuration && Number.isNaN(durationSeconds)) {
-        toast({
-          title: 'Invalid duration',
+        toast.error('Invalid duration', {
           description: 'Duration must be a number of seconds.',
-          variant: 'destructive',
         });
         return;
       }
@@ -265,10 +258,8 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
         targetType: createTargetType,
       });
 
-      toast({
-        title: 'Infraction created',
+      toast.success('Infraction created', {
         description: `A ${createType.toLowerCase()} has been issued to the ${createTargetType}.`,
-        variant: 'default',
       });
 
       setIsCreateDialogOpen(false);
@@ -277,10 +268,8 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
       setCreateDuration('');
     } catch (error) {
       console.error('Failed to create infraction:', error);
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Failed to create infraction from report.',
-        variant: 'destructive',
       });
     }
   };
@@ -913,7 +902,7 @@ function ReportCard({
                         {report.messageData.content.length} characters
                       </span>
                     </div>
-                    <div className="max-h-96 overflow-y-auto whitespace-pre-wrap break-words rounded border border-gray-600/50 bg-gray-800/50 p-3 text-gray-100 leading-relaxed">
+                    <div className="wrap-break-word max-h-96 overflow-y-auto whitespace-pre-wrap rounded border border-gray-600/50 bg-gray-800/50 p-3 text-gray-100 leading-relaxed">
                       {report.messageData.content}
                     </div>
                   </div>

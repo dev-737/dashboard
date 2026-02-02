@@ -91,9 +91,7 @@ export const MatchPatternExamples: Record<MatchPattern, string> = {
     '"bad" matches "bad", "badly", "reallybad", "badness"',
 };
 
-export function patternMatchTypeToMatchPattern(
-  type: PatternMatchType
-): MatchPattern {
+function patternMatchTypeToMatchPattern(type: PatternMatchType): MatchPattern {
   switch (type) {
     case 'EXACT':
       return MatchPattern.EXACT;
@@ -108,40 +106,7 @@ export function patternMatchTypeToMatchPattern(
   }
 }
 
-export function matchPatternToPatternMatchType(
-  pattern: MatchPattern
-): PatternMatchType {
-  switch (pattern) {
-    case MatchPattern.EXACT:
-      return 'EXACT';
-    case MatchPattern.PREFIX:
-      return 'PREFIX';
-    case MatchPattern.SUFFIX:
-      return 'SUFFIX';
-    case MatchPattern.WILDCARD:
-      return 'WILDCARD';
-    default:
-      return 'EXACT';
-  }
-}
-
-export function formatWordWithPattern(
-  word: string,
-  pattern: MatchPattern
-): string {
-  switch (pattern) {
-    case MatchPattern.EXACT:
-      return word;
-    case MatchPattern.PREFIX:
-      return `${word}*`;
-    case MatchPattern.SUFFIX:
-      return `*${word}`;
-    case MatchPattern.WILDCARD:
-      return `*${word}*`;
-  }
-}
-
-export function parseWordPattern(storedWord: string): {
+function parseWordPattern(storedWord: string): {
   word: string;
   pattern: MatchPattern;
 } {
@@ -170,30 +135,6 @@ export function parseWordPattern(storedWord: string): {
     word: storedWord,
     pattern: MatchPattern.EXACT,
   };
-}
-
-export function stringToPattern(
-  pattern: string,
-  matchType?: PatternMatchType
-): AntiSwearPattern {
-  return {
-    pattern,
-    matchType: matchType || 'EXACT',
-  };
-}
-
-export function wordAndMatchPatternToPattern(
-  word: string,
-  matchPattern: MatchPattern
-): AntiSwearPattern {
-  return {
-    pattern: formatWordWithPattern(word, matchPattern),
-    matchType: matchPatternToPatternMatchType(matchPattern),
-  };
-}
-
-export function patternToDisplayString(pattern: AntiSwearPattern): string {
-  return pattern.pattern;
 }
 
 export function getMatchPatternFromPattern(
@@ -240,3 +181,19 @@ export const RULE_TEMPLATES = {
     description: 'Blocks serious violations and bans users immediately',
   },
 } as const;
+
+export function formatWordWithPattern(
+  word: string,
+  pattern: MatchPattern
+): string {
+  switch (pattern) {
+    case MatchPattern.EXACT:
+      return word;
+    case MatchPattern.PREFIX:
+      return `${word}*`;
+    case MatchPattern.SUFFIX:
+      return `*${word}`;
+    case MatchPattern.WILDCARD:
+      return `*${word}*`;
+  }
+}

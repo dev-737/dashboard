@@ -11,12 +11,12 @@ import {
   Users,
 } from 'lucide-react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { auth } from '@/lib/auth';
 import { PermissionLevel } from '@/lib/constants';
 import { getHubConnections, getHubData } from '@/lib/hub-queries';
 import { cn } from '@/lib/utils';
@@ -187,7 +187,7 @@ export default async function HubDetailView(props: {
                   {canManageHub && (
                     <Link href={`/dashboard/hubs/${hubId}`}>
                       <Button
-                        className="flex cursor-pointer items-center gap-2 rounded-lg border-0 btn-primary px-4 py-2 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105 "
+                        className="btn-primary flex cursor-pointer items-center gap-2 rounded-lg border-0 px-4 py-2 font-medium text-white shadow-lg transition-all duration-200 hover:scale-105"
                         size="sm"
                         variant="outline"
                       >

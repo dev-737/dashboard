@@ -61,8 +61,8 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mx-auto mb-10 max-w-3xl text-gray-400 text-lg leading-relaxed md:text-xl"
             >
-              InterChat builds bridges between Discord servers. Share messages, memes and
-              chaos across thousands of communities instantly.
+              InterChat builds bridges between Discord servers. Share messages,
+              memes and chaos across thousands of communities instantly.
             </motion.p>
 
             <motion.div
@@ -79,7 +79,7 @@ export function Hero() {
                 <div className="absolute inset-0 rounded-full bg-none" />
                 <Button
                   size="lg"
-                  className="relative h-14 rounded-full btn-primary px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/25"
+                  className="btn-primary relative h-14 rounded-full px-8 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/25"
                 >
                   <Link href="/invite" className="flex items-center gap-2">
                     Start Connecting

@@ -21,6 +21,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import type { BasicHubConnection } from '@/app/dashboard/hubs/[hubId]/connections/client';
 import { DeleteConnectionDialog } from '@/components/features/dashboard/connections/DeleteConnectionDialog';
 import { Badge } from '@/components/ui/badge';
@@ -41,7 +42,6 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useToast } from '@/components/ui/use-toast';
 import { useTRPC } from '@/utils/trpc';
 
 interface ServerData {
@@ -66,7 +66,7 @@ export function ConnectionsList({
   onConnectionRemoved,
 }: SimpleConnectionsListProps) {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const router = useRouter();
 
   // Simple state management
@@ -87,9 +87,8 @@ export function ConnectionsList({
         );
         const serverName = connectionToRemove?.server?.name || 'Unknown Server';
 
-        toast({
-          description: `Connection to ${serverName} removed`,
-          variant: 'success',
+        toast.success(`Connection to ${serverName} removed`, {
+          description: `Disconnection from ${serverName} was successful`,
         });
 
         // Trigger callback to update the UI
@@ -99,10 +98,8 @@ export function ConnectionsList({
       },
       onError: (error) => {
         console.error('Error removing connection:', error);
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: 'Failed to remove connection. Please try again.',
-          variant: 'destructive',
         });
       },
     })
@@ -130,14 +127,13 @@ export function ConnectionsList({
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(
       () => {
-        toast({
+        toast.success('Copied to Clipboard', {
           description: `${label} copied to clipboard`,
         });
       },
       (err) => {
         console.error('Could not copy text: ', err);
-        toast({
-          variant: 'destructive',
+        toast.error('Error', {
           description: 'Failed to copy to clipboard',
         });
       }

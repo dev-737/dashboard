@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus, Shield, Sparkles } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { PatternBuilder } from '@/components/forms/PatternBuilder';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -23,13 +24,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useToast } from '@/components/ui/use-toast';
 import { BlockWordAction } from '@/lib/generated/prisma/client/client';
 import {
   BlockWordActionColors,
   BlockWordActionLabels,
   RULE_TEMPLATES,
-} from '@/lib/types/anti-swear';
+} from '@/lib/types/automod';
 import { useTRPC } from '@/utils/trpc';
 import { ActionSelector } from './ActionSelector';
 
@@ -45,7 +45,7 @@ export function CreateRuleDialog({
   onOpenChange,
 }: CreateRuleDialogProps) {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState('template');
   const [selectedTemplate, setSelectedTemplate] = useState<
@@ -65,16 +65,13 @@ export function CreateRuleDialog({
         );
         onOpenChange(false);
         resetForm();
-        toast({
-          title: 'Success',
+        toast.success('Success', {
           description: 'Rule created successfully',
         });
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to create rule',
-          variant: 'destructive',
         });
       },
     })
@@ -104,28 +101,22 @@ export function CreateRuleDialog({
 
   const handleCreateCustomRule = async () => {
     if (!customRule.name.trim() || customRule.name.length < 3) {
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Rule name must be at least 3 characters long',
-        variant: 'destructive',
       });
       return;
     }
 
     if (customRule.patterns.length === 0) {
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Please add at least one pattern',
-        variant: 'destructive',
       });
       return;
     }
 
     if (customRule.actions.length === 0) {
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Please select at least one action',
-        variant: 'destructive',
       });
       return;
     }
@@ -204,7 +195,7 @@ export function CreateRuleDialog({
                           <CardTitle className="text-lg text-white">
                             {template.name}
                           </CardTitle>
-                          <CardDescription className="break-words text-sm">
+                          <CardDescription className="wrap-break-word text-sm">
                             {template.description}
                           </CardDescription>
                         </CardHeader>

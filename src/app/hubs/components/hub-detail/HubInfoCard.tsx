@@ -43,7 +43,7 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
       <div className="min-w-0 flex-1">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <h1 className="break-words bg-linear-to-r from-white to-gray-300 bg-clip-text font-bold text-3xl text-transparent md:text-4xl">
+            <h1 className="wrap-break-word bg-linear-to-r from-white to-gray-300 bg-clip-text font-bold text-3xl text-transparent md:text-4xl">
               {hub.name}
             </h1>
             <div className="flex items-center gap-2">

@@ -214,9 +214,9 @@ export default withSentryConfig(config, {
   tunnelRoute: '/monitoring',
   webpack: {
     treeshake: {
-      removeDebugLogging: true
+      removeDebugLogging: true,
     },
-    automaticVercelMonitors: true
+    automaticVercelMonitors: true,
   },
   telemetry: false,
   sourcemaps: {

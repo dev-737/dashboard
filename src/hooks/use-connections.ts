@@ -1,16 +1,16 @@
 'use client';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import type {
   BasicHubConnection,
   ServerData,
 } from '@/app/dashboard/hubs/[hubId]/connections/client';
-import { useToast } from '@/components/ui/use-toast';
 import { useTRPC } from '@/utils/trpc';
 import { useErrorNotification } from './use-error-notification';
 
 // Query keys
-export const connectionKeys = {
+const connectionKeys = {
   all: ['connections'] as const,
   lists: () => [...connectionKeys.all, 'list'] as const,
   list: (hubId: string) => ['connections', hubId] as const, // Simplified to match server prefetching
@@ -64,7 +64,7 @@ export function useConnections(
 // Hook for removing a connection
 export function useRemoveConnection(hubId?: string) {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
@@ -98,9 +98,7 @@ export function useRemoveConnection(hubId?: string) {
         return { previousConnections };
       },
       onSuccess: () => {
-        toast({
-          description: 'Connection removed successfully',
-        });
+        toast.success('Connection removed successfully');
       },
       onError: (error, _, context) => {
         // Revert the optimistic update
@@ -111,9 +109,7 @@ export function useRemoveConnection(hubId?: string) {
           );
         }
 
-        toast({
-          variant: 'destructive',
-          title: 'Error',
+        toast.error('Error', {
           description: `Failed to remove connection: ${error instanceof Error ? error.message : 'Unknown error'}`,
         });
       },

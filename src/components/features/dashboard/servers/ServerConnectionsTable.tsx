@@ -13,6 +13,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { DeleteConnectionDialog } from '@/components/features/dashboard/connections/DeleteConnectionDialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -32,7 +33,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useToast } from '@/components/ui/use-toast';
 import type { Connection, Hub } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 
@@ -44,7 +44,7 @@ export function ServerConnectionsTable({
   connections,
 }: ServerConnectionsTableProps) {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const queryClient = useQueryClient();
 
   // Modal state for delete confirmation
@@ -58,22 +58,20 @@ export function ServerConnectionsTable({
   const updateConnectionMutation = useMutation(
     trpc.connection.update.mutationOptions({
       onSuccess: (_data, variables) => {
-        toast({
-          title: variables.connected
-            ? 'Connection enabled'
-            : 'Connection disabled',
-          description: variables.connected
-            ? 'The connection has been enabled successfully.'
-            : 'The connection has been disabled successfully.',
-        });
+        toast(
+          variables.connected ? 'Connection enabled' : 'Connection disabled',
+          {
+            description: variables.connected
+              ? 'The connection has been enabled successfully.'
+              : 'The connection has been disabled successfully.',
+          }
+        );
         // Invalidate and refetch relevant queries
         queryClient.invalidateQueries(trpc.connection.pathFilter());
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to update connection',
-          variant: 'destructive',
         });
       },
     })
@@ -82,8 +80,7 @@ export function ServerConnectionsTable({
   const deleteConnectionMutation = useMutation(
     trpc.connection.remove.mutationOptions({
       onSuccess: () => {
-        toast({
-          title: 'Connection deleted',
+        toast.success('Connection deleted', {
           description: 'The connection has been deleted successfully.',
         });
         // Invalidate and refetch relevant queries
@@ -92,10 +89,8 @@ export function ServerConnectionsTable({
         window.location.reload();
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to delete connection',
-          variant: 'destructive',
         });
       },
     })

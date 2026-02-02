@@ -167,7 +167,8 @@ export async function getSortedHubs(
   sort: SortOptions,
   minServers?: number,
   maxServers?: number,
-  activityLevels?: ActivityLevel[]
+  activityLevels?: ActivityLevel[],
+  skipCount = false
 ) {
   const now = new Date();
   const trendingWindowStart = new Date(
@@ -181,7 +182,10 @@ export async function getSortedHubs(
   );
 
   // Get total count based on the initial filter (for pagination)
-  let totalCount = await db.hub.count({ where: whereClause });
+  let totalCount = 0;
+  if (!skipCount) {
+    totalCount = await db.hub.count({ where: whereClause });
+  }
 
   // Flag to indicate if we need post-query filtering for server counts
   const needsServerCountFiltering =
@@ -370,7 +374,9 @@ export async function getSortedHubs(
     }
 
     // Set total count based on filtered results
-    totalCount = filteredScoredHubs.length;
+    if (!skipCount) {
+      totalCount = filteredScoredHubs.length;
+    }
 
     // 5. Get the paginated results
     const paginatedScoredHubs = filteredScoredHubs.slice(
@@ -415,7 +421,9 @@ export async function getSortedHubs(
         // Add fallback hubs to the results
         hubs = [...orderedTrendingHubs, ...fallbackHubs];
         // Update total count to include fallback hubs
-        totalCount += fallbackHubs.length;
+        if (!skipCount) {
+          totalCount += fallbackHubs.length;
+        }
       } else {
         // Use only the trending hubs
         hubs = orderedTrendingHubs;
@@ -488,7 +496,9 @@ export async function getSortedHubs(
     }
 
     // Set total count based on filtered results
-    totalCount = filteredRatingHubs.length;
+    if (!skipCount) {
+      totalCount = filteredRatingHubs.length;
+    }
 
     // Apply pagination AFTER sorting and filtering
     hubs = filteredRatingHubs.slice(
@@ -500,12 +510,14 @@ export async function getSortedHubs(
     // For better performance with pagination, we'll use a hybrid approach
 
     // First, get total count for pagination
-    totalCount = await db.hub.count({
-      where: {
-        ...whereClause,
-        connections: { some: { connected: true } },
-      },
-    });
+    if (!skipCount) {
+      totalCount = await db.hub.count({
+        where: {
+          ...whereClause,
+          connections: { some: { connected: true } },
+        },
+      });
+    }
 
     // For Activity sort, we need to score all hubs to get proper ranking
     // This is necessary because activity scoring can't be done at database level
@@ -577,7 +589,9 @@ export async function getSortedHubs(
         maxServers
       ) as typeof scoredActivityHubs;
       // Update total count to reflect filtering
-      totalCount = filteredHubs.length;
+      if (!skipCount) {
+        totalCount = filteredHubs.length;
+      }
     }
 
     // Get paginated results AFTER sorting and filtering
@@ -648,8 +662,9 @@ export async function getSortedHubs(
 
     // For sorts that modify the where clause, we need to recalculate totalCount
     if (
-      sort === SortOptions.MostUpvotedNew ||
-      sort === SortOptions.MostRecentPopular
+      !skipCount &&
+      (sort === SortOptions.MostUpvotedNew ||
+        sort === SortOptions.MostRecentPopular)
     ) {
       totalCount = await db.hub.count({ where: finalWhereClause });
     }
@@ -667,12 +682,14 @@ export async function getSortedHubs(
     if (needsServerCountFiltering) {
       hubs = filterHubsByServerCount(hubs, minServers, maxServers);
       // Recalculate total count if we filtered
-      totalCount = await getFilteredTotalCount(
-        whereClause,
-        minServers,
-        maxServers,
-        activityLevels
-      );
+      if (!skipCount) {
+        totalCount = await getFilteredTotalCount(
+          whereClause,
+          minServers,
+          maxServers,
+          activityLevels
+        );
+      }
     }
   }
 

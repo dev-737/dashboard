@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'motion/react';
 import { ArrowRight, Star, TrendingUp, Users } from 'lucide-react';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { HubCardDTO } from '@/lib/discover/query';

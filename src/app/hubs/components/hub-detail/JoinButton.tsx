@@ -2,8 +2,8 @@
 
 import { Check, ChevronDown, Copy, Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { authClient } from '@/lib/auth-client';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
-import { toast } from '@/hooks/use-toast';
+import { authClient } from '@/lib/auth-client';
 
 interface JoinButtonProps {
   hubName: string;
@@ -28,8 +28,7 @@ export default function JoinButton({ hubName, hubId }: JoinButtonProps) {
     try {
       await navigator.clipboard.writeText(joinHubCommand);
       setCopied(true);
-      toast({
-        title: 'Command copied!',
+      toast.success('Command copied!', {
         description:
           'Paste this command in your Discord server to join the hub.',
         className: 'bg-card border-primary/20 text-primary-foreground',
@@ -37,10 +36,8 @@ export default function JoinButton({ hubName, hubId }: JoinButtonProps) {
       });
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast({
-        title: 'Failed to copy',
+      toast.error('Failed to copy', {
         description: 'Please copy the command manually.',
-        variant: 'destructive',
       });
     }
   };

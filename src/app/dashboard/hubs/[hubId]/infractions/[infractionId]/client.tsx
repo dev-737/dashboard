@@ -13,6 +13,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useId, useState } from 'react';
+import { toast } from 'sonner';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
@@ -33,7 +34,6 @@ import {
 } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
 import { useTRPC } from '@/utils/trpc';
 
 interface AddInfractionClientProps {
@@ -51,7 +51,6 @@ export function AddInfractionClient({
 }: AddInfractionClientProps) {
   const trpc = useTRPC();
   const router = useRouter();
-  const { toast } = useToast();
 
   // Generate unique IDs for form fields
   const userIdFieldId = useId();
@@ -89,20 +88,17 @@ export function AddInfractionClient({
         expiresAt: duration === 'temporary' ? expiresAt : null,
         ...(targetType === 'user' ? { userId } : { serverId, serverName }),
       });
-      toast({
-        title: 'Success',
+      toast.success('Success', {
         description: `${infractionType.toLowerCase()} created successfully`,
       });
       router.push(`/dashboard/hubs/${hubId}/infractions`);
     } catch (error) {
       console.error('Error creating infraction:', error);
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description:
           error instanceof Error
             ? error.message
             : 'Failed to create infraction',
-        variant: 'destructive',
       });
     } finally {
       setIsSubmitting(false);

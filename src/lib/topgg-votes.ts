@@ -117,7 +117,7 @@ export async function processTopGGVote(
  * @param currentBadges Current user badges
  * @returns Array of newly awarded badges
  */
-export async function checkAndAwardVoteBadges(
+async function checkAndAwardVoteBadges(
   userId: string,
   voteCount: number,
   currentBadges: Badges[]
@@ -160,109 +160,6 @@ export function validateTopGGAuth(
     return false;
   }
   return authHeader === expectedSecret;
-}
-
-/**
- * Check if a user can vote (cooldown check)
- * @param userId User ID
- * @returns Whether the user can vote
- */
-export async function canUserVote(userId: string): Promise<boolean> {
-  try {
-    const user = await db.user.findUnique({
-      where: { id: userId },
-      select: { lastVoted: true },
-    });
-
-    if (!user || !user.lastVoted) {
-      return true; // User never voted before
-    }
-
-    // Check if 12 hours have passed since last vote
-    const twelveHoursAgo = new Date();
-    twelveHoursAgo.setHours(twelveHoursAgo.getHours() - 12);
-
-    return user.lastVoted < twelveHoursAgo;
-  } catch (error) {
-    console.error('Error checking vote cooldown:', error);
-    return false; // Conservative approach - don't allow if we can't check
-  }
-}
-
-/**
- * Get vote statistics for a user
- * @param userId User ID
- * @returns User's vote statistics
- */
-export async function getUserVoteStats(userId: string) {
-  try {
-    const user = await db.user.findUnique({
-      where: { id: userId },
-      select: {
-        voteCount: true,
-        lastVoted: true,
-        badges: true,
-      },
-    });
-
-    if (!user) {
-      return {
-        voteCount: 0,
-        lastVoted: null,
-        canVote: true,
-        badges: [],
-      };
-    }
-
-    const canVote = user.lastVoted ? await canUserVote(userId) : true;
-
-    return {
-      voteCount: user.voteCount,
-      lastVoted: user.lastVoted,
-      canVote,
-      badges: user.badges,
-    };
-  } catch (error) {
-    console.error('Error getting user vote stats:', error);
-    return {
-      voteCount: 0,
-      lastVoted: null,
-      canVote: false,
-      badges: [],
-    };
-  }
-}
-
-/**
- * Get top voters (leaderboard)
- * @param limit Number of users to return
- * @returns Array of top voters
- */
-export async function getTopVoters(limit: number = 10) {
-  try {
-    const topVoters = await db.user.findMany({
-      where: {
-        voteCount: {
-          gt: 0,
-        },
-      },
-      select: {
-        id: true,
-        name: true,
-        image: true,
-        voteCount: true,
-        lastVoted: true,
-        badges: true,
-      },
-      orderBy: [{ voteCount: 'desc' }, { lastVoted: 'desc' }],
-      take: limit,
-    });
-
-    return topVoters;
-  } catch (error) {
-    console.error('Error getting top voters:', error);
-    return [];
-  }
 }
 
 /**

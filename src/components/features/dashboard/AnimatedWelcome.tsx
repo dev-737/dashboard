@@ -2,9 +2,9 @@
 
 import {
   Activity,
+  Hand,
   type LucideIcon,
   MessageSquare,
-  Hand,
   Users,
 } from 'lucide-react';
 import { motion } from 'motion/react';

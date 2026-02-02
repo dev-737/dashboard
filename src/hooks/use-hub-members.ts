@@ -1,27 +1,14 @@
 'use client';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 import { useTRPC } from '@/utils/trpc';
 import { useErrorNotification } from './use-error-notification';
 
-// Types (match the tRPC router outputs)
 export interface User {
   id: string;
   name: string | null;
   image: string | null;
-}
-
-export interface Moderator {
-  id: string;
-  userId: string;
-  role: 'MODERATOR' | 'MANAGER';
-  user: User;
-}
-
-export interface HubMembers {
-  owner: User;
-  moderators: Moderator[];
 }
 
 /**
@@ -62,7 +49,6 @@ export function useHubMembers(
 export function useAddHubMember(hubId: string) {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-  const { toast } = useToast();
 
   return useMutation(
     trpc.hub.addMember.mutationOptions({
@@ -72,17 +58,14 @@ export function useAddHubMember(hubId: string) {
           queryKey: trpc.hub.getMembers.queryKey({ hubId }),
         });
 
-        toast({
-          title: 'Member Added',
+        toast.success('Member Added', {
           description: `User has been added as a ${variables.role.toLowerCase()}.`,
           duration: 3000,
         });
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: `Failed to add member: ${error.message}`,
-          variant: 'destructive',
         });
       },
     })
@@ -95,7 +78,6 @@ export function useAddHubMember(hubId: string) {
 export function useUpdateMemberRole(hubId: string) {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-  const { toast } = useToast();
 
   return useMutation(
     trpc.hub.updateMemberRole.mutationOptions({
@@ -106,17 +88,14 @@ export function useUpdateMemberRole(hubId: string) {
         });
         console.log('Members query invalidated');
 
-        toast({
-          title: 'Role Updated',
+        toast.success('Role Updated', {
           description: `Member's role has been updated to ${variables.role.toLowerCase()}.`,
           duration: 3000,
         });
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: `Failed to update role: ${error.message}`,
-          variant: 'destructive',
         });
       },
     })
@@ -129,27 +108,23 @@ export function useUpdateMemberRole(hubId: string) {
 export function useRemoveMember(hubId: string) {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-  const { toast } = useToast();
 
   return useMutation(
     trpc.hub.removeMember.mutationOptions({
-      onSuccess: async (_data, variables) => {
+      onSuccess: async (_data) => {
         // Wait for the refetch to complete
         await queryClient.invalidateQueries({
           queryKey: trpc.hub.getMembers.queryKey({ hubId }),
         });
 
-        toast({
-          title: 'Member Removed',
+        toast.success('Member Removed', {
           description: 'Member has been removed from the hub.',
           duration: 3000,
         });
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: `Failed to remove member: ${error.message}`,
-          variant: 'destructive',
         });
       },
     })

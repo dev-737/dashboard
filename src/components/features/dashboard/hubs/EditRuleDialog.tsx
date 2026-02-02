@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Save, Shield } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { PatternBuilder } from '@/components/forms/PatternBuilder';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,9 +15,8 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useToast } from '@/components/ui/use-toast';
 import { BlockWordAction } from '@/lib/generated/prisma/client/client';
-import type { AntiSwearRule } from '@/lib/types/anti-swear';
+import type { AntiSwearRule } from '@/lib/types/automod';
 import { useTRPC } from '@/utils/trpc';
 import { ActionSelector } from './ActionSelector';
 
@@ -34,7 +34,7 @@ export function EditRuleDialog({
   onOpenChange,
 }: EditRuleDialogProps) {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const queryClient = useQueryClient();
 
   const [editForm, setEditForm] = useState({
@@ -62,16 +62,13 @@ export function EditRuleDialog({
           trpc.hub.getAntiSwearRules.queryFilter({ hubId })
         );
         onOpenChange(false);
-        toast({
-          title: 'Success',
+        toast.success('Success', {
           description: 'Rule updated successfully',
         });
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to update rule',
-          variant: 'destructive',
         });
       },
     })
@@ -81,28 +78,22 @@ export function EditRuleDialog({
     if (!rule) return;
 
     if (!editForm.name.trim() || editForm.name.length < 3) {
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Rule name must be at least 3 characters long',
-        variant: 'destructive',
       });
       return;
     }
 
     if (editForm.patterns.length === 0) {
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Please add at least one pattern',
-        variant: 'destructive',
       });
       return;
     }
 
     if (editForm.actions.length === 0) {
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Please select at least one action',
-        variant: 'destructive',
       });
       return;
     }
@@ -113,10 +104,8 @@ export function EditRuleDialog({
         editForm.muteDurationMinutes < 1 ||
         editForm.muteDurationMinutes > 43200
       ) {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: 'Mute duration must be between 1 and 43200 minutes',
-          variant: 'destructive',
         });
         return;
       }

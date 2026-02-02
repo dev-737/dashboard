@@ -3,11 +3,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Star } from 'lucide-react';
 import { useId, useState } from 'react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
 import { useTRPC } from '@/utils/trpc';
 
 interface WriteReviewFormProps {
@@ -35,13 +35,12 @@ export default function WriteReviewForm({
   const [hoverRating, setHoverRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+
   const queryClient = useQueryClient();
   const createReview = useMutation(
     trpc.hub.createHubReview.mutationOptions({
       onSuccess: (newReview) => {
-        toast({
-          title: 'Review submitted',
+        toast.success('Review submitted', {
           description: 'Thank you for your feedback!',
         });
 
@@ -85,13 +84,11 @@ export default function WriteReviewForm({
         }
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description:
             error instanceof Error
               ? error.message
               : 'Failed to submit review. Please try again.',
-          variant: 'destructive',
         });
       },
     })
@@ -101,19 +98,15 @@ export default function WriteReviewForm({
     e.preventDefault();
 
     if (rating === 0) {
-      toast({
-        title: 'Rating required',
+      toast.error('Rating required', {
         description: 'Please select a rating before submitting your review.',
-        variant: 'destructive',
       });
       return;
     }
 
     if (!reviewText.trim()) {
-      toast({
-        title: 'Review text required',
+      toast.error('Review text required', {
         description: 'Please write a review before submitting.',
-        variant: 'destructive',
       });
       return;
     }

@@ -1,10 +1,10 @@
 import { AlertCircle, CheckCircle, FileText } from 'lucide-react';
-import { notFound, redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
+import { notFound, redirect } from 'next/navigation';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { HubLoggingForm } from '@/components/features/dashboard/hubs/HubLoggingForm';
 import { Card, CardContent } from '@/components/ui/card';
+import { auth } from '@/lib/auth';
 import { PermissionLevel } from '@/lib/constants';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';

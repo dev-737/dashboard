@@ -1,5 +1,5 @@
-import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
+import { auth } from '@/lib/auth';
 import { Navbar } from './Navbar';
 
 export async function NavbarWrapper() {

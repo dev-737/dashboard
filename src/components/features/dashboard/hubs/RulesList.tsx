@@ -16,6 +16,7 @@ import {
   UserX,
 } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -37,7 +38,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { Switch } from '@/components/ui/switch';
-import { useToast } from '@/components/ui/use-toast';
 import { BlockWordAction } from '@/lib/generated/prisma/client/client';
 import {
   type AntiSwearRule,
@@ -45,7 +45,7 @@ import {
   BlockWordActionLabels,
   getMatchPatternFromPattern,
   MatchPatternLabels,
-} from '@/lib/types/anti-swear';
+} from '@/lib/types/automod';
 import { useTRPC } from '@/utils/trpc';
 import { EditRuleDialog } from './EditRuleDialog';
 
@@ -74,9 +74,9 @@ const ActionIcon = ({ action }: { action: BlockWordAction }) => {
   }
 };
 
-export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
+export function RulesList({ hubId, canEdit }: RulesListProps) {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const queryClient = useQueryClient();
   const [deleteDialogRule, setDeleteDialogRule] =
     useState<AntiSwearRule | null>(null);
@@ -99,16 +99,13 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
         await queryClient.invalidateQueries(
           trpc.hub.getAntiSwearRules.queryFilter({ hubId })
         );
-        toast({
-          title: 'Success',
+        toast.success('Success', {
           description: 'Rule deleted successfully',
         });
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to delete rule',
-          variant: 'destructive',
         });
       },
     })
@@ -120,16 +117,13 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
         await queryClient.invalidateQueries(
           trpc.hub.getAntiSwearRules.queryFilter({ hubId })
         );
-        toast({
-          title: 'Success',
+        toast.success('Success', {
           description: 'Rule updated successfully',
         });
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to update rule',
-          variant: 'destructive',
         });
       },
     })
@@ -336,6 +330,7 @@ export function RulesList({ hubId, canEdit, canModerate }: RulesListProps) {
                 })}
                 {rule.patterns.length > 6 && (
                   <button
+                    type="button"
                     onClick={() => setEditingRule(rule)}
                     disabled={!canEdit}
                     className="flex items-center justify-center rounded-md border border-gray-700/30 bg-gray-800/30 p-2 transition-colors hover:border-gray-600/50 hover:bg-gray-800/50 disabled:cursor-not-allowed disabled:opacity-50"

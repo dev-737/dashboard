@@ -22,6 +22,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -41,7 +42,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useToast } from '@/components/ui/use-toast';
 import type { AppealStatus } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 
@@ -91,7 +91,6 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
   const trpc = useTRPC();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { toast } = useToast();
 
   const [appeals, setAppeals] = useState<Appeal[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -140,11 +139,11 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
         (queryError as { message?: string })?.message ||
         'Failed to fetch appeals';
       setError(message);
-      toast({ title: 'Error', description: message, variant: 'destructive' });
+      toast.error('Error', { description: message });
     } else {
       setError(null);
     }
-  }, [queryError, toast]);
+  }, [queryError]);
 
   useEffect(() => {
     // refetch on param changes
@@ -473,7 +472,7 @@ interface AppealCardProps {
 
 function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const [isUpdating, setIsUpdating] = useState(false);
   const [localStatus, setLocalStatus] = useState(appeal.status);
   const updateStatus = useMutation(trpc.appeal.updateStatus.mutationOptions());
@@ -486,22 +485,22 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
       { appealId: appeal.id, status: newStatus },
       {
         onSuccess: () => {
-          toast({
-            title: `Appeal ${newStatus === 'ACCEPTED' ? 'Accepted' : 'Rejected'}`,
-            description:
-              newStatus === 'ACCEPTED'
-                ? 'The infraction has been appealed.'
-                : 'The appeal has been rejected.',
-          });
+          toast.success(
+            `Appeal ${newStatus === 'ACCEPTED' ? 'Accepted' : 'Rejected'}`,
+            {
+              description:
+                newStatus === 'ACCEPTED'
+                  ? 'The infraction has been appealed.'
+                  : 'The appeal has been rejected.',
+            }
+          );
           onUpdate(appeal.id, newStatus);
         },
         onError: (error) => {
           setLocalStatus(previousStatus);
-          toast({
-            title: 'Error',
+          toast.error('Error', {
             description:
               error.message || `Failed to ${newStatus.toLowerCase()} appeal`,
-            variant: 'destructive',
           });
         },
         onSettled: () => setIsUpdating(false),

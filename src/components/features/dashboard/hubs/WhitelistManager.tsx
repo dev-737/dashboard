@@ -10,6 +10,7 @@ import {
   Users,
 } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -47,8 +48,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/components/ui/use-toast';
-import type { AntiSwearWhitelistItem } from '@/lib/types/anti-swear';
+import type { AntiSwearWhitelistItem } from '@/lib/types/automod';
 import { useTRPC } from '@/utils/trpc';
 
 interface WhitelistManagerProps {
@@ -57,13 +57,9 @@ interface WhitelistManagerProps {
   canModerate: boolean;
 }
 
-export function WhitelistManager({
-  hubId,
-  canEdit,
-  canModerate,
-}: WhitelistManagerProps) {
+export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const queryClient = useQueryClient();
 
   const [selectedRuleId, setSelectedRuleId] = useState<string>('');
@@ -101,16 +97,13 @@ export function WhitelistManager({
         );
         setShowAddDialog(false);
         setNewWhitelistItem({ word: '', reason: '' });
-        toast({
-          title: 'Success',
+        toast.success('Success', {
           description: 'Word added to whitelist successfully',
         });
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to add word to whitelist',
-          variant: 'destructive',
         });
       },
     })
@@ -122,16 +115,13 @@ export function WhitelistManager({
         await queryClient.invalidateQueries(
           trpc.hub.getAntiSwearWhitelist.queryFilter({ ruleId: selectedRuleId })
         );
-        toast({
-          title: 'Success',
+        toast.success('Success', {
           description: 'Word removed from whitelist successfully',
         });
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message || 'Failed to remove word from whitelist',
-          variant: 'destructive',
         });
       },
     })
@@ -139,10 +129,8 @@ export function WhitelistManager({
 
   const handleAddWhitelistItem = async () => {
     if (!selectedRuleId || !newWhitelistItem.word.trim()) {
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Please enter a word to whitelist',
-        variant: 'destructive',
       });
       return;
     }

@@ -2,11 +2,11 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { UnsavedChangesPrompt } from '@/components/features/dashboard/UnsavedChangesPrompt';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { useToast } from '@/components/ui/use-toast';
 import { HubModulesBits, HubModulesDescriptions } from '@/lib/constants';
 import { useTRPC } from '@/utils/trpc';
 
@@ -17,7 +17,7 @@ interface HubModulesFormProps {
 
 export function HubModulesForm({ hubId, initialModules }: HubModulesFormProps) {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const queryClient = useQueryClient();
   const [modules, setModules] = useState<number>(initialModules);
   const [currentInitialModules, setCurrentInitialModules] =
@@ -53,8 +53,7 @@ export function HubModulesForm({ hubId, initialModules }: HubModulesFormProps) {
     try {
       await saveMutation.mutateAsync({ hubId, settings: modules });
 
-      toast({
-        title: 'Modules saved',
+      toast.success('Modules saved', {
         description: 'Hub modules have been updated successfully.',
       });
 
@@ -63,11 +62,9 @@ export function HubModulesForm({ hubId, initialModules }: HubModulesFormProps) {
       setHasChanges(false);
     } catch (error) {
       console.error('Error saving modules:', error);
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description:
           error instanceof Error ? error.message : 'Failed to save modules',
-        variant: 'destructive',
       });
     } finally {
       setIsSaving(false);

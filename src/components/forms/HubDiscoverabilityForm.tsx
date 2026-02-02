@@ -1,6 +1,5 @@
 'use client';
 
-import type { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { Globe } from 'lucide-react';
 import { HubLanguageManagement } from '@/components/features/dashboard/hubs/HubLanguageManagement';
 import { HubNSFWToggle } from '@/components/features/dashboard/hubs/HubNSFWToggle';
@@ -12,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import type { HubVisibility } from '@/lib/generated/prisma/client/client';
 
 interface HubData {
   id: string;

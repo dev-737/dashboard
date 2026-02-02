@@ -106,7 +106,6 @@ export async function getUserHubs(userId: string) {
   // Combine and remove duplicates
   const allHubs = [...hubsWithPermission];
 
-  // biome-ignore lint/complexity/noForEach: <explanation>
   moderatedHubsWithPermission.forEach((hub) => {
     if (!allHubs.some((h) => h.id === hub.id)) {
       allHubs.push(hub);
@@ -114,20 +113,4 @@ export async function getUserHubs(userId: string) {
   });
 
   return allHubs;
-}
-
-/**
- * Check if a user has permission to perform an action on a hub
- * @param userId The user's ID
- * @param hubId The hub's ID
- * @param requiredPermission The required permission level
- * @returns Whether the user has the required permission
- */
-export async function hasHubPermission(
-  userId: string,
-  hubId: string,
-  requiredPermission: PermissionLevel
-): Promise<boolean> {
-  const userPermission = await getUserHubPermission(userId, hubId);
-  return userPermission >= requiredPermission;
 }

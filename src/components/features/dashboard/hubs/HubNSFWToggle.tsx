@@ -2,10 +2,10 @@
 
 import { AlertTriangle, Save, Shield } from 'lucide-react';
 import { useId, useState } from 'react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { useToast } from '@/components/ui/use-toast';
 import { useUpdateHub } from '@/hooks/use-hub-settings';
 
 interface HubNSFWToggleProps {
@@ -14,7 +14,6 @@ interface HubNSFWToggleProps {
 }
 
 export function HubNSFWToggle({ hubId, currentNsfw }: HubNSFWToggleProps) {
-  const { toast } = useToast();
   const nsfwToggleId = useId();
   const [isNsfw, setIsNsfw] = useState<boolean>(currentNsfw);
   const [hasChanges, setHasChanges] = useState(false);
@@ -36,16 +35,13 @@ export function HubNSFWToggle({ hubId, currentNsfw }: HubNSFWToggleProps) {
       });
 
       setHasChanges(false);
-      toast({
-        title: 'NSFW Setting Updated',
+      toast.success('NSFW Setting Updated', {
         description: `Hub has been marked as ${isNsfw ? 'NSFW' : 'SFW'}.`,
       });
     } catch (error) {
       console.error('Error updating NSFW setting:', error);
-      toast({
-        title: 'Error',
+      toast.error('Error', {
         description: 'Failed to update NSFW setting. Please try again.',
-        variant: 'destructive',
       });
     }
   };

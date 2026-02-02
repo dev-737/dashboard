@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AlertTriangle } from 'lucide-react';
 import { useEffect, useId, useState } from 'react';
+import { toast } from 'sonner';
 import { UnsavedChangesPrompt } from '@/components/features/dashboard/UnsavedChangesPrompt';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Label } from '@/components/ui/label';
@@ -14,13 +15,12 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { useToast } from '@/components/ui/use-toast';
 import { SUPPORTED_LANGUAGES } from '@/lib/constants';
 import { useTRPC } from '@/utils/trpc';
 
 export function UserSettingsForm() {
   const trpc = useTRPC();
-  const { toast } = useToast();
+
   const queryClient = useQueryClient();
 
   const mentionOnReplyId = useId();
@@ -32,18 +32,15 @@ export function UserSettingsForm() {
   const updateSettingsMutation = useMutation(
     trpc.user.updateSettings.mutationOptions({
       onSuccess: () => {
-        toast({
-          title: 'Settings saved',
+        toast.success('Settings saved', {
           description: 'Your settings have been updated successfully.',
         });
         setHasChanges(false);
         queryClient.invalidateQueries(trpc.user.getSettings.pathFilter());
       },
       onError: (error) => {
-        toast({
-          title: 'Error',
+        toast.error('Error', {
           description: error.message,
-          variant: 'destructive',
         });
       },
     })

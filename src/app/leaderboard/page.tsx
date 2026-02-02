@@ -1,7 +1,7 @@
 'use client';
 
+import { ArrowLeft, Sparkles, Trophy } from 'lucide-react';
 import { motion } from 'motion/react';
-import { Trophy, ArrowLeft, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 

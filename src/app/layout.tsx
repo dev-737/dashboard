@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { type ReactNode, Suspense } from 'react';
 import { NavbarWrapper } from '@/components/layout/NavbarWrapper';
-import { Toaster } from '@/components/layout/Toaster';
 import { Providers } from '@/components/providers';
+import { Toaster } from '@/components/ui/sonner';
 import '@/styles/globals.css';
 import { ConditionalFooter } from '@/components/layout/ConditionalFooter';
 

@@ -24,6 +24,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useId, useState } from 'react';
+import { toast } from 'sonner';
 import { InfractionRevokeModal } from '@/components/features/moderation/InfractionRevokeModal';
 import { Button } from '@/components/ui/button';
 import {
@@ -44,7 +45,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useToast } from '@/components/ui/use-toast';
 import type {
   InfractionStatus,
   InfractionType,
@@ -92,7 +92,6 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
   const trpc = useTRPC();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { toast } = useToast();
 
   // Generate unique IDs for form fields
   const typeFilterId = useId();
@@ -163,7 +162,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
           ? queryError.message
           : 'Failed to fetch infractions';
       setError(msg);
-      toast({ title: 'Error', description: msg, variant: 'destructive' });
+      toast.error('Error', { description: msg });
     } else {
       setError(null);
     }
@@ -173,7 +172,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
         data.totalPages || Math.ceil((data.total || 0) / itemsPerPage) || 1
       );
     }
-  }, [data, isLoading, queryError, toast]);
+  }, [data, isLoading, queryError]);
 
   useEffect(() => {
     // trigger refetch when filters change via input bindings
@@ -255,7 +254,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
         </div>
         <Button
           asChild
-          className="w-full border-none btn-primary text-white  sm:w-auto"
+          className="btn-primary w-full border-none text-white sm:w-auto"
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions/add`}>
             <PlusCircle className="mr-2 h-4 w-4" />

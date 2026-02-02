@@ -1,11 +1,11 @@
 import { Plus } from 'lucide-react';
+import { headers } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { HydrationBoundaryProvider } from '@/components/providers/HydrationBoundary';
 import { Button } from '@/components/ui/button';
+import { auth } from '@/lib/auth';
 import { PermissionLevel } from '@/lib/constants';
 import { createDehydratedState } from '@/lib/create-dehydrated-state';
 import { getUserHubPermission } from '@/lib/permissions';
