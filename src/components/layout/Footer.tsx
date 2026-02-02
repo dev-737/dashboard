@@ -187,9 +187,6 @@ export function Footer() {
             </div>
 
             <div className="flex items-center gap-4">
-              <div className="text-gray-500 text-sm">
-                Version {`${process.env.NEXT_PUBLIC_VERSION}`}
-              </div>
               <iframe
                 src="https://status.interchat.dev/badge?theme=dark"
                 width="250"
