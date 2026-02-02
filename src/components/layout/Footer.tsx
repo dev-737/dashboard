@@ -13,7 +13,6 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 
 export function Footer() {
   const footerLinks = {
@@ -191,19 +190,17 @@ export function Footer() {
               <div className="text-gray-500 text-sm">
                 Version {`${process.env.NEXT_PUBLIC_VERSION}`}
               </div>
-              <Button
-                className="flex items-center gap-2"
-                variant="outline"
-                size="sm"
-                onClick={() =>
-                  window.open('https://status.interchat.dev', '_blank')
-                }
-              >
-                <div className="h-2 w-2 animate-pulse rounded-full bg-green-400"></div>
-                <span className="text-gray-500 text-sm">
-                  All systems operational
-                </span>
-              </Button>
+              <iframe
+                src="https://status.interchat.dev/badge?theme=dark"
+                width="250"
+                height="30"
+                style={{
+                  colorScheme: 'normal',
+                  border: 'none',
+                  overflow: 'hidden',
+                }}
+                title="InterChat Status"
+              />
             </div>
           </div>
         </motion.div>
