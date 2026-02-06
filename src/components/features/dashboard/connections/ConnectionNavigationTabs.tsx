@@ -47,7 +47,6 @@ export function ConnectionNavigationTabs({
   );
 }
 
-// Loading skeleton version of the tabs
 export function ConnectionNavigationTabsSkeleton({
   currentTab = 'overview',
 }: {
@@ -63,7 +62,7 @@ export function ConnectionNavigationTabsSkeleton({
   return (
     <div className="no-scrollbar z-10 -mx-6 overflow-x-auto border-gray-800/50 border-b bg-gray-900/80 px-0 shadow-sm backdrop-blur-md transition-all duration-200">
       <div className="w-full px-4 sm:px-6">
-        <div className="mx-auto flex h-auto w-full max-w-screen-xl flex-nowrap justify-start gap-2 rounded-none bg-transparent p-0 sm:justify-center sm:gap-6">
+        <div className="mx-auto flex h-auto w-full max-w-7xl flex-nowrap justify-start gap-2 rounded-none bg-transparent p-0 sm:justify-center sm:gap-6">
           {[
             {
               value: 'overview',
@@ -92,7 +91,7 @@ export function ConnectionNavigationTabsSkeleton({
             return (
               <div
                 key={tab.value}
-                className={`flex items-center whitespace-nowrap border-b-[2px] px-3 py-3 font-medium text-sm transition-all duration-200 sm:px-6 sm:py-4 ${isActive ? `border-[${activeColor.borderColor}] text-[${activeColor.textColor}]` : 'border-transparent text-gray-500'}`}
+                className={`flex items-center whitespace-nowrap border-b-2 px-3 py-3 font-medium text-sm transition-all duration-200 sm:px-6 sm:py-4 ${isActive ? `border-[${activeColor.borderColor}] text-[${activeColor.textColor}]` : 'border-transparent text-gray-500'}`}
                 style={
                   isActive
                     ? {

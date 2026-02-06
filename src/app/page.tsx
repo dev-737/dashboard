@@ -95,7 +95,7 @@ export default async function HomePage() {
             <div className="h-96 w-full animate-pulse bg-gray-900/50" />
           }
         >
-          <TrendingHubs />
+        <TrendingHubs />
         </Suspense>
         <FaqSection />
         <CTA />

@@ -29,14 +29,15 @@ export function OnboardingHelpMenu() {
       action: startTour,
       color: 'text-orange-400',
     },
-    {
-      label: 'Documentation',
-      description: 'Read our comprehensive guides',
-      icon: BookOpen,
-      href: 'https://docs.interchat.dev',
-      external: true,
-      color: 'text-blue-400',
-    },
+    // FIXME: Re-enable changelog link when changelog is ready
+    // {
+    //   label: 'Documentation',
+    //   description: 'Read our comprehensive guides',
+    //   icon: BookOpen,
+    //   href: 'https://docs.interchat.dev',
+    //   external: true,
+    //   color: 'text-blue-400',
+    // },
     {
       label: 'Support Server',
       description: 'Get help from our community',

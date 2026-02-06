@@ -37,21 +37,23 @@ export function Footer() {
       },
     ],
     resources: [
-      {
-        label: 'Documentation',
-        href: 'https://docs.interchat.dev',
-        icon: FileText,
-      },
+      // FIXME: Re-enable changelog link when changelog is ready
+      // {
+      //   label: 'Documentation',
+      //   href: 'https://docs.interchat.dev',
+      //   icon: FileText,
+      // },
       {
         label: 'Status Page',
         href: 'https://status.interchat.dev',
         icon: Shield,
       },
-      {
-        label: 'Changelog',
-        href: 'https://docs.interchat.dev/changelog',
-        icon: FileText,
-      },
+      // FIXME: Re-enable changelog link when changelog is ready
+      // {
+      //   label: 'Changelog',
+      //   href: 'https://docs.interchat.dev/changelog',
+      //   icon: FileText,
+      // },
     ],
   };
   const pathname = usePathname();

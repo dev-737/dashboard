@@ -16,10 +16,10 @@ import {
 import { HomepageMobileSidebar } from './HomepageMobileSidebar';
 
 const links = [
-  {
-    text: 'Docs',
-    url: 'https://docs.interchat.dev',
-  },
+  // FIXME: Re-enable docs link when docs are ready{
+  //   text: 'Docs',
+  //   url: 'https://docs.interchat.dev',
+  // },
   {
     text: 'Discover',
     url: '/discover',

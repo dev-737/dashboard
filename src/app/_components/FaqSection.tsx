@@ -31,9 +31,9 @@ function AccordionItem({
     >
       <div
         className={cn(
-          'rounded-2xl border border-white/5 bg-white/[0.02]',
+          'rounded-2xl border border-white/5 bg-white/2',
           'backdrop-blur-xl transition-all duration-300',
-          'hover:border-white/10 hover:bg-white/[0.04] hover:shadow-lg'
+          'hover:border-white/10 hover:bg-white/4 hover:shadow-lg'
         )}
       >
         <button
