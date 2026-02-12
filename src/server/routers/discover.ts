@@ -1,5 +1,5 @@
 import { z } from 'zod/v4';
-import { getDiscoverHubs } from '@/lib/discover/query';
+import { DiscoverSortSchema, getDiscoverHubs } from '@/lib/discover/query';
 import { publicProcedure, router } from '../trpc';
 
 const discoverInput = z.object({
@@ -23,18 +23,7 @@ const discoverInput = z.object({
     .optional(),
   minRating: z.number().min(0).max(5).optional(),
   showFeaturedOnly: z.boolean().optional(),
-  sort: z
-    .enum([
-      'trending',
-      'active',
-      'new',
-      'oldest',
-      'upvoted',
-      'rated',
-      'members',
-      'growing',
-    ])
-    .optional(),
+  sort: DiscoverSortSchema.optional(),
   page: z.number().int().min(1).optional(),
   pageSize: z.number().int().min(1).max(60).optional(),
 });

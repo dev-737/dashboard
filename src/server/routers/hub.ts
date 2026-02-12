@@ -12,6 +12,7 @@ import {
   HubVisibility,
   type Prisma,
 } from '@/lib/generated/prisma/client/client';
+import { syncHubUpvoteCount } from '@/lib/hub-counts';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 import { getRedisClient } from '@/lib/redis-config';
@@ -37,6 +38,7 @@ const hubSearchSchema = z.object({
   skip: z.number().optional().prefault(0),
   limit: z.number().optional().prefault(12),
   sort: z.enum(SortOptions).optional().prefault(SortOptions.Trending),
+  skipCount: z.boolean().optional(),
 });
 
 async function updateHubAverageRating(hubId: string) {
@@ -52,7 +54,7 @@ async function updateHubAverageRating(hubId: string) {
 
   await db.hub.update({
     where: { id: hubId },
-    data: { averageRating },
+    data: { averageRating, reviewCount: reviews.length },
   });
 }
 
@@ -201,23 +203,16 @@ export const hubRouter = router({
     .input(
       z.object({
         hubId: z.string(),
-        automodEnabled: z.boolean().optional(),
         defaultMuteDurationMinutes: z
           .number()
           .int()
           .min(1)
           .max(43200)
           .optional(),
-        alertModsEnabled: z.boolean().optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {
-      const {
-        hubId,
-        automodEnabled,
-        defaultMuteDurationMinutes,
-        alertModsEnabled,
-      } = input;
+      const { hubId, defaultMuteDurationMinutes } = input;
       const userId = ctx.session.user.id;
       const level = await getUserHubPermission(userId, hubId);
       if (level < PermissionLevel.MANAGER)
@@ -617,7 +612,7 @@ export const hubRouter = router({
     }),
   // Get a list of hubs with pagination and filtering
   getHubs: publicProcedure.input(hubSearchSchema).query(async ({ input }) => {
-    const { search, tags, skip, sort } = input;
+    const { search, tags, skip, sort, skipCount } = input;
 
     // Build the where clause for filtering
     const whereClause = buildWhereClause({
@@ -626,7 +621,15 @@ export const hubRouter = router({
     });
 
     // Get sorted hubs with pagination
-    const { hubs, totalCount } = await getSortedHubs(whereClause, skip, sort);
+    const { hubs, totalCount } = await getSortedHubs(
+      whereClause,
+      skip,
+      sort,
+      undefined,
+      undefined,
+      undefined,
+      skipCount
+    );
 
     return {
       hubs,
@@ -1085,6 +1088,8 @@ export const hubRouter = router({
           },
         });
 
+        await syncHubUpvoteCount(hubId);
+
         return { upvoted: false };
       }
       // Add the upvote
@@ -1094,6 +1099,8 @@ export const hubRouter = router({
           userId,
         },
       });
+
+      await syncHubUpvoteCount(hubId);
 
       return { upvoted: true };
     }),

@@ -3,6 +3,7 @@ import { z } from 'zod/v4';
 import { getServers } from '@/actions/server-actions';
 import { PermissionLevel } from '@/lib/constants';
 import { HubVisibility } from '@/lib/generated/prisma/client/client';
+import { syncHubConnectionCount } from '@/lib/hub-counts';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 import { protectedProcedure, router } from '../trpc';
@@ -147,6 +148,7 @@ export const connectionRouter = router({
         }
 
         await db.connection.delete({ where: { id: connectionId } });
+        await syncHubConnectionCount(connection.hubId);
         return { success: true };
       } catch (error) {
         // Provide better error handling
@@ -238,6 +240,13 @@ export const connectionRouter = router({
           where: { id: input.connectionId },
           data: updateData,
         });
+
+        if (
+          input.connected !== undefined &&
+          input.connected !== connection.connected
+        ) {
+          await syncHubConnectionCount(connection.hubId);
+        }
 
         return { connection: updatedConnection, success: true };
       } catch (error) {

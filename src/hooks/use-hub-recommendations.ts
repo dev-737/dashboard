@@ -3,58 +3,13 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { SortOptions } from '@/app/hubs/constants';
 import { useTRPC } from '@/utils/trpc';
-import { useErrorNotification } from './use-error-notification';
-import type { SimplifiedHub } from './use-infinite-hubs';
 
-export interface HubRecommendation {
-  hubId: string;
-  hub: Hub & {
-    connectionCount: number;
-    upvoteCount: number;
-  };
-  score: number;
-  reason: string;
-  engagementMetrics: {
-    isHighActivity: boolean;
-    isGrowing: boolean;
-    isQuality: boolean;
-    isTrusted: boolean;
-  };
-}
-
-export interface EnhancedHub extends SimplifiedHub {
-  activityLevel: 'LOW' | 'MEDIUM' | 'HIGH';
-  connectionCount: number;
-  recentMessageCount: number;
-  upvoteCount: number;
-}
-
-export interface RecommendationsResponse {
-  recommendations: HubRecommendation[];
-  metadata: {
-    type: string;
-    count: number;
-    generatedAt: string;
-    userContext: {
-      authenticated: boolean;
-      userId?: string;
-    };
-  };
-}
-
-export type RecommendationType =
+type RecommendationType =
   | 'personalized'
   | 'trending'
   | 'activity'
   | 'similar'
   | 'friends';
-
-interface UseHubRecommendationsOptions {
-  enabled?: boolean;
-  staleTime?: number;
-  currentHubId?: string;
-  tags?: string[];
-}
 
 interface Hub {
   id: string;
@@ -75,7 +30,13 @@ interface Hub {
   createdAt?: Date;
   lastActive?: Date;
   rules?: string[];
-  moderators?: any[];
+  moderators?: {
+    user: {
+      id: string;
+      name: string | null;
+      image: string | null;
+    };
+  }[];
   nsfw?: boolean;
 }
 
@@ -102,39 +63,24 @@ function generateStrategies(
       ? [
           { search: tags.join(' '), sort: SortOptions.Trending, tags },
           {
-            search: tags.slice(0, 2).join(' '),
-            sort: SortOptions.Upvotes,
-            tags: tags.slice(0, 2),
+            search: tags[0],
+            sort: SortOptions.Activity,
+            tags: [tags[0]],
           },
-          ...tags.slice(0, 3).map((tag, idx) => ({
-            search: tag,
-            sort: [
-              SortOptions.Trending,
-              SortOptions.Upvotes,
-              SortOptions.Activity,
-            ][idx % 3],
-            skip: (seed + idx * 3) % 15,
-          })),
         ]
       : [];
 
   const fallbackSortOptions: SortOptions[] = [
-    SortOptions.Upvotes,
-    SortOptions.Created,
-    SortOptions.Activity,
-    SortOptions.Servers,
-    SortOptions.Rating,
     SortOptions.Trending,
-    SortOptions.Name,
-    SortOptions.MostUpvotedNew,
-    SortOptions.MostRecentPopular,
+    SortOptions.Activity,
+    SortOptions.Upvotes,
   ];
 
   const fallbackStrategies: RecommendationStrategy[] = fallbackSortOptions.map(
     (sort, idx) => ({
       search: '',
       sort,
-      skip: (seed * (idx + 1)) % 40,
+      skip: (seed * (idx + 1)) % 10,
     })
   );
 
@@ -236,6 +182,7 @@ export function useHubRecommendations(
             search: '',
             sort: SortOptions.Trending,
             limit,
+            skipCount: true,
           })
         );
 
@@ -274,7 +221,11 @@ export function useHubRecommendations(
       const results = await Promise.allSettled(
         strategies.map((strategy) =>
           queryClient.fetchQuery(
-            trpc.hub.getHubs.queryOptions({ ...strategy, limit: 15 })
+            trpc.hub.getHubs.queryOptions({
+              ...strategy,
+              limit: 8,
+              skipCount: true,
+            })
           )
         )
       );

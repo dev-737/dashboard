@@ -170,12 +170,19 @@ model Hub {
   messages            Message[]
   tags                Tag[]                @relation("HubToTag")
 
+  connectionCount Int @default(0)
+  upvoteCount     Int @default(0)
+  reviewCount     Int @default(0)
+
   @@index([ownerId])
   @@index([nsfw])
   @@index([weeklyMessageCount])
   @@index([activityLevel])
   @@index([language])
   @@index([verified, featured, visibility])
+  @@index([connectionCount(sort: Desc)])
+  @@index([upvoteCount(sort: Desc)])
+  @@index([createdAt(sort: Desc)])
 }
 
 model HubActivityMetrics {
@@ -365,7 +372,7 @@ model ServerData {
   createdAt                                                   DateTime          @default(now())
   updatedAt                                                   DateTime          @default(now())
   connections                                                 Connection[]
-  serverStats                                              HubServerStats[]
+  serverStats                                                 HubServerStats[]
   infractions                                                 Infraction[]
   serverBlacklists                                            ServerBlacklist[]
   ServerBlocklist_ServerBlocklist_blockedServerIdToServerData ServerBlocklist[] @relation("ServerBlocklist_blockedServerIdToServerData")
@@ -694,7 +701,6 @@ model HubUserStats {
   @@unique([hubId, userId, year, month], map: "HubUserStats_hub_user_year_month_key")
   @@index([hubId, year, month, messageCount], map: "HubUserStats_hubId_year_month_count_idx")
 }
-
 
 enum AppealStatus {
   PENDING

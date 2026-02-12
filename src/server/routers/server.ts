@@ -10,6 +10,7 @@ import {
   Routes,
 } from 'discord-api-types/v10';
 import { z } from 'zod/v4';
+import { syncHubConnectionCount } from '@/lib/hub-counts';
 import { db } from '@/lib/prisma';
 import type { ResolvedLogConfigs } from '@/types/logging';
 import { protectedProcedure, router } from '../trpc';
