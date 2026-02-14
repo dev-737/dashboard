@@ -126,9 +126,9 @@ function buildWhereClause(p: DiscoverParams): Prisma.HubWhereInput {
     });
   }
 
-  // Ensure we only show "alive" hubs by default.
-  // We intentionally do NOT rely on the denormalized `connectionCount` here because it can drift.
-  // If the user explicitly sets a memberCount filter, we respect it instead.
+  // Filter dead hubs: require at least 3 weekly messages AND at least one connected server.
+  // weeklyMessageCount is denormalized and indexed, so this is fast.
+  conditions.push({ weeklyMessageCount: { gte: 3 } });
   if (!p.memberCount) {
     conditions.push({ connections: { some: { connected: true } } });
   }
@@ -189,26 +189,16 @@ function buildOrderBy(
       ];
     case 'trending':
     default:
-      // Trending should prioritize active hubs:
-      // - more connected servers (members)
-      // - upvoted hubs
-      // - higher rating with enough reviews
-      // - recent activity
-      // We keep `activityMetrics.trendingScore` at the front if it's populated, but never rely on it.
+      // High-stats ranking: messages > rating > members > upvotes
+      // trendingScore is kept as the primary if populated, then we fall
+      // through a tight engagement ladder instead of piling up tiebreakers.
       return [
         { activityMetrics: { trendingScore: 'desc' } },
-        { connectionCount: 'desc' },
-        { connections: { _count: 'desc' } },
-        { upvoteCount: 'desc' },
-        { upvotes: { _count: 'desc' } },
-        { averageRating: 'desc' },
-        { reviewCount: 'desc' },
-        { reviews: { _count: 'desc' } },
         { weeklyMessageCount: 'desc' },
+        { averageRating: 'desc' },
+        { connectionCount: 'desc' },
+        { upvoteCount: 'desc' },
         { lastActive: 'desc' },
-        { verified: 'desc' },
-        { partnered: 'desc' },
-        { createdAt: 'desc' },
         { id: 'desc' },
       ];
   }
