@@ -14,17 +14,10 @@ import { ServerGrid } from '@/components/features/dashboard/servers/ServerGrid';
 import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { TabsContent } from '@/components/ui/tabs';
 import { auth } from '@/lib/auth';
 import { getUserHubs } from '@/lib/permissions';
-import { db } from '@/lib/prisma';
 
 export const metadata: Metadata = {
   title: 'Dashboard | InterChat',
@@ -32,33 +25,18 @@ export const metadata: Metadata = {
 };
 
 export default async function DashboardPage(props: {
-  searchParams: Promise<{ hubId?: string; tab?: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  const { hubId, tab } = await props.searchParams;
+  const { tab } = await props.searchParams;
   if (!session?.user?.id) {
     redirect('/login?callbackUrl=/dashboard');
   }
 
   // Get user's hubs
   const userHubs = await getUserHubs(session.user.id);
-
-  // If hubId is provided, check if it's a valid hub for connection
-  let targetHub = null;
-  if (hubId) {
-    targetHub = await db.hub.findUnique({
-      where: { id: hubId },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        iconUrl: true,
-        visibility: true,
-      },
-    });
-  }
 
   // Get servers using the server action with a timeout
   const serversPromise = getServers(session);
@@ -88,28 +66,6 @@ export default async function DashboardPage(props: {
     <div className="space-y-8">
       {/* Animated Welcome Hero */}
       <AnimatedWelcome user={session.user} />
-
-      {/* Hub Connection Flow Banner */}
-      {targetHub && (
-        <Card className="border-indigo-500/50 bg-linear-to-r from-indigo-900/20 to-purple-900/20 backdrop-blur-sm">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/20">
-                <MessageSquare className="h-6 w-6 text-indigo-400" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg text-white">
-                  Connect Server to {targetHub.name}
-                </h3>
-                <p className="mt-1 text-gray-400 text-sm">
-                  Choose a server below to connect to this hub, or switch to the
-                  &quot;My Servers&quot; tab to get started.
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Main Dashboard Content with Tabs */}
       <div className="space-y-6">
@@ -189,11 +145,7 @@ export default async function DashboardPage(props: {
                 </CardContent>
               </Card>
             ) : (
-              <ServerGrid
-                servers={servers}
-                showConnectButton={!!targetHub}
-                selectedHubId={targetHub?.id}
-              />
+              <ServerGrid servers={servers} />
             )}
           </TabsContent>
 

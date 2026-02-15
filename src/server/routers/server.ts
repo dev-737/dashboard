@@ -24,6 +24,104 @@ const resolveCache = new Map<string, CacheEntry>();
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 export const serverRouter = router({
+  getHubJoinServers: protectedProcedure
+    .input(z.object({ hubId: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const { hubId } = input;
+      const userId = ctx.session.user.id;
+
+      const account = await db.account.findFirst({
+        where: {
+          userId,
+          providerId: 'discord',
+        },
+        select: {
+          accessToken: true,
+        },
+      });
+
+      if (!account?.accessToken) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'Discord account not connected',
+        });
+      }
+
+      const userGuildsResponse = await fetch(
+        'https://discord.com/api/v10/users/@me/guilds',
+        {
+          headers: {
+            Authorization: `Bearer ${account.accessToken}`,
+          },
+        }
+      );
+
+      if (!userGuildsResponse.ok) {
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Failed to fetch Discord servers',
+        });
+      }
+
+      const userGuilds = (await userGuildsResponse.json()) as Array<{
+        id: string;
+        name: string;
+        icon: string | null;
+        owner: boolean;
+        permissions: string;
+      }>;
+
+      const manageableGuilds = userGuilds.filter((guild) => {
+        const permissions = BigInt(guild.permissions);
+        return (
+          guild.owner ||
+          (permissions & BigInt(0x10)) === BigInt(0x10) ||
+          (permissions & BigInt(0x8)) === BigInt(0x8)
+        );
+      });
+
+      const guildIds = manageableGuilds.map((guild) => guild.id);
+
+      const servers = await db.serverData.findMany({
+        where: {
+          id: {
+            in: guildIds,
+          },
+        },
+        select: {
+          id: true,
+          connections: {
+            where: { connected: true },
+            select: {
+              hubId: true,
+            },
+          },
+        },
+      });
+
+      const serverMap = new Map(servers.map((server) => [server.id, server]));
+
+      const mappedServers = manageableGuilds.map((guild) => {
+        const dbServer = serverMap.get(guild.id);
+        const hasConnectionToCurrentHub =
+          dbServer?.connections.some((connection) => connection.hubId === hubId) ||
+          false;
+
+        return {
+          id: guild.id,
+          name: guild.name,
+          icon: guild.icon
+            ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128`
+            : null,
+          owner: guild.owner,
+          botAdded: !!dbServer,
+          alreadyConnectedToHub: hasConnectionToCurrentHub,
+        };
+      });
+
+      return { servers: mappedServers };
+    }),
+
   // Get Discord server roles
   getServerRoles: protectedProcedure
     .input(z.object({ serverId: z.string() }))
@@ -109,9 +207,15 @@ export const serverRouter = router({
     }),
 
   getServerChannels: protectedProcedure
-    .input(z.object({ serverId: z.string(), hubId: z.string().optional() }))
+    .input(
+      z.object({
+        serverId: z.string(),
+        hubId: z.string().optional(),
+        includeConnected: z.boolean().optional(),
+      })
+    )
     .query(async ({ input }) => {
-      const { serverId } = input;
+      const { serverId, hubId, includeConnected = false } = input;
 
       const botToken = process.env.DISCORD_BOT_TOKEN;
       if (!botToken) {
@@ -130,9 +234,25 @@ export const serverRouter = router({
 
         const existingConnections = await db.connection.findMany({
           where: { connected: true },
-          select: { channelId: true },
+          select: {
+            channelId: true,
+            hubId: true,
+            hub: {
+              select: {
+                name: true,
+              },
+            },
+          },
         });
-        const connectedChannelIds = existingConnections.map((c) => c.channelId);
+        const connectedByChannelId = new Map(
+          existingConnections.map((connection) => [
+            connection.channelId,
+            {
+              hubId: connection.hubId,
+              hubName: connection.hub.name,
+            },
+          ])
+        );
 
         const hasName = (c: APIChannel): c is APIChannel & { name: string } =>
           'name' in (c as unknown as Record<string, unknown>) &&
@@ -152,10 +272,22 @@ export const serverRouter = router({
               channel.type === ChannelType.AnnouncementThread;
 
             const isEligible = isTextChannel || isThread;
-            const isNotConnected = !connectedChannelIds.includes(channel.id);
-            return isEligible && isNotConnected;
+            if (!isEligible) {
+              return false;
+            }
+
+            if (includeConnected) {
+              return true;
+            }
+
+            return !connectedByChannelId.has(channel.id);
           })
           .map((channel) => {
+            const connectedInfo = connectedByChannelId.get(channel.id);
+            const isConnectedElsewhere = !!connectedInfo;
+            const isConnectedToCurrentHub =
+              !!connectedInfo && !!hubId && connectedInfo.hubId === hubId;
+
             const isThread =
               channel.type === ChannelType.PublicThread ||
               channel.type === ChannelType.PrivateThread ||
@@ -196,6 +328,10 @@ export const serverRouter = router({
                   : null,
               isThread,
               isPrivateThread: channel.type === ChannelType.PrivateThread,
+              isConnectedElsewhere,
+              isConnectedToCurrentHub,
+              connectedHubId: connectedInfo?.hubId ?? null,
+              connectedHubName: connectedInfo?.hubName ?? null,
               position:
                 (
                   channel as unknown as APIGuildTextChannel<GuildTextChannelType>
@@ -282,12 +418,38 @@ export const serverRouter = router({
           serverId,
           connected: true,
         },
+        select: {
+          hubId: true,
+        },
       });
 
       if (existingConnection) {
         throw new TRPCError({
           code: 'BAD_REQUEST',
-          message: 'Server is already connected to a hub',
+          message:
+            existingConnection.hubId === hubId
+              ? 'Server is already connected to this hub'
+              : 'Server is already connected to another hub',
+        });
+      }
+
+      const existingChannelConnection = await db.connection.findFirst({
+        where: {
+          channelId,
+          connected: true,
+        },
+        select: {
+          hubId: true,
+        },
+      });
+
+      if (existingChannelConnection) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message:
+            existingChannelConnection.hubId === hubId
+              ? 'This channel is already connected to this hub'
+              : 'This channel is already connected to another hub. Leave it from dashboard first.',
         });
       }
 
@@ -301,6 +463,8 @@ export const serverRouter = router({
           lastActive: new Date(),
         },
       });
+
+      await syncHubConnectionCount(hubId);
 
       return { connection };
     }),
@@ -354,6 +518,8 @@ export const serverRouter = router({
           connected: false,
         },
       });
+
+      await syncHubConnectionCount(connection.hubId);
 
       return { connection: updatedConnection };
     }),

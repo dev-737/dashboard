@@ -21,15 +21,9 @@ import { Input } from '@/components/ui/input';
 
 interface ServerGridProps {
   servers: ServerDataWithConnections[];
-  showConnectButton?: boolean;
-  selectedHubId?: string;
 }
 
-export function ServerGrid({
-  servers,
-  showConnectButton = false,
-  selectedHubId,
-}: ServerGridProps) {
+export function ServerGrid({ servers }: ServerGridProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Filter servers based on search query
@@ -73,9 +67,7 @@ export function ServerGrid({
           </div>
           <h3 className="mb-2 font-medium text-lg">No matching servers</h3>
           <p className="max-w-md text-gray-400">
-            {selectedHubId && showConnectButton
-              ? 'No servers match your search query. Try a different search term or add the bot to more servers.'
-              : 'No servers match your search query. Try a different search term.'}
+            No servers match your search query. Try a different search term.
           </p>
         </div>
       ) : (
@@ -84,8 +76,6 @@ export function ServerGrid({
             <ServerCard
               key={server.id}
               server={server}
-              showConnectButton={showConnectButton}
-              selectedHubId={selectedHubId}
               index={index}
             />
           ))}
@@ -97,17 +87,10 @@ export function ServerGrid({
 
 interface ServerCardProps {
   server: ServerDataWithConnections;
-  showConnectButton?: boolean;
-  selectedHubId?: string;
   index: number;
 }
 
-function ServerCard({
-  server,
-  showConnectButton = false,
-  selectedHubId,
-  index,
-}: ServerCardProps) {
+function ServerCard({ server, index }: ServerCardProps) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -217,30 +200,7 @@ function ServerCard({
           </div>
         </CardContent>
         <CardFooter className="border-gray-800/50 border-t pt-0 pb-3 sm:pb-4">
-          {showConnectButton && server.botAdded ? (
-            // Check if server is already connected to the selected hub
-            server.connections.some((conn) => conn.hubId === selectedHubId) ? (
-              <Button
-                disabled
-                className="mt-2 w-full cursor-not-allowed rounded-xl border-none bg-linear-to-r from-gray-600/50 to-gray-700/50 opacity-70 hover:from-gray-600/50 hover:to-gray-700/50"
-              >
-                <span className="hidden sm:inline">Already Connected</span>
-                <span className="sm:hidden">Connected</span>
-              </Button>
-            ) : (
-              <Button
-                asChild
-                className="w-full rounded-xl border-none bg-linear-to-r from-blue-600 to-indigo-600 shadow-lg transition-all duration-200 hover:from-blue-700 hover:to-indigo-700 hover:shadow-blue-500/25"
-              >
-                <Link
-                  href={`/dashboard/servers/${server.id}/connect?hubId=${selectedHubId}`}
-                >
-                  <span className="hidden sm:inline">Connect to Hub</span>
-                  <span className="sm:hidden">Connect</span>
-                </Link>
-              </Button>
-            )
-          ) : server.botAdded ? (
+          {server.botAdded ? (
             <Button
               asChild
               className="mt-2 w-full rounded-xl border-none bg-linear-to-r from-gray-800 to-gray-800 shadow-lg transition-all duration-200 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"

@@ -8,7 +8,6 @@ import {
   Hash,
   Home,
   MoreVertical,
-  PlusCircle,
   Search,
   Server,
   Trash,
@@ -205,18 +204,6 @@ export function ConnectionsList({
               </CardDescription>
             </div>
 
-            {canManage && (
-              <Button
-                asChild
-                size="sm"
-                className="h-11 w-full border-none bg-linear-to-r from-blue-600 to-indigo-600 px-4 font-medium text-sm hover:from-blue-700 hover:to-indigo-700 sm:w-auto"
-              >
-                <Link href={`/dashboard?hubId=${hubId}`}>
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  Connect Server
-                </Link>
-              </Button>
-            )}
           </div>
 
           {/* Stats */}
@@ -272,17 +259,6 @@ export function ConnectionsList({
               This hub is not connected to any Discord servers yet. Connect your
               first server to start building your community.
             </p>
-            {canManage && (
-              <Button
-                asChild
-                className="h-11 border-none bg-linear-to-r from-blue-600 to-indigo-600 px-4 hover:from-blue-600/80 hover:to-indigo-600/80"
-              >
-                <Link href={`/dashboard?hubId=${hubId}`}>
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  Connect Your First Server
-                </Link>
-              </Button>
-            )}
           </div>
         ) : filteredConnections.length === 0 ? (
           <div className="px-4 py-12 text-center">

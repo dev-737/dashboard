@@ -1,10 +1,7 @@
-import { Plus } from 'lucide-react';
 import { headers } from 'next/headers';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
 import { HydrationBoundaryProvider } from '@/components/providers/HydrationBoundary';
-import { Button } from '@/components/ui/button';
 import { auth } from '@/lib/auth';
 import { PermissionLevel } from '@/lib/constants';
 import { createDehydratedState } from '@/lib/create-dehydrated-state';
@@ -126,26 +123,13 @@ export default async function HubConnectionsPage({
   };
 
   // Header actions - Mobile optimized
-  const headerActions = canEdit ? (
-    <Button
-      asChild
-      className="h-10 touch-manipulation border-none bg-linear-to-r from-blue-600 to-indigo-600 px-3 text-sm hover:from-blue-600/80 hover:to-indigo-600/80 sm:h-9 sm:px-4"
-    >
-      <Link href={`/dashboard?hubId=${hubId}`}>
-        <Plus className="mr-2 h-4 w-4" />
-        <span className="xs:inline hidden">Connect Server</span>
-        <span className="xs:hidden">Connect</span>
-      </Link>
-    </Button>
-  ) : null;
-
   return (
     <HubLayout
       hub={hubData}
       currentTab="connections"
       canModerate={canModerate}
       canEdit={canEdit}
-      headerActions={headerActions}
+      headerActions={null}
     >
       {/* Use the ClientConnectionsList component with the fetched data */}
       <HydrationBoundaryProvider state={dehydratedState}>

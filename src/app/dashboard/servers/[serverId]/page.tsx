@@ -375,23 +375,13 @@ export default async function ServerDetailPage(props: {
                   Bot Not Added
                 </Button>
               ) : (
-                <div className="flex gap-2">
-                  <Button
-                    asChild
-                    className="border-none bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-600/80 hover:to-indigo-600/80"
-                  >
-                    <Link href={`/dashboard/servers/${serverId}/connect`}>
-                      Connect to Hub
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
-                  >
-                    <Link href="/hubs">Explore Hubs</Link>
-                  </Button>
-                </div>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
+                >
+                  <Link href="/hubs">Explore Hubs</Link>
+                </Button>
               )}
             </CardHeader>
             <CardContent>
@@ -418,23 +408,13 @@ export default async function ServerDetailPage(props: {
                   <p className="mb-6 text-muted-foreground">
                     This server is not connected to any hubs yet.
                   </p>
-                  <div className="flex justify-center gap-3">
-                    <Button
-                      asChild
-                      className="border-none bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-600/80 hover:to-indigo-600/80"
-                    >
-                      <Link href={`/dashboard/servers/${serverId}/connect`}>
-                        Connect to Hub
-                      </Link>
-                    </Button>
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
-                    >
-                      <Link href="/hubs">Explore Hubs</Link>
-                    </Button>
-                  </div>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
+                  >
+                    <Link href="/hubs">Explore Hubs</Link>
+                  </Button>
                 </div>
               ) : (
                 <ServerConnectionsTable connections={connections} />
