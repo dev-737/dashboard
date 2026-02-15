@@ -1437,7 +1437,10 @@ export const hubRouter = router({
                 },
               },
             },
-            orderBy: [{ connections: { _count: 'desc' } }, { lastActive: 'desc' }],
+            orderBy: [
+              { connections: { _count: 'desc' } },
+              { lastActive: 'desc' },
+            ],
             take: limit,
           });
           metadata = {

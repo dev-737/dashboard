@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  Calendar,
-  Info,
-  Search,
-  Shield,
-  Star,
-  Users,
-} from 'lucide-react';
+import { Calendar, Info, Search, Shield, Star, Users } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function HubDetailLoading() {

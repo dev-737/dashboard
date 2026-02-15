@@ -88,7 +88,9 @@ export const messageRouter = router({
     .query(async ({ input }) => {
       const { hubId, query, sortBy } = input;
 
-      const whereClause: Prisma.MessageWhereInput & { AND: Prisma.MessageWhereInput[] } = { hubId, AND: []};
+      const whereClause: Prisma.MessageWhereInput & {
+        AND: Prisma.MessageWhereInput[];
+      } = { hubId, AND: [] };
 
       if (sortBy === 'author') {
         whereClause.AND.push({

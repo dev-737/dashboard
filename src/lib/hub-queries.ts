@@ -5,10 +5,7 @@ import { db } from '@/lib/prisma';
 
 // Define a more specific type for the hub data fetched for the detail page
 export interface HubDetailData
-  extends Omit<
-    SimplifiedHub,
-    'connections' | 'reviews' | 'moderators'
-  > {
+  extends Omit<SimplifiedHub, 'connections' | 'reviews' | 'moderators'> {
   rules: string[];
   shortDescription: string | null;
   activityLevel: 'LOW' | 'MEDIUM' | 'HIGH';

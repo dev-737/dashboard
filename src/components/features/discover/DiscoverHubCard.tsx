@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  Eye,
-  Handshake,
-  MessageCircle,
-  Star,
-  Users,
-} from 'lucide-react';
+import { Eye, Handshake, MessageCircle, Star, Users } from 'lucide-react';
 import Link from 'next/link';
 import { memo } from 'react';
 import JoinButton from '@/app/hubs/components/hub-detail/JoinButton';
@@ -232,9 +226,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
             </Button>
           </Link>
 
-          <div className="w-28 shrink-0">
-            <JoinButton hubId={id} hubName={name} />
-          </div>
+          <JoinButton hubId={id} hubName={name} className="flex-1 text-base" />
         </div>
       </CardFooter>
     </Card>

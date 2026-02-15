@@ -5,14 +5,20 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { authClient } from '@/lib/auth-client';
+import { cn } from '@/lib/utils';
 import JoinHubModal from './JoinHubModal';
 
-interface JoinButtonProps {
+interface JoinButtonProps extends React.ComponentProps<typeof Button> {
   hubId: string;
   hubName: string;
 }
 
-export default function JoinButton({ hubName, hubId }: JoinButtonProps) {
+export default function JoinButton({
+  hubName,
+  hubId,
+  className,
+  ...props
+}: JoinButtonProps) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { data: session } = authClient.useSession();
@@ -30,10 +36,14 @@ export default function JoinButton({ hubName, hubId }: JoinButtonProps) {
     <>
       <Button
         variant="default"
-        className="h-8 w-full transform cursor-pointer whitespace-nowrap rounded-lg bg-primary px-3 py-1 font-medium text-white text-xs shadow-sm transition-all hover:scale-105 hover:bg-primary/90 hover:shadow-md sm:h-9 sm:text-sm"
+        className={cn(
+          'w-full transform transition-all hover:scale-105 hover:bg-primary/90 hover:shadow-md',
+          className
+        )}
         onClick={handleJoin}
+        {...props}
       >
-        {!session && <LogIn className="mr-1 h-4 w-4 sm:mr-2" />}
+        {!session && <LogIn className="mr-2 h-4 w-4" />}
         <span>Join</span>
       </Button>
       <JoinHubModal

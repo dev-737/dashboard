@@ -203,7 +203,6 @@ export function ConnectionsList({
                 connected to this hub
               </CardDescription>
             </div>
-
           </div>
 
           {/* Stats */}

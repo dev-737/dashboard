@@ -195,9 +195,12 @@ export default async function HubDetailView(props: {
                       </Button>
                     </Link>
                   )}
-                  <div className="group relative">
-                    <JoinButton hubName={hub.name} hubId={hub.id} />
-                  </div>
+                  <JoinButton
+                    hubName={hub.name}
+                    hubId={hub.id}
+                    size="sm"
+                    className="h-9 px-4 text-sm"
+                  />
                 </div>
               </div>
             </div>

@@ -226,7 +226,7 @@ export default function JoinHubModal({
                                 </div>
                                 <div className="mt-0.5 flex items-center gap-2">
                                   {server.owner && (
-                                    <span className="inline-flex items-center gap-1 rounded-full bg-yellow-500/15 px-2 py-0.5 text-yellow-300 text-xs">
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-yellow-500/15 px-2 py-0.5 text-xs text-yellow-300">
                                       <Shield className="h-3 w-3" /> Owner
                                     </span>
                                   )}
@@ -258,7 +258,9 @@ export default function JoinHubModal({
 
           <div className="p-5">
             <div className="mb-3 flex items-center justify-between">
-              <h3 className="font-medium text-sm text-white">Step 2: Channel</h3>
+              <h3 className="font-medium text-sm text-white">
+                Step 2: Channel
+              </h3>
               {channelsQuery.isLoading && selectedServerId && (
                 <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
               )}
@@ -352,11 +354,17 @@ export default function JoinHubModal({
 
         <div className="flex items-center justify-between border-gray-800/70 border-t bg-gray-900/90 p-4">
           <div className="text-gray-400 text-xs">
-            {selectedServer ? `Server: ${selectedServer.name}` : 'No server selected'}
+            {selectedServer
+              ? `Server: ${selectedServer.name}`
+              : 'No server selected'}
           </div>
           <Button
             onClick={handleConnect}
-            disabled={!selectedServerId || !selectedChannelId || connectMutation.isPending}
+            disabled={
+              !selectedServerId ||
+              !selectedChannelId ||
+              connectMutation.isPending
+            }
             className="border-none bg-linear-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700"
           >
             {connectMutation.isPending ? (

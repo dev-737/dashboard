@@ -1,9 +1,9 @@
 {
-    "inputs": [],
-    "servers": {
-        "hugeicons": {
-            "command": "bunx",
-            "args": ["-y", "@hugeicons/mcp-server"]
-        }
+  "inputs": [],
+  "servers": {
+    "hugeicons": {
+      "command": "bunx",
+      "args": ["-y", "@hugeicons/mcp-server"]
     }
+  }
 }

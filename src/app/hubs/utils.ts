@@ -597,7 +597,7 @@ export async function getSortedHubs(
       | undefined;
 
     // Add connection filtering to ALL sort options to prevent dead hubs from showing
-    let finalWhereClause: Prisma.HubWhereInput = {
+    const finalWhereClause: Prisma.HubWhereInput = {
       ...whereClause,
       // Require at least one connection for ALL sorts
       connections: { some: { connected: true } },

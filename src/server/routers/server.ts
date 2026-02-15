@@ -104,8 +104,9 @@ export const serverRouter = router({
       const mappedServers = manageableGuilds.map((guild) => {
         const dbServer = serverMap.get(guild.id);
         const hasConnectionToCurrentHub =
-          dbServer?.connections.some((connection) => connection.hubId === hubId) ||
-          false;
+          dbServer?.connections.some(
+            (connection) => connection.hubId === hubId
+          ) || false;
 
         return {
           id: guild.id,

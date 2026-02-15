@@ -73,11 +73,7 @@ export function ServerGrid({ servers }: ServerGridProps) {
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
           {filteredServers.map((server, index) => (
-            <ServerCard
-              key={server.id}
-              server={server}
-              index={index}
-            />
+            <ServerCard key={server.id} server={server} index={index} />
           ))}
         </div>
       )}
