@@ -32,7 +32,6 @@ import HubReviewAnalytics from '../components/hub-detail/HubReviewAnalytics';
 import HubRules from '../components/hub-detail/HubRules';
 import JoinButton from '../components/hub-detail/JoinButton';
 import SimilarHubsCard from '../components/hub-detail/SimilarHubsCard';
-import UpvoteButton from '../components/hub-detail/UpvoteButton';
 
 export async function generateMetadata(props: {
   params: Promise<{ hubId: string }>;
@@ -199,7 +198,6 @@ export default async function HubDetailView(props: {
                   <div className="group relative">
                     <JoinButton hubName={hub.name} hubId={hub.id} />
                   </div>
-                  <UpvoteButton hubId={hub.id} initialUpvotes={hub.upvotes} />
                 </div>
               </div>
             </div>

@@ -65,7 +65,6 @@ export default async function HubDiscoverabilityPage({
           connections: {
             where: { connected: true },
           },
-          upvotes: true,
         },
       },
     },

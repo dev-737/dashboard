@@ -15,7 +15,6 @@ async function main() {
       _count: {
         select: {
           connections: { where: { connected: true } },
-          upvotes: true,
           reviews: true,
         },
       },
@@ -30,7 +29,6 @@ async function main() {
       where: { id: hub.id },
       data: {
         connectionCount: hub._count.connections,
-        upvoteCount: hub._count.upvotes,
         reviewCount: hub._count.reviews,
       },
     });

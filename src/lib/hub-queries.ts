@@ -7,13 +7,12 @@ import { db } from '@/lib/prisma';
 export interface HubDetailData
   extends Omit<
     SimplifiedHub,
-    'connections' | 'upvotes' | 'reviews' | 'moderators'
+    'connections' | 'reviews' | 'moderators'
   > {
   rules: string[];
   shortDescription: string | null;
   activityLevel: 'LOW' | 'MEDIUM' | 'HIGH';
   ownerId: string;
-  upvotes: { id: string; userId: string }[];
   moderators: {
     id: string;
     role: Role;
@@ -81,7 +80,6 @@ export async function getHubData(
         take: 10,
       },
       tags: { select: { name: true } },
-      upvotes: { select: { id: true, userId: true } },
       moderators: {
         where: { user: { name: { not: null } } },
         select: {

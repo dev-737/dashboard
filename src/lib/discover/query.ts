@@ -20,7 +20,6 @@ export const DiscoverSortSchema = z.enum([
   'active',
   'new',
   'oldest',
-  'upvoted',
   'rated',
   'members',
   'growing',
@@ -58,9 +57,8 @@ export type HubCardDTO = {
   partnered: boolean;
   nsfw: boolean;
   tags: { name: string; color: string | null }[];
-  _count: { upvotes: number; connections: number; messages: number };
+  _count: { connections: number; messages: number };
   averageRating: number | null;
-  isUpvoted?: boolean;
   serializedCreatedAt: string;
 };
 
@@ -159,13 +157,6 @@ function buildOrderBy(
       return [{ createdAt: 'desc' }, { id: 'desc' }];
     case 'oldest':
       return [{ createdAt: 'asc' }, { id: 'asc' }];
-    case 'upvoted':
-      // Prefer denormalized first (fast), but fall back to relation counts if it hasn't been synced.
-      return [
-        { upvoteCount: 'desc' },
-        { upvotes: { _count: 'desc' } },
-        { id: 'desc' },
-      ];
     case 'rated':
       return [
         { averageRating: 'desc' },
@@ -189,7 +180,7 @@ function buildOrderBy(
       ];
     case 'trending':
     default:
-      // High-stats ranking: messages > rating > members > upvotes
+      // High-stats ranking: messages > rating > members
       // trendingScore is kept as the primary if populated, then we fall
       // through a tight engagement ladder instead of piling up tiebreakers.
       return [
@@ -197,7 +188,6 @@ function buildOrderBy(
         { weeklyMessageCount: 'desc' },
         { averageRating: 'desc' },
         { connectionCount: 'desc' },
-        { upvoteCount: 'desc' },
         { lastActive: 'desc' },
         { id: 'desc' },
       ];
@@ -278,7 +268,6 @@ async function getCachedHubs(params: DiscoverParams) {
       _count: {
         select: {
           connections: { where: { connected: true } },
-          upvotes: true,
           reviews: true,
         },
       },
@@ -291,10 +280,8 @@ async function getCachedHubs(params: DiscoverParams) {
     tags: hub.tags,
     _count: {
       connections: hub._count.connections,
-      upvotes: hub._count.upvotes,
       messages: hub.weeklyMessageCount,
     },
-    isUpvoted: false, // Populated by caller if user exists
   }));
 
   const result: PaginatedResult = {
@@ -325,30 +312,6 @@ type PaginatedResult = {
  * Public API - keeping signature compatible-ish but switching to efficient implementation
  */
 export async function getDiscoverHubs(params: DiscoverParams, userId?: string) {
-  const result = await getCachedHubs(params);
-
-  if (!userId || result.items.length === 0) {
-    return result;
-  }
-
-  // Enrich with user state (Is Upvoted?)
-  // Fetch upvotes only for the specific hubs returned
-  const hubIds = result.items.map((h: HubCardDTO) => h.id);
-  const userUpvotes = await db.hubUpvote.findMany({
-    where: {
-      userId,
-      hubId: { in: hubIds },
-    },
-    select: { hubId: true },
-  });
-
-  const upvoteSet = new Set(userUpvotes.map((uv) => uv.hubId));
-
-  return {
-    ...result,
-    items: result.items.map((item: HubCardDTO) => ({
-      ...item,
-      isUpvoted: upvoteSet.has(item.id),
-    })),
-  };
+  void userId;
+  return getCachedHubs(params);
 }

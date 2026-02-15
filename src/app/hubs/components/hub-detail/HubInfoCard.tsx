@@ -1,5 +1,5 @@
 import { formatDistanceToNow } from 'date-fns';
-import { Clock, Handshake, Heart, Tag, Users } from 'lucide-react';
+import { Clock, Handshake, Tag, Users } from 'lucide-react';
 import Image from 'next/image';
 import type React from 'react';
 import {
@@ -7,14 +7,12 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 
 interface HubInfoCardProps {
   hub: {
     name: string;
     description: string | null;
     iconUrl: string | null;
-    upvotes: SimplifiedHub['upvotes']; // Replace with actual type if available
     _count: { connections: number };
     lastActive: Date | null;
     tags: Array<{ name: string }>;
@@ -96,12 +94,6 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
             <Users className="h-4 w-4 text-primary" /> {hub._count.connections}{' '}
             server
             {hub._count.connections !== 1 ? 's' : ''}
-          </span>
-          {/* Upvotes */}
-          <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
-            <Heart className="h-4 w-4 text-rose-500" /> {hub.upvotes.length}{' '}
-            upvote
-            {hub.upvotes.length !== 1 ? 's' : ''}
           </span>
           {/* Activity */}
           <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">

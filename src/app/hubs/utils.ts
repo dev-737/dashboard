@@ -16,7 +16,6 @@ const NEW_HUB_WINDOW_DAYS = 30;
 const RECENT_ACTIVITY_WINDOW_DAYS = 30;
 // trending weights
 const WEIGHT_RECENT_CONNECTION = 15;
-const WEIGHT_RECENT_UPVOTE = 8;
 const WEIGHT_RECENT_REVIEW = 5;
 const WEIGHT_MESSAGE_FREQUENCY = 12;
 const WEIGHT_CONNECTION_GROWTH = 10;
@@ -199,7 +198,6 @@ export async function getSortedHubs(
     _count: {
       select: {
         connections: { where: { connected: true } },
-        upvotes: true,
         reviews: true,
         messages: true, // Add messages count for display
       },
@@ -214,7 +212,6 @@ export async function getSortedHubs(
       where: { connected: true },
       select: { id: true, serverId: true, lastActive: true },
     },
-    upvotes: true,
     tags: { select: { name: true } },
   } as const;
 
@@ -240,7 +237,6 @@ export async function getSortedHubs(
                 },
               },
               // Has engagement
-              { upvotes: { some: {} } },
               { reviews: { some: {} } },
               // Has messages
               // Is verified/partnered (quality signal)
@@ -260,7 +256,6 @@ export async function getSortedHubs(
                 lastActive: { gte: trendingWindowStart },
               },
             },
-            upvotes: { where: { createdAt: { gte: trendingWindowStart } } },
             reviews: { where: { createdAt: { gte: trendingWindowStart } } },
           },
         },
@@ -273,8 +268,6 @@ export async function getSortedHubs(
       // Recent activity scores
       const recentConnectionsScore =
         (hub._count?.connections ?? 0) * WEIGHT_RECENT_CONNECTION;
-      const recentUpvotesScore =
-        (hub._count?.upvotes ?? 0) * WEIGHT_RECENT_UPVOTE;
       const recentReviewsScore =
         (hub._count?.reviews ?? 0) * WEIGHT_RECENT_REVIEW;
 
@@ -315,7 +308,6 @@ export async function getSortedHubs(
       // Activity requirement bonus - heavily penalize hubs with no real activity
       const totalActivityScore =
         recentConnectionsScore +
-        recentUpvotesScore +
         recentReviewsScore +
         messageFrequencyScore +
         connectionGrowthScore;
@@ -339,7 +331,6 @@ export async function getSortedHubs(
         trendingScore,
         debugInfo: {
           recentConnections: recentConnectionsScore,
-          recentUpvotes: recentUpvotesScore,
           recentReviews: recentReviewsScore,
           messageFrequency: messageFrequencyScore,
           connectionGrowth: connectionGrowthScore,
@@ -536,14 +527,12 @@ export async function getSortedHubs(
       // Core activity metrics (70% weight)
       const totalConnections = hub._count?.connections || 0;
       const totalMessages = hub._count?.messages || 0;
-      const totalUpvotes = hub.upvotes?.length || 0;
       const totalReviews = hub.reviews?.length || 0;
 
       // Calculate base activity score
       const baseActivityScore =
         totalConnections * 10 + // Server count is very important
         totalMessages * 0.1 + // Message volume matters
-        totalUpvotes * 5 + // Community approval
         totalReviews * 8; // Reviews are valuable
 
       // Recent activity factor (30% weight) - more prominent than before
@@ -615,32 +604,6 @@ export async function getSortedHubs(
     };
 
     switch (sort) {
-      case SortOptions.MostUpvotedNew:
-        // Filter for hubs created within the 'new' window, sort by total upvotes
-        finalWhereClause = {
-          AND: [
-            whereClause,
-            { createdAt: { gte: newHubWindowStart } },
-            // Require connections for this sort too
-            { connections: { some: { connected: true } } },
-          ],
-        };
-        orderBy = { upvotes: { _count: 'desc' } };
-        break;
-
-      case SortOptions.MostRecentPopular:
-        // Filter for hubs active recently, sort by total upvotes
-        finalWhereClause = {
-          AND: [
-            whereClause,
-            { lastActive: { gte: recentActivityWindowStart } },
-            // Require connections for this sort too
-            { connections: { some: { connected: true } } },
-          ],
-        };
-        orderBy = { upvotes: { _count: 'desc' } };
-        break;
-
       case SortOptions.Created:
         // newest sort will be handled with application-side scoring
         // For now, use simple creation date ordering
@@ -648,9 +611,6 @@ export async function getSortedHubs(
         break;
       case SortOptions.Name:
         orderBy = { name: 'asc' };
-        break;
-      case SortOptions.Upvotes:
-        orderBy = { upvotes: { _count: 'desc' } };
         break;
       case SortOptions.Servers:
         // servers sort with tie-breaking by recent activity
@@ -661,11 +621,7 @@ export async function getSortedHubs(
     }
 
     // For sorts that modify the where clause, we need to recalculate totalCount
-    if (
-      !skipCount &&
-      (sort === SortOptions.MostUpvotedNew ||
-        sort === SortOptions.MostRecentPopular)
-    ) {
+    if (!skipCount) {
       totalCount = await db.hub.count({ where: finalWhereClause });
     }
 
@@ -749,12 +705,10 @@ async function getFilteredTotalCount(
       _count: {
         select: {
           connections: { where: { connected: true } },
-          upvotes: true,
           reviews: true,
           messages: true,
         },
       },
-      upvotes: true,
       reviews: true,
     },
   });

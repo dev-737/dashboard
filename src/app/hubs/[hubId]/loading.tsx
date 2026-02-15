@@ -2,7 +2,6 @@
 
 import {
   Calendar,
-  Heart,
   Info,
   Search,
   Shield,
@@ -171,14 +170,6 @@ export default function HubDetailLoading() {
                     <div className="flex items-center text-gray-400 text-sm">
                       <Users className="mr-2 h-4 w-4 text-primary/80" />
                       <Skeleton className="h-4 w-32" />
-                    </div>
-                    <Skeleton className="h-4 w-8" />
-                  </div>
-                  {/* Upvotes */}
-                  <div className="flex items-center justify-between rounded-md border border-gray-700/50 bg-black/20 p-3">
-                    <div className="flex items-center text-gray-400 text-sm">
-                      <Heart className="mr-2 h-4 w-4 text-rose-500/80" />
-                      <Skeleton className="h-4 w-16" />
                     </div>
                     <Skeleton className="h-4 w-8" />
                   </div>

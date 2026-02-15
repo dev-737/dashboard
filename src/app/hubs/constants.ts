@@ -6,12 +6,9 @@ export const HUBS_PER_PAGE = 12;
 
 export enum SortOptions {
   Trending = 'trending',
-  MostUpvotedNew = 'most_upvoted_new',
-  MostRecentPopular = 'most_recent_popular',
   Activity = 'activity', // Consolidated activity sort
   Created = 'created', // Newest first
   Name = 'name', // A-Z
-  Upvotes = 'upvotes', // Total upvotes desc
   Servers = 'servers', // Total connected servers desc
   Rating = 'rating', // Average review rating desc
 }

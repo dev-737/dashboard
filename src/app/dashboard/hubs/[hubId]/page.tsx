@@ -72,7 +72,6 @@ export default async function HubOverviewPage({
           connections: {
             where: { connected: true },
           },
-          upvotes: true,
         },
       },
     },
@@ -185,11 +184,11 @@ export default async function HubOverviewPage({
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
-                    <p className="font-medium text-green-400 text-sm">Votes</p>
-                    <p className="font-bold text-3xl text-white">
-                      {hub._count.upvotes}
+                    <p className="font-medium text-green-400 text-sm">Access</p>
+                    <p className="font-bold text-2xl text-white">
+                      {canEdit ? 'Manager' : 'Moderator'}
                     </p>
-                    <p className="text-gray-400 text-xs">Community votes</p>
+                    <p className="text-gray-400 text-xs">Your hub role</p>
                   </div>
                   <div className="rounded-xl bg-green-500/10 p-3 transition-all group-hover:bg-green-500/20">
                     <Shield className="h-6 w-6 text-green-400" />

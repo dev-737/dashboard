@@ -59,7 +59,6 @@ const SORT_OPTIONS = [
   { value: 'active', label: 'Most Active' },
   { value: 'new', label: 'Newest' },
   { value: 'oldest', label: 'Oldest' },
-  { value: 'upvoted', label: 'Most Upvoted' },
   { value: 'rated', label: 'Highest Rated' },
   { value: 'members', label: 'Most Members' },
   { value: 'growing', label: 'Fastest Growing' },

@@ -12,7 +12,6 @@ import {
   HubVisibility,
   type Prisma,
 } from '@/lib/generated/prisma/client/client';
-import { syncHubUpvoteCount } from '@/lib/hub-counts';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 import { getRedisClient } from '@/lib/redis-config';
@@ -693,13 +692,6 @@ export const hubRouter = router({
               },
             },
           },
-          upvotes: {
-            select: {
-              id: true,
-              userId: true,
-              createdAt: true,
-            },
-          },
           moderators: {
             select: {
               id: true,
@@ -723,7 +715,6 @@ export const hubRouter = router({
           _count: {
             select: {
               connections: { where: { connected: true } },
-              upvotes: true,
               reviews: true,
             },
           },
@@ -938,13 +929,6 @@ export const hubRouter = router({
               },
             },
           },
-          upvotes: {
-            select: {
-              id: true,
-              userId: true,
-              createdAt: true,
-            },
-          },
           moderators: {
             select: {
               id: true,
@@ -963,7 +947,6 @@ export const hubRouter = router({
           _count: {
             select: {
               connections: { where: { connected: true } },
-              upvotes: true,
               reviews: true,
             },
           },
@@ -1045,64 +1028,6 @@ export const hubRouter = router({
       });
 
       return hub;
-    }),
-
-  // Upvote a hub
-  upvoteHub: protectedProcedure
-    .input(z.object({ hubId: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      const { hubId } = input;
-      const userId = ctx.session.user.id;
-
-      // Check if the hub exists
-      const hub = await db.hub.findUnique({
-        where: { id: hubId },
-        select: { id: true },
-      });
-
-      if (!hub) {
-        throw new TRPCError({
-          code: 'NOT_FOUND',
-          message: 'Hub not found',
-        });
-      }
-
-      // Check if the user has already upvoted this hub
-      const existingUpvote = await db.hubUpvote.findUnique({
-        where: {
-          hubId_userId: {
-            hubId,
-            userId,
-          },
-        },
-      });
-
-      if (existingUpvote) {
-        // Remove the upvote
-        await db.hubUpvote.delete({
-          where: {
-            hubId_userId: {
-              hubId,
-              userId,
-            },
-          },
-        });
-
-        await syncHubUpvoteCount(hubId);
-
-        return { upvoted: false };
-      }
-      // Add the upvote
-      await db.hubUpvote.create({
-        data: {
-          hubId,
-          userId,
-        },
-      });
-
-      await syncHubUpvoteCount(hubId);
-
-      return { upvoted: true };
     }),
 
   // Get hub members (owner and moderators)
@@ -1423,7 +1348,6 @@ export const hubRouter = router({
                 _count: {
                   select: {
                     connections: { where: { connected: true } },
-                    upvotes: true,
                     reviews: true,
                   },
                 },
@@ -1431,7 +1355,6 @@ export const hubRouter = router({
               orderBy: [
                 // Prioritize hubs with more matching tags
                 { connections: { _count: 'desc' } },
-                { upvotes: { _count: 'desc' } },
                 { lastActive: 'desc' },
               ],
               take: limit * 2, // Get more to filter by tag similarity
@@ -1467,14 +1390,13 @@ export const hubRouter = router({
                 _count: {
                   select: {
                     connections: { where: { connected: true } },
-                    upvotes: true,
                     reviews: true,
                   },
                 },
               },
               orderBy: [
                 { connections: { _count: 'desc' } },
-                { upvotes: { _count: 'desc' } },
+                { lastActive: 'desc' },
               ],
               take: limit,
             });
@@ -1490,16 +1412,9 @@ export const hubRouter = router({
         }
 
         case 'trending': {
-          // Get hubs with most upvotes in the last 7 days
-          const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
           hubs = await db.hub.findMany({
             where: {
               ...baseWhere,
-              upvotes: {
-                some: {
-                  createdAt: { gte: sevenDaysAgo },
-                },
-              },
             },
             select: {
               id: true,
@@ -1518,16 +1433,11 @@ export const hubRouter = router({
               _count: {
                 select: {
                   connections: { where: { connected: true } },
-                  upvotes: true,
                   reviews: true,
                 },
               },
-              upvotes: {
-                where: { createdAt: { gte: sevenDaysAgo } },
-                select: { id: true, createdAt: true },
-              },
             },
-            orderBy: [{ upvotes: { _count: 'desc' } }, { lastActive: 'desc' }],
+            orderBy: [{ connections: { _count: 'desc' } }, { lastActive: 'desc' }],
             take: limit,
           });
           metadata = {
@@ -1560,7 +1470,6 @@ export const hubRouter = router({
               _count: {
                 select: {
                   connections: { where: { connected: true } },
-                  upvotes: true,
                   reviews: true,
                 },
               },
@@ -1576,7 +1485,7 @@ export const hubRouter = router({
           };
           break;
         default:
-          // For now, fallback to general recommendations (most connections + upvotes)
+          // For now, fallback to general recommendations (most connections)
           hubs = await db.hub.findMany({
             where: baseWhere,
             select: {
@@ -1596,14 +1505,12 @@ export const hubRouter = router({
               _count: {
                 select: {
                   connections: { where: { connected: true } },
-                  upvotes: true,
                   reviews: true,
                 },
               },
             },
             orderBy: [
               { connections: { _count: 'desc' } },
-              { upvotes: { _count: 'desc' } },
               { lastActive: 'desc' },
             ],
             take: limit,
@@ -1620,19 +1527,17 @@ export const hubRouter = router({
       // Transform to recommendation format with enhanced metrics
       const recommendations = hubs.map((hub) => {
         const connectionCount = hub._count.connections;
-        const upvoteCount = hub._count.upvotes;
         const reviewCount = hub._count.reviews;
 
         // Calculate engagement metrics
         const isHighActivity = hub.activityLevel === 'HIGH';
-        const isGrowing = type === 'trending' && upvoteCount > 0;
-        const isQuality = reviewCount > 0 || upvoteCount > 5;
+        const isGrowing = type === 'trending' && connectionCount > 0;
+        const isQuality = reviewCount > 0;
         const isTrusted = hub.verified || hub.partnered;
 
         // Calculate recommendation score
         let score = 0;
         score += connectionCount * 10; // Base score from connections
-        score += upvoteCount * 5; // Upvotes boost
         score += reviewCount * 3; // Review boost
         if (isHighActivity) score += 20;
         if (isGrowing) score += 15;
@@ -1669,7 +1574,6 @@ export const hubRouter = router({
             activityLevel: hub.activityLevel,
             connectionCount,
             recentMessageCount: 0, // TODO: Would need message tracking
-            upvoteCount,
           },
           score,
           reason,

@@ -1,12 +1,11 @@
 import { formatDistanceToNow } from 'date-fns';
-import { Calendar, Heart, MessageSquare, Users } from 'lucide-react';
+import { Calendar, MessageSquare, Users } from 'lucide-react';
 import type React from 'react';
 
 interface HubDetailsCardProps {
   formattedDate: string;
   hub: {
     lastActive: Date | null;
-    upvotes: Array<{ id: string; userId: string }>;
   };
   connections: Array<{
     id: string;
@@ -62,17 +61,6 @@ const HubDetailsCard: React.FC<HubDetailsCardProps> = ({
           </dt>
           <dd className="font-medium text-gray-200 text-sm">
             {connections.length}
-          </dd>
-        </div>
-
-        {/* Upvotes */}
-        <div className="flex items-center justify-between rounded-md border border-gray-700/30 bg-gray-800/40 p-3 transition-colors hover:bg-gray-800/60">
-          <dt className="flex items-center text-gray-400 text-sm">
-            <Heart className="mr-2 h-4 w-4 text-rose-500/80" />
-            Upvotes
-          </dt>
-          <dd className="font-medium text-gray-200 text-sm">
-            {hub.upvotes.length}
           </dd>
         </div>
       </dl>

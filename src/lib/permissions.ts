@@ -70,7 +70,6 @@ export async function getUserHubs(userId: string) {
           hub: {
             include: {
               connections: { where: { connected: true }, select: { id: true } },
-              upvotes: true,
             },
           },
         },
@@ -81,7 +80,6 @@ export async function getUserHubs(userId: string) {
             where: { connected: true },
             select: { id: true },
           },
-          upvotes: true,
         },
       },
     },

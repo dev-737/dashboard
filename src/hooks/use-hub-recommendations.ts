@@ -21,7 +21,6 @@ interface Hub {
   _count: {
     connections: number;
   };
-  upvotes: unknown[];
   reviews: unknown[];
   iconUrl?: string;
   description?: string;
@@ -73,7 +72,6 @@ function generateStrategies(
   const fallbackSortOptions: SortOptions[] = [
     SortOptions.Trending,
     SortOptions.Activity,
-    SortOptions.Upvotes,
   ];
 
   const fallbackStrategies: RecommendationStrategy[] = fallbackSortOptions.map(
@@ -105,7 +103,6 @@ function calculateVarietyScore(hub: Hub, tags: string[] = []): number {
     { condition: hub.partnered, points: 20 },
     { condition: hub.activityLevel === 'HIGH', points: 15 },
     { condition: hub._count.connections > 50, points: 12 },
-    { condition: hub.upvotes.length > 5, points: 10 },
     { condition: hub.reviews.length > 2, points: 8 },
   ];
 
@@ -142,7 +139,6 @@ function determineRecommendationReason(
     [hub.activityLevel === 'HIGH', 'Highly active'],
     [hub._count.connections > 100, 'Large community'],
     [hub._count.connections > 50, 'Growing community'],
-    [hub.upvotes.length > 10, 'Highly rated'],
     [hub.reviews.length > 5, 'Well-reviewed'],
   ];
 
@@ -192,14 +188,13 @@ export function useHubRecommendations(
             hub: {
               ...hub,
               connectionCount: hub._count?.connections || 0,
-              upvoteCount: hub.upvotes?.length || 0,
             },
             score: 100 - index * 5,
             reason: 'Trending community',
             engagementMetrics: {
               isHighActivity: hub.activityLevel === 'HIGH',
               isGrowing: (hub._count?.connections || 0) > 20,
-              isQuality: (hub.upvotes?.length || 0) > 5,
+              isQuality: (hub.reviews?.length || 0) > 5,
               isTrusted: hub.verified || hub.partnered,
             },
           })),
@@ -265,14 +260,13 @@ export function useHubRecommendations(
             hub: {
               ...hub,
               connectionCount: hub._count?.connections || 0,
-              upvoteCount: hub.upvotes?.length || 0,
             },
             score: 100 - index * 5,
             reason,
             engagementMetrics: {
               isHighActivity: hub.activityLevel === 'HIGH',
               isGrowing: (hub._count?.connections || 0) > 20,
-              isQuality: (hub.upvotes?.length || 0) > 5,
+              isQuality: (hub.reviews?.length || 0) > 5,
               isTrusted: hub.verified || hub.partnered,
             },
           };

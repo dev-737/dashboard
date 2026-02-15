@@ -14,7 +14,7 @@ import { ServerGrid } from '@/components/features/dashboard/servers/ServerGrid';
 import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Button } from '@/components/ui/button';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { TabsContent } from '@/components/ui/tabs';
 import { auth } from '@/lib/auth';
 import { getUserHubs } from '@/lib/permissions';

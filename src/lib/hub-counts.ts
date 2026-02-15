@@ -13,19 +13,6 @@ export async function syncHubConnectionCount(hubId: string) {
   return connectionCount;
 }
 
-export async function syncHubUpvoteCount(hubId: string) {
-  const upvoteCount = await db.hubUpvote.count({
-    where: { hubId },
-  });
-
-  await db.hub.update({
-    where: { id: hubId },
-    data: { upvoteCount },
-  });
-
-  return upvoteCount;
-}
-
 export async function syncHubReviewCount(hubId: string) {
   const reviewCount = await db.hubReview.count({
     where: { hubId },

@@ -33,7 +33,6 @@ interface HubWithPermission {
   description: string;
   iconUrl: string;
   connections: { id: string }[];
-  upvotes: { id: string }[];
   lastActive: Date | null;
   visibility: HubVisibility;
   permissionLevel: PermissionLevel;
@@ -181,17 +180,6 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
               </span>
               <span className="font-medium text-gray-200">
                 {hub.connections.length}
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="flex items-center gap-2 text-gray-400">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
-                  <Users className="h-3 w-3 text-purple-400" />
-                </div>
-                <span>Upvotes</span>
-              </span>
-              <span className="font-medium text-gray-200">
-                {hub.upvotes.length}
               </span>
             </div>
             <div className="flex items-center justify-between">

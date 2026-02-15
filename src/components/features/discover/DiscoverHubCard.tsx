@@ -3,14 +3,13 @@
 import {
   Eye,
   Handshake,
-  Heart,
-  Loader2,
   MessageCircle,
   Star,
   Users,
 } from 'lucide-react';
 import Link from 'next/link';
 import { memo } from 'react';
+import JoinButton from '@/app/hubs/components/hub-detail/JoinButton';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -29,7 +28,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { useDiscoverUpvote } from '@/hooks/use-discover-upvote';
 import type { HubCardDTO } from '@/lib/discover/query';
 import { cn, formatNumber } from '@/lib/utils';
 
@@ -52,21 +50,9 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
   weeklyMessageCount,
   _count,
   averageRating,
-  isUpvoted = false,
   onTagClick,
   isAboveFold = false,
 }: DiscoverHubCardProps) {
-  const {
-    isUpvoted: liked,
-    upvoteCount,
-    handleUpvote,
-    isLoading,
-  } = useDiscoverUpvote({
-    hubId: id,
-    initialUpvoted: isUpvoted,
-    initialCount: _count.upvotes,
-  });
-
   return (
     <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-gray-800/70 bg-gray-900/40 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-gray-800/60 hover:shadow-2xl hover:shadow-indigo-500/10">
       {/* Banner */}
@@ -246,35 +232,9 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
             </Button>
           </Link>
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                onClick={handleUpvote}
-                disabled={isLoading}
-                className={cn(
-                  'h-10 min-w-14 shrink-0 rounded-lg border px-3 transition-all',
-                  liked
-                    ? 'border-red-500/50 bg-red-500/10 text-red-400 hover:bg-red-500/20'
-                    : 'border-gray-700/60 bg-gray-900/40 text-gray-400 hover:border-gray-600 hover:bg-gray-800/60 hover:text-white'
-                )}
-              >
-                {isLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <Heart className={cn('h-4 w-4', liked && 'fill-red-400')} />
-                    <span className="font-medium text-sm">
-                      {formatNumber(upvoteCount)}
-                    </span>
-                  </div>
-                )}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{liked ? 'Remove upvote' : 'Upvote this hub'}</p>
-            </TooltipContent>
-          </Tooltip>
+          <div className="w-28 shrink-0">
+            <JoinButton hubId={id} hubName={name} />
+          </div>
         </div>
       </CardFooter>
     </Card>

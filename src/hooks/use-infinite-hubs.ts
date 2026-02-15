@@ -20,7 +20,6 @@ export interface SimplifiedHub {
     role: Role;
     user: { name: string | null; image: string | null; id: string };
   }[];
-  upvotes: { id: string; userId: string }[];
   reviews: {
     id: string;
     createdAt: Date;
