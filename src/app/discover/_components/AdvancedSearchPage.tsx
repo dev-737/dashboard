@@ -66,10 +66,12 @@ const SORT_OPTIONS = [
 
 interface AdvancedSearchPageProps {
   initialData?: Awaited<ReturnType<typeof getDiscoverHubs>>;
+  isAuthenticated: boolean;
 }
 
 export default function AdvancedSearchPage({
   initialData,
+  isAuthenticated,
 }: AdvancedSearchPageProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -617,7 +619,11 @@ export default function AdvancedSearchPage({
                 </div>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {trendingHubsData.items.map((hub) => (
-                    <DiscoverHubCard key={hub.id} {...hub} />
+                    <DiscoverHubCard
+                      key={hub.id}
+                      {...hub}
+                      isAuthenticated={isAuthenticated}
+                    />
                   ))}
                 </div>
               </section>
@@ -634,7 +640,11 @@ export default function AdvancedSearchPage({
                 </div>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {newHubsData.items.map((hub) => (
-                    <DiscoverHubCard key={hub.id} {...hub} />
+                    <DiscoverHubCard
+                      key={hub.id}
+                      {...hub}
+                      isAuthenticated={isAuthenticated}
+                    />
                   ))}
                 </div>
               </section>
@@ -694,6 +704,7 @@ export default function AdvancedSearchPage({
                   <DiscoverHubCard
                     key={hub.id}
                     {...hub}
+                    isAuthenticated={isAuthenticated}
                     onTagClick={(tag) => {
                       if (!tags.includes(tag)) handleTagsChange([...tags, tag]);
                     }}

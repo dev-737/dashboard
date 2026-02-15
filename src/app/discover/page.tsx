@@ -1,6 +1,8 @@
 import { Loader2 } from 'lucide-react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { Suspense } from 'react';
+import { auth } from '@/lib/auth';
 import { getDiscoverHubs } from '@/lib/discover/query';
 import AdvancedSearchPage from './_components/AdvancedSearchPage';
 
@@ -11,6 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const isAuthenticated = Boolean(session?.user?.id);
+
   const initialData = await getDiscoverHubs({
     sort: 'trending',
     page: 1,
@@ -25,7 +32,10 @@ export default async function Page() {
         </div>
       }
     >
-      <AdvancedSearchPage initialData={initialData} />
+      <AdvancedSearchPage
+        initialData={initialData}
+        isAuthenticated={isAuthenticated}
+      />
     </Suspense>
   );
 }

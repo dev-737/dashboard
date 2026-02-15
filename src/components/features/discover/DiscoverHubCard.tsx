@@ -28,6 +28,7 @@ import { cn, formatNumber } from '@/lib/utils';
 interface DiscoverHubCardProps extends HubCardDTO {
   onTagClick?: (tagName: string) => void;
   isAboveFold?: boolean;
+  isAuthenticated?: boolean;
 }
 
 const DiscoverHubCard = memo(function DiscoverHubCard({
@@ -46,6 +47,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
   averageRating,
   onTagClick,
   isAboveFold = false,
+  isAuthenticated,
 }: DiscoverHubCardProps) {
   return (
     <Card className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-gray-800/70 bg-gray-900/40 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-gray-800/60 hover:shadow-2xl hover:shadow-indigo-500/10">
@@ -226,7 +228,12 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
             </Button>
           </Link>
 
-          <JoinButton hubId={id} hubName={name} className="flex-1 text-base" />
+          <JoinButton
+            hubId={id}
+            hubName={name}
+            isAuthenticated={isAuthenticated}
+            className="flex-1 text-base"
+          />
         </div>
       </CardFooter>
     </Card>

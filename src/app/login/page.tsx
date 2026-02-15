@@ -1,30 +1,57 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Spinner } from '@/components/ui/spinner';
 import { authClient } from '@/lib/auth-client';
 
 function LoginContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
+  const { data: session, isPending } = authClient.useSession();
+  const callbackUrl = searchParams.get('callbackUrl');
+  const redirectTarget = useMemo(() => {
+    if (!callbackUrl) {
+      return '/';
+    }
+
+    return callbackUrl.startsWith('/') ? callbackUrl : '/';
+  }, [callbackUrl]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (session?.user?.id) {
+      router.replace(redirectTarget);
+    }
+  }, [session?.user?.id, redirectTarget, router]);
 
   const handleDiscordLogin = async () => {
     setIsLoading(true);
     try {
       await authClient.signIn.social({
         provider: 'discord',
-        callbackURL: callbackUrl,
+        callbackURL: redirectTarget,
       });
     } catch (error) {
       console.error('Login error:', error);
       setIsLoading(false);
     }
   };
+
+  if (isPending || session?.user?.id) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-950">
+        <div className="flex items-center gap-3 text-white">
+          <Spinner className="h-6 w-6" />
+          <span>Redirecting...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gray-950">

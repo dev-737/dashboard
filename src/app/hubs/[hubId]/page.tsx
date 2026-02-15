@@ -198,6 +198,7 @@ export default async function HubDetailView(props: {
                   <JoinButton
                     hubName={hub.name}
                     hubId={hub.id}
+                    isAuthenticated={Boolean(session?.user?.id)}
                     size="sm"
                     className="h-9 px-4 text-sm"
                   />
