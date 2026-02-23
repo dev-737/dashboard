@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import {
     addServerBlocklistEntry,
     removeServerBlocklistEntry,
-    updateServerInviteCode,
+    updateServerInviteCode
 } from '@/actions/server-actions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -51,7 +51,7 @@ export function ServerSettingsForm({
         setIsSavingInvite(true);
         try {
             const result = await updateServerInviteCode(serverId, inviteCode.trim() || null);
-            if (result.error) {
+            if ('error' in result && result.error) {
                 toast.error(result.error);
             } else {
                 toast.success('Server invite code updated successfully.');
@@ -81,9 +81,9 @@ export function ServerSettingsForm({
                 newBlockReason.trim() || null
             );
 
-            if (result.error) {
+            if ('error' in result && result.error) {
                 toast.error(result.error);
-            } else if (result.data) {
+            } else if ('success' in result && result.data) {
                 toast.success('Added to blocklist successfully.');
                 // Update local state with the new entry
                 setBlocklist((prev) => [...prev, result.data as unknown as ServerBlocklistEntry]);
@@ -102,7 +102,7 @@ export function ServerSettingsForm({
         setRemovingBlockId(id);
         try {
             const result = await removeServerBlocklistEntry(serverId, id);
-            if (result.error) {
+            if ('error' in result && result.error) {
                 toast.error(result.error);
             } else {
                 toast.success('Removed from blocklist.');
