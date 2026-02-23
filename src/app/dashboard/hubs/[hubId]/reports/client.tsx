@@ -316,7 +316,11 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
       <Card className="premium-card">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <HugeiconsIcon icon={FilterIcon} className="h-5 w-5" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={FilterIcon}
+              className="h-5 w-5"
+            />
             Filters
           </CardTitle>
         </CardHeader>
@@ -330,7 +334,7 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
                   className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400"
                 />
                 <Input
-                  placeholder="Search01Icon reports..."
+                  placeholder="Search reports..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="border-gray-700 bg-gray-800/50 pl-10"
@@ -373,21 +377,37 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
               </div>
             ),
             color: 'red',
-            icon: <HugeiconsIcon icon={Clock01Icon} className="h-4 w-4" />,
+            icon: (
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Clock01Icon}
+                className="h-4 w-4"
+              />
+            ),
           },
           {
             value: 'resolved',
             label: `Resolved (${resolvedReports.length})`,
             color: 'green',
             icon: (
-              <HugeiconsIcon icon={CheckmarkCircle01Icon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={CheckmarkCircle01Icon}
+                className="h-4 w-4"
+              />
             ),
           },
           {
             value: 'ignored',
             label: `Ignored (${ignoredReports.length})`,
             color: 'blue',
-            icon: <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />,
+            icon: (
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Cancel01Icon}
+                className="h-4 w-4"
+              />
+            ),
           },
         ]}
       >
@@ -721,7 +741,11 @@ function ReportCard({
             variant="outline"
             className="border-yellow-500/50 bg-yellow-500/10 text-yellow-400"
           >
-            <HugeiconsIcon icon={Clock01Icon} className="mr-1 h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Clock01Icon}
+              className="mr-1 h-3 w-3"
+            />
             Pending
           </Badge>
         );
@@ -744,7 +768,11 @@ function ReportCard({
             variant="outline"
             className="border-gray-500/50 bg-gray-500/10 text-gray-400"
           >
-            <HugeiconsIcon icon={Cancel01Icon} className="mr-1 h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Cancel01Icon}
+              className="mr-1 h-3 w-3"
+            />
             Ignored
           </Badge>
         );
@@ -861,7 +889,11 @@ function ReportCard({
         {/* Report Reason */}
         <div className="rounded-md border border-gray-800 bg-gray-900/50 p-3">
           <div className="mb-2 flex items-center gap-2 text-gray-400 text-sm">
-            <HugeiconsIcon icon={Alert01Icon} className="h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Alert01Icon}
+              className="h-4 w-4"
+            />
             Reason for Report:
           </div>
           <div className="text-sm">{report.reason}</div>
@@ -1019,7 +1051,11 @@ function ReportCard({
               onClick={() => onAction(report, 'ignore')}
               disabled={isUpdating}
             >
-              <HugeiconsIcon icon={Cancel01Icon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Cancel01Icon}
+                className="mr-2 h-4 w-4"
+              />
               Ignore
             </Button>
             <Button

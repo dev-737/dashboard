@@ -189,7 +189,11 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                 onClick={onClose}
                 className="relative z-10 h-8 w-8 rounded-full text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
               >
-                <HugeiconsIcon icon={Cancel01Icon} className="h-5 w-5" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Cancel01Icon}
+                  className="h-5 w-5"
+                />
               </Button>
             </div>
 
@@ -353,7 +357,11 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                   onClick={onClose}
                   className="w-full border-white/10 bg-white/5 text-gray-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
                 >
-                  <HugeiconsIcon icon={UserIcon} className="mr-2 h-3.5 w-3.5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={UserIcon}
+                    className="mr-2 h-3.5 w-3.5"
+                  />
                   Profile
                 </Button>
                 <Button

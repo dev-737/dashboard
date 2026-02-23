@@ -261,7 +261,11 @@ export function GuidedTour({
               transition={{ delay: 0.5, duration: 0.3 }}
               className="flex items-center gap-2 rounded-full bg-purple-500 px-3 py-1 font-medium text-sm text-white"
             >
-              <HugeiconsIcon icon={Cursor01Icon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Cursor01Icon}
+                className="h-4 w-4"
+              />
               {currentStepData.actionText || 'Click here'}
             </motion.div>
           </div>
@@ -307,7 +311,11 @@ export function GuidedTour({
                   onClick={onSkip}
                   className="h-8 w-8 rounded-full text-gray-400 hover:bg-gray-800 hover:text-white"
                 >
-                  <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Cancel01Icon}
+                    className="h-4 w-4"
+                  />
                 </Button>
               </div>
 

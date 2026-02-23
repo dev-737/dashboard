@@ -190,7 +190,11 @@ export function MembersClient({ hubId }: { hubId: string }) {
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button className="w-full border-none bg-indigo-600 font-medium text-white shadow-indigo-900/20 shadow-lg hover:bg-indigo-500 sm:w-auto">
-              <HugeiconsIcon icon={UserAdd01Icon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={UserAdd01Icon}
+                className="mr-2 h-4 w-4"
+              />
               Add Member
             </Button>
           </DialogTrigger>

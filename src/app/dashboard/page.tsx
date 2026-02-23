@@ -91,14 +91,24 @@ export default async function DashboardPage(props: {
               label: 'My Servers',
               color: 'blue',
               icon: (
-                <HugeiconsIcon icon={ServerStackIcon} className="h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={ServerStackIcon}
+                  className="h-4 w-4"
+                />
               ),
             },
             {
               value: 'hubs',
               label: 'My Hubs',
               color: 'purple',
-              icon: <HugeiconsIcon icon={Message02Icon} className="h-4 w-4" />,
+              icon: (
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Message02Icon}
+                  className="h-4 w-4"
+                />
+              ),
             },
           ]}
         >

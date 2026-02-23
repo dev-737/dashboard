@@ -32,7 +32,11 @@ export function CTA() {
           className="mx-auto max-w-4xl"
         >
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-emerald-400 text-sm backdrop-blur-sm">
-            <HugeiconsIcon icon={ZapIcon} className="h-4 w-4 animate-pulse" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={ZapIcon}
+              className="h-4 w-4 animate-pulse"
+            />
             <span className="font-semibold tracking-wide">
               Fast, clean, and easy to use
             </span>
@@ -74,7 +78,11 @@ export function CTA() {
                 className="flex items-center gap-4 rounded-2xl border border-white/5 bg-white/2 p-4 backdrop-blur-sm transition-all hover:bg-white/4"
               >
                 <div className="rounded-xl bg-blue-500/10 p-3 text-blue-400 ring-1 ring-blue-500/20">
-                  <HugeiconsIcon icon={stat.icon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={stat.icon}
+                    className="h-5 w-5"
+                  />
                 </div>
                 <div className="text-left">
                   <div className="font-bold text-white text-xl">

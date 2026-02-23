@@ -25,7 +25,11 @@ export default function ConnectionLoading() {
             asChild
           >
             <Link href="/dashboard?tab=connections">
-              <HugeiconsIcon icon={ArrowLeftIcon} className="mr-1 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ArrowLeftIcon}
+                className="mr-1 h-4 w-4"
+              />
               Back
             </Link>
           </Button>

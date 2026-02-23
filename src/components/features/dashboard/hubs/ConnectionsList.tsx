@@ -248,7 +248,11 @@ export function ConnectionsList({
               className="absolute top-1/2 right-2 h-8 w-8 -translate-y-1/2 rounded-lg p-0 hover:bg-gray-700/50"
               onClick={() => setSearchQuery('')}
             >
-              <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Cancel01Icon}
+                className="h-4 w-4"
+              />
             </Button>
           )}
         </div>
@@ -394,7 +398,11 @@ function ConnectionItem({
             >
               {connection.connected ? (
                 <>
-                  <HugeiconsIcon icon={Wifi01Icon} className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Wifi01Icon}
+                    className="mr-1 h-3 w-3"
+                  />
                   Active
                 </>
               ) : (
@@ -412,13 +420,21 @@ function ConnectionItem({
           {/* Connection details */}
           <div className="flex flex-col gap-2 text-gray-400 text-sm sm:flex-row sm:items-center sm:gap-4">
             <div className="flex items-center gap-1">
-              <HugeiconsIcon icon={HashtagIcon} className="h-3 w-3 shrink-0" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={HashtagIcon}
+                className="h-3 w-3 shrink-0"
+              />
               <span className="truncate font-mono text-xs">
                 {connection.channelId}
               </span>
             </div>
             <div className="flex items-center gap-1">
-              <HugeiconsIcon icon={Clock01Icon} className="h-3 w-3 shrink-0" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Clock01Icon}
+                className="h-3 w-3 shrink-0"
+              />
               <span className="truncate text-xs">
                 {formatDistanceToNow(new Date(connection.lastActive), {
                   addSuffix: true,
@@ -436,7 +452,11 @@ function ConnectionItem({
               size="sm"
               className="h-8 w-8 rounded-lg p-0 opacity-0 transition-opacity hover:bg-gray-700/50 group-hover:opacity-100 sm:opacity-100"
             >
-              <HugeiconsIcon icon={MoreVerticalIcon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={MoreVerticalIcon}
+                className="h-4 w-4"
+              />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -447,14 +467,22 @@ function ConnectionItem({
               onClick={() => onCopy(connection.serverId, 'Server ID')}
               className="text-gray-300 hover:bg-gray-800 hover:text-white"
             >
-              <HugeiconsIcon icon={ServerStackIcon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ServerStackIcon}
+                className="mr-2 h-4 w-4"
+              />
               Copy01Icon Server ID
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => onCopy(connection.channelId, 'Channel ID')}
               className="text-gray-300 hover:bg-gray-800 hover:text-white"
             >
-              <HugeiconsIcon icon={HashtagIcon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={HashtagIcon}
+                className="mr-2 h-4 w-4"
+              />
               Copy01Icon Channel ID
             </DropdownMenuItem>
             {canManage && (
@@ -479,7 +507,11 @@ function ConnectionItem({
                   }
                   className="text-red-300 hover:bg-red-600/10 hover:text-red-200"
                 >
-                  <HugeiconsIcon icon={Delete02Icon} className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Delete02Icon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Remove Connection
                 </DropdownMenuItem>
               </>

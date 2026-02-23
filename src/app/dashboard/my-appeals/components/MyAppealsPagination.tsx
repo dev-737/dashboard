@@ -37,7 +37,11 @@ export function MyAppealsPagination({
           onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
         >
-          <HugeiconsIcon icon={ArrowLeftIcon} className="mr-1 h-4 w-4" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={ArrowLeftIcon}
+            className="mr-1 h-4 w-4"
+          />
           Previous
         </Button>
         <Button
@@ -49,7 +53,11 @@ export function MyAppealsPagination({
           disabled={currentPage === totalPages}
         >
           Next
-          <HugeiconsIcon icon={ArrowRightIcon} className="ml-1 h-4 w-4" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={ArrowRightIcon}
+            className="ml-1 h-4 w-4"
+          />
         </Button>
       </div>
     </CardFooter>

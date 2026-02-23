@@ -60,19 +60,49 @@ interface RulesListProps {
 const ActionIcon = ({ action }: { action: BlockWordAction }) => {
   switch (action) {
     case BlockWordAction.BLOCK_MESSAGE:
-      return <HugeiconsIcon icon={Alert02Icon} className="h-3 w-3" />;
+      return (
+        <HugeiconsIcon strokeWidth={3} icon={Alert02Icon} className="h-3 w-3" />
+      );
     case BlockWordAction.WARN:
-      return <HugeiconsIcon icon={Alert01Icon} className="h-3 w-3" />;
+      return (
+        <HugeiconsIcon strokeWidth={3} icon={Alert01Icon} className="h-3 w-3" />
+      );
     case BlockWordAction.MUTE:
-      return <HugeiconsIcon icon={Clock01Icon} className="h-3 w-3" />;
+      return (
+        <HugeiconsIcon strokeWidth={3} icon={Clock01Icon} className="h-3 w-3" />
+      );
     case BlockWordAction.BAN:
-      return <HugeiconsIcon icon={LegalHammerIcon} className="h-3 w-3" />;
+      return (
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={LegalHammerIcon}
+          className="h-3 w-3"
+        />
+      );
     case BlockWordAction.SEND_ALERT:
-      return <HugeiconsIcon icon={Notification03Icon} className="h-3 w-3" />;
+      return (
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={Notification03Icon}
+          className="h-3 w-3"
+        />
+      );
     case BlockWordAction.BLACKLIST:
-      return <HugeiconsIcon icon={UserRemoveIcon} className="h-3 w-3" />;
+      return (
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={UserRemoveIcon}
+          className="h-3 w-3"
+        />
+      );
     default:
-      return <HugeiconsIcon icon={Shield01Icon} className="h-3 w-3" />;
+      return (
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={Shield01Icon}
+          className="h-3 w-3"
+        />
+      );
   }
 };
 

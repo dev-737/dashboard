@@ -57,7 +57,11 @@ export function OnboardingHelpMenu() {
           size="icon"
           className="h-9 w-9 rounded-full text-gray-400 hover:text-white"
         >
-          <HugeiconsIcon icon={HelpCircleIcon} className="h-5 w-5" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={HelpCircleIcon}
+            className="h-5 w-5"
+          />
           <span className="sr-only">Help menu</span>
         </Button>
       </DropdownMenuTrigger>

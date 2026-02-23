@@ -111,7 +111,11 @@ export function InfractionRevokeModal({
     switch (type) {
       case 'BLACKLIST':
         return (
-          <HugeiconsIcon icon={Shield01Icon} className="h-4 w-4 text-red-400" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={Shield01Icon}
+            className="h-4 w-4 text-red-400"
+          />
         );
       case 'WARNING':
         return (
@@ -122,7 +126,11 @@ export function InfractionRevokeModal({
         );
       case 'BAN':
         return (
-          <HugeiconsIcon icon={Shield01Icon} className="h-4 w-4 text-red-500" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={Shield01Icon}
+            className="h-4 w-4 text-red-500"
+          />
         );
       case 'MUTE':
         return (

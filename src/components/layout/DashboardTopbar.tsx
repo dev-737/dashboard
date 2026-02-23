@@ -82,7 +82,11 @@ export function DashboardTopBar({ user }: { user: User }) {
                 )}
               >
                 {item.icon && (
-                  <HugeiconsIcon icon={item.icon} className="h-4 w-4" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={item.icon}
+                    className="h-4 w-4"
+                  />
                 )}
                 {item.name}
               </Link>
@@ -97,7 +101,11 @@ export function DashboardTopBar({ user }: { user: User }) {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="border border-transparent text-gray-300 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
           >
-            <HugeiconsIcon icon={Menu01Icon} className="h-6 w-6" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Menu01Icon}
+              className="h-6 w-6"
+            />
             <span className="sr-only">Open menu</span>
           </Button>
         </div>

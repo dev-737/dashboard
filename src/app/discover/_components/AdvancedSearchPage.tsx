@@ -229,7 +229,7 @@ export default function AdvancedSearchPage({
       <div className="sticky top-16 z-30 border-gray-800/60 border-b bg-[#030812]/95 backdrop-blur-xl transition-colors duration-200">
         <div className="container mx-auto max-w-7xl px-4 py-4">
           <div className="flex flex-col gap-4 md:flex-row md:items-center">
-            {/* Search01Icon Bar */}
+            {/* Search Bar */}
             <div className="relative flex-1">
               <HugeiconsIcon
                 icon={Search01Icon}
@@ -249,7 +249,11 @@ export default function AdvancedSearchPage({
                   }}
                   className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-300"
                 >
-                  <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Cancel01Icon}
+                    className="h-4 w-4"
+                  />
                 </Button>
               )}
             </div>
@@ -299,7 +303,11 @@ export default function AdvancedSearchPage({
                         'border-indigo-500/50 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20'
                     )}
                   >
-                    <HugeiconsIcon icon={FilterIcon} className="h-4 w-4" />
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={FilterIcon}
+                      className="h-4 w-4"
+                    />
                     Filters
                     {(tags.length > 0 ||
                       minMembers > 0 ||
@@ -615,7 +623,11 @@ export default function AdvancedSearchPage({
             {featuredData && featuredData.items.length > 0 && (
               <section className="space-y-4">
                 <div className="flex items-center gap-2 text-yellow-400">
-                  <HugeiconsIcon icon={SparklesIcon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={SparklesIcon}
+                    className="h-5 w-5"
+                  />
                   <h2 className="font-bold text-gray-100 text-xl">
                     Featured Hubs
                   </h2>
@@ -636,7 +648,11 @@ export default function AdvancedSearchPage({
             {trendingHubsData && trendingHubsData.items.length > 0 && (
               <section className="space-y-6">
                 <div className="flex items-center gap-2 text-orange-500">
-                  <HugeiconsIcon icon={ChartIncreaseIcon} className="h-6 w-6" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={ChartIncreaseIcon}
+                    className="h-6 w-6"
+                  />
                   <h2 className="font-bold text-2xl text-gray-100">
                     Trending Hubs
                   </h2>
@@ -657,7 +673,11 @@ export default function AdvancedSearchPage({
             {newHubsData && newHubsData.items.length > 0 && (
               <section className="space-y-6">
                 <div className="flex items-center gap-2 text-indigo-400">
-                  <HugeiconsIcon icon={Clock01Icon} className="h-6 w-6" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Clock01Icon}
+                    className="h-6 w-6"
+                  />
                   <h2 className="font-bold text-2xl text-gray-100">
                     New & Rising
                   </h2>

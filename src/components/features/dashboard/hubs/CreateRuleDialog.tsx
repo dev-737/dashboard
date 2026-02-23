@@ -141,7 +141,11 @@ export function CreateRuleDialog({
         <div className="flex h-full max-h-[85vh] flex-col">
           <DialogHeader className="shrink-0 pb-4">
             <DialogTitle className="flex items-center text-purple-400">
-              <HugeiconsIcon icon={Shield01Icon} className="mr-2 h-5 w-5" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Shield01Icon}
+                className="mr-2 h-5 w-5"
+              />
               Create New FilterIcon Rule
             </DialogTitle>
             <DialogDescription>
@@ -163,14 +167,22 @@ export function CreateRuleDialog({
                   value="custom"
                   className="data-[state=active]:bg-purple-600/20"
                 >
-                  <HugeiconsIcon icon={PlusSignIcon} className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={PlusSignIcon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Custom Rule
                 </TabsTrigger>
                 <TabsTrigger
                   value="template"
                   className="data-[state=active]:bg-purple-600/20"
                 >
-                  <HugeiconsIcon icon={SparklesIcon} className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={SparklesIcon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Templates (Coming Soon)
                 </TabsTrigger>
               </TabsList>

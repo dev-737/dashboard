@@ -172,7 +172,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             </div>
           </div>
 
-          {/* Quick Settings01Icon Grid */}
+          {/* Quick Settings Grid */}
           <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
             {/* Connection Status */}
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-3 text-center">

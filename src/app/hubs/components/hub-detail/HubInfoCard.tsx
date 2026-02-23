@@ -107,7 +107,6 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
             {hub._count.connections} server
             {hub._count.connections !== 1 ? 's' : ''}
           </span>
-          {/* ActivityIcon */}
           <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
             <HugeiconsIcon
               icon={Clock01Icon}

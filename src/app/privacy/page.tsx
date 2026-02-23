@@ -26,7 +26,11 @@ export default function PrivacyPolicy() {
         {/* Header */}
         <div className="mb-20 text-center">
           <div className="mb-6 inline-flex items-center justify-center rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm">
-            <HugeiconsIcon icon={Shield01Icon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Shield01Icon}
+              className="mr-2 h-4 w-4"
+            />
             <span className="font-medium text-sm">Privacy Policy</span>
           </div>
 
@@ -84,7 +88,11 @@ export default function PrivacyPolicy() {
             <section id="info-we-collect" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 text-purple-400">
-                  <HugeiconsIcon icon={EyeIcon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={EyeIcon}
+                    className="h-5 w-5"
+                  />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   1. Information We Collect
@@ -141,7 +149,11 @@ export default function PrivacyPolicy() {
             <section id="how-we-use" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
-                  <HugeiconsIcon icon={File01Icon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={File01Icon}
+                    className="h-5 w-5"
+                  />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   2. How We Use Your Information
@@ -172,7 +184,11 @@ export default function PrivacyPolicy() {
             <section id="data-retention" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
-                  <HugeiconsIcon icon={LockIcon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={LockIcon}
+                    className="h-5 w-5"
+                  />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   3. Data Retention
@@ -206,7 +222,11 @@ export default function PrivacyPolicy() {
             <section id="sharing" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10 text-green-400">
-                  <HugeiconsIcon icon={GlobeIcon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={GlobeIcon}
+                    className="h-5 w-5"
+                  />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   4. Data Sharing

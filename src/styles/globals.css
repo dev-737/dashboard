@@ -616,3 +616,7 @@ button {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+.hi {
+  stroke-width: 2px; /* Increase this value for thicker lines */
+}

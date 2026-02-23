@@ -85,7 +85,11 @@ export function HubLanguageManagement({
     <div className="space-y-6">
       <div className="flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
-          <HugeiconsIcon icon={GlobeIcon} className="h-5 w-5 text-blue-400" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={GlobeIcon}
+            className="h-5 w-5 text-blue-400"
+          />
         </div>
         <div>
           <h3 className="font-semibold text-lg">Hub Language</h3>
@@ -168,7 +172,11 @@ export function HubLanguageManagement({
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
-                    <HugeiconsIcon icon={FloppyDiskIcon} className="h-4 w-4" />
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={FloppyDiskIcon}
+                      className="h-4 w-4"
+                    />
                     Save Language
                   </div>
                 )}

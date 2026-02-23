@@ -65,7 +65,11 @@ export function RulesWelcomeStep({
     <>
       <CardHeader className="pb-6 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-green-500 to-emerald-600">
-          <HugeiconsIcon icon={Shield01Icon} className="h-8 w-8 text-white" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={Shield01Icon}
+            className="h-8 w-8 text-white"
+          />
         </div>
         <CardTitle className="text-2xl">Welcome & Rules</CardTitle>
         <CardDescription className="text-base">
@@ -111,7 +115,11 @@ export function RulesWelcomeStep({
               disabled={rules.length >= 10}
               className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
             >
-              <HugeiconsIcon icon={PlusSignIcon} className="mr-1 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={PlusSignIcon}
+                className="mr-1 h-4 w-4"
+              />
               Add Rule
             </Button>
           </div>
@@ -136,7 +144,11 @@ export function RulesWelcomeStep({
                     onClick={() => removeRule(index)}
                     className="border-red-500/30 text-red-400 hover:border-red-700/50 hover:bg-red-900/30 hover:text-red-300"
                   >
-                    <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={Cancel01Icon}
+                      className="h-4 w-4"
+                    />
                   </Button>
                 )}
               </div>
@@ -161,7 +173,11 @@ export function RulesWelcomeStep({
             onClick={onPrev}
             className="border-gray-700/50 bg-gray-800/50 px-6 hover:bg-gray-700/50 hover:text-white"
           >
-            <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={ArrowLeftIcon}
+              className="mr-2 h-4 w-4"
+            />
             Back
           </Button>
           <Button

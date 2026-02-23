@@ -34,7 +34,7 @@ export function UserSettingsForm() {
   const updateSettingsMutation = useMutation(
     trpc.user.updateSettings.mutationOptions({
       onSuccess: () => {
-        toast.success('Settings01Icon saved', {
+        toast.success('Settings saved', {
           description: 'Your settings have been updated successfully.',
         });
         setHasChanges(false);

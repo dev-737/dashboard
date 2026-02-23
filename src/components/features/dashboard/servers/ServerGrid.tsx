@@ -222,7 +222,11 @@ function ServerCard({ server, index }: ServerCardProps) {
               className="mt-2 w-full rounded-xl border-none bg-linear-to-r from-gray-800 to-gray-800 shadow-lg transition-all duration-200 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"
             >
               <Link href={`/dashboard/servers/${server.id}`}>
-                <HugeiconsIcon icon={Home01Icon} className="mr-2 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Home01Icon}
+                  className="mr-2 h-4 w-4"
+                />
                 <span className="hidden sm:inline">Manage Server</span>
                 <span className="sm:hidden">Manage</span>
               </Link>

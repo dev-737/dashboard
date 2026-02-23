@@ -8,7 +8,7 @@ import { UserSettingsForm } from '@/components/forms/UserSettingsForm';
 import { auth } from '@/lib/auth';
 
 export const metadata: Metadata = {
-  title: 'Settings01Icon | InterChat Dashboard',
+  title: 'Settings | InterChat Dashboard',
   description: 'Manage your settings and preferences on InterChat',
 };
 
@@ -25,9 +25,7 @@ export default async function SettingsPage() {
     <div className="mx-auto max-w-4xl space-y-8 p-6">
       {/* Header */}
       <div className="mb-8 text-center">
-        <h1 className="mb-2 font-bold text-3xl text-white">
-          Account Settings01Icon
-        </h1>
+        <h1 className="mb-2 font-bold text-3xl text-white">Account Settings</h1>
         <p className="text-gray-400">Manage your profile and preferences</p>
       </div>
 

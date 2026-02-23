@@ -140,7 +140,11 @@ export function ConnectionEditFormClient({
               htmlFor="connected"
               className="flex items-center gap-2 font-medium text-base"
             >
-              <HugeiconsIcon icon={ZapIcon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ZapIcon}
+                className="h-4 w-4"
+              />
               Connection Status
             </Label>
             <p className="text-gray-400 text-sm">
@@ -162,7 +166,11 @@ export function ConnectionEditFormClient({
             htmlFor="invite"
             className="flex items-center gap-2 font-medium text-base"
           >
-            <HugeiconsIcon icon={Link01Icon} className="h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Link01Icon}
+              className="h-4 w-4"
+            />
             Server Invite Link01Icon
           </Label>
           <p className="mb-3 text-gray-400 text-sm">
@@ -184,7 +192,11 @@ export function ConnectionEditFormClient({
               disabled={!inviteUrl}
               className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
             >
-              <HugeiconsIcon icon={Copy01Icon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Copy01Icon}
+                className="h-4 w-4"
+              />
             </Button>
             <Button
               variant="outline"
@@ -199,7 +211,11 @@ export function ConnectionEditFormClient({
                   className="h-4 w-4 animate-spin"
                 />
               ) : (
-                <HugeiconsIcon icon={PlusSignIcon} className="h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={PlusSignIcon}
+                  className="h-4 w-4"
+                />
               )}
             </Button>
           </div>
@@ -233,7 +249,11 @@ export function ConnectionEditFormClient({
         {/* Channel Information */}
         <div className="space-y-3">
           <Label className="flex items-center gap-2 font-medium text-base">
-            <HugeiconsIcon icon={HashtagIcon} className="h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={HashtagIcon}
+              className="h-4 w-4"
+            />
             Connected Channel
           </Label>
           <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-3">
@@ -255,7 +275,11 @@ export function ConnectionEditFormClient({
                 }
                 className="h-6 px-2 text-gray-400 text-xs hover:text-white"
               >
-                <HugeiconsIcon icon={Copy01Icon} className="h-3 w-3" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Copy01Icon}
+                  className="h-3 w-3"
+                />
               </Button>
             </div>
           </div>
@@ -282,7 +306,11 @@ export function ConnectionEditFormClient({
               </>
             ) : (
               <>
-                <HugeiconsIcon icon={FloppyDiskIcon} className="mr-2 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={FloppyDiskIcon}
+                  className="mr-2 h-4 w-4"
+                />
                 Save Changes
               </>
             )}

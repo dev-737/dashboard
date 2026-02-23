@@ -73,7 +73,7 @@ export function FeaturedHubCarousel({
             />
           </div>
 
-          {/* Text InformationCircleIcon */}
+          {/* Text Information */}
           <div className="mb-1 min-w-0 flex-1 space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               {verified && (
@@ -136,7 +136,11 @@ export function FeaturedHubCarousel({
         <div className="absolute right-6 bottom-6 hidden pt-3 md:block">
           <Link href={`/hubs/${id}`}>
             <Button size="default" className="btn-primary">
-              <HugeiconsIcon icon={EyeIcon} className="mr-2 h-5 w-5" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={EyeIcon}
+                className="mr-2 h-5 w-5"
+              />
               View Hub
             </Button>
           </Link>

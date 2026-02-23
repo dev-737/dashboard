@@ -174,7 +174,11 @@ export default async function ServerDetailPage(props: {
             asChild
           >
             <Link href="/dashboard">
-              <HugeiconsIcon icon={ArrowLeftIcon} className="mr-1 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ArrowLeftIcon}
+                className="mr-1 h-4 w-4"
+              />
               Back
             </Link>
           </Button>
@@ -224,7 +228,11 @@ export default async function ServerDetailPage(props: {
             <Card className="col-span-2 border border-gray-800/50 bg-dash-main backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <HugeiconsIcon icon={BarChartIcon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={BarChartIcon}
+                    className="h-5 w-5"
+                  />
                   Server Stats
                 </CardTitle>
                 <CardDescription>
@@ -316,7 +324,11 @@ export default async function ServerDetailPage(props: {
             <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <HugeiconsIcon icon={Home01Icon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Home01Icon}
+                    className="h-5 w-5"
+                  />
                   Connection Status
                 </CardTitle>
                 <CardDescription>
@@ -444,11 +456,11 @@ export default async function ServerDetailPage(props: {
           </Card>
         </TabsContent>
 
-        {/* Settings01Icon Tab */}
+        {/* Settings Tab */}
         <TabsContent value="settings" className="space-y-6">
           <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
             <CardHeader>
-              <CardTitle>Server Settings01Icon</CardTitle>
+              <CardTitle>Server Settings</CardTitle>
               <CardDescription>
                 Configure your server&apos;s InterChat settings
               </CardDescription>

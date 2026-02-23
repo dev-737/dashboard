@@ -65,7 +65,7 @@ function DropdownNavItem({ href, icon, label, active }: DropdownNavItemProps) {
               : 'text-gray-400 group-hover:bg-purple-400/15 group-hover:text-white'
           )}
         >
-          <HugeiconsIcon icon={icon} className="h-4 w-4" />
+          <HugeiconsIcon strokeWidth={3} icon={icon} className="h-4 w-4" />
         </div>
         <span className="truncate text-sm">{label}</span>
       </Link>
@@ -207,7 +207,11 @@ export function HubMobileDropdown({
                 animate={{ rotate: [0, 5, -5, 0] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
               >
-                <HugeiconsIcon icon={Menu01Icon} className="h-5 w-5" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Menu01Icon}
+                  className="h-5 w-5"
+                />
               </motion.div>
               <span className="text-base">Hub Navigation</span>
             </div>

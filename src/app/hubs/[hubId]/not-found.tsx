@@ -15,13 +15,21 @@ export default function HubNotFound() {
       <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
         <Button asChild>
           <Link href="/hubs">
-            <HugeiconsIcon icon={Search01Icon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Search01Icon}
+              className="mr-2 h-4 w-4"
+            />
             Browse Hubs
           </Link>
         </Button>
         <Button variant="outline" asChild>
           <Link href="/">
-            <HugeiconsIcon icon={Home01Icon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Home01Icon}
+              className="mr-2 h-4 w-4"
+            />
             Go Home
           </Link>
         </Button>

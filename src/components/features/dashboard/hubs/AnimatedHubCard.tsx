@@ -224,7 +224,11 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
             className="mt-3 w-full rounded-xl border-none bg-linear-to-r from-gray-800 to-gray-800 font-medium text-white shadow-md transition-all duration-300 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"
           >
             <Link href={`/dashboard/hubs/${hub.id}`}>
-              <HugeiconsIcon icon={Message02Icon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Message02Icon}
+                className="mr-2 h-4 w-4"
+              />
               Manage Hub
             </Link>
           </Button>

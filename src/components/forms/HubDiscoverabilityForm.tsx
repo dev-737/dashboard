@@ -64,7 +64,11 @@ export function HubDiscoverabilityForm({
         <CardHeader>
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-linear-to-br from-green-500 to-emerald-600">
-              <HugeiconsIcon icon={GlobeIcon} className="h-7 w-7 text-white" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={GlobeIcon}
+                className="h-7 w-7 text-white"
+              />
             </div>
             <div>
               <CardTitle className="text-3xl">

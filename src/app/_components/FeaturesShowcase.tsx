@@ -54,7 +54,11 @@ export function FeaturesShowcase() {
             <div className="relative z-10 flex h-full flex-col">
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-emerald-500/10 p-3 text-emerald-400 ring-1 ring-emerald-500/20">
-                  <HugeiconsIcon icon={Message02Icon} className="h-6 w-6" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Message02Icon}
+                    className="h-6 w-6"
+                  />
                 </div>
                 <h3 className="font-bold text-2xl text-white">Instant Relay</h3>
               </div>
@@ -87,7 +91,11 @@ export function FeaturesShowcase() {
             <div className="relative z-10">
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-red-500/10 p-3 text-red-400 ring-1 ring-red-500/20">
-                  <HugeiconsIcon icon={Shield01Icon} className="h-6 w-6" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Shield01Icon}
+                    className="h-6 w-6"
+                  />
                 </div>
                 <h3 className="font-bold text-white text-xl">
                   Stay in Control
@@ -112,7 +120,11 @@ export function FeaturesShowcase() {
             <div className="relative z-10">
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-purple-500/10 p-3 text-purple-400 ring-1 ring-purple-500/20">
-                  <HugeiconsIcon icon={UserMultipleIcon} className="h-6 w-6" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={UserMultipleIcon}
+                    className="h-6 w-6"
+                  />
                 </div>
                 <h3 className="font-bold text-white text-xl">
                   Join or Create Hubs
@@ -138,7 +150,11 @@ export function FeaturesShowcase() {
               <div className="flex-1">
                 <div className="mb-6 flex items-center gap-4">
                   <div className="rounded-2xl bg-blue-500/10 p-3 text-blue-400 ring-1 ring-blue-500/20">
-                    <HugeiconsIcon icon={Settings01Icon} className="h-6 w-6" />
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={Settings01Icon}
+                      className="h-6 w-6"
+                    />
                   </div>
                   <h3 className="font-bold text-2xl text-white">
                     Control Center
@@ -172,7 +188,11 @@ export function FeaturesShowcase() {
             <div className="relative z-10">
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-yellow-500/10 p-3 text-yellow-400 ring-1 ring-yellow-500/20">
-                  <HugeiconsIcon icon={SparklesIcon} className="h-6 w-6" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={SparklesIcon}
+                    className="h-6 w-6"
+                  />
                 </div>
                 <h3 className="font-bold text-white text-xl">Rich Content</h3>
               </div>

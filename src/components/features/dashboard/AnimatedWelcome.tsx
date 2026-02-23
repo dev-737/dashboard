@@ -51,7 +51,11 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
             transition={{ delay: 0.1 }}
             className="flex items-center gap-2 font-medium text-brand-purple-400 text-sm"
           >
-            <HugeiconsIcon icon={WavingHand01Icon} className="h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={WavingHand01Icon}
+              className="h-4 w-4"
+            />
             <span>InterChat Dashboard</span>
           </motion.div>
 

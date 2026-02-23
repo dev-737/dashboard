@@ -47,9 +47,17 @@ export function StepIndicator({ currentStep, steps }: StepIndicatorProps) {
                 }`}
               >
                 {isCompleted ? (
-                  <HugeiconsIcon icon={Tick01Icon} className="h-6 w-6" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Tick01Icon}
+                    className="h-6 w-6"
+                  />
                 ) : (
-                  <HugeiconsIcon icon={step.icon} className="h-6 w-6" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={step.icon}
+                    className="h-6 w-6"
+                  />
                 )}
               </div>
               {index < steps.length - 1 && (

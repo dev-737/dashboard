@@ -72,7 +72,11 @@ const InterChatRules = () => {
       id: 4,
       title: 'Severe Spam & Raiding',
       icon: (
-        <HugeiconsIcon icon={Alert02Icon} className="h-6 w-6 text-orange-400" />
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={Alert02Icon}
+          className="h-6 w-6 text-orange-400"
+        />
       ),
       description: 'Respect other communities and keep conversations organic.',
       notAllowed: [
@@ -86,7 +90,11 @@ const InterChatRules = () => {
       id: 5,
       title: 'Impersonation & Fraud',
       icon: (
-        <HugeiconsIcon icon={Alert01Icon} className="h-6 w-6 text-red-400" />
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={Alert01Icon}
+          className="h-6 w-6 text-red-400"
+        />
       ),
       description: 'Be yourself. Do not deceive others for personal gain.',
       notAllowed: [
@@ -102,7 +110,11 @@ const InterChatRules = () => {
       id: 6,
       title: 'Exploitation & Abuse',
       icon: (
-        <HugeiconsIcon icon={Alert02Icon} className="h-6 w-6 text-rose-400" />
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={Alert02Icon}
+          className="h-6 w-6 text-rose-400"
+        />
       ),
       description: 'Protecting the vulnerable is our top priority.',
       notAllowed: [
@@ -118,7 +130,11 @@ const InterChatRules = () => {
       id: 7,
       title: 'Malicious Software',
       icon: (
-        <HugeiconsIcon icon={Shield01Icon} className="h-6 w-6 text-amber-400" />
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={Shield01Icon}
+          className="h-6 w-6 text-amber-400"
+        />
       ),
       description: 'Do not distribute harmful software or tools.',
       notAllowed: [
@@ -144,7 +160,11 @@ const InterChatRules = () => {
         {/* Header */}
         <div className="mb-20 text-center">
           <div className="mb-6 inline-flex items-center justify-center rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm">
-            <HugeiconsIcon icon={Alert02Icon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Alert02Icon}
+              className="mr-2 h-4 w-4"
+            />
             <span className="font-medium text-sm">Community Standards</span>
           </div>
 
@@ -185,7 +205,11 @@ const InterChatRules = () => {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <p className="flex items-center gap-2 font-semibold text-rose-400 text-xs uppercase tracking-wider">
-                    <HugeiconsIcon icon={Alert01Icon} className="h-3 w-3" />{' '}
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={Alert01Icon}
+                      className="h-3 w-3"
+                    />{' '}
                     Prohibited
                   </p>
                   <ul className="space-y-2">
@@ -290,7 +314,11 @@ const InterChatRules = () => {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 rounded-lg bg-purple-600 px-6 py-3 font-medium text-sm text-white transition-all hover:bg-purple-500 hover:shadow-lg hover:shadow-purple-500/20"
                 >
-                  <HugeiconsIcon icon={Shield01Icon} className="h-4 w-4" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Shield01Icon}
+                    className="h-4 w-4"
+                  />
                   Report Violation
                 </a>
                 <a

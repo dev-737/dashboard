@@ -53,7 +53,7 @@ export function buildWhereClause({
     { visibility: HubVisibility.PUBLIC }, // Always filter out private hubs
   ];
 
-  // FilterIcon by tags - hub must have ALL selected tags
+  // Filter by tags - hub must have ALL selected tags
   if (tags && tags.length > 0) {
     filterConditions.push({
       AND: tags.map((tag) => ({
@@ -62,14 +62,14 @@ export function buildWhereClause({
     });
   }
 
-  // FilterIcon by content type (SFW/NSFW)
+  // Filter by content type (SFW/NSFW)
   if (contentFilter !== ContentFilter.All) {
     filterConditions.push({
       nsfw: contentFilter === ContentFilter.NSFW,
     });
   }
 
-  // FilterIcon by verification status
+  // Filter by verification status
   if (verificationStatus !== VerificationStatus.All) {
     if (verificationStatus === VerificationStatus.VerifiedOrPartnered) {
       filterConditions.push({
@@ -82,17 +82,17 @@ export function buildWhereClause({
     }
   }
 
-  // FilterIcon by language
+  // Filter by language
   if (language && language !== 'all') {
     filterConditions.push({ language });
   }
 
-  // FilterIcon by region
+  // Filter by region
   if (region && region !== 'all') {
     filterConditions.push({ region });
   }
 
-  // FilterIcon by server count range (using connection count)
+  // Filter by server count range (using connection count)
   if (minServers !== undefined || maxServers !== undefined) {
     // We'll add a basic filter for connections
     // The actual count filtering will be done after the query
@@ -111,7 +111,7 @@ export function buildWhereClause({
     // We'll handle the actual min/max server filtering in the getSortedHubs function
   }
 
-  // ActivityIcon level filtering - now done at database level
+  // Activity level filtering - now done at database level
   if (activityLevels && activityLevels.length > 0) {
     // Map frontend ActivityLevel enum to database HubActivityLevel enum
     const dbActivityLevels = activityLevels.map((level) => {
@@ -132,7 +132,7 @@ export function buildWhereClause({
     });
   }
 
-  // Search01Icon terms
+  // Search terms
   if (searchTerms.length > 0) {
     searchTerms.forEach((term) => {
       filterConditions.push({
@@ -186,10 +186,10 @@ export async function getSortedHubs(
     totalCount = await db.hub.count({ where: whereClause });
   }
 
-  // Flag01Icon to indicate if we need post-query filtering for server counts
+  // Flag to indicate if we need post-query filtering for server counts
   const needsServerCountFiltering =
     minServers !== undefined || maxServers !== undefined;
-  // ActivityIcon filtering is now done at database level, no post-query filtering needed
+  // Activity filtering is now done at database level, no post-query filtering needed
 
   let hubs: SimplifiedHub[] = [];
 
@@ -727,8 +727,6 @@ async function getFilteredTotalCount(
         return false;
       }
     }
-
-    // ActivityIcon level filtering is now done at database level, no need for post-query filtering
 
     return true;
   });

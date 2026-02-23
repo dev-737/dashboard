@@ -256,7 +256,11 @@ export function ViewInfractionClient({
             className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50"
           >
             <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-              <HugeiconsIcon icon={ArrowLeftIcon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ArrowLeftIcon}
+                className="h-4 w-4"
+              />
             </Link>
           </Button>
           <div>
@@ -268,7 +272,11 @@ export function ViewInfractionClient({
         </div>
 
         <Alert className="border-red-500/50 bg-red-950/20">
-          <HugeiconsIcon icon={Alert01Icon} className="h-4 w-4" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={Alert01Icon}
+            className="h-4 w-4"
+          />
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
@@ -301,7 +309,11 @@ export function ViewInfractionClient({
           className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50"
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-            <HugeiconsIcon icon={ArrowLeftIcon} className="h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={ArrowLeftIcon}
+              className="h-4 w-4"
+            />
           </Link>
         </Button>
         <div>
@@ -318,20 +330,24 @@ export function ViewInfractionClient({
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Main Infraction Details */}
         <div className="space-y-6 lg:col-span-2">
-          {/* Target01Icon Information */}
+          {/* Target Information */}
           <Card className="premium-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <div
                   className={`rounded-(--radius-button) p-2 ${typeInfo.color}`}
                 >
-                  <HugeiconsIcon icon={typeInfo.icon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={typeInfo.icon}
+                    className="h-5 w-5"
+                  />
                 </div>
                 {typeInfo.label} Details
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Target01Icon InformationCircleIcon */}
+              {/* Target Information */}
               <div className="flex items-center gap-4 rounded-(--radius) border border-gray-700/50 bg-gray-900/50 p-4">
                 {isUserInfraction ? (
                   <>
@@ -352,7 +368,11 @@ export function ViewInfractionClient({
                       variant="outline"
                       className="ml-auto border-blue-500/50 bg-blue-500/20 text-blue-400"
                     >
-                      <HugeiconsIcon icon={UserIcon} className="mr-1 h-3 w-3" />
+                      <HugeiconsIcon
+                        strokeWidth={3}
+                        icon={UserIcon}
+                        className="mr-1 h-3 w-3"
+                      />
                       User
                     </Badge>
                   </>
@@ -625,7 +645,11 @@ export function ViewInfractionClient({
                   <Link
                     href={`/dashboard/hubs/${hubId}/infractions?userId=${infraction.userId}`}
                   >
-                    <HugeiconsIcon icon={UserIcon} className="mr-2 h-4 w-4" />
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={UserIcon}
+                      className="mr-2 h-4 w-4"
+                    />
                     View User Infractions
                   </Link>
                 </Button>

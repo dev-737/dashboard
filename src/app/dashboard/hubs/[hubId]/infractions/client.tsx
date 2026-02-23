@@ -259,7 +259,11 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
           className="btn-primary w-full border-none text-white sm:w-auto"
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions/add`}>
-            <HugeiconsIcon icon={PlusSignCircleIcon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={PlusSignCircleIcon}
+              className="mr-2 h-4 w-4"
+            />
             Add Infraction
           </Link>
         </Button>
@@ -355,8 +359,8 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
             Advanced Filters
           </CardTitle>
           <CardDescription>
-            FilterIcon infractions by type, status, target, or search for
-            specific IDs
+            Filter infractions by type, status, target, or search for specific
+            IDs
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -446,7 +450,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 htmlFor="target-filter"
                 className="font-medium text-gray-300 text-sm"
               >
-                Target01Icon Type
+                Target Type
               </Label>
               <Select
                 value={targetType || 'all'}
@@ -468,7 +472,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                         icon={UserIcon}
                         className="h-3 w-3 text-blue-400"
                       />
-                      UserMultipleIcon Only
+                      User Only
                     </div>
                   </SelectItem>
                   <SelectItem value="server">
@@ -488,7 +492,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 htmlFor="search-input"
                 className="font-medium text-gray-300 text-sm"
               >
-                Search01Icon by ID
+                Search by ID
               </Label>
               <form onSubmit={handleSearch} className="flex gap-2">
                 <div className="flex-1">
@@ -505,7 +509,11 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   size="icon"
                   className="rounded-(--radius-button) border-none bg-linear-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
                 >
-                  <HugeiconsIcon icon={Search01Icon} className="h-4 w-4" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Search01Icon}
+                    className="h-4 w-4"
+                  />
                 </Button>
                 <Button
                   type="button"
@@ -514,7 +522,11 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   onClick={resetFilters}
                   className="rounded-(--radius-button) border-gray-700/50 hover:bg-gray-800/50 hover:text-white"
                 >
-                  <HugeiconsIcon icon={Rotate01Icon} className="h-4 w-4" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Rotate01Icon}
+                    className="h-4 w-4"
+                  />
                 </Button>
               </form>
               <p className="mt-1 text-gray-400 text-xs">
@@ -571,7 +583,11 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 onClick={() => refetch()}
                 className="rounded-(--radius-button) border-none bg-linear-to-r from-red-500 to-red-600 px-6 text-white hover:from-red-600 hover:to-red-700"
               >
-                <HugeiconsIcon icon={Rotate01Icon} className="mr-2 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Rotate01Icon}
+                  className="mr-2 h-4 w-4"
+                />
                 Try Again
               </Button>
             </div>
@@ -636,7 +652,11 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 disabled={page === 1}
                 className="flex-1 border-gray-700 hover:bg-gray-800 hover:text-white sm:flex-initial"
               >
-                <HugeiconsIcon icon={ArrowLeftIcon} className="mr-1 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={ArrowLeftIcon}
+                  className="mr-1 h-4 w-4"
+                />
                 Previous
               </Button>
               <Button
@@ -647,7 +667,11 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 className="flex-1 border-gray-700 hover:bg-gray-800 hover:text-white sm:flex-initial"
               >
                 Next
-                <HugeiconsIcon icon={ArrowRightIcon} className="ml-1 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={ArrowRightIcon}
+                  className="ml-1 h-4 w-4"
+                />
               </Button>
             </div>
           </CardFooter>
@@ -773,19 +797,31 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
         <div className="flex flex-wrap items-center gap-2">
           {infraction.type === 'BLACKLIST' ? (
             <span className="flex items-center gap-1 rounded-full bg-red-500/20 px-2 py-1 text-red-400 text-xs">
-              <HugeiconsIcon icon={LegalHammerIcon} className="h-3 w-3" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={LegalHammerIcon}
+                className="h-3 w-3"
+              />
               Blacklist
             </span>
           ) : (
             <span className="flex items-center gap-1 rounded-full bg-yellow-500/20 px-2 py-1 text-xs text-yellow-400">
-              <HugeiconsIcon icon={Alert01Icon} className="h-3 w-3" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Alert01Icon}
+                className="h-3 w-3"
+              />
               Warning
             </span>
           )}
           {getInfractionStatusBadge(infraction.status)}
           {infraction.appealedAt && (
             <span className="flex items-center gap-1 rounded-full bg-blue-500/20 px-2 py-1 text-blue-400 text-xs">
-              <HugeiconsIcon icon={Message02Icon} className="h-3 w-3" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Message02Icon}
+                className="h-3 w-3"
+              />
               Appeal
             </span>
           )}
@@ -857,7 +893,11 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
               <Link
                 href={`/dashboard/hubs/${infraction.hubId}/infractions/${infraction.id}/view`}
               >
-                <HugeiconsIcon icon={EyeIcon} className="mr-1 h-3 w-3" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={EyeIcon}
+                  className="mr-1 h-3 w-3"
+                />
                 View Details
                 {infraction.appealedAt && (
                   <span className="ml-1 rounded-full bg-blue-500/20 px-1.5 py-0.5 text-[10px] text-blue-400">
@@ -895,7 +935,11 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
                   className="w-full border-red-700/30 bg-red-950/20 text-red-400 transition-all hover:border-red-700/50 hover:bg-red-900/30 hover:text-red-300 sm:w-auto"
                   onClick={() => onRevokeClick(infraction)}
                 >
-                  <HugeiconsIcon icon={Shield01Icon} className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Shield01Icon}
+                    className="mr-1 h-3 w-3"
+                  />
                   Revoke
                 </Button>
               </>

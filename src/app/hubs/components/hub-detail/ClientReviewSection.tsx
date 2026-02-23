@@ -49,7 +49,11 @@ export default function ClientReviewSection({
             onClick={() => setShowForm(true)}
             className="rounded-lg bg-linear-to-r from-primary to-primary-alt px-4 py-2 font-medium text-white transition-opacity hover:opacity-90"
           >
-            <HugeiconsIcon icon={Message02Icon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Message02Icon}
+              className="mr-2 h-4 w-4"
+            />
             Write a Review
           </Button>
         </div>

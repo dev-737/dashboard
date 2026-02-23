@@ -120,7 +120,11 @@ export function HubTagManagement({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-r from-blue-500 to-purple-500">
-            <HugeiconsIcon icon={Tag01Icon} className="h-5 w-5 text-white" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Tag01Icon}
+              className="h-5 w-5 text-white"
+            />
           </div>
           <div>
             <h3 className="font-semibold text-lg text-white">Tag Management</h3>
@@ -162,12 +166,20 @@ export function HubTagManagement({
               </>
             ) : hasChanges ? (
               <>
-                <HugeiconsIcon icon={FloppyDiskIcon} className="mr-2 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={FloppyDiskIcon}
+                  className="mr-2 h-4 w-4"
+                />
                 Save Changes
               </>
             ) : (
               <>
-                <HugeiconsIcon icon={Tick01Icon} className="mr-2 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Tick01Icon}
+                  className="mr-2 h-4 w-4"
+                />
                 Saved
               </>
             )}
@@ -179,7 +191,11 @@ export function HubTagManagement({
       <Card className="premium-card backdrop-blur-sm">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-white">
-            <HugeiconsIcon icon={Search01Icon} className="h-5 w-5" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Search01Icon}
+              className="h-5 w-5"
+            />
             Add & Remove Tags
           </CardTitle>
         </CardHeader>

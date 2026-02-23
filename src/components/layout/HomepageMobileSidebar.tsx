@@ -137,7 +137,11 @@ export function HomepageMobileSidebar({
                 onClick={onClose}
                 className="relative z-10 h-8 w-8 rounded-full text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
               >
-                <HugeiconsIcon icon={Cancel01Icon} className="h-5 w-5" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Cancel01Icon}
+                  className="h-5 w-5"
+                />
               </Button>
             </div>
 

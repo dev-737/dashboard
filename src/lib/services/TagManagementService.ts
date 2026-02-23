@@ -47,7 +47,7 @@ class TagManagementService {
   }
 
   /**
-   * Search01Icon tags for autocomplete functionality with caching
+   * Search tags for autocomplete functionality with caching
    */
   async searchTags(
     query: string,

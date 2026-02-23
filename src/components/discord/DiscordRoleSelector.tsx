@@ -186,7 +186,11 @@ export function DiscordRoleSelector({
       {/* Locked state overlay */}
       {!isAccessible && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg bg-gray-900/80 backdrop-blur-sm">
-          <HugeiconsIcon icon={LockIcon} className="h-6 w-6 text-amber-400" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={LockIcon}
+            className="h-6 w-6 text-amber-400"
+          />
           <p className="px-4 text-center text-gray-300 text-sm">
             You don't have access to this server
           </p>

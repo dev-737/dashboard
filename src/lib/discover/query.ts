@@ -124,7 +124,7 @@ function buildWhereClause(p: DiscoverParams): Prisma.HubWhereInput {
     });
   }
 
-  // FilterIcon dead hubs: require at least 3 weekly messages AND at least one connected server.
+  // Filter dead hubs: require at least 3 weekly messages AND at least one connected server.
   // weeklyMessageCount is denormalized and indexed, so this is fast.
   conditions.push({ weeklyMessageCount: { gte: 3 } });
   if (!p.memberCount) {
@@ -147,7 +147,7 @@ function buildOrderBy(
 ): Prisma.HubOrderByWithRelationInput[] {
   switch (sort) {
     case 'active':
-      // ActivityIcon priority: High metrics -> Recent messages
+      // Activity priority: High metrics -> Recent messages
       return [
         { activityMetrics: { messagesLast24h: 'desc' } },
         { activityMetrics: { activeUsersLast24h: 'desc' } },

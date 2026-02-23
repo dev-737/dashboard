@@ -32,21 +32,43 @@ export function ChannelIcon({
 
   switch (type) {
     case ChannelType.GuildText:
-      icon = <HugeiconsIcon icon={HashtagIcon} className={className} />;
+      icon = (
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={HashtagIcon}
+          className={className}
+        />
+      );
       tooltipText = 'Text Channel';
       break;
     case ChannelType.GuildAnnouncement:
-      icon = <HugeiconsIcon icon={HashtagIcon} className={className} />;
+      icon = (
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={HashtagIcon}
+          className={className}
+        />
+      );
       tooltipText = 'Announcement Channel';
       break;
     case ChannelType.PublicThread:
-      icon = <HugeiconsIcon icon={Message02Icon} className={className} />;
+      icon = (
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={Message02Icon}
+          className={className}
+        />
+      );
       tooltipText = 'Public Thread';
       break;
     case ChannelType.PrivateThread:
       icon = (
         <div className="relative">
-          <HugeiconsIcon icon={Message02Icon} className={className} />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={Message02Icon}
+            className={className}
+          />
           <HugeiconsIcon
             icon={LockIcon}
             className="absolute -top-1 -right-1 h-2 w-2"
@@ -56,23 +78,43 @@ export function ChannelIcon({
       tooltipText = 'Private Thread';
       break;
     case ChannelType.AnnouncementThread:
-      icon = <HugeiconsIcon icon={Message02Icon} className={className} />;
+      icon = (
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={Message02Icon}
+          className={className}
+        />
+      );
       tooltipText = 'Announcement Thread';
       break;
     case ChannelType.GuildForum:
       icon = (
-        <HugeiconsIcon icon={MessageMultiple01Icon} className={className} />
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={MessageMultiple01Icon}
+          className={className}
+        />
       );
       tooltipText = 'Forum Channel';
       break;
     case ChannelType.GuildMedia:
       icon = (
-        <HugeiconsIcon icon={MessageMultiple01Icon} className={className} />
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={MessageMultiple01Icon}
+          className={className}
+        />
       );
       tooltipText = 'Media Channel';
       break;
     default:
-      icon = <HugeiconsIcon icon={HashtagIcon} className={className} />;
+      icon = (
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={HashtagIcon}
+          className={className}
+        />
+      );
       tooltipText = 'Channel';
   }
 

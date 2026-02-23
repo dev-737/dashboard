@@ -164,7 +164,11 @@ export function TagSelector({
                   variant="secondary"
                   className="group border-blue-600/30 bg-blue-600/20 pr-1 text-blue-300 transition-colors hover:bg-blue-600/30"
                 >
-                  <HugeiconsIcon icon={Tag01Icon} className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Tag01Icon}
+                    className="mr-1 h-3 w-3"
+                  />
                   {tag}
                   <Button
                     variant="ghost"
@@ -172,7 +176,11 @@ export function TagSelector({
                     onClick={() => removeTag(tag)}
                     className="ml-1 h-auto p-0 text-blue-300 hover:text-white group-hover:text-white"
                   >
-                    <HugeiconsIcon icon={Cancel01Icon} className="h-3 w-3" />
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={Cancel01Icon}
+                      className="h-3 w-3"
+                    />
                   </Button>
                 </Badge>
               </motion.div>
@@ -216,7 +224,11 @@ export function TagSelector({
               }}
               className="absolute top-1/2 right-2 h-auto -translate-y-1/2 transform p-1 text-gray-400 hover:text-white"
             >
-              <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Cancel01Icon}
+                className="h-4 w-4"
+              />
             </Button>
           )}
         </div>

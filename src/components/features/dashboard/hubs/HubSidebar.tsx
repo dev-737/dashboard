@@ -116,7 +116,7 @@ function SidebarNavItem({
           active ? 'text-purple-400' : 'text-gray-500 group-hover:text-gray-300'
         )}
       >
-        <HugeiconsIcon icon={Icon} className="h-5 w-5" />
+        <HugeiconsIcon strokeWidth={3} icon={Icon} className="h-5 w-5" />
       </div>
 
       {!isCollapsed && (
@@ -235,7 +235,11 @@ function SidebarSection({
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
         >
-          <HugeiconsIcon icon={ArrowRight01Icon} className="h-3 w-3" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={ArrowRight01Icon}
+            className="h-3 w-3"
+          />
         </motion.div>
       </button>
 
@@ -527,7 +531,11 @@ export function HubSidebar({
               animate={{ rotate: isCollapsed ? 0 : 180 }}
               transition={{ duration: 0.3 }}
             >
-              <HugeiconsIcon icon={ArrowLeft01Icon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ArrowLeft01Icon}
+                className="h-4 w-4"
+              />
             </motion.div>
           </Button>
         </div>

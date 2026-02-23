@@ -119,7 +119,11 @@ export function Footer() {
                     href={link.href}
                     className="flex items-center gap-2 text-gray-400 text-sm transition-colors duration-200 hover:text-white"
                   >
-                    <HugeiconsIcon icon={link.icon} className="h-4 w-4" />
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={link.icon}
+                      className="h-4 w-4"
+                    />
                     {link.label}
                   </Link>
                 </li>
@@ -141,7 +145,11 @@ export function Footer() {
                     href={link.href}
                     className="flex items-center gap-2 text-gray-400 text-sm transition-colors duration-200 hover:text-white"
                   >
-                    <HugeiconsIcon icon={link.icon} className="h-4 w-4" />
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={link.icon}
+                      className="h-4 w-4"
+                    />
                     {link.label}
                   </Link>
                 </li>

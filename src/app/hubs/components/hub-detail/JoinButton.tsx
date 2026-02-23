@@ -61,7 +61,11 @@ export default function JoinButton({
         {...props}
       >
         {!resolvedAuthenticated && !isSessionLoading && (
-          <HugeiconsIcon icon={Login01Icon} className="mr-2 h-4 w-4" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={Login01Icon}
+            className="mr-2 h-4 w-4"
+          />
         )}
         <span>Join</span>
       </Button>

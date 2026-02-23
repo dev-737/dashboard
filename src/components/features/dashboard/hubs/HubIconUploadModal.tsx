@@ -262,7 +262,11 @@ export function HubIconUploadModal({
                   onClick={handleRemoveIcon}
                   disabled={isUploading}
                 >
-                  <HugeiconsIcon icon={Cancel01Icon} className="h-3 w-3" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Cancel01Icon}
+                    className="h-3 w-3"
+                  />
                 </Button>
               )}
             </div>
@@ -342,7 +346,11 @@ export function HubIconUploadModal({
           {/* Error State */}
           {!selectedFile && !previewUrl && (
             <div className="flex items-center gap-2 text-amber-400 text-sm">
-              <HugeiconsIcon icon={AlertCircleIcon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={AlertCircleIcon}
+                className="h-4 w-4"
+              />
               <span>No icon selected</span>
             </div>
           )}
@@ -365,7 +373,11 @@ export function HubIconUploadModal({
               disabled={isUploading}
               className="text-gray-400 hover:bg-gray-800 hover:text-white"
             >
-              <HugeiconsIcon icon={RefreshIcon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={RefreshIcon}
+                className="mr-2 h-4 w-4"
+              />
               Reset
             </Button>
           )}
@@ -385,7 +397,11 @@ export function HubIconUploadModal({
               </>
             ) : (
               <>
-                <HugeiconsIcon icon={Upload01Icon} className="mr-2 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Upload01Icon}
+                  className="mr-2 h-4 w-4"
+                />
                 Upload01Icon Icon
               </>
             )}

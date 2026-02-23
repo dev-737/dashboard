@@ -68,7 +68,11 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
           disabled={!newRule.trim()}
           className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
         >
-          <HugeiconsIcon icon={PlusSignIcon} className="mr-1 h-4 w-4" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={PlusSignIcon}
+            className="mr-1 h-4 w-4"
+          />
           Add Rule
         </Button>
       </div>
@@ -106,7 +110,11 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
                         disabled={index === 0}
                         className="h-8 w-8 p-0 hover:bg-gray-700/50"
                       >
-                        <HugeiconsIcon icon={ArrowUpIcon} className="h-4 w-4" />
+                        <HugeiconsIcon
+                          strokeWidth={3}
+                          icon={ArrowUpIcon}
+                          className="h-4 w-4"
+                        />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -150,7 +158,11 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
                 onClick={() => handleRemoveRule(index)}
                 className="h-8 w-8 p-0 hover:bg-red-600/20 hover:text-red-400"
               >
-                <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Cancel01Icon}
+                  className="h-4 w-4"
+                />
               </Button>
             </div>
           ))

@@ -62,7 +62,11 @@ export function AutomodDashboard({
                 onClick={() => setShowCreateRule(true)}
                 className="bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
               >
-                <HugeiconsIcon icon={PlusSignIcon} className="mr-2 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={PlusSignIcon}
+                  className="mr-2 h-4 w-4"
+                />
                 New Rule
               </Button>
             )}
@@ -77,7 +81,11 @@ export function AutomodDashboard({
             value="rules"
             className="data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-300"
           >
-            <HugeiconsIcon icon={Shield01Icon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Shield01Icon}
+              className="mr-2 h-4 w-4"
+            />
             FilterIcon Rules
           </TabsTrigger>
           <TabsTrigger

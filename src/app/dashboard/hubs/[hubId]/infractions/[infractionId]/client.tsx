@@ -127,7 +127,11 @@ export function AddInfractionClient({
           className="text-gray-400 hover:text-white"
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-            <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={ArrowLeftIcon}
+              className="mr-2 h-4 w-4"
+            />
             Back to Infractions
           </Link>
         </Button>
@@ -145,7 +149,11 @@ export function AddInfractionClient({
         variant="default"
         className="border-blue-500/30 bg-linear-to-r from-blue-950/40 to-indigo-950/40 backdrop-blur-sm"
       >
-        <HugeiconsIcon icon={Shield01Icon} className="h-5 w-5 text-blue-400" />
+        <HugeiconsIcon
+          strokeWidth={3}
+          icon={Shield01Icon}
+          className="h-5 w-5 text-blue-400"
+        />
         <AlertTitle className="font-semibold text-blue-300">
           Infraction Guidelines
         </AlertTitle>
@@ -161,7 +169,7 @@ export function AddInfractionClient({
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Main Form */}
           <div className="space-y-6 lg:col-span-2">
-            {/* Target01Icon Type Selection */}
+            {/* Target Type Selection */}
             <Card className="premium-card">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2">
@@ -171,7 +179,7 @@ export function AddInfractionClient({
                       className="h-4 w-4 text-purple-400"
                     />
                   </div>
-                  Target01Icon Selection
+                  Target Selection
                 </CardTitle>
                 <CardDescription>
                   Choose what type of entity to create an infraction for
@@ -189,7 +197,11 @@ export function AddInfractionClient({
                       value="user"
                       className="rounded-(--radius) data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
                     >
-                      <HugeiconsIcon icon={UserIcon} className="mr-2 h-4 w-4" />
+                      <HugeiconsIcon
+                        strokeWidth={3}
+                        icon={UserIcon}
+                        className="mr-2 h-4 w-4"
+                      />
                       User
                     </TabsTrigger>
                     <TabsTrigger
@@ -215,9 +227,8 @@ export function AddInfractionClient({
                         className="border-gray-700/50 bg-gray-900/50 focus:border-blue-500/50"
                       />
                       <p className="text-gray-400 text-xs">
-                        Right-click on a user in Discord and select
-                        &quot;Copy01Icon User ID&quot; (Developer Mode must be
-                        enabled)
+                        Right-click on a user in Discord and select &quot;Copy
+                        User ID&quot; (Developer Mode must be enabled)
                       </p>
                     </div>
                   </TabsContent>
@@ -246,9 +257,8 @@ export function AddInfractionClient({
                       </div>
                     </div>
                     <p className="text-gray-400 text-xs">
-                      Right-click on a server in Discord and select
-                      &quot;Copy01Icon Server ID&quot; (Developer Mode must be
-                      enabled)
+                      Right-click on a server in Discord and select &quot;Copy
+                      Server ID&quot; (Developer Mode must be enabled)
                     </p>
                   </TabsContent>
                 </Tabs>

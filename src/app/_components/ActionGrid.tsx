@@ -103,7 +103,11 @@ export function ActionGrid() {
                         action.iconColor
                       )}
                     >
-                      <HugeiconsIcon icon={action.icon} className="h-8 w-8" />
+                      <HugeiconsIcon
+                        strokeWidth={3}
+                        icon={action.icon}
+                        className="h-8 w-8"
+                      />
                     </div>
                     <h3 className="mb-3 font-bold text-white text-xl">
                       {action.title}

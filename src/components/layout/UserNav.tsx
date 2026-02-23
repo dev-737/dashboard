@@ -194,7 +194,11 @@ export function UserNav({
           className="flex cursor-pointer items-center gap-2 px-2 py-2 text-red-400 transition-colors duration-150 hover:bg-red-950/30 hover:text-red-300"
           onClick={handleSignOut}
         >
-          <HugeiconsIcon icon={Logout01Icon} className="mr-2 h-4 w-4" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={Logout01Icon}
+            className="mr-2 h-4 w-4"
+          />
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>

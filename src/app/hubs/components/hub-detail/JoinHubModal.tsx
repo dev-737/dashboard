@@ -408,7 +408,11 @@ export default function JoinHubModal({
               </>
             ) : (
               <>
-                <HugeiconsIcon icon={HashtagIcon} className="mr-2 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={HashtagIcon}
+                  className="mr-2 h-4 w-4"
+                />
                 Join Hub
               </>
             )}

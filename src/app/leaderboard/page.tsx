@@ -74,7 +74,11 @@ export default function LeaderboardComingSoon() {
                 size="lg"
                 className="rounded-full bg-white px-8 py-6 font-medium text-black text-lg hover:bg-zinc-200"
               >
-                <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-5 w-5" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={ArrowLeftIcon}
+                  className="mr-2 h-5 w-5"
+                />
                 Return Home
               </Button>
             </Link>

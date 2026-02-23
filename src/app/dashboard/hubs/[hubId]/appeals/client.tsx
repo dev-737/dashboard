@@ -364,7 +364,11 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
                     size="icon"
                     className="cursor-pointer bg-indigo-600 text-white hover:bg-indigo-700"
                   >
-                    <HugeiconsIcon icon={Search01Icon} className="h-4 w-4" />
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={Search01Icon}
+                      className="h-4 w-4"
+                    />
                   </Button>
                   <Button
                     type="button"
@@ -373,7 +377,11 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
                     onClick={resetFilters}
                     className="cursor-pointer border-gray-700 hover:bg-gray-800 hover:text-white"
                   >
-                    <HugeiconsIcon icon={Rotate01Icon} className="h-4 w-4" />
+                    <HugeiconsIcon
+                      strokeWidth={3}
+                      icon={Rotate01Icon}
+                      className="h-4 w-4"
+                    />
                   </Button>
                 </div>
               </form>
@@ -470,7 +478,11 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
                 disabled={page === 1}
                 className="flex-1 border-gray-700 hover:bg-gray-800 hover:text-white sm:flex-initial"
               >
-                <HugeiconsIcon icon={ArrowLeftIcon} className="mr-1 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={ArrowLeftIcon}
+                  className="mr-1 h-4 w-4"
+                />
                 Previous
               </Button>
               <Button
@@ -481,7 +493,11 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
                 className="flex-1 border-gray-700 hover:bg-gray-800 hover:text-white sm:flex-initial"
               >
                 Next
-                <HugeiconsIcon icon={ArrowRightIcon} className="ml-1 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={ArrowRightIcon}
+                  className="ml-1 h-4 w-4"
+                />
               </Button>
             </div>
           </div>
@@ -540,21 +556,33 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
       case 'PENDING':
         return (
           <span className="flex items-center gap-1 rounded-full bg-yellow-500/20 px-2 py-1 text-xs text-yellow-400">
-            <HugeiconsIcon icon={Clock01Icon} className="h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Clock01Icon}
+              className="h-3 w-3"
+            />
             Pending
           </span>
         );
       case 'ACCEPTED':
         return (
           <span className="flex items-center gap-1 rounded-full bg-green-500/20 px-2 py-1 text-green-400 text-xs">
-            <HugeiconsIcon icon={Tick01Icon} className="h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Tick01Icon}
+              className="h-3 w-3"
+            />
             Accepted
           </span>
         );
       case 'REJECTED':
         return (
           <span className="flex items-center gap-1 rounded-full bg-red-500/20 px-2 py-1 text-red-400 text-xs">
-            <HugeiconsIcon icon={Cancel01Icon} className="h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Cancel01Icon}
+              className="h-3 w-3"
+            />
             Rejected
           </span>
         );
@@ -568,14 +596,22 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
       case 'BLACKLIST':
         return (
           <span className="flex items-center gap-1 rounded-full bg-red-500/20 px-2 py-1 text-red-400 text-xs">
-            <HugeiconsIcon icon={Shield01Icon} className="h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Shield01Icon}
+              className="h-3 w-3"
+            />
             Blacklist
           </span>
         );
       case 'WARNING':
         return (
           <span className="flex items-center gap-1 rounded-full bg-orange-500/20 px-2 py-1 text-orange-400 text-xs">
-            <HugeiconsIcon icon={Alert01Icon} className="h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Alert01Icon}
+              className="h-3 w-3"
+            />
             Warning
           </span>
         );
@@ -619,7 +655,11 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
           {getInfractionTypeBadge(appeal.infraction.type)}
           {getStatusBadge(localStatus)}
           <div className="flex items-center gap-1 text-gray-400 text-xs">
-            <HugeiconsIcon icon={Clock01Icon} className="h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Clock01Icon}
+              className="h-3 w-3"
+            />
             {submittedAt}
           </div>
         </div>
@@ -691,7 +731,11 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
                   <div className="mt-1 text-gray-300">
                     {appeal.infraction.user ? (
                       <div className="flex items-center gap-2">
-                        <HugeiconsIcon icon={UserIcon} className="h-3 w-3" />
+                        <HugeiconsIcon
+                          strokeWidth={3}
+                          icon={UserIcon}
+                          className="h-3 w-3"
+                        />
                         {appeal.infraction.user.name || 'Unknown User'}
                       </div>
                     ) : appeal.infraction.serverName ? (
@@ -754,7 +798,11 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
             <Link
               href={`/dashboard/hubs/${hubId}/infractions/${appeal.infractionId}/view`}
             >
-              <HugeiconsIcon icon={EyeIcon} className="mr-1 h-3 w-3" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={EyeIcon}
+                className="mr-1 h-3 w-3"
+              />
               View Infraction
             </Link>
           </Button>
@@ -768,7 +816,11 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
                 onClick={() => handleStatusChange('REJECTED')}
                 disabled={isUpdating}
               >
-                <HugeiconsIcon icon={Cancel01Icon} className="mr-1 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Cancel01Icon}
+                  className="mr-1 h-4 w-4"
+                />
                 Reject
               </Button>
               <Button
@@ -778,7 +830,11 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
                 onClick={() => handleStatusChange('ACCEPTED')}
                 disabled={isUpdating}
               >
-                <HugeiconsIcon icon={Tick01Icon} className="mr-1 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Tick01Icon}
+                  className="mr-1 h-4 w-4"
+                />
                 Accept
               </Button>
             </>

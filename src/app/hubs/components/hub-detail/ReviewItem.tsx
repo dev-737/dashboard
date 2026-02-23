@@ -119,7 +119,11 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
               disabled={isDeleting}
               title="Delete review"
             >
-              <HugeiconsIcon icon={Delete02Icon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Delete02Icon}
+                className="h-4 w-4"
+              />
               <span className="sr-only">Delete</span>
             </Button>
           )}

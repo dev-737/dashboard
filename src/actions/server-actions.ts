@@ -94,7 +94,7 @@ export async function getServers(
       const cachedGuildsEarly =
         await perfCache.get<DiscordGuild[]>(cacheKeyEarly);
       if (cachedGuildsEarly && Array.isArray(cachedGuildsEarly)) {
-        // FilterIcon guilds where the user has the Manage Channels permission (0x10)
+        // Filter guilds where the user has the Manage Channels permission (0x10)
         const adminGuilds = cachedGuildsEarly.filter((guild: DiscordGuild) => {
           const permissions = BigInt(guild.permissions);
           return guild.owner || (permissions & BigInt(0x10)) === BigInt(0x10);
@@ -262,7 +262,7 @@ export async function getServers(
       }
     }
 
-    // FilterIcon guilds where the user has the Manage Channels permission (0x10)
+    // Filter guilds where the user has the Manage Channels permission (0x10)
     const adminGuilds = userGuilds.filter((guild: DiscordGuild) => {
       const permissions = BigInt(guild.permissions);
       return guild.owner || (permissions & BigInt(0x10)) === BigInt(0x10);

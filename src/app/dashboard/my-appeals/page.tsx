@@ -168,7 +168,11 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
             variant="outline"
             className="border-yellow-500/20 bg-yellow-500/10 text-yellow-500"
           >
-            <HugeiconsIcon icon={Clock01Icon} className="mr-1 h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Clock01Icon}
+              className="mr-1 h-3 w-3"
+            />
             Pending
           </Badge>
         );
@@ -178,7 +182,11 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
             variant="outline"
             className="border-green-500/20 bg-green-500/10 text-green-500"
           >
-            <HugeiconsIcon icon={Tick01Icon} className="mr-1 h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Tick01Icon}
+              className="mr-1 h-3 w-3"
+            />
             Accepted
           </Badge>
         );
@@ -188,7 +196,11 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
             variant="outline"
             className="border-red-500/20 bg-red-500/10 text-red-500"
           >
-            <HugeiconsIcon icon={Cancel01Icon} className="mr-1 h-3 w-3" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Cancel01Icon}
+              className="mr-1 h-3 w-3"
+            />
             Rejected
           </Badge>
         );

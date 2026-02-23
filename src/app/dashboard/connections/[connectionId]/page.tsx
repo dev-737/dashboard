@@ -130,7 +130,11 @@ export default async function ConnectionPage(props: {
             asChild
           >
             <Link href="/dashboard?tab=connections">
-              <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ArrowLeftIcon}
+                className="mr-2 h-4 w-4"
+              />
               Back to Connections
             </Link>
           </Button>
@@ -149,7 +153,11 @@ export default async function ConnectionPage(props: {
           className="border-none bg-linear-to-r from-blue-600 to-purple-600 px-6 font-medium text-white hover:from-blue-700 hover:to-purple-700"
         >
           <Link href={`/dashboard/connections/${params.connectionId}/edit`}>
-            <HugeiconsIcon icon={PencilEdit01Icon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={PencilEdit01Icon}
+              className="mr-2 h-4 w-4"
+            />
             Edit Connection
           </Link>
         </Button>

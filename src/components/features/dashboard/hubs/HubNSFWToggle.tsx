@@ -117,7 +117,11 @@ export function HubNSFWToggle({ hubId, currentNsfw }: HubNSFWToggleProps) {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <HugeiconsIcon icon={FloppyDiskIcon} className="h-4 w-4" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={FloppyDiskIcon}
+                    className="h-4 w-4"
+                  />
                   Save Changes
                 </div>
               )}

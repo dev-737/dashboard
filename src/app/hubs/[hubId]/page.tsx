@@ -161,18 +161,34 @@ export default async function HubDetailView(props: {
               href="/"
               className="flex items-center gap-1 transition-colors hover:text-gray-200"
             >
-              <HugeiconsIcon icon={Home01Icon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Home01Icon}
+                className="h-4 w-4"
+              />
               <span>Home01Icon</span>
             </Link>
-            <HugeiconsIcon icon={ArrowRight01Icon} className="h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={ArrowRight01Icon}
+              className="h-4 w-4"
+            />
             <Link
               href="/discover"
               className="flex items-center gap-1 transition-colors hover:text-gray-200"
             >
-              <HugeiconsIcon icon={Search01Icon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Search01Icon}
+                className="h-4 w-4"
+              />
               <span>Browse Hubs</span>
             </Link>
-            <HugeiconsIcon icon={ArrowRight01Icon} className="h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={ArrowRight01Icon}
+              className="h-4 w-4"
+            />
             <span className="font-medium text-gray-200">{hub.name}</span>
           </nav>
         </div>

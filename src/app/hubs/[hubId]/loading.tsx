@@ -15,7 +15,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function HubDetailLoading() {
   return (
     <div className="flex min-h-screen flex-col bg-gray-950 text-gray-200">
-      {/* Header with Search01Icon Bar */}
+      {/* Header with Search Bar */}
       <header className="sticky top-0 z-40 w-full border-gray-800 border-b bg-gray-950/80 backdrop-blur-lg">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
@@ -24,7 +24,7 @@ export default function HubDetailLoading() {
               <Skeleton className="h-5 w-32" />
             </div>
 
-            {/* Search01Icon Bar */}
+            {/* Search Bar */}
             <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
@@ -56,7 +56,7 @@ export default function HubDetailLoading() {
                 {/* Hub Icon */}
                 <Skeleton className="h-28 w-28 shrink-0 rounded-2xl md:h-36 md:w-36" />
 
-                {/* Hub InformationCircleIcon */}
+                {/* Hub Information */}
                 <div className="min-w-0 flex-1">
                   <Skeleton className="mb-4 h-10 w-3/4" />
                   <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">

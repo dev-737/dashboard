@@ -66,7 +66,11 @@ export function DeleteHubDialog({ hubId, hubName }: DeleteHubDialogProps) {
           variant="destructive"
           className="bg-red-600 text-white hover:bg-red-700"
         >
-          <HugeiconsIcon icon={Delete02Icon} className="mr-2 h-4 w-4" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={Delete02Icon}
+            className="mr-2 h-4 w-4"
+          />
           Delete Hub
         </Button>
       </AlertDialogTrigger>

@@ -113,7 +113,11 @@ export default async function ConnectionEditPage(
             asChild
           >
             <Link href={`/dashboard/connections/${connectionId}`}>
-              <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ArrowLeftIcon}
+                className="mr-2 h-4 w-4"
+              />
               Back to Connection
             </Link>
           </Button>

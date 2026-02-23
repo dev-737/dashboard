@@ -263,7 +263,11 @@ export function HubBannerUploadModal({
                 onClick={handleRemoveBanner}
                 disabled={isUploading}
               >
-                <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Cancel01Icon}
+                  className="h-4 w-4"
+                />
               </Button>
             )}
           </div>
@@ -357,7 +361,11 @@ export function HubBannerUploadModal({
               disabled={isUploading}
               className="text-gray-400 hover:bg-gray-800 hover:text-white"
             >
-              <HugeiconsIcon icon={RefreshIcon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={RefreshIcon}
+                className="mr-2 h-4 w-4"
+              />
               Reset
             </Button>
           )}
@@ -377,7 +385,11 @@ export function HubBannerUploadModal({
               </>
             ) : (
               <>
-                <HugeiconsIcon icon={Upload01Icon} className="mr-2 h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Upload01Icon}
+                  className="mr-2 h-4 w-4"
+                />
                 Upload01Icon Banner
               </>
             )}

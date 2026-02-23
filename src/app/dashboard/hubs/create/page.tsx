@@ -42,7 +42,11 @@ export default async function CreateHubPage() {
             asChild
           >
             <Link href="/dashboard">
-              <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ArrowLeftIcon}
+                className="mr-2 h-4 w-4"
+              />
               Back to Hubs
             </Link>
           </Button>
@@ -59,7 +63,11 @@ export default async function CreateHubPage() {
         {/* Feature Highlights */}
         <div className="hidden items-center gap-6 text-gray-400 text-sm lg:flex">
           <div className="flex items-center gap-2">
-            <HugeiconsIcon icon={ZapIcon} className="h-4 w-4 text-yellow-400" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={ZapIcon}
+              className="h-4 w-4 text-yellow-400"
+            />
             <span>Instant Setup</span>
           </div>
           <div className="flex items-center gap-2">
@@ -70,7 +78,11 @@ export default async function CreateHubPage() {
             <span>Full Control</span>
           </div>
           <div className="flex items-center gap-2">
-            <HugeiconsIcon icon={GlobeIcon} className="h-4 w-4 text-blue-400" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={GlobeIcon}
+              className="h-4 w-4 text-blue-400"
+            />
             <span>Global Reach</span>
           </div>
         </div>
@@ -79,7 +91,11 @@ export default async function CreateHubPage() {
       {/* Hero Section */}
       <div className="py-8 text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-2 text-indigo-300 text-sm">
-          <HugeiconsIcon icon={SparklesIcon} className="h-4 w-4" />
+          <HugeiconsIcon
+            strokeWidth={3}
+            icon={SparklesIcon}
+            className="h-4 w-4"
+          />
           <span>Create Your Community Hub</span>
         </div>
         <h2 className="mb-4 font-bold text-3xl text-white">

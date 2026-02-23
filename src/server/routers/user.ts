@@ -240,7 +240,7 @@ export const userRouter = router({
 
       return {
         user: updatedUser,
-        message: 'Settings01Icon updated successfully',
+        message: 'Settings updated successfully',
       };
     }),
 });

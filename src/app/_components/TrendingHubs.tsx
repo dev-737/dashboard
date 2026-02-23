@@ -31,7 +31,11 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
         <div className="mb-16 flex flex-col items-end justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 font-medium text-indigo-400 text-sm backdrop-blur-sm">
-              <HugeiconsIcon icon={ChartIncreaseIcon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ChartIncreaseIcon}
+                className="h-4 w-4"
+              />
               <span>Trending Now</span>
             </div>
             <h2 className="font-bold text-4xl text-white tracking-tight md:text-5xl">

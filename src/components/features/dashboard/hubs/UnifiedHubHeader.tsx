@@ -96,7 +96,7 @@ export function UnifiedHubHeader({
 
           <div className="p-6">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
-              {/* Hub Icon and Basic InformationCircleIcon */}
+              {/* Hub Icon and Basic Information */}
               <div className="flex items-center gap-4">
                 <div className="relative -mt-16 sm:-mt-20">
                   <div className="group relative">
@@ -110,7 +110,7 @@ export function UnifiedHubHeader({
                       />
                     </div>
 
-                    {/* Icon Upload01Icon Overlay */}
+                    {/* Icon Upload Overlay */}
                     {canEdit && (
                       <button
                         type="button"

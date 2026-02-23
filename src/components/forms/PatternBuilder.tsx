@@ -112,7 +112,11 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
               size="sm"
               className="bg-purple-600 hover:bg-purple-700"
             >
-              <HugeiconsIcon icon={PlusSignIcon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={PlusSignIcon}
+                className="h-4 w-4"
+              />
             </Button>
           </div>
 
@@ -181,7 +185,11 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
                   onClick={() => removePattern(index)}
                   className="h-6 w-6 p-0 text-gray-400 hover:text-red-400"
                 >
-                  <HugeiconsIcon icon={Cancel01Icon} className="h-3 w-3" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Cancel01Icon}
+                    className="h-3 w-3"
+                  />
                 </Button>
               </div>
             ))}

@@ -43,7 +43,11 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
                   {conn.server?.name || 'Discord Server'}
                 </h4>
                 <p className="mt-1 flex items-center text-gray-400 text-xs">
-                  <HugeiconsIcon icon={Clock01Icon} className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Clock01Icon}
+                    className="mr-1 h-3 w-3"
+                  />
                   {formatDistanceToNow(new Date(conn.lastActive), {
                     addSuffix: true,
                   })}

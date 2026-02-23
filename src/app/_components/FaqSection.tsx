@@ -164,7 +164,11 @@ export function FaqSection() {
               className="flex items-center gap-2"
             >
               View Documentation
-              <HugeiconsIcon icon={ArrowRightIcon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={ArrowRightIcon}
+                className="h-4 w-4"
+              />
             </Link>
           </Button>
         </motion.div>

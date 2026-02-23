@@ -29,7 +29,13 @@ export function ConnectionNavigationTabs({
             </>
           ),
           color: 'indigo' as const,
-          icon: <HugeiconsIcon icon={Message02Icon} className="h-4 w-4" />,
+          icon: (
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Message02Icon}
+              className="h-4 w-4"
+            />
+          ),
           href: `/dashboard/connections/${connectionId}`,
         },
         {
@@ -41,7 +47,13 @@ export function ConnectionNavigationTabs({
             </>
           ),
           color: 'blue' as const,
-          icon: <HugeiconsIcon icon={PencilEdit01Icon} className="h-4 w-4" />,
+          icon: (
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={PencilEdit01Icon}
+              className="h-4 w-4"
+            />
+          ),
           href: `/dashboard/connections/${connectionId}/edit`,
         },
       ]}
@@ -68,7 +80,13 @@ export function ConnectionNavigationTabsSkeleton({
           {[
             {
               value: 'overview',
-              icon: <HugeiconsIcon icon={Message02Icon} className="h-4 w-4" />,
+              icon: (
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={Message02Icon}
+                  className="h-4 w-4"
+                />
+              ),
               label: (
                 <>
                   <span className="hidden sm:inline">Overview</span>
@@ -81,7 +99,11 @@ export function ConnectionNavigationTabsSkeleton({
             {
               value: 'edit',
               icon: (
-                <HugeiconsIcon icon={PencilEdit01Icon} className="h-4 w-4" />
+                <HugeiconsIcon
+                  strokeWidth={3}
+                  icon={PencilEdit01Icon}
+                  className="h-4 w-4"
+                />
               ),
               label: (
                 <>

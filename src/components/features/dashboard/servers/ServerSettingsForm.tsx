@@ -219,12 +219,16 @@ export function ServerSettingsForm({
 
   return (
     <div className="space-y-6">
-      {/* General Settings01Icon Card */}
+      {/* General Settings Card */}
       <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <HugeiconsIcon icon={Link01Icon} className="h-5 w-5" />
-            General Settings01Icon
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={Link01Icon}
+              className="h-5 w-5"
+            />
+            General Settings
           </CardTitle>
           <CardDescription>
             Configure basic aspects of your server&apos;s InterChat presence.
@@ -254,7 +258,11 @@ export function ServerSettingsForm({
             disabled={isSavingInvite}
             className="gap-2"
           >
-            <HugeiconsIcon icon={FloppyDiskIcon} className="h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={FloppyDiskIcon}
+              className="h-4 w-4"
+            />
             {isSavingInvite ? 'Saving...' : 'Save Settings01Icon'}
           </Button>
         </CardFooter>
@@ -324,7 +332,11 @@ export function ServerSettingsForm({
               variant="destructive"
               className="w-full gap-2 md:w-auto"
             >
-              <HugeiconsIcon icon={Shield01Icon} className="h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={Shield01Icon}
+                className="h-4 w-4"
+              />
               {isAddingBlock ? 'Adding...' : 'Block'}
             </Button>
           </div>

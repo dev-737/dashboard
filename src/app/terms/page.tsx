@@ -25,7 +25,11 @@ export default function TermsOfService() {
         {/* Header */}
         <div className="mb-20 text-center">
           <div className="mb-6 inline-flex items-center justify-center rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm">
-            <HugeiconsIcon icon={JusticeScale01Icon} className="mr-2 h-4 w-4" />
+            <HugeiconsIcon
+              strokeWidth={3}
+              icon={JusticeScale01Icon}
+              className="mr-2 h-4 w-4"
+            />
             <span className="font-medium text-sm">Terms of Service</span>
           </div>
 
@@ -160,7 +164,11 @@ export default function TermsOfService() {
             <section id="acceptable-use" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10 text-red-400">
-                  <HugeiconsIcon icon={MinusSignIcon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={MinusSignIcon}
+                    className="h-5 w-5"
+                  />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   5. Acceptable Use
@@ -210,7 +218,11 @@ export default function TermsOfService() {
             <section id="moderation" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 text-purple-400">
-                  <HugeiconsIcon icon={LegalHammerIcon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={LegalHammerIcon}
+                    className="h-5 w-5"
+                  />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   7. Moderation & Enforcement
@@ -276,7 +288,11 @@ export default function TermsOfService() {
             <section id="disclaimers" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
-                  <HugeiconsIcon icon={Alert01Icon} className="h-5 w-5" />
+                  <HugeiconsIcon
+                    strokeWidth={3}
+                    icon={Alert01Icon}
+                    className="h-5 w-5"
+                  />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   13. Disclaimers & Liability
@@ -320,7 +336,7 @@ export default function TermsOfService() {
               </div>
             </section>
 
-            {/* Footer Link01Icon */}
+            {/* Footer Link */}
             <div className="border-white/10 border-t pt-8 text-center">
               <p className="text-gray-500">
                 By using InterChat, you agree to these Terms and our{' '}

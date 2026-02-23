@@ -138,7 +138,11 @@ export default async function HubOverviewPage({
             className="border-gray-700 hover:bg-gray-800 hover:text-white"
           >
             <Link href={`/hubs/${hubId}`}>
-              <HugeiconsIcon icon={GlobeIcon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={GlobeIcon}
+                className="mr-2 h-4 w-4"
+              />
               View Public
             </Link>
           </Button>
@@ -368,7 +372,11 @@ export default async function HubOverviewPage({
             className="border-gray-700 hover:bg-gray-800 hover:text-white"
           >
             <Link href={`/hubs/${hubId}`}>
-              <HugeiconsIcon icon={GlobeIcon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={GlobeIcon}
+                className="mr-2 h-4 w-4"
+              />
               View Public
             </Link>
           </Button>

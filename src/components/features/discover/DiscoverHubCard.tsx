@@ -242,7 +242,11 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
         <div className="flex w-full gap-3">
           <Link href={`/hubs/${id}`} className="flex-1">
             <Button className="btn-primary group w-full text-base">
-              <HugeiconsIcon icon={EyeIcon} className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                strokeWidth={3}
+                icon={EyeIcon}
+                className="mr-2 h-4 w-4"
+              />
               View Hub
             </Button>
           </Link>
