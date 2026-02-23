@@ -7,7 +7,6 @@ import type {
     Hub,
     ServerData,
     ServerBlacklist,
-    ServerBlocklist,
 } from '@/lib/generated/prisma/client/client';
 import { cache as perfCache } from '@/lib/performance-cache';
 import { db } from '@/lib/prisma';
@@ -29,15 +28,28 @@ interface DiscordGuild {
 
 type ServerDataWithDiscordGuild = ServerData & DiscordGuild;
 
+/** A ServerBlocklist entry with the blocked user and server names loaded from the DB. */
+export interface EnrichedBlocklistEntry {
+    id: string;
+    serverId: string;
+    blockedUserId: string | null;
+    blockedServerId: string | null;
+    reason: string | null;
+    createdAt: Date;
+    /** Populated when blockedUserId is set */
+    User: { id: string; name: string | null; image: string | null } | null;
+    /** Populated when blockedServerId is set */
+    blockedServer: { id: string; name: string; iconUrl: string | null } | null;
+}
+
 export interface ServerDataWithConnections extends ServerDataWithDiscordGuild {
     botAdded: boolean;
     connections: (Connection & {
         hub: Hub;
         server: ServerData | null;
     })[];
-    serverBlacklists?: ServerBlacklist[]; // or use Prisma types if available for ServerBlacklist
-    serverBlocklists?: ServerBlocklist[]; // Type correctly if needed
-    blockedServers?: unknown[];
+    serverBlacklists?: ServerBlacklist[];
+    serverBlocklists?: EnrichedBlocklistEntry[];
 }
 
 export async function getServers(
@@ -392,6 +404,12 @@ export async function getServerDetails(
                 connections: { include: { hub: true, server: true } },
                 serversBlockingMe: true,
                 serverBlacklists: true,
+                blockedServers: {
+                    include: {
+                        User: { select: { id: true, name: true, image: true } },
+                        blockedServer: { select: { id: true, name: true, iconUrl: true } },
+                    },
+                },
             },
         });
 
@@ -423,6 +441,7 @@ export async function getServerDetails(
             verification_level: userGuild.verification_level || 0,
             connections: dbServer?.connections || [],
             serverBlacklists: dbServer?.serverBlacklists || [],
+            serverBlocklists: (dbServer?.blockedServers || []) as EnrichedBlocklistEntry[],
         };
 
         return { data: serverData, status: 200 };
@@ -592,3 +611,4 @@ export async function removeServerBlocklistEntry(serverId: string, blocklistId: 
         return { error: 'Failed to remove blocklist entry', status: 500 };
     }
 }
+

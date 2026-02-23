@@ -2,34 +2,46 @@
 
 import { useState } from 'react';
 import { Shield, ShieldAlert, ShieldCheck, Link as LinkIcon, Save, Trash2 } from 'lucide-react';
+import Image from 'next/image';
 import { toast } from 'sonner';
 
 import {
     addServerBlocklistEntry,
     removeServerBlocklistEntry,
-    updateServerInviteCode
+    updateServerInviteCode,
+    type EnrichedBlocklistEntry,
 } from '@/actions/server-actions';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-
-// Define blocklist type for better type support based on schema
-interface ServerBlocklistEntry {
-    id: string;
-    serverId: string;
-    blockedUserId: string | null;
-    blockedServerId: string | null;
-    reason: string | null;
-    createdAt: Date;
-}
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from '@/components/ui/table';
 
 interface ServerSettingsFormProps {
     serverId: string;
     initialInviteCode: string | null;
-    initialBlocklist: ServerBlocklistEntry[];
+    initialBlocklist: EnrichedBlocklistEntry[];
 }
 
 export function ServerSettingsForm({
@@ -40,7 +52,7 @@ export function ServerSettingsForm({
     const [inviteCode, setInviteCode] = useState(initialInviteCode || '');
     const [isSavingInvite, setIsSavingInvite] = useState(false);
 
-    const [blocklist, setBlocklist] = useState<ServerBlocklistEntry[]>(initialBlocklist);
+    const [blocklist, setBlocklist] = useState<EnrichedBlocklistEntry[]>(initialBlocklist);
     const [newBlockId, setNewBlockId] = useState('');
     const [newBlockType, setNewBlockType] = useState<'user' | 'server'>('user');
     const [newBlockReason, setNewBlockReason] = useState('');
@@ -52,27 +64,44 @@ export function ServerSettingsForm({
         try {
             const result = await updateServerInviteCode(serverId, inviteCode.trim() || null);
             if ('error' in result && result.error) {
-                toast.error(result.error);
+                toast.error('Failed to save invite code', { description: result.error });
             } else {
-                toast.success('Server invite code updated successfully.');
+                toast.success('Invite code updated', {
+                    description: 'Your server invite code has been saved.',
+                });
             }
-        } catch (error) {
-            toast.error('Failed to update invite code.');
+        } catch {
+            toast.error('Something went wrong', {
+                description: 'Could not save invite code. Please try again.',
+            });
         } finally {
             setIsSavingInvite(false);
         }
     };
 
     const handleAddBlocklist = async () => {
-        if (!newBlockId.trim()) {
-            toast.error('Please enter a Discord ID to block.');
+        const trimmedId = newBlockId.trim();
+
+        if (!trimmedId) {
+            toast.error('Discord ID required', {
+                description: 'Please enter a valid Discord user or server ID.',
+            });
+            return;
+        }
+
+        // Basic snowflake validation (17-19 digits)
+        if (!/^\d{17,19}$/.test(trimmedId)) {
+            toast.error('Invalid Discord ID', {
+                description:
+                    'Discord IDs are 17–19 digit numbers. Right-click a user/server in Discord → Copy ID.',
+            });
             return;
         }
 
         setIsAddingBlock(true);
         try {
-            const blockedUserId = newBlockType === 'user' ? newBlockId.trim() : null;
-            const blockedServerId = newBlockType === 'server' ? newBlockId.trim() : null;
+            const blockedUserId = newBlockType === 'user' ? trimmedId : null;
+            const blockedServerId = newBlockType === 'server' ? trimmedId : null;
 
             const result = await addServerBlocklistEntry(
                 serverId,
@@ -82,17 +111,27 @@ export function ServerSettingsForm({
             );
 
             if ('error' in result && result.error) {
-                toast.error(result.error);
+                toast.error('Could not add to blocklist', { description: result.error });
             } else if ('success' in result && result.data) {
-                toast.success('Added to blocklist successfully.');
-                // Update local state with the new entry
-                setBlocklist((prev) => [...prev, result.data as unknown as ServerBlocklistEntry]);
-                // Reset form
+                toast.success(
+                    `${newBlockType === 'user' ? 'User' : 'Server'} blocked`,
+                    { description: `ID ${trimmedId} added to the blocklist.` }
+                );
+                // New entries won't have DB-joined relations yet; the name will show once the page
+                // is refreshed. Add a minimal placeholder so the row appears right away.
+                const placeholder: EnrichedBlocklistEntry = {
+                    ...(result.data as unknown as EnrichedBlocklistEntry),
+                    User: null,
+                    blockedServer: null,
+                };
+                setBlocklist((prev) => [...prev, placeholder]);
                 setNewBlockId('');
                 setNewBlockReason('');
             }
-        } catch (error) {
-            toast.error('Failed to add to blocklist.');
+        } catch {
+            toast.error('Something went wrong', {
+                description: 'Could not add to blocklist. Please try again.',
+            });
         } finally {
             setIsAddingBlock(false);
         }
@@ -103,16 +142,63 @@ export function ServerSettingsForm({
         try {
             const result = await removeServerBlocklistEntry(serverId, id);
             if ('error' in result && result.error) {
-                toast.error(result.error);
+                toast.error('Could not remove entry', { description: result.error });
             } else {
-                toast.success('Removed from blocklist.');
+                toast.success('Entry removed', {
+                    description: 'The user or server has been unblocked.',
+                });
                 setBlocklist((prev) => prev.filter((item) => item.id !== id));
             }
-        } catch (error) {
-            toast.error('Failed to remove from blocklist.');
+        } catch {
+            toast.error('Something went wrong', {
+                description: 'Could not remove from blocklist. Please try again.',
+            });
         } finally {
             setRemovingBlockId(null);
         }
+    };
+
+    /** Renders name + avatar/icon for a blocklist entry, falls back to raw ID. */
+    const EntityLabel = ({ item }: { item: EnrichedBlocklistEntry }) => {
+        const isUser = !!item.blockedUserId;
+        const rawId = item.blockedUserId ?? item.blockedServerId ?? '';
+
+        const name = isUser ? item.User?.name : item.blockedServer?.name;
+        const avatarSrc = isUser
+            ? item.User?.image
+            : item.blockedServer?.iconUrl;
+
+        return (
+            <span className="flex items-center gap-2">
+                {avatarSrc ? (
+                    <Image
+                        src={avatarSrc}
+                        alt={name ?? rawId}
+                        width={28}
+                        height={28}
+                        className={`h-7 w-7 flex-shrink-0 object-cover ${isUser ? 'rounded-full' : 'rounded-md'}`}
+                    />
+                ) : (
+                    <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-gray-700 text-xs text-gray-400">
+                        {isUser ? 'U' : 'S'}
+                    </span>
+                )}
+                <span className="flex flex-col min-w-0">
+                    {name ? (
+                        <>
+                            <span className="truncate font-medium text-gray-100 leading-tight">
+                                {name}
+                            </span>
+                            <span className="font-mono text-xs text-gray-500 leading-tight select-all">
+                                {rawId}
+                            </span>
+                        </>
+                    ) : (
+                        <span className="font-mono text-sm text-gray-300 select-all">{rawId}</span>
+                    )}
+                </span>
+            </span>
+        );
     };
 
     return (
@@ -124,7 +210,9 @@ export function ServerSettingsForm({
                         <LinkIcon className="h-5 w-5" />
                         General Settings
                     </CardTitle>
-                    <CardDescription>Configure basic aspects of your server&apos;s InterChat presence.</CardDescription>
+                    <CardDescription>
+                        Configure basic aspects of your server&apos;s InterChat presence.
+                    </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
@@ -139,7 +227,8 @@ export function ServerSettingsForm({
                             />
                         </div>
                         <p className="text-sm text-gray-400">
-                            Provide an invite code to let users join your server directly from InterChat. Example: `interchat` instead of `discord.gg/interchat`.
+                            Provide an invite code to let users join your server directly from
+                            InterChat. Example: `interchat` instead of `discord.gg/interchat`.
                         </p>
                     </div>
                 </CardContent>
@@ -159,7 +248,8 @@ export function ServerSettingsForm({
                         Server Blocklist
                     </CardTitle>
                     <CardDescription>
-                        Prevent specific users or entire servers from interacting with hubs originating from your server.
+                        Prevent specific users or entire servers from interacting with hubs
+                        originating from your server.
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -167,8 +257,14 @@ export function ServerSettingsForm({
                     <div className="grid gap-4 rounded-lg border border-gray-800/50 bg-gray-900/30 p-4 md:grid-cols-[1fr_1fr_2fr_auto] items-end">
                         <div className="space-y-2">
                             <Label htmlFor="blockType">Type</Label>
-                            <Select value={newBlockType} onValueChange={(v) => setNewBlockType(v as 'user' | 'server')}>
-                                <SelectTrigger id="blockType" className="bg-gray-800/50 border-gray-700/50">
+                            <Select
+                                value={newBlockType}
+                                onValueChange={(v) => setNewBlockType(v as 'user' | 'server')}
+                            >
+                                <SelectTrigger
+                                    id="blockType"
+                                    className="bg-gray-800/50 border-gray-700/50"
+                                >
                                     <SelectValue placeholder="Select type" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -178,13 +274,15 @@ export function ServerSettingsForm({
                             </Select>
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="blockId">Discord ID</Label>
+                            <Label htmlFor="blockId">
+                                Discord {newBlockType === 'user' ? 'User' : 'Server'} ID
+                            </Label>
                             <Input
                                 id="blockId"
-                                placeholder="Enter Discord ID"
+                                placeholder="17–19 digit Discord ID"
                                 value={newBlockId}
                                 onChange={(e) => setNewBlockId(e.target.value)}
-                                className="bg-gray-800/50 border-gray-700/50"
+                                className="bg-gray-800/50 border-gray-700/50 font-mono"
                             />
                         </div>
                         <div className="space-y-2">
@@ -215,7 +313,7 @@ export function ServerSettingsForm({
                                 <TableHeader className="bg-gray-900/50">
                                     <TableRow className="border-gray-800/50 hover:bg-transparent">
                                         <TableHead>Type</TableHead>
-                                        <TableHead>Target ID</TableHead>
+                                        <TableHead>Target</TableHead>
                                         <TableHead>Reason</TableHead>
                                         <TableHead>Date Added</TableHead>
                                         <TableHead className="text-right">Actions</TableHead>
@@ -235,11 +333,16 @@ export function ServerSettingsForm({
                                                     </span>
                                                 )}
                                             </TableCell>
-                                            <TableCell className="font-mono text-sm whitespace-nowrap">
-                                                {item.blockedUserId || item.blockedServerId}
+                                            <TableCell className="min-w-[200px]">
+                                                <EntityLabel item={item} />
                                             </TableCell>
-                                            <TableCell className="text-gray-400 max-w-[200px] truncate" title={item.reason || ''}>
-                                                {item.reason || '-'}
+                                            <TableCell
+                                                className="text-gray-400 max-w-[200px] truncate"
+                                                title={item.reason || ''}
+                                            >
+                                                {item.reason || (
+                                                    <span className="text-gray-600">—</span>
+                                                )}
                                             </TableCell>
                                             <TableCell className="text-gray-400 whitespace-nowrap">
                                                 {new Date(item.createdAt).toLocaleDateString()}
@@ -254,7 +357,9 @@ export function ServerSettingsForm({
                                                 >
                                                     <Trash2 className="h-4 w-4 md:mr-2" />
                                                     <span className="hidden md:inline">
-                                                        {removingBlockId === item.id ? 'Removing...' : 'Remove'}
+                                                        {removingBlockId === item.id
+                                                            ? 'Removing...'
+                                                            : 'Remove'}
                                                     </span>
                                                 </Button>
                                             </TableCell>
@@ -270,7 +375,8 @@ export function ServerSettingsForm({
                             </div>
                             <h3 className="mb-2 font-semibold text-xl">Blocklist is empty</h3>
                             <p className="text-muted-foreground max-w-sm mx-auto">
-                                You haven&apos;t blocked any users or servers yet. Add them above if needed.
+                                You haven&apos;t blocked any users or servers yet. Add them above
+                                if needed.
                             </p>
                         </div>
                     )}

@@ -458,7 +458,7 @@ export default async function ServerDetailPage(props: {
                                 <ServerSettingsForm
                                     serverId={serverId}
                                     initialInviteCode={discordServer.inviteCode}
-                                    initialBlocklist={(discordServer as any).serverBlacklists || []}
+                                    initialBlocklist={serverData.serverBlocklists || []}
                                 />
                             )}
                         </CardContent>
