@@ -13,7 +13,6 @@ import {
   Rotate01Icon,
   Search01Icon,
   Shield01Icon,
-  Target01Icon,
   Tick01Icon,
   UserIcon,
 } from '@hugeicons/core-free-icons';
@@ -350,7 +349,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
                 Search01Icon
               </Label>
               <form onSubmit={handleSearch} className="flex flex-wrap gap-2">
-                <div className="min-w-[200px] flex-1">
+                <div className="min-w-50 flex-1">
                   <Input
                     placeholder="user:123456789 or infraction:abc123"
                     value={searchQuery}

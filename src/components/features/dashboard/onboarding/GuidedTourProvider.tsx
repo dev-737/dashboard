@@ -1,6 +1,5 @@
 'use client';
 
-import { FilterIcon, Settings01Icon } from '@hugeicons/core-free-icons';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   createContext,

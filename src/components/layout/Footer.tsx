@@ -4,7 +4,6 @@ import {
   FavouriteIcon,
   File01Icon,
   HelpCircleIcon,
-  Link01Icon,
   LinkSquare02Icon,
   Message01Icon,
   Shield01Icon,

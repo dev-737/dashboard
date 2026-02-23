@@ -3,13 +3,10 @@
 import {
   Alert02Icon,
   CheckmarkSquare01Icon,
-  Copy01Icon,
   Delete02Icon,
   FloppyDiskIcon,
   Link01Icon,
-  Settings01Icon,
   Shield01Icon,
-  Target01Icon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import Image from 'next/image';

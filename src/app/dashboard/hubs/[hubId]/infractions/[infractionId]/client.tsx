@@ -4,11 +4,9 @@ import {
   Alert01Icon,
   ArrowLeftIcon,
   Calendar01Icon,
-  Copy01Icon,
   FloppyDiskIcon,
   ServerStackIcon,
   Shield01Icon,
-  Target01Icon,
   UserIcon,
 } from '@hugeicons/core-free-icons';
 

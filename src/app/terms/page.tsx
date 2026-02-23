@@ -4,13 +4,10 @@ import {
   Alert01Icon,
   CopyrightIcon,
   Dollar01Icon,
-  File01Icon,
   JusticeScale01Icon,
   LegalHammerIcon,
-  Link01Icon,
   MailIcon,
   MinusSignIcon,
-  Shield01Icon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import Link from 'next/link';

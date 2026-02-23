@@ -2,10 +2,8 @@
 
 import {
   Clock01Icon,
-  FilterIcon,
   Home01Icon,
   LinkSquare02Icon,
-  Search01Icon,
   UserMultipleIcon,
 } from '@hugeicons/core-free-icons';
 

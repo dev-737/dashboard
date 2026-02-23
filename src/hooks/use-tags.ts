@@ -1,6 +1,5 @@
 'use client';
 
-import { Search01Icon } from '@hugeicons/core-free-icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useTRPC } from '@/utils/trpc';

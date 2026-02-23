@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert01Icon, Settings01Icon } from '@hugeicons/core-free-icons';
+import { Alert01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';

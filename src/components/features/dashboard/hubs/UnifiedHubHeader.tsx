@@ -3,7 +3,6 @@
 import {
   Camera01Icon,
   GlobeIcon,
-  InformationCircleIcon,
   LockIcon,
   Upload01Icon,
   UserMultipleIcon,

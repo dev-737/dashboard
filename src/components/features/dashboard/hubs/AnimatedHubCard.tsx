@@ -7,7 +7,6 @@ import {
   LockIcon,
   Message02Icon,
   PencilEdit02Icon,
-  UserMultipleIcon,
 } from '@hugeicons/core-free-icons';
 
 import { HugeiconsIcon } from '@hugeicons/react';

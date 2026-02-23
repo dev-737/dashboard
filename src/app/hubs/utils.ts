@@ -1,9 +1,3 @@
-import {
-  ActivityIcon,
-  FilterIcon,
-  Flag01Icon,
-  Search01Icon,
-} from '@hugeicons/core-free-icons';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 import type { Prisma } from '@/lib/generated/prisma/client/client';
 import { HubVisibility } from '@/lib/generated/prisma/client/client';
@@ -179,10 +173,10 @@ export async function getSortedHubs(
   const trendingWindowStart = new Date(
     now.getTime() - TRENDING_WINDOW_DAYS * 24 * 60 * 60 * 1000
   );
-  const newHubWindowStart = new Date(
+  const _newHubWindowStart = new Date(
     now.getTime() - NEW_HUB_WINDOW_DAYS * 24 * 60 * 60 * 1000
   );
-  const recentActivityWindowStart = new Date(
+  const _recentActivityWindowStart = new Date(
     now.getTime() - RECENT_ACTIVITY_WINDOW_DAYS * 24 * 60 * 60 * 1000
   );
 

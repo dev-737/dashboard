@@ -2,7 +2,6 @@
 
 import {
   ArrowRight01Icon,
-  FilterIcon,
   GraduationScrollIcon,
   Home01Icon,
   InformationCircleIcon,

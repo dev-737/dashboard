@@ -68,7 +68,7 @@ function HydrationSafeImage({
       const url = new URL(src);
       return SKIPPED_OPTIMIZATION_DOMAINS.some(
         (domain) =>
-          url.hostname === domain || url.hostname.endsWith('.' + domain)
+          url.hostname === domain || url.hostname.endsWith(`.${domain}`)
       );
     } catch {
       // If URL parsing fails, stick to default behavior

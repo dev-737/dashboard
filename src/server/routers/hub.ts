@@ -2,7 +2,6 @@
  * Hub router for tRPC
  */
 
-import { Search01Icon } from '@hugeicons/core-free-icons';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod/v4';
 import { SortOptions } from '@/app/hubs/constants';

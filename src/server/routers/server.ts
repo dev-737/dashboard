@@ -1,5 +1,4 @@
 import { REST } from '@discordjs/rest';
-import { FilterIcon } from '@hugeicons/core-free-icons';
 import { TRPCError } from '@trpc/server';
 import {
   type APIChannel,
@@ -27,7 +26,7 @@ import { protectedProcedure, router } from '../trpc';
 const CACHE_TTL_USER_GUILDS = 60; // 1 minute
 const CACHE_TTL_GUILD_ROLES = 60 * 5; // 5 minutes
 const CACHE_TTL_LOG_RESOLVE = 60 * 5; // 5 minutes
-const WEBHOOK_LOCK_TTL = 10; // 10 seconds
+const _WEBHOOK_LOCK_TTL = 10; // 10 seconds
 
 const MANAGE_CHANNELS = BigInt(PermissionFlagsBits.ManageChannels);
 const ADMINISTRATOR = BigInt(PermissionFlagsBits.Administrator);
@@ -551,7 +550,7 @@ export const serverRouter = router({
           userId
         );
         if (!hasPerms) throw new Error('No permission');
-      } catch (error) {
+      } catch (_error) {
         throw new TRPCError({
           code: 'FORBIDDEN',
           message: 'You must have Manage Channels permission.',
@@ -630,7 +629,7 @@ export const serverRouter = router({
             channelId,
             'InterChat Webhook 2'
           );
-      } catch (error) {
+      } catch (_error) {
         // Release lock on failure
         await redis.del(lockKey);
         throw new TRPCError({
@@ -791,7 +790,7 @@ export const serverRouter = router({
             );
           });
           manageableServerIds = new Set(manageable.map((g) => g.id));
-        } catch (e) {
+        } catch (_e) {
           /* ignore */
         }
       }
@@ -805,7 +804,7 @@ export const serverRouter = router({
         uniqueChannelIds.map(async (id) => {
           try {
             return (await rest.get(Routes.channel(id))) as APIChannel;
-          } catch (e) {
+          } catch (_e) {
             return { id, error: true };
           }
         })

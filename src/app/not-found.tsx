@@ -1,4 +1,3 @@
-import { Home01Icon } from '@hugeicons/core-free-icons';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';

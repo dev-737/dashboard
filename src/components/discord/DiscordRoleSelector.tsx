@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  Loading03Icon,
-  LockIcon,
-  Search01Icon,
-} from '@hugeicons/core-free-icons';
+import { Loading03Icon, LockIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
 import { useQuery } from '@tanstack/react-query';

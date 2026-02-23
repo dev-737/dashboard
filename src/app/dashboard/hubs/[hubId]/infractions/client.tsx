@@ -15,9 +15,7 @@ import {
   Search01Icon,
   ServerStackIcon,
   Shield01Icon,
-  Target01Icon,
   UserIcon,
-  UserMultipleIcon,
 } from '@hugeicons/core-free-icons';
 
 import { HugeiconsIcon } from '@hugeicons/react';

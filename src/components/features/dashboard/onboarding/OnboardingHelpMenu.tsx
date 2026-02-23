@@ -71,7 +71,7 @@ export function OnboardingHelpMenu() {
         <DropdownMenuSeparator className="bg-gray-800" />
 
         {helpItems.map((item) => {
-          const Icon = item.icon;
+          const _Icon = item.icon;
 
           if (item.href) {
             return (

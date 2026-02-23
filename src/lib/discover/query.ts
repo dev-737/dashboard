@@ -1,8 +1,3 @@
-import {
-  ActivityIcon,
-  FilterIcon,
-  Search01Icon,
-} from '@hugeicons/core-free-icons';
 import { cacheLife } from 'next/cache';
 import { z } from 'zod';
 import type { Prisma } from '@/lib/generated/prisma/client/client';
@@ -183,7 +178,6 @@ function buildOrderBy(
         { activityMetrics: { newConnectionsLast7d: 'desc' } },
         { id: 'desc' },
       ];
-    case 'trending':
     default:
       // High-stats ranking: messages > rating > members
       // trendingScore is kept as the primary if populated, then we fall

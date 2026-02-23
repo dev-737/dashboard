@@ -1,5 +1,4 @@
 import {
-  ActivityIcon,
   Agreement01Icon,
   Clock01Icon,
   Tag01Icon,

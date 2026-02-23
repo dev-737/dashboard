@@ -9,7 +9,6 @@ import {
   HashtagIcon,
   Link01Icon,
   ServerStackIcon,
-  Settings01Icon,
   Shield01Icon,
   ZapIcon,
 } from '@hugeicons/core-free-icons';

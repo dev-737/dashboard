@@ -6,7 +6,6 @@ import {
   Wifi01Icon,
 } from '@hugeicons/core-free-icons';
 import type { IconSvgElement } from '@hugeicons/react';
-import { HugeiconsIcon } from '@hugeicons/react';
 
 /**
  * Beginner-friendly error message system for InterChat

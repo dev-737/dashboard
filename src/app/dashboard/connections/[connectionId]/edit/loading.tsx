@@ -1,4 +1,3 @@
-import { Settings01Icon } from '@hugeicons/core-free-icons';
 import { ConnectionNavigationTabsSkeleton } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
 import {
   Card,

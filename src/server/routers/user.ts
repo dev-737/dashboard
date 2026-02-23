@@ -2,11 +2,6 @@
  * User router for tRPC
  */
 
-import {
-  FilterIcon,
-  Search01Icon,
-  Settings01Icon,
-} from '@hugeicons/core-free-icons';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod/v4';
 import type { Prisma } from '@/lib/generated/prisma/client/client';

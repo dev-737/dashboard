@@ -4,7 +4,6 @@ import {
   Loading03Icon,
   LockIcon,
   RefreshIcon,
-  Search01Icon,
   ServerStackIcon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';

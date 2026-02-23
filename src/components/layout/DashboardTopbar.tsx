@@ -4,7 +4,6 @@ import {
   Award01Icon,
   Home01Icon,
   JusticeScale01Icon,
-  Link01Icon,
   Menu01Icon,
   Settings01Icon,
 } from '@hugeicons/core-free-icons';

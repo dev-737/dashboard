@@ -2,7 +2,6 @@
 
 import {
   CheckmarkCircle02Icon,
-  FilterIcon,
   PlusSignIcon,
   Shield01Icon,
 } from '@hugeicons/core-free-icons';

@@ -1,4 +1,3 @@
-import { GlobeIcon } from '@hugeicons/core-free-icons';
 import Image from 'next/image';
 
 interface InterChatSpinnerProps {

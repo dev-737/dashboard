@@ -3,12 +3,10 @@
 import {
   ArrowDown01Icon,
   File01Icon,
-  FilterIcon,
   GlobeIcon,
   Home01Icon,
   LegalHammerIcon,
   Menu01Icon,
-  Message01Icon,
   Message02Icon,
   Notification03Icon,
   Package01Icon,

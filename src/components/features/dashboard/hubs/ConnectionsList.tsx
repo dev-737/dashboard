@@ -6,7 +6,6 @@ import {
   Delete02Icon,
   HashtagIcon,
   Home01Icon,
-  InformationCircleIcon,
   LegalHammerIcon,
   MoreVerticalIcon,
   Search01Icon,

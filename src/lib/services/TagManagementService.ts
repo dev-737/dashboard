@@ -1,4 +1,3 @@
-import { Search01Icon } from '@hugeicons/core-free-icons';
 import { db } from '@/lib/prisma';
 import { getRedisClient } from '@/lib/redis-config';
 

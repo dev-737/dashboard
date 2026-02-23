@@ -31,7 +31,7 @@ export function StepIndicator({ currentStep, steps }: StepIndicatorProps) {
     <div className="mb-8">
       <div className="mb-4 flex items-center justify-between">
         {steps.map((step, index) => {
-          const StepIcon = step.icon;
+          const _StepIcon = step.icon;
           const isActive = currentStep === index + 1;
           const isCompleted = currentStep > index + 1;
 

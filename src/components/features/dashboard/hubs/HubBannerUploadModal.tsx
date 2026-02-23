@@ -3,7 +3,6 @@
 import {
   Cancel01Icon,
   Image01Icon,
-  InformationCircleIcon,
   Loading03Icon,
   RefreshIcon,
   Upload01Icon,

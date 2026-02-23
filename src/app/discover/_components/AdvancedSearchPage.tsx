@@ -102,7 +102,7 @@ export default function AdvancedSearchPage({
 
   // Advanced filters
   const [minMembers, setMinMembers] = useState<number>(
-    parseInt(searchParams.get('minMembers') || '0')
+    parseInt(searchParams.get('minMembers') || '0', 10)
   );
   const [verifiedOnly, setVerifiedOnly] = useState<boolean>(
     searchParams.get('verified') === 'true'

@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  InformationCircleIcon,
-  Message02Icon,
-  PencilEdit01Icon,
-} from '@hugeicons/core-free-icons';
+import { Message02Icon, PencilEdit01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
 import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';

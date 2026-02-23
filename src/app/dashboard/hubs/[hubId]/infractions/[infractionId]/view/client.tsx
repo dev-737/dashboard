@@ -282,7 +282,7 @@ export function ViewInfractionClient({
 
   const typeInfo = getInfractionTypeInfo(infraction.type);
   const statusInfo = getStatusInfo(infraction.status);
-  const TypeIcon = typeInfo.icon;
+  const _TypeIcon = typeInfo.icon;
 
   const isUserInfraction = infraction.userId !== null;
   const targetName = isUserInfraction

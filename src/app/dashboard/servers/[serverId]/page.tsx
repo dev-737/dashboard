@@ -4,7 +4,6 @@ import {
   Calendar01Icon,
   Clock01Icon,
   Home01Icon,
-  Settings01Icon,
   Shield01Icon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';

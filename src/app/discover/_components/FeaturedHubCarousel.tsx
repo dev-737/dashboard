@@ -2,7 +2,6 @@
 
 import {
   EyeIcon,
-  InformationCircleIcon,
   StarIcon,
   UserMultipleIcon,
 } from '@hugeicons/core-free-icons';

@@ -1,6 +1,6 @@
 'use client';
 
-import { GlobeIcon, Settings01Icon } from '@hugeicons/core-free-icons';
+import { GlobeIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
 import { HubLanguageManagement } from '@/components/features/dashboard/hubs/HubLanguageManagement';

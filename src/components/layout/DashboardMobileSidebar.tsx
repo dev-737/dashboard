@@ -6,7 +6,6 @@ import {
   HelpCircleIcon,
   Home01Icon,
   JusticeScale01Icon,
-  Link01Icon,
   Logout01Icon,
   Notification03Icon,
   Settings01Icon,

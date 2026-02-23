@@ -3,7 +3,6 @@
 import {
   ArrowLeftIcon,
   Award01Icon,
-  Home01Icon,
   SparklesIcon,
 } from '@hugeicons/core-free-icons';
 

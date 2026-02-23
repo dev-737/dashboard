@@ -6,7 +6,6 @@ import {
   Clock01Icon,
   Home01Icon,
   Shield01Icon,
-  Target01Icon,
   UserIcon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
