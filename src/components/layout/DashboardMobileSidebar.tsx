@@ -190,7 +190,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                 className="relative z-10 h-8 w-8 rounded-full text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Cancel01Icon}
                   className="h-5 w-5"
                 />
@@ -257,6 +257,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                               )}
                             >
                               <HugeiconsIcon
+                                strokeWidth={2}
                                 icon={item.icon}
                                 className="h-5 w-5 transform transition-transform duration-300 group-hover:scale-110"
                               />
@@ -292,6 +293,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                       <div className="flex items-center gap-3">
                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={Notification03Icon}
                             className="h-4 w-4"
                           />
@@ -310,6 +312,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                       <div className="flex items-center gap-3">
                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-500/10 text-green-400">
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={HelpCircleIcon}
                             className="h-4 w-4"
                           />
@@ -358,7 +361,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                   className="w-full border-white/10 bg-white/5 text-gray-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
                 >
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={UserIcon}
                     className="mr-2 h-3.5 w-3.5"
                   />
@@ -375,6 +378,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                   className="w-full border-red-500/10 bg-red-500/5 text-red-400 hover:border-red-500/20 hover:bg-red-500/10"
                 >
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Logout01Icon}
                     className="mr-2 h-3.5 w-3.5"
                   />

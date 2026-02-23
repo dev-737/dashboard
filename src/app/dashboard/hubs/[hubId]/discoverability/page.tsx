@@ -107,6 +107,7 @@ export default async function HubDiscoverabilityPage({
             <div className="mb-3 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={PaintBoardIcon}
                   className="h-5 w-5 text-blue-400"
                 />
@@ -123,6 +124,7 @@ export default async function HubDiscoverabilityPage({
             <div className="mb-3 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/20">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={GlobeIcon}
                   className="h-5 w-5 text-green-400"
                 />
@@ -138,6 +140,7 @@ export default async function HubDiscoverabilityPage({
             <div className="mb-3 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-500/20">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={GlobeIcon}
                   className="h-5 w-5 text-yellow-400"
                 />

@@ -30,6 +30,7 @@ export default async function Page() {
       fallback={
         <div className="flex min-h-screen items-center justify-center bg-gray-950 text-gray-400">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Loading03Icon}
             className="h-8 w-8 animate-spin"
           />

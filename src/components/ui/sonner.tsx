@@ -22,35 +22,35 @@ const Toaster = ({ ...props }: ToasterProps) => {
       icons={{
         success: (
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={CheckmarkCircle01Icon}
             className="size-4"
           />
         ),
         info: (
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={InformationCircleIcon}
             className="size-4"
           />
         ),
         warning: (
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Alert01Icon}
             className="size-4"
           />
         ),
         error: (
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Cancel01Icon}
             className="size-4"
           />
         ),
         loading: (
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Loading03Icon}
             className="size-4 animate-spin"
           />

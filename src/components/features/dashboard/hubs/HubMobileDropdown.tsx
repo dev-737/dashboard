@@ -65,7 +65,7 @@ function DropdownNavItem({ href, icon, label, active }: DropdownNavItemProps) {
               : 'text-gray-400 group-hover:bg-purple-400/15 group-hover:text-white'
           )}
         >
-          <HugeiconsIcon strokeWidth={3} icon={icon} className="h-4 w-4" />
+          <HugeiconsIcon strokeWidth={2} icon={icon} className="h-4 w-4" />
         </div>
         <span className="truncate text-sm">{label}</span>
       </Link>
@@ -208,7 +208,7 @@ export function HubMobileDropdown({
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Menu01Icon}
                   className="h-5 w-5"
                 />
@@ -217,6 +217,7 @@ export function HubMobileDropdown({
             </div>
 
             <HugeiconsIcon
+              strokeWidth={2}
               icon={ArrowDown01Icon}
               className="h-5 w-5 text-white transition-colors duration-300 group-hover:text-white/70"
             />

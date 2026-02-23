@@ -104,7 +104,7 @@ export function ActionGrid() {
                       )}
                     >
                       <HugeiconsIcon
-                        strokeWidth={3}
+                        strokeWidth={2}
                         icon={action.icon}
                         className="h-8 w-8"
                       />

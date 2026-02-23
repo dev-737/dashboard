@@ -53,6 +53,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             <div className="flex items-center gap-3">
               <div className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-2">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={ActivityIcon}
                   className="h-5 w-5 text-blue-400"
                 />
@@ -75,6 +76,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
               {connection.connected ? (
                 <>
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={CheckmarkCircle01Icon}
                     className="mr-2 h-4 w-4"
                   />
@@ -83,6 +85,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
               ) : (
                 <>
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={AlertCircleIcon}
                     className="mr-2 h-4 w-4"
                   />
@@ -100,6 +103,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
               <div className="mb-3 flex items-center gap-3">
                 <div className="rounded-md border border-purple-500/20 bg-purple-500/10 p-2">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={GlobeIcon}
                     className="h-4 w-4 text-purple-400"
                   />
@@ -138,6 +142,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
               <div className="mb-3 flex items-center gap-3">
                 <div className="rounded-md border border-indigo-500/20 bg-indigo-500/10 p-2">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={ServerStackIcon}
                     className="h-4 w-4 text-indigo-400"
                   />
@@ -155,6 +160,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={HashtagIcon}
                     className="h-3 w-3 text-gray-400"
                   />
@@ -178,6 +184,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-3 text-center">
               <div className="mb-2 flex items-center justify-center">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={ZapIcon}
                   className={`h-4 w-4 ${connection.connected ? 'text-green-400' : 'text-red-400'}`}
                 />
@@ -194,6 +201,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-3 text-center">
               <div className="mb-2 flex items-center justify-center">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Shield01Icon}
                   className="h-4 w-4 text-orange-400"
                 />
@@ -205,6 +213,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-3 text-center">
               <div className="mb-2 flex items-center justify-center">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={ActivityIcon}
                   className="h-4 w-4 text-indigo-400"
                 />
@@ -234,6 +243,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
                 <div className="mb-3 flex items-center gap-3">
                   <div className="rounded-md border border-green-500/20 bg-green-500/10 p-2">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Link01Icon}
                       className="h-4 w-4 text-green-400"
                     />
@@ -256,6 +266,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
               <div className="mb-3 flex items-center gap-3">
                 <div className="rounded-md border border-gray-500/20 bg-gray-500/10 p-2">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={HashtagIcon}
                     className="h-4 w-4 text-gray-400"
                   />
@@ -276,6 +287,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
                 <div className="mb-3 flex items-center gap-3">
                   <div className="rounded-md border border-yellow-500/20 bg-yellow-500/10 p-2">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={HashtagIcon}
                       className="h-4 w-4 text-yellow-400"
                     />
@@ -298,6 +310,7 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
               <div className="mb-3 flex items-center gap-3">
                 <div className="rounded-md border border-blue-500/20 bg-blue-500/10 p-2">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Calendar01Icon}
                     className="h-4 w-4 text-blue-400"
                   />

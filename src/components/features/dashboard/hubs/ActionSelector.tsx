@@ -99,6 +99,7 @@ export function ActionSelector({
                       >
                         {isSelected && (
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={Tick01Icon}
                             className="h-3 w-3 text-white"
                           />
@@ -126,6 +127,7 @@ export function ActionSelector({
                       <TooltipTrigger asChild>
                         <div className="ml-2">
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={HelpCircleIcon}
                             className="h-4 w-4 text-gray-500"
                           />
@@ -159,6 +161,7 @@ export function ActionSelector({
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Clock01Icon}
                 className="h-4 w-4 text-purple-400"
               />

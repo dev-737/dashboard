@@ -112,7 +112,7 @@ export function InfractionRevokeModal({
       case 'BLACKLIST':
         return (
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Shield01Icon}
             className="h-4 w-4 text-red-400"
           />
@@ -120,6 +120,7 @@ export function InfractionRevokeModal({
       case 'WARNING':
         return (
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Alert01Icon}
             className="h-4 w-4 text-yellow-400"
           />
@@ -127,7 +128,7 @@ export function InfractionRevokeModal({
       case 'BAN':
         return (
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Shield01Icon}
             className="h-4 w-4 text-red-500"
           />
@@ -135,6 +136,7 @@ export function InfractionRevokeModal({
       case 'MUTE':
         return (
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Clock01Icon}
             className="h-4 w-4 text-orange-400"
           />
@@ -142,6 +144,7 @@ export function InfractionRevokeModal({
       default:
         return (
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Shield01Icon}
             className="h-4 w-4 text-gray-400"
           />
@@ -155,6 +158,7 @@ export function InfractionRevokeModal({
         <AlertDialogHeader>
           <AlertDialogTitle className="flex items-center gap-2 text-white">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Alert01Icon}
               className="h-5 w-5 text-red-400"
             />
@@ -174,6 +178,7 @@ export function InfractionRevokeModal({
               {isUserInfraction ? (
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-700">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={UserIcon}
                     className="h-5 w-5 text-blue-400"
                   />
@@ -181,6 +186,7 @@ export function InfractionRevokeModal({
               ) : (
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-700">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Home01Icon}
                     className="h-5 w-5 text-green-400"
                   />
@@ -207,6 +213,7 @@ export function InfractionRevokeModal({
 
             <div className="flex items-start gap-2 text-sm">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Alert01Icon}
                 className="mt-0.5 h-4 w-4 shrink-0 text-yellow-400"
               />
@@ -220,6 +227,7 @@ export function InfractionRevokeModal({
 
             <div className="flex items-center gap-2 text-sm">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Calendar01Icon}
                 className="h-4 w-4 text-gray-400"
               />
@@ -234,6 +242,7 @@ export function InfractionRevokeModal({
             {infraction.expiresAt && (
               <div className="flex items-center gap-2 text-sm">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Clock01Icon}
                   className="h-4 w-4 text-gray-400"
                 />

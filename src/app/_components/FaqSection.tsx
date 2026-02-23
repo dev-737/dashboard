@@ -57,6 +57,7 @@ function AccordionItem({
             className="shrink-0"
           >
             <HugeiconsIcon
+              strokeWidth={2}
               icon={ArrowDown01Icon}
               className="h-5 w-5 text-gray-400 transition-colors duration-200 group-hover:text-blue-400"
             />
@@ -108,6 +109,7 @@ export function FaqSection() {
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-blue-300 backdrop-blur-sm">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={SparklesIcon}
               className="h-4 w-4 animate-pulse text-blue-400"
             />
@@ -165,7 +167,7 @@ export function FaqSection() {
             >
               View Documentation
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ArrowRightIcon}
                 className="h-4 w-4"
               />

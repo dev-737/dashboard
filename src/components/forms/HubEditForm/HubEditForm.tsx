@@ -129,6 +129,7 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-md bg-linear-to-br from-blue-500 to-cyan-600">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={PencilEdit02Icon}
                 className="h-5 w-5 text-white"
               />

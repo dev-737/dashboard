@@ -96,6 +96,7 @@ export function Footer() {
             <div className="flex items-center gap-2 text-gray-500 text-sm">
               <span>Made with</span>
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={FavouriteIcon}
                 className="h-4 w-4 fill-current text-red-400"
               />
@@ -120,7 +121,7 @@ export function Footer() {
                     className="flex items-center gap-2 text-gray-400 text-sm transition-colors duration-200 hover:text-white"
                   >
                     <HugeiconsIcon
-                      strokeWidth={3}
+                      strokeWidth={2}
                       icon={link.icon}
                       className="h-4 w-4"
                     />
@@ -146,7 +147,7 @@ export function Footer() {
                     className="flex items-center gap-2 text-gray-400 text-sm transition-colors duration-200 hover:text-white"
                   >
                     <HugeiconsIcon
-                      strokeWidth={3}
+                      strokeWidth={2}
                       icon={link.icon}
                       className="h-4 w-4"
                     />
@@ -176,6 +177,7 @@ export function Footer() {
                     <div className="flex items-center gap-3 rounded-lg border border-gray-700/50 bg-gray-800/30 p-3 transition-all duration-200 hover:border-gray-600/50 hover:bg-gray-800/50">
                       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-700/50 transition-transform duration-200 group-hover:scale-110">
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={link.icon}
                           className="h-4 w-4 text-gray-300 group-hover:text-white"
                         />
@@ -189,6 +191,7 @@ export function Footer() {
                         </div>
                       </div>
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={LinkSquare02Icon}
                         className="ml-auto h-3 w-3 text-gray-500 opacity-0 transition-opacity group-hover:opacity-100"
                       />

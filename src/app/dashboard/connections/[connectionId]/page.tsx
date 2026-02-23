@@ -131,7 +131,7 @@ export default async function ConnectionPage(props: {
           >
             <Link href="/dashboard?tab=connections">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ArrowLeftIcon}
                 className="mr-2 h-4 w-4"
               />
@@ -154,7 +154,7 @@ export default async function ConnectionPage(props: {
         >
           <Link href={`/dashboard/connections/${params.connectionId}/edit`}>
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={PencilEdit01Icon}
               className="mr-2 h-4 w-4"
             />
@@ -177,6 +177,7 @@ export default async function ConnectionPage(props: {
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={GlobeIcon}
                   className="h-5 w-5 text-purple-400"
                 />
@@ -211,6 +212,7 @@ export default async function ConnectionPage(props: {
                   >
                     <Link href={`/hubs/${connection.hub.id}`} target="_blank">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={LinkSquare02Icon}
                         className="mr-2 h-4 w-4"
                       />
@@ -227,6 +229,7 @@ export default async function ConnectionPage(props: {
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={ServerStackIcon}
                   className="h-5 w-5 text-indigo-400"
                 />
@@ -259,6 +262,7 @@ export default async function ConnectionPage(props: {
                   >
                     <Link href={`/dashboard/servers/${connection.server.id}`}>
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={LinkSquare02Icon}
                         className="mr-2 h-4 w-4"
                       />
@@ -275,6 +279,7 @@ export default async function ConnectionPage(props: {
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={PencilEdit01Icon}
                   className="h-5 w-5 text-blue-400"
                 />
@@ -290,6 +295,7 @@ export default async function ConnectionPage(props: {
                   href={`/dashboard/connections/${params.connectionId}/edit`}
                 >
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={PencilEdit01Icon}
                     className="mr-2 h-5 w-5"
                   />

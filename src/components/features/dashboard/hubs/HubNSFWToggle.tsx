@@ -61,6 +61,7 @@ export function HubNSFWToggle({ hubId, currentNsfw }: HubNSFWToggleProps) {
     <div className="space-y-4">
       <div className="flex items-center gap-3">
         <HugeiconsIcon
+          strokeWidth={2}
           icon={Shield01Icon}
           className="h-5 w-5 text-orange-400"
         />
@@ -118,7 +119,7 @@ export function HubNSFWToggle({ hubId, currentNsfw }: HubNSFWToggleProps) {
               ) : (
                 <div className="flex items-center gap-2">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={FloppyDiskIcon}
                     className="h-4 w-4"
                   />
@@ -134,6 +135,7 @@ export function HubNSFWToggle({ hubId, currentNsfw }: HubNSFWToggleProps) {
       {isNsfw && (
         <div className="flex items-start gap-3 rounded-lg border border-orange-500/20 bg-orange-500/10 p-4">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Alert01Icon}
             className="mt-0.5 h-5 w-5 shrink-0 text-orange-400"
           />

@@ -136,7 +136,7 @@ export function EditRuleDialog({
           <DialogHeader className="shrink-0 pb-4">
             <DialogTitle className="flex items-center text-blue-400">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Shield01Icon}
                 className="mr-2 h-5 w-5"
               />
@@ -215,7 +215,7 @@ export function EditRuleDialog({
                 className="bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={FloppyDiskIcon}
                   className="mr-2 h-4 w-4"
                 />

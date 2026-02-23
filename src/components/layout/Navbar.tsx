@@ -117,6 +117,7 @@ export function Navbar({ session }: NavbarProps) {
             <Link href="/invite" className="items-center gap-2">
               Invite
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={ArrowRightIcon}
                 className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
               />
@@ -147,6 +148,7 @@ export function Navbar({ session }: NavbarProps) {
             className="group rounded-full border border-white/5 bg-white/5 text-gray-400 backdrop-blur-sm transition-all duration-300 hover:border-white/10 hover:bg-white/10 hover:text-white lg:hidden"
           >
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Menu01Icon}
               className="h-5 w-5 transition-transform duration-300 group-hover:scale-110"
             />

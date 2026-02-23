@@ -52,7 +52,7 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
             className="flex items-center gap-2 font-medium text-brand-purple-400 text-sm"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={WavingHand01Icon}
               className="h-4 w-4"
             />
@@ -126,6 +126,7 @@ function QuickAction({
       className="group flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-700/50 bg-gray-900/50 px-4 py-3 transition-all hover:border-purple-500/30 hover:bg-gray-800 sm:flex-none"
     >
       <HugeiconsIcon
+        strokeWidth={2}
         icon={Icon}
         className="h-4 w-4 text-gray-400 transition-colors group-hover:text-purple-400"
       />

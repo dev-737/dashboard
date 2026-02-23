@@ -138,7 +138,7 @@ export function HomepageMobileSidebar({
                 className="relative z-10 h-8 w-8 rounded-full text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Cancel01Icon}
                   className="h-5 w-5"
                 />
@@ -169,6 +169,7 @@ export function HomepageMobileSidebar({
                       </span>
                       {link.external && (
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={LinkSquare02Icon}
                           className="ml-auto h-3.5 w-3.5 opacity-50 transition-opacity duration-300 group-hover:opacity-100"
                         />
@@ -195,6 +196,7 @@ export function HomepageMobileSidebar({
                     >
                       Invite Bot
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={ArrowRightIcon}
                         className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1"
                       />

@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
         <div className="mb-20 text-center">
           <div className="mb-6 inline-flex items-center justify-center rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Shield01Icon}
               className="mr-2 h-4 w-4"
             />
@@ -89,7 +89,7 @@ export default function PrivacyPolicy() {
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 text-purple-400">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={EyeIcon}
                     className="h-5 w-5"
                   />
@@ -150,7 +150,7 @@ export default function PrivacyPolicy() {
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={File01Icon}
                     className="h-5 w-5"
                   />
@@ -185,7 +185,7 @@ export default function PrivacyPolicy() {
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={LockIcon}
                     className="h-5 w-5"
                   />
@@ -223,7 +223,7 @@ export default function PrivacyPolicy() {
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10 text-green-400">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={GlobeIcon}
                     className="h-5 w-5"
                   />
@@ -315,6 +315,7 @@ export default function PrivacyPolicy() {
             <section id="cookies" className="scroll-mt-32">
               <div className="mb-4 flex items-center gap-3">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={CookieIcon}
                   className="h-5 w-5 text-gray-400"
                 />
@@ -333,6 +334,7 @@ export default function PrivacyPolicy() {
             <section id="children" className="scroll-mt-32">
               <div className="mb-4 flex items-center gap-3">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={UserIcon}
                   className="h-5 w-5 text-rose-400"
                 />
@@ -364,6 +366,7 @@ export default function PrivacyPolicy() {
             <section id="contact" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Mail01Icon}
                   className="h-5 w-5 text-gray-400"
                 />

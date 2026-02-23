@@ -187,6 +187,7 @@ export function DiscordChannelSelector({
           {isLoading && !servers.length ? (
             <div className="flex items-center justify-center py-2">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Loading03Icon}
                 className="mr-2 h-4 w-4 animate-spin text-gray-400"
               />
@@ -211,6 +212,7 @@ export function DiscordChannelSelector({
                     </div>
                   ) : (
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={ServerStackIcon}
                       className="h-5 w-5 shrink-0 text-gray-400"
                     />
@@ -234,6 +236,7 @@ export function DiscordChannelSelector({
             {isLoading ? (
               <div className="flex items-center justify-center py-4">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="mr-2 h-4 w-4 animate-spin text-gray-400"
                 />
@@ -258,6 +261,7 @@ export function DiscordChannelSelector({
                     className="mt-2"
                   >
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={RefreshIcon}
                       className="mr-2 h-4 w-4"
                     />
@@ -367,7 +371,7 @@ export function DiscordChannelSelector({
                     onClick={() => window.location.reload()}
                   >
                     <HugeiconsIcon
-                      strokeWidth={3}
+                      strokeWidth={2}
                       icon={RefreshIcon}
                       className="h-4 w-4"
                     />
@@ -405,7 +409,7 @@ export function DiscordChannelSelector({
                   onClick={() => window.location.reload()}
                 >
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={RefreshIcon}
                     className="h-4 w-4"
                   />
@@ -423,7 +427,7 @@ export function DiscordChannelSelector({
       {!isAccessible && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg bg-gray-900/80 backdrop-blur-sm">
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={LockIcon}
             className="h-6 w-6 text-amber-400"
           />

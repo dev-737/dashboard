@@ -247,6 +247,7 @@ export function HubBannerUploadModal({
                 <div className="flex h-full w-full items-center justify-center">
                   <div className="text-center">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Image01Icon}
                       className="mx-auto mb-2 h-12 w-12 text-gray-500"
                     />
@@ -264,7 +265,7 @@ export function HubBannerUploadModal({
                 disabled={isUploading}
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Cancel01Icon}
                   className="h-4 w-4"
                 />
@@ -296,6 +297,7 @@ export function HubBannerUploadModal({
             <div className="space-y-3">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-700/50">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Upload01Icon}
                   className="h-6 w-6 text-gray-400"
                 />
@@ -327,6 +329,7 @@ export function HubBannerUploadModal({
               <div className="flex items-center gap-3">
                 <div className="flex h-8 w-8 items-center justify-center rounded bg-indigo-500/20">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Upload01Icon}
                     className="h-4 w-4 text-indigo-400"
                   />
@@ -362,7 +365,7 @@ export function HubBannerUploadModal({
               className="text-gray-400 hover:bg-gray-800 hover:text-white"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={RefreshIcon}
                 className="mr-2 h-4 w-4"
               />
@@ -378,6 +381,7 @@ export function HubBannerUploadModal({
             {isUploading ? (
               <>
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="mr-2 h-4 w-4 animate-spin"
                 />
@@ -386,7 +390,7 @@ export function HubBannerUploadModal({
             ) : (
               <>
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Upload01Icon}
                   className="mr-2 h-4 w-4"
                 />

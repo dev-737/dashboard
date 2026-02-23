@@ -66,7 +66,7 @@ export function RulesWelcomeStep({
       <CardHeader className="pb-6 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-green-500 to-emerald-600">
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Shield01Icon}
             className="h-8 w-8 text-white"
           />
@@ -116,7 +116,7 @@ export function RulesWelcomeStep({
               className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={PlusSignIcon}
                 className="mr-1 h-4 w-4"
               />
@@ -145,7 +145,7 @@ export function RulesWelcomeStep({
                     className="border-red-500/30 text-red-400 hover:border-red-700/50 hover:bg-red-900/30 hover:text-red-300"
                   >
                     <HugeiconsIcon
-                      strokeWidth={3}
+                      strokeWidth={2}
                       icon={Cancel01Icon}
                       className="h-4 w-4"
                     />
@@ -174,7 +174,7 @@ export function RulesWelcomeStep({
             className="border-gray-700/50 bg-gray-800/50 px-6 hover:bg-gray-700/50 hover:text-white"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ArrowLeftIcon}
               className="mr-2 h-4 w-4"
             />
@@ -188,6 +188,7 @@ export function RulesWelcomeStep({
             {isSubmitting ? (
               <>
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="mr-2 h-4 w-4 animate-spin"
                 />
@@ -196,6 +197,7 @@ export function RulesWelcomeStep({
             ) : (
               <>
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={UserMultipleIcon}
                   className="mr-2 h-4 w-4"
                 />

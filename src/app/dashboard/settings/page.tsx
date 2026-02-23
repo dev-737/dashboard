@@ -35,6 +35,7 @@ export default async function SettingsPage() {
         <div className="rounded-xl border border-gray-700/50 bg-dash-surface p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-2">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={UserIcon}
               className="h-5 w-5 text-purple-400"
             />
@@ -77,6 +78,7 @@ export default async function SettingsPage() {
         <div className="rounded-xl border border-gray-700/50 bg-linear-to-br from-gray-900/90 to-gray-950/90 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-2">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Settings01Icon}
               className="h-5 w-5 text-indigo-400"
             />

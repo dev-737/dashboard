@@ -245,6 +245,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
             <div className="flex items-center gap-3">
               <div className="rounded-lg bg-blue-500/20 p-2">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Message01Icon}
                   className="h-4 w-4 text-blue-400"
                 />
@@ -261,6 +262,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
             <div className="flex items-center gap-3">
               <div className="rounded-lg bg-yellow-500/20 p-2">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Clock01Icon}
                   className="h-4 w-4 text-yellow-400"
                 />
@@ -277,6 +279,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
             <div className="flex items-center gap-3">
               <div className="rounded-lg bg-green-500/20 p-2">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Tick01Icon}
                   className="h-4 w-4 text-green-400"
                 />
@@ -295,6 +298,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
             <div className="flex items-center gap-3">
               <div className="rounded-lg bg-red-500/20 p-2">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Cancel01Icon}
                   className="h-4 w-4 text-red-400"
                 />
@@ -315,6 +319,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
         <CardHeader className="border-gray-800/50 border-b pb-3">
           <CardTitle className="flex items-center text-lg">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={FilterIcon}
               className="mr-2 h-4 w-4 text-indigo-400"
             />
@@ -365,7 +370,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
                     className="cursor-pointer bg-indigo-600 text-white hover:bg-indigo-700"
                   >
                     <HugeiconsIcon
-                      strokeWidth={3}
+                      strokeWidth={2}
                       icon={Search01Icon}
                       className="h-4 w-4"
                     />
@@ -378,7 +383,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
                     className="cursor-pointer border-gray-700 hover:bg-gray-800 hover:text-white"
                   >
                     <HugeiconsIcon
-                      strokeWidth={3}
+                      strokeWidth={2}
                       icon={Rotate01Icon}
                       className="h-4 w-4"
                     />
@@ -395,6 +400,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
         <CardHeader className="border-gray-800/50 border-b pb-3">
           <CardTitle className="flex items-center text-lg">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Message01Icon}
               className="mr-2 h-4 w-4 text-blue-400"
             />
@@ -420,6 +426,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
           ) : error ? (
             <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-6 py-8 text-center">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Alert01Icon}
                 className="mx-auto mb-4 h-12 w-12 text-red-500"
               />
@@ -437,6 +444,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
           ) : appeals.length === 0 ? (
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/30 p-6 py-8 text-center">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Message01Icon}
                 className="mx-auto mb-4 h-12 w-12 text-gray-500"
               />
@@ -479,7 +487,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
                 className="flex-1 border-gray-700 hover:bg-gray-800 hover:text-white sm:flex-initial"
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={ArrowLeftIcon}
                   className="mr-1 h-4 w-4"
                 />
@@ -494,7 +502,7 @@ export function AppealsClient({ hubId }: AppealsClientProps) {
               >
                 Next
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={ArrowRightIcon}
                   className="ml-1 h-4 w-4"
                 />
@@ -557,7 +565,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
         return (
           <span className="flex items-center gap-1 rounded-full bg-yellow-500/20 px-2 py-1 text-xs text-yellow-400">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Clock01Icon}
               className="h-3 w-3"
             />
@@ -568,7 +576,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
         return (
           <span className="flex items-center gap-1 rounded-full bg-green-500/20 px-2 py-1 text-green-400 text-xs">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Tick01Icon}
               className="h-3 w-3"
             />
@@ -579,7 +587,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
         return (
           <span className="flex items-center gap-1 rounded-full bg-red-500/20 px-2 py-1 text-red-400 text-xs">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Cancel01Icon}
               className="h-3 w-3"
             />
@@ -597,7 +605,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
         return (
           <span className="flex items-center gap-1 rounded-full bg-red-500/20 px-2 py-1 text-red-400 text-xs">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Shield01Icon}
               className="h-3 w-3"
             />
@@ -608,7 +616,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
         return (
           <span className="flex items-center gap-1 rounded-full bg-orange-500/20 px-2 py-1 text-orange-400 text-xs">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Alert01Icon}
               className="h-3 w-3"
             />
@@ -656,7 +664,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
           {getStatusBadge(localStatus)}
           <div className="flex items-center gap-1 text-gray-400 text-xs">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Clock01Icon}
               className="h-3 w-3"
             />
@@ -680,6 +688,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
         <div className="mb-6">
           <h4 className="mb-3 flex items-center gap-2 font-medium text-gray-300 text-sm">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Shield01Icon}
               className="h-4 w-4 text-red-400"
             />
@@ -732,7 +741,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
                     {appeal.infraction.user ? (
                       <div className="flex items-center gap-2">
                         <HugeiconsIcon
-                          strokeWidth={3}
+                          strokeWidth={2}
                           icon={UserIcon}
                           className="h-3 w-3"
                         />
@@ -741,6 +750,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
                     ) : appeal.infraction.serverName ? (
                       <div className="flex items-center gap-2">
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Message02Icon}
                           className="h-3 w-3"
                         />
@@ -799,7 +809,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
               href={`/dashboard/hubs/${hubId}/infractions/${appeal.infractionId}/view`}
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={EyeIcon}
                 className="mr-1 h-3 w-3"
               />
@@ -817,7 +827,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
                 disabled={isUpdating}
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Cancel01Icon}
                   className="mr-1 h-4 w-4"
                 />
@@ -831,7 +841,7 @@ function AppealCard({ appeal, hubId, onUpdate }: AppealCardProps) {
                 disabled={isUpdating}
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Tick01Icon}
                   className="mr-1 h-4 w-4"
                 />

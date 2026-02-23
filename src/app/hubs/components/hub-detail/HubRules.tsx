@@ -29,6 +29,7 @@ const HubRules: React.FC<HubRulesProps> = ({ rules }) => {
       ) : (
         <div className="flex flex-col items-center justify-center p-10 text-gray-400">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={GraduationScrollIcon}
             className="mb-3 h-12 w-12 text-gray-500 opacity-50"
           />

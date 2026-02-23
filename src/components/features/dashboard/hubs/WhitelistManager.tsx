@@ -168,6 +168,7 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
       <Card className="border border-gray-800/50 bg-gray-950/50">
         <CardContent className="p-8 text-center">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Shield01Icon}
             className="mx-auto mb-4 h-12 w-12 text-gray-500"
           />
@@ -191,6 +192,7 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
             <div className="flex items-center space-x-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-green-500/30 bg-linear-to-br from-green-500/20 to-emerald-500/20">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={CheckmarkCircle02Icon}
                   className="h-5 w-5 text-green-400"
                 />
@@ -257,6 +259,7 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
                   <DialogTrigger asChild>
                     <Button className="bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={PlusSignIcon}
                         className="mr-2 h-4 w-4"
                       />
@@ -340,6 +343,7 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
               <div className="mb-4">
                 <div className="relative">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Search01Icon}
                     className="absolute top-3 left-3 h-4 w-4 text-gray-400"
                   />
@@ -377,6 +381,7 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
                         </code>
                         <div className="flex items-center gap-2 text-gray-400 text-xs">
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={UserMultipleIcon}
                             className="h-3 w-3"
                           />
@@ -405,6 +410,7 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
                         className="text-red-400 hover:bg-red-950/20 hover:text-red-300"
                       >
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Delete02Icon}
                           className="h-4 w-4"
                         />

@@ -165,7 +165,7 @@ export function TagSelector({
                   className="group border-blue-600/30 bg-blue-600/20 pr-1 text-blue-300 transition-colors hover:bg-blue-600/30"
                 >
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Tag01Icon}
                     className="mr-1 h-3 w-3"
                   />
@@ -177,7 +177,7 @@ export function TagSelector({
                     className="ml-1 h-auto p-0 text-blue-300 hover:text-white group-hover:text-white"
                   >
                     <HugeiconsIcon
-                      strokeWidth={3}
+                      strokeWidth={2}
                       icon={Cancel01Icon}
                       className="h-3 w-3"
                     />
@@ -193,6 +193,7 @@ export function TagSelector({
       <div className="relative">
         <div className="relative">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Search01Icon}
             className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400"
           />
@@ -225,7 +226,7 @@ export function TagSelector({
               className="absolute top-1/2 right-2 h-auto -translate-y-1/2 transform p-1 text-gray-400 hover:text-white"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Cancel01Icon}
                 className="h-4 w-4"
               />
@@ -261,6 +262,7 @@ export function TagSelector({
                       >
                         <div className="flex items-center gap-2">
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={PlusSignIcon}
                             className="h-4 w-4 text-green-400"
                           />
@@ -288,6 +290,7 @@ export function TagSelector({
                           <div className="border-gray-700 border-b px-4 py-2">
                             <div className="flex items-center gap-2 text-gray-400 text-sm">
                               <HugeiconsIcon
+                                strokeWidth={2}
                                 icon={SparklesIcon}
                                 className="h-4 w-4"
                               />
@@ -306,6 +309,7 @@ export function TagSelector({
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <HugeiconsIcon
+                                  strokeWidth={2}
                                   icon={Tag01Icon}
                                   className="h-4 w-4 text-gray-400"
                                 />

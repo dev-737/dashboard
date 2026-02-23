@@ -41,7 +41,7 @@ function SelectTrigger({
       {children}
       <SelectPrimitive.Icon asChild>
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={ArrowDown01Icon}
           className="size-4 opacity-50"
         />
@@ -101,7 +101,7 @@ function SelectItem({
     >
       <span className="absolute right-2 flex size-3.5 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <HugeiconsIcon strokeWidth={3} icon={Tick01Icon} className="size-4" />
+          <HugeiconsIcon strokeWidth={2} icon={Tick01Icon} className="size-4" />
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
@@ -122,7 +122,7 @@ function SelectScrollUpButton({
       )}
       {...props}
     >
-      <HugeiconsIcon strokeWidth={3} icon={ArrowUp01Icon} className="size-4" />
+      <HugeiconsIcon strokeWidth={2} icon={ArrowUp01Icon} className="size-4" />
     </SelectPrimitive.ScrollUpButton>
   );
 }
@@ -141,7 +141,7 @@ function SelectScrollDownButton({
       {...props}
     >
       <HugeiconsIcon
-        strokeWidth={3}
+        strokeWidth={2}
         icon={ArrowDown01Icon}
         className="size-4"
       />

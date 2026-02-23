@@ -139,7 +139,7 @@ export default async function HubOverviewPage({
           >
             <Link href={`/hubs/${hubId}`}>
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={GlobeIcon}
                 className="mr-2 h-4 w-4"
               />
@@ -165,6 +165,7 @@ export default async function HubOverviewPage({
                   </div>
                   <div className="rounded-xl bg-blue-500/10 p-3 transition-all group-hover:bg-blue-500/20">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Home01Icon}
                       className="h-6 w-6 text-blue-400"
                     />
@@ -191,6 +192,7 @@ export default async function HubOverviewPage({
                   </div>
                   <div className="rounded-xl bg-purple-500/10 p-3 transition-all group-hover:bg-purple-500/20">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={GlobeIcon}
                       className="h-6 w-6 text-purple-400"
                     />
@@ -211,6 +213,7 @@ export default async function HubOverviewPage({
                   </div>
                   <div className="rounded-xl bg-green-500/10 p-3 transition-all group-hover:bg-green-500/20">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Shield01Icon}
                       className="h-6 w-6 text-green-400"
                     />
@@ -225,6 +228,7 @@ export default async function HubOverviewPage({
             <CardHeader className="border-gray-700/50 border-b bg-linear-to-r from-gray-800/50 to-gray-900/50">
               <CardTitle className="flex items-center gap-2 text-white">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={File01Icon}
                   className="h-5 w-5 text-indigo-400"
                 />
@@ -266,6 +270,7 @@ export default async function HubOverviewPage({
                     <div className="mb-4 flex items-start justify-between">
                       <div className="rounded-xl bg-red-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-red-500/20">
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Shield01Icon}
                           className="h-6 w-6 text-red-400"
                         />
@@ -292,6 +297,7 @@ export default async function HubOverviewPage({
                     <div className="mb-4 flex items-start justify-between">
                       <div className="rounded-xl bg-orange-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-orange-500/20">
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Notification03Icon}
                           className="h-6 w-6 text-orange-400"
                         />
@@ -318,6 +324,7 @@ export default async function HubOverviewPage({
                     <div className="mb-4 flex items-start justify-between">
                       <div className="rounded-xl bg-purple-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-purple-500/20">
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={LegalHammerIcon}
                           className="h-6 w-6 text-purple-400"
                         />
@@ -373,7 +380,7 @@ export default async function HubOverviewPage({
           >
             <Link href={`/hubs/${hubId}`}>
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={GlobeIcon}
                 className="mr-2 h-4 w-4"
               />

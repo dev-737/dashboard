@@ -25,6 +25,7 @@ export function FeaturesShowcase() {
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-blue-300 backdrop-blur-sm">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={SparklesIcon}
               className="h-4 w-4 animate-pulse text-blue-400"
             />
@@ -55,7 +56,7 @@ export function FeaturesShowcase() {
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-emerald-500/10 p-3 text-emerald-400 ring-1 ring-emerald-500/20">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Message02Icon}
                     className="h-6 w-6"
                   />
@@ -92,7 +93,7 @@ export function FeaturesShowcase() {
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-red-500/10 p-3 text-red-400 ring-1 ring-red-500/20">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Shield01Icon}
                     className="h-6 w-6"
                   />
@@ -121,7 +122,7 @@ export function FeaturesShowcase() {
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-purple-500/10 p-3 text-purple-400 ring-1 ring-purple-500/20">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={UserMultipleIcon}
                     className="h-6 w-6"
                   />
@@ -151,7 +152,7 @@ export function FeaturesShowcase() {
                 <div className="mb-6 flex items-center gap-4">
                   <div className="rounded-2xl bg-blue-500/10 p-3 text-blue-400 ring-1 ring-blue-500/20">
                     <HugeiconsIcon
-                      strokeWidth={3}
+                      strokeWidth={2}
                       icon={Settings01Icon}
                       className="h-6 w-6"
                     />
@@ -189,7 +190,7 @@ export function FeaturesShowcase() {
               <div className="mb-6 flex items-center gap-4">
                 <div className="rounded-2xl bg-yellow-500/10 p-3 text-yellow-400 ring-1 ring-yellow-500/20">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={SparklesIcon}
                     className="h-6 w-6"
                   />

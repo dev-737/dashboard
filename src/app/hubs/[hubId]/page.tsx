@@ -162,14 +162,14 @@ export default async function HubDetailView(props: {
               className="flex items-center gap-1 transition-colors hover:text-gray-200"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Home01Icon}
                 className="h-4 w-4"
               />
               <span>Home01Icon</span>
             </Link>
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ArrowRight01Icon}
               className="h-4 w-4"
             />
@@ -178,14 +178,14 @@ export default async function HubDetailView(props: {
               className="flex items-center gap-1 transition-colors hover:text-gray-200"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Search01Icon}
                 className="h-4 w-4"
               />
               <span>Browse Hubs</span>
             </Link>
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ArrowRight01Icon}
               className="h-4 w-4"
             />
@@ -210,6 +210,7 @@ export default async function HubDetailView(props: {
                         variant="outline"
                       >
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Settings01Icon}
                           className="h-4 w-4"
                         />
@@ -265,6 +266,7 @@ export default async function HubDetailView(props: {
                         )}
                       >
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={tab.icon}
                           className="mr-1 h-3 w-3 shrink-0 sm:mr-2 sm:h-4 sm:w-4"
                         />
@@ -287,6 +289,7 @@ export default async function HubDetailView(props: {
                   <div className="mt-8 border-gray-700/50 border-t pt-8">
                     <div className="mb-6 flex items-center gap-2">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Message02Icon}
                         className="h-5 w-5 text-primary"
                       />

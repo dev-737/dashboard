@@ -62,7 +62,7 @@ export default function JoinButton({
       >
         {!resolvedAuthenticated && !isSessionLoading && (
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Login01Icon}
             className="mr-2 h-4 w-4"
           />

@@ -67,7 +67,7 @@ export function DeleteHubDialog({ hubId, hubName }: DeleteHubDialogProps) {
           className="bg-red-600 text-white hover:bg-red-700"
         >
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Delete02Icon}
             className="mr-2 h-4 w-4"
           />
@@ -126,6 +126,7 @@ export function DeleteHubDialog({ hubId, hubName }: DeleteHubDialogProps) {
             {deleteMutation.isPending ? (
               <>
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="mr-2 h-4 w-4 animate-spin"
                 />

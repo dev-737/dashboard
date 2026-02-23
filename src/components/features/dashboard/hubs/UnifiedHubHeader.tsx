@@ -83,6 +83,7 @@ export function UnifiedHubHeader({
               >
                 <div className="flex items-center gap-2 rounded-lg bg-gray-900/80 px-3 py-2 opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Camera01Icon}
                     className="h-4 w-4 text-white"
                   />
@@ -118,6 +119,7 @@ export function UnifiedHubHeader({
                         className="absolute inset-0 flex cursor-pointer items-center justify-center rounded-2xl bg-black/0 opacity-0 transition-colors duration-200 hover:bg-black/60 group-hover:opacity-100"
                       >
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Upload01Icon}
                           className="h-5 w-5 text-white"
                         />
@@ -129,11 +131,13 @@ export function UnifiedHubHeader({
                   <div className="absolute -right-1 -bottom-1 rounded-full border border-gray-700/50 bg-gray-950 p-1.5 shadow-md">
                     {isPrivate ? (
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={LockIcon}
                         className="h-3 w-3 text-amber-400"
                       />
                     ) : (
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={GlobeIcon}
                         className="h-3 w-3 text-green-400"
                       />
@@ -153,6 +157,7 @@ export function UnifiedHubHeader({
                           className="border-amber-500/30 bg-amber-500/20 text-amber-400"
                         >
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={LockIcon}
                             className="mr-1 h-3 w-3"
                           />
@@ -165,6 +170,7 @@ export function UnifiedHubHeader({
                           className="border-red-500/30 bg-red-500/20 text-red-400"
                         >
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={ViewOffIcon}
                             className="mr-1 h-3 w-3"
                           />
@@ -182,6 +188,7 @@ export function UnifiedHubHeader({
                   <div className="flex items-center gap-2">
                     <div className="flex items-center gap-2 rounded-lg border border-gray-700/50 bg-gray-800/50 px-3 py-1.5">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={UserMultipleIcon}
                         className="h-4 w-4 text-blue-400"
                       />

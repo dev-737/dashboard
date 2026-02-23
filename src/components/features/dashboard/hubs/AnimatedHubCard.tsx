@@ -123,11 +123,13 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
               <div className="absolute -right-1 -bottom-1 flex h-6 w-6 items-center justify-center rounded-(--radius-avatar) border-2 border-gray-700 bg-gray-900">
                 {isPrivate ? (
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={LockIcon}
                     className="h-3 w-3 text-orange-400"
                   />
                 ) : (
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={GlobeIcon}
                     className="h-3 w-3 text-green-400"
                   />
@@ -149,6 +151,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
                   }}
                 >
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={PencilEdit02Icon}
                     className="h-4 w-4 text-white"
                   />
@@ -172,11 +175,13 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
                   {isPrivate ? (
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={LockIcon}
                       className="h-3 w-3 text-purple-400"
                     />
                   ) : (
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={GlobeIcon}
                       className="h-3 w-3 text-green-400"
                     />
@@ -192,6 +197,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
               <span className="flex items-center gap-2 text-gray-400">
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Home01Icon}
                     className="h-3 w-3 text-blue-400"
                   />
@@ -206,6 +212,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
               <span className="flex items-center gap-2 text-gray-400">
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Clock01Icon}
                     className="h-3 w-3 text-indigo-400"
                   />
@@ -225,7 +232,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
           >
             <Link href={`/dashboard/hubs/${hub.id}`}>
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Message02Icon}
                 className="mr-2 h-4 w-4"
               />

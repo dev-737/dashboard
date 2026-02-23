@@ -43,6 +43,7 @@ export function AutomodDashboard({
             <div className="flex items-center space-x-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-purple-500/30 bg-linear-to-br from-purple-500/20 to-indigo-500/20">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Shield01Icon}
                   className="h-6 w-6 text-purple-400"
                 />
@@ -63,7 +64,7 @@ export function AutomodDashboard({
                 className="bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={PlusSignIcon}
                   className="mr-2 h-4 w-4"
                 />
@@ -82,7 +83,7 @@ export function AutomodDashboard({
             className="data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-300"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Shield01Icon}
               className="mr-2 h-4 w-4"
             />
@@ -93,6 +94,7 @@ export function AutomodDashboard({
             className="data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-300"
           >
             <HugeiconsIcon
+              strokeWidth={2}
               icon={CheckmarkCircle02Icon}
               className="mr-2 h-4 w-4"
             />

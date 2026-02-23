@@ -67,6 +67,7 @@ const SimilarHubsCard = ({
     >
       <h3 className="mb-3 flex items-center font-semibold text-lg text-white sm:mb-5 sm:text-xl">
         <HugeiconsIcon
+          strokeWidth={2}
           icon={Tag01Icon}
           className="mr-2 h-4 w-4 text-primary sm:h-5 sm:w-5"
         />
@@ -132,6 +133,7 @@ const SimilarHubsCard = ({
                 </div>
               </div>
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={LinkSquare02Icon}
                 className="h-3 w-3 text-gray-500 opacity-0 transition-opacity group-hover:opacity-100"
               />

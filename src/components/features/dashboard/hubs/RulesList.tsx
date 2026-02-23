@@ -61,20 +61,20 @@ const ActionIcon = ({ action }: { action: BlockWordAction }) => {
   switch (action) {
     case BlockWordAction.BLOCK_MESSAGE:
       return (
-        <HugeiconsIcon strokeWidth={3} icon={Alert02Icon} className="h-3 w-3" />
+        <HugeiconsIcon strokeWidth={2} icon={Alert02Icon} className="h-3 w-3" />
       );
     case BlockWordAction.WARN:
       return (
-        <HugeiconsIcon strokeWidth={3} icon={Alert01Icon} className="h-3 w-3" />
+        <HugeiconsIcon strokeWidth={2} icon={Alert01Icon} className="h-3 w-3" />
       );
     case BlockWordAction.MUTE:
       return (
-        <HugeiconsIcon strokeWidth={3} icon={Clock01Icon} className="h-3 w-3" />
+        <HugeiconsIcon strokeWidth={2} icon={Clock01Icon} className="h-3 w-3" />
       );
     case BlockWordAction.BAN:
       return (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={LegalHammerIcon}
           className="h-3 w-3"
         />
@@ -82,7 +82,7 @@ const ActionIcon = ({ action }: { action: BlockWordAction }) => {
     case BlockWordAction.SEND_ALERT:
       return (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={Notification03Icon}
           className="h-3 w-3"
         />
@@ -90,7 +90,7 @@ const ActionIcon = ({ action }: { action: BlockWordAction }) => {
     case BlockWordAction.BLACKLIST:
       return (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={UserRemoveIcon}
           className="h-3 w-3"
         />
@@ -98,7 +98,7 @@ const ActionIcon = ({ action }: { action: BlockWordAction }) => {
     default:
       return (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={Shield01Icon}
           className="h-3 w-3"
         />
@@ -191,6 +191,7 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
       <Card className="border-red-800/30 bg-red-950/10">
         <CardContent className="p-6 text-center">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Alert01Icon}
             className="mx-auto mb-4 h-8 w-8 text-red-400"
           />
@@ -206,6 +207,7 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
       <Card className="border border-gray-800/50 bg-gray-950/50">
         <CardContent className="p-8 text-center">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Shield01Icon}
             className="mx-auto mb-4 h-12 w-12 text-gray-500"
           />
@@ -242,6 +244,7 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
               <div className="flex items-center space-x-3">
                 <div className="flex items-center space-x-2">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Shield01Icon}
                     className={`h-5 w-5 ${rule.enabled ? 'text-green-400' : 'text-gray-500'}`}
                   />
@@ -258,6 +261,7 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
                       className="border-green-500/30 text-green-400"
                     >
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={CheckmarkCircle02Icon}
                         className="mr-1 h-3 w-3"
                       />
@@ -269,6 +273,7 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
                       className="border-gray-500/30 text-gray-400"
                     >
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={ViewOffIcon}
                         className="mr-1 h-3 w-3"
                       />
@@ -301,6 +306,7 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={MoreVerticalIcon}
                         className="h-4 w-4"
                       />
@@ -315,6 +321,7 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
                       disabled={!canEdit}
                     >
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Edit02Icon}
                         className="mr-2 h-4 w-4"
                       />
@@ -327,6 +334,7 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
                       className="text-red-400 focus:text-red-300"
                     >
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Delete02Icon}
                         className="mr-2 h-4 w-4"
                       />

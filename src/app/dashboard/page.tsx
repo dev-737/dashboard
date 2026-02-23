@@ -92,7 +92,7 @@ export default async function DashboardPage(props: {
               color: 'blue',
               icon: (
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={ServerStackIcon}
                   className="h-4 w-4"
                 />
@@ -104,7 +104,7 @@ export default async function DashboardPage(props: {
               color: 'purple',
               icon: (
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Message02Icon}
                   className="h-4 w-4"
                 />
@@ -132,6 +132,7 @@ export default async function DashboardPage(props: {
                   rel="noopener noreferrer"
                 >
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={PlusSignCircleIcon}
                     className="mr-2 h-4 w-4"
                   />
@@ -145,6 +146,7 @@ export default async function DashboardPage(props: {
                 <CardHeader className="py-12 text-center">
                   <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={ServerStackIcon}
                       className="h-6 w-6 text-blue-400"
                     />
@@ -169,6 +171,7 @@ export default async function DashboardPage(props: {
                       rel="noopener noreferrer"
                     >
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={PlusSignCircleIcon}
                         className="mr-2 h-4 w-4"
                       />
@@ -198,6 +201,7 @@ export default async function DashboardPage(props: {
               >
                 <Link href="/dashboard/hubs/create">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={PlusSignCircleIcon}
                     className="mr-2 h-4 w-4"
                   />

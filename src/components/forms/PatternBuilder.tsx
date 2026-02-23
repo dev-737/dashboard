@@ -113,7 +113,7 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
               className="bg-purple-600 hover:bg-purple-700"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={PlusSignIcon}
                 className="h-4 w-4"
               />
@@ -128,6 +128,7 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
                   <TooltipTrigger asChild>
                     <div className="flex items-center gap-1 text-gray-400">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={HelpCircleIcon}
                         className="h-4 w-4"
                       />
@@ -186,7 +187,7 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
                   className="h-6 w-6 p-0 text-gray-400 hover:text-red-400"
                 >
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Cancel01Icon}
                     className="h-3 w-3"
                   />

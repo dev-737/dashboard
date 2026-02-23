@@ -141,6 +141,7 @@ export default function WriteReviewForm({
                 className="bg-gray-700/20 focus:outline-none"
               >
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={StarIcon}
                   className={`h-6 w-6 cursor-pointer ${
                     star <= (hoverRating || rating)

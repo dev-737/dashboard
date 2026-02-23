@@ -116,6 +116,7 @@ export function DiscordRoleSelector({
             {isLoading ? (
               <div className="flex items-center justify-center py-4">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="mr-2 h-4 w-4 animate-spin text-gray-400"
                 />
@@ -187,7 +188,7 @@ export function DiscordRoleSelector({
       {!isAccessible && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg bg-gray-900/80 backdrop-blur-sm">
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={LockIcon}
             className="h-6 w-6 text-amber-400"
           />

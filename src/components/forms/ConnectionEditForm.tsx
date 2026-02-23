@@ -120,6 +120,7 @@ export function ConnectionEditFormClient({
         <div className="flex items-center gap-3">
           <div className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-2">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Settings01Icon}
               className="h-5 w-5 text-blue-400"
             />
@@ -141,7 +142,7 @@ export function ConnectionEditFormClient({
               className="flex items-center gap-2 font-medium text-base"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ZapIcon}
                 className="h-4 w-4"
               />
@@ -167,7 +168,7 @@ export function ConnectionEditFormClient({
             className="flex items-center gap-2 font-medium text-base"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Link01Icon}
               className="h-4 w-4"
             />
@@ -193,7 +194,7 @@ export function ConnectionEditFormClient({
               className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Copy01Icon}
                 className="h-4 w-4"
               />
@@ -207,12 +208,13 @@ export function ConnectionEditFormClient({
             >
               {generateInviteMutation.isPending ? (
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="h-4 w-4 animate-spin"
                 />
               ) : (
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={PlusSignIcon}
                   className="h-4 w-4"
                 />
@@ -222,6 +224,7 @@ export function ConnectionEditFormClient({
           {inviteUrl && (
             <div className="flex items-center gap-2 text-sm">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={CheckmarkCircle01Icon}
                 className="h-4 w-4 text-green-400"
               />
@@ -234,6 +237,7 @@ export function ConnectionEditFormClient({
               >
                 <a href={inviteUrl} target="_blank" rel="noopener noreferrer">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={LinkSquare02Icon}
                     className="mr-1 h-3 w-3"
                   />
@@ -250,7 +254,7 @@ export function ConnectionEditFormClient({
         <div className="space-y-3">
           <Label className="flex items-center gap-2 font-medium text-base">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={HashtagIcon}
               className="h-4 w-4"
             />
@@ -260,6 +264,7 @@ export function ConnectionEditFormClient({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={HashtagIcon}
                   className="h-4 w-4 text-gray-400"
                 />
@@ -276,7 +281,7 @@ export function ConnectionEditFormClient({
                 className="h-6 px-2 text-gray-400 text-xs hover:text-white"
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Copy01Icon}
                   className="h-3 w-3"
                 />
@@ -299,6 +304,7 @@ export function ConnectionEditFormClient({
             {updateConnectionMutation.isPending ? (
               <>
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="mr-2 h-4 w-4 animate-spin"
                 />
@@ -307,7 +313,7 @@ export function ConnectionEditFormClient({
             ) : (
               <>
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={FloppyDiskIcon}
                   className="mr-2 h-4 w-4"
                 />

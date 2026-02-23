@@ -42,6 +42,7 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
             "As a hub owner, you'll have full control over settings, members, and connections.",
           icon: (
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Message02Icon}
               className="h-16 w-16 text-purple-400"
             />
@@ -56,6 +57,7 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
             'Hub owners can assign you as a manager to help with hub administration.',
           icon: (
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Shield01Icon}
               className="h-16 w-16 text-blue-400"
             />
@@ -70,6 +72,7 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
             'Hub owners can assign you as a moderator to help with content moderation.',
           icon: (
             <HugeiconsIcon
+              strokeWidth={2}
               icon={UserMultipleIcon}
               className="h-16 w-16 text-indigo-400"
             />
@@ -83,6 +86,7 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
           message: 'Create your first hub to get started.',
           icon: (
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Message02Icon}
               className="h-16 w-16 text-gray-400"
             />
@@ -136,6 +140,7 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
               >
                 <Link href="/dashboard/hubs/create">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={PlusSignCircleIcon}
                     className="mr-2 h-4 w-4"
                   />

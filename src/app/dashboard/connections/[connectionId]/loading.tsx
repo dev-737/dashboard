@@ -26,7 +26,7 @@ export default function ConnectionLoading() {
           >
             <Link href="/dashboard?tab=connections">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ArrowLeftIcon}
                 className="mr-1 h-4 w-4"
               />

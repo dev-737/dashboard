@@ -224,7 +224,7 @@ export function ServerSettingsForm({
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Link01Icon}
               className="h-5 w-5"
             />
@@ -259,7 +259,7 @@ export function ServerSettingsForm({
             className="gap-2"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={FloppyDiskIcon}
               className="h-4 w-4"
             />
@@ -273,6 +273,7 @@ export function ServerSettingsForm({
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Alert02Icon}
               className="h-5 w-5 text-red-400"
             />
@@ -333,7 +334,7 @@ export function ServerSettingsForm({
               className="w-full gap-2 md:w-auto"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Shield01Icon}
                 className="h-4 w-4"
               />
@@ -361,6 +362,7 @@ export function ServerSettingsForm({
                         {item.blockedUserId ? (
                           <span className="flex items-center gap-2 text-indigo-400">
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={CheckmarkSquare01Icon}
                               className="h-4 w-4"
                             />{' '}
@@ -369,6 +371,7 @@ export function ServerSettingsForm({
                         ) : (
                           <span className="flex items-center gap-2 text-rose-400">
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={Alert02Icon}
                               className="h-4 w-4"
                             />{' '}
@@ -399,6 +402,7 @@ export function ServerSettingsForm({
                           className="text-red-400 hover:bg-red-400/10 hover:text-red-300"
                         >
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={Delete02Icon}
                             className="h-4 w-4 md:mr-2"
                           />
@@ -418,6 +422,7 @@ export function ServerSettingsForm({
             <div className="py-8 text-center">
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gray-800/80">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={CheckmarkSquare01Icon}
                   className="h-6 w-6 text-green-400"
                 />

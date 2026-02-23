@@ -55,6 +55,7 @@ export function UnsavedChangesPrompt({
                 className="shrink-0"
               >
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Alert01Icon}
                   className="h-4 w-4 text-orange-400"
                 />
@@ -88,6 +89,7 @@ export function UnsavedChangesPrompt({
                 className="flex h-auto flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 font-medium text-gray-300 text-xs transition-colors duration-150 hover:bg-gray-700 hover:text-white sm:flex-none"
               >
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Rotate01Icon}
                   className="h-3 w-3 shrink-0"
                 />
@@ -104,6 +106,7 @@ export function UnsavedChangesPrompt({
                 {isSubmitting ? (
                   <>
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Loading03Icon}
                       className="h-3 w-3 shrink-0 animate-spin"
                     />
@@ -113,6 +116,7 @@ export function UnsavedChangesPrompt({
                 ) : (
                   <>
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={FloppyDiskIcon}
                       className="h-3 w-3 shrink-0"
                     />

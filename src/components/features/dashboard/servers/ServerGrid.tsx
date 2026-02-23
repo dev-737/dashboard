@@ -61,7 +61,6 @@ export function ServerGrid({ servers }: ServerGridProps) {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
           </svg>
@@ -72,6 +71,7 @@ export function ServerGrid({ servers }: ServerGridProps) {
         <div className="flex flex-col items-center justify-center py-12 text-center">
           <div className="mb-4 rounded-full bg-gray-800/50 p-3">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Home01Icon}
               className="h-6 w-6 text-gray-400"
             />
@@ -168,6 +168,7 @@ function ServerCard({ server, index }: ServerCardProps) {
               <span className="flex items-center gap-1 text-gray-400">
                 <div className="flex h-5 w-5 items-center justify-center rounded-lg bg-blue-500/20 sm:h-6 sm:w-6">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={UserMultipleIcon}
                     className="h-3 w-3 text-blue-400"
                   />
@@ -181,6 +182,7 @@ function ServerCard({ server, index }: ServerCardProps) {
               <span className="flex items-center gap-1 text-gray-400">
                 <div className="flex h-5 w-5 items-center justify-center rounded-lg bg-gray-500/20 sm:h-6 sm:w-6">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Clock01Icon}
                     className="h-3 w-3 text-gray-400"
                   />
@@ -196,6 +198,7 @@ function ServerCard({ server, index }: ServerCardProps) {
               <span className="flex items-center gap-1 text-gray-400">
                 <div className="flex h-5 w-5 items-center justify-center rounded-lg bg-indigo-500/20 sm:h-6 sm:w-6">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Home01Icon}
                     className="h-3 w-3 text-indigo-400"
                   />
@@ -223,7 +226,7 @@ function ServerCard({ server, index }: ServerCardProps) {
             >
               <Link href={`/dashboard/servers/${server.id}`}>
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Home01Icon}
                   className="mr-2 h-4 w-4"
                 />
@@ -242,6 +245,7 @@ function ServerCard({ server, index }: ServerCardProps) {
                 rel="noopener noreferrer"
               >
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={LinkSquare02Icon}
                   className="mr-2 h-4 w-4"
                 />

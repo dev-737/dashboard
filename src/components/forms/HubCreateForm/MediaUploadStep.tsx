@@ -70,7 +70,7 @@ export function MediaUploadStep({
       <CardHeader className="pb-6 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-pink-500 to-rose-600">
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Upload01Icon}
             className="h-8 w-8 text-white"
           />
@@ -97,7 +97,7 @@ export function MediaUploadStep({
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-gray-500">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Upload01Icon}
                     className="h-6 w-6"
                   />
@@ -134,7 +134,7 @@ export function MediaUploadStep({
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-gray-500">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Upload01Icon}
                     className="h-8 w-8"
                   />
@@ -162,7 +162,7 @@ export function MediaUploadStep({
             className="border-gray-700/50"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ArrowLeftIcon}
               className="mr-2 h-4 w-4"
             />
@@ -175,7 +175,7 @@ export function MediaUploadStep({
           >
             Continue
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ArrowRightIcon}
               className="ml-2 h-4 w-4"
             />

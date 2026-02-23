@@ -161,6 +161,7 @@ export default function JoinHubModal({
               <h3 className="font-medium text-sm text-white">Step 1: Server</h3>
               {serversQuery.isLoading && (
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="h-4 w-4 animate-spin text-gray-400"
                 />
@@ -175,6 +176,7 @@ export default function JoinHubModal({
                 className="border-gray-700/50 bg-gray-800/50 pl-9"
               />
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Search01Icon}
                 className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400"
               />
@@ -225,6 +227,7 @@ export default function JoinHubModal({
                                 ) : (
                                   <div className="flex h-full w-full items-center justify-center">
                                     <HugeiconsIcon
+                                      strokeWidth={2}
                                       icon={ServerStackIcon}
                                       className="h-4 w-4 text-gray-400"
                                     />
@@ -239,6 +242,7 @@ export default function JoinHubModal({
                                   {server.owner && (
                                     <span className="inline-flex items-center gap-1 rounded-full bg-yellow-500/15 px-2 py-0.5 text-xs text-yellow-300">
                                       <HugeiconsIcon
+                                        strokeWidth={2}
                                         icon={Shield01Icon}
                                         className="h-3 w-3"
                                       />{' '}
@@ -248,6 +252,7 @@ export default function JoinHubModal({
                                   {server.alreadyConnectedToHub && (
                                     <span className="inline-flex items-center gap-1 rounded-full bg-gray-600/20 px-2 py-0.5 text-gray-300 text-xs">
                                       <HugeiconsIcon
+                                        strokeWidth={2}
                                         icon={LockIcon}
                                         className="h-3 w-3"
                                       />{' '}
@@ -258,6 +263,7 @@ export default function JoinHubModal({
                               </div>
                               {isSelected && (
                                 <HugeiconsIcon
+                                  strokeWidth={2}
                                   icon={Tick01Icon}
                                   className="h-4 w-4 text-indigo-300"
                                 />
@@ -285,6 +291,7 @@ export default function JoinHubModal({
               </h3>
               {channelsQuery.isLoading && selectedServerId && (
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="h-4 w-4 animate-spin text-gray-400"
                 />
@@ -351,12 +358,14 @@ export default function JoinHubModal({
                                   </div>
                                   {isSelected && (
                                     <HugeiconsIcon
+                                      strokeWidth={2}
                                       icon={Tick01Icon}
                                       className="h-4 w-4 text-indigo-300"
                                     />
                                   )}
                                   {isLocked && (
                                     <HugeiconsIcon
+                                      strokeWidth={2}
                                       icon={LockIcon}
                                       className="h-4 w-4 text-gray-400"
                                     />
@@ -401,6 +410,7 @@ export default function JoinHubModal({
             {connectMutation.isPending ? (
               <>
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="mr-2 h-4 w-4 animate-spin"
                 />
@@ -409,7 +419,7 @@ export default function JoinHubModal({
             ) : (
               <>
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={HashtagIcon}
                   className="mr-2 h-4 w-4"
                 />

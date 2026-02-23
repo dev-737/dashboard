@@ -119,6 +119,7 @@ export function UserSettingsForm() {
           <div className="flex items-center gap-2">
             <Label htmlFor="show-nsfw-hubs">Show NSFW Hubs</Label>
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Alert01Icon}
               className="h-4 w-4 text-orange-400"
             />

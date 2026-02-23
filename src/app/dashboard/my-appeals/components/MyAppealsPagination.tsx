@@ -38,7 +38,7 @@ export function MyAppealsPagination({
           disabled={currentPage === 1}
         >
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={ArrowLeftIcon}
             className="mr-1 h-4 w-4"
           />
@@ -54,7 +54,7 @@ export function MyAppealsPagination({
         >
           Next
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={ArrowRightIcon}
             className="ml-1 h-4 w-4"
           />

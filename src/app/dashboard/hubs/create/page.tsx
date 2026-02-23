@@ -43,7 +43,7 @@ export default async function CreateHubPage() {
           >
             <Link href="/dashboard">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ArrowLeftIcon}
                 className="mr-2 h-4 w-4"
               />
@@ -64,7 +64,7 @@ export default async function CreateHubPage() {
         <div className="hidden items-center gap-6 text-gray-400 text-sm lg:flex">
           <div className="flex items-center gap-2">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ZapIcon}
               className="h-4 w-4 text-yellow-400"
             />
@@ -72,6 +72,7 @@ export default async function CreateHubPage() {
           </div>
           <div className="flex items-center gap-2">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Shield01Icon}
               className="h-4 w-4 text-green-400"
             />
@@ -79,7 +80,7 @@ export default async function CreateHubPage() {
           </div>
           <div className="flex items-center gap-2">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={GlobeIcon}
               className="h-4 w-4 text-blue-400"
             />
@@ -92,7 +93,7 @@ export default async function CreateHubPage() {
       <div className="py-8 text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-2 text-indigo-300 text-sm">
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={SparklesIcon}
             className="h-4 w-4"
           />

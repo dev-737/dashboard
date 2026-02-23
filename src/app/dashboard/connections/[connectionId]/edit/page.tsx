@@ -114,7 +114,7 @@ export default async function ConnectionEditPage(
           >
             <Link href={`/dashboard/connections/${connectionId}`}>
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ArrowLeftIcon}
                 className="mr-2 h-4 w-4"
               />
@@ -243,6 +243,7 @@ export default async function ConnectionEditPage(
                       href={`/dashboard/connections/${connectionId}/delete`}
                     >
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Delete02Icon}
                         className="mr-2 h-4 w-4"
                       />

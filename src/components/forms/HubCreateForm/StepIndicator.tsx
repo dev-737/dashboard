@@ -48,13 +48,13 @@ export function StepIndicator({ currentStep, steps }: StepIndicatorProps) {
               >
                 {isCompleted ? (
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Tick01Icon}
                     className="h-6 w-6"
                   />
                 ) : (
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={step.icon}
                     className="h-6 w-6"
                   />

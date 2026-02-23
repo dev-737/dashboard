@@ -191,7 +191,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
           <DialogTrigger asChild>
             <Button className="w-full border-none bg-indigo-600 font-medium text-white shadow-indigo-900/20 shadow-lg hover:bg-indigo-500 sm:w-auto">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={UserAdd01Icon}
                 className="mr-2 h-4 w-4"
               />
@@ -219,6 +219,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                 <div className="group relative flex gap-2">
                   <div className="relative flex-1">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Search01Icon}
                       className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-500 transition-colors group-focus-within:text-indigo-400"
                     />
@@ -242,11 +243,13 @@ export function MembersClient({ hubId }: { hubId: string }) {
                     >
                       {isValidating ? (
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Loading03Icon}
                           className="h-4 w-4 animate-spin"
                         />
                       ) : (
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Search01Icon}
                           className="h-4 w-4"
                         />
@@ -292,6 +295,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                         className="h-8 w-8 rounded-full p-0 text-gray-400 hover:bg-gray-800 hover:text-white"
                       >
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Cancel01Icon}
                           className="h-4 w-4"
                         />
@@ -324,6 +328,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                   >
                     <div className="mb-2 flex items-center justify-between">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Shield01Icon}
                         className={cn(
                           'h-4 w-4',
@@ -334,6 +339,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                       />
                       {selectedRole === 'MODERATOR' && (
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Tick01Icon}
                           className="h-3 w-3 text-purple-400"
                         />
@@ -359,6 +365,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                   >
                     <div className="mb-2 flex items-center justify-between">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Shield01Icon}
                         className={cn(
                           'h-4 w-4',
@@ -369,6 +376,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                       />
                       {selectedRole === 'MANAGER' && (
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Tick01Icon}
                           className="h-3 w-3 text-blue-400"
                         />
@@ -404,6 +412,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                 {addMemberMutation.isPending ? (
                   <>
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Loading03Icon}
                       className="mr-2 h-4 w-4 animate-spin"
                     />
@@ -424,6 +433,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
           <div className="mb-8">
             <h3 className="mb-4 flex items-center font-semibold text-gray-500 text-sm uppercase tracking-wider">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={CrownIcon}
                 className="mr-2 h-4 w-4 text-yellow-500"
               />
@@ -445,6 +455,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                   />
                   <div className="absolute -right-1 -bottom-1 rounded-full bg-gray-900 p-0.5">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={CrownIcon}
                       className="h-4 w-4 fill-yellow-500/20 text-yellow-500"
                     />
@@ -460,6 +471,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
             ) : (
               <div className="flex h-20 items-center justify-center text-gray-500">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="h-5 w-5 animate-spin"
                 />
@@ -474,6 +486,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
             <div className="mb-4 flex items-center justify-between">
               <h3 className="flex items-center font-semibold text-gray-500 text-sm uppercase tracking-wider">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Shield01Icon}
                   className="mr-2 h-4 w-4 text-indigo-400"
                 />
@@ -487,6 +500,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
             {isLoadingMembers ? (
               <div className="flex h-32 items-center justify-center">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="h-8 w-8 animate-spin text-gray-600"
                 />
@@ -531,6 +545,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                             {mod.role === 'MANAGER' ? 'Manager' : 'Moderator'}
                             {updatingMemberId === mod.id && (
                               <HugeiconsIcon
+                                strokeWidth={2}
                                 icon={Loading03Icon}
                                 className="ml-2 h-3 w-3 animate-spin text-gray-400"
                               />
@@ -547,6 +562,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                             className="h-8 w-8 p-0 text-gray-400 opacity-0 transition-opacity hover:bg-gray-800 hover:text-white group-hover:opacity-100 data-[state=open]:opacity-100"
                           >
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={MoreHorizontalIcon}
                               className="h-4 w-4"
                             />
@@ -566,6 +582,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                             className="cursor-pointer text-gray-300 focus:bg-gray-800 focus:text-white"
                           >
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={Shield01Icon}
                               className="mr-2 h-4 w-4"
                             />
@@ -578,6 +595,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
                             className="cursor-pointer text-red-400 focus:bg-red-500/10 focus:text-red-400"
                           >
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={Delete02Icon}
                               className="mr-2 h-4 w-4"
                             />
@@ -593,6 +611,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
               <div className="rounded-xl border border-gray-800 border-dashed bg-gray-900/10 p-12 text-center">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gray-800">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={UserAdd01Icon}
                     className="h-6 w-6 text-gray-500"
                   />

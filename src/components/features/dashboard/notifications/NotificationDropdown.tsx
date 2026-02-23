@@ -60,7 +60,7 @@ export function NotificationDropdown() {
           className="relative h-9 w-9 rounded-full text-gray-400 hover:text-white"
         >
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Notification03Icon}
             className="h-5 w-5"
           />
@@ -84,7 +84,7 @@ export function NotificationDropdown() {
               onClick={() => markAllAsRead()}
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Tick01Icon}
                 className="mr-1 h-3.5 w-3.5"
               />
@@ -109,6 +109,7 @@ export function NotificationDropdown() {
           ) : !hasNotifications ? (
             <div className="py-8 text-center text-gray-400">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Notification03Icon}
                 className="mx-auto mb-2 h-8 w-8 opacity-50"
               />
@@ -169,7 +170,7 @@ export function NotificationDropdown() {
             <Link href="/dashboard/announcements">
               View all notifications
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ArrowRightIcon}
                 className="ml-2 h-4 w-4"
               />

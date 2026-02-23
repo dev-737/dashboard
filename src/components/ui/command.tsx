@@ -35,6 +35,7 @@ function CommandInput({
       className="flex h-9 items-center gap-2 border-gray-700/50 border-b px-3"
     >
       <HugeiconsIcon
+        strokeWidth={2}
         icon={Search01Icon}
         className="size-4 shrink-0 text-gray-400"
       />

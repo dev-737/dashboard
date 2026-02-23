@@ -89,6 +89,7 @@ export function DeleteConnectionDialog({
             {isLoading ? (
               <>
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="mr-2 h-4 w-4 animate-spin"
                 />
@@ -97,7 +98,7 @@ export function DeleteConnectionDialog({
             ) : (
               <>
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Delete02Icon}
                   className="mr-2 h-4 w-4"
                 />

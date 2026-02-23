@@ -175,7 +175,7 @@ export default async function ServerDetailPage(props: {
           >
             <Link href="/dashboard">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ArrowLeftIcon}
                 className="mr-1 h-4 w-4"
               />
@@ -229,7 +229,7 @@ export default async function ServerDetailPage(props: {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={BarChartIcon}
                     className="h-5 w-5"
                   />
@@ -245,6 +245,7 @@ export default async function ServerDetailPage(props: {
                     <span className="flex items-center gap-1 text-gray-400">
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-800/80">
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Calendar01Icon}
                           className="h-3 w-3 text-blue-400"
                         />
@@ -257,6 +258,7 @@ export default async function ServerDetailPage(props: {
                     <span className="flex items-center gap-1 text-gray-400">
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-800/80">
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Shield01Icon}
                           className="h-3 w-3 text-purple-400"
                         />
@@ -277,6 +279,7 @@ export default async function ServerDetailPage(props: {
                         <span className="flex items-center gap-1 text-gray-400">
                           <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-800/80">
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={Home01Icon}
                               className="h-3 w-3 text-green-400"
                             />
@@ -292,6 +295,7 @@ export default async function ServerDetailPage(props: {
                         <span className="flex items-center gap-1 text-gray-400">
                           <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-800/80">
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={Clock01Icon}
                               className="h-3 w-3 text-indigo-400"
                             />
@@ -304,6 +308,7 @@ export default async function ServerDetailPage(props: {
                         <span className="flex items-center gap-1 text-gray-400">
                           <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-800/80">
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={BarChartIcon}
                               className="h-3 w-3 text-yellow-400"
                             />
@@ -325,7 +330,7 @@ export default async function ServerDetailPage(props: {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Home01Icon}
                     className="h-5 w-5"
                   />
@@ -349,6 +354,7 @@ export default async function ServerDetailPage(props: {
                       <span className="flex items-center gap-1 text-gray-400">
                         <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-800/80">
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={Home01Icon}
                             className="h-3 w-3 text-blue-400"
                           />

@@ -99,6 +99,7 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
           <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={StarIcon}
                 key={`review-star-${i + 1}`}
                 className={cn(
@@ -120,7 +121,7 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
               title="Delete review"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Delete02Icon}
                 className="h-4 w-4"
               />

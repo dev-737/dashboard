@@ -32,7 +32,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
           <div className="max-w-2xl">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 font-medium text-indigo-400 text-sm backdrop-blur-sm">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ChartIncreaseIcon}
                 className="h-4 w-4"
               />
@@ -52,6 +52,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
           >
             View all hubs
             <HugeiconsIcon
+              strokeWidth={2}
               icon={ArrowRightIcon}
               className="h-4 w-4 transition-transform group-hover:translate-x-1"
             />
@@ -145,6 +146,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                       <div className="flex items-center gap-4 text-sm">
                         <div className="flex items-center gap-2 text-gray-300">
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={UserMultipleIcon}
                             className="h-4 w-4 text-indigo-400"
                           />
@@ -155,6 +157,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                         {hub.averageRating && (
                           <div className="flex items-center gap-2 text-gray-300">
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={StarIcon}
                               className="h-4 w-4 fill-yellow-500/20 text-yellow-500"
                             />
@@ -167,6 +170,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
 
                       <div className="rounded-full bg-white/5 p-2 text-gray-400 transition-all group-hover:bg-indigo-500/20 group-hover:text-indigo-400">
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={ArrowRightIcon}
                           className="h-4 w-4"
                         />

@@ -26,7 +26,7 @@ export default function TermsOfService() {
         <div className="mb-20 text-center">
           <div className="mb-6 inline-flex items-center justify-center rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={JusticeScale01Icon}
               className="mr-2 h-4 w-4"
             />
@@ -165,7 +165,7 @@ export default function TermsOfService() {
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10 text-red-400">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={MinusSignIcon}
                     className="h-5 w-5"
                   />
@@ -219,7 +219,7 @@ export default function TermsOfService() {
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 text-purple-400">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={LegalHammerIcon}
                     className="h-5 w-5"
                   />
@@ -242,6 +242,7 @@ export default function TermsOfService() {
             <section id="fees" className="scroll-mt-32">
               <div className="mb-4 flex items-center gap-3">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Dollar01Icon}
                   className="h-5 w-5 text-green-400"
                 />
@@ -259,6 +260,7 @@ export default function TermsOfService() {
             <section id="intellectual-property" className="scroll-mt-32">
               <div className="mb-4 flex items-center gap-3">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={CopyrightIcon}
                   className="h-5 w-5 text-gray-400"
                 />
@@ -289,7 +291,7 @@ export default function TermsOfService() {
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Alert01Icon}
                     className="h-5 w-5"
                   />
@@ -314,6 +316,7 @@ export default function TermsOfService() {
             <section id="contact" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={MailIcon}
                   className="h-5 w-5 text-gray-400"
                 />

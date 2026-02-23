@@ -101,6 +101,7 @@ export default async function HubLoggingPage({
               <h2 className="flex items-center gap-3 font-bold text-2xl text-white">
                 <div className="rounded-(--radius-button) bg-indigo-500/20 p-2">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={File01Icon}
                     className="h-6 w-6 text-indigo-400"
                   />
@@ -115,6 +116,7 @@ export default async function HubLoggingPage({
             {configuredLogs.length > 0 && (
               <div className="flex items-center gap-2 rounded-(--radius-badge) border border-emerald-500/30 bg-emerald-500/20 px-3 py-1.5">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={CheckmarkCircle01Icon}
                   className="h-4 w-4 text-emerald-400"
                 />
@@ -137,6 +139,7 @@ export default async function HubLoggingPage({
                 <div className="flex flex-col items-center justify-center p-12 text-center">
                   <div className="mb-4 rounded-(--radius-modal) bg-amber-500/20 p-4">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={AlertCircleIcon}
                       className="h-8 w-8 text-amber-400"
                     />

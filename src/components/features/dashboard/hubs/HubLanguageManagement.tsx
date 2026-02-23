@@ -86,7 +86,7 @@ export function HubLanguageManagement({
       <div className="flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={GlobeIcon}
             className="h-5 w-5 text-blue-400"
           />
@@ -109,6 +109,7 @@ export function HubLanguageManagement({
               <SelectValue placeholder="Select a language">
                 <div className="flex items-center gap-2">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={GlobeIcon}
                     className="h-4 w-4 text-gray-400"
                   />
@@ -173,7 +174,7 @@ export function HubLanguageManagement({
                 ) : (
                   <div className="flex items-center gap-2">
                     <HugeiconsIcon
-                      strokeWidth={3}
+                      strokeWidth={2}
                       icon={FloppyDiskIcon}
                       className="h-4 w-4"
                     />
@@ -188,6 +189,7 @@ export function HubLanguageManagement({
         {!hasChanges && currentLanguage && (
           <div className="flex items-center gap-2 rounded-lg border border-green-500/20 bg-green-500/10 p-3">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Tick01Icon}
               className="h-4 w-4 text-green-400"
             />

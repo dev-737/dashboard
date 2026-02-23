@@ -50,7 +50,7 @@ export function ModulesSettingsStep({
       <CardHeader className="pb-6 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-orange-500 to-amber-600">
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Settings01Icon}
             className="h-8 w-8 text-white"
           />
@@ -107,7 +107,7 @@ export function ModulesSettingsStep({
             className="border-gray-700/50"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ArrowLeftIcon}
               className="mr-2 h-4 w-4"
             />
@@ -128,7 +128,7 @@ export function ModulesSettingsStep({
           >
             Continue
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ArrowRightIcon}
               className="ml-2 h-4 w-4"
             />

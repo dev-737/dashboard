@@ -34,7 +34,7 @@ export function ChannelIcon({
     case ChannelType.GuildText:
       icon = (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={HashtagIcon}
           className={className}
         />
@@ -44,7 +44,7 @@ export function ChannelIcon({
     case ChannelType.GuildAnnouncement:
       icon = (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={HashtagIcon}
           className={className}
         />
@@ -54,7 +54,7 @@ export function ChannelIcon({
     case ChannelType.PublicThread:
       icon = (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={Message02Icon}
           className={className}
         />
@@ -65,11 +65,12 @@ export function ChannelIcon({
       icon = (
         <div className="relative">
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Message02Icon}
             className={className}
           />
           <HugeiconsIcon
+            strokeWidth={2}
             icon={LockIcon}
             className="absolute -top-1 -right-1 h-2 w-2"
           />
@@ -80,7 +81,7 @@ export function ChannelIcon({
     case ChannelType.AnnouncementThread:
       icon = (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={Message02Icon}
           className={className}
         />
@@ -90,7 +91,7 @@ export function ChannelIcon({
     case ChannelType.GuildForum:
       icon = (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={MessageMultiple01Icon}
           className={className}
         />
@@ -100,7 +101,7 @@ export function ChannelIcon({
     case ChannelType.GuildMedia:
       icon = (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={MessageMultiple01Icon}
           className={className}
         />
@@ -110,7 +111,7 @@ export function ChannelIcon({
     default:
       icon = (
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={HashtagIcon}
           className={className}
         />

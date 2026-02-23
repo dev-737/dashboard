@@ -91,6 +91,7 @@ export default async function AnnouncementsPage() {
         <Card className="border-gray-800 bg-dash-main backdrop-blur-sm">
           <CardContent className="flex flex-col items-center justify-center py-12">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Notification03Icon}
               className="mb-4 h-12 w-12 text-gray-500"
             />
@@ -126,6 +127,7 @@ export default async function AnnouncementsPage() {
                 <div className="mt-2 flex items-center gap-4 text-gray-400 text-sm">
                   <div className="flex items-center">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Calendar01Icon}
                       className="mr-1 h-4 w-4"
                     />
@@ -133,6 +135,7 @@ export default async function AnnouncementsPage() {
                   </div>
                   <div className="flex items-center">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Clock01Icon}
                       className="mr-1 h-4 w-4"
                     />

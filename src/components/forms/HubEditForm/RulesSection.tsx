@@ -69,7 +69,7 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
           className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
         >
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={PlusSignIcon}
             className="mr-1 h-4 w-4"
           />
@@ -111,7 +111,7 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
                         className="h-8 w-8 p-0 hover:bg-gray-700/50"
                       >
                         <HugeiconsIcon
-                          strokeWidth={3}
+                          strokeWidth={2}
                           icon={ArrowUpIcon}
                           className="h-4 w-4"
                         />
@@ -133,6 +133,7 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
                         className="h-8 w-8 p-0 hover:bg-gray-700/50"
                       >
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={ArrowDownIcon}
                           className="h-4 w-4"
                         />
@@ -159,7 +160,7 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
                 className="h-8 w-8 p-0 hover:bg-red-600/20 hover:text-red-400"
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Cancel01Icon}
                   className="h-4 w-4"
                 />
@@ -169,6 +170,7 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
         ) : (
           <div className="py-8 text-center text-gray-500">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Message02Icon}
               className="mx-auto mb-3 h-12 w-12 opacity-50"
             />

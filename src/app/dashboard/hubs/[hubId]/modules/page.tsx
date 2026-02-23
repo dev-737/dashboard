@@ -97,6 +97,7 @@ export default async function HubModulesPage({ params }: HubModulesPageProps) {
           ) : (
             <div className="flex items-center justify-center p-6">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={AlertCircleIcon}
                 className="mr-2 h-5 w-5 text-amber-500"
               />

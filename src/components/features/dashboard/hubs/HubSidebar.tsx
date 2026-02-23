@@ -116,7 +116,7 @@ function SidebarNavItem({
           active ? 'text-purple-400' : 'text-gray-500 group-hover:text-gray-300'
         )}
       >
-        <HugeiconsIcon strokeWidth={3} icon={Icon} className="h-5 w-5" />
+        <HugeiconsIcon strokeWidth={2} icon={Icon} className="h-5 w-5" />
       </div>
 
       {!isCollapsed && (
@@ -125,6 +125,7 @@ function SidebarNavItem({
           <div className="flex items-center gap-2">
             {locked && (
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Shield01Icon}
                 className="h-3 w-3 text-gray-600"
               />
@@ -164,6 +165,7 @@ function SidebarNavItem({
             {label}
             {locked && (
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Shield01Icon}
                 className="h-3 w-3 text-gray-500"
               />
@@ -236,7 +238,7 @@ function SidebarSection({
           transition={{ duration: 0.2, ease: 'easeOut' }}
         >
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={ArrowRight01Icon}
             className="h-3 w-3"
           />
@@ -410,6 +412,7 @@ export function HubSidebar({
                   </span>
                 </div>
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={ArrowDown01Icon}
                   className="h-4 w-4 shrink-0 text-gray-500 transition-colors group-hover:text-gray-300"
                 />
@@ -532,7 +535,7 @@ export function HubSidebar({
               transition={{ duration: 0.3 }}
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ArrowLeft01Icon}
                 className="h-4 w-4"
               />

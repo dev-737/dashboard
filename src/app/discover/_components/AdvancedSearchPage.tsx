@@ -232,6 +232,7 @@ export default function AdvancedSearchPage({
             {/* Search Bar */}
             <div className="relative flex-1">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Search01Icon}
                 className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-500"
               />
@@ -250,7 +251,7 @@ export default function AdvancedSearchPage({
                   className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-300"
                 >
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Cancel01Icon}
                     className="h-4 w-4"
                   />
@@ -265,11 +266,13 @@ export default function AdvancedSearchPage({
                   <div className="flex items-center gap-2">
                     {sort === 'new' || sort === 'oldest' ? (
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={ArrowDown01Icon}
                         className="h-4 w-4 text-gray-400"
                       />
                     ) : (
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={ArrowUp01Icon}
                         className="h-4 w-4 text-gray-400"
                       />
@@ -304,7 +307,7 @@ export default function AdvancedSearchPage({
                     )}
                   >
                     <HugeiconsIcon
-                      strokeWidth={3}
+                      strokeWidth={2}
                       icon={FilterIcon}
                       className="h-4 w-4"
                     />
@@ -453,6 +456,7 @@ export default function AdvancedSearchPage({
                                     <div className="flex w-full items-center justify-between">
                                       <div className="flex items-center gap-2">
                                         <HugeiconsIcon
+                                          strokeWidth={2}
                                           icon={HashtagIcon}
                                           className="h-3 w-3 text-gray-500"
                                         />
@@ -460,6 +464,7 @@ export default function AdvancedSearchPage({
                                       </div>
                                       {tags.includes(tag.name) && (
                                         <HugeiconsIcon
+                                          strokeWidth={2}
                                           icon={Tick01Icon}
                                           className="h-3 w-3 text-indigo-400"
                                         />
@@ -483,6 +488,7 @@ export default function AdvancedSearchPage({
                               >
                                 {tag}
                                 <HugeiconsIcon
+                                  strokeWidth={2}
                                   icon={Cancel01Icon}
                                   className="h-3 w-3 cursor-pointer"
                                   onClick={() => toggleTag(tag)}
@@ -521,6 +527,7 @@ export default function AdvancedSearchPage({
                 >
                   Search01Icon: {debouncedSearchTerm}
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() => setSearchTerm('')}
@@ -535,6 +542,7 @@ export default function AdvancedSearchPage({
                 >
                   Sort: {SORT_OPTIONS.find((o) => o.value === sort)?.label}
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() => setSort('trending')}
@@ -550,6 +558,7 @@ export default function AdvancedSearchPage({
                 >
                   #{tag}
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() =>
@@ -566,6 +575,7 @@ export default function AdvancedSearchPage({
                 >
                   Members &ge; {minMembers}
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() => setMinMembers(0)}
@@ -580,6 +590,7 @@ export default function AdvancedSearchPage({
                 >
                   Verified Only
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() => setVerifiedOnly(false)}
@@ -594,6 +605,7 @@ export default function AdvancedSearchPage({
                 >
                   Partnered Only
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() => setPartneredOnly(false)}
@@ -624,7 +636,7 @@ export default function AdvancedSearchPage({
               <section className="space-y-4">
                 <div className="flex items-center gap-2 text-yellow-400">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={SparklesIcon}
                     className="h-5 w-5"
                   />
@@ -649,7 +661,7 @@ export default function AdvancedSearchPage({
               <section className="space-y-6">
                 <div className="flex items-center gap-2 text-orange-500">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={ChartIncreaseIcon}
                     className="h-6 w-6"
                   />
@@ -674,7 +686,7 @@ export default function AdvancedSearchPage({
               <section className="space-y-6">
                 <div className="flex items-center gap-2 text-indigo-400">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Clock01Icon}
                     className="h-6 w-6"
                   />
@@ -726,6 +738,7 @@ export default function AdvancedSearchPage({
           ) : data?.items.length === 0 ? (
             <div className="flex flex-col items-center justify-center rounded-xl border border-gray-800 border-dashed bg-gray-900/20 py-20 text-center">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Search01Icon}
                 className="mb-4 h-10 w-10 text-gray-600"
               />

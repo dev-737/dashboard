@@ -31,7 +31,7 @@ export function ConnectionNavigationTabs({
           color: 'indigo' as const,
           icon: (
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Message02Icon}
               className="h-4 w-4"
             />
@@ -49,7 +49,7 @@ export function ConnectionNavigationTabs({
           color: 'blue' as const,
           icon: (
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={PencilEdit01Icon}
               className="h-4 w-4"
             />
@@ -82,7 +82,7 @@ export function ConnectionNavigationTabsSkeleton({
               value: 'overview',
               icon: (
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Message02Icon}
                   className="h-4 w-4"
                 />
@@ -100,7 +100,7 @@ export function ConnectionNavigationTabsSkeleton({
               value: 'edit',
               icon: (
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={PencilEdit01Icon}
                   className="h-4 w-4"
                 />

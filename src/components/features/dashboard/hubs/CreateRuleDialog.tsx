@@ -142,7 +142,7 @@ export function CreateRuleDialog({
           <DialogHeader className="shrink-0 pb-4">
             <DialogTitle className="flex items-center text-purple-400">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Shield01Icon}
                 className="mr-2 h-5 w-5"
               />
@@ -168,7 +168,7 @@ export function CreateRuleDialog({
                   className="data-[state=active]:bg-purple-600/20"
                 >
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={PlusSignIcon}
                     className="mr-2 h-4 w-4"
                   />
@@ -179,7 +179,7 @@ export function CreateRuleDialog({
                   className="data-[state=active]:bg-purple-600/20"
                 >
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={SparklesIcon}
                     className="mr-2 h-4 w-4"
                   />

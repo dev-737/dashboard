@@ -121,7 +121,7 @@ export function HubTagManagement({
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-r from-blue-500 to-purple-500">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Tag01Icon}
               className="h-5 w-5 text-white"
             />
@@ -159,6 +159,7 @@ export function HubTagManagement({
             {isSaving ? (
               <>
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="mr-2 h-4 w-4 animate-spin"
                 />
@@ -167,7 +168,7 @@ export function HubTagManagement({
             ) : hasChanges ? (
               <>
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={FloppyDiskIcon}
                   className="mr-2 h-4 w-4"
                 />
@@ -176,7 +177,7 @@ export function HubTagManagement({
             ) : (
               <>
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={Tick01Icon}
                   className="mr-2 h-4 w-4"
                 />
@@ -192,7 +193,7 @@ export function HubTagManagement({
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-white">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Search01Icon}
               className="h-5 w-5"
             />
@@ -219,6 +220,7 @@ export function HubTagManagement({
             >
               <div className="mb-2 flex items-center gap-2">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={AlertCircleIcon}
                   className="h-4 w-4 text-blue-400"
                 />
@@ -262,6 +264,7 @@ export function HubTagManagement({
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-base text-white">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={ChartIncreaseIcon}
                 className="h-4 w-4 text-orange-400"
               />
@@ -272,6 +275,7 @@ export function HubTagManagement({
             {isLoadingPopular ? (
               <div className="flex items-center justify-center py-4">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Loading03Icon}
                   className="h-5 w-5 animate-spin text-gray-400"
                 />
@@ -296,11 +300,13 @@ export function HubTagManagement({
                   >
                     {selectedTags.includes(tag.name) ? (
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Tick01Icon}
                         className="mr-1 h-3 w-3"
                       />
                     ) : (
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={PlusSignIcon}
                         className="mr-1 h-3 w-3"
                       />
@@ -318,6 +324,7 @@ export function HubTagManagement({
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-base text-white">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={SparklesIcon}
                 className="h-4 w-4 text-purple-400"
               />
@@ -336,6 +343,7 @@ export function HubTagManagement({
       <div className="premium-card p-4">
         <div className="flex items-start gap-3">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={AlertCircleIcon}
             className="mt-0.5 h-5 w-5 shrink-0 text-blue-400"
           />

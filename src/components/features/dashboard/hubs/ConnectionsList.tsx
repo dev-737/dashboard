@@ -197,6 +197,7 @@ export function ConnectionsList({
               <CardTitle className="flex items-center gap-2 font-bold text-white text-xl">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-indigo-600">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={ServerStackIcon}
                     className="h-4 w-4 text-white"
                   />
@@ -232,6 +233,7 @@ export function ConnectionsList({
         {/* Simple Search01Icon */}
         <div className="relative">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Search01Icon}
             className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400"
           />
@@ -249,7 +251,7 @@ export function ConnectionsList({
               onClick={() => setSearchQuery('')}
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Cancel01Icon}
                 className="h-4 w-4"
               />
@@ -262,6 +264,7 @@ export function ConnectionsList({
           <div className="px-4 py-12 text-center">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-800/50">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Home01Icon}
                 className="h-8 w-8 text-gray-500"
               />
@@ -278,6 +281,7 @@ export function ConnectionsList({
           <div className="px-4 py-12 text-center">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-800/50">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Search01Icon}
                 className="h-8 w-8 text-gray-500"
               />
@@ -365,6 +369,7 @@ function ConnectionItem({
             ) : (
               <div className="flex h-full w-full items-center justify-center">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={UserMultipleIcon}
                   className="h-6 w-6 text-gray-400"
                 />
@@ -399,7 +404,7 @@ function ConnectionItem({
               {connection.connected ? (
                 <>
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Wifi01Icon}
                     className="mr-1 h-3 w-3"
                   />
@@ -408,6 +413,7 @@ function ConnectionItem({
               ) : (
                 <>
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={WifiDisconnected01Icon}
                     className="mr-1 h-3 w-3"
                   />
@@ -421,7 +427,7 @@ function ConnectionItem({
           <div className="flex flex-col gap-2 text-gray-400 text-sm sm:flex-row sm:items-center sm:gap-4">
             <div className="flex items-center gap-1">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={HashtagIcon}
                 className="h-3 w-3 shrink-0"
               />
@@ -431,7 +437,7 @@ function ConnectionItem({
             </div>
             <div className="flex items-center gap-1">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Clock01Icon}
                 className="h-3 w-3 shrink-0"
               />
@@ -453,7 +459,7 @@ function ConnectionItem({
               className="h-8 w-8 rounded-lg p-0 opacity-0 transition-opacity hover:bg-gray-700/50 group-hover:opacity-100 sm:opacity-100"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={MoreVerticalIcon}
                 className="h-4 w-4"
               />
@@ -468,7 +474,7 @@ function ConnectionItem({
               className="text-gray-300 hover:bg-gray-800 hover:text-white"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={ServerStackIcon}
                 className="mr-2 h-4 w-4"
               />
@@ -479,7 +485,7 @@ function ConnectionItem({
               className="text-gray-300 hover:bg-gray-800 hover:text-white"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={HashtagIcon}
                 className="mr-2 h-4 w-4"
               />
@@ -493,6 +499,7 @@ function ConnectionItem({
                   className="text-orange-300 hover:bg-orange-600/10 hover:text-orange-200"
                 >
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={LegalHammerIcon}
                     className="mr-2 h-4 w-4"
                   />
@@ -508,7 +515,7 @@ function ConnectionItem({
                   className="text-red-300 hover:bg-red-600/10 hover:text-red-200"
                 >
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Delete02Icon}
                     className="mr-2 h-4 w-4"
                   />

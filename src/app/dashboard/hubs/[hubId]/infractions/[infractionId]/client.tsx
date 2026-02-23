@@ -128,7 +128,7 @@ export function AddInfractionClient({
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions`}>
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ArrowLeftIcon}
               className="mr-2 h-4 w-4"
             />
@@ -150,7 +150,7 @@ export function AddInfractionClient({
         className="border-blue-500/30 bg-linear-to-r from-blue-950/40 to-indigo-950/40 backdrop-blur-sm"
       >
         <HugeiconsIcon
-          strokeWidth={3}
+          strokeWidth={2}
           icon={Shield01Icon}
           className="h-5 w-5 text-blue-400"
         />
@@ -175,6 +175,7 @@ export function AddInfractionClient({
                 <CardTitle className="flex items-center gap-2">
                   <div className="rounded-(--radius-button) bg-purple-500/20 p-2">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Shield01Icon}
                       className="h-4 w-4 text-purple-400"
                     />
@@ -198,7 +199,7 @@ export function AddInfractionClient({
                       className="rounded-(--radius) data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
                     >
                       <HugeiconsIcon
-                        strokeWidth={3}
+                        strokeWidth={2}
                         icon={UserIcon}
                         className="mr-2 h-4 w-4"
                       />
@@ -209,6 +210,7 @@ export function AddInfractionClient({
                       className="rounded-(--radius) data-[state=active]:bg-linear-to-r data-[state=active]:from-red-500 data-[state=active]:to-orange-500 data-[state=active]:text-white"
                     >
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={ServerStackIcon}
                         className="mr-2 h-4 w-4"
                       />
@@ -271,6 +273,7 @@ export function AddInfractionClient({
                 <CardTitle className="flex items-center gap-2">
                   <div className="rounded-(--radius-button) bg-red-500/20 p-2">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Alert01Icon}
                       className="h-4 w-4 text-red-400"
                     />
@@ -405,6 +408,7 @@ export function AddInfractionClient({
                 ) : (
                   <>
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={FloppyDiskIcon}
                       className="mr-2 h-4 w-4"
                     />
@@ -421,6 +425,7 @@ export function AddInfractionClient({
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <div className="rounded-(--radius-button) bg-amber-500/20 p-2">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Alert01Icon}
                       className="h-4 w-4 text-amber-400"
                     />
@@ -433,6 +438,7 @@ export function AddInfractionClient({
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 rounded-(--radius) bg-red-500/20 p-1.5">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Shield01Icon}
                         className="h-3.5 w-3.5 text-red-400"
                       />
@@ -451,6 +457,7 @@ export function AddInfractionClient({
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 rounded-(--radius) bg-amber-500/20 p-1.5">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Alert01Icon}
                         className="h-3.5 w-3.5 text-amber-400"
                       />
@@ -469,6 +476,7 @@ export function AddInfractionClient({
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 rounded-(--radius) bg-blue-500/20 p-1.5">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Calendar01Icon}
                         className="h-3.5 w-3.5 text-blue-400"
                       />
@@ -490,6 +498,7 @@ export function AddInfractionClient({
                   className="border-red-500/30 bg-linear-to-r from-red-950/40 to-orange-950/40"
                 >
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Alert01Icon}
                     className="h-4 w-4 text-red-400"
                   />

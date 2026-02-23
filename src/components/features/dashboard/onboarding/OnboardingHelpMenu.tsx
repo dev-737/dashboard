@@ -58,7 +58,7 @@ export function OnboardingHelpMenu() {
           className="h-9 w-9 rounded-full text-gray-400 hover:text-white"
         >
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={HelpCircleIcon}
             className="h-5 w-5"
           />
@@ -87,6 +87,7 @@ export function OnboardingHelpMenu() {
                   className="flex cursor-pointer items-center gap-3 px-3 py-2 text-sm hover:bg-gray-800 focus:bg-gray-800"
                 >
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={item.icon}
                     className={`h-4 w-4 ${item.color}`}
                   />
@@ -98,6 +99,7 @@ export function OnboardingHelpMenu() {
                   </div>
                   {item.external && (
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={LinkSquare02Icon}
                       className="h-3 w-3 text-gray-500"
                     />
@@ -114,6 +116,7 @@ export function OnboardingHelpMenu() {
               className="flex cursor-pointer items-center gap-3 px-3 py-2 text-sm hover:bg-gray-800 focus:bg-gray-800"
             >
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={item.icon}
                 className={`h-4 w-4 ${item.color}`}
               />

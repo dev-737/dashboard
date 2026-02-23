@@ -127,6 +127,7 @@ export default async function MyAppealsPage(props: {
           {appeals.length === 0 ? (
             <div className="py-8 text-center">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Message01Icon}
                 className="mx-auto mb-4 h-12 w-12 text-gray-500"
               />
@@ -169,7 +170,7 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
             className="border-yellow-500/20 bg-yellow-500/10 text-yellow-500"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Clock01Icon}
               className="mr-1 h-3 w-3"
             />
@@ -183,7 +184,7 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
             className="border-green-500/20 bg-green-500/10 text-green-500"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Tick01Icon}
               className="mr-1 h-3 w-3"
             />
@@ -197,7 +198,7 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
             className="border-red-500/20 bg-red-500/10 text-red-500"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Cancel01Icon}
               className="mr-1 h-3 w-3"
             />
@@ -243,6 +244,7 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
       <div className="mb-3 rounded-md border border-gray-800/50 bg-gray-800/30 p-3">
         <div className="mb-2 flex items-center gap-2">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Shield01Icon}
             className="h-4 w-4 text-gray-400"
           />

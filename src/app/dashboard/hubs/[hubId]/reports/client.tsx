@@ -317,7 +317,7 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={FilterIcon}
               className="h-5 w-5"
             />
@@ -330,6 +330,7 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
               <Label className="font-medium text-sm">Search01Icon</Label>
               <div className="relative">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Search01Icon}
                   className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400"
                 />
@@ -379,7 +380,7 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
             color: 'red',
             icon: (
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Clock01Icon}
                 className="h-4 w-4"
               />
@@ -391,7 +392,7 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
             color: 'green',
             icon: (
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={CheckmarkCircle01Icon}
                 className="h-4 w-4"
               />
@@ -403,7 +404,7 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
             color: 'blue',
             icon: (
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Cancel01Icon}
                 className="h-4 w-4"
               />
@@ -510,6 +511,7 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
                 className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
               >
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={ArrowLeft01Icon}
                   className="mr-1 h-4 w-4"
                 />
@@ -526,6 +528,7 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
               >
                 Next
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={ArrowRight01Icon}
                   className="ml-1 h-4 w-4"
                 />
@@ -742,7 +745,7 @@ function ReportCard({
             className="border-yellow-500/50 bg-yellow-500/10 text-yellow-400"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Clock01Icon}
               className="mr-1 h-3 w-3"
             />
@@ -756,6 +759,7 @@ function ReportCard({
             className="border-green-500/50 bg-green-500/10 text-green-400"
           >
             <HugeiconsIcon
+              strokeWidth={2}
               icon={CheckmarkCircle01Icon}
               className="mr-1 h-3 w-3"
             />
@@ -769,7 +773,7 @@ function ReportCard({
             className="border-gray-500/50 bg-gray-500/10 text-gray-400"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Cancel01Icon}
               className="mr-1 h-3 w-3"
             />
@@ -890,7 +894,7 @@ function ReportCard({
         <div className="rounded-md border border-gray-800 bg-gray-900/50 p-3">
           <div className="mb-2 flex items-center gap-2 text-gray-400 text-sm">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Alert01Icon}
               className="h-4 w-4"
             />
@@ -904,6 +908,7 @@ function ReportCard({
           <div className="rounded-md border border-gray-700 bg-gray-800/50 p-4">
             <div className="mb-4 flex items-center gap-2 font-medium text-gray-300 text-sm">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Message02Icon}
                 className="h-4 w-4 text-blue-400"
               />
@@ -1001,6 +1006,7 @@ function ReportCard({
             ) : (
               <div className="rounded-lg border border-gray-700/50 bg-gray-900/30 py-6 text-center">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={Message02Icon}
                   className="mx-auto mb-2 h-8 w-8 text-gray-500"
                 />
@@ -1052,7 +1058,7 @@ function ReportCard({
               disabled={isUpdating}
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Cancel01Icon}
                 className="mr-2 h-4 w-4"
               />
@@ -1064,6 +1070,7 @@ function ReportCard({
               className="border-none bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-600/80 hover:to-emerald-600/80"
             >
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={CheckmarkCircle01Icon}
                 className="mr-2 h-4 w-4"
               />

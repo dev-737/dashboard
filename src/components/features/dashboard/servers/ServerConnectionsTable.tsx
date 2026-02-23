@@ -210,6 +210,7 @@ export function ServerConnectionsTable({
                       >
                         <span className="sr-only">Open menu</span>
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={MoreHorizontalIcon}
                           className="h-4 w-4"
                         />
@@ -228,6 +229,7 @@ export function ServerConnectionsTable({
                           className="flex w-full items-center"
                         >
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={LinkSquare02Icon}
                             className="mr-2 h-4 w-4"
                           />
@@ -240,6 +242,7 @@ export function ServerConnectionsTable({
                           className="flex w-full items-center"
                         >
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={LegalHammerIcon}
                             className="mr-2 h-4 w-4"
                           />
@@ -261,6 +264,7 @@ export function ServerConnectionsTable({
                         {connection.connected ? (
                           <>
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={PauseIcon}
                               className="mr-2 h-4 w-4"
                             />
@@ -269,6 +273,7 @@ export function ServerConnectionsTable({
                         ) : (
                           <>
                             <HugeiconsIcon
+                              strokeWidth={2}
                               icon={PlayIcon}
                               className="mr-2 h-4 w-4"
                             />
@@ -287,6 +292,7 @@ export function ServerConnectionsTable({
                         disabled={isLoading}
                       >
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Delete02Icon}
                           className="mr-2 h-4 w-4"
                         />

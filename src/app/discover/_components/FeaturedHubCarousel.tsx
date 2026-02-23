@@ -114,6 +114,7 @@ export function FeaturedHubCarousel({
             <div className="flex items-center gap-4 pt-1 font-medium text-gray-400 text-sm">
               <div className="flex items-center gap-1.5">
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={UserMultipleIcon}
                   className="h-4 w-4 text-emerald-400"
                 />
@@ -122,6 +123,7 @@ export function FeaturedHubCarousel({
               {averageRating && (
                 <div className="flex items-center gap-1.5">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={StarIcon}
                     className="h-4 w-4 fill-yellow-400 text-yellow-400"
                   />
@@ -137,7 +139,7 @@ export function FeaturedHubCarousel({
           <Link href={`/hubs/${id}`}>
             <Button size="default" className="btn-primary">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={EyeIcon}
                 className="mr-2 h-5 w-5"
               />

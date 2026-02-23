@@ -262,7 +262,7 @@ export function GuidedTour({
               className="flex items-center gap-2 rounded-full bg-purple-500 px-3 py-1 font-medium text-sm text-white"
             >
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Cursor01Icon}
                 className="h-4 w-4"
               />
@@ -292,6 +292,7 @@ export function GuidedTour({
                 <div className="flex items-center gap-3">
                   <div className="rounded-lg border border-purple-500/30 bg-purple-900/30 p-2">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Target01Icon}
                       className="h-5 w-5 text-purple-400"
                     />
@@ -312,7 +313,7 @@ export function GuidedTour({
                   className="h-8 w-8 rounded-full text-gray-400 hover:bg-gray-800 hover:text-white"
                 >
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Cancel01Icon}
                     className="h-4 w-4"
                   />
@@ -336,6 +337,7 @@ export function GuidedTour({
               {currentStepData.action && (
                 <div className="flex items-center gap-2 rounded-lg border border-purple-500/30 bg-purple-900/20 p-3">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={BulbIcon}
                     className="h-4 w-4 shrink-0 text-purple-400"
                   />
@@ -368,6 +370,7 @@ export function GuidedTour({
                     className="text-gray-400 hover:text-white disabled:opacity-50"
                   >
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={ArrowLeftIcon}
                       className="mr-1 h-4 w-4"
                     />
@@ -383,6 +386,7 @@ export function GuidedTour({
                       <>
                         Next
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={ArrowRightIcon}
                           className="ml-1 h-4 w-4"
                         />
@@ -391,6 +395,7 @@ export function GuidedTour({
                       <>
                         Finish
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={EyeIcon}
                           className="ml-1 h-4 w-4"
                         />

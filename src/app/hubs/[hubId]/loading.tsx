@@ -29,6 +29,7 @@ export default function HubDetailLoading() {
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Search01Icon}
                     className="h-5 w-5 text-gray-400"
                     aria-hidden="true"
@@ -105,6 +106,7 @@ export default function HubDetailLoading() {
                 <div className="mb-6 flex items-center">
                   <div className="mr-3 rounded-lg border border-primary/30 bg-primary/10 p-2">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={UserMultipleIcon}
                       className="h-5 w-5 text-primary"
                     />
@@ -139,6 +141,7 @@ export default function HubDetailLoading() {
                                 .fill(0)
                                 .map(() => (
                                   <HugeiconsIcon
+                                    strokeWidth={2}
                                     icon={StarIcon}
                                     key={`star-${crypto.randomUUID()}`}
                                     className="h-4 w-4 text-yellow-500"
@@ -161,6 +164,7 @@ export default function HubDetailLoading() {
               <div className="rounded-xl border border-gray-800 bg-gray-900/70 p-6 shadow-lg backdrop-blur-md">
                 <div className="mb-5 flex items-center">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={InformationCircleIcon}
                     className="mr-2 h-5 w-5 text-primary"
                   />
@@ -171,6 +175,7 @@ export default function HubDetailLoading() {
                   <div className="flex items-center justify-between rounded-md border border-gray-700/50 bg-black/20 p-3">
                     <div className="flex items-center text-gray-400 text-sm">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Calendar01Icon}
                         className="mr-2 h-4 w-4 text-primary/80"
                       />
@@ -182,6 +187,7 @@ export default function HubDetailLoading() {
                   <div className="flex items-center justify-between rounded-md border border-gray-700/50 bg-black/20 p-3">
                     <div className="flex items-center text-gray-400 text-sm">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={UserMultipleIcon}
                         className="mr-2 h-4 w-4 text-primary/80"
                       />
@@ -196,6 +202,7 @@ export default function HubDetailLoading() {
               <div className="rounded-xl border border-gray-800 bg-gray-900/70 p-6 shadow-lg backdrop-blur-md">
                 <div className="mb-5 flex items-center">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Shield01Icon}
                     className="mr-2 h-5 w-5 text-primary"
                   />

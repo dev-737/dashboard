@@ -22,6 +22,7 @@ export default function ClientReviewSection({
     return (
       <div className="mb-6 flex flex-col items-center justify-center rounded-lg border border-gray-700/30 bg-gray-800/30 p-6">
         <HugeiconsIcon
+          strokeWidth={2}
           icon={Message02Icon}
           className="mb-3 h-8 w-8 text-gray-500"
         />
@@ -50,7 +51,7 @@ export default function ClientReviewSection({
             className="rounded-lg bg-linear-to-r from-primary to-primary-alt px-4 py-2 font-medium text-white transition-opacity hover:opacity-90"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Message02Icon}
               className="mr-2 h-4 w-4"
             />

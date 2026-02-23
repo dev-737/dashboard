@@ -16,7 +16,7 @@ export default function HubNotFound() {
         <Button asChild>
           <Link href="/hubs">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Search01Icon}
               className="mr-2 h-4 w-4"
             />
@@ -26,7 +26,7 @@ export default function HubNotFound() {
         <Button variant="outline" asChild>
           <Link href="/">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Home01Icon}
               className="mr-2 h-4 w-4"
             />

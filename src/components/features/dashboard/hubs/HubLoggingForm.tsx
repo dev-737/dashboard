@@ -338,6 +338,7 @@ export function HubLoggingForm({
       {isResolvingConfigs && (
         <div className="flex items-center justify-center gap-2 py-8">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Loading03Icon}
             className="h-5 w-5 animate-spin text-indigo-400"
           />
@@ -363,6 +364,7 @@ export function HubLoggingForm({
                         className={`rounded-lg p-2 ${colorClasses.bg} ${colorClasses.border} border`}
                       >
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Icon}
                           className={`h-5 w-5 ${colorClasses.text}`}
                         />
@@ -377,6 +379,7 @@ export function HubLoggingForm({
                       </div>
                       {resolved && !resolved.userHasAccess && (
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={LockIcon}
                           className="h-4 w-4 text-amber-400"
                         />
@@ -384,6 +387,7 @@ export function HubLoggingForm({
                       {isConfigured(key) && (
                         <div className="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/20 px-3 py-1">
                           <HugeiconsIcon
+                            strokeWidth={2}
                             icon={Tick01Icon}
                             className="h-3 w-3 text-emerald-400"
                           />
@@ -393,6 +397,7 @@ export function HubLoggingForm({
                         </div>
                       )}
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={ArrowDown01Icon}
                         className="h-5 w-5 text-gray-400 transition-transform duration-200 data-[state=open]:rotate-180"
                       />
@@ -461,6 +466,7 @@ export function HubLoggingForm({
                     {resolved?.channel && !resolved.channel.exists && (
                       <Alert className="border-red-500/30 bg-red-950/30">
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Alert01Icon}
                           className="h-4 w-4 text-red-400"
                         />
@@ -475,6 +481,7 @@ export function HubLoggingForm({
                     {resolved?.role && !resolved.role.exists && (
                       <Alert className="border-red-500/30 bg-red-950/30">
                         <HugeiconsIcon
+                          strokeWidth={2}
                           icon={Alert01Icon}
                           className="h-4 w-4 text-red-400"
                         />
@@ -487,6 +494,7 @@ export function HubLoggingForm({
 
                     <Alert className="border-amber-500/30 bg-amber-950/30">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Alert01Icon}
                         className="h-4 w-4 text-amber-400"
                       />

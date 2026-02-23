@@ -122,6 +122,7 @@ export function PageFooter({
             }}
           >
             <HugeiconsIcon
+              strokeWidth={2}
               icon={SparklesIcon}
               className="h-4 w-4 text-purple-400/70"
             />
@@ -137,6 +138,7 @@ export function PageFooter({
             }}
           >
             <HugeiconsIcon
+              strokeWidth={2}
               icon={FavouriteIcon}
               className="h-4 w-4 text-red-400/70"
             />
@@ -152,6 +154,7 @@ export function PageFooter({
             }}
           >
             <HugeiconsIcon
+              strokeWidth={2}
               icon={UserMultipleIcon}
               className="h-4 w-4 text-indigo-400/70"
             />
@@ -167,6 +170,7 @@ export function PageFooter({
             }}
           >
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Message01Icon}
               className="h-4 w-4 text-emerald-400/70"
             />

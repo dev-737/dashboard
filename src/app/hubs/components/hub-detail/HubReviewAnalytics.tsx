@@ -26,6 +26,7 @@ const HubReviewAnalytics: React.FC<HubReviewAnalyticsProps> = ({
           <div className="mb-1 flex items-center text-amber-400">
             {Array.from({ length: 5 }).map((_, i) => (
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={StarIcon}
                 key={`rating-star-${i + 1}`}
                 className={cn(
@@ -54,6 +55,7 @@ const HubReviewAnalytics: React.FC<HubReviewAnalyticsProps> = ({
                   {item.rating}
                 </span>
                 <HugeiconsIcon
+                  strokeWidth={2}
                   icon={StarIcon}
                   className="h-3 w-3 fill-amber-400 text-amber-400"
                 />

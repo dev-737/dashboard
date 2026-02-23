@@ -83,7 +83,7 @@ export function DashboardTopBar({ user }: { user: User }) {
               >
                 {item.icon && (
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={item.icon}
                     className="h-4 w-4"
                   />
@@ -102,7 +102,7 @@ export function DashboardTopBar({ user }: { user: User }) {
             className="border border-transparent text-gray-300 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
           >
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={Menu01Icon}
               className="h-6 w-6"
             />

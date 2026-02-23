@@ -36,6 +36,7 @@ export default function LeaderboardComingSoon() {
             />
             <div className="relative rounded-full border border-zinc-800 bg-zinc-900 p-6 shadow-2xl">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Award01Icon}
                 className="h-16 w-16 text-yellow-400"
               />
@@ -47,6 +48,7 @@ export default function LeaderboardComingSoon() {
               className="absolute -top-2 -right-2"
             >
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={SparklesIcon}
                 className="h-8 w-8 fill-yellow-200 text-yellow-200"
               />
@@ -75,7 +77,7 @@ export default function LeaderboardComingSoon() {
                 className="rounded-full bg-white px-8 py-6 font-medium text-black text-lg hover:bg-zinc-200"
               >
                 <HugeiconsIcon
-                  strokeWidth={3}
+                  strokeWidth={2}
                   icon={ArrowLeftIcon}
                   className="mr-2 h-5 w-5"
                 />

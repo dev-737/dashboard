@@ -37,6 +37,7 @@ export function Hero() {
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/20"
             >
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={SparklesIcon}
                 className="h-4 w-4 animate-pulse text-purple-400"
               />
@@ -90,6 +91,7 @@ export function Hero() {
                   <Link href="/invite" className="flex items-center gap-2">
                     Start Connecting
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={ArrowRightIcon}
                       className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
                     />
@@ -109,6 +111,7 @@ export function Hero() {
                   <Link href="/discover" className="flex items-center gap-2">
                     Explore Hubs
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={SparklesIcon}
                       className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12"
                     />

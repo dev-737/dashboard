@@ -115,6 +115,7 @@ export function UserNav({
           >
             <Link href={firstPage.href} className="flex w-full items-center">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={firstPage.icon ?? Home01Icon}
                 className="mr-2 h-4 w-4 text-indigo-400"
               />
@@ -134,6 +135,7 @@ export function UserNav({
               className="flex w-full items-center"
             >
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Message02Icon}
                 className="mr-2 h-4 w-4 text-blue-400"
               />
@@ -147,6 +149,7 @@ export function UserNav({
           >
             <Link href="/dashboard" className="flex w-full items-center">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Home01Icon}
                 className="mr-2 h-4 w-4 text-green-400"
               />
@@ -167,6 +170,7 @@ export function UserNav({
               className="flex w-full items-center"
             >
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={UserIcon}
                 className="mr-2 h-4 w-4 text-gray-400"
               />
@@ -180,6 +184,7 @@ export function UserNav({
           >
             <Link href="/support" className="flex w-full items-center">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={HelpCircleIcon}
                 className="mr-2 h-4 w-4 text-gray-400"
               />
@@ -195,7 +200,7 @@ export function UserNav({
           onClick={handleSignOut}
         >
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={Logout01Icon}
             className="mr-2 h-4 w-4"
           />

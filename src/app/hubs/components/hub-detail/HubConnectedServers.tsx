@@ -33,6 +33,7 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
               <div className="h-12 w-12 overflow-hidden rounded-lg border border-gray-700/50">
                 <div className="flex h-full w-full items-center justify-center bg-gray-700">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={UserMultipleIcon}
                     className="h-6 w-6 text-gray-300"
                   />
@@ -44,7 +45,7 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
                 </h4>
                 <p className="mt-1 flex items-center text-gray-400 text-xs">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Clock01Icon}
                     className="mr-1 h-3 w-3"
                   />
@@ -60,6 +61,7 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
               <div className="h-12 w-12 overflow-hidden rounded-lg border border-gray-600/50">
                 <div className="flex h-full w-full items-center justify-center bg-gray-600">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={PlusSignIcon}
                     className="h-6 w-6 text-gray-300"
                   />
@@ -79,6 +81,7 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
       ) : (
         <div className="flex flex-col items-center justify-center p-10 text-gray-400">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={UserMultipleIcon}
             className="mb-3 h-12 w-12 text-gray-500 opacity-50"
           />

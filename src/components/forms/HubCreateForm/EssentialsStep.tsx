@@ -68,7 +68,7 @@ export function EssentialsStep({
       <CardHeader className="pb-6 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-indigo-600">
           <HugeiconsIcon
-            strokeWidth={3}
+            strokeWidth={2}
             icon={SparklesIcon}
             className="h-8 w-8 text-white"
           />
@@ -100,6 +100,7 @@ export function EssentialsStep({
               {isValidatingName && (
                 <span className="flex items-center text-indigo-400">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={Loading03Icon}
                     className="mr-1 h-3 w-3 animate-spin"
                   />
@@ -110,7 +111,7 @@ export function EssentialsStep({
               {isNameValid && name.length >= 3 && !isValidatingName && (
                 <span className="flex items-center text-green-400">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={Tick01Icon}
                     className="mr-1 h-3 w-3"
                   />
@@ -201,12 +202,13 @@ export function EssentialsStep({
           >
             {isSubmitting ? (
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Loading03Icon}
                 className="mr-2 h-4 w-4 animate-spin"
               />
             ) : (
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={Tick01Icon}
                 className="mr-2 h-4 w-4"
               />
@@ -221,7 +223,7 @@ export function EssentialsStep({
           >
             Customize More
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ArrowRightIcon}
               className="ml-2 h-4 w-4"
             />

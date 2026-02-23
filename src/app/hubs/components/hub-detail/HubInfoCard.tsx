@@ -79,6 +79,7 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
                   <TooltipTrigger asChild>
                     <div className="flex h-6 w-6 cursor-help items-center justify-center rounded-full bg-linear-to-br from-purple-500 via-purple-600 to-violet-700">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Agreement01Icon}
                         className="h-4 w-4 text-white"
                       />
@@ -101,6 +102,7 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
           {/* Server Count */}
           <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={UserMultipleIcon}
               className="h-4 w-4 text-primary"
             />{' '}
@@ -109,6 +111,7 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
           </span>
           <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
             <HugeiconsIcon
+              strokeWidth={2}
               icon={Clock01Icon}
               className="h-4 w-4 text-primary"
             />
@@ -120,6 +123,7 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
           {hub.tags && hub.tags.length > 0 && (
             <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={Tag01Icon}
                 className="h-4 w-4 text-primary"
               />

@@ -134,6 +134,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                   <TooltipTrigger asChild>
                     <div className="flex h-4 w-4 shrink-0 cursor-help items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-violet-600">
                       <HugeiconsIcon
+                        strokeWidth={2}
                         icon={Agreement01Icon}
                         className="h-2.5 w-2.5 text-white"
                       />
@@ -152,6 +153,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 <TooltipTrigger asChild>
                   <div className="flex cursor-help items-center gap-1.5">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={UserMultipleIcon}
                       className="h-4 w-4 text-emerald-400"
                     />
@@ -168,6 +170,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 <TooltipTrigger asChild>
                   <div className="flex cursor-help items-center gap-1.5">
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={Message01Icon}
                       className="h-4 w-4 text-purple-400"
                     />
@@ -188,6 +191,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 <div className="flex items-center gap-0.5">
                   {[1, 2, 3, 4, 5].map((starIndex) => (
                     <HugeiconsIcon
+                      strokeWidth={2}
                       icon={StarIcon}
                       key={starIndex}
                       className={cn(
@@ -243,7 +247,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
           <Link href={`/hubs/${id}`} className="flex-1">
             <Button className="btn-primary group w-full text-base">
               <HugeiconsIcon
-                strokeWidth={3}
+                strokeWidth={2}
                 icon={EyeIcon}
                 className="mr-2 h-4 w-4"
               />

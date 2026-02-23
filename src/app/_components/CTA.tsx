@@ -33,7 +33,7 @@ export function CTA() {
         >
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-emerald-400 text-sm backdrop-blur-sm">
             <HugeiconsIcon
-              strokeWidth={3}
+              strokeWidth={2}
               icon={ZapIcon}
               className="h-4 w-4 animate-pulse"
             />
@@ -79,7 +79,7 @@ export function CTA() {
               >
                 <div className="rounded-xl bg-blue-500/10 p-3 text-blue-400 ring-1 ring-blue-500/20">
                   <HugeiconsIcon
-                    strokeWidth={3}
+                    strokeWidth={2}
                     icon={stat.icon}
                     className="h-5 w-5"
                   />
@@ -114,11 +114,13 @@ export function CTA() {
               >
                 <Link href="/hubs" className="group flex items-center">
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={SparklesIcon}
                     className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12"
                   />
                   Discover Hubs
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={ArrowRightIcon}
                     className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
                   />
@@ -139,6 +141,7 @@ export function CTA() {
                 >
                   Learn how it works
                   <HugeiconsIcon
+                    strokeWidth={2}
                     icon={ArrowRightIcon}
                     className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
                   />

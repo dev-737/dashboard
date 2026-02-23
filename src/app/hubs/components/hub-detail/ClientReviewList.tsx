@@ -58,6 +58,7 @@ export default function ClientReviewList({
     return (
       <div className="flex flex-col items-center justify-center p-6 text-gray-400">
         <HugeiconsIcon
+          strokeWidth={2}
           icon={Message02Icon}
           className="mb-3 h-8 w-8 text-red-500"
         />
@@ -78,6 +79,7 @@ export default function ClientReviewList({
       ) : (
         <div className="flex flex-col items-center justify-center p-10 text-gray-400">
           <HugeiconsIcon
+            strokeWidth={2}
             icon={Message02Icon}
             className="mb-3 h-12 w-12 text-gray-500 opacity-50"
           />

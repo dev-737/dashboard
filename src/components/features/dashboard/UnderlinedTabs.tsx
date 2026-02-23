@@ -105,6 +105,7 @@ export function UnderlinedTabs({
               aria-label="Scroll tabs left"
             >
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={ArrowLeft01Icon}
                 className="h-4 w-4 text-gray-300"
               />
@@ -118,6 +119,7 @@ export function UnderlinedTabs({
               aria-label="Scroll tabs right"
             >
               <HugeiconsIcon
+                strokeWidth={2}
                 icon={ArrowRight01Icon}
                 className="h-4 w-4 text-gray-300"
               />
