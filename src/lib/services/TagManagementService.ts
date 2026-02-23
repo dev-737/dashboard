@@ -1,3 +1,4 @@
+import { Search01Icon } from '@hugeicons/core-free-icons';
 import { db } from '@/lib/prisma';
 import { getRedisClient } from '@/lib/redis-config';
 
@@ -47,7 +48,7 @@ class TagManagementService {
   }
 
   /**
-   * Search tags for autocomplete functionality with caching
+   * Search01Icon tags for autocomplete functionality with caching
    */
   async searchTags(
     query: string,

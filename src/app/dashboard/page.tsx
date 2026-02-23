@@ -1,7 +1,13 @@
-import { MessageSquare, PlusCircle, Server } from 'lucide-react';
+import {
+  Message02Icon,
+  PlusSignCircleIcon,
+  ServerStackIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Link from 'next/link';
+
 import { redirect } from 'next/navigation';
 import {
   getServers,
@@ -84,13 +90,15 @@ export default async function DashboardPage(props: {
               value: 'servers',
               label: 'My Servers',
               color: 'blue',
-              icon: <Server className="h-4 w-4" />,
+              icon: (
+                <HugeiconsIcon icon={ServerStackIcon} className="h-4 w-4" />
+              ),
             },
             {
               value: 'hubs',
               label: 'My Hubs',
               color: 'purple',
-              icon: <MessageSquare className="h-4 w-4" />,
+              icon: <HugeiconsIcon icon={Message02Icon} className="h-4 w-4" />,
             },
           ]}
         >
@@ -113,7 +121,10 @@ export default async function DashboardPage(props: {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <PlusCircle className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    icon={PlusSignCircleIcon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Add Bot to Server
                 </Link>
               </Button>
@@ -123,7 +134,10 @@ export default async function DashboardPage(props: {
               <Card className="border-gray-800/50 bg-dash-main backdrop-blur-sm">
                 <CardHeader className="py-12 text-center">
                   <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
-                    <Server className="h-6 w-6 text-blue-400" />
+                    <HugeiconsIcon
+                      icon={ServerStackIcon}
+                      className="h-6 w-6 text-blue-400"
+                    />
                   </div>
                   <CardTitle className="mb-2 text-xl">
                     No Servers Found
@@ -144,7 +158,10 @@ export default async function DashboardPage(props: {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <PlusCircle className="mr-2 h-4 w-4" />
+                      <HugeiconsIcon
+                        icon={PlusSignCircleIcon}
+                        className="mr-2 h-4 w-4"
+                      />
                       Add Bot to Server
                     </Link>
                   </Button>
@@ -170,7 +187,10 @@ export default async function DashboardPage(props: {
                 className="border-none bg-linear-to-r from-[#6352BE]/80 to-[#6352BE]/50 text-white shadow-lg"
               >
                 <Link href="/dashboard/hubs/create">
-                  <PlusCircle className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    icon={PlusSignCircleIcon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Create Hub
                 </Link>
               </Button>

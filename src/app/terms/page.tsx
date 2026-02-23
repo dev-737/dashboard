@@ -1,17 +1,19 @@
 'use client';
 
 import {
-  AlertTriangle,
-  Ban,
-  Copyright,
-  DollarSign,
-  FileText,
-  Gavel,
-  Mail,
-  Scale,
-  Shield,
-} from 'lucide-react';
-import { Link } from '@/components/Link';
+  Alert01Icon,
+  CopyrightIcon,
+  Dollar01Icon,
+  File01Icon,
+  JusticeScale01Icon,
+  LegalHammerIcon,
+  Link01Icon,
+  MailIcon,
+  MinusSignIcon,
+  Shield01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import Link from 'next/link';
 
 export default function TermsOfService() {
   return (
@@ -26,7 +28,7 @@ export default function TermsOfService() {
         {/* Header */}
         <div className="mb-20 text-center">
           <div className="mb-6 inline-flex items-center justify-center rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm">
-            <Scale className="mr-2 h-4 w-4" />
+            <HugeiconsIcon icon={JusticeScale01Icon} className="mr-2 h-4 w-4" />
             <span className="font-medium text-sm">Terms of Service</span>
           </div>
 
@@ -161,7 +163,7 @@ export default function TermsOfService() {
             <section id="acceptable-use" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10 text-red-400">
-                  <Ban className="h-5 w-5" />
+                  <HugeiconsIcon icon={MinusSignIcon} className="h-5 w-5" />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   5. Acceptable Use
@@ -211,7 +213,7 @@ export default function TermsOfService() {
             <section id="moderation" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 text-purple-400">
-                  <Gavel className="h-5 w-5" />
+                  <HugeiconsIcon icon={LegalHammerIcon} className="h-5 w-5" />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   7. Moderation & Enforcement
@@ -230,7 +232,10 @@ export default function TermsOfService() {
             {/* Section 10 */}
             <section id="fees" className="scroll-mt-32">
               <div className="mb-4 flex items-center gap-3">
-                <DollarSign className="h-5 w-5 text-green-400" />
+                <HugeiconsIcon
+                  icon={Dollar01Icon}
+                  className="h-5 w-5 text-green-400"
+                />
                 <h2 className="font-bold text-2xl text-gray-100">
                   10. Fees & Paid Features
                 </h2>
@@ -244,7 +249,10 @@ export default function TermsOfService() {
             {/* Section 11 */}
             <section id="intellectual-property" className="scroll-mt-32">
               <div className="mb-4 flex items-center gap-3">
-                <Copyright className="h-5 w-5 text-gray-400" />
+                <HugeiconsIcon
+                  icon={CopyrightIcon}
+                  className="h-5 w-5 text-gray-400"
+                />
                 <h2 className="font-bold text-2xl text-gray-100">
                   11. Intellectual Property
                 </h2>
@@ -271,7 +279,7 @@ export default function TermsOfService() {
             <section id="disclaimers" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
-                  <AlertTriangle className="h-5 w-5" />
+                  <HugeiconsIcon icon={Alert01Icon} className="h-5 w-5" />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   13. Disclaimers & Liability
@@ -292,7 +300,10 @@ export default function TermsOfService() {
             {/* Section 19 */}
             <section id="contact" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
-                <Mail className="h-5 w-5 text-gray-400" />
+                <HugeiconsIcon
+                  icon={MailIcon}
+                  className="h-5 w-5 text-gray-400"
+                />
                 <h2 className="font-bold text-2xl text-gray-100">
                   19. Contact Us
                 </h2>
@@ -312,7 +323,7 @@ export default function TermsOfService() {
               </div>
             </section>
 
-            {/* Footer Link */}
+            {/* Footer Link01Icon */}
             <div className="border-white/10 border-t pt-8 text-center">
               <p className="text-gray-500">
                 By using InterChat, you agree to these Terms and our{' '}

@@ -1,8 +1,18 @@
 'use client';
 
-import { Home, Menu, Scale, Settings, Trophy } from 'lucide-react';
+import {
+  Award01Icon,
+  Home01Icon,
+  JusticeScale01Icon,
+  Link01Icon,
+  Menu01Icon,
+  Settings01Icon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { NotificationDropdown } from '@/components/features/dashboard/notifications/NotificationDropdown';
@@ -47,14 +57,18 @@ export function DashboardTopBar({ user }: { user: User }) {
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-1 lg:flex">
             {[
-              { name: 'Dashboard', href: '/dashboard', icon: Home },
+              { name: 'Dashboard', href: '/dashboard', icon: Home01Icon },
               {
                 name: 'My Appeals',
                 href: '/dashboard/my-appeals',
-                icon: Scale,
+                icon: JusticeScale01Icon,
               },
-              { name: 'Leaderboard', href: '/leaderboard', icon: Trophy },
-              { name: 'Settings', href: '/dashboard/settings', icon: Settings },
+              { name: 'Leaderboard', href: '/leaderboard', icon: Award01Icon },
+              {
+                name: 'Settings01Icon',
+                href: '/dashboard/settings',
+                icon: Settings01Icon,
+              },
             ].map((item) => (
               <Link
                 key={item.name}
@@ -68,7 +82,9 @@ export function DashboardTopBar({ user }: { user: User }) {
                     : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'
                 )}
               >
-                {item.icon && <item.icon className="h-4 w-4" />}
+                {item.icon && (
+                  <HugeiconsIcon icon={item.icon} className="h-4 w-4" />
+                )}
                 {item.name}
               </Link>
             ))}
@@ -82,7 +98,7 @@ export function DashboardTopBar({ user }: { user: User }) {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="border border-transparent text-gray-300 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
           >
-            <Menu className="h-6 w-6" />
+            <HugeiconsIcon icon={Menu01Icon} className="h-6 w-6" />
             <span className="sr-only">Open menu</span>
           </Button>
         </div>
@@ -102,7 +118,7 @@ export function DashboardTopBar({ user }: { user: User }) {
             <div className="rounded-(--radius-button) p-1 transition-all duration-300 hover:bg-white/5">
               <UserNav
                 user={user}
-                firstPage={{ name: 'Home', icon: Home, href: '/' }}
+                firstPage={{ name: 'Home', icon: Home01Icon, href: '/' }}
               />
             </div>
           </div>

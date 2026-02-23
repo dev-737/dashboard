@@ -1,5 +1,7 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeftIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import Link from 'next/link';
+
 import { ConnectionNavigationTabsSkeleton } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,7 +25,7 @@ export default function ConnectionLoading() {
             asChild
           >
             <Link href="/dashboard?tab=connections">
-              <ArrowLeft className="mr-1 h-4 w-4" />
+              <HugeiconsIcon icon={ArrowLeftIcon} className="mr-1 h-4 w-4" />
               Back
             </Link>
           </Button>

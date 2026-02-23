@@ -1,3 +1,9 @@
+import {
+  ActivityIcon,
+  FilterIcon,
+  Flag01Icon,
+  Search01Icon,
+} from '@hugeicons/core-free-icons';
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 import type { Prisma } from '@/lib/generated/prisma/client/client';
 import { HubVisibility } from '@/lib/generated/prisma/client/client';
@@ -53,7 +59,7 @@ export function buildWhereClause({
     { visibility: HubVisibility.PUBLIC }, // Always filter out private hubs
   ];
 
-  // Filter by tags - hub must have ALL selected tags
+  // FilterIcon by tags - hub must have ALL selected tags
   if (tags && tags.length > 0) {
     filterConditions.push({
       AND: tags.map((tag) => ({
@@ -62,14 +68,14 @@ export function buildWhereClause({
     });
   }
 
-  // Filter by content type (SFW/NSFW)
+  // FilterIcon by content type (SFW/NSFW)
   if (contentFilter !== ContentFilter.All) {
     filterConditions.push({
       nsfw: contentFilter === ContentFilter.NSFW,
     });
   }
 
-  // Filter by verification status
+  // FilterIcon by verification status
   if (verificationStatus !== VerificationStatus.All) {
     if (verificationStatus === VerificationStatus.VerifiedOrPartnered) {
       filterConditions.push({
@@ -82,17 +88,17 @@ export function buildWhereClause({
     }
   }
 
-  // Filter by language
+  // FilterIcon by language
   if (language && language !== 'all') {
     filterConditions.push({ language });
   }
 
-  // Filter by region
+  // FilterIcon by region
   if (region && region !== 'all') {
     filterConditions.push({ region });
   }
 
-  // Filter by server count range (using connection count)
+  // FilterIcon by server count range (using connection count)
   if (minServers !== undefined || maxServers !== undefined) {
     // We'll add a basic filter for connections
     // The actual count filtering will be done after the query
@@ -111,7 +117,7 @@ export function buildWhereClause({
     // We'll handle the actual min/max server filtering in the getSortedHubs function
   }
 
-  // Activity level filtering - now done at database level
+  // ActivityIcon level filtering - now done at database level
   if (activityLevels && activityLevels.length > 0) {
     // Map frontend ActivityLevel enum to database HubActivityLevel enum
     const dbActivityLevels = activityLevels.map((level) => {
@@ -132,7 +138,7 @@ export function buildWhereClause({
     });
   }
 
-  // Search terms
+  // Search01Icon terms
   if (searchTerms.length > 0) {
     searchTerms.forEach((term) => {
       filterConditions.push({
@@ -186,10 +192,10 @@ export async function getSortedHubs(
     totalCount = await db.hub.count({ where: whereClause });
   }
 
-  // Flag to indicate if we need post-query filtering for server counts
+  // Flag01Icon to indicate if we need post-query filtering for server counts
   const needsServerCountFiltering =
     minServers !== undefined || maxServers !== undefined;
-  // Activity filtering is now done at database level, no post-query filtering needed
+  // ActivityIcon filtering is now done at database level, no post-query filtering needed
 
   let hubs: SimplifiedHub[] = [];
 
@@ -305,7 +311,7 @@ export async function getSortedHubs(
       const verificationBonus =
         (hub.verified ? 5 : 0) + (hub.partnered ? 8 : 0);
 
-      // Activity requirement bonus - heavily penalize hubs with no real activity
+      // ActivityIcon requirement bonus - heavily penalize hubs with no real activity
       const totalActivityScore =
         recentConnectionsScore +
         recentReviewsScore +
@@ -497,7 +503,7 @@ export async function getSortedHubs(
       skip + HUBS_PER_PAGE
     ) as unknown as SimplifiedHub[];
   } else if (sort === SortOptions.Activity) {
-    // **Consolidated Activity Sort** - algorithm combining total activity + recent engagement
+    // **Consolidated ActivityIcon Sort** - algorithm combining total activity + recent engagement
     // For better performance with pagination, we'll use a hybrid approach
 
     // First, get total count for pagination
@@ -510,12 +516,12 @@ export async function getSortedHubs(
       });
     }
 
-    // For Activity sort, we need to score all hubs to get proper ranking
+    // For ActivityIcon sort, we need to score all hubs to get proper ranking
     // This is necessary because activity scoring can't be done at database level
     const hubsForActivityScoring = await db.hub.findMany({
       where: {
         ...whereClause,
-        // Must have at least one connection for Activity sort
+        // Must have at least one connection for ActivityIcon sort
         connections: { some: { connected: true } },
       },
       include: standardIncludes,
@@ -728,7 +734,7 @@ async function getFilteredTotalCount(
       }
     }
 
-    // Activity level filtering is now done at database level, no need for post-query filtering
+    // ActivityIcon level filtering is now done at database level, no need for post-query filtering
 
     return true;
   });

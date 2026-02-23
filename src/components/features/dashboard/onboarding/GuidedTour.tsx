@@ -1,14 +1,16 @@
 'use client';
 
 import {
-  ArrowLeft,
-  ArrowRight,
-  Eye,
-  Lightbulb,
-  MousePointer,
-  Target,
-  X,
-} from 'lucide-react';
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  BulbIcon,
+  Cancel01Icon,
+  Cursor01Icon,
+  EyeIcon,
+  Target01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -79,7 +81,7 @@ export function GuidedTour({
       );
       if (!targetElement) {
         console.warn(
-          `Target element not found: ${currentStepData.targetSelector}`
+          `Target01Icon element not found: ${currentStepData.targetSelector}`
         );
         return;
       }
@@ -259,7 +261,7 @@ export function GuidedTour({
               transition={{ delay: 0.5, duration: 0.3 }}
               className="flex items-center gap-2 rounded-full bg-purple-500 px-3 py-1 font-medium text-sm text-white"
             >
-              <MousePointer className="h-4 w-4" />
+              <HugeiconsIcon icon={Cursor01Icon} className="h-4 w-4" />
               {currentStepData.actionText || 'Click here'}
             </motion.div>
           </div>
@@ -285,7 +287,10 @@ export function GuidedTour({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="rounded-lg border border-purple-500/30 bg-purple-900/30 p-2">
-                    <Target className="h-5 w-5 text-purple-400" />
+                    <HugeiconsIcon
+                      icon={Target01Icon}
+                      className="h-5 w-5 text-purple-400"
+                    />
                   </div>
                   <div>
                     <CardTitle className="font-semibold text-lg text-white">
@@ -302,7 +307,7 @@ export function GuidedTour({
                   onClick={onSkip}
                   className="h-8 w-8 rounded-full text-gray-400 hover:bg-gray-800 hover:text-white"
                 >
-                  <X className="h-4 w-4" />
+                  <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
                 </Button>
               </div>
 
@@ -322,7 +327,10 @@ export function GuidedTour({
 
               {currentStepData.action && (
                 <div className="flex items-center gap-2 rounded-lg border border-purple-500/30 bg-purple-900/20 p-3">
-                  <Lightbulb className="h-4 w-4 shrink-0 text-purple-400" />
+                  <HugeiconsIcon
+                    icon={BulbIcon}
+                    className="h-4 w-4 shrink-0 text-purple-400"
+                  />
                   <span className="text-purple-300 text-sm">
                     {currentStepData.action === 'click'
                       ? 'Click the highlighted element to continue'
@@ -351,7 +359,10 @@ export function GuidedTour({
                     size="sm"
                     className="text-gray-400 hover:text-white disabled:opacity-50"
                   >
-                    <ArrowLeft className="mr-1 h-4 w-4" />
+                    <HugeiconsIcon
+                      icon={ArrowLeftIcon}
+                      className="mr-1 h-4 w-4"
+                    />
                     Back
                   </Button>
 
@@ -363,12 +374,18 @@ export function GuidedTour({
                     {canGoNext ? (
                       <>
                         Next
-                        <ArrowRight className="ml-1 h-4 w-4" />
+                        <HugeiconsIcon
+                          icon={ArrowRightIcon}
+                          className="ml-1 h-4 w-4"
+                        />
                       </>
                     ) : (
                       <>
                         Finish
-                        <Eye className="ml-1 h-4 w-4" />
+                        <HugeiconsIcon
+                          icon={EyeIcon}
+                          className="ml-1 h-4 w-4"
+                        />
                       </>
                     )}
                   </Button>

@@ -1,5 +1,10 @@
+import {
+  Clock01Icon,
+  PlusSignIcon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { formatDistanceToNow } from 'date-fns';
-import { Clock, Plus, Users } from 'lucide-react';
 import type React from 'react';
 
 interface HubConnectedServersProps {
@@ -27,7 +32,10 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
             >
               <div className="h-12 w-12 overflow-hidden rounded-lg border border-gray-700/50">
                 <div className="flex h-full w-full items-center justify-center bg-gray-700">
-                  <Users className="h-6 w-6 text-gray-300" />
+                  <HugeiconsIcon
+                    icon={UserMultipleIcon}
+                    className="h-6 w-6 text-gray-300"
+                  />
                 </div>
               </div>
               <div className="min-w-0 flex-1">
@@ -35,7 +43,7 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
                   {conn.server?.name || 'Discord Server'}
                 </h4>
                 <p className="mt-1 flex items-center text-gray-400 text-xs">
-                  <Clock className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon icon={Clock01Icon} className="mr-1 h-3 w-3" />
                   {formatDistanceToNow(new Date(conn.lastActive), {
                     addSuffix: true,
                   })}
@@ -47,7 +55,10 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
             <div className="flex items-center gap-4 rounded-lg border border-gray-700/50 bg-gray-700/20 p-4 transition-colors duration-200 hover:bg-gray-700/30">
               <div className="h-12 w-12 overflow-hidden rounded-lg border border-gray-600/50">
                 <div className="flex h-full w-full items-center justify-center bg-gray-600">
-                  <Plus className="h-6 w-6 text-gray-300" />
+                  <HugeiconsIcon
+                    icon={PlusSignIcon}
+                    className="h-6 w-6 text-gray-300"
+                  />
                 </div>
               </div>
               <div className="min-w-0 flex-1">
@@ -63,7 +74,10 @@ const HubConnectedServers: React.FC<HubConnectedServersProps> = ({
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center p-10 text-gray-400">
-          <Users className="mb-3 h-12 w-12 text-gray-500 opacity-50" />
+          <HugeiconsIcon
+            icon={UserMultipleIcon}
+            className="mb-3 h-12 w-12 text-gray-500 opacity-50"
+          />
           <p className="text-center text-gray-400">No servers connected yet</p>
           <p className="mt-1 text-center text-gray-500 text-sm">
             Be the first to connect your Discord server!

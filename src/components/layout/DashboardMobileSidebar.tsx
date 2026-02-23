@@ -1,19 +1,23 @@
 'use client';
 
 import {
-  Bell,
-  HelpCircle,
-  Home,
-  LogOut,
-  Scale,
-  Settings,
-  Trophy,
-  User as UserIcon,
-  X,
-} from 'lucide-react';
+  Award01Icon,
+  Cancel01Icon,
+  HelpCircleIcon,
+  Home01Icon,
+  JusticeScale01Icon,
+  Link01Icon,
+  Logout01Icon,
+  Notification03Icon,
+  Settings01Icon,
+  UserIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { AnimatePresence, motion, type Variants } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -72,7 +76,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
   const navigationItems = [
     {
       href: '/dashboard',
-      icon: Home,
+      icon: Home01Icon,
       label: 'Dashboard',
       gradient: 'from-blue-500/20 to-indigo-500/20',
       activeBorder: 'border-blue-500/30',
@@ -80,7 +84,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
     },
     {
       href: '/dashboard/my-appeals',
-      icon: Scale,
+      icon: JusticeScale01Icon,
       label: 'My Appeals',
       gradient: 'from-purple-500/20 to-pink-500/20',
       activeBorder: 'border-purple-500/30',
@@ -88,7 +92,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
     },
     {
       href: '/leaderboard',
-      icon: Trophy,
+      icon: Award01Icon,
       label: 'Leaderboard',
       gradient: 'from-yellow-500/20 to-orange-500/20',
       activeBorder: 'border-yellow-500/30',
@@ -96,8 +100,8 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
     },
     {
       href: '/dashboard/settings',
-      icon: Settings,
-      label: 'Settings',
+      icon: Settings01Icon,
+      label: 'Settings01Icon',
       gradient: 'from-gray-500/20 to-slate-500/20',
       activeBorder: 'border-gray-500/30',
       iconColor: 'text-gray-400',
@@ -186,7 +190,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                 onClick={onClose}
                 className="relative z-10 h-8 w-8 rounded-full text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
               >
-                <X className="h-5 w-5" />
+                <HugeiconsIcon icon={Cancel01Icon} className="h-5 w-5" />
               </Button>
             </div>
 
@@ -249,7 +253,10 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                                     item.iconColor.replace('text-', 'text-')
                               )}
                             >
-                              <item.icon className="h-5 w-5 transform transition-transform duration-300 group-hover:scale-110" />
+                              <HugeiconsIcon
+                                icon={item.icon}
+                                className="h-5 w-5 transform transition-transform duration-300 group-hover:scale-110"
+                              />
                             </div>
 
                             {/* Label */}
@@ -281,7 +288,10 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                     <div className="group relative flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] p-3 transition-all hover:bg-white/[0.04]">
                       <div className="flex items-center gap-3">
                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
-                          <Bell className="h-4 w-4" />
+                          <HugeiconsIcon
+                            icon={Notification03Icon}
+                            className="h-4 w-4"
+                          />
                         </div>
                         <span className="font-medium text-gray-300 text-sm">
                           Inbox
@@ -296,7 +306,10 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                     <div className="group relative flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] p-3 transition-all hover:bg-white/[0.04]">
                       <div className="flex items-center gap-3">
                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-500/10 text-green-400">
-                          <HelpCircle className="h-4 w-4" />
+                          <HugeiconsIcon
+                            icon={HelpCircleIcon}
+                            className="h-4 w-4"
+                          />
                         </div>
                         <span className="font-medium text-gray-300 text-sm">
                           Support
@@ -341,7 +354,7 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                   onClick={onClose}
                   className="w-full border-white/10 bg-white/5 text-gray-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
                 >
-                  <UserIcon className="mr-2 h-3.5 w-3.5" />
+                  <HugeiconsIcon icon={UserIcon} className="mr-2 h-3.5 w-3.5" />
                   Profile
                 </Button>
                 <Button
@@ -354,7 +367,10 @@ export function MobileSidebar({ isOpen, onClose, user }: MobileSidebarProps) {
                   }}
                   className="w-full border-red-500/10 bg-red-500/5 text-red-400 hover:border-red-500/20 hover:bg-red-500/10"
                 >
-                  <LogOut className="mr-2 h-3.5 w-3.5" />
+                  <HugeiconsIcon
+                    icon={Logout01Icon}
+                    className="mr-2 h-3.5 w-3.5"
+                  />
                   Sign out
                 </Button>
               </div>

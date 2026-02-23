@@ -1,20 +1,22 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
-  AlertTriangle,
-  Ban,
-  Bell,
-  CheckCircle2,
-  Clock,
-  Edit2,
-  EyeOff,
-  MessageSquareX,
-  MoreVertical,
-  Shield,
-  Trash2,
-  UserX,
-} from 'lucide-react';
+  Alert01Icon,
+  Alert02Icon,
+  CheckmarkCircle02Icon,
+  Clock01Icon,
+  Delete02Icon,
+  Edit02Icon,
+  LegalHammerIcon,
+  MoreVerticalIcon,
+  Notification03Icon,
+  Shield01Icon,
+  UserRemoveIcon,
+  ViewOffIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import {
@@ -58,19 +60,19 @@ interface RulesListProps {
 const ActionIcon = ({ action }: { action: BlockWordAction }) => {
   switch (action) {
     case BlockWordAction.BLOCK_MESSAGE:
-      return <MessageSquareX className="h-3 w-3" />;
+      return <HugeiconsIcon icon={Alert02Icon} className="h-3 w-3" />;
     case BlockWordAction.WARN:
-      return <AlertTriangle className="h-3 w-3" />;
+      return <HugeiconsIcon icon={Alert01Icon} className="h-3 w-3" />;
     case BlockWordAction.MUTE:
-      return <Clock className="h-3 w-3" />;
+      return <HugeiconsIcon icon={Clock01Icon} className="h-3 w-3" />;
     case BlockWordAction.BAN:
-      return <Ban className="h-3 w-3" />;
+      return <HugeiconsIcon icon={LegalHammerIcon} className="h-3 w-3" />;
     case BlockWordAction.SEND_ALERT:
-      return <Bell className="h-3 w-3" />;
+      return <HugeiconsIcon icon={Notification03Icon} className="h-3 w-3" />;
     case BlockWordAction.BLACKLIST:
-      return <UserX className="h-3 w-3" />;
+      return <HugeiconsIcon icon={UserRemoveIcon} className="h-3 w-3" />;
     default:
-      return <Shield className="h-3 w-3" />;
+      return <HugeiconsIcon icon={Shield01Icon} className="h-3 w-3" />;
   }
 };
 
@@ -158,7 +160,10 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
     return (
       <Card className="border-red-800/30 bg-red-950/10">
         <CardContent className="p-6 text-center">
-          <AlertTriangle className="mx-auto mb-4 h-8 w-8 text-red-400" />
+          <HugeiconsIcon
+            icon={Alert01Icon}
+            className="mx-auto mb-4 h-8 w-8 text-red-400"
+          />
           <p className="text-red-400">Failed to load rules</p>
           <p className="mt-2 text-gray-400 text-sm">{error.message}</p>
         </CardContent>
@@ -170,9 +175,12 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
     return (
       <Card className="border border-gray-800/50 bg-gray-950/50">
         <CardContent className="p-8 text-center">
-          <Shield className="mx-auto mb-4 h-12 w-12 text-gray-500" />
+          <HugeiconsIcon
+            icon={Shield01Icon}
+            className="mx-auto mb-4 h-12 w-12 text-gray-500"
+          />
           <h3 className="mb-2 font-medium text-gray-300 text-lg">
-            No Filter Rules
+            No FilterIcon Rules
           </h3>
           <p className="mb-6 text-gray-400">
             Create your first content filter rule to start protecting your hub
@@ -203,7 +211,8 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="flex items-center space-x-2">
-                  <Shield
+                  <HugeiconsIcon
+                    icon={Shield01Icon}
                     className={`h-5 w-5 ${rule.enabled ? 'text-green-400' : 'text-gray-500'}`}
                   />
                   <CardTitle
@@ -218,7 +227,10 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
                       variant="outline"
                       className="border-green-500/30 text-green-400"
                     >
-                      <CheckCircle2 className="mr-1 h-3 w-3" />
+                      <HugeiconsIcon
+                        icon={CheckmarkCircle02Icon}
+                        className="mr-1 h-3 w-3"
+                      />
                       Active
                     </Badge>
                   ) : (
@@ -226,7 +238,10 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
                       variant="outline"
                       className="border-gray-500/30 text-gray-400"
                     >
-                      <EyeOff className="mr-1 h-3 w-3" />
+                      <HugeiconsIcon
+                        icon={ViewOffIcon}
+                        className="mr-1 h-3 w-3"
+                      />
                       Disabled
                     </Badge>
                   )}
@@ -255,7 +270,10 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                      <MoreVertical className="h-4 w-4" />
+                      <HugeiconsIcon
+                        icon={MoreVerticalIcon}
+                        className="h-4 w-4"
+                      />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent
@@ -266,7 +284,10 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
                       onClick={() => setEditingRule(rule)}
                       disabled={!canEdit}
                     >
-                      <Edit2 className="mr-2 h-4 w-4" />
+                      <HugeiconsIcon
+                        icon={Edit02Icon}
+                        className="mr-2 h-4 w-4"
+                      />
                       Edit Rule
                     </DropdownMenuItem>
                     <DropdownMenuSeparator className="bg-gray-800" />
@@ -275,7 +296,10 @@ export function RulesList({ hubId, canEdit }: RulesListProps) {
                       disabled={!canEdit}
                       className="text-red-400 focus:text-red-300"
                     >
-                      <Trash2 className="mr-2 h-4 w-4" />
+                      <HugeiconsIcon
+                        icon={Delete02Icon}
+                        className="mr-2 h-4 w-4"
+                      />
                       Delete Rule
                     </DropdownMenuItem>
                   </DropdownMenuContent>

@@ -1,6 +1,12 @@
 'use client';
 
-import { ArrowLeft, ArrowRight, Upload } from 'lucide-react';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  Upload01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -63,15 +69,15 @@ export function MediaUploadStep({
     <>
       <CardHeader className="pb-6 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-pink-500 to-rose-600">
-          <Upload className="h-8 w-8 text-white" />
+          <HugeiconsIcon icon={Upload01Icon} className="h-8 w-8 text-white" />
         </div>
         <CardTitle className="text-2xl">Add Hub Media</CardTitle>
         <CardDescription className="text-base">
-          Upload an icon and banner to make your hub stand out (optional)
+          Upload01Icon an icon and banner to make your hub stand out (optional)
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        {/* Icon Upload */}
+        {/* Icon Upload01Icon */}
         <div className="space-y-3">
           <Label className="font-medium text-base">Hub Icon</Label>
           <div className="flex items-center gap-4">
@@ -86,7 +92,7 @@ export function MediaUploadStep({
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-gray-500">
-                  <Upload className="h-6 w-6" />
+                  <HugeiconsIcon icon={Upload01Icon} className="h-6 w-6" />
                 </div>
               )}
             </div>
@@ -104,7 +110,7 @@ export function MediaUploadStep({
           </div>
         </div>
 
-        {/* Banner Upload */}
+        {/* Banner Upload01Icon */}
         <div className="space-y-3">
           <Label className="font-medium text-base">Hub Banner</Label>
           <div className="space-y-2">
@@ -119,7 +125,7 @@ export function MediaUploadStep({
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-gray-500">
-                  <Upload className="h-8 w-8" />
+                  <HugeiconsIcon icon={Upload01Icon} className="h-8 w-8" />
                 </div>
               )}
             </div>
@@ -143,7 +149,7 @@ export function MediaUploadStep({
             onClick={onPrev}
             className="border-gray-700/50"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
             Back
           </Button>
           <Button
@@ -152,7 +158,7 @@ export function MediaUploadStep({
             className="btn-primary border-none px-8 py-3"
           >
             Continue
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <HugeiconsIcon icon={ArrowRightIcon} className="ml-2 h-4 w-4" />
           </Button>
         </div>
       </CardContent>

@@ -1,12 +1,21 @@
 'use client';
 
-import { Calendar, Info, Search, Shield, Star, Users } from 'lucide-react';
+import {
+  Calendar01Icon,
+  InformationCircleIcon,
+  Search01Icon,
+  Shield01Icon,
+  StarIcon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function HubDetailLoading() {
   return (
     <div className="flex min-h-screen flex-col bg-gray-950 text-gray-200">
-      {/* Header with Search Bar */}
+      {/* Header with Search01Icon Bar */}
       <header className="sticky top-0 z-40 w-full border-gray-800 border-b bg-gray-950/80 backdrop-blur-lg">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
@@ -15,11 +24,12 @@ export default function HubDetailLoading() {
               <Skeleton className="h-5 w-32" />
             </div>
 
-            {/* Search Bar */}
+            {/* Search01Icon Bar */}
             <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                  <Search
+                  <HugeiconsIcon
+                    icon={Search01Icon}
                     className="h-5 w-5 text-gray-400"
                     aria-hidden="true"
                   />
@@ -46,7 +56,7 @@ export default function HubDetailLoading() {
                 {/* Hub Icon */}
                 <Skeleton className="h-28 w-28 shrink-0 rounded-2xl md:h-36 md:w-36" />
 
-                {/* Hub Info */}
+                {/* Hub InformationCircleIcon */}
                 <div className="min-w-0 flex-1">
                   <Skeleton className="mb-4 h-10 w-3/4" />
                   <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -94,7 +104,10 @@ export default function HubDetailLoading() {
               <div className="rounded-xl border border-gray-800 bg-gray-900/70 p-6 shadow-lg backdrop-blur-md md:p-8">
                 <div className="mb-6 flex items-center">
                   <div className="mr-3 rounded-lg border border-primary/30 bg-primary/10 p-2">
-                    <Users className="h-5 w-5 text-primary" />
+                    <HugeiconsIcon
+                      icon={UserMultipleIcon}
+                      className="h-5 w-5 text-primary"
+                    />
                   </div>
                   <Skeleton className="h-8 w-48" />
                 </div>
@@ -125,7 +138,8 @@ export default function HubDetailLoading() {
                               {Array(5)
                                 .fill(0)
                                 .map(() => (
-                                  <Star
+                                  <HugeiconsIcon
+                                    icon={StarIcon}
                                     key={`star-${crypto.randomUUID()}`}
                                     className="h-4 w-4 text-yellow-500"
                                   />
@@ -146,14 +160,20 @@ export default function HubDetailLoading() {
               {/* Hub Details Card */}
               <div className="rounded-xl border border-gray-800 bg-gray-900/70 p-6 shadow-lg backdrop-blur-md">
                 <div className="mb-5 flex items-center">
-                  <Info className="mr-2 h-5 w-5 text-primary" />
+                  <HugeiconsIcon
+                    icon={InformationCircleIcon}
+                    className="mr-2 h-5 w-5 text-primary"
+                  />
                   <Skeleton className="h-6 w-32" />
                 </div>
                 <div className="space-y-3">
                   {/* Created Date */}
                   <div className="flex items-center justify-between rounded-md border border-gray-700/50 bg-black/20 p-3">
                     <div className="flex items-center text-gray-400 text-sm">
-                      <Calendar className="mr-2 h-4 w-4 text-primary/80" />
+                      <HugeiconsIcon
+                        icon={Calendar01Icon}
+                        className="mr-2 h-4 w-4 text-primary/80"
+                      />
                       <Skeleton className="h-4 w-16" />
                     </div>
                     <Skeleton className="h-4 w-24" />
@@ -161,7 +181,10 @@ export default function HubDetailLoading() {
                   {/* Connected Servers */}
                   <div className="flex items-center justify-between rounded-md border border-gray-700/50 bg-black/20 p-3">
                     <div className="flex items-center text-gray-400 text-sm">
-                      <Users className="mr-2 h-4 w-4 text-primary/80" />
+                      <HugeiconsIcon
+                        icon={UserMultipleIcon}
+                        className="mr-2 h-4 w-4 text-primary/80"
+                      />
                       <Skeleton className="h-4 w-32" />
                     </div>
                     <Skeleton className="h-4 w-8" />
@@ -172,7 +195,10 @@ export default function HubDetailLoading() {
               {/* Moderators Card */}
               <div className="rounded-xl border border-gray-800 bg-gray-900/70 p-6 shadow-lg backdrop-blur-md">
                 <div className="mb-5 flex items-center">
-                  <Shield className="mr-2 h-5 w-5 text-primary" />
+                  <HugeiconsIcon
+                    icon={Shield01Icon}
+                    className="mr-2 h-5 w-5 text-primary"
+                  />
                   <Skeleton className="h-6 w-24" />
                 </div>
                 <div className="space-y-3">

@@ -1,21 +1,24 @@
 'use client';
 
+import {
+  Alert01Icon,
+  ArrowLeftIcon,
+  Calendar01Icon,
+  Cancel01Icon,
+  EyeIcon,
+  MinusSignIcon,
+  PencilEditIcon,
+  ServerStackIcon,
+  Shield01Icon,
+  UserIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
-import {
-  AlertTriangle,
-  ArrowLeft,
-  Ban,
-  Calendar,
-  Edit,
-  Eye,
-  Server,
-  Shield,
-  User,
-  XCircle,
-} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { useEffect, useId, useState } from 'react';
 import { toast } from 'sonner';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -161,31 +164,31 @@ export function ViewInfractionClient({
       case 'BLACKLIST':
         return {
           label: 'Blacklist',
-          icon: Ban,
+          icon: MinusSignIcon,
           color: 'bg-red-500/20 text-red-400 border-red-500/50',
         };
       case 'WARNING':
         return {
           label: 'Warning',
-          icon: AlertTriangle,
+          icon: Alert01Icon,
           color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50',
         };
       case 'BAN':
         return {
           label: 'Ban',
-          icon: Shield,
+          icon: Shield01Icon,
           color: 'bg-red-500/20 text-red-400 border-red-500/50',
         };
       case 'MUTE':
         return {
           label: 'Mute',
-          icon: XCircle,
+          icon: Cancel01Icon,
           color: 'bg-gray-500/20 text-gray-400 border-gray-500/50',
         };
       default:
         return {
           label: type,
-          icon: Shield,
+          icon: Shield01Icon,
           color: 'bg-gray-500/20 text-gray-400 border-gray-500/50',
         };
     }
@@ -253,7 +256,7 @@ export function ViewInfractionClient({
             className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50"
           >
             <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-              <ArrowLeft className="h-4 w-4" />
+              <HugeiconsIcon icon={ArrowLeftIcon} className="h-4 w-4" />
             </Link>
           </Button>
           <div>
@@ -265,7 +268,7 @@ export function ViewInfractionClient({
         </div>
 
         <Alert className="border-red-500/50 bg-red-950/20">
-          <AlertTriangle className="h-4 w-4" />
+          <HugeiconsIcon icon={Alert01Icon} className="h-4 w-4" />
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
@@ -298,7 +301,7 @@ export function ViewInfractionClient({
           className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50"
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-            <ArrowLeft className="h-4 w-4" />
+            <HugeiconsIcon icon={ArrowLeftIcon} className="h-4 w-4" />
           </Link>
         </Button>
         <div>
@@ -315,20 +318,20 @@ export function ViewInfractionClient({
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Main Infraction Details */}
         <div className="space-y-6 lg:col-span-2">
-          {/* Target Information */}
+          {/* Target01Icon Information */}
           <Card className="premium-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <div
                   className={`rounded-(--radius-button) p-2 ${typeInfo.color}`}
                 >
-                  <TypeIcon className="h-5 w-5" />
+                  <HugeiconsIcon icon={typeInfo.icon} className="h-5 w-5" />
                 </div>
                 {typeInfo.label} Details
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Target Info */}
+              {/* Target01Icon InformationCircleIcon */}
               <div className="flex items-center gap-4 rounded-(--radius) border border-gray-700/50 bg-gray-900/50 p-4">
                 {isUserInfraction ? (
                   <>
@@ -349,14 +352,17 @@ export function ViewInfractionClient({
                       variant="outline"
                       className="ml-auto border-blue-500/50 bg-blue-500/20 text-blue-400"
                     >
-                      <User className="mr-1 h-3 w-3" />
+                      <HugeiconsIcon icon={UserIcon} className="mr-1 h-3 w-3" />
                       User
                     </Badge>
                   </>
                 ) : (
                   <>
                     <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-gray-700 bg-linear-to-br from-green-500/20 to-blue-500/20">
-                      <Server className="h-6 w-6 text-green-400" />
+                      <HugeiconsIcon
+                        icon={ServerStackIcon}
+                        className="h-6 w-6 text-green-400"
+                      />
                     </div>
                     <div>
                       <div className="font-medium text-white">{targetName}</div>
@@ -368,7 +374,10 @@ export function ViewInfractionClient({
                       variant="outline"
                       className="ml-auto border-green-500/50 bg-green-500/20 text-green-400"
                     >
-                      <Server className="mr-1 h-3 w-3" />
+                      <HugeiconsIcon
+                        icon={ServerStackIcon}
+                        className="mr-1 h-3 w-3"
+                      />
                       Server
                     </Badge>
                   </>
@@ -396,7 +405,10 @@ export function ViewInfractionClient({
                     variant="outline"
                     className={`w-fit ${typeInfo.color}`}
                   >
-                    <TypeIcon className="mr-1 h-3 w-3" />
+                    <HugeiconsIcon
+                      icon={typeInfo.icon}
+                      className="mr-1 h-3 w-3"
+                    />
                     {typeInfo.label}
                   </Badge>
                 </div>
@@ -422,7 +434,10 @@ export function ViewInfractionClient({
               <CardTitle className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="rounded-(--radius-button) bg-purple-500/20 p-2">
-                    <Calendar className="h-5 w-5 text-purple-400" />
+                    <HugeiconsIcon
+                      icon={Calendar01Icon}
+                      className="h-5 w-5 text-purple-400"
+                    />
                   </div>
                   Duration
                 </div>
@@ -433,7 +448,10 @@ export function ViewInfractionClient({
                     onClick={() => setIsEditDurationOpen(true)}
                     className="border-purple-500/50 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20"
                   >
-                    <Edit className="mr-1 h-3 w-3" />
+                    <HugeiconsIcon
+                      icon={PencilEditIcon}
+                      className="mr-1 h-3 w-3"
+                    />
                     Edit Duration
                   </Button>
                 )}
@@ -485,7 +503,10 @@ export function ViewInfractionClient({
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <div className="rounded-(--radius-button) bg-indigo-500/20 p-2">
-                  <Shield className="h-5 w-5 text-indigo-400" />
+                  <HugeiconsIcon
+                    icon={Shield01Icon}
+                    className="h-5 w-5 text-indigo-400"
+                  />
                 </div>
                 Issued By
               </CardTitle>
@@ -515,7 +536,10 @@ export function ViewInfractionClient({
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <div className="rounded-(--radius-button) bg-blue-500/20 p-2">
-                    <Eye className="h-5 w-5 text-blue-400" />
+                    <HugeiconsIcon
+                      icon={EyeIcon}
+                      className="h-5 w-5 text-blue-400"
+                    />
                   </div>
                   Appeals
                 </CardTitle>
@@ -542,7 +566,10 @@ export function ViewInfractionClient({
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <div className="rounded-(--radius-button) bg-emerald-500/20 p-2">
-                  <Server className="h-5 w-5 text-emerald-400" />
+                  <HugeiconsIcon
+                    icon={ServerStackIcon}
+                    className="h-5 w-5 text-emerald-400"
+                  />
                 </div>
                 Hub
               </CardTitle>
@@ -581,7 +608,10 @@ export function ViewInfractionClient({
                 asChild
               >
                 <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    icon={ArrowLeftIcon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Back to Infractions
                 </Link>
               </Button>
@@ -595,7 +625,7 @@ export function ViewInfractionClient({
                   <Link
                     href={`/dashboard/hubs/${hubId}/infractions?userId=${infraction.userId}`}
                   >
-                    <User className="mr-2 h-4 w-4" />
+                    <HugeiconsIcon icon={UserIcon} className="mr-2 h-4 w-4" />
                     View User Infractions
                   </Link>
                 </Button>

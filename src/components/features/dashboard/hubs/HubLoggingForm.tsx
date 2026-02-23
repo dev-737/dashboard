@@ -1,18 +1,20 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
-  AlertTriangle,
-  Bell,
-  Check,
-  ChevronDown,
-  Flag,
-  Loader2,
-  Lock,
-  MessageSquare,
-  Shield,
-  Users,
-} from 'lucide-react';
+  Alert01Icon,
+  ArrowDown01Icon,
+  Flag01Icon,
+  Loading03Icon,
+  LockIcon,
+  Message02Icon,
+  Notification03Icon,
+  Shield01Icon,
+  Tick01Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { DiscordChannelSelector } from '@/components/discord/DiscordChannelSelector';
@@ -56,42 +58,42 @@ const LOG_TYPES = [
     key: 'modLogs',
     title: 'Moderation',
     description: 'Track bans, warnings, and other moderation actions',
-    icon: Shield,
+    icon: Shield01Icon,
     color: 'indigo',
   },
   {
     key: 'joinLeaves',
     title: 'Join/Leave',
     description: 'Monitor servers joining or leaving your hub',
-    icon: Users,
+    icon: UserMultipleIcon,
     color: 'emerald',
   },
   {
     key: 'appeals',
     title: 'Appeals',
     description: 'Receive blacklist appeal requests',
-    icon: MessageSquare,
+    icon: Message02Icon,
     color: 'blue',
   },
   {
     key: 'reports',
     title: 'Reports',
     description: 'Get notified when content is reported',
-    icon: Flag,
+    icon: Flag01Icon,
     color: 'red',
   },
   {
     key: 'networkAlerts',
     title: 'Network Alerts',
     description: 'Important system notifications and alerts',
-    icon: Bell,
+    icon: Notification03Icon,
     color: 'amber',
   },
   {
     key: 'messageModeration',
     title: 'Message',
     description: 'Log message deletions, edits, and moderation',
-    icon: MessageSquare,
+    icon: Message02Icon,
     color: 'purple',
   },
 ];
@@ -335,7 +337,10 @@ export function HubLoggingForm({
       {/* Loading state during resolution */}
       {isResolvingConfigs && (
         <div className="flex items-center justify-center gap-2 py-8">
-          <Loader2 className="h-5 w-5 animate-spin text-indigo-400" />
+          <HugeiconsIcon
+            icon={Loading03Icon}
+            className="h-5 w-5 animate-spin text-indigo-400"
+          />
           <p className="text-gray-400">Loading configurations...</p>
         </div>
       )}
@@ -357,7 +362,10 @@ export function HubLoggingForm({
                       <div
                         className={`rounded-lg p-2 ${colorClasses.bg} ${colorClasses.border} border`}
                       >
-                        <Icon className={`h-5 w-5 ${colorClasses.text}`} />
+                        <HugeiconsIcon
+                          icon={Icon}
+                          className={`h-5 w-5 ${colorClasses.text}`}
+                        />
                       </div>
                       <div className="flex-1 text-left">
                         <div className="font-semibold text-lg text-white">
@@ -368,17 +376,26 @@ export function HubLoggingForm({
                         </p>
                       </div>
                       {resolved && !resolved.userHasAccess && (
-                        <Lock className="h-4 w-4 text-amber-400" />
+                        <HugeiconsIcon
+                          icon={LockIcon}
+                          className="h-4 w-4 text-amber-400"
+                        />
                       )}
                       {isConfigured(key) && (
                         <div className="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/20 px-3 py-1">
-                          <Check className="h-3 w-3 text-emerald-400" />
+                          <HugeiconsIcon
+                            icon={Tick01Icon}
+                            className="h-3 w-3 text-emerald-400"
+                          />
                           <span className="font-medium text-emerald-400 text-xs">
                             Configured
                           </span>
                         </div>
                       )}
-                      <ChevronDown className="h-5 w-5 text-gray-400 transition-transform duration-200 data-[state=open]:rotate-180" />
+                      <HugeiconsIcon
+                        icon={ArrowDown01Icon}
+                        className="h-5 w-5 text-gray-400 transition-transform duration-200 data-[state=open]:rotate-180"
+                      />
                     </div>
                   </CardHeader>
                 </CollapsibleTrigger>
@@ -443,7 +460,10 @@ export function HubLoggingForm({
                     {/* Warning if channel no longer exists */}
                     {resolved?.channel && !resolved.channel.exists && (
                       <Alert className="border-red-500/30 bg-red-950/30">
-                        <AlertTriangle className="h-4 w-4 text-red-400" />
+                        <HugeiconsIcon
+                          icon={Alert01Icon}
+                          className="h-4 w-4 text-red-400"
+                        />
                         <AlertDescription className="text-red-200 text-sm">
                           This channel no longer exists. Please update the
                           configuration.
@@ -454,7 +474,10 @@ export function HubLoggingForm({
                     {/* Warning if role no longer exists */}
                     {resolved?.role && !resolved.role.exists && (
                       <Alert className="border-red-500/30 bg-red-950/30">
-                        <AlertTriangle className="h-4 w-4 text-red-400" />
+                        <HugeiconsIcon
+                          icon={Alert01Icon}
+                          className="h-4 w-4 text-red-400"
+                        />
                         <AlertDescription className="text-red-200 text-sm">
                           This role no longer exists. Please update the
                           configuration.
@@ -463,7 +486,10 @@ export function HubLoggingForm({
                     )}
 
                     <Alert className="border-amber-500/30 bg-amber-950/30">
-                      <AlertTriangle className="h-4 w-4 text-amber-400" />
+                      <HugeiconsIcon
+                        icon={Alert01Icon}
+                        className="h-4 w-4 text-amber-400"
+                      />
                       <AlertDescription className="text-amber-200 text-sm">
                         Make sure the InterChat bot has permission to send
                         messages and mention roles in the selected channel.

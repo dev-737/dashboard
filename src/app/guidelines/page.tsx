@@ -1,22 +1,25 @@
 'use client';
 
 import {
-  AlertTriangle,
-  BadgeAlert,
-  Ban,
-  Gavel,
-  MessageSquareWarning,
-  Scale,
-  Shield,
-  ShieldAlert,
-} from 'lucide-react';
+  Alert01Icon,
+  Alert02Icon,
+  JusticeScale01Icon,
+  LegalHammerIcon,
+  Shield01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 
 const InterChatRules = () => {
   const rules = [
     {
       id: 1,
       title: 'Hate Speech & Harassment',
-      icon: <Scale className="h-6 w-6 text-rose-400" />,
+      icon: (
+        <HugeiconsIcon
+          icon={JusticeScale01Icon}
+          className="h-6 w-6 text-rose-400"
+        />
+      ),
       description:
         'We have zero tolerance for hate speech and targeted harassment.',
       notAllowed: [
@@ -30,7 +33,12 @@ const InterChatRules = () => {
     {
       id: 2,
       title: 'Illegal Content',
-      icon: <Gavel className="h-6 w-6 text-amber-400" />,
+      icon: (
+        <HugeiconsIcon
+          icon={LegalHammerIcon}
+          className="h-6 w-6 text-amber-400"
+        />
+      ),
       description:
         'Do not use InterChat to promote or facilitate illegal acts.',
       notAllowed: [
@@ -44,7 +52,12 @@ const InterChatRules = () => {
     {
       id: 3,
       title: 'Severe NSFW & Gore',
-      icon: <Ban className="h-6 w-6 text-rose-400" />,
+      icon: (
+        <HugeiconsIcon
+          icon={LegalHammerIcon}
+          className="h-6 w-6 text-rose-400"
+        />
+      ),
       description:
         'Keep sensitive content in designated areas and label it properly.',
       notAllowed: [
@@ -58,7 +71,9 @@ const InterChatRules = () => {
     {
       id: 4,
       title: 'Severe Spam & Raiding',
-      icon: <MessageSquareWarning className="h-6 w-6 text-orange-400" />,
+      icon: (
+        <HugeiconsIcon icon={Alert02Icon} className="h-6 w-6 text-orange-400" />
+      ),
       description: 'Respect other communities and keep conversations organic.',
       notAllowed: [
         'Mass spamming or bot floods',
@@ -70,7 +85,9 @@ const InterChatRules = () => {
     {
       id: 5,
       title: 'Impersonation & Fraud',
-      icon: <BadgeAlert className="h-6 w-6 text-red-400" />,
+      icon: (
+        <HugeiconsIcon icon={Alert01Icon} className="h-6 w-6 text-red-400" />
+      ),
       description: 'Be yourself. Do not deceive others for personal gain.',
       notAllowed: [
         'Impersonating InterChat staff or hub moderators',
@@ -84,7 +101,9 @@ const InterChatRules = () => {
     {
       id: 6,
       title: 'Exploitation & Abuse',
-      icon: <ShieldAlert className="h-6 w-6 text-rose-400" />,
+      icon: (
+        <HugeiconsIcon icon={Alert02Icon} className="h-6 w-6 text-rose-400" />
+      ),
       description: 'Protecting the vulnerable is our top priority.',
       notAllowed: [
         'Grooming or predatory behavior towards minors',
@@ -98,7 +117,9 @@ const InterChatRules = () => {
     {
       id: 7,
       title: 'Malicious Software',
-      icon: <Shield className="h-6 w-6 text-amber-400" />,
+      icon: (
+        <HugeiconsIcon icon={Shield01Icon} className="h-6 w-6 text-amber-400" />
+      ),
       description: 'Do not distribute harmful software or tools.',
       notAllowed: [
         'Sharing malware, viruses, or harmful scripts',
@@ -123,7 +144,7 @@ const InterChatRules = () => {
         {/* Header */}
         <div className="mb-20 text-center">
           <div className="mb-6 inline-flex items-center justify-center rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm">
-            <ShieldAlert className="mr-2 h-4 w-4" />
+            <HugeiconsIcon icon={Alert02Icon} className="mr-2 h-4 w-4" />
             <span className="font-medium text-sm">Community Standards</span>
           </div>
 
@@ -164,7 +185,8 @@ const InterChatRules = () => {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <p className="flex items-center gap-2 font-semibold text-rose-400 text-xs uppercase tracking-wider">
-                    <Ban className="h-3 w-3" /> Prohibited
+                    <HugeiconsIcon icon={Alert01Icon} className="h-3 w-3" />{' '}
+                    Prohibited
                   </p>
                   <ul className="space-y-2">
                     {rule.notAllowed.map((item, i) => (
@@ -181,7 +203,10 @@ const InterChatRules = () => {
 
                 <div className="mt-4 border-white/5 border-t pt-4">
                   <p className="flex gap-2 rounded-lg border border-amber-500/10 bg-amber-500/5 p-3 text-amber-400/90 text-xs leading-relaxed">
-                    <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                    <HugeiconsIcon
+                      icon={Alert01Icon}
+                      className="mt-0.5 h-3.5 w-3.5 shrink-0"
+                    />
                     {rule.warning}
                   </p>
                 </div>
@@ -197,7 +222,10 @@ const InterChatRules = () => {
           <div className="relative z-10 grid items-center gap-12 lg:grid-cols-2">
             <div>
               <div className="mb-6 inline-flex items-center justify-center rounded-full bg-purple-500/10 p-3 ring-1 ring-purple-500/20">
-                <Gavel className="h-6 w-6 text-purple-400" />
+                <HugeiconsIcon
+                  icon={LegalHammerIcon}
+                  className="h-6 w-6 text-purple-400"
+                />
               </div>
               <h2 className="mb-4 font-bold text-3xl text-white">
                 Enforcement Process
@@ -239,7 +267,10 @@ const InterChatRules = () => {
 
             <div className="rounded-2xl border border-white/5 bg-black/20 p-6 md:p-8">
               <h3 className="mb-4 flex items-center gap-2 font-semibold text-gray-200 text-lg">
-                <MessageSquareWarning className="h-5 w-5 text-purple-400" />
+                <HugeiconsIcon
+                  icon={Alert02Icon}
+                  className="h-5 w-5 text-purple-400"
+                />
                 Hub Autonomy
               </h3>
               <p className="mb-6 text-gray-400 leading-relaxed">
@@ -259,7 +290,7 @@ const InterChatRules = () => {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 rounded-lg bg-purple-600 px-6 py-3 font-medium text-sm text-white transition-all hover:bg-purple-500 hover:shadow-lg hover:shadow-purple-500/20"
                 >
-                  <Shield className="h-4 w-4" />
+                  <HugeiconsIcon icon={Shield01Icon} className="h-4 w-4" />
                   Report Violation
                 </a>
                 <a

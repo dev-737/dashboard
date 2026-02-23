@@ -1,6 +1,8 @@
 'use client';
 
+import { Home01Icon } from '@hugeicons/core-free-icons';
 import Link from 'next/link';
+
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 

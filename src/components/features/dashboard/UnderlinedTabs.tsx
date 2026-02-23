@@ -1,7 +1,14 @@
 'use client';
 
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  ArrowLeft01Icon,
+  ArrowRight01Icon,
+  Link01Icon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import Link from 'next/link';
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -101,7 +108,10 @@ export function UnderlinedTabs({
               className="absolute top-1/2 left-2 z-20 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg border border-gray-600/50 bg-gray-800/80 transition-all duration-200 hover:bg-gray-700/80 sm:flex"
               aria-label="Scroll tabs left"
             >
-              <ChevronLeft className="h-4 w-4 text-gray-300" />
+              <HugeiconsIcon
+                icon={ArrowLeft01Icon}
+                className="h-4 w-4 text-gray-300"
+              />
             </Button>
           )}
 
@@ -111,7 +121,10 @@ export function UnderlinedTabs({
               className="absolute top-1/2 right-2 z-20 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg border border-gray-600/50 bg-gray-800/80 transition-all duration-200 hover:bg-gray-700/80 sm:flex"
               aria-label="Scroll tabs right"
             >
-              <ChevronRight className="h-4 w-4 text-gray-300" />
+              <HugeiconsIcon
+                icon={ArrowRight01Icon}
+                className="h-4 w-4 text-gray-300"
+              />
             </Button>
           )}
 
@@ -181,7 +194,7 @@ export function UnderlinedTabs({
                   </TabsTrigger>
                 );
 
-                // Wrap with Link if navigational
+                // Wrap with Link01Icon if navigational
                 return navigational && tab.href ? (
                   <Link key={tab.value} href={tab.href} className="flex">
                     {TabTrigger}

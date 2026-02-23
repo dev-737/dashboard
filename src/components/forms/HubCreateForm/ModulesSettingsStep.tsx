@@ -1,6 +1,12 @@
 'use client';
 
-import { ArrowLeft, ArrowRight, Settings } from 'lucide-react';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  Settings01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { Button } from '@/components/ui/button';
 import {
   CardContent,
@@ -43,7 +49,7 @@ export function ModulesSettingsStep({
     <>
       <CardHeader className="pb-6 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-orange-500 to-amber-600">
-          <Settings className="h-8 w-8 text-white" />
+          <HugeiconsIcon icon={Settings01Icon} className="h-8 w-8 text-white" />
         </div>
         <CardTitle className="text-2xl">Configure Hub Modules</CardTitle>
         <CardDescription className="text-base">
@@ -96,7 +102,7 @@ export function ModulesSettingsStep({
             onClick={onPrev}
             className="border-gray-700/50"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
             Back
           </Button>
           <Button
@@ -113,7 +119,7 @@ export function ModulesSettingsStep({
             className="btn-primary border-none px-8 py-3"
           >
             Continue
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <HugeiconsIcon icon={ArrowRightIcon} className="ml-2 h-4 w-4" />
           </Button>
         </div>
       </CardContent>

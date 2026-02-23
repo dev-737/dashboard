@@ -1,7 +1,15 @@
-import { ArrowLeft, Globe, Shield, Sparkles, Zap } from 'lucide-react';
+import {
+  ArrowLeftIcon,
+  GlobeIcon,
+  Shield01Icon,
+  SparklesIcon,
+  ZapIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Link from 'next/link';
+
 import { redirect } from 'next/navigation';
 import { HubCreateForm } from '@/components/forms/HubCreateForm';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
@@ -34,7 +42,7 @@ export default async function CreateHubPage() {
             asChild
           >
             <Link href="/dashboard">
-              <ArrowLeft className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
               Back to Hubs
             </Link>
           </Button>
@@ -51,15 +59,18 @@ export default async function CreateHubPage() {
         {/* Feature Highlights */}
         <div className="hidden items-center gap-6 text-gray-400 text-sm lg:flex">
           <div className="flex items-center gap-2">
-            <Zap className="h-4 w-4 text-yellow-400" />
+            <HugeiconsIcon icon={ZapIcon} className="h-4 w-4 text-yellow-400" />
             <span>Instant Setup</span>
           </div>
           <div className="flex items-center gap-2">
-            <Shield className="h-4 w-4 text-green-400" />
+            <HugeiconsIcon
+              icon={Shield01Icon}
+              className="h-4 w-4 text-green-400"
+            />
             <span>Full Control</span>
           </div>
           <div className="flex items-center gap-2">
-            <Globe className="h-4 w-4 text-blue-400" />
+            <HugeiconsIcon icon={GlobeIcon} className="h-4 w-4 text-blue-400" />
             <span>Global Reach</span>
           </div>
         </div>
@@ -68,7 +79,7 @@ export default async function CreateHubPage() {
       {/* Hero Section */}
       <div className="py-8 text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-2 text-indigo-300 text-sm">
-          <Sparkles className="h-4 w-4" />
+          <HugeiconsIcon icon={SparklesIcon} className="h-4 w-4" />
           <span>Create Your Community Hub</span>
         </div>
         <h2 className="mb-4 font-bold text-3xl text-white">

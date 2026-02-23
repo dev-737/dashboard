@@ -1,6 +1,14 @@
 'use client';
 
-import { Plus, Search, Sparkles, Tag, X } from 'lucide-react';
+import {
+  Cancel01Icon,
+  PlusSignIcon,
+  Search01Icon,
+  SparklesIcon,
+  Tag01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { AnimatePresence, motion } from 'motion/react';
 import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
@@ -26,7 +34,7 @@ interface TagSelectorProps {
 export function TagSelector({
   selectedTags,
   onTagsChange,
-  placeholder = 'Search for tags...',
+  placeholder = 'Search01Icon for tags...',
   maxTags = 5,
   showPopular = true,
   allowTagCreation = true, // Default to true for backward compatibility
@@ -156,7 +164,7 @@ export function TagSelector({
                   variant="secondary"
                   className="group border-blue-600/30 bg-blue-600/20 pr-1 text-blue-300 transition-colors hover:bg-blue-600/30"
                 >
-                  <Tag className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon icon={Tag01Icon} className="mr-1 h-3 w-3" />
                   {tag}
                   <Button
                     variant="ghost"
@@ -164,7 +172,7 @@ export function TagSelector({
                     onClick={() => removeTag(tag)}
                     className="ml-1 h-auto p-0 text-blue-300 hover:text-white group-hover:text-white"
                   >
-                    <X className="h-3 w-3" />
+                    <HugeiconsIcon icon={Cancel01Icon} className="h-3 w-3" />
                   </Button>
                 </Badge>
               </motion.div>
@@ -173,10 +181,13 @@ export function TagSelector({
         </div>
       )}
 
-      {/* Search Input */}
+      {/* Search01Icon Input */}
       <div className="relative">
         <div className="relative">
-          <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
+          <HugeiconsIcon
+            icon={Search01Icon}
+            className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400"
+          />
           <Input
             ref={inputRef}
             type="text"
@@ -205,7 +216,7 @@ export function TagSelector({
               }}
               className="absolute top-1/2 right-2 h-auto -translate-y-1/2 transform p-1 text-gray-400 hover:text-white"
             >
-              <X className="h-4 w-4" />
+              <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
             </Button>
           )}
         </div>
@@ -237,7 +248,10 @@ export function TagSelector({
                         }`}
                       >
                         <div className="flex items-center gap-2">
-                          <Plus className="h-4 w-4 text-green-400" />
+                          <HugeiconsIcon
+                            icon={PlusSignIcon}
+                            className="h-4 w-4 text-green-400"
+                          />
                           <span className="text-white">Create tag: </span>
                           <Badge
                             variant="outline"
@@ -249,7 +263,7 @@ export function TagSelector({
                       </Button>
                     )}
 
-                  {/* Search results or popular tags */}
+                  {/* Search01Icon results or popular tags */}
                   <div className="max-h-48 overflow-y-auto">
                     {isSearching || isLoadingPopular ? (
                       <div className="p-4 text-center text-gray-400">
@@ -261,7 +275,10 @@ export function TagSelector({
                         {!searchQuery && showPopular && (
                           <div className="border-gray-700 border-b px-4 py-2">
                             <div className="flex items-center gap-2 text-gray-400 text-sm">
-                              <Sparkles className="h-4 w-4" />
+                              <HugeiconsIcon
+                                icon={SparklesIcon}
+                                className="h-4 w-4"
+                              />
                               Popular Tags
                             </div>
                           </div>
@@ -276,7 +293,10 @@ export function TagSelector({
                           >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
-                                <Tag className="h-4 w-4 text-gray-400" />
+                                <HugeiconsIcon
+                                  icon={Tag01Icon}
+                                  className="h-4 w-4 text-gray-400"
+                                />
                                 <span className="text-white">{tag.name}</span>
                                 {'category' in tag && tag.category && (
                                   <Badge

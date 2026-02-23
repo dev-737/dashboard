@@ -1,15 +1,23 @@
 'use client';
 
-import { LayoutDashboard, Plus, Search, Shield } from 'lucide-react';
+import {
+  DashboardSquare01Icon,
+  PlusSignIcon,
+  Search01Icon,
+  Shield01Icon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+
 import { cn } from '@/lib/utils';
 
 const actions = [
   {
     title: 'Dashboard',
     description: 'Manage your hubs and connections',
-    icon: LayoutDashboard,
+    icon: DashboardSquare01Icon,
     href: '/dashboard',
     gradient: 'from-blue-500/10 to-indigo-500/10',
     border: 'group-hover:border-blue-500/30',
@@ -19,7 +27,7 @@ const actions = [
   {
     title: 'Discover Hubs',
     description: 'Find communities to connect with',
-    icon: Search,
+    icon: Search01Icon,
     href: '/discover',
     gradient: 'from-emerald-500/10 to-teal-500/10',
     border: 'group-hover:border-emerald-500/30',
@@ -29,7 +37,7 @@ const actions = [
   {
     title: 'Create Hub',
     description: 'Start your own community network',
-    icon: Plus,
+    icon: PlusSignIcon,
     href: '/dashboard/hubs/create',
     gradient: 'from-purple-500/10 to-pink-500/10',
     border: 'group-hover:border-purple-500/30',
@@ -39,7 +47,7 @@ const actions = [
   {
     title: 'Moderation Tools',
     description: 'Keep your communities safe',
-    icon: Shield,
+    icon: Shield01Icon,
     href: 'https://docs.interchat.dev/hub-management/moderation',
     gradient: 'from-orange-500/10 to-red-500/10',
     border: 'group-hover:border-orange-500/30',
@@ -95,7 +103,7 @@ export function ActionGrid() {
                         action.iconColor
                       )}
                     >
-                      <action.icon className="h-8 w-8" />
+                      <HugeiconsIcon icon={action.icon} className="h-8 w-8" />
                     </div>
                     <h3 className="mb-3 font-bold text-white text-xl">
                       {action.title}

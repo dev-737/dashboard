@@ -1,4 +1,5 @@
-import { AlertCircle } from 'lucide-react';
+import { AlertCircleIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
@@ -95,7 +96,10 @@ export default async function HubModulesPage({ params }: HubModulesPageProps) {
             <HubModulesForm hubId={hubId} initialModules={hub.settings || 0} />
           ) : (
             <div className="flex items-center justify-center p-6">
-              <AlertCircle className="mr-2 h-5 w-5 text-amber-500" />
+              <HugeiconsIcon
+                icon={AlertCircleIcon}
+                className="mr-2 h-5 w-5 text-amber-500"
+              />
               <p className="text-gray-400">
                 You don&apos;t have permission to edit this hub.
               </p>

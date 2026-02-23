@@ -1,6 +1,16 @@
 'use client';
 
-import { AlertCircle, Loader2, RefreshCw, Upload, User, X } from 'lucide-react';
+import {
+  AlertCircleIcon,
+  Cancel01Icon,
+  InformationCircleIcon,
+  Loading03Icon,
+  RefreshIcon,
+  Upload01Icon,
+  UserIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import Image from 'next/image';
 import type React from 'react';
 import { useCallback, useRef, useState } from 'react';
@@ -71,14 +81,14 @@ export function HubIconUploadModal({
       setIsUploading(false);
     },
     onUploadError: (error) => {
-      console.error('Upload error:', error);
+      console.error('Upload01Icon error:', error);
 
       // Revert optimistic update on error
       if (onIconUpdate && currentIconUrl) {
         onIconUpdate(currentIconUrl);
       }
 
-      toast.error('Upload Failed', {
+      toast.error('Upload01Icon Failed', {
         description: error.message || 'Failed to upload icon',
       });
       setIsUploading(false);
@@ -149,7 +159,7 @@ export function HubIconUploadModal({
     }
   };
 
-  // Upload icon using UploadThing
+  // Upload01Icon icon using UploadThing
   const handleUploadIcon = async () => {
     if (!selectedFile) return;
 
@@ -171,7 +181,7 @@ export function HubIconUploadModal({
         onIconUpdate(currentIconUrl);
       }
 
-      toast.error('Upload Failed', {
+      toast.error('Upload01Icon Failed', {
         description:
           error instanceof Error ? error.message : 'Failed to start upload',
       });
@@ -218,8 +228,8 @@ export function HubIconUploadModal({
         <DialogHeader>
           <DialogTitle className="text-white">Update Hub Icon</DialogTitle>
           <DialogDescription className="text-gray-400">
-            Upload a new icon for {hubName || 'your hub'}. Recommended size:
-            512x512px or larger.
+            Upload01Icon a new icon for {hubName || 'your hub'}. Recommended
+            size: 512x512px or larger.
           </DialogDescription>
         </DialogHeader>
 
@@ -238,7 +248,10 @@ export function HubIconUploadModal({
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">
-                    <User className="h-8 w-8 text-gray-500" />
+                    <HugeiconsIcon
+                      icon={UserIcon}
+                      className="h-8 w-8 text-gray-500"
+                    />
                   </div>
                 )}
               </div>
@@ -250,13 +263,13 @@ export function HubIconUploadModal({
                   onClick={handleRemoveIcon}
                   disabled={isUploading}
                 >
-                  <X className="h-3 w-3" />
+                  <HugeiconsIcon icon={Cancel01Icon} className="h-3 w-3" />
                 </Button>
               )}
             </div>
           </div>
 
-          {/* Upload Area */}
+          {/* Upload01Icon Area */}
           <section
             aria-label="Icon drop area"
             className={cn(
@@ -279,12 +292,15 @@ export function HubIconUploadModal({
 
             <div className="space-y-3">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-700/50">
-                <Upload className="h-6 w-6 text-gray-400" />
+                <HugeiconsIcon
+                  icon={Upload01Icon}
+                  className="h-6 w-6 text-gray-400"
+                />
               </div>
 
               <div>
                 <p className="mb-1 font-medium text-sm text-white">
-                  {isDragging ? 'Drop your image here' : 'Upload Icon'}
+                  {isDragging ? 'Drop your image here' : 'Upload01Icon Icon'}
                 </p>
                 <p className="mb-3 text-gray-400 text-xs">
                   Drag and drop or click to browse
@@ -302,12 +318,15 @@ export function HubIconUploadModal({
             </div>
           </section>
 
-          {/* File Info */}
+          {/* File InformationCircleIcon */}
           {selectedFile && (
             <div className="rounded-lg bg-gray-800/50 p-3">
               <div className="flex items-center gap-3">
                 <div className="flex h-8 w-8 items-center justify-center rounded bg-indigo-500/20">
-                  <Upload className="h-4 w-4 text-indigo-400" />
+                  <HugeiconsIcon
+                    icon={Upload01Icon}
+                    className="h-4 w-4 text-indigo-400"
+                  />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium text-sm text-white">
@@ -324,7 +343,7 @@ export function HubIconUploadModal({
           {/* Error State */}
           {!selectedFile && !previewUrl && (
             <div className="flex items-center gap-2 text-amber-400 text-sm">
-              <AlertCircle className="h-4 w-4" />
+              <HugeiconsIcon icon={AlertCircleIcon} className="h-4 w-4" />
               <span>No icon selected</span>
             </div>
           )}
@@ -347,7 +366,7 @@ export function HubIconUploadModal({
               disabled={isUploading}
               className="text-gray-400 hover:bg-gray-800 hover:text-white"
             >
-              <RefreshCw className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={RefreshIcon} className="mr-2 h-4 w-4" />
               Reset
             </Button>
           )}
@@ -359,13 +378,16 @@ export function HubIconUploadModal({
           >
             {isUploading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="mr-2 h-4 w-4 animate-spin"
+                />
                 Uploading...
               </>
             ) : (
               <>
-                <Upload className="mr-2 h-4 w-4" />
-                Upload Icon
+                <HugeiconsIcon icon={Upload01Icon} className="mr-2 h-4 w-4" />
+                Upload01Icon Icon
               </>
             )}
           </Button>

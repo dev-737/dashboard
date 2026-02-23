@@ -1,6 +1,12 @@
 'use client';
 
-import { AlertTriangle, Save, Shield } from 'lucide-react';
+import {
+  Alert01Icon,
+  FloppyDiskIcon,
+  Shield01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useId, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -54,7 +60,10 @@ export function HubNSFWToggle({ hubId, currentNsfw }: HubNSFWToggleProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <Shield className="h-5 w-5 text-orange-400" />
+        <HugeiconsIcon
+          icon={Shield01Icon}
+          className="h-5 w-5 text-orange-400"
+        />
         <div>
           <Label
             htmlFor="nsfw-toggle"
@@ -108,7 +117,7 @@ export function HubNSFWToggle({ hubId, currentNsfw }: HubNSFWToggleProps) {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <Save className="h-4 w-4" />
+                  <HugeiconsIcon icon={FloppyDiskIcon} className="h-4 w-4" />
                   Save Changes
                 </div>
               )}
@@ -120,7 +129,10 @@ export function HubNSFWToggle({ hubId, currentNsfw }: HubNSFWToggleProps) {
       {/* Warning message for NSFW content */}
       {isNsfw && (
         <div className="flex items-start gap-3 rounded-lg border border-orange-500/20 bg-orange-500/10 p-4">
-          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-orange-400" />
+          <HugeiconsIcon
+            icon={Alert01Icon}
+            className="mt-0.5 h-5 w-5 shrink-0 text-orange-400"
+          />
           <div className="space-y-2 text-orange-200 text-sm">
             <p>
               <strong>Important NSFW Guidelines:</strong>

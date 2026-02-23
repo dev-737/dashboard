@@ -1,16 +1,21 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import {
-  AlertTriangle,
-  ArrowLeft,
-  Calendar,
-  Save,
-  Server,
-  Shield,
-  User,
-} from 'lucide-react';
+  Alert01Icon,
+  ArrowLeftIcon,
+  Calendar01Icon,
+  Copy01Icon,
+  FloppyDiskIcon,
+  ServerStackIcon,
+  Shield01Icon,
+  Target01Icon,
+  UserIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
+import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
+
 import { useRouter } from 'next/navigation';
 import { useId, useState } from 'react';
 import { toast } from 'sonner';
@@ -124,7 +129,7 @@ export function AddInfractionClient({
           className="text-gray-400 hover:text-white"
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions`}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
             Back to Infractions
           </Link>
         </Button>
@@ -142,7 +147,7 @@ export function AddInfractionClient({
         variant="default"
         className="border-blue-500/30 bg-linear-to-r from-blue-950/40 to-indigo-950/40 backdrop-blur-sm"
       >
-        <Shield className="h-5 w-5 text-blue-400" />
+        <HugeiconsIcon icon={Shield01Icon} className="h-5 w-5 text-blue-400" />
         <AlertTitle className="font-semibold text-blue-300">
           Infraction Guidelines
         </AlertTitle>
@@ -158,14 +163,17 @@ export function AddInfractionClient({
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Main Form */}
           <div className="space-y-6 lg:col-span-2">
-            {/* Target Type Selection */}
+            {/* Target01Icon Type Selection */}
             <Card className="premium-card">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2">
                   <div className="rounded-(--radius-button) bg-purple-500/20 p-2">
-                    <Shield className="h-4 w-4 text-purple-400" />
+                    <HugeiconsIcon
+                      icon={Shield01Icon}
+                      className="h-4 w-4 text-purple-400"
+                    />
                   </div>
-                  Target Selection
+                  Target01Icon Selection
                 </CardTitle>
                 <CardDescription>
                   Choose what type of entity to create an infraction for
@@ -183,14 +191,17 @@ export function AddInfractionClient({
                       value="user"
                       className="rounded-(--radius) data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white"
                     >
-                      <User className="mr-2 h-4 w-4" />
+                      <HugeiconsIcon icon={UserIcon} className="mr-2 h-4 w-4" />
                       User
                     </TabsTrigger>
                     <TabsTrigger
                       value="server"
                       className="rounded-(--radius) data-[state=active]:bg-linear-to-r data-[state=active]:from-red-500 data-[state=active]:to-orange-500 data-[state=active]:text-white"
                     >
-                      <Server className="mr-2 h-4 w-4" />
+                      <HugeiconsIcon
+                        icon={ServerStackIcon}
+                        className="mr-2 h-4 w-4"
+                      />
                       Server
                     </TabsTrigger>
                   </TabsList>
@@ -206,8 +217,9 @@ export function AddInfractionClient({
                         className="border-gray-700/50 bg-gray-900/50 focus:border-blue-500/50"
                       />
                       <p className="text-gray-400 text-xs">
-                        Right-click on a user in Discord and select &quot;Copy
-                        User ID&quot; (Developer Mode must be enabled)
+                        Right-click on a user in Discord and select
+                        &quot;Copy01Icon User ID&quot; (Developer Mode must be
+                        enabled)
                       </p>
                     </div>
                   </TabsContent>
@@ -236,8 +248,9 @@ export function AddInfractionClient({
                       </div>
                     </div>
                     <p className="text-gray-400 text-xs">
-                      Right-click on a server in Discord and select &quot;Copy
-                      Server ID&quot; (Developer Mode must be enabled)
+                      Right-click on a server in Discord and select
+                      &quot;Copy01Icon Server ID&quot; (Developer Mode must be
+                      enabled)
                     </p>
                   </TabsContent>
                 </Tabs>
@@ -249,7 +262,10 @@ export function AddInfractionClient({
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2">
                   <div className="rounded-(--radius-button) bg-red-500/20 p-2">
-                    <AlertTriangle className="h-4 w-4 text-red-400" />
+                    <HugeiconsIcon
+                      icon={Alert01Icon}
+                      className="h-4 w-4 text-red-400"
+                    />
                   </div>
                   Infraction Details
                 </CardTitle>
@@ -380,7 +396,10 @@ export function AddInfractionClient({
                   </>
                 ) : (
                   <>
-                    <Save className="mr-2 h-4 w-4" />
+                    <HugeiconsIcon
+                      icon={FloppyDiskIcon}
+                      className="mr-2 h-4 w-4"
+                    />
                     Create{' '}
                     {infractionType === 'BLACKLIST' ? 'Blacklist' : 'Warning'}
                   </>
@@ -393,7 +412,10 @@ export function AddInfractionClient({
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <div className="rounded-(--radius-button) bg-amber-500/20 p-2">
-                    <AlertTriangle className="h-4 w-4 text-amber-400" />
+                    <HugeiconsIcon
+                      icon={Alert01Icon}
+                      className="h-4 w-4 text-amber-400"
+                    />
                   </div>
                   Moderation Guidelines
                 </CardTitle>
@@ -402,7 +424,10 @@ export function AddInfractionClient({
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 rounded-(--radius) bg-red-500/20 p-1.5">
-                      <Shield className="h-3.5 w-3.5 text-red-400" />
+                      <HugeiconsIcon
+                        icon={Shield01Icon}
+                        className="h-3.5 w-3.5 text-red-400"
+                      />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-200 text-sm">
@@ -417,7 +442,10 @@ export function AddInfractionClient({
 
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 rounded-(--radius) bg-amber-500/20 p-1.5">
-                      <AlertTriangle className="h-3.5 w-3.5 text-amber-400" />
+                      <HugeiconsIcon
+                        icon={Alert01Icon}
+                        className="h-3.5 w-3.5 text-amber-400"
+                      />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-200 text-sm">
@@ -432,7 +460,10 @@ export function AddInfractionClient({
 
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 rounded-(--radius) bg-blue-500/20 p-1.5">
-                      <Calendar className="h-3.5 w-3.5 text-blue-400" />
+                      <HugeiconsIcon
+                        icon={Calendar01Icon}
+                        className="h-3.5 w-3.5 text-blue-400"
+                      />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-200 text-sm">
@@ -450,7 +481,10 @@ export function AddInfractionClient({
                   variant="default"
                   className="border-red-500/30 bg-linear-to-r from-red-950/40 to-orange-950/40"
                 >
-                  <AlertTriangle className="h-4 w-4 text-red-400" />
+                  <HugeiconsIcon
+                    icon={Alert01Icon}
+                    className="h-4 w-4 text-red-400"
+                  />
                   <AlertTitle className="text-red-300 text-sm">
                     Important
                   </AlertTitle>

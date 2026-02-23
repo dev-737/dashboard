@@ -1,9 +1,15 @@
+import {
+  Calendar01Icon,
+  Clock01Icon,
+  Notification03Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { format, formatDistanceToNow } from 'date-fns';
-import { Bell, Calendar, Clock } from 'lucide-react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { redirect } from 'next/navigation';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
 import { Button } from '@/components/ui/button';
@@ -84,7 +90,10 @@ export default async function AnnouncementsPage() {
       {announcements.length === 0 ? (
         <Card className="border-gray-800 bg-dash-main backdrop-blur-sm">
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <Bell className="mb-4 h-12 w-12 text-gray-500" />
+            <HugeiconsIcon
+              icon={Notification03Icon}
+              className="mb-4 h-12 w-12 text-gray-500"
+            />
             <h3 className="mb-2 font-medium text-gray-300 text-xl">
               No Announcements
             </h3>
@@ -116,11 +125,17 @@ export default async function AnnouncementsPage() {
                 </div>
                 <div className="mt-2 flex items-center gap-4 text-gray-400 text-sm">
                   <div className="flex items-center">
-                    <Calendar className="mr-1 h-4 w-4" />
+                    <HugeiconsIcon
+                      icon={Calendar01Icon}
+                      className="mr-1 h-4 w-4"
+                    />
                     {format(new Date(announcement.createdAt), 'MMM d, yyyy')}
                   </div>
                   <div className="flex items-center">
-                    <Clock className="mr-1 h-4 w-4" />
+                    <HugeiconsIcon
+                      icon={Clock01Icon}
+                      className="mr-1 h-4 w-4"
+                    />
                     {formatDistanceToNow(new Date(announcement.createdAt), {
                       addSuffix: true,
                     })}

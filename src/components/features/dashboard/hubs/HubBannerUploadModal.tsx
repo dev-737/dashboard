@@ -1,12 +1,15 @@
 'use client';
 
 import {
-  Image as ImageIcon,
-  Loader2,
-  RefreshCw,
-  Upload,
-  X,
-} from 'lucide-react';
+  Cancel01Icon,
+  Image01Icon,
+  InformationCircleIcon,
+  Loading03Icon,
+  RefreshIcon,
+  Upload01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import Image from 'next/image';
 import type React from 'react';
 import { useCallback, useRef, useState } from 'react';
@@ -77,14 +80,14 @@ export function HubBannerUploadModal({
       setIsUploading(false);
     },
     onUploadError: (error) => {
-      console.error('Upload error:', error);
+      console.error('Upload01Icon error:', error);
 
       // Revert optimistic update on error
       if (onBannerUpdate && currentBannerUrl) {
         onBannerUpdate(currentBannerUrl);
       }
 
-      toast.error('Upload Failed', {
+      toast.error('Upload01Icon Failed', {
         description: error.message || 'Failed to upload banner',
       });
       setIsUploading(false);
@@ -155,7 +158,7 @@ export function HubBannerUploadModal({
     }
   };
 
-  // Upload banner using UploadThing
+  // Upload01Icon banner using UploadThing
   const handleUploadBanner = async () => {
     if (!selectedFile) return;
 
@@ -177,7 +180,7 @@ export function HubBannerUploadModal({
         onBannerUpdate(currentBannerUrl);
       }
 
-      toast.error('Upload Failed', {
+      toast.error('Upload01Icon Failed', {
         description:
           error instanceof Error ? error.message : 'Failed to start upload',
       });
@@ -224,8 +227,8 @@ export function HubBannerUploadModal({
         <DialogHeader>
           <DialogTitle className="text-white">Update Hub Banner</DialogTitle>
           <DialogDescription className="text-gray-400">
-            Upload a new banner for {hubName || 'your hub'}. Recommended size:
-            1920x1080px or similar aspect ratio.
+            Upload01Icon a new banner for {hubName || 'your hub'}. Recommended
+            size: 1920x1080px or similar aspect ratio.
           </DialogDescription>
         </DialogHeader>
 
@@ -244,7 +247,10 @@ export function HubBannerUploadModal({
               ) : (
                 <div className="flex h-full w-full items-center justify-center">
                   <div className="text-center">
-                    <ImageIcon className="mx-auto mb-2 h-12 w-12 text-gray-500" />
+                    <HugeiconsIcon
+                      icon={Image01Icon}
+                      className="mx-auto mb-2 h-12 w-12 text-gray-500"
+                    />
                     <p className="text-gray-500 text-sm">No banner set</p>
                   </div>
                 </div>
@@ -258,12 +264,12 @@ export function HubBannerUploadModal({
                 onClick={handleRemoveBanner}
                 disabled={isUploading}
               >
-                <X className="h-4 w-4" />
+                <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
               </Button>
             )}
           </div>
 
-          {/* Upload Area */}
+          {/* Upload01Icon Area */}
           <section
             aria-label="File drop area"
             className={cn(
@@ -286,12 +292,15 @@ export function HubBannerUploadModal({
 
             <div className="space-y-3">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-700/50">
-                <Upload className="h-6 w-6 text-gray-400" />
+                <HugeiconsIcon
+                  icon={Upload01Icon}
+                  className="h-6 w-6 text-gray-400"
+                />
               </div>
 
               <div>
                 <p className="mb-1 font-medium text-sm text-white">
-                  {isDragging ? 'Drop your image here' : 'Upload Banner'}
+                  {isDragging ? 'Drop your image here' : 'Upload01Icon Banner'}
                 </p>
                 <p className="mb-3 text-gray-400 text-xs">
                   Drag and drop or click to browse
@@ -309,12 +318,15 @@ export function HubBannerUploadModal({
             </div>
           </section>
 
-          {/* File Info */}
+          {/* File InformationCircleIcon */}
           {selectedFile && (
             <div className="rounded-lg bg-gray-800/50 p-3">
               <div className="flex items-center gap-3">
                 <div className="flex h-8 w-8 items-center justify-center rounded bg-indigo-500/20">
-                  <Upload className="h-4 w-4 text-indigo-400" />
+                  <HugeiconsIcon
+                    icon={Upload01Icon}
+                    className="h-4 w-4 text-indigo-400"
+                  />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium text-sm text-white">
@@ -346,7 +358,7 @@ export function HubBannerUploadModal({
               disabled={isUploading}
               className="text-gray-400 hover:bg-gray-800 hover:text-white"
             >
-              <RefreshCw className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={RefreshIcon} className="mr-2 h-4 w-4" />
               Reset
             </Button>
           )}
@@ -358,13 +370,16 @@ export function HubBannerUploadModal({
           >
             {isUploading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="mr-2 h-4 w-4 animate-spin"
+                />
                 Uploading...
               </>
             ) : (
               <>
-                <Upload className="mr-2 h-4 w-4" />
-                Upload Banner
+                <HugeiconsIcon icon={Upload01Icon} className="mr-2 h-4 w-4" />
+                Upload01Icon Banner
               </>
             )}
           </Button>

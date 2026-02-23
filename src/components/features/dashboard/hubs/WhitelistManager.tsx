@@ -1,14 +1,16 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
-  CheckCircle2,
-  Plus,
-  Search,
-  Shield,
-  Trash2,
-  Users,
-} from 'lucide-react';
+  CheckmarkCircle02Icon,
+  Delete02Icon,
+  PlusSignIcon,
+  Search01Icon,
+  Shield01Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import {
@@ -165,7 +167,10 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
     return (
       <Card className="border border-gray-800/50 bg-gray-950/50">
         <CardContent className="p-8 text-center">
-          <Shield className="mx-auto mb-4 h-12 w-12 text-gray-500" />
+          <HugeiconsIcon
+            icon={Shield01Icon}
+            className="mx-auto mb-4 h-12 w-12 text-gray-500"
+          />
           <h3 className="mb-2 font-medium text-gray-300 text-lg">
             No Rules Found
           </h3>
@@ -185,7 +190,10 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-green-500/30 bg-linear-to-br from-green-500/20 to-emerald-500/20">
-                <CheckCircle2 className="h-5 w-5 text-green-400" />
+                <HugeiconsIcon
+                  icon={CheckmarkCircle02Icon}
+                  className="h-5 w-5 text-green-400"
+                />
               </div>
               <div>
                 <CardTitle className="text-green-400">
@@ -248,7 +256,10 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
                 <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
                   <DialogTrigger asChild>
                     <Button className="bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
-                      <Plus className="mr-2 h-4 w-4" />
+                      <HugeiconsIcon
+                        icon={PlusSignIcon}
+                        className="mr-2 h-4 w-4"
+                      />
                       Add Word
                     </Button>
                   </DialogTrigger>
@@ -324,13 +335,16 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
             </div>
           </CardHeader>
           <CardContent>
-            {/* Search */}
+            {/* Search01Icon */}
             {whitelistItems.length > 0 && (
               <div className="mb-4">
                 <div className="relative">
-                  <Search className="absolute top-3 left-3 h-4 w-4 text-gray-400" />
+                  <HugeiconsIcon
+                    icon={Search01Icon}
+                    className="absolute top-3 left-3 h-4 w-4 text-gray-400"
+                  />
                   <Input
-                    placeholder="Search whitelist items..."
+                    placeholder="Search01Icon whitelist items..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="border-gray-700 bg-gray-800 pl-10"
@@ -362,7 +376,10 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
                           {item.word}
                         </code>
                         <div className="flex items-center gap-2 text-gray-400 text-xs">
-                          <Users className="h-3 w-3" />
+                          <HugeiconsIcon
+                            icon={UserMultipleIcon}
+                            className="h-3 w-3"
+                          />
                           <span>
                             Added by {item.createdBy.name || 'Unknown'}
                           </span>
@@ -387,7 +404,10 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
                         onClick={() => setDeleteDialogItem(item)}
                         className="text-red-400 hover:bg-red-950/20 hover:text-red-300"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <HugeiconsIcon
+                          icon={Delete02Icon}
+                          className="h-4 w-4"
+                        />
                       </Button>
                     )}
                   </div>

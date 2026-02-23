@@ -1,6 +1,13 @@
 'use client';
 
-import { Heart, MessageCircle, Sparkles, Users } from 'lucide-react';
+import {
+  FavouriteIcon,
+  Message01Icon,
+  SparklesIcon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { motion } from 'motion/react';
 
 interface PageFooterProps {
@@ -114,7 +121,10 @@ export function PageFooter({
               ease: 'easeInOut',
             }}
           >
-            <Sparkles className="h-4 w-4 text-purple-400/70" />
+            <HugeiconsIcon
+              icon={SparklesIcon}
+              className="h-4 w-4 text-purple-400/70"
+            />
           </motion.div>
 
           <motion.div
@@ -126,7 +136,10 @@ export function PageFooter({
               delay: 0.5,
             }}
           >
-            <Heart className="h-4 w-4 text-red-400/70" />
+            <HugeiconsIcon
+              icon={FavouriteIcon}
+              className="h-4 w-4 text-red-400/70"
+            />
           </motion.div>
 
           <motion.div
@@ -138,7 +151,10 @@ export function PageFooter({
               delay: 1,
             }}
           >
-            <Users className="h-4 w-4 text-indigo-400/70" />
+            <HugeiconsIcon
+              icon={UserMultipleIcon}
+              className="h-4 w-4 text-indigo-400/70"
+            />
           </motion.div>
 
           <motion.div
@@ -150,7 +166,10 @@ export function PageFooter({
               delay: 1.5,
             }}
           >
-            <MessageCircle className="h-4 w-4 text-emerald-400/70" />
+            <HugeiconsIcon
+              icon={Message01Icon}
+              className="h-4 w-4 text-emerald-400/70"
+            />
           </motion.div>
         </motion.div>
 

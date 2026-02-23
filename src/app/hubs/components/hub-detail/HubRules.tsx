@@ -1,4 +1,5 @@
-import { ScrollText } from 'lucide-react';
+import { GraduationScrollIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type React from 'react';
 import ReactMarkdown from 'react-markdown';
 
@@ -27,7 +28,10 @@ const HubRules: React.FC<HubRulesProps> = ({ rules }) => {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center p-10 text-gray-400">
-          <ScrollText className="mb-3 h-12 w-12 text-gray-500 opacity-50" />
+          <HugeiconsIcon
+            icon={GraduationScrollIcon}
+            className="mb-3 h-12 w-12 text-gray-500 opacity-50"
+          />
           <p className="text-center text-gray-400">
             No rules specified for this hub.
           </p>

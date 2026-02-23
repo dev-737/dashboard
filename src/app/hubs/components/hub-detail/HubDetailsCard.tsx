@@ -1,5 +1,10 @@
+import {
+  Calendar01Icon,
+  Message02Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { formatDistanceToNow } from 'date-fns';
-import { Calendar, MessageSquare, Users } from 'lucide-react';
 import type React from 'react';
 
 interface HubDetailsCardProps {
@@ -25,14 +30,20 @@ const HubDetailsCard: React.FC<HubDetailsCardProps> = ({
   return (
     <div className="rounded-xl border border-gray-800/70 bg-gray-900/60 p-4 shadow-lg backdrop-blur-md sm:p-6">
       <h3 className="mb-3 flex items-center font-semibold text-lg text-white sm:mb-5 sm:text-xl">
-        <Calendar className="mr-2 h-4 w-4 text-primary sm:h-5 sm:w-5" />
+        <HugeiconsIcon
+          icon={Calendar01Icon}
+          className="mr-2 h-4 w-4 text-primary sm:h-5 sm:w-5"
+        />
         Hub Details
       </h3>
       <dl className="space-y-2 sm:space-y-3">
         {/* Created Date */}
         <div className="flex items-center justify-between rounded-md border border-gray-700/30 bg-gray-800/40 p-3 transition-colors hover:bg-gray-800/60">
           <dt className="flex items-center text-gray-400 text-sm">
-            <Calendar className="mr-2 h-4 w-4 text-primary/80" />
+            <HugeiconsIcon
+              icon={Calendar01Icon}
+              className="mr-2 h-4 w-4 text-primary/80"
+            />
             Created
           </dt>
           <dd className="font-medium text-gray-200 text-sm">{formattedDate}</dd>
@@ -41,7 +52,10 @@ const HubDetailsCard: React.FC<HubDetailsCardProps> = ({
         {/* Last Message */}
         <div className="flex items-center justify-between rounded-md border border-gray-700/30 bg-gray-800/40 p-3 transition-colors hover:bg-gray-800/60">
           <dt className="flex items-center text-gray-400 text-sm">
-            <MessageSquare className="mr-2 h-4 w-4 text-primary/80" />
+            <HugeiconsIcon
+              icon={Message02Icon}
+              className="mr-2 h-4 w-4 text-primary/80"
+            />
             Last Message
           </dt>
           <dd className="font-medium text-gray-200 text-sm">
@@ -56,7 +70,10 @@ const HubDetailsCard: React.FC<HubDetailsCardProps> = ({
         {/* Connected Servers */}
         <div className="flex items-center justify-between rounded-md border border-gray-700/30 bg-gray-800/40 p-3 transition-colors hover:bg-gray-800/60">
           <dt className="flex items-center text-gray-400 text-sm">
-            <Users className="mr-2 h-4 w-4 text-primary/80" />
+            <HugeiconsIcon
+              icon={UserMultipleIcon}
+              className="mr-2 h-4 w-4 text-primary/80"
+            />
             Connected Servers
           </dt>
           <dd className="font-medium text-gray-200 text-sm">

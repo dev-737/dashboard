@@ -2,6 +2,7 @@
  * Hub router for tRPC
  */
 
+import { Search01Icon } from '@hugeicons/core-free-icons';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod/v4';
 import { SortOptions } from '@/app/hubs/constants';
@@ -639,7 +640,7 @@ export const hubRouter = router({
     };
   }),
 
-  // Search for hubs by term
+  // Search01Icon for hubs by term
   searchHubs: publicProcedure
     .input(z.object({ term: z.string().min(1) }))
     .query(async ({ input }) => {

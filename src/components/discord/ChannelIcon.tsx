@@ -1,7 +1,14 @@
 'use client';
 
+import {
+  HashtagIcon,
+  LockIcon,
+  Message02Icon,
+  MessageMultiple01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { ChannelType } from 'discord-api-types/v10';
-import { Hash, Lock, MessageSquare, MessagesSquare } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
@@ -25,40 +32,47 @@ export function ChannelIcon({
 
   switch (type) {
     case ChannelType.GuildText:
-      icon = <Hash className={className} />;
+      icon = <HugeiconsIcon icon={HashtagIcon} className={className} />;
       tooltipText = 'Text Channel';
       break;
     case ChannelType.GuildAnnouncement:
-      icon = <Hash className={className} />;
+      icon = <HugeiconsIcon icon={HashtagIcon} className={className} />;
       tooltipText = 'Announcement Channel';
       break;
     case ChannelType.PublicThread:
-      icon = <MessageSquare className={className} />;
+      icon = <HugeiconsIcon icon={Message02Icon} className={className} />;
       tooltipText = 'Public Thread';
       break;
     case ChannelType.PrivateThread:
       icon = (
         <div className="relative">
-          <MessageSquare className={className} />
-          <Lock className="absolute -top-1 -right-1 h-2 w-2" />
+          <HugeiconsIcon icon={Message02Icon} className={className} />
+          <HugeiconsIcon
+            icon={LockIcon}
+            className="absolute -top-1 -right-1 h-2 w-2"
+          />
         </div>
       );
       tooltipText = 'Private Thread';
       break;
     case ChannelType.AnnouncementThread:
-      icon = <MessageSquare className={className} />;
+      icon = <HugeiconsIcon icon={Message02Icon} className={className} />;
       tooltipText = 'Announcement Thread';
       break;
     case ChannelType.GuildForum:
-      icon = <MessagesSquare className={className} />;
+      icon = (
+        <HugeiconsIcon icon={MessageMultiple01Icon} className={className} />
+      );
       tooltipText = 'Forum Channel';
       break;
     case ChannelType.GuildMedia:
-      icon = <MessagesSquare className={className} />;
+      icon = (
+        <HugeiconsIcon icon={MessageMultiple01Icon} className={className} />
+      );
       tooltipText = 'Media Channel';
       break;
     default:
-      icon = <Hash className={className} />;
+      icon = <HugeiconsIcon icon={HashtagIcon} className={className} />;
       tooltipText = 'Channel';
   }
 

@@ -1,18 +1,20 @@
 'use client';
 
+import {
+  Alert01Icon,
+  ArrowLeft01Icon,
+  ArrowRight01Icon,
+  Cancel01Icon,
+  CheckmarkCircle01Icon,
+  Clock01Icon,
+  FilterIcon,
+  Message02Icon,
+  Search01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
-import {
-  AlertTriangle,
-  CheckCircle,
-  ChevronLeft,
-  ChevronRight,
-  Clock,
-  Filter,
-  MessageSquare,
-  Search,
-  XCircle,
-} from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -314,18 +316,21 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
       <Card className="premium-card">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Filter className="h-5 w-5" />
+            <HugeiconsIcon icon={FilterIcon} className="h-5 w-5" />
             Filters
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label className="font-medium text-sm">Search</Label>
+              <Label className="font-medium text-sm">Search01Icon</Label>
               <div className="relative">
-                <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
+                <HugeiconsIcon
+                  icon={Search01Icon}
+                  className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400"
+                />
                 <Input
-                  placeholder="Search reports..."
+                  placeholder="Search01Icon reports..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="border-gray-700 bg-gray-800/50 pl-10"
@@ -368,19 +373,21 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
               </div>
             ),
             color: 'red',
-            icon: <Clock className="h-4 w-4" />,
+            icon: <HugeiconsIcon icon={Clock01Icon} className="h-4 w-4" />,
           },
           {
             value: 'resolved',
             label: `Resolved (${resolvedReports.length})`,
             color: 'green',
-            icon: <CheckCircle className="h-4 w-4" />,
+            icon: (
+              <HugeiconsIcon icon={CheckmarkCircle01Icon} className="h-4 w-4" />
+            ),
           },
           {
             value: 'ignored',
             label: `Ignored (${ignoredReports.length})`,
             color: 'blue',
-            icon: <XCircle className="h-4 w-4" />,
+            icon: <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />,
           },
         ]}
       >
@@ -482,7 +489,10 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
                 disabled={currentPage === 1}
                 className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
               >
-                <ChevronLeft className="mr-1 h-4 w-4" />
+                <HugeiconsIcon
+                  icon={ArrowLeft01Icon}
+                  className="mr-1 h-4 w-4"
+                />
                 Previous
               </Button>
               <Button
@@ -495,7 +505,10 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
                 className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
               >
                 Next
-                <ChevronRight className="ml-1 h-4 w-4" />
+                <HugeiconsIcon
+                  icon={ArrowRight01Icon}
+                  className="ml-1 h-4 w-4"
+                />
               </Button>
             </div>
           </CardContent>
@@ -589,13 +602,13 @@ export function ReportsClient({ hubId }: ReportsClientProps) {
                   <SelectContent>
                     <SelectItem value="WARNING">Warning</SelectItem>
                     <SelectItem value="BLACKLIST">Blacklist</SelectItem>
-                    <SelectItem value="BAN">Ban</SelectItem>
+                    <SelectItem value="BAN">Subtract01Icon</SelectItem>
                     <SelectItem value="MUTE">Mute</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label className="font-medium text-sm">Target</Label>
+                <Label className="font-medium text-sm">Target01Icon</Label>
                 <Select
                   value={createTargetType}
                   onValueChange={(v: string) =>
@@ -708,7 +721,7 @@ function ReportCard({
             variant="outline"
             className="border-yellow-500/50 bg-yellow-500/10 text-yellow-400"
           >
-            <Clock className="mr-1 h-3 w-3" />
+            <HugeiconsIcon icon={Clock01Icon} className="mr-1 h-3 w-3" />
             Pending
           </Badge>
         );
@@ -718,7 +731,10 @@ function ReportCard({
             variant="outline"
             className="border-green-500/50 bg-green-500/10 text-green-400"
           >
-            <CheckCircle className="mr-1 h-3 w-3" />
+            <HugeiconsIcon
+              icon={CheckmarkCircle01Icon}
+              className="mr-1 h-3 w-3"
+            />
             Resolved
           </Badge>
         );
@@ -728,7 +744,7 @@ function ReportCard({
             variant="outline"
             className="border-gray-500/50 bg-gray-500/10 text-gray-400"
           >
-            <XCircle className="mr-1 h-3 w-3" />
+            <HugeiconsIcon icon={Cancel01Icon} className="mr-1 h-3 w-3" />
             Ignored
           </Badge>
         );
@@ -845,7 +861,7 @@ function ReportCard({
         {/* Report Reason */}
         <div className="rounded-md border border-gray-800 bg-gray-900/50 p-3">
           <div className="mb-2 flex items-center gap-2 text-gray-400 text-sm">
-            <AlertTriangle className="h-4 w-4" />
+            <HugeiconsIcon icon={Alert01Icon} className="h-4 w-4" />
             Reason for Report:
           </div>
           <div className="text-sm">{report.reason}</div>
@@ -855,7 +871,10 @@ function ReportCard({
         {report.messageId && (
           <div className="rounded-md border border-gray-700 bg-gray-800/50 p-4">
             <div className="mb-4 flex items-center gap-2 font-medium text-gray-300 text-sm">
-              <MessageSquare className="h-4 w-4 text-blue-400" />
+              <HugeiconsIcon
+                icon={Message02Icon}
+                className="h-4 w-4 text-blue-400"
+              />
               Reported Message Details
             </div>
 
@@ -949,7 +968,10 @@ function ReportCard({
               </div>
             ) : (
               <div className="rounded-lg border border-gray-700/50 bg-gray-900/30 py-6 text-center">
-                <MessageSquare className="mx-auto mb-2 h-8 w-8 text-gray-500" />
+                <HugeiconsIcon
+                  icon={Message02Icon}
+                  className="mx-auto mb-2 h-8 w-8 text-gray-500"
+                />
                 <div className="text-gray-400 text-sm italic">
                   Message content not available (may have been deleted)
                 </div>
@@ -997,7 +1019,7 @@ function ReportCard({
               onClick={() => onAction(report, 'ignore')}
               disabled={isUpdating}
             >
-              <XCircle className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={Cancel01Icon} className="mr-2 h-4 w-4" />
               Ignore
             </Button>
             <Button
@@ -1005,7 +1027,10 @@ function ReportCard({
               disabled={isUpdating}
               className="border-none bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-600/80 hover:to-emerald-600/80"
             >
-              <CheckCircle className="mr-2 h-4 w-4" />
+              <HugeiconsIcon
+                icon={CheckmarkCircle01Icon}
+                className="mr-2 h-4 w-4"
+              />
               Resolve
             </Button>
           </div>

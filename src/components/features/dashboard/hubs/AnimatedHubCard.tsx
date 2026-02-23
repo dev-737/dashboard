@@ -1,17 +1,20 @@
 'use client';
 
-import { formatDistanceToNow } from 'date-fns';
 import {
-  Clock,
-  Edit3,
-  Globe,
-  Home,
-  Lock,
-  MessageSquare,
-  Users,
-} from 'lucide-react';
+  Clock01Icon,
+  GlobeIcon,
+  Home01Icon,
+  LockIcon,
+  Message02Icon,
+  PencilEdit02Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
+import { formatDistanceToNow } from 'date-fns';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -120,9 +123,15 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
               {/* Privacy indicator */}
               <div className="absolute -right-1 -bottom-1 flex h-6 w-6 items-center justify-center rounded-(--radius-avatar) border-2 border-gray-700 bg-gray-900">
                 {isPrivate ? (
-                  <Lock className="h-3 w-3 text-orange-400" />
+                  <HugeiconsIcon
+                    icon={LockIcon}
+                    className="h-3 w-3 text-orange-400"
+                  />
                 ) : (
-                  <Globe className="h-3 w-3 text-green-400" />
+                  <HugeiconsIcon
+                    icon={GlobeIcon}
+                    className="h-3 w-3 text-green-400"
+                  />
                 )}
               </div>
 
@@ -140,7 +149,10 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
                     window.location.href = `/dashboard/hubs/${hub.id}`;
                   }}
                 >
-                  <Edit3 className="h-4 w-4 text-white" />
+                  <HugeiconsIcon
+                    icon={PencilEdit02Icon}
+                    className="h-4 w-4 text-white"
+                  />
                 </motion.div>
               )}
             </motion.div>
@@ -160,9 +172,15 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
               <span className="flex items-center gap-2 text-gray-400">
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
                   {isPrivate ? (
-                    <Lock className="h-3 w-3 text-purple-400" />
+                    <HugeiconsIcon
+                      icon={LockIcon}
+                      className="h-3 w-3 text-purple-400"
+                    />
                   ) : (
-                    <Globe className="h-3 w-3 text-green-400" />
+                    <HugeiconsIcon
+                      icon={GlobeIcon}
+                      className="h-3 w-3 text-green-400"
+                    />
                   )}
                 </div>
                 <span>Privacy</span>
@@ -174,7 +192,10 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-gray-400">
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
-                  <Home className="h-3 w-3 text-blue-400" />
+                  <HugeiconsIcon
+                    icon={Home01Icon}
+                    className="h-3 w-3 text-blue-400"
+                  />
                 </div>
                 <span>Servers</span>
               </span>
@@ -185,7 +206,10 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2 text-gray-400">
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-purple-500/20 to-blue-500/20">
-                  <Clock className="h-3 w-3 text-indigo-400" />
+                  <HugeiconsIcon
+                    icon={Clock01Icon}
+                    className="h-3 w-3 text-indigo-400"
+                  />
                 </div>
                 <span>Last Active</span>
               </span>
@@ -201,7 +225,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
             className="mt-3 w-full rounded-xl border-none bg-linear-to-r from-gray-800 to-gray-800 font-medium text-white shadow-md transition-all duration-300 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"
           >
             <Link href={`/dashboard/hubs/${hub.id}`}>
-              <MessageSquare className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={Message02Icon} className="mr-2 h-4 w-4" />
               Manage Hub
             </Link>
           </Button>

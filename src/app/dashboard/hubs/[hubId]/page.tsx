@@ -1,7 +1,16 @@
-import { Bell, FileText, Gavel, Globe, Home, Shield } from 'lucide-react';
+import {
+  File01Icon,
+  GlobeIcon,
+  Home01Icon,
+  LegalHammerIcon,
+  Notification03Icon,
+  Shield01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Link from 'next/link';
+
 import { notFound } from 'next/navigation';
 import { DeleteHubDialog } from '@/components/features/dashboard/hubs/DeleteHubDialog';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
@@ -129,7 +138,7 @@ export default async function HubOverviewPage({
             className="border-gray-700 hover:bg-gray-800 hover:text-white"
           >
             <Link href={`/hubs/${hubId}`}>
-              <Globe className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={GlobeIcon} className="mr-2 h-4 w-4" />
               View Public
             </Link>
           </Button>
@@ -151,7 +160,10 @@ export default async function HubOverviewPage({
                     <p className="text-gray-400 text-xs">Active servers</p>
                   </div>
                   <div className="rounded-xl bg-blue-500/10 p-3 transition-all group-hover:bg-blue-500/20">
-                    <Home className="h-6 w-6 text-blue-400" />
+                    <HugeiconsIcon
+                      icon={Home01Icon}
+                      className="h-6 w-6 text-blue-400"
+                    />
                   </div>
                 </div>
               </CardContent>
@@ -174,7 +186,10 @@ export default async function HubOverviewPage({
                     </p>
                   </div>
                   <div className="rounded-xl bg-purple-500/10 p-3 transition-all group-hover:bg-purple-500/20">
-                    <Globe className="h-6 w-6 text-purple-400" />
+                    <HugeiconsIcon
+                      icon={GlobeIcon}
+                      className="h-6 w-6 text-purple-400"
+                    />
                   </div>
                 </div>
               </CardContent>
@@ -191,7 +206,10 @@ export default async function HubOverviewPage({
                     <p className="text-gray-400 text-xs">Your hub role</p>
                   </div>
                   <div className="rounded-xl bg-green-500/10 p-3 transition-all group-hover:bg-green-500/20">
-                    <Shield className="h-6 w-6 text-green-400" />
+                    <HugeiconsIcon
+                      icon={Shield01Icon}
+                      className="h-6 w-6 text-green-400"
+                    />
                   </div>
                 </div>
               </CardContent>
@@ -202,7 +220,10 @@ export default async function HubOverviewPage({
           <Card className="overflow-hidden rounded-2xl border-gray-700/50 bg-gray-900/50 backdrop-blur-sm">
             <CardHeader className="border-gray-700/50 border-b bg-linear-to-r from-gray-800/50 to-gray-900/50">
               <CardTitle className="flex items-center gap-2 text-white">
-                <FileText className="h-5 w-5 text-indigo-400" />
+                <HugeiconsIcon
+                  icon={File01Icon}
+                  className="h-5 w-5 text-indigo-400"
+                />
                 Hub Information
               </CardTitle>
             </CardHeader>
@@ -240,7 +261,10 @@ export default async function HubOverviewPage({
                   <CardContent className="p-6">
                     <div className="mb-4 flex items-start justify-between">
                       <div className="rounded-xl bg-red-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-red-500/20">
-                        <Shield className="h-6 w-6 text-red-400" />
+                        <HugeiconsIcon
+                          icon={Shield01Icon}
+                          className="h-6 w-6 text-red-400"
+                        />
                       </div>
                       {pendingReports > 0 && (
                         <span className="rounded-full bg-red-500/30 px-2.5 py-1 font-bold text-sm text-white shadow-lg shadow-red-500/30 ring-2 ring-red-500/50">
@@ -263,7 +287,10 @@ export default async function HubOverviewPage({
                   <CardContent className="p-6">
                     <div className="mb-4 flex items-start justify-between">
                       <div className="rounded-xl bg-orange-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-orange-500/20">
-                        <Bell className="h-6 w-6 text-orange-400" />
+                        <HugeiconsIcon
+                          icon={Notification03Icon}
+                          className="h-6 w-6 text-orange-400"
+                        />
                       </div>
                       {pendingAppeals > 0 && (
                         <span className="rounded-full bg-orange-500/30 px-2.5 py-1 font-bold text-sm text-white shadow-lg shadow-orange-500/30 ring-2 ring-orange-500/50">
@@ -286,7 +313,10 @@ export default async function HubOverviewPage({
                   <CardContent className="p-6">
                     <div className="mb-4 flex items-start justify-between">
                       <div className="rounded-xl bg-purple-500/10 p-3 transition-all group-hover:scale-110 group-hover:bg-purple-500/20">
-                        <Gavel className="h-6 w-6 text-purple-400" />
+                        <HugeiconsIcon
+                          icon={LegalHammerIcon}
+                          className="h-6 w-6 text-purple-400"
+                        />
                       </div>
                     </div>
                     <h3 className="mb-2 font-bold text-white text-xl">
@@ -338,7 +368,7 @@ export default async function HubOverviewPage({
             className="border-gray-700 hover:bg-gray-800 hover:text-white"
           >
             <Link href={`/hubs/${hubId}`}>
-              <Globe className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={GlobeIcon} className="mr-2 h-4 w-4" />
               View Public
             </Link>
           </Button>

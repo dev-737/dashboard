@@ -1,6 +1,8 @@
 'use client';
 
-import { Loader2, Trash } from 'lucide-react';
+import { Delete02Icon, Loading03Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useState } from 'react';
 import {
   AlertDialog,
@@ -86,12 +88,15 @@ export function DeleteConnectionDialog({
           >
             {isLoading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="mr-2 h-4 w-4 animate-spin"
+                />
                 Removing...
               </>
             ) : (
               <>
-                <Trash className="mr-2 h-4 w-4" />
+                <HugeiconsIcon icon={Delete02Icon} className="mr-2 h-4 w-4" />
                 Remove Connection
               </>
             )}

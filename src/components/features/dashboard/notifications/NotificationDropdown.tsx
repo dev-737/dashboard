@@ -1,9 +1,16 @@
 'use client';
 
+import {
+  ArrowRightIcon,
+  Notification03Icon,
+  Tick01Icon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { formatDistanceToNow } from 'date-fns';
-import { ArrowRight, Bell, Check } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -52,7 +59,7 @@ export function NotificationDropdown() {
           size="icon"
           className="relative h-9 w-9 rounded-full text-gray-400 hover:text-white"
         >
-          <Bell className="h-5 w-5" />
+          <HugeiconsIcon icon={Notification03Icon} className="h-5 w-5" />
           <NotificationBadge count={unreadCount} />
           <span className="sr-only">Notifications</span>
         </Button>
@@ -72,7 +79,7 @@ export function NotificationDropdown() {
               className="h-8 text-gray-400 text-xs hover:text-white"
               onClick={() => markAllAsRead()}
             >
-              <Check className="mr-1 h-3.5 w-3.5" />
+              <HugeiconsIcon icon={Tick01Icon} className="mr-1 h-3.5 w-3.5" />
               Mark all as read
             </Button>
           )}
@@ -93,7 +100,10 @@ export function NotificationDropdown() {
             ))
           ) : !hasNotifications ? (
             <div className="py-8 text-center text-gray-400">
-              <Bell className="mx-auto mb-2 h-8 w-8 opacity-50" />
+              <HugeiconsIcon
+                icon={Notification03Icon}
+                className="mx-auto mb-2 h-8 w-8 opacity-50"
+              />
               <p>No notifications</p>
             </div>
           ) : (
@@ -150,7 +160,7 @@ export function NotificationDropdown() {
           >
             <Link href="/dashboard/announcements">
               View all notifications
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <HugeiconsIcon icon={ArrowRightIcon} className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </DropdownMenuFooter>

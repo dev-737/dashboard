@@ -1,6 +1,13 @@
 'use client';
 
-import { AlertTriangle, Loader2, RotateCcw, Save } from 'lucide-react';
+import {
+  Alert01Icon,
+  FloppyDiskIcon,
+  Loading03Icon,
+  Rotate01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { AnimatePresence, motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
 
@@ -47,7 +54,10 @@ export function UnsavedChangesPrompt({
                 transition={{ delay: 0.1, type: 'spring', stiffness: 300 }}
                 className="shrink-0"
               >
-                <AlertTriangle className="h-4 w-4 text-orange-400" />
+                <HugeiconsIcon
+                  icon={Alert01Icon}
+                  className="h-4 w-4 text-orange-400"
+                />
               </motion.div>
 
               <motion.span
@@ -77,7 +87,10 @@ export function UnsavedChangesPrompt({
                 disabled={isSubmitting}
                 className="flex h-auto flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 font-medium text-gray-300 text-xs transition-colors duration-150 hover:bg-gray-700 hover:text-white sm:flex-none"
               >
-                <RotateCcw className="h-3 w-3 shrink-0" />
+                <HugeiconsIcon
+                  icon={Rotate01Icon}
+                  className="h-3 w-3 shrink-0"
+                />
                 <span className="hidden sm:inline">{resetLabel}</span>
                 <span className="sm:hidden">Reset</span>
               </Button>
@@ -90,13 +103,19 @@ export function UnsavedChangesPrompt({
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="h-3 w-3 shrink-0 animate-spin" />
+                    <HugeiconsIcon
+                      icon={Loading03Icon}
+                      className="h-3 w-3 shrink-0 animate-spin"
+                    />
                     <span className="hidden sm:inline">Saving...</span>
                     <span className="sm:hidden">Save</span>
                   </>
                 ) : (
                   <>
-                    <Save className="h-3 w-3 shrink-0" />
+                    <HugeiconsIcon
+                      icon={FloppyDiskIcon}
+                      className="h-3 w-3 shrink-0"
+                    />
                     <span className="hidden sm:inline">{saveLabel}</span>
                     <span className="sm:hidden">Save</span>
                   </>

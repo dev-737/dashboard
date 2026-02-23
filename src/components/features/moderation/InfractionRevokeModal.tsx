@@ -1,14 +1,17 @@
 'use client';
 
-import { formatDistanceToNow } from 'date-fns';
 import {
-  AlertTriangle,
-  Calendar,
-  Clock,
-  Home,
-  Shield,
-  User,
-} from 'lucide-react';
+  Alert01Icon,
+  Calendar01Icon,
+  Clock01Icon,
+  Home01Icon,
+  Shield01Icon,
+  Target01Icon,
+  UserIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
+import { formatDistanceToNow } from 'date-fns';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { revokeInfraction } from '@/actions/server-actions';
@@ -108,15 +111,34 @@ export function InfractionRevokeModal({
   const getInfractionIcon = (type: InfractionType) => {
     switch (type) {
       case 'BLACKLIST':
-        return <Shield className="h-4 w-4 text-red-400" />;
+        return (
+          <HugeiconsIcon icon={Shield01Icon} className="h-4 w-4 text-red-400" />
+        );
       case 'WARNING':
-        return <AlertTriangle className="h-4 w-4 text-yellow-400" />;
+        return (
+          <HugeiconsIcon
+            icon={Alert01Icon}
+            className="h-4 w-4 text-yellow-400"
+          />
+        );
       case 'BAN':
-        return <Shield className="h-4 w-4 text-red-500" />;
+        return (
+          <HugeiconsIcon icon={Shield01Icon} className="h-4 w-4 text-red-500" />
+        );
       case 'MUTE':
-        return <Clock className="h-4 w-4 text-orange-400" />;
+        return (
+          <HugeiconsIcon
+            icon={Clock01Icon}
+            className="h-4 w-4 text-orange-400"
+          />
+        );
       default:
-        return <Shield className="h-4 w-4 text-gray-400" />;
+        return (
+          <HugeiconsIcon
+            icon={Shield01Icon}
+            className="h-4 w-4 text-gray-400"
+          />
+        );
     }
   };
 
@@ -125,7 +147,10 @@ export function InfractionRevokeModal({
       <AlertDialogContent className="max-w-md border-gray-800 bg-gray-900">
         <AlertDialogHeader>
           <AlertDialogTitle className="flex items-center gap-2 text-white">
-            <AlertTriangle className="h-5 w-5 text-red-400" />
+            <HugeiconsIcon
+              icon={Alert01Icon}
+              className="h-5 w-5 text-red-400"
+            />
             Revoke Infraction
           </AlertDialogTitle>
           <AlertDialogDescription className="text-gray-300">
@@ -136,16 +161,22 @@ export function InfractionRevokeModal({
 
         {/* Infraction Details */}
         <div className="space-y-4 py-4">
-          {/* Target Information */}
+          {/* Target01Icon Information */}
           <div className="flex items-center gap-3 rounded-lg border border-gray-800/50 bg-gray-900/50 p-3">
             <div className="relative">
               {isUserInfraction ? (
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-700">
-                  <User className="h-5 w-5 text-blue-400" />
+                  <HugeiconsIcon
+                    icon={UserIcon}
+                    className="h-5 w-5 text-blue-400"
+                  />
                 </div>
               ) : (
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray-800 bg-gray-700">
-                  <Home className="h-5 w-5 text-green-400" />
+                  <HugeiconsIcon
+                    icon={Home01Icon}
+                    className="h-5 w-5 text-green-400"
+                  />
                 </div>
               )}
             </div>
@@ -168,7 +199,10 @@ export function InfractionRevokeModal({
             </div>
 
             <div className="flex items-start gap-2 text-sm">
-              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-yellow-400" />
+              <HugeiconsIcon
+                icon={Alert01Icon}
+                className="mt-0.5 h-4 w-4 shrink-0 text-yellow-400"
+              />
               <div className="flex-1">
                 <span className="text-gray-400">Reason:</span>
                 <div className="mt-1 rounded border border-gray-800/50 bg-gray-950/50 p-2 text-white">
@@ -178,7 +212,10 @@ export function InfractionRevokeModal({
             </div>
 
             <div className="flex items-center gap-2 text-sm">
-              <Calendar className="h-4 w-4 text-gray-400" />
+              <HugeiconsIcon
+                icon={Calendar01Icon}
+                className="h-4 w-4 text-gray-400"
+              />
               <span className="text-gray-400">Created:</span>
               <span className="text-white">
                 {formatDistanceToNow(new Date(infraction.createdAt), {
@@ -189,7 +226,10 @@ export function InfractionRevokeModal({
 
             {infraction.expiresAt && (
               <div className="flex items-center gap-2 text-sm">
-                <Clock className="h-4 w-4 text-gray-400" />
+                <HugeiconsIcon
+                  icon={Clock01Icon}
+                  className="h-4 w-4 text-gray-400"
+                />
                 <span className="text-gray-400">Expires:</span>
                 <span className="text-white">
                   {formatDistanceToNow(new Date(infraction.expiresAt), {

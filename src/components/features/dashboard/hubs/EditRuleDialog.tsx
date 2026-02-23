@@ -1,7 +1,13 @@
 'use client';
 
+import {
+  FilterIcon,
+  FloppyDiskIcon,
+  Shield01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Save, Shield } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { PatternBuilder } from '@/components/forms/PatternBuilder';
@@ -133,8 +139,8 @@ export function EditRuleDialog({
         <div className="flex h-full max-h-[85vh] flex-col">
           <DialogHeader className="shrink-0 pb-4">
             <DialogTitle className="flex items-center text-blue-400">
-              <Shield className="mr-2 h-5 w-5" />
-              Edit Filter Rule
+              <HugeiconsIcon icon={Shield01Icon} className="mr-2 h-5 w-5" />
+              Edit FilterIcon Rule
             </DialogTitle>
             <DialogDescription>
               Modify your filter rule patterns and actions.
@@ -208,7 +214,7 @@ export function EditRuleDialog({
                 }
                 className="bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
               >
-                <Save className="mr-2 h-4 w-4" />
+                <HugeiconsIcon icon={FloppyDiskIcon} className="mr-2 h-4 w-4" />
                 {updateMutation.isPending ? 'Saving...' : 'Save Changes'}
               </Button>
             </div>

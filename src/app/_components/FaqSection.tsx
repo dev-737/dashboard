@@ -1,8 +1,15 @@
 'use client';
 
-import { ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
+import {
+  ArrowDown01Icon,
+  ArrowRightIcon,
+  SparklesIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -49,7 +56,10 @@ function AccordionItem({
             transition={{ duration: 0.2 }}
             className="shrink-0"
           >
-            <ChevronDown className="h-5 w-5 text-gray-400 transition-colors duration-200 group-hover:text-blue-400" />
+            <HugeiconsIcon
+              icon={ArrowDown01Icon}
+              className="h-5 w-5 text-gray-400 transition-colors duration-200 group-hover:text-blue-400"
+            />
           </motion.div>
         </button>
 
@@ -97,7 +107,10 @@ export function FaqSection() {
           className="mb-16 text-center"
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-blue-300 backdrop-blur-sm">
-            <Sparkles className="h-4 w-4 animate-pulse text-blue-400" />
+            <HugeiconsIcon
+              icon={SparklesIcon}
+              className="h-4 w-4 animate-pulse text-blue-400"
+            />
             <span className="font-semibold text-sm tracking-wide">
               Frequently Asked Questions
             </span>
@@ -151,7 +164,7 @@ export function FaqSection() {
               className="flex items-center gap-2"
             >
               View Documentation
-              <ArrowRight className="h-4 w-4" />
+              <HugeiconsIcon icon={ArrowRightIcon} className="h-4 w-4" />
             </Link>
           </Button>
         </motion.div>

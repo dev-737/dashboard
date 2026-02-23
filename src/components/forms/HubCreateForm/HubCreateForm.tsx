@@ -1,7 +1,13 @@
 'use client';
 
+import {
+  Settings01Icon,
+  Shield01Icon,
+  SparklesIcon,
+  Upload01Icon,
+} from '@hugeicons/core-free-icons';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Settings, Shield, Sparkles, Upload } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { toast } from 'sonner';
@@ -15,10 +21,10 @@ import { RulesWelcomeStep } from './RulesWelcomeStep';
 import { StepIndicator } from './StepIndicator';
 
 const STEP_ICONS = [
-  { icon: Sparkles, label: 'Essentials', color: 'text-purple-400' },
-  { icon: Upload, label: 'Media', color: 'text-pink-400' },
-  { icon: Settings, label: 'Modules', color: 'text-orange-400' },
-  { icon: Shield, label: 'Rules', color: 'text-green-400' },
+  { icon: SparklesIcon, label: 'Essentials', color: 'text-purple-400' },
+  { icon: Upload01Icon, label: 'Media', color: 'text-pink-400' },
+  { icon: Settings01Icon, label: 'Modules', color: 'text-orange-400' },
+  { icon: Shield01Icon, label: 'Rules', color: 'text-green-400' },
 ];
 
 export function HubCreateForm() {

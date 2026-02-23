@@ -1,4 +1,9 @@
-import { AlertCircle, CheckCircle, FileText } from 'lucide-react';
+import {
+  AlertCircleIcon,
+  CheckmarkCircle01Icon,
+  File01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 import { HubLayout } from '@/components/features/dashboard/hubs/HubLayout';
@@ -95,7 +100,10 @@ export default async function HubLoggingPage({
             <div className="space-y-1">
               <h2 className="flex items-center gap-3 font-bold text-2xl text-white">
                 <div className="rounded-(--radius-button) bg-indigo-500/20 p-2">
-                  <FileText className="h-6 w-6 text-indigo-400" />
+                  <HugeiconsIcon
+                    icon={File01Icon}
+                    className="h-6 w-6 text-indigo-400"
+                  />
                 </div>
                 Logging Configuration
               </h2>
@@ -106,7 +114,10 @@ export default async function HubLoggingPage({
             </div>
             {configuredLogs.length > 0 && (
               <div className="flex items-center gap-2 rounded-(--radius-badge) border border-emerald-500/30 bg-emerald-500/20 px-3 py-1.5">
-                <CheckCircle className="h-4 w-4 text-emerald-400" />
+                <HugeiconsIcon
+                  icon={CheckmarkCircle01Icon}
+                  className="h-4 w-4 text-emerald-400"
+                />
                 <span className="font-medium text-emerald-400 text-sm">
                   {configuredLogs.length} Active
                 </span>
@@ -125,7 +136,10 @@ export default async function HubLoggingPage({
               ) : (
                 <div className="flex flex-col items-center justify-center p-12 text-center">
                   <div className="mb-4 rounded-(--radius-modal) bg-amber-500/20 p-4">
-                    <AlertCircle className="h-8 w-8 text-amber-400" />
+                    <HugeiconsIcon
+                      icon={AlertCircleIcon}
+                      className="h-8 w-8 text-amber-400"
+                    />
                   </div>
                   <h3 className="mb-2 font-semibold text-lg text-white">
                     Access Restricted

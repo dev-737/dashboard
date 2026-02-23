@@ -1,4 +1,5 @@
-import { Loader2 } from 'lucide-react';
+import { Loading03Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { Suspense } from 'react';
@@ -28,7 +29,10 @@ export default async function Page() {
     <Suspense
       fallback={
         <div className="flex min-h-screen items-center justify-center bg-gray-950 text-gray-400">
-          <Loader2 className="h-8 w-8 animate-spin" />
+          <HugeiconsIcon
+            icon={Loading03Icon}
+            className="h-8 w-8 animate-spin"
+          />
         </div>
       }
     >

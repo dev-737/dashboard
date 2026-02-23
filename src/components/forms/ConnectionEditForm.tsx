@@ -1,18 +1,20 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import {
-  CheckCircle,
-  Copy,
-  ExternalLink,
-  Hash,
-  Link,
-  Loader2,
-  Plus,
-  Save,
-  Settings,
-  Zap,
-} from 'lucide-react';
+  CheckmarkCircle01Icon,
+  Copy01Icon,
+  FloppyDiskIcon,
+  HashtagIcon,
+  Link01Icon,
+  LinkSquare02Icon,
+  Loading03Icon,
+  PlusSignIcon,
+  Settings01Icon,
+  ZapIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useId, useState } from 'react';
 import { toast } from 'sonner';
@@ -117,10 +119,13 @@ export function ConnectionEditFormClient({
       <CardHeader className="px-4 sm:px-6">
         <div className="flex items-center gap-3">
           <div className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-2">
-            <Settings className="h-5 w-5 text-blue-400" />
+            <HugeiconsIcon
+              icon={Settings01Icon}
+              className="h-5 w-5 text-blue-400"
+            />
           </div>
           <div>
-            <CardTitle>Connection Settings</CardTitle>
+            <CardTitle>Connection Settings01Icon</CardTitle>
             <CardDescription>
               Configure how this connection works
             </CardDescription>
@@ -135,7 +140,7 @@ export function ConnectionEditFormClient({
               htmlFor="connected"
               className="flex items-center gap-2 font-medium text-base"
             >
-              <Zap className="h-4 w-4" />
+              <HugeiconsIcon icon={ZapIcon} className="h-4 w-4" />
               Connection Status
             </Label>
             <p className="text-gray-400 text-sm">
@@ -157,8 +162,8 @@ export function ConnectionEditFormClient({
             htmlFor="invite"
             className="flex items-center gap-2 font-medium text-base"
           >
-            <Link className="h-4 w-4" />
-            Server Invite Link
+            <HugeiconsIcon icon={Link01Icon} className="h-4 w-4" />
+            Server Invite Link01Icon
           </Label>
           <p className="mb-3 text-gray-400 text-sm">
             Optional invite link to your Discord server
@@ -179,7 +184,7 @@ export function ConnectionEditFormClient({
               disabled={!inviteUrl}
               className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
             >
-              <Copy className="h-4 w-4" />
+              <HugeiconsIcon icon={Copy01Icon} className="h-4 w-4" />
             </Button>
             <Button
               variant="outline"
@@ -189,15 +194,21 @@ export function ConnectionEditFormClient({
               className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
             >
               {generateInviteMutation.isPending ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="h-4 w-4 animate-spin"
+                />
               ) : (
-                <Plus className="h-4 w-4" />
+                <HugeiconsIcon icon={PlusSignIcon} className="h-4 w-4" />
               )}
             </Button>
           </div>
           {inviteUrl && (
             <div className="flex items-center gap-2 text-sm">
-              <CheckCircle className="h-4 w-4 text-green-400" />
+              <HugeiconsIcon
+                icon={CheckmarkCircle01Icon}
+                className="h-4 w-4 text-green-400"
+              />
               <span className="text-green-400">Invite link configured</span>
               <Button
                 variant="ghost"
@@ -206,7 +217,10 @@ export function ConnectionEditFormClient({
                 className="h-6 px-2 text-blue-400 text-xs hover:text-blue-300"
               >
                 <a href={inviteUrl} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon
+                    icon={LinkSquare02Icon}
+                    className="mr-1 h-3 w-3"
+                  />
                   Test
                 </a>
               </Button>
@@ -219,13 +233,16 @@ export function ConnectionEditFormClient({
         {/* Channel Information */}
         <div className="space-y-3">
           <Label className="flex items-center gap-2 font-medium text-base">
-            <Hash className="h-4 w-4" />
+            <HugeiconsIcon icon={HashtagIcon} className="h-4 w-4" />
             Connected Channel
           </Label>
           <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Hash className="h-4 w-4 text-gray-400" />
+                <HugeiconsIcon
+                  icon={HashtagIcon}
+                  className="h-4 w-4 text-gray-400"
+                />
                 <span className="font-mono text-sm text-white">
                   {connection.channelId}
                 </span>
@@ -238,7 +255,7 @@ export function ConnectionEditFormClient({
                 }
                 className="h-6 px-2 text-gray-400 text-xs hover:text-white"
               >
-                <Copy className="h-3 w-3" />
+                <HugeiconsIcon icon={Copy01Icon} className="h-3 w-3" />
               </Button>
             </div>
           </div>
@@ -257,12 +274,15 @@ export function ConnectionEditFormClient({
           >
             {updateConnectionMutation.isPending ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="mr-2 h-4 w-4 animate-spin"
+                />
                 Saving...
               </>
             ) : (
               <>
-                <Save className="mr-2 h-4 w-4" />
+                <HugeiconsIcon icon={FloppyDiskIcon} className="mr-2 h-4 w-4" />
                 Save Changes
               </>
             )}

@@ -1,8 +1,11 @@
 'use client';
 
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRightIcon, SparklesIcon } from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+
 import { useId } from 'react';
 import { HeroAnimation } from '@/app/_components/HeroAnimation';
 import { AnimatedShinyText } from '@/components/ui/AnimatedShinyText';
@@ -33,7 +36,10 @@ export function Hero() {
               transition={{ duration: 0.5 }}
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/20"
             >
-              <Sparkles className="h-4 w-4 animate-pulse text-purple-400" />
+              <HugeiconsIcon
+                icon={SparklesIcon}
+                className="h-4 w-4 animate-pulse text-purple-400"
+              />
               <Link href="https://interchat.dev/invite">
                 <AnimatedShinyText className="font-semibold text-sm tracking-wide">
                   InterChat v5.4.0 is out
@@ -83,7 +89,10 @@ export function Hero() {
                 >
                   <Link href="/invite" className="flex items-center gap-2">
                     Start Connecting
-                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    <HugeiconsIcon
+                      icon={ArrowRightIcon}
+                      className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                    />
                   </Link>
                 </Button>
               </motion.div>
@@ -99,7 +108,10 @@ export function Hero() {
                 >
                   <Link href="/discover" className="flex items-center gap-2">
                     Explore Hubs
-                    <Sparkles className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                    <HugeiconsIcon
+                      icon={SparklesIcon}
+                      className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12"
+                    />
                   </Link>
                 </Button>
               </motion.div>

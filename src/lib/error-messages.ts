@@ -1,10 +1,17 @@
+import {
+  Clock01Icon,
+  HelpCircleIcon,
+  LinkSquare02Icon,
+  Shield01Icon,
+  Wifi01Icon,
+} from '@hugeicons/core-free-icons';
+import type { IconSvgElement } from '@hugeicons/react';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 /**
  * Beginner-friendly error message system for InterChat
  * Transforms technical errors into user-friendly messages with clear next steps
  */
-
-import type { LucideIcon } from 'lucide-react';
-import { Clock, ExternalLink, HelpCircle, Shield, Wifi } from 'lucide-react';
 
 interface ErrorSolution {
   id: string;
@@ -19,7 +26,7 @@ interface ErrorSolution {
 export interface BeginnerFriendlyError {
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: IconSvgElement;
   severity: 'info' | 'warning' | 'error' | 'critical';
   category:
     | 'connection'
@@ -50,7 +57,7 @@ const ERROR_MAPPINGS: Record<string, BeginnerFriendlyError> = {
     title: 'Permission Problem',
     description:
       "InterChat doesn't have the right permissions to do this action in your Discord server.",
-    icon: Shield,
+    icon: Shield01Icon,
     severity: 'error',
     category: 'permission',
     solutions: [
@@ -101,7 +108,7 @@ const ERROR_MAPPINGS: Record<string, BeginnerFriendlyError> = {
     title: 'Too Many Requests',
     description:
       'Discord is asking us to slow down to keep the service stable for everyone.',
-    icon: Clock,
+    icon: Clock01Icon,
     severity: 'warning',
     category: 'rate-limit',
     solutions: [
@@ -133,7 +140,7 @@ const ERROR_MAPPINGS: Record<string, BeginnerFriendlyError> = {
     title: 'Connection Problem',
     description:
       "We couldn't connect your channel to the hub. This usually happens due to setup issues.",
-    icon: Wifi,
+    icon: Wifi01Icon,
     severity: 'error',
     category: 'connection',
     solutions: [
@@ -179,7 +186,7 @@ const ERROR_MAPPINGS: Record<string, BeginnerFriendlyError> = {
     title: 'Discord Service Issue',
     description:
       "Discord's servers are having problems right now. This isn't something you did wrong.",
-    icon: ExternalLink,
+    icon: LinkSquare02Icon,
     severity: 'warning',
     category: 'discord',
     solutions: [
@@ -224,7 +231,7 @@ const ERROR_MAPPINGS: Record<string, BeginnerFriendlyError> = {
     title: 'Connection Timeout',
     description:
       "We couldn't reach Discord's servers. This might be a temporary network issue.",
-    icon: Wifi,
+    icon: Wifi01Icon,
     severity: 'warning',
     category: 'network',
     solutions: [
@@ -264,7 +271,7 @@ const ERROR_MAPPINGS: Record<string, BeginnerFriendlyError> = {
     title: 'Something Went Wrong',
     description:
       "We encountered an unexpected problem. Don't worry - this helps us improve InterChat!",
-    icon: HelpCircle,
+    icon: HelpCircleIcon,
     severity: 'error',
     category: 'unknown',
     solutions: [

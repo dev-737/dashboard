@@ -1,8 +1,11 @@
 'use client';
 
-import { ExternalLink, Tag } from 'lucide-react';
+import { LinkSquare02Icon, Tag01Icon } from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { useEffect, useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useHubRecommendations } from '@/hooks/use-hub-recommendations';
@@ -63,7 +66,10 @@ const SimilarHubsCard = ({
       className="rounded-xl border border-gray-800/70 bg-gray-900/60 p-4 shadow-lg backdrop-blur-md sm:p-6"
     >
       <h3 className="mb-3 flex items-center font-semibold text-lg text-white sm:mb-5 sm:text-xl">
-        <Tag className="mr-2 h-4 w-4 text-primary sm:h-5 sm:w-5" />
+        <HugeiconsIcon
+          icon={Tag01Icon}
+          className="mr-2 h-4 w-4 text-primary sm:h-5 sm:w-5"
+        />
         Similar Hubs
       </h3>
 
@@ -125,7 +131,10 @@ const SimilarHubsCard = ({
                   )}
                 </div>
               </div>
-              <ExternalLink className="h-3 w-3 text-gray-500 opacity-0 transition-opacity group-hover:opacity-100" />
+              <HugeiconsIcon
+                icon={LinkSquare02Icon}
+                className="h-3 w-3 text-gray-500 opacity-0 transition-opacity group-hover:opacity-100"
+              />
             </Link>
           ))
         )}

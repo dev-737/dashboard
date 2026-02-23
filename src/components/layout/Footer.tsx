@@ -1,38 +1,46 @@
 'use client';
 
 import {
-  ExternalLink,
-  FileText,
-  Heart,
-  HelpCircle,
-  MessageCircle,
-  Shield,
-  Users,
-} from 'lucide-react';
+  FavouriteIcon,
+  File01Icon,
+  HelpCircleIcon,
+  Link01Icon,
+  LinkSquare02Icon,
+  Message01Icon,
+  Shield01Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { usePathname } from 'next/navigation';
 
 export function Footer() {
   const footerLinks = {
     legal: [
-      { label: 'Terms of Service', href: '/terms', icon: FileText },
-      { label: 'Privacy Policy', href: '/privacy', icon: Shield },
-      { label: 'Community Guidelines', href: '/guidelines', icon: Users },
-      { label: 'Support', href: '/support', icon: HelpCircle },
+      { label: 'Terms of Service', href: '/terms', icon: File01Icon },
+      { label: 'Privacy Policy', href: '/privacy', icon: Shield01Icon },
+      {
+        label: 'Community Guidelines',
+        href: '/guidelines',
+        icon: UserMultipleIcon,
+      },
+      { label: 'Support', href: '/support', icon: HelpCircleIcon },
     ],
     social: [
       {
         label: 'Discord Server',
         href: '/support',
-        icon: MessageCircle,
+        icon: Message01Icon,
         description: 'Join InterChat HQ',
       },
       {
         label: 'Twitter',
         href: 'https://twitter.com/oxaradev',
-        icon: ExternalLink,
+        icon: LinkSquare02Icon,
         description: '@InterChatApp',
       },
     ],
@@ -41,18 +49,18 @@ export function Footer() {
       // {
       //   label: 'Documentation',
       //   href: 'https://docs.interchat.dev',
-      //   icon: FileText,
+      //   icon: File01Icon,
       // },
       {
         label: 'Status Page',
         href: 'https://status.interchat.dev',
-        icon: Shield,
+        icon: Shield01Icon,
       },
       // FIXME: Re-enable changelog link when changelog is ready
       // {
       //   label: 'Changelog',
       //   href: 'https://docs.interchat.dev/changelog',
-      //   icon: FileText,
+      //   icon: File01Icon,
       // },
     ],
   };
@@ -88,7 +96,10 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-2 text-gray-500 text-sm">
               <span>Made with</span>
-              <Heart className="h-4 w-4 fill-current text-red-400" />
+              <HugeiconsIcon
+                icon={FavouriteIcon}
+                className="h-4 w-4 fill-current text-red-400"
+              />
               <span>for the Discord community</span>
             </div>
           </motion.div>
@@ -109,7 +120,7 @@ export function Footer() {
                     href={link.href}
                     className="flex items-center gap-2 text-gray-400 text-sm transition-colors duration-200 hover:text-white"
                   >
-                    <link.icon className="h-4 w-4" />
+                    <HugeiconsIcon icon={link.icon} className="h-4 w-4" />
                     {link.label}
                   </Link>
                 </li>
@@ -131,7 +142,7 @@ export function Footer() {
                     href={link.href}
                     className="flex items-center gap-2 text-gray-400 text-sm transition-colors duration-200 hover:text-white"
                   >
-                    <link.icon className="h-4 w-4" />
+                    <HugeiconsIcon icon={link.icon} className="h-4 w-4" />
                     {link.label}
                   </Link>
                 </li>
@@ -157,7 +168,10 @@ export function Footer() {
                   >
                     <div className="flex items-center gap-3 rounded-lg border border-gray-700/50 bg-gray-800/30 p-3 transition-all duration-200 hover:border-gray-600/50 hover:bg-gray-800/50">
                       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-700/50 transition-transform duration-200 group-hover:scale-110">
-                        <link.icon className="h-4 w-4 text-gray-300 group-hover:text-white" />
+                        <HugeiconsIcon
+                          icon={link.icon}
+                          className="h-4 w-4 text-gray-300 group-hover:text-white"
+                        />
                       </div>
                       <div>
                         <div className="font-medium text-sm text-white transition-colors group-hover:text-blue-300">
@@ -167,7 +181,10 @@ export function Footer() {
                           {link.description}
                         </div>
                       </div>
-                      <ExternalLink className="ml-auto h-3 w-3 text-gray-500 opacity-0 transition-opacity group-hover:opacity-100" />
+                      <HugeiconsIcon
+                        icon={LinkSquare02Icon}
+                        className="ml-auto h-3 w-3 text-gray-500 opacity-0 transition-opacity group-hover:opacity-100"
+                      />
                     </div>
                   </Link>
                 </div>

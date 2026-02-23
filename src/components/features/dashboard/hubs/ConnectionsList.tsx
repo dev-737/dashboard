@@ -1,23 +1,26 @@
 'use client';
 
+import {
+  Cancel01Icon,
+  Clock01Icon,
+  Delete02Icon,
+  HashtagIcon,
+  Home01Icon,
+  InformationCircleIcon,
+  LegalHammerIcon,
+  MoreVerticalIcon,
+  Search01Icon,
+  ServerStackIcon,
+  UserMultipleIcon,
+  Wifi01Icon,
+  WifiDisconnected01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useMutation } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
-import {
-  Ban,
-  Clock,
-  Hash,
-  Home,
-  MoreVertical,
-  Search,
-  Server,
-  Trash,
-  Users,
-  Wifi,
-  WifiOff,
-  X,
-} from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
+
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -194,7 +197,10 @@ export function ConnectionsList({
             <div className="space-y-1">
               <CardTitle className="flex items-center gap-2 font-bold text-white text-xl">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-blue-500 to-indigo-600">
-                  <Server className="h-4 w-4 text-white" />
+                  <HugeiconsIcon
+                    icon={ServerStackIcon}
+                    className="h-4 w-4 text-white"
+                  />
                 </div>
                 Server Connections
               </CardTitle>
@@ -224,11 +230,14 @@ export function ConnectionsList({
       </CardHeader>
 
       <CardContent className="space-y-6 pt-6">
-        {/* Simple Search */}
+        {/* Simple Search01Icon */}
         <div className="relative">
-          <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <HugeiconsIcon
+            icon={Search01Icon}
+            className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400"
+          />
           <Input
-            placeholder="Search servers by name or ID..."
+            placeholder="Search01Icon servers by name or ID..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="h-12 rounded-xl border-gray-700/50 bg-gray-800/30 pl-10 text-white placeholder:text-gray-500 focus:border-blue-500/50"
@@ -240,7 +249,7 @@ export function ConnectionsList({
               className="absolute top-1/2 right-2 h-8 w-8 -translate-y-1/2 rounded-lg p-0 hover:bg-gray-700/50"
               onClick={() => setSearchQuery('')}
             >
-              <X className="h-4 w-4" />
+              <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
             </Button>
           )}
         </div>
@@ -249,7 +258,10 @@ export function ConnectionsList({
         {connections.length === 0 ? (
           <div className="px-4 py-12 text-center">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-800/50">
-              <Home className="h-8 w-8 text-gray-500" />
+              <HugeiconsIcon
+                icon={Home01Icon}
+                className="h-8 w-8 text-gray-500"
+              />
             </div>
             <h3 className="mb-2 font-medium text-lg text-white">
               No Connections
@@ -262,7 +274,10 @@ export function ConnectionsList({
         ) : filteredConnections.length === 0 ? (
           <div className="px-4 py-12 text-center">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-800/50">
-              <Search className="h-8 w-8 text-gray-500" />
+              <HugeiconsIcon
+                icon={Search01Icon}
+                className="h-8 w-8 text-gray-500"
+              />
             </div>
             <h3 className="mb-2 font-medium text-lg text-white">
               No Results Found
@@ -275,7 +290,7 @@ export function ConnectionsList({
               onClick={() => setSearchQuery('')}
               className="h-10 border-gray-700/50 px-4 text-gray-300 hover:bg-gray-800/50 hover:text-white"
             >
-              Clear Search
+              Clear Search01Icon
             </Button>
           </div>
         ) : (
@@ -346,7 +361,10 @@ function ConnectionItem({
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center">
-                <Users className="h-6 w-6 text-gray-400" />
+                <HugeiconsIcon
+                  icon={UserMultipleIcon}
+                  className="h-6 w-6 text-gray-400"
+                />
               </div>
             )}
           </div>
@@ -361,7 +379,7 @@ function ConnectionItem({
           </div>
         </div>
 
-        {/* Server Info */}
+        {/* Server InformationCircleIcon */}
         <div className="min-w-0 flex-1">
           <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center">
             <h4 className="truncate font-semibold text-base text-white">
@@ -377,12 +395,15 @@ function ConnectionItem({
             >
               {connection.connected ? (
                 <>
-                  <Wifi className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon icon={Wifi01Icon} className="mr-1 h-3 w-3" />
                   Active
                 </>
               ) : (
                 <>
-                  <WifiOff className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon
+                    icon={WifiDisconnected01Icon}
+                    className="mr-1 h-3 w-3"
+                  />
                   Paused
                 </>
               )}
@@ -392,13 +413,13 @@ function ConnectionItem({
           {/* Connection details */}
           <div className="flex flex-col gap-2 text-gray-400 text-sm sm:flex-row sm:items-center sm:gap-4">
             <div className="flex items-center gap-1">
-              <Hash className="h-3 w-3 shrink-0" />
+              <HugeiconsIcon icon={HashtagIcon} className="h-3 w-3 shrink-0" />
               <span className="truncate font-mono text-xs">
                 {connection.channelId}
               </span>
             </div>
             <div className="flex items-center gap-1">
-              <Clock className="h-3 w-3 shrink-0" />
+              <HugeiconsIcon icon={Clock01Icon} className="h-3 w-3 shrink-0" />
               <span className="truncate text-xs">
                 {formatDistanceToNow(new Date(connection.lastActive), {
                   addSuffix: true,
@@ -416,7 +437,7 @@ function ConnectionItem({
               size="sm"
               className="h-8 w-8 rounded-lg p-0 opacity-0 transition-opacity hover:bg-gray-700/50 group-hover:opacity-100 sm:opacity-100"
             >
-              <MoreVertical className="h-4 w-4" />
+              <HugeiconsIcon icon={MoreVerticalIcon} className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -427,15 +448,15 @@ function ConnectionItem({
               onClick={() => onCopy(connection.serverId, 'Server ID')}
               className="text-gray-300 hover:bg-gray-800 hover:text-white"
             >
-              <Server className="mr-2 h-4 w-4" />
-              Copy Server ID
+              <HugeiconsIcon icon={ServerStackIcon} className="mr-2 h-4 w-4" />
+              Copy01Icon Server ID
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => onCopy(connection.channelId, 'Channel ID')}
               className="text-gray-300 hover:bg-gray-800 hover:text-white"
             >
-              <Hash className="mr-2 h-4 w-4" />
-              Copy Channel ID
+              <HugeiconsIcon icon={HashtagIcon} className="mr-2 h-4 w-4" />
+              Copy01Icon Channel ID
             </DropdownMenuItem>
             {canManage && (
               <>
@@ -444,7 +465,10 @@ function ConnectionItem({
                   onClick={() => onBlacklist(connection.serverId)}
                   className="text-orange-300 hover:bg-orange-600/10 hover:text-orange-200"
                 >
-                  <Ban className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    icon={LegalHammerIcon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Blacklist Server
                 </DropdownMenuItem>
                 <DropdownMenuItem
@@ -456,7 +480,7 @@ function ConnectionItem({
                   }
                   className="text-red-300 hover:bg-red-600/10 hover:text-red-200"
                 >
-                  <Trash className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon icon={Delete02Icon} className="mr-2 h-4 w-4" />
                   Remove Connection
                 </DropdownMenuItem>
               </>

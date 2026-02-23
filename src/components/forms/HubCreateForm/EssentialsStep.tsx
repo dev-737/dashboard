@@ -1,4 +1,10 @@
-import { ArrowRight, Check, Loader2, Sparkles } from 'lucide-react';
+import {
+  ArrowRightIcon,
+  Loading03Icon,
+  SparklesIcon,
+  Tick01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type React from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -61,7 +67,7 @@ export function EssentialsStep({
     <>
       <CardHeader className="pb-6 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-indigo-600">
-          <Sparkles className="h-8 w-8 text-white" />
+          <HugeiconsIcon icon={SparklesIcon} className="h-8 w-8 text-white" />
         </div>
         <CardTitle className="text-2xl">Hub Essentials</CardTitle>
         <CardDescription className="text-base">
@@ -89,14 +95,17 @@ export function EssentialsStep({
             <div className="text-sm">
               {isValidatingName && (
                 <span className="flex items-center text-indigo-400">
-                  <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                  <HugeiconsIcon
+                    icon={Loading03Icon}
+                    className="mr-1 h-3 w-3 animate-spin"
+                  />
                   Checking availability...
                 </span>
               )}
               {nameError && <span className="text-red-400">{nameError}</span>}
               {isNameValid && name.length >= 3 && !isValidatingName && (
                 <span className="flex items-center text-green-400">
-                  <Check className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon icon={Tick01Icon} className="mr-1 h-3 w-3" />
                   Name is available
                 </span>
               )}
@@ -183,9 +192,12 @@ export function EssentialsStep({
             className="text-gray-400 hover:bg-gray-800/50 hover:text-white"
           >
             {isSubmitting ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <HugeiconsIcon
+                icon={Loading03Icon}
+                className="mr-2 h-4 w-4 animate-spin"
+              />
             ) : (
-              <Check className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={Tick01Icon} className="mr-2 h-4 w-4" />
             )}
             Create & Finish
           </Button>
@@ -196,7 +208,7 @@ export function EssentialsStep({
             className="btn-primary border-none px-8"
           >
             Customize More
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <HugeiconsIcon icon={ArrowRightIcon} className="ml-2 h-4 w-4" />
           </Button>
         </div>
       </CardContent>

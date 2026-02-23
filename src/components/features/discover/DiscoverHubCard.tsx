@@ -1,7 +1,16 @@
 'use client';
 
-import { Eye, Handshake, MessageCircle, Star, Users } from 'lucide-react';
+import {
+  Agreement01Icon,
+  EyeIcon,
+  Message01Icon,
+  StarIcon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import Link from 'next/link';
+
 import { memo } from 'react';
 import JoinButton from '@/app/hubs/components/hub-detail/JoinButton';
 import { Button } from '@/components/ui/button';
@@ -124,7 +133,10 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div className="flex h-4 w-4 shrink-0 cursor-help items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-violet-600">
-                      <Handshake className="h-2.5 w-2.5 text-white" />
+                      <HugeiconsIcon
+                        icon={Agreement01Icon}
+                        className="h-2.5 w-2.5 text-white"
+                      />
                     </div>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -139,7 +151,10 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div className="flex cursor-help items-center gap-1.5">
-                    <Users className="h-4 w-4 text-emerald-400" />
+                    <HugeiconsIcon
+                      icon={UserMultipleIcon}
+                      className="h-4 w-4 text-emerald-400"
+                    />
                     <span className="text-gray-300">
                       {formatNumber(_count.connections)}
                     </span>
@@ -152,7 +167,10 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div className="flex cursor-help items-center gap-1.5">
-                    <MessageCircle className="h-4 w-4 text-purple-400" />
+                    <HugeiconsIcon
+                      icon={Message01Icon}
+                      className="h-4 w-4 text-purple-400"
+                    />
                     <span className="text-gray-300">
                       {formatNumber(weeklyMessageCount)}
                     </span>
@@ -169,7 +187,8 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-0.5">
                   {[1, 2, 3, 4, 5].map((starIndex) => (
-                    <Star
+                    <HugeiconsIcon
+                      icon={StarIcon}
                       key={starIndex}
                       className={cn(
                         'h-3.5 w-3.5',
@@ -223,7 +242,7 @@ const DiscoverHubCard = memo(function DiscoverHubCard({
         <div className="flex w-full gap-3">
           <Link href={`/hubs/${id}`} className="flex-1">
             <Button className="btn-primary group w-full text-base">
-              <Eye className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={EyeIcon} className="mr-2 h-4 w-4" />
               View Hub
             </Button>
           </Link>

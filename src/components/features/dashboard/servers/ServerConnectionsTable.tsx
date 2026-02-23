@@ -1,17 +1,20 @@
 'use client';
 
+import {
+  Delete02Icon,
+  LegalHammerIcon,
+  LinkSquare02Icon,
+  MoreHorizontalIcon,
+  PauseIcon,
+  PlayIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
-import {
-  ExternalLink,
-  MoreHorizontal,
-  Power,
-  PowerOff,
-  Settings,
-  Trash2,
-} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { DeleteConnectionDialog } from '@/components/features/dashboard/connections/DeleteConnectionDialog';
@@ -206,7 +209,10 @@ export function ServerConnectionsTable({
                         disabled={isLoading}
                       >
                         <span className="sr-only">Open menu</span>
-                        <MoreHorizontal className="h-4 w-4" />
+                        <HugeiconsIcon
+                          icon={MoreHorizontalIcon}
+                          className="h-4 w-4"
+                        />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
@@ -221,7 +227,10 @@ export function ServerConnectionsTable({
                           target="_blank"
                           className="flex w-full items-center"
                         >
-                          <ExternalLink className="mr-2 h-4 w-4" />
+                          <HugeiconsIcon
+                            icon={LinkSquare02Icon}
+                            className="mr-2 h-4 w-4"
+                          />
                           View Hub
                         </Link>
                       </DropdownMenuItem>
@@ -230,7 +239,10 @@ export function ServerConnectionsTable({
                           href={`/dashboard/connections/${connection.id}/edit`}
                           className="flex w-full items-center"
                         >
-                          <Settings className="mr-2 h-4 w-4" />
+                          <HugeiconsIcon
+                            icon={LegalHammerIcon}
+                            className="mr-2 h-4 w-4"
+                          />
                           Edit Connection
                         </Link>
                       </DropdownMenuItem>
@@ -248,12 +260,18 @@ export function ServerConnectionsTable({
                       >
                         {connection.connected ? (
                           <>
-                            <PowerOff className="mr-2 h-4 w-4" />
+                            <HugeiconsIcon
+                              icon={PauseIcon}
+                              className="mr-2 h-4 w-4"
+                            />
                             Pause Connection
                           </>
                         ) : (
                           <>
-                            <Power className="mr-2 h-4 w-4" />
+                            <HugeiconsIcon
+                              icon={PlayIcon}
+                              className="mr-2 h-4 w-4"
+                            />
                             Unpause Connection
                           </>
                         )}
@@ -268,7 +286,10 @@ export function ServerConnectionsTable({
                         }}
                         disabled={isLoading}
                       >
-                        <Trash2 className="mr-2 h-4 w-4" />
+                        <HugeiconsIcon
+                          icon={Delete02Icon}
+                          className="mr-2 h-4 w-4"
+                        />
                         Delete Connection
                       </DropdownMenuItem>
                     </DropdownMenuContent>

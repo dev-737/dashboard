@@ -1,7 +1,13 @@
 'use client';
 
+import {
+  Loading03Icon,
+  LockIcon,
+  Search01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useQuery } from '@tanstack/react-query';
-import { Loader2, Lock } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -107,13 +113,16 @@ export function DiscordRoleSelector({
       {serverId ? (
         <Command className="overflow-hidden rounded-lg border border-gray-700/50 bg-gray-800/50">
           <CommandInput
-            placeholder="Search roles..."
+            placeholder="Search01Icon roles..."
             className="border-0 border-gray-700/50 border-b bg-transparent focus:ring-0"
           />
           <CommandList className="max-h-[300px] overflow-y-auto">
             {isLoading ? (
               <div className="flex items-center justify-center py-4">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin text-gray-400" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="mr-2 h-4 w-4 animate-spin text-gray-400"
+                />
                 <span className="text-gray-400">Loading roles...</span>
               </div>
             ) : error ? (
@@ -181,7 +190,7 @@ export function DiscordRoleSelector({
       {/* Locked state overlay */}
       {!isAccessible && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg bg-gray-900/80 backdrop-blur-sm">
-          <Lock className="h-6 w-6 text-amber-400" />
+          <HugeiconsIcon icon={LockIcon} className="h-6 w-6 text-amber-400" />
           <p className="px-4 text-center text-gray-300 text-sm">
             You don't have access to this server
           </p>

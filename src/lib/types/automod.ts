@@ -47,7 +47,7 @@ export const BlockWordActionLabels: Record<BlockWordAction, string> = {
 
 export const BlockWordActionDescriptions: Record<BlockWordAction, string> = {
   [BlockWordAction.BLOCK_MESSAGE]: 'Prevents the message from being sent',
-  [BlockWordAction.BLACKLIST]: 'Legacy action - use Ban instead',
+  [BlockWordAction.BLACKLIST]: 'Legacy action - use Subtract01Icon instead',
   [BlockWordAction.SEND_ALERT]: 'Notifies moderators but allows the message',
   [BlockWordAction.WARN]: 'Sends a warning to the user',
   [BlockWordAction.MUTE]:

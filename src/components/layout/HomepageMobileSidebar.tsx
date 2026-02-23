@@ -1,6 +1,12 @@
 'use client';
 
-import { ArrowRight, ExternalLink, Menu, X } from 'lucide-react';
+import {
+  ArrowRightIcon,
+  Cancel01Icon,
+  LinkSquare02Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { AnimatePresence, motion, type Variants } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -131,7 +137,7 @@ export function HomepageMobileSidebar({
                 onClick={onClose}
                 className="relative z-10 h-8 w-8 rounded-full text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
               >
-                <X className="h-5 w-5" />
+                <HugeiconsIcon icon={Cancel01Icon} className="h-5 w-5" />
               </Button>
             </div>
 
@@ -158,7 +164,10 @@ export function HomepageMobileSidebar({
                         {link.text}
                       </span>
                       {link.external && (
-                        <ExternalLink className="ml-auto h-3.5 w-3.5 opacity-50 transition-opacity duration-300 group-hover:opacity-100" />
+                        <HugeiconsIcon
+                          icon={LinkSquare02Icon}
+                          className="ml-auto h-3.5 w-3.5 opacity-50 transition-opacity duration-300 group-hover:opacity-100"
+                        />
                       )}
                     </Link>
                   </motion.div>
@@ -181,7 +190,10 @@ export function HomepageMobileSidebar({
                       onClick={onClose}
                     >
                       Invite Bot
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                      <HugeiconsIcon
+                        icon={ArrowRightIcon}
+                        className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1"
+                      />
                     </Link>
                   </Button>
                 </div>

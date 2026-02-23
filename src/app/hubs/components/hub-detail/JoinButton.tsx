@@ -1,6 +1,8 @@
 'use client';
 
-import { LogIn } from 'lucide-react';
+import { Login01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -59,7 +61,7 @@ export default function JoinButton({
         {...props}
       >
         {!resolvedAuthenticated && !isSessionLoading && (
-          <LogIn className="mr-2 h-4 w-4" />
+          <HugeiconsIcon icon={Login01Icon} className="mr-2 h-4 w-4" />
         )}
         <span>Join</span>
       </Button>

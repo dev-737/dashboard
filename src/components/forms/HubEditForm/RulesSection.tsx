@@ -1,4 +1,11 @@
-import { ArrowDown, ArrowUp, MessageSquare, Plus, X } from 'lucide-react';
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  Cancel01Icon,
+  Message02Icon,
+  PlusSignIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -61,7 +68,7 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
           disabled={!newRule.trim()}
           className="border-gray-700/50 bg-gray-800/50 hover:bg-gray-700/50 hover:text-white"
         >
-          <Plus className="mr-1 h-4 w-4" />
+          <HugeiconsIcon icon={PlusSignIcon} className="mr-1 h-4 w-4" />
           Add Rule
         </Button>
       </div>
@@ -99,7 +106,7 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
                         disabled={index === 0}
                         className="h-8 w-8 p-0 hover:bg-gray-700/50"
                       >
-                        <ArrowUp className="h-4 w-4" />
+                        <HugeiconsIcon icon={ArrowUpIcon} className="h-4 w-4" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -117,7 +124,10 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
                         disabled={index === rules.length - 1}
                         className="h-8 w-8 p-0 hover:bg-gray-700/50"
                       >
-                        <ArrowDown className="h-4 w-4" />
+                        <HugeiconsIcon
+                          icon={ArrowDownIcon}
+                          className="h-4 w-4"
+                        />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -140,13 +150,16 @@ export function RulesSection({ rules, setRules }: RulesSectionProps) {
                 onClick={() => handleRemoveRule(index)}
                 className="h-8 w-8 p-0 hover:bg-red-600/20 hover:text-red-400"
               >
-                <X className="h-4 w-4" />
+                <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
               </Button>
             </div>
           ))
         ) : (
           <div className="py-8 text-center text-gray-500">
-            <MessageSquare className="mx-auto mb-3 h-12 w-12 opacity-50" />
+            <HugeiconsIcon
+              icon={Message02Icon}
+              className="mx-auto mb-3 h-12 w-12 opacity-50"
+            />
             <p>No rules added yet</p>
             <p className="text-sm">
               Add your first rule to help maintain a positive environment.

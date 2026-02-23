@@ -1,4 +1,5 @@
-import { Globe, Palette } from 'lucide-react';
+import { GlobeIcon, PaintBoardIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
@@ -105,7 +106,10 @@ export default async function HubDiscoverabilityPage({
           <div className="rounded-lg border border-blue-500/20 bg-linear-to-br from-blue-500/10 to-cyan-600/10 p-6">
             <div className="mb-3 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
-                <Palette className="h-5 w-5 text-blue-400" />
+                <HugeiconsIcon
+                  icon={PaintBoardIcon}
+                  className="h-5 w-5 text-blue-400"
+                />
               </div>
               <h3 className="font-semibold text-white">Appearance</h3>
             </div>
@@ -118,7 +122,10 @@ export default async function HubDiscoverabilityPage({
           <div className="rounded-lg border border-green-500/20 bg-linear-to-br from-green-500/10 to-emerald-600/10 p-6">
             <div className="mb-3 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/20">
-                <Globe className="h-5 w-5 text-green-400" />
+                <HugeiconsIcon
+                  icon={GlobeIcon}
+                  className="h-5 w-5 text-green-400"
+                />
               </div>
               <h3 className="font-semibold text-white">Discovery</h3>
             </div>
@@ -130,7 +137,10 @@ export default async function HubDiscoverabilityPage({
           <div className="rounded-lg border border-yellow-500/20 bg-linear-to-br from-yellow-500/10 to-amber-600/10 p-6">
             <div className="mb-3 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-500/20">
-                <Globe className="h-5 w-5 text-yellow-400" />
+                <HugeiconsIcon
+                  icon={GlobeIcon}
+                  className="h-5 w-5 text-yellow-400"
+                />
               </div>
               <h3 className="font-semibold text-white">NSFW Configuration</h3>
             </div>

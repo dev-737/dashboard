@@ -1,22 +1,25 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import {
-  Bell,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  FileText,
-  Gavel,
-  Globe,
-  Home,
-  MessageSquare,
-  Package,
-  Shield,
-  Users,
-} from 'lucide-react';
+  ArrowDown01Icon,
+  ArrowLeft01Icon,
+  ArrowRight01Icon,
+  File01Icon,
+  GlobeIcon,
+  Home01Icon,
+  LegalHammerIcon,
+  Message02Icon,
+  Notification03Icon,
+  Package01Icon,
+  Shield01Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+import type { IconSvgElement } from '@hugeicons/react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { useQuery } from '@tanstack/react-query';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -51,7 +54,7 @@ interface HubSidebarProps {
 
 interface SidebarNavItemProps {
   href: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: IconSvgElement;
   label: string;
   active: boolean;
   isCollapsed: boolean;
@@ -65,7 +68,7 @@ interface SidebarNavItemProps {
 interface NavigationItem {
   value: string;
   label: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: IconSvgElement;
   href: string;
   show:
     | boolean
@@ -113,14 +116,19 @@ function SidebarNavItem({
           active ? 'text-purple-400' : 'text-gray-500 group-hover:text-gray-300'
         )}
       >
-        <Icon className="h-5 w-5" />
+        <HugeiconsIcon icon={Icon} className="h-5 w-5" />
       </div>
 
       {!isCollapsed && (
         <div className="flex flex-1 items-center justify-between overflow-hidden">
           <span className="truncate font-medium text-sm">{label}</span>
           <div className="flex items-center gap-2">
-            {locked && <Shield className="h-3 w-3 text-gray-600" />}
+            {locked && (
+              <HugeiconsIcon
+                icon={Shield01Icon}
+                className="h-3 w-3 text-gray-600"
+              />
+            )}
             {comingSoon && (
               <span className="rounded-full bg-blue-500/10 px-1.5 py-0.5 font-medium text-[10px] text-blue-400 leading-none">
                 SOON
@@ -154,7 +162,12 @@ function SidebarNavItem({
             className="flex items-center gap-2 border-gray-800 bg-gray-900 text-gray-200"
           >
             {label}
-            {locked && <Shield className="h-3 w-3 text-gray-500" />}
+            {locked && (
+              <HugeiconsIcon
+                icon={Shield01Icon}
+                className="h-3 w-3 text-gray-500"
+              />
+            )}
             {comingSoon && (
               <span className="rounded bg-blue-500/20 px-1 py-0.5 text-[10px] text-blue-400">
                 SOON
@@ -222,7 +235,7 @@ function SidebarSection({
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
         >
-          <ChevronRight className="h-3 w-3" />
+          <HugeiconsIcon icon={ArrowRight01Icon} className="h-3 w-3" />
         </motion.div>
       </button>
 
@@ -265,14 +278,14 @@ export function HubSidebar({
         {
           value: 'overview',
           label: 'Overview',
-          icon: MessageSquare,
+          icon: Message02Icon,
           href: `/dashboard/hubs/${hubId}`,
           show: true,
         },
         {
           value: 'discovery',
           label: 'Discovery',
-          icon: Globe,
+          icon: GlobeIcon,
           href: `/dashboard/hubs/${hubId}/discoverability`,
           show: true,
           locked: ({ canEdit }) => !canEdit,
@@ -288,21 +301,21 @@ export function HubSidebar({
         {
           value: 'members',
           label: 'Team',
-          icon: Users,
+          icon: UserMultipleIcon,
           href: `/dashboard/hubs/${hubId}/members`,
           show: ({ canEdit }) => canEdit,
         },
         {
           value: 'connections',
           label: 'Connections',
-          icon: Home,
+          icon: Home01Icon,
           href: `/dashboard/hubs/${hubId}/connections`,
           show: ({ canModerate }) => canModerate,
         },
         {
           value: 'logging',
           label: 'Logging',
-          icon: FileText,
+          icon: File01Icon,
           href: `/dashboard/hubs/${hubId}/logging`,
           show: true,
           locked: ({ canEdit }) => !canEdit,
@@ -311,7 +324,7 @@ export function HubSidebar({
         {
           value: 'modules',
           label: 'Modules',
-          icon: Package,
+          icon: Package01Icon,
           href: `/dashboard/hubs/${hubId}/modules`,
           show: true,
         },
@@ -325,28 +338,28 @@ export function HubSidebar({
         {
           value: 'reports',
           label: 'Reports',
-          icon: Shield,
+          icon: Shield01Icon,
           href: `/dashboard/hubs/${hubId}/reports`,
           show: ({ canModerate }) => canModerate,
         },
         {
           value: 'appeals',
           label: 'Appeals',
-          icon: Bell,
+          icon: Notification03Icon,
           href: `/dashboard/hubs/${hubId}/appeals`,
           show: ({ canModerate }) => canModerate,
         },
         {
           value: 'infractions',
           label: 'Infractions',
-          icon: Gavel,
+          icon: LegalHammerIcon,
           href: `/dashboard/hubs/${hubId}/infractions`,
           show: ({ canModerate }) => canModerate,
         },
         {
           value: 'automod',
           label: 'AutoMod',
-          icon: Shield,
+          icon: Shield01Icon,
           href: `/dashboard/hubs/${hubId}/automod`,
           show: ({ canModerate }) => canModerate,
         },
@@ -392,7 +405,10 @@ export function HubSidebar({
                     {hub?.name || 'Loading...'}
                   </span>
                 </div>
-                <ChevronDown className="h-4 w-4 shrink-0 text-gray-500 transition-colors group-hover:text-gray-300" />
+                <HugeiconsIcon
+                  icon={ArrowDown01Icon}
+                  className="h-4 w-4 shrink-0 text-gray-500 transition-colors group-hover:text-gray-300"
+                />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -511,7 +527,7 @@ export function HubSidebar({
               animate={{ rotate: isCollapsed ? 0 : 180 }}
               transition={{ duration: 0.3 }}
             >
-              <ChevronLeft className="h-4 w-4" />
+              <HugeiconsIcon icon={ArrowLeft01Icon} className="h-4 w-4" />
             </motion.div>
           </Button>
         </div>

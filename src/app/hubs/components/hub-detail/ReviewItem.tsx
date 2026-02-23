@@ -1,7 +1,9 @@
 'use client';
 
+import { Delete02Icon, StarIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Star, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -96,7 +98,8 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
-              <Star
+              <HugeiconsIcon
+                icon={StarIcon}
                 key={`review-star-${i + 1}`}
                 className={cn(
                   'h-4 w-4',
@@ -116,7 +119,7 @@ export default function ReviewItem({ review, hubId }: ReviewItemProps) {
               disabled={isDeleting}
               title="Delete review"
             >
-              <Trash2 className="h-4 w-4" />
+              <HugeiconsIcon icon={Delete02Icon} className="h-4 w-4" />
               <span className="sr-only">Delete</span>
             </Button>
           )}

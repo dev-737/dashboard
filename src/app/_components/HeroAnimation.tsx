@@ -1,5 +1,6 @@
 'use client';
 
+import { HugeiconsIcon } from '@hugeicons/react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 
@@ -338,7 +339,6 @@ export function HeroAnimation() {
             ))}
           </div>
 
-          {/* Infinite Scale Hint */}
           <motion.div
             animate={{ opacity: [0.3, 0.7, 0.3] }}
             transition={{ duration: 2, repeat: Infinity }}

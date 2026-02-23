@@ -1,9 +1,17 @@
+import {
+  Cancel01Icon,
+  Clock01Icon,
+  Message01Icon,
+  Shield01Icon,
+  Tick01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { formatDistanceToNow } from 'date-fns';
-import { Check, Clock, MessageCircle, Shield, X } from 'lucide-react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { redirect } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -118,7 +126,10 @@ export default async function MyAppealsPage(props: {
         <CardContent>
           {appeals.length === 0 ? (
             <div className="py-8 text-center">
-              <MessageCircle className="mx-auto mb-4 h-12 w-12 text-gray-500" />
+              <HugeiconsIcon
+                icon={Message01Icon}
+                className="mx-auto mb-4 h-12 w-12 text-gray-500"
+              />
               <h3 className="mb-2 font-medium text-lg">No Appeals Found</h3>
               <p className="mb-4 text-gray-400">
                 You haven&apos;t submitted any appeals yet.
@@ -157,7 +168,7 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
             variant="outline"
             className="border-yellow-500/20 bg-yellow-500/10 text-yellow-500"
           >
-            <Clock className="mr-1 h-3 w-3" />
+            <HugeiconsIcon icon={Clock01Icon} className="mr-1 h-3 w-3" />
             Pending
           </Badge>
         );
@@ -167,7 +178,7 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
             variant="outline"
             className="border-green-500/20 bg-green-500/10 text-green-500"
           >
-            <Check className="mr-1 h-3 w-3" />
+            <HugeiconsIcon icon={Tick01Icon} className="mr-1 h-3 w-3" />
             Accepted
           </Badge>
         );
@@ -177,7 +188,7 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
             variant="outline"
             className="border-red-500/20 bg-red-500/10 text-red-500"
           >
-            <X className="mr-1 h-3 w-3" />
+            <HugeiconsIcon icon={Cancel01Icon} className="mr-1 h-3 w-3" />
             Rejected
           </Badge>
         );
@@ -219,7 +230,10 @@ function MyAppealCard({ appeal }: MyAppealCardProps) {
       </div>
       <div className="mb-3 rounded-md border border-gray-800/50 bg-gray-800/30 p-3">
         <div className="mb-2 flex items-center gap-2">
-          <Shield className="h-4 w-4 text-gray-400" />
+          <HugeiconsIcon
+            icon={Shield01Icon}
+            className="h-4 w-4 text-gray-400"
+          />
           <h4 className="font-medium text-sm">Infraction Details</h4>
         </div>
         <div className="mb-1 flex items-center gap-2">

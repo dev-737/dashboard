@@ -1,6 +1,12 @@
 'use client';
 
-import { Check, Clock, HelpCircle } from 'lucide-react';
+import {
+  Clock01Icon,
+  HelpCircleIcon,
+  Tick01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -91,7 +97,12 @@ export function ActionSelector({
                             : 'border-gray-500'
                         }`}
                       >
-                        {isSelected && <Check className="h-3 w-3 text-white" />}
+                        {isSelected && (
+                          <HugeiconsIcon
+                            icon={Tick01Icon}
+                            className="h-3 w-3 text-white"
+                          />
+                        )}
                       </div>
                       <span className="font-medium text-sm text-white">
                         {BlockWordActionLabels[action]}
@@ -114,7 +125,10 @@ export function ActionSelector({
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <div className="ml-2">
-                          <HelpCircle className="h-4 w-4 text-gray-500" />
+                          <HugeiconsIcon
+                            icon={HelpCircleIcon}
+                            className="h-4 w-4 text-gray-500"
+                          />
                         </div>
                       </TooltipTrigger>
                       <TooltipContent className="max-w-xs border-gray-700 bg-gray-800 text-white">
@@ -144,7 +158,10 @@ export function ActionSelector({
         <Card className="border-gray-700 bg-gray-800/50 p-4">
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4 text-purple-400" />
+              <HugeiconsIcon
+                icon={Clock01Icon}
+                className="h-4 w-4 text-purple-400"
+              />
               <Label className="font-medium text-gray-300 text-sm">
                 Mute Duration
               </Label>

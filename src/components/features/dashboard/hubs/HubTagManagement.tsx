@@ -1,16 +1,18 @@
 'use client';
 
 import {
-  AlertCircle,
-  Check,
-  Loader2,
-  Plus,
-  Save,
-  Search,
-  Sparkles,
-  Tag,
-  TrendingUp,
-} from 'lucide-react';
+  AlertCircleIcon,
+  ChartIncreaseIcon,
+  FloppyDiskIcon,
+  Loading03Icon,
+  PlusSignIcon,
+  Search01Icon,
+  SparklesIcon,
+  Tag01Icon,
+  Tick01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -118,7 +120,7 @@ export function HubTagManagement({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-r from-blue-500 to-purple-500">
-            <Tag className="h-5 w-5 text-white" />
+            <HugeiconsIcon icon={Tag01Icon} className="h-5 w-5 text-white" />
           </div>
           <div>
             <h3 className="font-semibold text-lg text-white">Tag Management</h3>
@@ -152,17 +154,20 @@ export function HubTagManagement({
           >
             {isSaving ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="mr-2 h-4 w-4 animate-spin"
+                />
                 Saving...
               </>
             ) : hasChanges ? (
               <>
-                <Save className="mr-2 h-4 w-4" />
+                <HugeiconsIcon icon={FloppyDiskIcon} className="mr-2 h-4 w-4" />
                 Save Changes
               </>
             ) : (
               <>
-                <Check className="mr-2 h-4 w-4" />
+                <HugeiconsIcon icon={Tick01Icon} className="mr-2 h-4 w-4" />
                 Saved
               </>
             )}
@@ -174,7 +179,7 @@ export function HubTagManagement({
       <Card className="premium-card backdrop-blur-sm">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-white">
-            <Search className="h-5 w-5" />
+            <HugeiconsIcon icon={Search01Icon} className="h-5 w-5" />
             Add & Remove Tags
           </CardTitle>
         </CardHeader>
@@ -183,7 +188,7 @@ export function HubTagManagement({
           <TagSelector
             selectedTags={selectedTags}
             onTagsChange={handleTagsChange}
-            placeholder="Search for tags or create new ones..."
+            placeholder="Search01Icon for tags or create new ones..."
             maxTags={5}
             showPopular={true}
           />
@@ -197,7 +202,10 @@ export function HubTagManagement({
               className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-4"
             >
               <div className="mb-2 flex items-center gap-2">
-                <AlertCircle className="h-4 w-4 text-blue-400" />
+                <HugeiconsIcon
+                  icon={AlertCircleIcon}
+                  className="h-4 w-4 text-blue-400"
+                />
                 <span className="font-medium text-blue-300 text-sm">
                   Pending Changes
                 </span>
@@ -237,14 +245,20 @@ export function HubTagManagement({
         <Card className="premium-card backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-base text-white">
-              <TrendingUp className="h-4 w-4 text-orange-400" />
+              <HugeiconsIcon
+                icon={ChartIncreaseIcon}
+                className="h-4 w-4 text-orange-400"
+              />
               Popular Tags
             </CardTitle>
           </CardHeader>
           <CardContent>
             {isLoadingPopular ? (
               <div className="flex items-center justify-center py-4">
-                <Loader2 className="h-5 w-5 animate-spin text-gray-400" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="h-5 w-5 animate-spin text-gray-400"
+                />
               </div>
             ) : (
               <div className="flex flex-wrap gap-2">
@@ -265,9 +279,15 @@ export function HubTagManagement({
                     )}
                   >
                     {selectedTags.includes(tag.name) ? (
-                      <Check className="mr-1 h-3 w-3" />
+                      <HugeiconsIcon
+                        icon={Tick01Icon}
+                        className="mr-1 h-3 w-3"
+                      />
                     ) : (
-                      <Plus className="mr-1 h-3 w-3" />
+                      <HugeiconsIcon
+                        icon={PlusSignIcon}
+                        className="mr-1 h-3 w-3"
+                      />
                     )}
                     {tag.name}
                   </Button>
@@ -281,7 +301,10 @@ export function HubTagManagement({
         <Card className="premium-card backdrop-blur-sm">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-base text-white">
-              <Sparkles className="h-4 w-4 text-purple-400" />
+              <HugeiconsIcon
+                icon={SparklesIcon}
+                className="h-4 w-4 text-purple-400"
+              />
               Suggested for You
             </CardTitle>
           </CardHeader>
@@ -296,7 +319,10 @@ export function HubTagManagement({
       {/* Help Text */}
       <div className="premium-card p-4">
         <div className="flex items-start gap-3">
-          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-blue-400" />
+          <HugeiconsIcon
+            icon={AlertCircleIcon}
+            className="mt-0.5 h-5 w-5 shrink-0 text-blue-400"
+          />
           <div className="space-y-1 text-gray-400 text-sm">
             <p>
               <strong className="text-gray-300">Tag Guidelines:</strong>

@@ -1,8 +1,17 @@
 'use client';
 
-import { ArrowRight, Home, Sparkles, Users, Zap } from 'lucide-react';
+import {
+  ArrowRightIcon,
+  Home01Icon,
+  SparklesIcon,
+  UserMultipleIcon,
+  ZapIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 
 export function CTA() {
@@ -23,7 +32,7 @@ export function CTA() {
           className="mx-auto max-w-4xl"
         >
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-emerald-400 text-sm backdrop-blur-sm">
-            <Zap className="h-4 w-4 animate-pulse" />
+            <HugeiconsIcon icon={ZapIcon} className="h-4 w-4 animate-pulse" />
             <span className="font-semibold tracking-wide">
               Fast, clean, and easy to use
             </span>
@@ -52,16 +61,20 @@ export function CTA() {
             className="mb-16 flex flex-wrap justify-center gap-8"
           >
             {[
-              { icon: Users, label: '12,000+', sublabel: 'Connected Servers' },
-              { icon: Home, label: '30+', sublabel: 'Hubs Chatting Now' },
-              { icon: Zap, label: '99.9%', sublabel: 'Uptime' },
+              {
+                icon: UserMultipleIcon,
+                label: '12,000+',
+                sublabel: 'Connected Servers',
+              },
+              { icon: Home01Icon, label: '30+', sublabel: 'Hubs Chatting Now' },
+              { icon: ZapIcon, label: '99.9%', sublabel: 'Uptime' },
             ].map((stat) => (
               <div
                 key={stat.label}
                 className="flex items-center gap-4 rounded-2xl border border-white/5 bg-white/2 p-4 backdrop-blur-sm transition-all hover:bg-white/4"
               >
                 <div className="rounded-xl bg-blue-500/10 p-3 text-blue-400 ring-1 ring-blue-500/20">
-                  <stat.icon className="h-5 w-5" />
+                  <HugeiconsIcon icon={stat.icon} className="h-5 w-5" />
                 </div>
                 <div className="text-left">
                   <div className="font-bold text-white text-xl">
@@ -92,9 +105,15 @@ export function CTA() {
                 className="relative h-14 rounded-full bg-linear-to-r from-blue-600 to-purple-600 px-8 font-semibold text-white shadow-lg transition-all hover:shadow-blue-500/25"
               >
                 <Link href="/hubs" className="group flex items-center">
-                  <Sparkles className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                  <HugeiconsIcon
+                    icon={SparklesIcon}
+                    className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12"
+                  />
                   Discover Hubs
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  <HugeiconsIcon
+                    icon={ArrowRightIcon}
+                    className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                  />
                 </Link>
               </Button>
             </motion.div>
@@ -111,7 +130,10 @@ export function CTA() {
                   className="group flex items-center"
                 >
                   Learn how it works
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  <HugeiconsIcon
+                    icon={ArrowRightIcon}
+                    className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                  />
                 </Link>
               </Button>
             </motion.div>

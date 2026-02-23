@@ -1,3 +1,4 @@
+import { GlobeIcon } from '@hugeicons/core-free-icons';
 import Image from 'next/image';
 
 interface InterChatSpinnerProps {
@@ -16,7 +17,7 @@ export function InterChatSpinner({ size = 80 }: InterChatSpinnerProps) {
       <div className="absolute inset-0 flex items-center justify-center">
         <Image
           src="/assets/images/logos/GlobeInside.svg"
-          alt="InterChat Globe"
+          alt="InterChat GlobeIcon"
           width={size * 0.6}
           height={size * 0.6}
           className="select-none"

@@ -2,6 +2,11 @@
  * User router for tRPC
  */
 
+import {
+  FilterIcon,
+  Search01Icon,
+  Settings01Icon,
+} from '@hugeicons/core-free-icons';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod/v4';
 import type { Prisma } from '@/lib/generated/prisma/client/client';
@@ -21,7 +26,7 @@ interface DiscordGuild {
 const supportedLanguages = ['en', 'hi', 'es', 'pt', 'zh', 'ru', 'et'] as const;
 
 export const userRouter = router({
-  // Search for users
+  // Search01Icon for users
   // Get user by ID
   getById: protectedProcedure
     .input(z.object({ id: z.string() }))
@@ -136,7 +141,7 @@ export const userRouter = router({
 
       const userGuilds = (await userGuildsResponse.json()) as DiscordGuild[];
 
-      // Filter guilds where the user has manage permissions
+      // FilterIcon guilds where the user has manage permissions
       const manageableGuilds = userGuilds.filter((guild: DiscordGuild) => {
         const permissions = BigInt(guild.permissions);
         return (
@@ -156,7 +161,7 @@ export const userRouter = router({
 
       const botServerIds = new Set(serversWithBot.map((s) => s.id));
 
-      // Filter to only servers where bot is present
+      // FilterIcon to only servers where bot is present
       const serversWithBotPresent = manageableGuilds.filter((guild) =>
         botServerIds.has(guild.id)
       );
@@ -240,7 +245,7 @@ export const userRouter = router({
 
       return {
         user: updatedUser,
-        message: 'Settings updated successfully',
+        message: 'Settings01Icon updated successfully',
       };
     }),
 });

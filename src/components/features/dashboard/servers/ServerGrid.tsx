@@ -1,10 +1,20 @@
 'use client';
 
+import {
+  Clock01Icon,
+  FilterIcon,
+  Home01Icon,
+  LinkSquare02Icon,
+  Search01Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { formatDistanceToNow } from 'date-fns';
-import { Clock, ExternalLink, Home, Users } from 'lucide-react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import type { ServerDataWithConnections } from '@/actions/server-actions';
@@ -26,7 +36,7 @@ interface ServerGridProps {
 export function ServerGrid({ servers }: ServerGridProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter servers based on search query
+  // FilterIcon servers based on search query
   const filteredServers = servers.filter((server) =>
     server.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -36,7 +46,7 @@ export function ServerGrid({ servers }: ServerGridProps) {
       <div className="relative">
         <Input
           type="text"
-          placeholder="Search servers..."
+          placeholder="Search01Icon servers..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="border-gray-700/50 bg-transparent pl-10 focus-visible:ring-indigo-500/50"
@@ -49,7 +59,7 @@ export function ServerGrid({ servers }: ServerGridProps) {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <title>Search servers</title>
+            <title>Search01Icon servers</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -63,7 +73,10 @@ export function ServerGrid({ servers }: ServerGridProps) {
       {filteredServers.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
           <div className="mb-4 rounded-full bg-gray-800/50 p-3">
-            <Home className="h-6 w-6 text-gray-400" />
+            <HugeiconsIcon
+              icon={Home01Icon}
+              className="h-6 w-6 text-gray-400"
+            />
           </div>
           <h3 className="mb-2 font-medium text-lg">No matching servers</h3>
           <p className="max-w-md text-gray-400">
@@ -156,7 +169,10 @@ function ServerCard({ server, index }: ServerCardProps) {
             <div className="flex w-full items-center justify-between">
               <span className="flex items-center gap-1 text-gray-400">
                 <div className="flex h-5 w-5 items-center justify-center rounded-lg bg-blue-500/20 sm:h-6 sm:w-6">
-                  <Users className="h-3 w-3 text-blue-400" />
+                  <HugeiconsIcon
+                    icon={UserMultipleIcon}
+                    className="h-3 w-3 text-blue-400"
+                  />
                 </div>
                 <span className="hidden sm:inline">Connections</span>
                 <span className="sm:hidden">Conn.</span>
@@ -166,7 +182,10 @@ function ServerCard({ server, index }: ServerCardProps) {
             <div className="flex w-full items-center justify-between">
               <span className="flex items-center gap-1 text-gray-400">
                 <div className="flex h-5 w-5 items-center justify-center rounded-lg bg-gray-500/20 sm:h-6 sm:w-6">
-                  <Clock className="h-3 w-3 text-gray-400" />
+                  <HugeiconsIcon
+                    icon={Clock01Icon}
+                    className="h-3 w-3 text-gray-400"
+                  />
                 </div>
                 <span className="hidden sm:inline">Last Active</span>
                 <span className="sm:hidden">Active</span>
@@ -178,7 +197,10 @@ function ServerCard({ server, index }: ServerCardProps) {
             <div className="flex w-full items-center justify-between">
               <span className="flex items-center gap-1 text-gray-400">
                 <div className="flex h-5 w-5 items-center justify-center rounded-lg bg-indigo-500/20 sm:h-6 sm:w-6">
-                  <Home className="h-3 w-3 text-indigo-400" />
+                  <HugeiconsIcon
+                    icon={Home01Icon}
+                    className="h-3 w-3 text-indigo-400"
+                  />
                 </div>
                 <span className="hidden sm:inline">Bot Added</span>
                 <span className="sm:hidden">Bot</span>
@@ -202,7 +224,7 @@ function ServerCard({ server, index }: ServerCardProps) {
               className="mt-2 w-full rounded-xl border-none bg-linear-to-r from-gray-800 to-gray-800 shadow-lg transition-all duration-200 hover:from-gray-600 hover:to-gray-700 hover:shadow-gray-500/25"
             >
               <Link href={`/dashboard/servers/${server.id}`}>
-                <Home className="mr-2 h-4 w-4" />
+                <HugeiconsIcon icon={Home01Icon} className="mr-2 h-4 w-4" />
                 <span className="hidden sm:inline">Manage Server</span>
                 <span className="sm:hidden">Manage</span>
               </Link>
@@ -217,7 +239,10 @@ function ServerCard({ server, index }: ServerCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ExternalLink className="mr-2 h-4 w-4" />
+                <HugeiconsIcon
+                  icon={LinkSquare02Icon}
+                  className="mr-2 h-4 w-4"
+                />
                 <span className="hidden sm:inline">Add Bot</span>
                 <span className="sm:hidden">Add</span>
               </Link>

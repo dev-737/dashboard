@@ -1,4 +1,5 @@
-import { Star } from 'lucide-react';
+import { StarIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type React from 'react';
 import { cn } from '@/lib/utils';
 
@@ -24,7 +25,8 @@ const HubReviewAnalytics: React.FC<HubReviewAnalyticsProps> = ({
           </span>
           <div className="mb-1 flex items-center text-amber-400">
             {Array.from({ length: 5 }).map((_, i) => (
-              <Star
+              <HugeiconsIcon
+                icon={StarIcon}
                 key={`rating-star-${i + 1}`}
                 className={cn(
                   'h-4 w-4',
@@ -51,7 +53,10 @@ const HubReviewAnalytics: React.FC<HubReviewAnalyticsProps> = ({
                 <span className="font-medium text-gray-300 text-sm">
                   {item.rating}
                 </span>
-                <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+                <HugeiconsIcon
+                  icon={StarIcon}
+                  className="h-3 w-3 fill-amber-400 text-amber-400"
+                />
               </div>
               <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-700">
                 <div

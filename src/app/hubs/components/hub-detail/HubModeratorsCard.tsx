@@ -1,4 +1,5 @@
-import { Shield } from 'lucide-react';
+import { Shield01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import Image from 'next/image';
 import type React from 'react';
 
@@ -16,7 +17,10 @@ const HubModeratorsCard: React.FC<HubModeratorsCardProps> = ({
   return (
     <div className="rounded-xl border border-gray-800/70 bg-gray-900/60 p-4 shadow-lg backdrop-blur-md sm:p-6">
       <h3 className="mb-3 flex items-center font-semibold text-lg text-white sm:mb-5 sm:text-xl">
-        <Shield className="mr-2 h-4 w-4 text-primary sm:h-5 sm:w-5" />
+        <HugeiconsIcon
+          icon={Shield01Icon}
+          className="mr-2 h-4 w-4 text-primary sm:h-5 sm:w-5"
+        />
         Moderators
       </h3>
       {moderators && moderators.length > 0 ? (

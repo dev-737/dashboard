@@ -1,18 +1,21 @@
 'use client';
 
-import { formatDistanceToNow } from 'date-fns';
 import {
-  Activity,
-  AlertCircle,
-  Calendar,
-  CheckCircle,
-  Globe,
-  Hash,
-  Link as LinkIcon,
-  Server,
-  Shield,
-  Zap,
-} from 'lucide-react';
+  ActivityIcon,
+  AlertCircleIcon,
+  Calendar01Icon,
+  CheckmarkCircle01Icon,
+  GlobeIcon,
+  HashtagIcon,
+  Link01Icon,
+  ServerStackIcon,
+  Settings01Icon,
+  Shield01Icon,
+  ZapIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
+import { formatDistanceToNow } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -50,7 +53,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
           <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-2">
-                <Activity className="h-5 w-5 text-blue-400" />
+                <HugeiconsIcon
+                  icon={ActivityIcon}
+                  className="h-5 w-5 text-blue-400"
+                />
               </div>
               <div>
                 <CardTitle className="text-xl">Connection Overview</CardTitle>
@@ -69,12 +75,18 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             >
               {connection.connected ? (
                 <>
-                  <CheckCircle className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    icon={CheckmarkCircle01Icon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Active Connection
                 </>
               ) : (
                 <>
-                  <AlertCircle className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    icon={AlertCircleIcon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Inactive Connection
                 </>
               )}
@@ -88,7 +100,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-4 transition-colors hover:bg-gray-900/30">
               <div className="mb-3 flex items-center gap-3">
                 <div className="rounded-md border border-purple-500/20 bg-purple-500/10 p-2">
-                  <Globe className="h-4 w-4 text-purple-400" />
+                  <HugeiconsIcon
+                    icon={GlobeIcon}
+                    className="h-4 w-4 text-purple-400"
+                  />
                 </div>
                 <div>
                   <div className="font-medium text-white">Connected Hub</div>
@@ -123,7 +138,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-4 transition-colors hover:bg-gray-900/30">
               <div className="mb-3 flex items-center gap-3">
                 <div className="rounded-md border border-indigo-500/20 bg-indigo-500/10 p-2">
-                  <Server className="h-4 w-4 text-indigo-400" />
+                  <HugeiconsIcon
+                    icon={ServerStackIcon}
+                    className="h-4 w-4 text-indigo-400"
+                  />
                 </div>
                 <div>
                   <div className="font-medium text-white">Discord Server</div>
@@ -137,7 +155,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
                   {connection.server.name}
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <Hash className="h-3 w-3 text-gray-400" />
+                  <HugeiconsIcon
+                    icon={HashtagIcon}
+                    className="h-3 w-3 text-gray-400"
+                  />
                   <span className="font-mono text-gray-300 text-xs">
                     {connection.channelId}
                   </span>
@@ -152,12 +173,13 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             </div>
           </div>
 
-          {/* Quick Settings Grid */}
+          {/* Quick Settings01Icon Grid */}
           <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
             {/* Connection Status */}
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-3 text-center">
               <div className="mb-2 flex items-center justify-center">
-                <Zap
+                <HugeiconsIcon
+                  icon={ZapIcon}
                   className={`h-4 w-4 ${connection.connected ? 'text-green-400' : 'text-red-400'}`}
                 />
               </div>
@@ -172,7 +194,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             {/* Join Requests */}
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-3 text-center">
               <div className="mb-2 flex items-center justify-center">
-                <Shield className="h-4 w-4 text-orange-400" />
+                <HugeiconsIcon
+                  icon={Shield01Icon}
+                  className="h-4 w-4 text-orange-400"
+                />
               </div>
               <div className="mb-1 text-gray-400 text-xs">Join Requests</div>
             </div>
@@ -180,7 +205,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             {/* Last Active */}
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-3 text-center">
               <div className="mb-2 flex items-center justify-center">
-                <Activity className="h-4 w-4 text-indigo-400" />
+                <HugeiconsIcon
+                  icon={ActivityIcon}
+                  className="h-4 w-4 text-indigo-400"
+                />
               </div>
               <div className="mb-1 text-gray-400 text-xs">Last Active</div>
               <div className="font-medium text-indigo-400 text-sm">
@@ -201,12 +229,15 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
         </CardHeader>
         <CardContent className="px-6 pb-6">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {/* Server Invite Link (if exists) */}
+            {/* Server Invite Link01Icon (if exists) */}
             {connection.invite && (
               <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-4">
                 <div className="mb-3 flex items-center gap-3">
                   <div className="rounded-md border border-green-500/20 bg-green-500/10 p-2">
-                    <LinkIcon className="h-4 w-4 text-green-400" />
+                    <HugeiconsIcon
+                      icon={Link01Icon}
+                      className="h-4 w-4 text-green-400"
+                    />
                   </div>
                   <div>
                     <div className="font-medium text-white">Server Invite</div>
@@ -225,7 +256,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-4">
               <div className="mb-3 flex items-center gap-3">
                 <div className="rounded-md border border-gray-500/20 bg-gray-500/10 p-2">
-                  <Hash className="h-4 w-4 text-gray-400" />
+                  <HugeiconsIcon
+                    icon={HashtagIcon}
+                    className="h-4 w-4 text-gray-400"
+                  />
                 </div>
                 <div>
                   <div className="font-medium text-white">Connection ID</div>
@@ -242,7 +276,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
               <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-4">
                 <div className="mb-3 flex items-center gap-3">
                   <div className="rounded-md border border-yellow-500/20 bg-yellow-500/10 p-2">
-                    <Hash className="h-4 w-4 text-yellow-400" />
+                    <HugeiconsIcon
+                      icon={HashtagIcon}
+                      className="h-4 w-4 text-yellow-400"
+                    />
                   </div>
                   <div>
                     <div className="font-medium text-white">Parent Channel</div>
@@ -261,7 +298,10 @@ export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
             <div className="rounded-lg border border-gray-800/50 bg-gray-900/20 p-4">
               <div className="mb-3 flex items-center gap-3">
                 <div className="rounded-md border border-blue-500/20 bg-blue-500/10 p-2">
-                  <Calendar className="h-4 w-4 text-blue-400" />
+                  <HugeiconsIcon
+                    icon={Calendar01Icon}
+                    className="h-4 w-4 text-blue-400"
+                  />
                 </div>
                 <div>
                   <div className="font-medium text-white">Created</div>

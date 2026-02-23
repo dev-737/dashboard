@@ -1,18 +1,20 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import {
-  ArrowDownWideNarrow,
-  ArrowUpNarrowWide,
-  Check,
-  Clock,
-  Filter,
-  Hash,
-  Search,
-  Sparkles,
-  TrendingUp,
-  X,
-} from 'lucide-react';
+  ArrowDown01Icon,
+  ArrowUp01Icon,
+  Cancel01Icon,
+  ChartIncreaseIcon,
+  Clock01Icon,
+  FilterIcon,
+  HashtagIcon,
+  Search01Icon,
+  SparklesIcon,
+  Tick01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
+import { useQuery } from '@tanstack/react-query';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import DiscoverHubCard from '@/components/features/discover/DiscoverHubCard';
@@ -180,7 +182,7 @@ export default function AdvancedSearchPage({
     enabled: !hasActiveFilters,
   });
 
-  // Popular Tags for Filter
+  // Popular Tags for FilterIcon
   const { data: popularTagsData } = useQuery(
     trpc.tags.list.queryOptions({ popular: true, limit: 20 })
   );
@@ -227,11 +229,14 @@ export default function AdvancedSearchPage({
       <div className="sticky top-16 z-30 border-gray-800/60 border-b bg-[#030812]/95 backdrop-blur-xl transition-colors duration-200">
         <div className="container mx-auto max-w-7xl px-4 py-4">
           <div className="flex flex-col gap-4 md:flex-row md:items-center">
-            {/* Search Bar */}
+            {/* Search01Icon Bar */}
             <div className="relative flex-1">
-              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-500" />
+              <HugeiconsIcon
+                icon={Search01Icon}
+                className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-500"
+              />
               <Input
-                placeholder="Search hubs..."
+                placeholder="Search01Icon hubs..."
                 className="h-11 border-white/5 bg-white/5 pl-10 text-base text-gray-200 transition-colors placeholder:text-gray-500 focus:border-indigo-500/50 focus:bg-white/10 focus:ring-indigo-500/20"
                 value={searchTerm}
                 onChange={handleSearchChange}
@@ -244,7 +249,7 @@ export default function AdvancedSearchPage({
                   }}
                   className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-300"
                 >
-                  <X className="h-4 w-4" />
+                  <HugeiconsIcon icon={Cancel01Icon} className="h-4 w-4" />
                 </Button>
               )}
             </div>
@@ -255,9 +260,15 @@ export default function AdvancedSearchPage({
                 <SelectTrigger className="h-11 w-[160px] border-white/5 bg-white/5 text-gray-200 hover:bg-white/10 hover:text-white">
                   <div className="flex items-center gap-2">
                     {sort === 'new' || sort === 'oldest' ? (
-                      <ArrowDownWideNarrow className="h-4 w-4 text-gray-400" />
+                      <HugeiconsIcon
+                        icon={ArrowDown01Icon}
+                        className="h-4 w-4 text-gray-400"
+                      />
                     ) : (
-                      <ArrowUpNarrowWide className="h-4 w-4 text-gray-400" />
+                      <HugeiconsIcon
+                        icon={ArrowUp01Icon}
+                        className="h-4 w-4 text-gray-400"
+                      />
                     )}
                     <SelectValue placeholder="Sort by" />
                   </div>
@@ -288,7 +299,7 @@ export default function AdvancedSearchPage({
                         'border-indigo-500/50 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20'
                     )}
                   >
-                    <Filter className="h-4 w-4" />
+                    <HugeiconsIcon icon={FilterIcon} className="h-4 w-4" />
                     Filters
                     {(tags.length > 0 ||
                       minMembers > 0 ||
@@ -416,7 +427,7 @@ export default function AdvancedSearchPage({
                         <div className="rounded-lg border border-white/5 bg-white/5 p-1">
                           <Command className="bg-transparent">
                             <CommandInput
-                              placeholder="Search tags..."
+                              placeholder="Search01Icon tags..."
                               className="h-9 text-gray-200"
                             />
                             <CommandList className="custom-scrollbar max-h-[200px] overflow-y-auto">
@@ -433,11 +444,17 @@ export default function AdvancedSearchPage({
                                   >
                                     <div className="flex w-full items-center justify-between">
                                       <div className="flex items-center gap-2">
-                                        <Hash className="h-3 w-3 text-gray-500" />
+                                        <HugeiconsIcon
+                                          icon={HashtagIcon}
+                                          className="h-3 w-3 text-gray-500"
+                                        />
                                         <span>{tag.name}</span>
                                       </div>
                                       {tags.includes(tag.name) && (
-                                        <Check className="h-3 w-3 text-indigo-400" />
+                                        <HugeiconsIcon
+                                          icon={Tick01Icon}
+                                          className="h-3 w-3 text-indigo-400"
+                                        />
                                       )}
                                     </div>
                                   </CommandItem>
@@ -457,7 +474,8 @@ export default function AdvancedSearchPage({
                                 className="gap-1 border-indigo-500/20 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20"
                               >
                                 {tag}
-                                <X
+                                <HugeiconsIcon
+                                  icon={Cancel01Icon}
                                   className="h-3 w-3 cursor-pointer"
                                   onClick={() => toggleTag(tag)}
                                 />
@@ -493,8 +511,9 @@ export default function AdvancedSearchPage({
                   variant="outline"
                   className="gap-1 border-white/10 bg-white/5 text-gray-300 hover:bg-white/10"
                 >
-                  Search: {debouncedSearchTerm}
-                  <X
+                  Search01Icon: {debouncedSearchTerm}
+                  <HugeiconsIcon
+                    icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() => setSearchTerm('')}
                   />
@@ -507,7 +526,8 @@ export default function AdvancedSearchPage({
                   className="gap-1 border-white/10 bg-white/5 text-gray-300 hover:bg-white/10"
                 >
                   Sort: {SORT_OPTIONS.find((o) => o.value === sort)?.label}
-                  <X
+                  <HugeiconsIcon
+                    icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() => setSort('trending')}
                   />
@@ -521,7 +541,8 @@ export default function AdvancedSearchPage({
                   className="gap-1 border-indigo-500/30 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20"
                 >
                   #{tag}
-                  <X
+                  <HugeiconsIcon
+                    icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() =>
                       handleTagsChange(tags.filter((t) => t !== tag))
@@ -536,7 +557,8 @@ export default function AdvancedSearchPage({
                   className="gap-1 border-white/10 bg-white/5 text-gray-300 hover:bg-white/10"
                 >
                   Members &ge; {minMembers}
-                  <X
+                  <HugeiconsIcon
+                    icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() => setMinMembers(0)}
                   />
@@ -549,7 +571,8 @@ export default function AdvancedSearchPage({
                   className="gap-1 border-blue-500/30 bg-blue-500/10 text-blue-300 hover:bg-blue-500/20"
                 >
                   Verified Only
-                  <X
+                  <HugeiconsIcon
+                    icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() => setVerifiedOnly(false)}
                   />
@@ -562,7 +585,8 @@ export default function AdvancedSearchPage({
                   className="gap-1 border-purple-500/30 bg-purple-500/10 text-purple-300 hover:bg-purple-500/20"
                 >
                   Partnered Only
-                  <X
+                  <HugeiconsIcon
+                    icon={Cancel01Icon}
                     className="h-3 w-3 cursor-pointer hover:text-white"
                     onClick={() => setPartneredOnly(false)}
                   />
@@ -591,7 +615,7 @@ export default function AdvancedSearchPage({
             {featuredData && featuredData.items.length > 0 && (
               <section className="space-y-4">
                 <div className="flex items-center gap-2 text-yellow-400">
-                  <Sparkles className="h-5 w-5" />
+                  <HugeiconsIcon icon={SparklesIcon} className="h-5 w-5" />
                   <h2 className="font-bold text-gray-100 text-xl">
                     Featured Hubs
                   </h2>
@@ -612,7 +636,7 @@ export default function AdvancedSearchPage({
             {trendingHubsData && trendingHubsData.items.length > 0 && (
               <section className="space-y-6">
                 <div className="flex items-center gap-2 text-orange-500">
-                  <TrendingUp className="h-6 w-6" />
+                  <HugeiconsIcon icon={ChartIncreaseIcon} className="h-6 w-6" />
                   <h2 className="font-bold text-2xl text-gray-100">
                     Trending Hubs
                   </h2>
@@ -633,7 +657,7 @@ export default function AdvancedSearchPage({
             {newHubsData && newHubsData.items.length > 0 && (
               <section className="space-y-6">
                 <div className="flex items-center gap-2 text-indigo-400">
-                  <Clock className="h-6 w-6" />
+                  <HugeiconsIcon icon={Clock01Icon} className="h-6 w-6" />
                   <h2 className="font-bold text-2xl text-gray-100">
                     New & Rising
                   </h2>
@@ -662,7 +686,7 @@ export default function AdvancedSearchPage({
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="font-bold text-gray-100 text-xl">
-              {hasActiveFilters ? 'Search Results' : 'Browse All Hubs'}
+              {hasActiveFilters ? 'Search01Icon Results' : 'Browse All Hubs'}
             </h2>
             <span className="text-gray-500 text-sm">
               {data?.total || 0} hubs found
@@ -681,7 +705,10 @@ export default function AdvancedSearchPage({
             </div>
           ) : data?.items.length === 0 ? (
             <div className="flex flex-col items-center justify-center rounded-xl border border-gray-800 border-dashed bg-gray-900/20 py-20 text-center">
-              <Search className="mb-4 h-10 w-10 text-gray-600" />
+              <HugeiconsIcon
+                icon={Search01Icon}
+                className="mb-4 h-10 w-10 text-gray-600"
+              />
               <h3 className="font-medium text-gray-300 text-lg">
                 No hubs found
               </h3>

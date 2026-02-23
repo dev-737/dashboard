@@ -1,7 +1,14 @@
 'use client';
 
+import {
+  FilterIcon,
+  PlusSignIcon,
+  Shield01Icon,
+  SparklesIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Shield, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { PatternBuilder } from '@/components/forms/PatternBuilder';
@@ -135,8 +142,8 @@ export function CreateRuleDialog({
         <div className="flex h-full max-h-[85vh] flex-col">
           <DialogHeader className="shrink-0 pb-4">
             <DialogTitle className="flex items-center text-purple-400">
-              <Shield className="mr-2 h-5 w-5" />
-              Create New Filter Rule
+              <HugeiconsIcon icon={Shield01Icon} className="mr-2 h-5 w-5" />
+              Create New FilterIcon Rule
             </DialogTitle>
             <DialogDescription>
               Choose from a template or create a custom rule to protect your hub
@@ -157,14 +164,14 @@ export function CreateRuleDialog({
                   value="custom"
                   className="data-[state=active]:bg-purple-600/20"
                 >
-                  <Plus className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon icon={PlusSignIcon} className="mr-2 h-4 w-4" />
                   Custom Rule
                 </TabsTrigger>
                 <TabsTrigger
                   value="template"
                   className="data-[state=active]:bg-purple-600/20"
                 >
-                  <Sparkles className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon icon={SparklesIcon} className="mr-2 h-4 w-4" />
                   Templates (Coming Soon)
                 </TabsTrigger>
               </TabsList>

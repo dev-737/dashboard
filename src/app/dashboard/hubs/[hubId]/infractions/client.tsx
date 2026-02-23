@@ -1,27 +1,31 @@
 'use client';
 
+import {
+  Alert01Icon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  Clock01Icon,
+  EyeIcon,
+  FilterIcon,
+  Home01Icon,
+  LegalHammerIcon,
+  Message02Icon,
+  PlusSignCircleIcon,
+  Rotate01Icon,
+  Search01Icon,
+  ServerStackIcon,
+  Shield01Icon,
+  Target01Icon,
+  UserIcon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { useQuery } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
-import {
-  AlertTriangle,
-  ArrowLeft,
-  ArrowRight,
-  Ban,
-  Clock,
-  Eye,
-  Filter,
-  Home,
-  HomeIcon,
-  MessageSquare,
-  PlusCircle,
-  RotateCcw,
-  Search,
-  Server,
-  Shield,
-  User,
-} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useId, useState } from 'react';
 import { toast } from 'sonner';
@@ -257,7 +261,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
           className="btn-primary w-full border-none text-white sm:w-auto"
         >
           <Link href={`/dashboard/hubs/${hubId}/infractions/add`}>
-            <PlusCircle className="mr-2 h-4 w-4" />
+            <HugeiconsIcon icon={PlusSignCircleIcon} className="mr-2 h-4 w-4" />
             Add Infraction
           </Link>
         </Button>
@@ -275,7 +279,10 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 </p>
               </div>
               <div className="rounded-(--radius-button) bg-linear-to-br from-purple-500/20 to-indigo-500/20 p-3 transition-transform group-hover:scale-110">
-                <Shield className="h-5 w-5 text-purple-400" />
+                <HugeiconsIcon
+                  icon={Shield01Icon}
+                  className="h-5 w-5 text-purple-400"
+                />
               </div>
             </div>
           </CardContent>
@@ -291,7 +298,10 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 </p>
               </div>
               <div className="rounded-(--radius-button) bg-linear-to-br from-emerald-500/20 to-green-500/20 p-3 transition-transform group-hover:scale-110">
-                <AlertTriangle className="h-5 w-5 text-emerald-400" />
+                <HugeiconsIcon
+                  icon={Alert01Icon}
+                  className="h-5 w-5 text-emerald-400"
+                />
               </div>
             </div>
           </CardContent>
@@ -307,7 +317,10 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 </p>
               </div>
               <div className="rounded-(--radius-button) bg-linear-to-br from-blue-500/20 to-cyan-500/20 p-3 transition-transform group-hover:scale-110">
-                <MessageSquare className="h-5 w-5 text-blue-400" />
+                <HugeiconsIcon
+                  icon={Message02Icon}
+                  className="h-5 w-5 text-blue-400"
+                />
               </div>
             </div>
           </CardContent>
@@ -323,7 +336,10 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 </p>
               </div>
               <div className="rounded-(--radius-button) bg-linear-to-br from-gray-500/20 to-slate-500/20 p-3 transition-transform group-hover:scale-110">
-                <RotateCcw className="h-5 w-5 text-gray-400" />
+                <HugeiconsIcon
+                  icon={Rotate01Icon}
+                  className="h-5 w-5 text-gray-400"
+                />
               </div>
             </div>
           </CardContent>
@@ -333,13 +349,16 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-lg">
             <div className="rounded-(--radius-button) bg-indigo-500/20 p-2">
-              <Filter className="h-4 w-4 text-indigo-400" />
+              <HugeiconsIcon
+                icon={FilterIcon}
+                className="h-4 w-4 text-indigo-400"
+              />
             </div>
             Advanced Filters
           </CardTitle>
           <CardDescription>
-            Filter infractions by type, status, target, or search for specific
-            IDs
+            FilterIcon infractions by type, status, target, or search for
+            specific IDs
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -429,7 +448,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 htmlFor="target-filter"
                 className="font-medium text-gray-300 text-sm"
               >
-                Target Type
+                Target01Icon Type
               </Label>
               <Select
                 value={targetType || 'all'}
@@ -447,13 +466,19 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   <SelectItem value="all">All Targets</SelectItem>
                   <SelectItem value="user">
                     <div className="flex items-center gap-2">
-                      <User className="h-3 w-3 text-blue-400" />
-                      Users Only
+                      <HugeiconsIcon
+                        icon={UserIcon}
+                        className="h-3 w-3 text-blue-400"
+                      />
+                      UserMultipleIcon Only
                     </div>
                   </SelectItem>
                   <SelectItem value="server">
                     <div className="flex items-center gap-2">
-                      <Server className="h-3 w-3 text-orange-400" />
+                      <HugeiconsIcon
+                        icon={ServerStackIcon}
+                        className="h-3 w-3 text-orange-400"
+                      />
                       Servers Only
                     </div>
                   </SelectItem>
@@ -465,7 +490,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 htmlFor="search-input"
                 className="font-medium text-gray-300 text-sm"
               >
-                Search by ID
+                Search01Icon by ID
               </Label>
               <form onSubmit={handleSearch} className="flex gap-2">
                 <div className="flex-1">
@@ -482,7 +507,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   size="icon"
                   className="rounded-(--radius-button) border-none bg-linear-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
                 >
-                  <Search className="h-4 w-4" />
+                  <HugeiconsIcon icon={Search01Icon} className="h-4 w-4" />
                 </Button>
                 <Button
                   type="button"
@@ -491,7 +516,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                   onClick={resetFilters}
                   className="rounded-(--radius-button) border-gray-700/50 hover:bg-gray-800/50 hover:text-white"
                 >
-                  <RotateCcw className="h-4 w-4" />
+                  <HugeiconsIcon icon={Rotate01Icon} className="h-4 w-4" />
                 </Button>
               </form>
               <p className="mt-1 text-gray-400 text-xs">
@@ -506,7 +531,10 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-xl">
             <div className="rounded-(--radius-button) bg-purple-500/20 p-2">
-              <Shield className="h-5 w-5 text-purple-400" />
+              <HugeiconsIcon
+                icon={Shield01Icon}
+                className="h-5 w-5 text-purple-400"
+              />
             </div>
             Infractions List
           </CardTitle>
@@ -532,7 +560,10 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
           ) : error ? (
             <div className="rounded-(--radius) border border-red-500/30 bg-linear-to-br from-red-950/30 to-red-900/20 p-8 py-12 text-center">
               <div className="mx-auto mb-6 w-fit rounded-(--radius-button) bg-red-500/20 p-4">
-                <AlertTriangle className="h-8 w-8 text-red-400" />
+                <HugeiconsIcon
+                  icon={Alert01Icon}
+                  className="h-8 w-8 text-red-400"
+                />
               </div>
               <h3 className="mb-3 font-semibold text-white text-xl">
                 Error Loading Infractions
@@ -542,14 +573,17 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 onClick={() => refetch()}
                 className="rounded-(--radius-button) border-none bg-linear-to-r from-red-500 to-red-600 px-6 text-white hover:from-red-600 hover:to-red-700"
               >
-                <RotateCcw className="mr-2 h-4 w-4" />
+                <HugeiconsIcon icon={Rotate01Icon} className="mr-2 h-4 w-4" />
                 Try Again
               </Button>
             </div>
           ) : infractions.length === 0 ? (
             <div className="rounded-(--radius) border border-gray-700/50 bg-linear-to-br from-gray-900/50 to-gray-800/30 p-8 py-12 text-center">
               <div className="mx-auto mb-6 w-fit rounded-(--radius-button) bg-gray-500/20 p-4">
-                <Shield className="h-8 w-8 text-gray-400" />
+                <HugeiconsIcon
+                  icon={Shield01Icon}
+                  className="h-8 w-8 text-gray-400"
+                />
               </div>
               <h3 className="mb-3 font-semibold text-white text-xl">
                 No Infractions Found
@@ -568,7 +602,10 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 className="rounded-(--radius-button) border-none bg-linear-to-r from-purple-500 to-indigo-500 px-6 text-white hover:from-purple-600 hover:to-indigo-600"
               >
                 <Link href={`/dashboard/hubs/${hubId}/infractions/add`}>
-                  <PlusCircle className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    icon={PlusSignCircleIcon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Create First Infraction
                 </Link>
               </Button>
@@ -601,7 +638,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 disabled={page === 1}
                 className="flex-1 border-gray-700 hover:bg-gray-800 hover:text-white sm:flex-initial"
               >
-                <ArrowLeft className="mr-1 h-4 w-4" />
+                <HugeiconsIcon icon={ArrowLeftIcon} className="mr-1 h-4 w-4" />
                 Previous
               </Button>
               <Button
@@ -612,7 +649,7 @@ export function InfractionsClient({ hubId }: InfractionsClientProps) {
                 className="flex-1 border-gray-700 hover:bg-gray-800 hover:text-white sm:flex-initial"
               >
                 Next
-                <ArrowRight className="ml-1 h-4 w-4" />
+                <HugeiconsIcon icon={ArrowRightIcon} className="ml-1 h-4 w-4" />
               </Button>
             </div>
           </CardFooter>
@@ -702,14 +739,23 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
               />
             ) : (
               <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-gray-800 bg-linear-to-br from-green-500/20 to-blue-500/20">
-                <HomeIcon className="h-5 w-5 text-gray-300" />
+                <HugeiconsIcon
+                  icon={Home01Icon}
+                  className="h-5 w-5 text-gray-300"
+                />
               </div>
             )}
             <div className="absolute -right-1 -bottom-1 rounded-full border border-gray-700 bg-gray-950 p-0.5 shadow-md">
               {isUserInfraction ? (
-                <User className="h-3 w-3 text-blue-400" />
+                <HugeiconsIcon
+                  icon={UserIcon}
+                  className="h-3 w-3 text-blue-400"
+                />
               ) : (
-                <Home className="h-3 w-3 text-green-400" />
+                <HugeiconsIcon
+                  icon={Home01Icon}
+                  className="h-3 w-3 text-green-400"
+                />
               )}
             </div>
           </div>
@@ -729,19 +775,19 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
         <div className="flex flex-wrap items-center gap-2">
           {infraction.type === 'BLACKLIST' ? (
             <span className="flex items-center gap-1 rounded-full bg-red-500/20 px-2 py-1 text-red-400 text-xs">
-              <Ban className="h-3 w-3" />
+              <HugeiconsIcon icon={LegalHammerIcon} className="h-3 w-3" />
               Blacklist
             </span>
           ) : (
             <span className="flex items-center gap-1 rounded-full bg-yellow-500/20 px-2 py-1 text-xs text-yellow-400">
-              <AlertTriangle className="h-3 w-3" />
+              <HugeiconsIcon icon={Alert01Icon} className="h-3 w-3" />
               Warning
             </span>
           )}
           {getInfractionStatusBadge(infraction.status)}
           {infraction.appealedAt && (
             <span className="flex items-center gap-1 rounded-full bg-blue-500/20 px-2 py-1 text-blue-400 text-xs">
-              <MessageSquare className="h-3 w-3" />
+              <HugeiconsIcon icon={Message02Icon} className="h-3 w-3" />
               Appeal
             </span>
           )}
@@ -755,7 +801,10 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
         <div className="mb-3 grid grid-cols-1 gap-x-4 gap-y-2 text-xs sm:grid-cols-2">
           <div className="flex items-center gap-2">
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-800/50">
-              <Clock className="h-3 w-3 text-gray-400" />
+              <HugeiconsIcon
+                icon={Clock01Icon}
+                className="h-3 w-3 text-gray-400"
+              />
             </div>
             <div>
               <span className="text-gray-400">Created:</span> {createdAt}
@@ -763,7 +812,10 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
           </div>
           <div className="flex items-center gap-2">
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-800/50">
-              <User className="h-3 w-3 text-gray-400" />
+              <HugeiconsIcon
+                icon={UserIcon}
+                className="h-3 w-3 text-gray-400"
+              />
             </div>
             <div>
               <span className="text-gray-400">By:</span>{' '}
@@ -772,7 +824,10 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
           </div>
           <div className="flex items-center gap-2">
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-800/50">
-              <Clock className="h-3 w-3 text-gray-400" />
+              <HugeiconsIcon
+                icon={Clock01Icon}
+                className="h-3 w-3 text-gray-400"
+              />
             </div>
             <div>
               <span className="text-gray-400">Expires:</span> {expiresIn}
@@ -780,7 +835,10 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
           </div>
           <div className="flex items-center gap-2">
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-800/50">
-              <Shield className="h-3 w-3 text-gray-400" />
+              <HugeiconsIcon
+                icon={Shield01Icon}
+                className="h-3 w-3 text-gray-400"
+              />
             </div>
             <div>
               <span className="text-gray-400">Status:</span>{' '}
@@ -801,7 +859,7 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
               <Link
                 href={`/dashboard/hubs/${infraction.hubId}/infractions/${infraction.id}/view`}
               >
-                <Eye className="mr-1 h-3 w-3" />
+                <HugeiconsIcon icon={EyeIcon} className="mr-1 h-3 w-3" />
                 View Details
                 {infraction.appealedAt && (
                   <span className="ml-1 rounded-full bg-blue-500/20 px-1.5 py-0.5 text-[10px] text-blue-400">
@@ -825,7 +883,10 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
                     <Link
                       href={`/dashboard/moderation/blacklist/extend/${infraction.id}`}
                     >
-                      <Clock className="mr-1 h-3 w-3" />
+                      <HugeiconsIcon
+                        icon={Clock01Icon}
+                        className="mr-1 h-3 w-3"
+                      />
                       Extend
                     </Link>
                   </Button>
@@ -836,7 +897,7 @@ function InfractionCard({ infraction, onRevokeClick }: InfractionCardProps) {
                   className="w-full border-red-700/30 bg-red-950/20 text-red-400 transition-all hover:border-red-700/50 hover:bg-red-900/30 hover:text-red-300 sm:w-auto"
                   onClick={() => onRevokeClick(infraction)}
                 >
-                  <Shield className="mr-1 h-3 w-3" />
+                  <HugeiconsIcon icon={Shield01Icon} className="mr-1 h-3 w-3" />
                   Revoke
                 </Button>
               </>

@@ -1,5 +1,6 @@
 'use client';
 
+import { FilterIcon, Settings01Icon } from '@hugeicons/core-free-icons';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   createContext,
@@ -100,7 +101,7 @@ export function GuidedTourProvider({ children }: GuidedTourProviderProps) {
       },
       {
         id: 'user-menu',
-        title: 'User Settings',
+        title: 'User Settings01Icon',
         description:
           'Access your account settings, preferences, and logout options from this menu. You can also restart this tour anytime from the help menu.',
         targetSelector: "[data-tour='user-menu']",
@@ -134,7 +135,7 @@ export function GuidedTourProvider({ children }: GuidedTourProviderProps) {
     []
   );
 
-  // Filter steps based on current route or show all if no route requirement
+  // FilterIcon steps based on current route or show all if no route requirement
   const getCurrentStepData = useCallback(() => {
     const step = tourSteps[currentTourStep];
     if (!step) return null;

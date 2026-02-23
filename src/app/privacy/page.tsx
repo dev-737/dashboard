@@ -1,16 +1,17 @@
 'use client';
 
 import {
-  Cookie,
-  Eye,
-  FileText,
-  Globe,
-  Lock,
-  Mail,
-  Shield,
-  UserX,
-} from 'lucide-react';
-import { Link } from '@/components/Link';
+  CookieIcon,
+  EyeIcon,
+  File01Icon,
+  GlobeIcon,
+  LockIcon,
+  Mail01Icon,
+  Shield01Icon,
+  UserIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import Link from 'next/link';
 
 export default function PrivacyPolicy() {
   return (
@@ -25,7 +26,7 @@ export default function PrivacyPolicy() {
         {/* Header */}
         <div className="mb-20 text-center">
           <div className="mb-6 inline-flex items-center justify-center rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-1.5 text-purple-300 backdrop-blur-sm">
-            <Shield className="mr-2 h-4 w-4" />
+            <HugeiconsIcon icon={Shield01Icon} className="mr-2 h-4 w-4" />
             <span className="font-medium text-sm">Privacy Policy</span>
           </div>
 
@@ -83,7 +84,7 @@ export default function PrivacyPolicy() {
             <section id="info-we-collect" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 text-purple-400">
-                  <Eye className="h-5 w-5" />
+                  <HugeiconsIcon icon={EyeIcon} className="h-5 w-5" />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   1. Information We Collect
@@ -140,7 +141,7 @@ export default function PrivacyPolicy() {
             <section id="how-we-use" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
-                  <FileText className="h-5 w-5" />
+                  <HugeiconsIcon icon={File01Icon} className="h-5 w-5" />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   2. How We Use Your Information
@@ -171,7 +172,7 @@ export default function PrivacyPolicy() {
             <section id="data-retention" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
-                  <Lock className="h-5 w-5" />
+                  <HugeiconsIcon icon={LockIcon} className="h-5 w-5" />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   3. Data Retention
@@ -205,7 +206,7 @@ export default function PrivacyPolicy() {
             <section id="sharing" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10 text-green-400">
-                  <Globe className="h-5 w-5" />
+                  <HugeiconsIcon icon={GlobeIcon} className="h-5 w-5" />
                 </div>
                 <h2 className="font-bold text-2xl text-gray-100">
                   4. Data Sharing
@@ -293,7 +294,10 @@ export default function PrivacyPolicy() {
             {/* Section 7 */}
             <section id="cookies" className="scroll-mt-32">
               <div className="mb-4 flex items-center gap-3">
-                <Cookie className="h-5 w-5 text-gray-400" />
+                <HugeiconsIcon
+                  icon={CookieIcon}
+                  className="h-5 w-5 text-gray-400"
+                />
                 <h2 className="font-bold text-2xl text-gray-100">
                   7. Cookies & Tracking
                 </h2>
@@ -308,7 +312,10 @@ export default function PrivacyPolicy() {
             {/* Section 8 */}
             <section id="children" className="scroll-mt-32">
               <div className="mb-4 flex items-center gap-3">
-                <UserX className="h-5 w-5 text-rose-400" />
+                <HugeiconsIcon
+                  icon={UserIcon}
+                  className="h-5 w-5 text-rose-400"
+                />
                 <h2 className="font-bold text-2xl text-gray-100">
                   8. Children's Privacy
                 </h2>
@@ -336,7 +343,10 @@ export default function PrivacyPolicy() {
             {/* Section 10 */}
             <section id="contact" className="scroll-mt-32">
               <div className="mb-6 flex items-center gap-3">
-                <Mail className="h-5 w-5 text-gray-400" />
+                <HugeiconsIcon
+                  icon={Mail01Icon}
+                  className="h-5 w-5 text-gray-400"
+                />
                 <h2 className="font-bold text-2xl text-gray-100">
                   10. Contact Us
                 </h2>
@@ -356,7 +366,7 @@ export default function PrivacyPolicy() {
               </div>
             </section>
 
-            {/* Footer Link */}
+            {/* Footer Link01Icon */}
             <div className="border-white/10 border-t pt-8 text-center">
               <p className="text-gray-500">
                 This policy is part of our{' '}

@@ -1,8 +1,16 @@
-import { ArrowLeft, Edit, ExternalLink, Globe, Server } from 'lucide-react';
+import {
+  ArrowLeftIcon,
+  GlobeIcon,
+  LinkSquare02Icon,
+  PencilEdit01Icon,
+  ServerStackIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { notFound, redirect } from 'next/navigation';
 import { getServers } from '@/actions/server-actions';
 import { ConnectionNavigationTabs } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
@@ -122,7 +130,7 @@ export default async function ConnectionPage(props: {
             asChild
           >
             <Link href="/dashboard?tab=connections">
-              <ArrowLeft className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
               Back to Connections
             </Link>
           </Button>
@@ -141,7 +149,7 @@ export default async function ConnectionPage(props: {
           className="border-none bg-linear-to-r from-blue-600 to-purple-600 px-6 font-medium text-white hover:from-blue-700 hover:to-purple-700"
         >
           <Link href={`/dashboard/connections/${params.connectionId}/edit`}>
-            <Edit className="mr-2 h-4 w-4" />
+            <HugeiconsIcon icon={PencilEdit01Icon} className="mr-2 h-4 w-4" />
             Edit Connection
           </Link>
         </Button>
@@ -160,7 +168,10 @@ export default async function ConnectionPage(props: {
           <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
-                <Globe className="h-5 w-5 text-purple-400" />
+                <HugeiconsIcon
+                  icon={GlobeIcon}
+                  className="h-5 w-5 text-purple-400"
+                />
                 <CardTitle className="text-lg">Connected Hub</CardTitle>
               </div>
             </CardHeader>
@@ -191,7 +202,10 @@ export default async function ConnectionPage(props: {
                     asChild
                   >
                     <Link href={`/hubs/${connection.hub.id}`} target="_blank">
-                      <ExternalLink className="mr-2 h-4 w-4" />
+                      <HugeiconsIcon
+                        icon={LinkSquare02Icon}
+                        className="mr-2 h-4 w-4"
+                      />
                       View Hub Details
                     </Link>
                   </Button>
@@ -204,7 +218,10 @@ export default async function ConnectionPage(props: {
           <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
-                <Server className="h-5 w-5 text-indigo-400" />
+                <HugeiconsIcon
+                  icon={ServerStackIcon}
+                  className="h-5 w-5 text-indigo-400"
+                />
                 <CardTitle className="text-lg">Discord Server</CardTitle>
               </div>
             </CardHeader>
@@ -233,7 +250,10 @@ export default async function ConnectionPage(props: {
                     asChild
                   >
                     <Link href={`/dashboard/servers/${connection.server.id}`}>
-                      <ExternalLink className="mr-2 h-4 w-4" />
+                      <HugeiconsIcon
+                        icon={LinkSquare02Icon}
+                        className="mr-2 h-4 w-4"
+                      />
                       Manage Server
                     </Link>
                   </Button>
@@ -246,7 +266,10 @@ export default async function ConnectionPage(props: {
           <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
-                <Edit className="h-5 w-5 text-blue-400" />
+                <HugeiconsIcon
+                  icon={PencilEdit01Icon}
+                  className="h-5 w-5 text-blue-400"
+                />
                 <CardTitle className="text-lg">Quick Actions</CardTitle>
               </div>
             </CardHeader>
@@ -258,7 +281,10 @@ export default async function ConnectionPage(props: {
                 <Link
                   href={`/dashboard/connections/${params.connectionId}/edit`}
                 >
-                  <Edit className="mr-2 h-5 w-5" />
+                  <HugeiconsIcon
+                    icon={PencilEdit01Icon}
+                    className="mr-2 h-5 w-5"
+                  />
                   Edit Connection
                 </Link>
               </Button>

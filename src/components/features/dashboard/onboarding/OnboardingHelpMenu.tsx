@@ -1,12 +1,13 @@
 'use client';
 
 import {
-  BookOpen,
-  ExternalLink,
-  HelpCircle,
-  MessageCircle,
-  Target,
-} from 'lucide-react';
+  HelpCircleIcon,
+  LinkSquare02Icon,
+  Message01Icon,
+  Target01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -25,7 +26,7 @@ export function OnboardingHelpMenu() {
     {
       label: 'Interactive Guide',
       description: 'Step-by-step guided tour with highlights',
-      icon: Target,
+      icon: Target01Icon,
       action: startTour,
       color: 'text-orange-400',
     },
@@ -41,7 +42,7 @@ export function OnboardingHelpMenu() {
     {
       label: 'Support Server',
       description: 'Get help from our community',
-      icon: MessageCircle,
+      icon: Message01Icon,
       href: 'https://discord.gg/cgYgC6YZyX',
       external: true,
       color: 'text-green-400',
@@ -56,7 +57,7 @@ export function OnboardingHelpMenu() {
           size="icon"
           className="h-9 w-9 rounded-full text-gray-400 hover:text-white"
         >
-          <HelpCircle className="h-5 w-5" />
+          <HugeiconsIcon icon={HelpCircleIcon} className="h-5 w-5" />
           <span className="sr-only">Help menu</span>
         </Button>
       </DropdownMenuTrigger>
@@ -81,7 +82,10 @@ export function OnboardingHelpMenu() {
                   rel={item.external ? 'noopener noreferrer' : undefined}
                   className="flex cursor-pointer items-center gap-3 px-3 py-2 text-sm hover:bg-gray-800 focus:bg-gray-800"
                 >
-                  <Icon className={`h-4 w-4 ${item.color}`} />
+                  <HugeiconsIcon
+                    icon={item.icon}
+                    className={`h-4 w-4 ${item.color}`}
+                  />
                   <div className="flex-1">
                     <div className="font-medium text-white">{item.label}</div>
                     <div className="text-gray-400 text-xs">
@@ -89,7 +93,10 @@ export function OnboardingHelpMenu() {
                     </div>
                   </div>
                   {item.external && (
-                    <ExternalLink className="h-3 w-3 text-gray-500" />
+                    <HugeiconsIcon
+                      icon={LinkSquare02Icon}
+                      className="h-3 w-3 text-gray-500"
+                    />
                   )}
                 </a>
               </DropdownMenuItem>
@@ -102,7 +109,10 @@ export function OnboardingHelpMenu() {
               onClick={item.action}
               className="flex cursor-pointer items-center gap-3 px-3 py-2 text-sm hover:bg-gray-800 focus:bg-gray-800"
             >
-              <Icon className={`h-4 w-4 ${item.color}`} />
+              <HugeiconsIcon
+                icon={item.icon}
+                className={`h-4 w-4 ${item.color}`}
+              />
               <div className="flex-1">
                 <div className="font-medium text-white">{item.label}</div>
                 <div className="text-gray-400 text-xs">{item.description}</div>

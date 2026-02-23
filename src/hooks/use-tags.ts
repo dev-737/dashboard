@@ -1,5 +1,6 @@
 'use client';
 
+import { Search01Icon } from '@hugeicons/core-free-icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useTRPC } from '@/utils/trpc';
@@ -29,7 +30,7 @@ export function useTagSearch(
   useErrorNotification({
     isError: queryResult.isError,
     error: queryResult.error,
-    title: 'Tag Search Error',
+    title: 'Tag Search01Icon Error',
     description: 'Failed to search tags',
   });
 

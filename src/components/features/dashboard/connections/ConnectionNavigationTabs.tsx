@@ -1,6 +1,12 @@
 'use client';
 
-import { Edit, MessageSquare } from 'lucide-react';
+import {
+  InformationCircleIcon,
+  Message02Icon,
+  PencilEdit01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { UnderlinedTabs } from '@/components/features/dashboard/UnderlinedTabs';
 
 interface ConnectionNavigationTabsProps {
@@ -23,11 +29,11 @@ export function ConnectionNavigationTabs({
           label: (
             <>
               <span className="sm:inline">Overview</span>
-              <span className="inline sm:hidden">Info</span>
+              <span className="inline sm:hidden">InformationCircleIcon</span>
             </>
           ),
           color: 'indigo' as const,
-          icon: <MessageSquare className="h-4 w-4" />,
+          icon: <HugeiconsIcon icon={Message02Icon} className="h-4 w-4" />,
           href: `/dashboard/connections/${connectionId}`,
         },
         {
@@ -39,7 +45,7 @@ export function ConnectionNavigationTabs({
             </>
           ),
           color: 'blue' as const,
-          icon: <Edit className="h-4 w-4" />,
+          icon: <HugeiconsIcon icon={PencilEdit01Icon} className="h-4 w-4" />,
           href: `/dashboard/connections/${connectionId}/edit`,
         },
       ]}
@@ -66,17 +72,21 @@ export function ConnectionNavigationTabsSkeleton({
           {[
             {
               value: 'overview',
-              icon: <MessageSquare className="h-4 w-4" />,
+              icon: <HugeiconsIcon icon={Message02Icon} className="h-4 w-4" />,
               label: (
                 <>
                   <span className="hidden sm:inline">Overview</span>
-                  <span className="inline sm:hidden">Info</span>
+                  <span className="inline sm:hidden">
+                    InformationCircleIcon
+                  </span>
                 </>
               ),
             },
             {
               value: 'edit',
-              icon: <Edit className="h-4 w-4" />,
+              icon: (
+                <HugeiconsIcon icon={PencilEdit01Icon} className="h-4 w-4" />
+              ),
               label: (
                 <>
                   <span className="hidden sm:inline">Edit Connection</span>

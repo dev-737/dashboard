@@ -1,6 +1,12 @@
 'use client';
 
-import { HelpCircle, Plus, X } from 'lucide-react';
+import {
+  Cancel01Icon,
+  HelpCircleIcon,
+  PlusSignIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -106,7 +112,7 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
               size="sm"
               className="bg-purple-600 hover:bg-purple-700"
             >
-              <Plus className="h-4 w-4" />
+              <HugeiconsIcon icon={PlusSignIcon} className="h-4 w-4" />
             </Button>
           </div>
 
@@ -117,7 +123,10 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div className="flex items-center gap-1 text-gray-400">
-                      <HelpCircle className="h-4 w-4" />
+                      <HugeiconsIcon
+                        icon={HelpCircleIcon}
+                        className="h-4 w-4"
+                      />
                       <span className="font-medium">
                         {MatchPatternLabels[newMatchType]}
                       </span>
@@ -172,7 +181,7 @@ export function PatternBuilder({ patterns, onChange }: PatternBuilderProps) {
                   onClick={() => removePattern(index)}
                   className="h-6 w-6 p-0 text-gray-400 hover:text-red-400"
                 >
-                  <X className="h-3 w-3" />
+                  <HugeiconsIcon icon={Cancel01Icon} className="h-3 w-3" />
                 </Button>
               </div>
             ))}

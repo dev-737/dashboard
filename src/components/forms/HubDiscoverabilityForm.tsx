@@ -1,6 +1,8 @@
 'use client';
 
-import { Globe } from 'lucide-react';
+import { GlobeIcon, Settings01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { HubLanguageManagement } from '@/components/features/dashboard/hubs/HubLanguageManagement';
 import { HubNSFWToggle } from '@/components/features/dashboard/hubs/HubNSFWToggle';
 import { HubTagManagement } from '@/components/features/dashboard/hubs/HubTagManagement';
@@ -42,7 +44,10 @@ export function HubDiscoverabilityForm({
       <Card className="premium-card">
         <CardContent className="p-8">
           <div className="text-center text-gray-400">
-            <Globe className="mx-auto mb-3 h-12 w-12 opacity-50" />
+            <HugeiconsIcon
+              icon={GlobeIcon}
+              className="mx-auto mb-3 h-12 w-12 opacity-50"
+            />
             <p>
               You don&apos;t have permission to edit this hub&apos;s
               discoverability settings.
@@ -59,10 +64,12 @@ export function HubDiscoverabilityForm({
         <CardHeader>
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-linear-to-br from-green-500 to-emerald-600">
-              <Globe className="h-7 w-7 text-white" />
+              <HugeiconsIcon icon={GlobeIcon} className="h-7 w-7 text-white" />
             </div>
             <div>
-              <CardTitle className="text-3xl">Discovery Settings</CardTitle>
+              <CardTitle className="text-3xl">
+                Discovery Settings01Icon
+              </CardTitle>
               <CardDescription className="text-base">
                 Manage tags, language, and content settings to help users find
                 your hub

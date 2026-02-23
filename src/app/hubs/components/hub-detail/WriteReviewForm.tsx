@@ -1,7 +1,9 @@
 'use client';
 
+import { StarIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Star } from 'lucide-react';
 import { useId, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -138,7 +140,8 @@ export default function WriteReviewForm({
                 onMouseLeave={() => setHoverRating(0)}
                 className="bg-gray-700/20 focus:outline-none"
               >
-                <Star
+                <HugeiconsIcon
+                  icon={StarIcon}
                   className={`h-6 w-6 cursor-pointer ${
                     star <= (hoverRating || rating)
                       ? 'fill-amber-400 text-amber-400'

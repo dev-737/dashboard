@@ -1,3 +1,8 @@
+import {
+  ActivityIcon,
+  FilterIcon,
+  Search01Icon,
+} from '@hugeicons/core-free-icons';
 import { cacheLife } from 'next/cache';
 import { z } from 'zod';
 import type { Prisma } from '@/lib/generated/prisma/client/client';
@@ -72,7 +77,7 @@ function buildWhereClause(p: DiscoverParams): Prisma.HubWhereInput {
     { visibility: HubVisibility.PUBLIC },
   ];
 
-  // Search (Name or Description)
+  // Search01Icon (Name or Description)
   // Optimized: Using mode: 'insensitive' which maps to ILIKE in Postgres
   if (p.q?.trim()) {
     const term = p.q.trim();
@@ -88,7 +93,7 @@ function buildWhereClause(p: DiscoverParams): Prisma.HubWhereInput {
   if (p.language) conditions.push({ language: p.language });
   if (p.region) conditions.push({ region: p.region });
 
-  // Activity Level - mapped directly to enum
+  // ActivityIcon Level - mapped directly to enum
   if (p.activity?.length) {
     conditions.push({ activityLevel: { in: p.activity } });
   }
@@ -124,7 +129,7 @@ function buildWhereClause(p: DiscoverParams): Prisma.HubWhereInput {
     });
   }
 
-  // Filter dead hubs: require at least 3 weekly messages AND at least one connected server.
+  // FilterIcon dead hubs: require at least 3 weekly messages AND at least one connected server.
   // weeklyMessageCount is denormalized and indexed, so this is fast.
   conditions.push({ weeklyMessageCount: { gte: 3 } });
   if (!p.memberCount) {
@@ -147,7 +152,7 @@ function buildOrderBy(
 ): Prisma.HubOrderByWithRelationInput[] {
   switch (sort) {
     case 'active':
-      // Activity priority: High metrics -> Recent messages
+      // ActivityIcon priority: High metrics -> Recent messages
       return [
         { activityMetrics: { messagesLast24h: 'desc' } },
         { activityMetrics: { activeUsersLast24h: 'desc' } },

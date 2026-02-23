@@ -1,7 +1,9 @@
-import { Check, type LucideIcon } from 'lucide-react';
+import { Tick01Icon } from '@hugeicons/core-free-icons';
+import type { IconSvgElement } from '@hugeicons/react';
+import { HugeiconsIcon } from '@hugeicons/react';
 
 interface Step {
-  icon: LucideIcon;
+  icon: IconSvgElement;
   label: string;
   color: string;
 }
@@ -45,9 +47,9 @@ export function StepIndicator({ currentStep, steps }: StepIndicatorProps) {
                 }`}
               >
                 {isCompleted ? (
-                  <Check className="h-6 w-6" />
+                  <HugeiconsIcon icon={Tick01Icon} className="h-6 w-6" />
                 ) : (
-                  <StepIcon className="h-6 w-6" />
+                  <HugeiconsIcon icon={step.icon} className="h-6 w-6" />
                 )}
               </div>
               {index < steps.length - 1 && (

@@ -1,12 +1,14 @@
 'use client';
 
 import {
-  Activity,
-  Hand,
-  type LucideIcon,
-  MessageSquare,
-  Users,
-} from 'lucide-react';
+  ActivityIcon,
+  Message02Icon,
+  UserMultipleIcon,
+  WavingHand01Icon,
+} from '@hugeicons/core-free-icons';
+import type { IconSvgElement } from '@hugeicons/react';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { motion } from 'motion/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -49,7 +51,7 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
             transition={{ delay: 0.1 }}
             className="flex items-center gap-2 font-medium text-brand-purple-400 text-sm"
           >
-            <Hand className="h-4 w-4" />
+            <HugeiconsIcon icon={WavingHand01Icon} className="h-4 w-4" />
             <span>InterChat Dashboard</span>
           </motion.div>
 
@@ -83,17 +85,17 @@ export function AnimatedWelcome({ user }: AnimatedWelcomeProps) {
         >
           <div className="grid w-full grid-cols-2 gap-3 sm:flex sm:w-auto">
             <QuickAction
-              icon={MessageSquare}
+              icon={Message02Icon}
               label="Hubs"
               onClick={() => setTab('hubs')}
             />
             <QuickAction
-              icon={Users}
+              icon={UserMultipleIcon}
               label="Servers"
               onClick={() => setTab('servers')}
             />
             <QuickAction
-              icon={Activity}
+              icon={ActivityIcon}
               label="Profile"
               onClick={() => router.replace('/dashboard/settings')}
             />
@@ -109,7 +111,7 @@ function QuickAction({
   label,
   onClick,
 }: {
-  icon: LucideIcon;
+  icon: IconSvgElement;
   label: string;
   onClick: () => void;
 }) {
@@ -119,7 +121,10 @@ function QuickAction({
       onClick={onClick}
       className="group flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-700/50 bg-gray-900/50 px-4 py-3 transition-all hover:border-purple-500/30 hover:bg-gray-800 sm:flex-none"
     >
-      <Icon className="h-4 w-4 text-gray-400 transition-colors group-hover:text-purple-400" />
+      <HugeiconsIcon
+        icon={Icon}
+        className="h-4 w-4 text-gray-400 transition-colors group-hover:text-purple-400"
+      />
       <span className="font-medium text-gray-300 text-sm group-hover:text-white">
         {label}
       </span>

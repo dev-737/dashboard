@@ -1,16 +1,18 @@
 'use client';
-import { useQueryClient } from '@tanstack/react-query';
+
 import {
-  Check,
-  Crown,
-  Loader2,
-  MoreHorizontal,
-  Search,
-  Shield,
-  Trash,
-  UserPlus,
-  X,
-} from 'lucide-react';
+  Cancel01Icon,
+  CrownIcon,
+  Delete02Icon,
+  Loading03Icon,
+  MoreHorizontalIcon,
+  Search01Icon,
+  Shield01Icon,
+  Tick01Icon,
+  UserAdd01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
@@ -188,7 +190,7 @@ export function MembersClient({ hubId }: { hubId: string }) {
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button className="w-full border-none bg-indigo-600 font-medium text-white shadow-indigo-900/20 shadow-lg hover:bg-indigo-500 sm:w-auto">
-              <UserPlus className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={UserAdd01Icon} className="mr-2 h-4 w-4" />
               Add Member
             </Button>
           </DialogTrigger>
@@ -212,7 +214,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
                 </Label>
                 <div className="group relative flex gap-2">
                   <div className="relative flex-1">
-                    <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-500 transition-colors group-focus-within:text-indigo-400" />
+                    <HugeiconsIcon
+                      icon={Search01Icon}
+                      className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-500 transition-colors group-focus-within:text-indigo-400"
+                    />
                     <Input
                       ref={inputRef}
                       placeholder="e.g. 123456789..."
@@ -232,9 +237,15 @@ export function MembersClient({ hubId }: { hubId: string }) {
                       className="h-11 bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white"
                     >
                       {isValidating ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <HugeiconsIcon
+                          icon={Loading03Icon}
+                          className="h-4 w-4 animate-spin"
+                        />
                       ) : (
-                        <Search className="h-4 w-4" />
+                        <HugeiconsIcon
+                          icon={Search01Icon}
+                          className="h-4 w-4"
+                        />
                       )}
                     </Button>
                   )}
@@ -276,7 +287,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
                         }}
                         className="h-8 w-8 rounded-full p-0 text-gray-400 hover:bg-gray-800 hover:text-white"
                       >
-                        <X className="h-4 w-4" />
+                        <HugeiconsIcon
+                          icon={Cancel01Icon}
+                          className="h-4 w-4"
+                        />
                       </Button>
                     </div>
                   </div>
@@ -305,7 +319,8 @@ export function MembersClient({ hubId }: { hubId: string }) {
                     )}
                   >
                     <div className="mb-2 flex items-center justify-between">
-                      <Shield
+                      <HugeiconsIcon
+                        icon={Shield01Icon}
                         className={cn(
                           'h-4 w-4',
                           selectedRole === 'MODERATOR'
@@ -314,7 +329,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
                         )}
                       />
                       {selectedRole === 'MODERATOR' && (
-                        <Check className="h-3 w-3 text-purple-400" />
+                        <HugeiconsIcon
+                          icon={Tick01Icon}
+                          className="h-3 w-3 text-purple-400"
+                        />
                       )}
                     </div>
                     <div className="font-medium text-gray-200 text-sm">
@@ -336,7 +354,8 @@ export function MembersClient({ hubId }: { hubId: string }) {
                     )}
                   >
                     <div className="mb-2 flex items-center justify-between">
-                      <Shield
+                      <HugeiconsIcon
+                        icon={Shield01Icon}
                         className={cn(
                           'h-4 w-4',
                           selectedRole === 'MANAGER'
@@ -345,7 +364,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
                         )}
                       />
                       {selectedRole === 'MANAGER' && (
-                        <Check className="h-3 w-3 text-blue-400" />
+                        <HugeiconsIcon
+                          icon={Tick01Icon}
+                          className="h-3 w-3 text-blue-400"
+                        />
                       )}
                     </div>
                     <div className="font-medium text-gray-200 text-sm">
@@ -377,7 +399,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
               >
                 {addMemberMutation.isPending ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <HugeiconsIcon
+                      icon={Loading03Icon}
+                      className="mr-2 h-4 w-4 animate-spin"
+                    />
                     Adding...
                   </>
                 ) : (
@@ -394,7 +419,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
           {/* Owner Section */}
           <div className="mb-8">
             <h3 className="mb-4 flex items-center font-semibold text-gray-500 text-sm uppercase tracking-wider">
-              <Crown className="mr-2 h-4 w-4 text-yellow-500" />
+              <HugeiconsIcon
+                icon={CrownIcon}
+                className="mr-2 h-4 w-4 text-yellow-500"
+              />
               Hub Owner
             </h3>
 
@@ -412,7 +440,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
                     unoptimized
                   />
                   <div className="absolute -right-1 -bottom-1 rounded-full bg-gray-900 p-0.5">
-                    <Crown className="h-4 w-4 fill-yellow-500/20 text-yellow-500" />
+                    <HugeiconsIcon
+                      icon={CrownIcon}
+                      className="h-4 w-4 fill-yellow-500/20 text-yellow-500"
+                    />
                   </div>
                 </div>
                 <div>
@@ -424,7 +455,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
               </div>
             ) : (
               <div className="flex h-20 items-center justify-center text-gray-500">
-                <Loader2 className="h-5 w-5 animate-spin" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="h-5 w-5 animate-spin"
+                />
               </div>
             )}
           </div>
@@ -435,7 +469,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
           <div>
             <div className="mb-4 flex items-center justify-between">
               <h3 className="flex items-center font-semibold text-gray-500 text-sm uppercase tracking-wider">
-                <Shield className="mr-2 h-4 w-4 text-indigo-400" />
+                <HugeiconsIcon
+                  icon={Shield01Icon}
+                  className="mr-2 h-4 w-4 text-indigo-400"
+                />
                 Staff Team
               </h3>
               <span className="flex h-6 items-center justify-center rounded-full bg-indigo-500/10 px-2.5 font-medium text-indigo-400 text-xs">
@@ -445,7 +482,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
 
             {isLoadingMembers ? (
               <div className="flex h-32 items-center justify-center">
-                <Loader2 className="h-8 w-8 animate-spin text-gray-600" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="h-8 w-8 animate-spin text-gray-600"
+                />
               </div>
             ) : members?.moderators && members.moderators.length > 0 ? (
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -486,7 +526,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
                           >
                             {mod.role === 'MANAGER' ? 'Manager' : 'Moderator'}
                             {updatingMemberId === mod.id && (
-                              <Loader2 className="ml-2 h-3 w-3 animate-spin text-gray-400" />
+                              <HugeiconsIcon
+                                icon={Loading03Icon}
+                                className="ml-2 h-3 w-3 animate-spin text-gray-400"
+                              />
                             )}
                           </div>
                         </div>
@@ -499,7 +542,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
                             size="sm"
                             className="h-8 w-8 p-0 text-gray-400 opacity-0 transition-opacity hover:bg-gray-800 hover:text-white group-hover:opacity-100 data-[state=open]:opacity-100"
                           >
-                            <MoreHorizontal className="h-4 w-4" />
+                            <HugeiconsIcon
+                              icon={MoreHorizontalIcon}
+                              className="h-4 w-4"
+                            />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
@@ -515,7 +561,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
                             }
                             className="cursor-pointer text-gray-300 focus:bg-gray-800 focus:text-white"
                           >
-                            <Shield className="mr-2 h-4 w-4" />
+                            <HugeiconsIcon
+                              icon={Shield01Icon}
+                              className="mr-2 h-4 w-4"
+                            />
                             {mod.role === 'MANAGER'
                               ? 'Demote to Moderator'
                               : 'Promote to Manager'}
@@ -524,7 +573,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
                             onClick={() => handleRemoveMember(mod.id)}
                             className="cursor-pointer text-red-400 focus:bg-red-500/10 focus:text-red-400"
                           >
-                            <Trash className="mr-2 h-4 w-4" />
+                            <HugeiconsIcon
+                              icon={Delete02Icon}
+                              className="mr-2 h-4 w-4"
+                            />
                             Remove from Hub
                           </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -536,7 +588,10 @@ export function MembersClient({ hubId }: { hubId: string }) {
             ) : (
               <div className="rounded-xl border border-gray-800 border-dashed bg-gray-900/10 p-12 text-center">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gray-800">
-                  <UserPlus className="h-6 w-6 text-gray-500" />
+                  <HugeiconsIcon
+                    icon={UserAdd01Icon}
+                    className="h-6 w-6 text-gray-500"
+                  />
                 </div>
                 <h3 className="mb-1 font-medium text-lg text-white">
                   No Team Members

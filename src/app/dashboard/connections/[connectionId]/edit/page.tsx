@@ -1,8 +1,10 @@
-import { ArrowLeft, Trash } from 'lucide-react';
+import { ArrowLeftIcon, Delete02Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { notFound, redirect } from 'next/navigation';
 import { getServers } from '@/actions/server-actions';
 import { ConnectionNavigationTabs } from '@/components/features/dashboard/connections/ConnectionNavigationTabs';
@@ -111,7 +113,7 @@ export default async function ConnectionEditPage(
             asChild
           >
             <Link href={`/dashboard/connections/${connectionId}`}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
+              <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-4 w-4" />
               Back to Connection
             </Link>
           </Button>
@@ -236,7 +238,10 @@ export default async function ConnectionEditPage(
                     <Link
                       href={`/dashboard/connections/${connectionId}/delete`}
                     >
-                      <Trash className="mr-2 h-4 w-4" />
+                      <HugeiconsIcon
+                        icon={Delete02Icon}
+                        className="mr-2 h-4 w-4"
+                      />
                       Delete
                     </Link>
                   </Button>

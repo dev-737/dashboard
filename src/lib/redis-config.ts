@@ -160,12 +160,12 @@ class RedisManager {
  * Get the Redis client instance for rate limiting
  */
 export async function getRedisClient(): Promise<Redis> {
-    const manager = RedisManager.getInstance();
-    const client = await manager.getClient();
-    if (!client) {
-      throw new Error('Redis client is not available');
-    }
-    return client;
+  const manager = RedisManager.getInstance();
+  const client = await manager.getClient();
+  if (!client) {
+    throw new Error('Redis client is not available');
+  }
+  return client;
 }
 
 /**

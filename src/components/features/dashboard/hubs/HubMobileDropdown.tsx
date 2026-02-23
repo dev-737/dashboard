@@ -1,21 +1,25 @@
 'use client';
 
 import {
-  Bell,
-  ChevronDown,
-  FileText,
-  Gavel,
-  Globe,
-  Home,
-  Menu,
-  MessageCircle,
-  MessageSquare,
-  Package,
-  Shield,
-  Users,
-} from 'lucide-react';
+  ArrowDown01Icon,
+  File01Icon,
+  FilterIcon,
+  GlobeIcon,
+  Home01Icon,
+  LegalHammerIcon,
+  Menu01Icon,
+  Message01Icon,
+  Message02Icon,
+  Notification03Icon,
+  Package01Icon,
+  Shield01Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+import type { IconSvgElement } from '@hugeicons/react';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
@@ -37,17 +41,12 @@ interface HubMobileDropdownProps {
 
 interface DropdownNavItemProps {
   href: string;
-  icon: React.ElementType;
+  icon: IconSvgElement;
   label: string;
   active: boolean;
 }
 
-function DropdownNavItem({
-  href,
-  icon: Icon,
-  label,
-  active,
-}: DropdownNavItemProps) {
+function DropdownNavItem({ href, icon, label, active }: DropdownNavItemProps) {
   return (
     <DropdownMenuItem asChild>
       <Link
@@ -68,7 +67,7 @@ function DropdownNavItem({
               : 'text-gray-400 group-hover:bg-purple-400/15 group-hover:text-white'
           )}
         >
-          <Icon className="h-4 w-4" />
+          <HugeiconsIcon icon={icon} className="h-4 w-4" />
         </div>
         <span className="truncate text-sm">{label}</span>
       </Link>
@@ -93,7 +92,7 @@ export function HubMobileDropdown({
           value: 'overview',
           label: 'Overview',
           color: 'default' as const,
-          icon: MessageSquare,
+          icon: Message02Icon,
           href: `/dashboard/hubs/${hubId}`,
           show: true,
         },
@@ -101,7 +100,7 @@ export function HubMobileDropdown({
           value: 'discovery',
           label: 'Discovery',
           color: 'yellow' as const,
-          icon: Globe,
+          icon: GlobeIcon,
           href: `/dashboard/hubs/${hubId}/discoverability`,
           show: canEdit,
         },
@@ -115,7 +114,7 @@ export function HubMobileDropdown({
           value: 'members',
           label: 'Team',
           color: 'blue' as const,
-          icon: Users,
+          icon: UserMultipleIcon,
           href: `/dashboard/hubs/${hubId}/members`,
           show: canModerate,
         },
@@ -123,7 +122,7 @@ export function HubMobileDropdown({
           value: 'connections',
           label: 'Connections',
           color: 'green' as const,
-          icon: Home,
+          icon: Home01Icon,
           href: `/dashboard/hubs/${hubId}/connections`,
           show: canModerate,
         },
@@ -131,7 +130,7 @@ export function HubMobileDropdown({
           value: 'logging',
           label: 'Logging',
           color: 'amber' as const,
-          icon: FileText,
+          icon: File01Icon,
           href: `/dashboard/hubs/${hubId}/logging`,
           show: canEdit,
         },
@@ -139,7 +138,7 @@ export function HubMobileDropdown({
           value: 'modules',
           label: 'Modules',
           color: 'default' as const,
-          icon: Package,
+          icon: Package01Icon,
           href: `/dashboard/hubs/${hubId}/modules`,
           show: true,
         },
@@ -153,7 +152,7 @@ export function HubMobileDropdown({
           value: 'reports',
           label: 'Reports',
           color: 'red' as const,
-          icon: Shield,
+          icon: Shield01Icon,
           href: `/dashboard/hubs/${hubId}/reports`,
           show: canModerate,
         },
@@ -161,7 +160,7 @@ export function HubMobileDropdown({
           value: 'appeals',
           label: 'Appeals',
           color: 'orange' as const,
-          icon: Bell,
+          icon: Notification03Icon,
           href: `/dashboard/hubs/${hubId}/appeals`,
           show: canModerate,
         },
@@ -169,7 +168,7 @@ export function HubMobileDropdown({
           value: 'infractions',
           label: 'Infractions',
           color: 'purple' as const,
-          icon: Gavel,
+          icon: LegalHammerIcon,
           href: `/dashboard/hubs/${hubId}/infractions`,
           show: canModerate,
         },
@@ -177,7 +176,7 @@ export function HubMobileDropdown({
           value: 'automod',
           label: 'AutoMod',
           color: 'green' as const,
-          icon: Shield,
+          icon: Shield01Icon,
           href: `/dashboard/hubs/${hubId}/automod`,
           show: canModerate,
         },
@@ -185,7 +184,7 @@ export function HubMobileDropdown({
     },
   ];
 
-  // Filter sections based on permissions
+  // FilterIcon sections based on permissions
   const visibleSections = navigationSections
     .map((section) => ({
       ...section,
@@ -210,12 +209,15 @@ export function HubMobileDropdown({
                 animate={{ rotate: [0, 5, -5, 0] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
               >
-                <Menu className="h-5 w-5" />
+                <HugeiconsIcon icon={Menu01Icon} className="h-5 w-5" />
               </motion.div>
               <span className="text-base">Hub Navigation</span>
             </div>
 
-            <ChevronDown className="h-5 w-5 text-white transition-colors duration-300 group-hover:text-white/70" />
+            <HugeiconsIcon
+              icon={ArrowDown01Icon}
+              className="h-5 w-5 text-white transition-colors duration-300 group-hover:text-white/70"
+            />
           </Button>
         </motion.div>
       </DropdownMenuTrigger>

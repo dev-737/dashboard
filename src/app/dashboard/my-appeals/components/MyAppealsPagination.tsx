@@ -1,6 +1,8 @@
 'use client';
 
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { CardFooter } from '@/components/ui/card';
@@ -35,7 +37,7 @@ export function MyAppealsPagination({
           onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
         >
-          <ArrowLeft className="mr-1 h-4 w-4" />
+          <HugeiconsIcon icon={ArrowLeftIcon} className="mr-1 h-4 w-4" />
           Previous
         </Button>
         <Button
@@ -47,7 +49,7 @@ export function MyAppealsPagination({
           disabled={currentPage === totalPages}
         >
           Next
-          <ArrowRight className="ml-1 h-4 w-4" />
+          <HugeiconsIcon icon={ArrowRightIcon} className="ml-1 h-4 w-4" />
         </Button>
       </div>
     </CardFooter>

@@ -1,7 +1,9 @@
 'use client';
 
+import { Alert01Icon, Settings01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { AlertTriangle } from 'lucide-react';
 import { useEffect, useId, useState } from 'react';
 import { toast } from 'sonner';
 import { UnsavedChangesPrompt } from '@/components/features/dashboard/UnsavedChangesPrompt';
@@ -32,7 +34,7 @@ export function UserSettingsForm() {
   const updateSettingsMutation = useMutation(
     trpc.user.updateSettings.mutationOptions({
       onSuccess: () => {
-        toast.success('Settings saved', {
+        toast.success('Settings01Icon saved', {
           description: 'Your settings have been updated successfully.',
         });
         setHasChanges(false);
@@ -116,7 +118,10 @@ export function UserSettingsForm() {
         <div className="space-y-0.5">
           <div className="flex items-center gap-2">
             <Label htmlFor="show-nsfw-hubs">Show NSFW Hubs</Label>
-            <AlertTriangle className="h-4 w-4 text-orange-400" />
+            <HugeiconsIcon
+              icon={Alert01Icon}
+              className="h-4 w-4 text-orange-400"
+            />
           </div>
           <p className="text-gray-400 text-sm">
             Allow NSFW (adult content) hubs to appear in search results and
@@ -163,8 +168,8 @@ export function UserSettingsForm() {
         onSave={handleSaveSettings}
         onReset={resetForm}
         isSubmitting={updateSettingsMutation.isPending}
-        saveLabel="Save Settings"
-        resetLabel="Reset Settings"
+        saveLabel="Save Settings01Icon"
+        resetLabel="Reset Settings01Icon"
         message="Careful! You have unsaved user setting changes."
       />
 

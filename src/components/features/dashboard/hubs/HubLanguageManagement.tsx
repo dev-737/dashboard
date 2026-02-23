@@ -1,6 +1,12 @@
 'use client';
 
-import { Check, Globe, Save } from 'lucide-react';
+import {
+  FloppyDiskIcon,
+  GlobeIcon,
+  Tick01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { LANGUAGES } from '@/app/hubs/constants';
@@ -79,7 +85,7 @@ export function HubLanguageManagement({
     <div className="space-y-6">
       <div className="flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
-          <Globe className="h-5 w-5 text-blue-400" />
+          <HugeiconsIcon icon={GlobeIcon} className="h-5 w-5 text-blue-400" />
         </div>
         <div>
           <h3 className="font-semibold text-lg">Hub Language</h3>
@@ -98,7 +104,10 @@ export function HubLanguageManagement({
             <SelectTrigger className="w-full border-gray-700/50 bg-gray-800/50 hover:bg-gray-800/70 focus:ring-2 focus:ring-blue-500/50">
               <SelectValue placeholder="Select a language">
                 <div className="flex items-center gap-2">
-                  <Globe className="h-4 w-4 text-gray-400" />
+                  <HugeiconsIcon
+                    icon={GlobeIcon}
+                    className="h-4 w-4 text-gray-400"
+                  />
                   <span>{getSelectedLanguageName()}</span>
                 </div>
               </SelectValue>
@@ -159,7 +168,7 @@ export function HubLanguageManagement({
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
-                    <Save className="h-4 w-4" />
+                    <HugeiconsIcon icon={FloppyDiskIcon} className="h-4 w-4" />
                     Save Language
                   </div>
                 )}
@@ -170,7 +179,10 @@ export function HubLanguageManagement({
 
         {!hasChanges && currentLanguage && (
           <div className="flex items-center gap-2 rounded-lg border border-green-500/20 bg-green-500/10 p-3">
-            <Check className="h-4 w-4 text-green-400" />
+            <HugeiconsIcon
+              icon={Tick01Icon}
+              className="h-4 w-4 text-green-400"
+            />
             <p className="text-green-400 text-sm">
               Hub language is set to {getCurrentLanguageName()}
             </p>

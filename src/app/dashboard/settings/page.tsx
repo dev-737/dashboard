@@ -1,4 +1,5 @@
-import { Settings, User } from 'lucide-react';
+import { Settings01Icon, UserIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Image from 'next/image';
@@ -7,7 +8,7 @@ import { UserSettingsForm } from '@/components/forms/UserSettingsForm';
 import { auth } from '@/lib/auth';
 
 export const metadata: Metadata = {
-  title: 'Settings | InterChat Dashboard',
+  title: 'Settings01Icon | InterChat Dashboard',
   description: 'Manage your settings and preferences on InterChat',
 };
 
@@ -24,7 +25,9 @@ export default async function SettingsPage() {
     <div className="mx-auto max-w-4xl space-y-8 p-6">
       {/* Header */}
       <div className="mb-8 text-center">
-        <h1 className="mb-2 font-bold text-3xl text-white">Account Settings</h1>
+        <h1 className="mb-2 font-bold text-3xl text-white">
+          Account Settings01Icon
+        </h1>
         <p className="text-gray-400">Manage your profile and preferences</p>
       </div>
 
@@ -33,7 +36,10 @@ export default async function SettingsPage() {
         {/* Profile Section */}
         <div className="rounded-xl border border-gray-700/50 bg-dash-surface p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-2">
-            <User className="h-5 w-5 text-purple-400" />
+            <HugeiconsIcon
+              icon={UserIcon}
+              className="h-5 w-5 text-purple-400"
+            />
             <h2 className="font-semibold text-white text-xl">Profile</h2>
           </div>
 
@@ -72,7 +78,10 @@ export default async function SettingsPage() {
         {/* Account Preferences */}
         <div className="rounded-xl border border-gray-700/50 bg-linear-to-br from-gray-900/90 to-gray-950/90 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-2">
-            <Settings className="h-5 w-5 text-indigo-400" />
+            <HugeiconsIcon
+              icon={Settings01Icon}
+              className="h-5 w-5 text-indigo-400"
+            />
             <h2 className="font-semibold text-white text-xl">Preferences</h2>
           </div>
 

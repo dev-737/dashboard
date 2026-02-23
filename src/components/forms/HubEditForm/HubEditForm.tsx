@@ -1,7 +1,9 @@
 'use client';
 
+import { PencilEdit02Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useMutation } from '@tanstack/react-query';
-import { Edit3 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useId, useState } from 'react';
 import { toast } from 'sonner';
@@ -126,7 +128,10 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
         <CardHeader>
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-md bg-linear-to-br from-blue-500 to-cyan-600">
-              <Edit3 className="h-5 w-5 text-white" />
+              <HugeiconsIcon
+                icon={PencilEdit02Icon}
+                className="h-5 w-5 text-white"
+              />
             </div>
             <div>
               <CardTitle className="text-xl">Basic Information</CardTitle>

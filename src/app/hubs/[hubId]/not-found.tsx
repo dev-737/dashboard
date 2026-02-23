@@ -1,5 +1,7 @@
-import { Home, Search } from 'lucide-react';
+import { Home01Icon, Search01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 
 export default function HubNotFound() {
@@ -13,13 +15,13 @@ export default function HubNotFound() {
       <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
         <Button asChild>
           <Link href="/hubs">
-            <Search className="mr-2 h-4 w-4" />
+            <HugeiconsIcon icon={Search01Icon} className="mr-2 h-4 w-4" />
             Browse Hubs
           </Link>
         </Button>
         <Button variant="outline" asChild>
           <Link href="/">
-            <Home className="mr-2 h-4 w-4" />
+            <HugeiconsIcon icon={Home01Icon} className="mr-2 h-4 w-4" />
             Go Home
           </Link>
         </Button>

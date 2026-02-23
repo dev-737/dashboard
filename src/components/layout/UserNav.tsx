@@ -1,13 +1,16 @@
 'use client';
 
 import {
-  HelpCircle,
-  Home,
-  LayoutDashboard,
-  LogOut,
-  MessageSquare,
-  User as UserIcon,
-} from 'lucide-react';
+  DashboardSquare01Icon,
+  HelpCircleIcon,
+  Home01Icon,
+  Logout01Icon,
+  Message02Icon,
+  UserIcon,
+} from '@hugeicons/core-free-icons';
+import type { IconSvgElement } from '@hugeicons/react';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -33,12 +36,16 @@ interface User {
 
 interface UserNavProps {
   user: User;
-  firstPage?: { name: string; icon: React.ElementType; href: string };
+  firstPage?: { name: string; icon?: IconSvgElement; href: string };
 }
 
 export function UserNav({
   user,
-  firstPage = { name: 'Dashboard', icon: LayoutDashboard, href: '/dashboard' },
+  firstPage = {
+    name: 'Dashboard',
+    icon: DashboardSquare01Icon,
+    href: '/dashboard',
+  },
 }: UserNavProps) {
   const router = useRouter();
 
@@ -107,7 +114,10 @@ export function UserNav({
             className="flex cursor-pointer items-center gap-2 px-2 py-2 text-gray-200 transition-colors duration-150 hover:bg-gray-800/50 hover:text-white"
           >
             <Link href={firstPage.href} className="flex w-full items-center">
-              <firstPage.icon className="mr-2 h-4 w-4 text-indigo-400" />
+              <HugeiconsIcon
+                icon={firstPage.icon ?? Home01Icon}
+                className="mr-2 h-4 w-4 text-indigo-400"
+              />
               {firstPage.name}
               <DropdownMenuShortcut className="text-gray-500">
                 ⌘D
@@ -123,7 +133,10 @@ export function UserNav({
               href="/dashboard?tab=hubs"
               className="flex w-full items-center"
             >
-              <MessageSquare className="mr-2 h-4 w-4 text-blue-400" />
+              <HugeiconsIcon
+                icon={Message02Icon}
+                className="mr-2 h-4 w-4 text-blue-400"
+              />
               My Hubs
             </Link>
           </DropdownMenuItem>
@@ -133,7 +146,10 @@ export function UserNav({
             className="flex cursor-pointer items-center gap-2 px-2 py-2 text-gray-200 transition-colors duration-150 hover:bg-gray-800/50 hover:text-white"
           >
             <Link href="/dashboard" className="flex w-full items-center">
-              <Home className="mr-2 h-4 w-4 text-green-400" />
+              <HugeiconsIcon
+                icon={Home01Icon}
+                className="mr-2 h-4 w-4 text-green-400"
+              />
               My Servers
             </Link>
           </DropdownMenuItem>
@@ -150,7 +166,10 @@ export function UserNav({
               href="/dashboard/settings"
               className="flex w-full items-center"
             >
-              <UserIcon className="mr-2 h-4 w-4 text-gray-400" />
+              <HugeiconsIcon
+                icon={UserIcon}
+                className="mr-2 h-4 w-4 text-gray-400"
+              />
               Profile
             </Link>
           </DropdownMenuItem>
@@ -160,7 +179,10 @@ export function UserNav({
             className="flex cursor-pointer items-center gap-2 px-2 py-2 text-gray-200 transition-colors duration-150 hover:bg-gray-800/50 hover:text-white"
           >
             <Link href="/support" className="flex w-full items-center">
-              <HelpCircle className="mr-2 h-4 w-4 text-gray-400" />
+              <HugeiconsIcon
+                icon={HelpCircleIcon}
+                className="mr-2 h-4 w-4 text-gray-400"
+              />
               Help & Support
             </Link>
           </DropdownMenuItem>
@@ -172,7 +194,7 @@ export function UserNav({
           className="flex cursor-pointer items-center gap-2 px-2 py-2 text-red-400 transition-colors duration-150 hover:bg-red-950/30 hover:text-red-300"
           onClick={handleSignOut}
         >
-          <LogOut className="mr-2 h-4 w-4" />
+          <HugeiconsIcon icon={Logout01Icon} className="mr-2 h-4 w-4" />
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>

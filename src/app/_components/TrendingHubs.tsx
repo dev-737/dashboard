@@ -1,9 +1,17 @@
 'use client';
 
-import { ArrowRight, Star, TrendingUp, Users } from 'lucide-react';
+import {
+  ArrowRightIcon,
+  ChartIncreaseIcon,
+  StarIcon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import type { HubCardDTO } from '@/lib/discover/query';
 import { formatNumber } from '@/lib/utils';
 
@@ -23,7 +31,7 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
         <div className="mb-16 flex flex-col items-end justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 font-medium text-indigo-400 text-sm backdrop-blur-sm">
-              <TrendingUp className="h-4 w-4" />
+              <HugeiconsIcon icon={ChartIncreaseIcon} className="h-4 w-4" />
               <span>Trending Now</span>
             </div>
             <h2 className="font-bold text-4xl text-white tracking-tight md:text-5xl">
@@ -39,7 +47,10 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
             className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 font-medium text-white transition-all hover:border-white/20 hover:bg-white/10"
           >
             View all hubs
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <HugeiconsIcon
+              icon={ArrowRightIcon}
+              className="h-4 w-4 transition-transform group-hover:translate-x-1"
+            />
           </Link>
         </div>
 
@@ -129,14 +140,20 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                     <div className="mt-auto flex items-center justify-between border-white/5 border-t pt-6">
                       <div className="flex items-center gap-4 text-sm">
                         <div className="flex items-center gap-2 text-gray-300">
-                          <Users className="h-4 w-4 text-indigo-400" />
+                          <HugeiconsIcon
+                            icon={UserMultipleIcon}
+                            className="h-4 w-4 text-indigo-400"
+                          />
                           <span className="font-medium">
                             {formatNumber(hub._count.connections)}
                           </span>
                         </div>
                         {hub.averageRating && (
                           <div className="flex items-center gap-2 text-gray-300">
-                            <Star className="h-4 w-4 fill-yellow-500/20 text-yellow-500" />
+                            <HugeiconsIcon
+                              icon={StarIcon}
+                              className="h-4 w-4 fill-yellow-500/20 text-yellow-500"
+                            />
                             <span className="font-medium">
                               {hub.averageRating.toFixed(1)}
                             </span>
@@ -145,7 +162,10 @@ export function TrendingHubsClient({ hubs }: TrendingHubsProps) {
                       </div>
 
                       <div className="rounded-full bg-white/5 p-2 text-gray-400 transition-all group-hover:bg-indigo-500/20 group-hover:text-indigo-400">
-                        <ArrowRight className="h-4 w-4" />
+                        <HugeiconsIcon
+                          icon={ArrowRightIcon}
+                          className="h-4 w-4"
+                        />
                       </div>
                     </div>
                   </div>

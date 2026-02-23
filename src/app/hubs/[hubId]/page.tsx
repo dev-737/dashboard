@@ -1,18 +1,22 @@
 'use server';
 
 import {
-  ChevronRight,
-  Home,
-  Info,
-  MessageSquare,
-  ScrollText,
-  Search,
-  Settings,
-  Users,
-} from 'lucide-react';
+  ArrowRight01Icon,
+  FilterIcon,
+  GraduationScrollIcon,
+  Home01Icon,
+  InformationCircleIcon,
+  Message02Icon,
+  Search01Icon,
+  Settings01Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Link from 'next/link';
+
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -158,18 +162,18 @@ export default async function HubDetailView(props: {
               href="/"
               className="flex items-center gap-1 transition-colors hover:text-gray-200"
             >
-              <Home className="h-4 w-4" />
-              <span>Home</span>
+              <HugeiconsIcon icon={Home01Icon} className="h-4 w-4" />
+              <span>Home01Icon</span>
             </Link>
-            <ChevronRight className="h-4 w-4" />
+            <HugeiconsIcon icon={ArrowRight01Icon} className="h-4 w-4" />
             <Link
               href="/discover"
               className="flex items-center gap-1 transition-colors hover:text-gray-200"
             >
-              <Search className="h-4 w-4" />
+              <HugeiconsIcon icon={Search01Icon} className="h-4 w-4" />
               <span>Browse Hubs</span>
             </Link>
-            <ChevronRight className="h-4 w-4" />
+            <HugeiconsIcon icon={ArrowRight01Icon} className="h-4 w-4" />
             <span className="font-medium text-gray-200">{hub.name}</span>
           </nav>
         </div>
@@ -190,7 +194,10 @@ export default async function HubDetailView(props: {
                         size="sm"
                         variant="outline"
                       >
-                        <Settings className="h-4 w-4" />
+                        <HugeiconsIcon
+                          icon={Settings01Icon}
+                          className="h-4 w-4"
+                        />
                         Manage Hub
                       </Button>
                     </Link>
@@ -214,11 +221,19 @@ export default async function HubDetailView(props: {
                 <div className="relative mb-6">
                   <TabsList className="inline-flex h-auto w-full items-center justify-start gap-1 rounded-lg border border-gray-700/40 bg-gray-800/40 p-1.5 px-4 sm:gap-2">
                     {[
-                      { value: 'overview', icon: Info, label: 'Overview' },
-                      { value: 'rules', icon: ScrollText, label: 'Rules' },
+                      {
+                        value: 'overview',
+                        icon: InformationCircleIcon,
+                        label: 'Overview',
+                      },
+                      {
+                        value: 'rules',
+                        icon: GraduationScrollIcon,
+                        label: 'Rules',
+                      },
                       {
                         value: 'servers',
-                        icon: Users,
+                        icon: UserMultipleIcon,
                         label: 'Connected Servers',
                       },
                     ].map((tab) => (
@@ -234,7 +249,10 @@ export default async function HubDetailView(props: {
                           'text-gray-300 hover:bg-gray-700/50 hover:text-white' // Inactive state
                         )}
                       >
-                        <tab.icon className="mr-1 h-3 w-3 shrink-0 sm:mr-2 sm:h-4 sm:w-4" />
+                        <HugeiconsIcon
+                          icon={tab.icon}
+                          className="mr-1 h-3 w-3 shrink-0 sm:mr-2 sm:h-4 sm:w-4"
+                        />
                         <span className="truncate">{tab.label}</span>
                       </TabsTrigger>
                     ))}
@@ -253,7 +271,10 @@ export default async function HubDetailView(props: {
                   {/* Reviews Section - Now part of Overview */}
                   <div className="mt-8 border-gray-700/50 border-t pt-8">
                     <div className="mb-6 flex items-center gap-2">
-                      <MessageSquare className="h-5 w-5 text-primary" />
+                      <HugeiconsIcon
+                        icon={Message02Icon}
+                        className="h-5 w-5 text-primary"
+                      />
                       <h3 className="font-semibold text-lg text-white">
                         Reviews
                       </h3>
@@ -293,7 +314,7 @@ export default async function HubDetailView(props: {
                 </TabsContent>
               </Tabs>
             </div>
-            {/* Filter Sidebar */}
+            {/* FilterIcon Sidebar */}
             <div className="space-y-4 sm:space-y-6 lg:col-span-1">
               <HubDetailsCard
                 formattedDate={formattedDate}

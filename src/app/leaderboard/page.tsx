@@ -1,8 +1,16 @@
 'use client';
 
-import { ArrowLeft, Sparkles, Trophy } from 'lucide-react';
+import {
+  ArrowLeftIcon,
+  Award01Icon,
+  Home01Icon,
+  SparklesIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 
 export default function LeaderboardComingSoon() {
@@ -28,7 +36,10 @@ export default function LeaderboardComingSoon() {
               className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 opacity-50 blur-xl"
             />
             <div className="relative rounded-full border border-zinc-800 bg-zinc-900 p-6 shadow-2xl">
-              <Trophy className="h-16 w-16 text-yellow-400" />
+              <HugeiconsIcon
+                icon={Award01Icon}
+                className="h-16 w-16 text-yellow-400"
+              />
             </div>
             <motion.div
               initial={{ scale: 0 }}
@@ -36,7 +47,10 @@ export default function LeaderboardComingSoon() {
               transition={{ delay: 0.5, type: 'spring' }}
               className="absolute -top-2 -right-2"
             >
-              <Sparkles className="h-8 w-8 fill-yellow-200 text-yellow-200" />
+              <HugeiconsIcon
+                icon={SparklesIcon}
+                className="h-8 w-8 fill-yellow-200 text-yellow-200"
+              />
             </motion.div>
           </div>
 
@@ -61,7 +75,7 @@ export default function LeaderboardComingSoon() {
                 size="lg"
                 className="rounded-full bg-white px-8 py-6 font-medium text-black text-lg hover:bg-zinc-200"
               >
-                <ArrowLeft className="mr-2 h-5 w-5" />
+                <HugeiconsIcon icon={ArrowLeftIcon} className="mr-2 h-5 w-5" />
                 Return Home
               </Button>
             </Link>

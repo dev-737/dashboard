@@ -1,5 +1,12 @@
+import {
+  ActivityIcon,
+  Agreement01Icon,
+  Clock01Icon,
+  Tag01Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { formatDistanceToNow } from 'date-fns';
-import { Clock, Handshake, Tag, Users } from 'lucide-react';
 import Image from 'next/image';
 import type React from 'react';
 import {
@@ -72,7 +79,10 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div className="flex h-6 w-6 cursor-help items-center justify-center rounded-full bg-linear-to-br from-purple-500 via-purple-600 to-violet-700">
-                      <Handshake className="h-4 w-4 text-white" />
+                      <HugeiconsIcon
+                        icon={Agreement01Icon}
+                        className="h-4 w-4 text-white"
+                      />
                     </div>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -91,13 +101,19 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-gray-300">
           {/* Server Count */}
           <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
-            <Users className="h-4 w-4 text-primary" /> {hub._count.connections}{' '}
-            server
+            <HugeiconsIcon
+              icon={UserMultipleIcon}
+              className="h-4 w-4 text-primary"
+            />{' '}
+            {hub._count.connections} server
             {hub._count.connections !== 1 ? 's' : ''}
           </span>
-          {/* Activity */}
+          {/* ActivityIcon */}
           <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
-            <Clock className="h-4 w-4 text-primary" />
+            <HugeiconsIcon
+              icon={Clock01Icon}
+              className="h-4 w-4 text-primary"
+            />
             {hub.lastActive
               ? formatDistanceToNow(hub.lastActive, { addSuffix: true })
               : 'No activity yet'}
@@ -105,7 +121,10 @@ const HubInfoCard: React.FC<HubInfoCardProps> = ({ hub }) => {
           {/* Tags with hover effect */}
           {hub.tags && hub.tags.length > 0 && (
             <span className="flex items-center gap-1.5 rounded-full border border-gray-700/30 bg-gray-800/50 px-3 py-1.5 text-sm transition-colors hover:bg-gray-800">
-              <Tag className="h-4 w-4 text-primary" />
+              <HugeiconsIcon
+                icon={Tag01Icon}
+                className="h-4 w-4 text-primary"
+              />
               {hub.tags.map((tag) => tag.name).join(', ')}
             </span>
           )}

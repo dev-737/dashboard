@@ -1,15 +1,17 @@
 'use client';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
 import {
-  Check,
-  Hash,
-  Loader2,
-  Lock,
-  Search,
-  Server,
-  Shield,
-} from 'lucide-react';
+  HashtagIcon,
+  Loading03Icon,
+  LockIcon,
+  Search01Icon,
+  ServerStackIcon,
+  Shield01Icon,
+  Tick01Icon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
+import { useMutation, useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
@@ -158,7 +160,10 @@ export default function JoinHubModal({
             <div className="mb-3 flex items-center justify-between">
               <h3 className="font-medium text-sm text-white">Step 1: Server</h3>
               {serversQuery.isLoading && (
-                <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="h-4 w-4 animate-spin text-gray-400"
+                />
               )}
             </div>
 
@@ -166,10 +171,13 @@ export default function JoinHubModal({
               <Input
                 value={serverSearch}
                 onChange={(event) => setServerSearch(event.target.value)}
-                placeholder="Search servers..."
+                placeholder="Search01Icon servers..."
                 className="border-gray-700/50 bg-gray-800/50 pl-9"
               />
-              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <HugeiconsIcon
+                icon={Search01Icon}
+                className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400"
+              />
             </div>
 
             <div className="scrollbar-thin max-h-[48vh] space-y-2 overflow-y-auto pr-1">
@@ -216,7 +224,10 @@ export default function JoinHubModal({
                                   />
                                 ) : (
                                   <div className="flex h-full w-full items-center justify-center">
-                                    <Server className="h-4 w-4 text-gray-400" />
+                                    <HugeiconsIcon
+                                      icon={ServerStackIcon}
+                                      className="h-4 w-4 text-gray-400"
+                                    />
                                   </div>
                                 )}
                               </div>
@@ -227,18 +238,29 @@ export default function JoinHubModal({
                                 <div className="mt-0.5 flex items-center gap-2">
                                   {server.owner && (
                                     <span className="inline-flex items-center gap-1 rounded-full bg-yellow-500/15 px-2 py-0.5 text-xs text-yellow-300">
-                                      <Shield className="h-3 w-3" /> Owner
+                                      <HugeiconsIcon
+                                        icon={Shield01Icon}
+                                        className="h-3 w-3"
+                                      />{' '}
+                                      Owner
                                     </span>
                                   )}
                                   {server.alreadyConnectedToHub && (
                                     <span className="inline-flex items-center gap-1 rounded-full bg-gray-600/20 px-2 py-0.5 text-gray-300 text-xs">
-                                      <Lock className="h-3 w-3" /> Joined
+                                      <HugeiconsIcon
+                                        icon={LockIcon}
+                                        className="h-3 w-3"
+                                      />{' '}
+                                      Joined
                                     </span>
                                   )}
                                 </div>
                               </div>
                               {isSelected && (
-                                <Check className="h-4 w-4 text-indigo-300" />
+                                <HugeiconsIcon
+                                  icon={Tick01Icon}
+                                  className="h-4 w-4 text-indigo-300"
+                                />
                               )}
                             </div>
                           </button>
@@ -262,7 +284,10 @@ export default function JoinHubModal({
                 Step 2: Channel
               </h3>
               {channelsQuery.isLoading && selectedServerId && (
-                <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="h-4 w-4 animate-spin text-gray-400"
+                />
               )}
             </div>
 
@@ -276,7 +301,7 @@ export default function JoinHubModal({
                   <Input
                     value={channelSearch}
                     onChange={(event) => setChannelSearch(event.target.value)}
-                    placeholder="Search channels..."
+                    placeholder="Search01Icon channels..."
                     className="border-gray-700/50 bg-gray-800/50"
                   />
                 </div>
@@ -325,10 +350,16 @@ export default function JoinHubModal({
                                     )}
                                   </div>
                                   {isSelected && (
-                                    <Check className="h-4 w-4 text-indigo-300" />
+                                    <HugeiconsIcon
+                                      icon={Tick01Icon}
+                                      className="h-4 w-4 text-indigo-300"
+                                    />
                                   )}
                                   {isLocked && (
-                                    <Lock className="h-4 w-4 text-gray-400" />
+                                    <HugeiconsIcon
+                                      icon={LockIcon}
+                                      className="h-4 w-4 text-gray-400"
+                                    />
                                   )}
                                 </div>
                               </button>
@@ -369,12 +400,15 @@ export default function JoinHubModal({
           >
             {connectMutation.isPending ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="mr-2 h-4 w-4 animate-spin"
+                />
                 Joining...
               </>
             ) : (
               <>
-                <Hash className="mr-2 h-4 w-4" />
+                <HugeiconsIcon icon={HashtagIcon} className="mr-2 h-4 w-4" />
                 Join Hub
               </>
             )}

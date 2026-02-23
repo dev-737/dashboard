@@ -1,7 +1,15 @@
 'use client';
 
-import { Eye, Star, Users } from 'lucide-react';
+import {
+  EyeIcon,
+  InformationCircleIcon,
+  StarIcon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import Link from 'next/link';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -66,7 +74,7 @@ export function FeaturedHubCarousel({
             />
           </div>
 
-          {/* Text Info */}
+          {/* Text InformationCircleIcon */}
           <div className="mb-1 min-w-0 flex-1 space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               {verified && (
@@ -106,12 +114,18 @@ export function FeaturedHubCarousel({
 
             <div className="flex items-center gap-4 pt-1 font-medium text-gray-400 text-sm">
               <div className="flex items-center gap-1.5">
-                <Users className="h-4 w-4 text-emerald-400" />
+                <HugeiconsIcon
+                  icon={UserMultipleIcon}
+                  className="h-4 w-4 text-emerald-400"
+                />
                 <span>{formatNumber(_count.connections)} Members</span>
               </div>
               {averageRating && (
                 <div className="flex items-center gap-1.5">
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  <HugeiconsIcon
+                    icon={StarIcon}
+                    className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                  />
                   <span>{averageRating.toFixed(1)}</span>
                 </div>
               )}
@@ -123,7 +137,7 @@ export function FeaturedHubCarousel({
         <div className="absolute right-6 bottom-6 hidden pt-3 md:block">
           <Link href={`/hubs/${id}`}>
             <Button size="default" className="btn-primary">
-              <Eye className="mr-2 h-5 w-5" />
+              <HugeiconsIcon icon={EyeIcon} className="mr-2 h-5 w-5" />
               View Hub
             </Button>
           </Link>

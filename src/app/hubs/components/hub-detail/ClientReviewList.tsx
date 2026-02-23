@@ -1,6 +1,8 @@
 'use client';
 
-import { MessageSquare } from 'lucide-react';
+import { Message02Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { Skeleton } from '@/components/ui/skeleton';
 import { useHubReviews } from '@/hooks/use-hub-reviews';
 import ReviewItem from './ReviewItem';
@@ -55,7 +57,10 @@ export default function ClientReviewList({
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center p-6 text-gray-400">
-        <MessageSquare className="mb-3 h-8 w-8 text-red-500" />
+        <HugeiconsIcon
+          icon={Message02Icon}
+          className="mb-3 h-8 w-8 text-red-500"
+        />
         <p className="text-center text-red-400">Failed to load reviews</p>
         <p className="mt-1 text-center text-gray-500 text-sm">
           Please refresh the page to try again.
@@ -72,7 +77,10 @@ export default function ClientReviewList({
         ))
       ) : (
         <div className="flex flex-col items-center justify-center p-10 text-gray-400">
-          <MessageSquare className="mb-3 h-12 w-12 text-gray-500 opacity-50" />
+          <HugeiconsIcon
+            icon={Message02Icon}
+            className="mb-3 h-12 w-12 text-gray-500 opacity-50"
+          />
           <p className="text-center text-gray-400">No reviews yet</p>
           <p className="mt-1 text-center text-gray-500 text-sm">
             Be the first to review this hub!

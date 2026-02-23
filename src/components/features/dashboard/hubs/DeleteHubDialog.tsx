@@ -1,7 +1,9 @@
 'use client';
 
+import { Delete02Icon, Loading03Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
 import { useMutation } from '@tanstack/react-query';
-import { Loader2, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -64,7 +66,7 @@ export function DeleteHubDialog({ hubId, hubName }: DeleteHubDialogProps) {
           variant="destructive"
           className="bg-red-600 text-white hover:bg-red-700"
         >
-          <Trash className="mr-2 h-4 w-4" />
+          <HugeiconsIcon icon={Delete02Icon} className="mr-2 h-4 w-4" />
           Delete Hub
         </Button>
       </AlertDialogTrigger>
@@ -119,7 +121,10 @@ export function DeleteHubDialog({ hubId, hubName }: DeleteHubDialogProps) {
           >
             {deleteMutation.isPending ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <HugeiconsIcon
+                  icon={Loading03Icon}
+                  className="mr-2 h-4 w-4 animate-spin"
+                />
                 Deleting...
               </>
             ) : (

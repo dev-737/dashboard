@@ -1,8 +1,16 @@
 'use client';
 
-import { MessageSquare, PlusCircle, Shield, Users } from 'lucide-react';
+import {
+  Message02Icon,
+  PlusSignCircleIcon,
+  Shield01Icon,
+  UserMultipleIcon,
+} from '@hugeicons/core-free-icons';
+
+import { HugeiconsIcon } from '@hugeicons/react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
 import {
@@ -32,7 +40,12 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
             "You don't own any hubs yet. Create your first hub to get started.",
           message:
             "As a hub owner, you'll have full control over settings, members, and connections.",
-          icon: <MessageSquare className="h-16 w-16 text-purple-400" />,
+          icon: (
+            <HugeiconsIcon
+              icon={Message02Icon}
+              className="h-16 w-16 text-purple-400"
+            />
+          ),
           showButton: true,
         };
       case 'managed':
@@ -41,7 +54,12 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
           description: "You don't manage any hubs yet.",
           message:
             'Hub owners can assign you as a manager to help with hub administration.',
-          icon: <Shield className="h-16 w-16 text-blue-400" />,
+          icon: (
+            <HugeiconsIcon
+              icon={Shield01Icon}
+              className="h-16 w-16 text-blue-400"
+            />
+          ),
           showButton: false,
         };
       case 'moderated':
@@ -50,7 +68,12 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
           description: "You don't moderate any hubs yet.",
           message:
             'Hub owners can assign you as a moderator to help with content moderation.',
-          icon: <Users className="h-16 w-16 text-indigo-400" />,
+          icon: (
+            <HugeiconsIcon
+              icon={UserMultipleIcon}
+              className="h-16 w-16 text-indigo-400"
+            />
+          ),
           showButton: false,
         };
       default:
@@ -58,7 +81,12 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
           title: 'No Hubs',
           description: "You don't have any hubs yet.",
           message: 'Create your first hub to get started.',
-          icon: <MessageSquare className="h-16 w-16 text-gray-400" />,
+          icon: (
+            <HugeiconsIcon
+              icon={Message02Icon}
+              className="h-16 w-16 text-gray-400"
+            />
+          ),
           showButton: true,
         };
     }
@@ -107,7 +135,10 @@ export function AnimatedEmptyState({ type }: AnimatedEmptyStateProps) {
                 className="btn-primary border-none bg-linear-to-r text-white"
               >
                 <Link href="/dashboard/hubs/create">
-                  <PlusCircle className="mr-2 h-4 w-4" />
+                  <HugeiconsIcon
+                    icon={PlusSignCircleIcon}
+                    className="mr-2 h-4 w-4"
+                  />
                   Create Hub
                 </Link>
               </Button>
