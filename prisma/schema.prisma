@@ -1,781 +1,876 @@
 generator client {
-    provider        = "prisma-client"
-    output          = "../src/lib/generated/prisma/client"
-    previewFeatures = ["postgresqlExtensions", "relationJoins"]
-    moduleFormat    = "esm"
-    runtime         = "vercel-edge"
+  provider        = "prisma-client"
+  output          = "../src/lib/generated/prisma/client"
+  previewFeatures = ["postgresqlExtensions", "relationJoins", "partialIndexes"]
+  moduleFormat    = "esm"
+  runtime         = "vercel-edge"
 }
 
 datasource db {
-    provider = "postgresql"
+  provider = "postgresql"
 }
 
 model Achievement {
-    id               String                    @id @default(cuid())
-    name             String
-    description      String
-    badgeEmoji       String
-    badgeUrl         String
-    threshold        Int
-    secret           Boolean                   @default(false)
-    createdAt        DateTime                  @default(now())
-    updatedAt        DateTime                  @default(now())
-    userAchievements UserAchievement[]
-    userProgress     UserAchievementProgress[]
+  id               String                    @id @default(cuid())
+  name             String
+  description      String
+  badgeEmoji       String
+  badgeUrl         String
+  createdAt        DateTime                  @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime                  @default(now()) @db.Timestamp(6)
+  threshold        Int
+  secret           Boolean                   @default(false)
+  userAchievements UserAchievement[]
+  userProgress     UserAchievementProgress[]
 }
 
 model AntiSwearPattern {
-    id        String           @id @default(cuid())
-    ruleId    String
-    pattern   String
-    matchType PatternMatchType @default(EXACT)
-    rule      AntiSwearRule    @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id        String           @id @default(cuid())
+  ruleId    String
+  pattern   String
+  matchType PatternMatchType @default(EXACT)
+  rule      AntiSwearRule    @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@index([ruleId])
+  @@index([ruleId])
 }
 
 model AntiSwearRule {
-    id                  String               @id @default(cuid())
-    hubId               String
-    name                String
-    createdBy           String
-    createdAt           DateTime             @default(now())
-    updatedAt           DateTime             @default(now())
-    actions             BlockWordAction[]    @default([])
-    enabled             Boolean              @default(true)
-    muteDurationMinutes Int?
-    patterns            AntiSwearPattern[]
-    creator             User                 @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    hub                 Hub                  @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    AntiSwearWhitelist  AntiSwearWhitelist[]
+  id                  String               @id @default(cuid())
+  hubId               String
+  name                String
+  createdBy           String
+  enabled             Boolean              @default(true)
+  muteDurationMinutes Int?
+  createdAt           DateTime             @default(now()) @db.Timestamp(6)
+  updatedAt           DateTime             @default(now()) @db.Timestamp(6)
+  actions             BlockWordAction[]    @default([])
+  patterns            AntiSwearPattern[]
+  creator             User                 @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  hub                 Hub                  @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  AntiSwearWhitelist  AntiSwearWhitelist[]
 
-    @@unique([hubId, name])
+  @@unique([hubId, name])
 }
 
 model Appeal {
-    id           String       @id @default(cuid())
-    infractionId String
-    userId       String
-    reason       String
-    status       AppealStatus @default(PENDING)
-    createdAt    DateTime     @default(now())
-    updatedAt    DateTime     @default(now())
-    infraction   Infraction   @relation(fields: [infractionId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    user         User         @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  infractionId String
+  userId       String
+  reason       String       @db.VarChar(1000)
+  createdAt    DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime     @default(now()) @db.Timestamp(6)
+  id           String       @id @default(cuid())
+  status       AppealStatus @default(PENDING)
+  infraction   Infraction   @relation(fields: [infractionId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user         User         @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@index([infractionId])
-    @@index([userId])
-    @@index([createdAt])
+  @@index([infractionId])
+  @@index([userId])
+  @@index([createdAt])
 }
 
 model BlockWord {
-    id        String            @id @default(cuid())
-    hubId     String
-    name      String
-    createdBy String
-    createdAt DateTime          @default(now())
-    updatedAt DateTime          @default(now())
-    words     String
-    actions   BlockWordAction[]
-    creator   User              @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    hub       Hub               @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id        String            @id @default(cuid())
+  hubId     String
+  name      String
+  createdBy String
+  createdAt DateTime          @default(now()) @db.Timestamp(6)
+  updatedAt DateTime          @default(now()) @db.Timestamp(6)
+  words     String
+  actions   BlockWordAction[]
+  creator   User              @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  hub       Hub               @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@unique([hubId, name])
+  @@unique([hubId, name])
 }
 
 model Broadcast {
-    id        String   @id @default(cuid())
-    messageId String
-    channelId String
-    createdAt DateTime @default(now())
-    guildId   String
-    message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id        String   @id @default(cuid())
+  messageId String
+  guildId   String
+  channelId String
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@index([channelId])
-    @@index([messageId])
-    @@index([createdAt(sort: Desc)])
-    @@index([id, messageId, channelId, createdAt])
-    @@index([messageId, channelId])
+  @@index([channelId])
+  @@index([messageId])
+  @@index([createdAt(sort: Desc)])
+  @@index([id, messageId, channelId, createdAt])
+  @@index([messageId, channelId])
 }
 
 model Connection {
-    id                  String     @id @default(cuid())
-    channelId           String     @unique
-    parentId            String?
-    serverId            String
-    hubId               String
-    connected           Boolean    @default(true)
-    invite              String?
-    createdAt           DateTime   @default(now())
-    webhookURL          String
-    lastActive          DateTime   @default(now())
-    webhookSecondaryURL String?
-    hub                 Hub        @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    server              ServerData @relation(fields: [serverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id                  String     @id @default(cuid())
+  channelId           String     @unique
+  invite              String?
+  webhookURL          String
+  serverId            String
+  hubId               String
+  createdAt           DateTime   @default(now()) @db.Timestamp(6)
+  lastActive          DateTime   @default(now()) @db.Timestamp(6)
+  parentId            String?
+  webhookSecondaryURL String?
+  connected           Boolean    @default(true)
+  hub                 Hub        @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  server              ServerData @relation(fields: [serverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@unique([channelId, serverId])
-    @@unique([hubId, serverId])
-    @@index([lastActive])
-    @@index([hubId])
-    @@index([serverId])
-    @@index([channelId, connected])
-    @@index([channelId], map: "Connection_channelid_idx")
-    @@index([hubId, channelId])
+  @@unique([channelId, serverId])
+  @@unique([hubId, serverId])
+  @@index([lastActive])
+  @@index([hubId])
+  @@index([serverId])
+  @@index([channelId, connected])
+  @@index([channelId], map: "Connection_channelid_idx")
+  @@index([channelId], map: "Connection_channel_connected_idx", where: raw("(connected = true)"))
 }
 
 model Hub {
-    id                  String               @id @default(cuid())
-    name                String               @unique
-    description         String
-    ownerId             String
-    iconUrl             String
-    bannerUrl           String?
-    welcomeMessage      String?
-    locked              Boolean              @default(false)
-    appealCooldownHours Int                  @default(168)
-    lastActive          DateTime             @default(now())
-    settings            Int                  @default(0)
-    createdAt           DateTime             @default(now())
-    updatedAt           DateTime             @default(now())
-    rules               String[]
-    language            String?
-    nsfw                Boolean              @default(false)
-    partnered           Boolean              @default(false)
-    region              String?
-    verified            Boolean              @default(false)
-    activityLevel       HubActivityLevel     @default(LOW)
-    shortDescription    String?              @db.VarChar(100)
-    weeklyMessageCount  Int                  @default(0)
-    featured            Boolean              @default(false)
-    lastNameChange      DateTime?            @default(now())
-    customBadges        Json?
-    averageRating       Float?               @default(0.0)
-    visibility          HubVisibility        @default(PUBLIC)
-    antiSwearRules      AntiSwearRule[]
-    blockWords          BlockWord[]
-    connections         Connection[]
-    owner               User                 @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    activityMetrics     HubActivityMetrics?
-    hubAnnouncements    HubAnnouncement[]
-    invites             HubInvite[]
-    logConfig           HubLogConfig?
-    moderators          HubModerator[]
-    reports             HubReport[]
-    reviews             HubReview[]
-    rulesAcceptances    HubRulesAcceptance[]
-    HubServerStats      HubServerStats[]
-    upvotes             HubUpvote[]
-    HubUserStats        HubUserStats[]
-    infractions         Infraction[]
-    messages            Message[]
-    tags                Tag[]                @relation("HubToTag")
+  id                  String               @id @default(cuid())
+  name                String               @unique @db.VarChar(100)
+  description         String               @db.VarChar(1024)
+  ownerId             String
+  iconUrl             String               @db.VarChar(512)
+  shortDescription    String?              @db.VarChar(100)
+  createdAt           DateTime             @default(now()) @db.Timestamp(6)
+  updatedAt           DateTime             @default(now()) @db.Timestamp(6)
+  lastActive          DateTime             @default(now()) @db.Timestamp(6)
+  lastNameChange      DateTime?            @default(now()) @db.Timestamp(6)
+  bannerUrl           String?
+  welcomeMessage      String?
+  language            String?
+  region              String?
+  customBadges        Json?
+  settings            Int                  @default(0)
+  appealCooldownHours Int                  @default(168)
+  weeklyMessageCount  Int                  @default(0)
+  locked              Boolean              @default(false)
+  nsfw                Boolean              @default(false)
+  verified            Boolean              @default(false)
+  partnered           Boolean              @default(false)
+  featured            Boolean              @default(false)
+  rules               String[]
+  activityLevel       HubActivityLevel     @default(LOW)
+  averageRating       Float?               @default(0.0)
+  visibility          HubVisibility        @default(PUBLIC)
+  connectionCount     Int                  @default(0)
+  upvoteCount         Int                  @default(0)
+  reviewCount         Int                  @default(0)
+  AllowedBots         AllowedBots[]
+  antiSwearRules      AntiSwearRule[]
+  blockWords          BlockWord[]
+  connections         Connection[]
+  owner               User                 @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  activityMetrics     HubActivityMetrics?
+  hubAnnouncements    HubAnnouncement[]
+  invites             HubInvite[]
+  logConfig           HubLogConfig?
+  moderators          HubModerator[]
+  reports             HubReport[]
+  reviews             HubReview[]
+  rulesAcceptances    HubRulesAcceptance[]
+  HubServerStats      HubServerStats[]
+  upvotes             HubUpvote[]
+  HubUserStats        HubUserStats[]
+  infractions         Infraction[]
+  messages            Message[]
+  PremiumKey          PremiumKey[]
+  tags                Tag[]                @relation("HubToTag")
 
-    connectionCount Int @default(0)
-    upvoteCount     Int @default(0)
-    reviewCount     Int @default(0)
-
-    @@index([ownerId])
-    @@index([nsfw])
-    @@index([weeklyMessageCount])
-    @@index([activityLevel])
-    @@index([language])
-    @@index([verified, featured, visibility])
-    @@index([connectionCount(sort: Desc)])
-    @@index([upvoteCount(sort: Desc)])
-    @@index([createdAt(sort: Desc)])
+  @@index([ownerId])
+  @@index([nsfw])
+  @@index([weeklyMessageCount])
+  @@index([verified, featured, visibility])
+  @@index([connectionCount(sort: Desc)])
+  @@index([upvoteCount(sort: Desc)])
+  @@index([createdAt(sort: Desc)])
 }
 
 model HubActivityMetrics {
-    id                    String   @id @default(cuid())
-    hubId                 String   @unique
-    messagesLast24h       Int      @default(0)
-    activeUsersLast24h    Int      @default(0)
-    newConnectionsLast24h Int      @default(0)
-    messagesLast7d        Int      @default(0)
-    activeUsersLast7d     Int      @default(0)
-    newConnectionsLast7d  Int      @default(0)
-    memberGrowthRate      Float    @default(0.0)
-    engagementRate        Float    @default(0.0)
-    lastUpdated           DateTime @default(now())
-    createdAt             DateTime @default(now())
-    trendingScore         Float    @default(0.0)
-    hub                   Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id                    String   @id @default(cuid())
+  hubId                 String   @unique
+  lastUpdated           DateTime @default(now()) @db.Timestamp(6)
+  createdAt             DateTime @default(now()) @db.Timestamp(6)
+  messagesLast24h       Int      @default(0)
+  activeUsersLast24h    Int      @default(0)
+  newConnectionsLast24h Int      @default(0)
+  messagesLast7d        Int      @default(0)
+  activeUsersLast7d     Int      @default(0)
+  newConnectionsLast7d  Int      @default(0)
+  memberGrowthRate      Float    @default(0.0)
+  engagementRate        Float    @default(0.0)
+  trendingScore         Float    @default(0.0)
+  hub                   Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@index([hubId])
-    @@index([lastUpdated])
-    @@index([trendingScore])
+  @@index([hubId])
+  @@index([lastUpdated])
+  @@index([trendingScore])
 }
 
 model HubInvite {
-    code      String    @id @unique @default(nanoid())
-    hubId     String
-    expires   DateTime?
-    createdAt DateTime  @default(now())
-    maxUses   Int       @default(0)
-    uses      Int       @default(0)
-    hub       Hub       @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  hubId     String
+  expires   DateTime? @db.Timestamp(6)
+  code      String    @id @default(nanoid())
+  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  maxUses   Int       @default(0)
+  uses      Int       @default(0)
+  hub       Hub       @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@index([hubId])
+  @@index([hubId])
 }
 
 model HubLogConfig {
-    id                         String  @id @default(cuid())
-    hubId                      String  @unique
-    modLogsChannelId           String?
-    modLogsRoleId              String?
-    joinLeavesChannelId        String?
-    joinLeavesRoleId           String?
-    appealsChannelId           String?
-    appealsRoleId              String?
-    reportsChannelId           String?
-    reportsRoleId              String?
-    networkAlertsChannelId     String?
-    networkAlertsRoleId        String?
-    messageModerationChannelId String?
-    messageModerationRoleId    String?
-    hub                        Hub     @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id                         String  @id @default(cuid())
+  hubId                      String  @unique
+  modLogsChannelId           String?
+  modLogsRoleId              String?
+  joinLeavesChannelId        String?
+  joinLeavesRoleId           String?
+  appealsChannelId           String?
+  appealsRoleId              String?
+  reportsChannelId           String?
+  reportsRoleId              String?
+  networkAlertsChannelId     String?
+  networkAlertsRoleId        String?
+  messageModerationChannelId String?
+  messageModerationRoleId    String?
+  hub                        Hub     @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@index([hubId])
+  @@index([hubId])
 }
 
 model HubModerator {
-    id     String @id @default(cuid())
-    hubId  String
-    userId String
-    role   Role
-    hub    Hub    @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    user   User   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id     String @id @default(cuid())
+  hubId  String
+  userId String
+  role   Role
+  hub    Hub    @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user   User   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@unique([hubId, userId])
-    @@index([userId])
+  @@unique([hubId, userId])
+  @@index([userId])
 }
 
 model HubReview {
-    id        String   @id @default(cuid())
-    hubId     String
-    userId    String
-    rating    Int
-    text      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
-    hub       Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    user      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  rating    Int
+  text      String
+  hubId     String
+  userId    String
+  hub       Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@unique([hubId, userId])
+  @@unique([hubId, userId])
 }
 
 model HubRulesAcceptance {
-    id         String   @id @default(cuid())
-    userId     String
-    hubId      String
-    acceptedAt DateTime @default(now())
-    hub        Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    user       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id         String   @id @default(cuid())
+  userId     String
+  hubId      String
+  acceptedAt DateTime @default(now()) @db.Timestamp(6)
+  hub        Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@unique([userId, hubId])
+  @@unique([userId, hubId])
 }
 
 model HubUpvote {
-    id        String   @id @default(cuid())
-    hubId     String
-    userId    String
-    createdAt DateTime @default(now())
-    hub       Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    user      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id        String   @id @default(cuid())
+  userId    String
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  hubId     String
+  hub       Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@unique([hubId, userId])
+  @@unique([hubId, userId])
 }
 
 model Infraction {
-    id                 String           @id @default(cuid())
-    hubId              String
-    type               InfractionType
-    status             InfractionStatus @default(ACTIVE)
-    moderatorId        String
-    reason             String
-    expiresAt          DateTime?
-    notified           Boolean          @default(false)
-    userId             String?
-    serverId           String?
-    serverName         String?
-    createdAt          DateTime         @default(now())
-    updatedAt          DateTime         @default(now())
-    evidenceMessageId  String?
-    evidenceContent    String?
-    evidenceImageUrl   String?
-    evidenceAuthorId   String?
-    evidenceAuthorName String?
-    evidenceChannelId  String?
-    evidenceGuildId    String?
-    evidenceGuildName  String?
-    evidenceCreatedAt  DateTime?
-    appeals            Appeal[]
-    hub                Hub              @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    moderator          User             @relation("Infraction_moderatorIdToUser", fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    server             ServerData?      @relation(fields: [serverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    user               User?            @relation("Infraction_userIdToUser", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id                 String           @id @default(cuid())
+  hubId              String
+  moderatorId        String
+  reason             String           @db.VarChar(500)
+  expiresAt          DateTime?        @db.Timestamp(6)
+  userId             String?
+  serverId           String?
+  serverName         String?
+  type               InfractionType
+  createdAt          DateTime         @default(now()) @db.Timestamp(6)
+  updatedAt          DateTime         @default(now()) @db.Timestamp(6)
+  status             InfractionStatus @default(ACTIVE)
+  notified           Boolean          @default(false)
+  evidenceMessageId  String?
+  evidenceContent    String?
+  evidenceImageUrl   String?
+  evidenceAuthorId   String?
+  evidenceAuthorName String?
+  evidenceChannelId  String?
+  evidenceGuildId    String?
+  evidenceGuildName  String?
+  evidenceCreatedAt  DateTime?        @db.Timestamp(6)
+  appeals            Appeal[]
+  hub                Hub              @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  moderator          User             @relation("Infraction_moderatorIdToUser", fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  server             ServerData?      @relation(fields: [serverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user               User?            @relation("Infraction_userIdToUser", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@index([status, hubId])
+  @@index([status, hubId])
+  @@index([hubId, serverId, type, expiresAt], map: "Infraction_server_active_idx", where: raw("(status = 'ACTIVE'::\"InfractionStatus\")"))
+  @@index([hubId, userId, type, expiresAt], map: "Infraction_user_active_idx", where: raw("(status = 'ACTIVE'::\"InfractionStatus\")"))
 }
 
 model Message {
-    id                String               @id
-    hubId             String
-    content           String
-    imageUrl          String?
-    channelId         String
-    guildId           String
-    authorId          String
-    createdAt         DateTime             @default(now())
-    referredMessageId String?
-    status            MessageStatus        @default(ACTIVE)
-    deletionQueuedAt  DateTime?
-    broadcasts        Broadcast[]
-    globalReports     GlobalReport[]
-    reactions         HubMessageReaction[]
-    hubReports        HubReport[]
-    hub               Hub                  @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    referredTo        Message?             @relation("MessageToMessage", fields: [referredMessageId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    referredBy        Message[]            @relation("MessageToMessage")
+  id                String               @id
+  hubId             String
+  content           String               @db.VarChar(4000)
+  imageUrl          String?              @db.VarChar(512)
+  channelId         String
+  guildId           String
+  authorId          String
+  referredMessageId String?
+  createdAt         DateTime             @default(now()) @db.Timestamp(6)
+  status            MessageStatus        @default(ACTIVE)
+  deletionQueuedAt  DateTime?            @db.Timestamp(6)
+  broadcasts        Broadcast[]
+  globalReports     GlobalReport[]
+  reactions         HubMessageReaction[]
+  hubReports        HubReport[]
+  hub               Hub                  @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  referredTo        Message?             @relation("MessageToMessage", fields: [referredMessageId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  referredBy        Message[]            @relation("MessageToMessage")
 
-    @@index([createdAt(sort: Desc)])
-    @@index([hubId])
-    @@index([referredMessageId])
-    @@index([hubId, createdAt(sort: Desc)])
-    @@index([status, createdAt(sort: Desc)])
-    @@index([authorId])
-    @@index([channelId, createdAt(sort: Desc)], map: "Message_channel_timestamp_idx")
-    @@index([guildId, hubId])
-    @@index([guildId])
+  @@index([createdAt(sort: Desc)])
+  @@index([hubId])
+  @@index([referredMessageId])
+  @@index([hubId, createdAt(sort: Desc)])
+  @@index([status, createdAt(sort: Desc)])
+  @@index([guildId, authorId])
 }
 
 model ReputationLog {
-    id         String   @id @default(cuid())
-    giverId    String
-    receiverId String
-    reason     String
-    automatic  Boolean  @default(false)
-    timestamp  DateTime @default(now())
-    receiver   User     @relation(fields: [receiverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id         String   @id @default(cuid())
+  giverId    String
+  receiverId String
+  reason     String
+  timestamp  DateTime @default(now()) @db.Timestamp(6)
+  automatic  Boolean  @default(false)
+  receiver   User     @relation(fields: [receiverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@index([giverId])
-    @@index([receiverId])
+  @@index([giverId])
+  @@index([receiverId])
 }
 
 model ServerData {
-    id                String            @id
-    name              String
-    iconUrl           String?
-    inviteCode        String?
-    messageCount      Int               @default(0)
-    lastMessageAt     DateTime          @default(now())
-    createdAt         DateTime          @default(now())
-    updatedAt         DateTime          @default(now())
-    connections       Connection[]
-    serverStats       HubServerStats[]
-    infractions       Infraction[]
-    serverBlacklists  ServerBlacklist[]
-    serversBlockingMe ServerBlocklist[] @relation("serversBlockingMe")
-    blockedServers    ServerBlocklist[] @relation("blockedServers")
-
-    @@index([lastMessageAt(sort: Desc)])
+  id                String            @id
+  name              String            @db.VarChar(100)
+  lastMessageAt     DateTime          @default(now()) @db.Timestamp(6)
+  createdAt         DateTime          @default(now()) @db.Timestamp(6)
+  updatedAt         DateTime          @default(now()) @db.Timestamp(6)
+  inviteCode        String?
+  messageCount      Int               @default(0)
+  iconUrl           String?
+  connections       Connection[]
+  serverStats       HubServerStats[]
+  infractions       Infraction[]
+  PremiumKey        PremiumKey[]
+  serverBlacklists  ServerBlacklist[]
+  blockedServers    ServerBlocklist[] @relation("blockedServers")
+  serversBlockingMe ServerBlocklist[] @relation("serversBlockingMe")
 }
 
 model Tag {
-    id          String   @id @default(cuid())
-    name        String   @unique
-    category    String?
-    color       String?
-    createdAt   DateTime @default(now())
-    description String?
-    isOfficial  Boolean  @default(false)
-    usageCount  Int      @default(0)
-    hubs        Hub[]    @relation("HubToTag")
+  id          String   @id @default(cuid())
+  name        String   @unique
+  category    String?
+  description String?
+  color       String?
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  isOfficial  Boolean  @default(false)
+  usageCount  Int      @default(0)
+  hubs        Hub[]    @relation("HubToTag")
 }
 
 model User {
-    id                     String                    @id
-    name                   String?
-    showBadges             Boolean                   @default(true)
-    image                  String?
-    locale                 String?
-    voteCount              Int                       @default(0)
-    reputation             Int                       @default(0)
-    lastVoted              DateTime?
-    mentionOnReply         Boolean                   @default(true)
-    messageCount           Int                       @default(0)
-    lastMessageAt          DateTime?                 @default(now())
-    inboxLastReadDate      DateTime?                 @default(now())
-    createdAt              DateTime?                 @default(now())
-    updatedAt              DateTime?                 @default(now())
-    email                  String?
-    hubEngagementScore     Float                     @default(0.0)
-    hubJoinCount           Int                       @default(0)
-    lastHubJoinAt          DateTime?
-    preferredLanguages     String[]                  @default([])
-    showNsfwHubs           Boolean                   @default(false)
-    badges                 Badges[]                  @default([])
-    activityLevel          HubActivityLevel?
-    emailVerified          Boolean?
-    voteRemindersEnabled   Boolean                   @default(true)
-    lastVoteReminderSent   DateTime?
-    accounts               Account[]
-    antiSwearRulesCreated  AntiSwearRule[]
-    AntiSwearWhitelist     AntiSwearWhitelist[]
-    appeals                Appeal[]
-    issuedBlacklists       Blacklist[]               @relation("Blacklist_moderatorIdToUser")
-    blacklists             Blacklist[]               @relation("Blacklist_userIdToUser")
-    blockWordsCreated      BlockWord[]
-    globalReportsSubmitted GlobalReport[]            @relation("GlobalReport_handledByToUser")
-    globalReportsReceived  GlobalReport[]            @relation("GlobalReport_reportedUserIdToUser")
-    globalReportsHandled   GlobalReport[]            @relation("GlobalReport_reporterIdToUser")
-    ownedHubs              Hub[]
-    modPositions           HubModerator[]
-    hubReportsSubmitted    HubReport[]               @relation("HubReport_handledByToUser")
-    hubReportsReceived     HubReport[]               @relation("HubReport_reportedUserIdToUser")
-    hubReportsHandled      HubReport[]               @relation("HubReport_reporterIdToUser")
-    reviews                HubReview[]
-    rulesAcceptances       HubRulesAcceptance[]
-    upvotedHubs            HubUpvote[]
-    HubUserStats           HubUserStats[]
-    issuedInfractions      Infraction[]              @relation("Infraction_moderatorIdToUser")
-    infractions            Infraction[]              @relation("Infraction_userIdToUser")
-    reputationLog          ReputationLog[]
-    issuedServerBlacklists ServerBlacklist[]
-    ServerBlocklist        ServerBlocklist[]
-    sessions               Session[]
-    achievements           UserAchievement[]
-    achievementProgress    UserAchievementProgress[]
+  id                                       String                    @id
+  name                                     String?
+  image                                    String?
+  lastMessageAt                            DateTime?                 @default(now()) @db.Timestamp(6)
+  inboxLastReadDate                        DateTime?                 @default(now()) @db.Timestamp(6)
+  createdAt                                DateTime?                 @default(now()) @db.Timestamp(6)
+  updatedAt                                DateTime?                 @default(now()) @db.Timestamp(6)
+  activityLevel                            HubActivityLevel?
+  lastHubJoinAt                            DateTime?                 @db.Timestamp(6)
+  email                                    String?
+  emailVerified                            Boolean?
+  showBadges                               Boolean                   @default(true)
+  mentionOnReply                           Boolean                   @default(true)
+  showNsfwHubs                             Boolean                   @default(false)
+  voteCount                                Int                       @default(0)
+  reputation                               Int                       @default(0)
+  messageCount                             Int                       @default(0)
+  hubJoinCount                             Int                       @default(0)
+  hubEngagementScore                       Float                     @default(0.0)
+  locale                                   String?
+  lastVoted                                DateTime?                 @db.Timestamp(6)
+  badges                                   Badges[]                  @default([])
+  preferredLanguages                       String[]                  @default([])
+  voteRemindersEnabled                     Boolean                   @default(true)
+  lastVoteReminderSent                     DateTime?                 @db.Timestamp(6)
+  customerId                               String?
+  accounts                                 Account[]
+  antiSwearRulesCreated                    AntiSwearRule[]
+  AntiSwearWhitelist                       AntiSwearWhitelist[]
+  appeals                                  Appeal[]
+  issuedBlacklists                         Blacklist[]               @relation("Blacklist_moderatorIdToUser")
+  blacklists                               Blacklist[]               @relation("Blacklist_userIdToUser")
+  blockWordsCreated                        BlockWord[]
+  globalReportsSubmitted                   GlobalReport[]            @relation("GlobalReport_handledByToUser")
+  globalReportsReceived                    GlobalReport[]            @relation("GlobalReport_reportedUserIdToUser")
+  globalReportsHandled                     GlobalReport[]            @relation("GlobalReport_reporterIdToUser")
+  ownedHubs                                Hub[]
+  modPositions                             HubModerator[]
+  hubReportsSubmitted                      HubReport[]               @relation("HubReport_handledByToUser")
+  hubReportsReceived                       HubReport[]               @relation("HubReport_reportedUserIdToUser")
+  hubReportsHandled                        HubReport[]               @relation("HubReport_reporterIdToUser")
+  reviews                                  HubReview[]
+  rulesAcceptances                         HubRulesAcceptance[]
+  upvotedHubs                              HubUpvote[]
+  HubUserStats                             HubUserStats[]
+  issuedInfractions                        Infraction[]              @relation("Infraction_moderatorIdToUser")
+  infractions                              Infraction[]              @relation("Infraction_userIdToUser")
+  PremiumKey_PremiumKey_assignedUserToUser PremiumKey[]              @relation("PremiumKey_assignedUserToUser")
+  PremiumKey_PremiumKey_purchasedByToUser  PremiumKey[]              @relation("PremiumKey_purchasedByToUser")
+  reputationLog                            ReputationLog[]
+  issuedServerBlacklists                   ServerBlacklist[]
+  ServerBlocklist                          ServerBlocklist[]
+  sessions                                 Session[]
+  achievements                             UserAchievement[]
+  achievementProgress                      UserAchievementProgress[]
 
-    @@index([email])
-    @@index([lastVoted])
-    @@index([reputation])
-    @@index([voteCount])
-    @@index([createdAt])
-    @@index([locale])
-    @@index([messageCount])
+  @@index([email])
+  @@index([lastVoted])
+  @@index([reputation])
+  @@index([voteCount])
+  @@index([messageCount])
 }
 
 model UserAchievement {
-    id            String      @id @default(cuid())
-    userId        String
-    achievementId String
-    unlockedAt    DateTime    @default(now())
-    achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    user          User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id            String      @id @default(cuid())
+  userId        String
+  achievementId String
+  unlockedAt    DateTime    @default(now()) @db.Timestamp(6)
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@unique([userId, achievementId])
-    @@index([achievementId])
-    @@index([userId])
+  @@unique([userId, achievementId])
+  @@index([achievementId])
+  @@index([userId])
 }
 
 model UserAchievementProgress {
-    userId        String
-    achievementId String
-    currentValue  Int         @default(0)
-    createdAt     DateTime    @default(now())
-    updatedAt     DateTime    @default(now())
-    achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    user          User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  userId        String
+  achievementId String
+  createdAt     DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime    @default(now()) @db.Timestamp(6)
+  currentValue  Int         @default(0)
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@id([userId, achievementId])
+  @@id([userId, achievementId])
 }
 
 model Blacklist {
-    id          String        @id @default(cuid())
-    userId      String
-    moderatorId String
-    reason      String
-    expiresAt   DateTime?
-    createdAt   DateTime      @default(now())
-    updatedAt   DateTime?     @default(now())
-    type        BlacklistType @default(PERMANENT)
-    moderator   User          @relation("Blacklist_moderatorIdToUser", fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    user        User          @relation("Blacklist_userIdToUser", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id          String        @id @default(cuid())
+  userId      String
+  moderatorId String
+  reason      String
+  expiresAt   DateTime?     @db.Timestamp(6)
+  createdAt   DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime?     @default(now()) @db.Timestamp(6)
+  type        BlacklistType @default(PERMANENT)
+  moderator   User          @relation("Blacklist_moderatorIdToUser", fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user        User          @relation("Blacklist_userIdToUser", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@index([userId, expiresAt], map: "Blacklist_user_active_idx")
+  @@index([userId, expiresAt], map: "Blacklist_user_active_idx")
 }
 
 model ServerBlacklist {
-    id          String        @id @default(cuid())
-    serverId    String
-    moderatorId String
-    reason      String
-    duration    Int?
-    expiresAt   DateTime?
-    createdAt   DateTime      @default(now())
-    updatedAt   DateTime      @default(now())
-    type        BlacklistType @default(PERMANENT)
-    moderator   User          @relation(fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    server      ServerData    @relation(fields: [serverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id          String        @id @default(cuid())
+  serverId    String
+  moderatorId String
+  reason      String        @db.VarChar(500)
+  duration    Int?
+  expiresAt   DateTime?     @db.Timestamp(6)
+  createdAt   DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime      @default(now()) @db.Timestamp(6)
+  type        BlacklistType @default(PERMANENT)
+  moderator   User          @relation(fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  server      ServerData    @relation(fields: [serverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@index([serverId, type])
-    @@index([serverId, expiresAt], map: "ServerBlacklist_server_active_idx")
+  @@index([serverId, type])
+  @@index([serverId, expiresAt], map: "ServerBlacklist_server_active_idx")
 }
 
 model DevAlerts {
-    id           String   @id @default(cuid())
-    title        String
-    content      String
-    imageUrl     String?
-    createdAt    DateTime @default(now())
-    thumbnailUrl String?
+  id           String   @id @default(cuid())
+  title        String
+  content      String
+  imageUrl     String?
+  createdAt    DateTime @default(now()) @db.Timestamp(6)
+  thumbnailUrl String?
 }
 
 model HubAnnouncement {
-    id                   String    @id @default(cuid())
-    hubId                String
-    title                String
-    content              String
-    createdAt            DateTime  @default(now())
-    frequencyMs          Int
-    previousAnnouncement DateTime?
-    nextAnnouncement     DateTime?
-    imageUrl             String?
-    thumbnailUrl         String?
-    hub                  Hub       @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id                   String    @id @default(cuid())
+  hubId                String
+  title                String
+  content              String
+  createdAt            DateTime  @default(now()) @db.Timestamp(6)
+  frequencyMs          BigInt
+  previousAnnouncement DateTime? @db.Timestamp(6)
+  nextAnnouncement     DateTime? @db.Timestamp(6)
+  imageUrl             String?
+  thumbnailUrl         String?
+  hub                  Hub       @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model GlobalReport {
-    id                                     String       @id @default(cuid())
-    reporterId                             String
-    reportedUserId                         String
-    reportedServerId                       String
-    messageId                              String?
-    reason                                 String
-    createdAt                              DateTime     @default(now())
-    updatedAt                              DateTime     @default(now())
-    handledBy                              String?
-    status                                 ReportStatus @default(PENDING)
-    handledAt                              DateTime?
-    reportMessageId                        String?
-    reportChannelId                        String?
-    actionTaken                            String?
-    User_GlobalReport_handledByToUser      User?        @relation("GlobalReport_handledByToUser", fields: [handledBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    Message                                Message?     @relation(fields: [messageId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    User_GlobalReport_reportedUserIdToUser User         @relation("GlobalReport_reportedUserIdToUser", fields: [reportedUserId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    User_GlobalReport_reporterIdToUser     User         @relation("GlobalReport_reporterIdToUser", fields: [reporterId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id                                     String       @id @default(cuid())
+  reporterId                             String
+  reportedUserId                         String
+  reportedServerId                       String
+  messageId                              String?
+  reason                                 String
+  createdAt                              DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt                              DateTime     @default(now()) @db.Timestamp(6)
+  handledBy                              String?
+  status                                 ReportStatus @default(PENDING)
+  handledAt                              DateTime?    @db.Timestamp(6)
+  reportMessageId                        String?
+  reportChannelId                        String?
+  actionTaken                            String?
+  User_GlobalReport_handledByToUser      User?        @relation("GlobalReport_handledByToUser", fields: [handledBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Message                                Message?     @relation(fields: [messageId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  User_GlobalReport_reportedUserIdToUser User         @relation("GlobalReport_reportedUserIdToUser", fields: [reportedUserId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  User_GlobalReport_reporterIdToUser     User         @relation("GlobalReport_reporterIdToUser", fields: [reporterId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@index([handledBy])
-    @@index([messageId])
-    @@index([reportedUserId])
-    @@index([reporterId])
+  @@index([handledBy])
+  @@index([messageId])
+  @@index([reportedUserId])
+  @@index([reporterId])
 }
 
 model HubReport {
-    id               String       @id @default(cuid())
-    hubId            String
-    reporterId       String
-    reportedUserId   String
-    reportedServerId String
-    messageId        String?
-    reason           String
-    createdAt        DateTime     @default(now())
-    updatedAt        DateTime     @default(now())
-    handledBy        String?
-    status           ReportStatus @default(PENDING)
-    handledAt        DateTime?
-    reportMessageId  String?
-    reportChannelId  String?
-    actionTaken      String?
-    handler          User?        @relation("HubReport_handledByToUser", fields: [handledBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    hub              Hub          @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    message          Message?     @relation(fields: [messageId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    reportedUser     User         @relation("HubReport_reportedUserIdToUser", fields: [reportedUserId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    reporter         User         @relation("HubReport_reporterIdToUser", fields: [reporterId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id               String       @id @default(cuid())
+  hubId            String
+  reporterId       String
+  reportedUserId   String
+  reportedServerId String
+  messageId        String?
+  reason           String
+  createdAt        DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime     @default(now()) @db.Timestamp(6)
+  handledBy        String?
+  status           ReportStatus @default(PENDING)
+  handledAt        DateTime?    @db.Timestamp(6)
+  reportMessageId  String?
+  reportChannelId  String?
+  actionTaken      String?
+  handler          User?        @relation("HubReport_handledByToUser", fields: [handledBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  hub              Hub          @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  message          Message?     @relation(fields: [messageId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  reportedUser     User         @relation("HubReport_reportedUserIdToUser", fields: [reportedUserId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  reporter         User         @relation("HubReport_reporterIdToUser", fields: [reporterId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    @@index([createdAt])
-    @@index([handledBy])
-    @@index([hubId])
-    @@index([messageId])
-    @@index([reportedUserId])
-    @@index([reporterId])
-    @@index([status])
+  @@index([createdAt])
+  @@index([handledBy])
+  @@index([hubId])
+  @@index([messageId])
+  @@index([reportedUserId])
+  @@index([reporterId])
+  @@index([status])
 }
 
 model HubMessageReaction {
-    id        String   @id
-    messageId String
-    emoji     String   @db.VarChar(64)
-    users     String[]
-    Message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id        String   @id @db.VarChar
+  messageId String
+  emoji     String   @db.VarChar(64)
+  users     String[]
+  Message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@unique([messageId, emoji])
+  @@unique([messageId, emoji])
 }
 
 model AntiSwearWhitelist {
-    id            String        @id
-    word          String
-    createdBy     String
-    reason        String?
-    createdAt     DateTime      @default(now())
-    ruleId        String
-    User          User          @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    AntiSwearRule AntiSwearRule @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id            String        @id
+  ruleId        String
+  word          String
+  createdBy     String
+  reason        String?
+  createdAt     DateTime      @default(now()) @db.Timestamp(6)
+  User          User          @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  AntiSwearRule AntiSwearRule @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@unique([ruleId, word])
+  @@unique([ruleId, word])
 }
 
 model Account {
-    userId                String
-    scope                 String?
-    createdAt             DateTime  @default(now())
-    updatedAt             DateTime
-    id                    String    @id @default(dbgenerated("(gen_random_uuid())::text"))
-    accountId             String
-    providerId            String
-    accessToken           String?
-    refreshToken          String?
-    idToken               String?
-    accessTokenExpiresAt  DateTime?
-    refreshTokenExpiresAt DateTime?
-    password              String?
-    user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  userId                String
+  scope                 String?
+  createdAt             DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt             DateTime  @default(now()) @db.Timestamp(6)
+  id                    String    @id
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime? @db.Timestamp(6)
+  refreshTokenExpiresAt DateTime? @db.Timestamp(6)
+  password              String?
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model Session {
-    userId    String
-    createdAt DateTime @default(now())
-    updatedAt DateTime
-    id        String   @id @default(dbgenerated("(gen_random_uuid())::text"))
-    expiresAt DateTime
-    token     String   @unique
-    ipAddress String?
-    userAgent String?
-    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  userId    String
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  id        String   @id
+  expiresAt DateTime @db.Timestamp(6)
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model Verification {
-    id         String    @id @default(dbgenerated("(gen_random_uuid())::text"))
-    identifier String
-    value      String
-    expiresAt  DateTime
-    createdAt  DateTime? @default(now())
-    updatedAt  DateTime? @default(now())
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime  @db.Timestamp(6)
+  createdAt  DateTime? @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime? @default(now()) @db.Timestamp(6)
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model ServerBlocklist {
-    id              String      @id @default(cuid())
-    serverId        String
-    blockedUserId   String?
-    blockedServerId String?
-    reason          String?
-    createdAt       DateTime    @default(now())
-    updatedAt       DateTime    @default(now())
-    blockedServer   ServerData? @relation("blockedServers", fields: [blockedServerId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    User            User?       @relation(fields: [blockedUserId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    server          ServerData  @relation("serversBlockingMe", fields: [serverId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id              String      @id @default(cuid())
+  serverId        String
+  blockedUserId   String?
+  blockedServerId String?
+  reason          String?
+  createdAt       DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt       DateTime    @default(now()) @db.Timestamp(6)
+  blockedServer   ServerData? @relation("blockedServers", fields: [blockedServerId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  User            User?       @relation(fields: [blockedUserId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  server          ServerData  @relation("serversBlockingMe", fields: [serverId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@unique([serverId, blockedServerId])
-    @@unique([serverId, blockedUserId])
-    @@index([serverId])
+  @@unique([serverId, blockedServerId])
+  @@unique([serverId, blockedUserId])
+  @@index([serverId])
 }
 
 model HubServerStats {
-    id            String     @id
-    hubId         String
-    serverId      String
-    year          Int
-    month         Int
-    messageCount  Int        @default(0)
-    lastMessageAt DateTime   @default(now())
-    Hub           Hub        @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    ServerData    ServerData @relation(fields: [serverId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id            String     @id
+  hubId         String
+  serverId      String
+  year          Int
+  month         Int
+  messageCount  Int        @default(0)
+  lastMessageAt DateTime   @default(now()) @db.Timestamp(6)
+  Hub           Hub        @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  ServerData    ServerData @relation(fields: [serverId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@unique([hubId, serverId, year, month], map: "HubServerStats_hub_server_year_month_key")
-    @@index([hubId, year, month, messageCount], map: "HubServerStats_hubId_year_month_count_idx")
+  @@unique([hubId, serverId, year, month], map: "HubServerStats_hub_server_year_month_key")
+  @@index([hubId, year, month, messageCount], map: "HubServerStats_hubId_year_month_count_idx")
 }
 
 model HubUserStats {
-    id            String   @id
-    hubId         String
-    userId        String
-    year          Int
-    month         Int
-    messageCount  Int      @default(0)
-    lastMessageAt DateTime @default(now())
-    Hub           Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-    User          User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id            String   @id
+  hubId         String
+  userId        String
+  year          Int
+  month         Int
+  messageCount  Int      @default(0)
+  lastMessageAt DateTime @default(now()) @db.Timestamp(6)
+  Hub           Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  User          User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-    @@unique([hubId, userId, year, month], map: "HubUserStats_hub_user_year_month_key")
-    @@index([hubId, year, month, messageCount], map: "HubUserStats_hubId_year_month_count_idx")
+  @@unique([hubId, userId, year, month], map: "HubUserStats_hub_user_year_month_key")
+  @@index([hubId, year, month, messageCount], map: "HubUserStats_hubId_year_month_count_idx")
+}
+
+model AllowedBots {
+  id    String @id
+  hubId String
+  botId String
+  Bot   Bot    @relation(fields: [botId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  Hub   Hub    @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Bot {
+  id               String         @id
+  name             String         @db.VarChar(100)
+  image            String?        @db.VarChar(512)
+  createdAt        DateTime       @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime       @default(now()) @db.Timestamp(6)
+  shortDescription String         @db.VarChar(255)
+  longDescription  String
+  features         String
+  state            ApprovalStatus @default(PENDING)
+  AllowedBots      AllowedBots[]
+  BotTag           BotTag[]       @relation("BotToTag")
+
+  @@index([state])
+}
+
+model BotTag {
+  id          String   @id
+  name        String   @unique @db.VarChar(50)
+  category    String?  @db.VarChar(50)
+  description String?  @db.VarChar(255)
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  Bot         Bot[]    @relation("BotToTag")
+}
+
+model PremiumKey {
+  id                                 String             @id
+  purchasedBy                        String?
+  subscriptionId                     String
+  assignedUser                       String?
+  assignedGuild                      String?
+  assignedHub                        String?
+  status                             KeyStatus          @default(ACTIVE)
+  createdAt                          DateTime           @default(now()) @db.Timestamp(6)
+  ServerData                         ServerData?        @relation(fields: [assignedGuild], references: [id], onUpdate: NoAction)
+  Hub                                Hub?               @relation(fields: [assignedHub], references: [id], onUpdate: NoAction)
+  User_PremiumKey_assignedUserToUser User?              @relation("PremiumKey_assignedUserToUser", fields: [assignedUser], references: [id], onUpdate: NoAction)
+  User_PremiumKey_purchasedByToUser  User?              @relation("PremiumKey_purchasedByToUser", fields: [purchasedBy], references: [id], onUpdate: NoAction)
+  StripeSubscription                 StripeSubscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([assignedGuild])
+  @@index([assignedHub])
+  @@index([assignedUser])
+  @@index([purchasedBy])
+  @@index([subscriptionId])
+}
+
+model StripeEvent {
+  id        String   @id
+  type      String
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+}
+
+model StripeSubscription {
+  id                String             @id
+  customerId        String
+  currentPeriodEnd  DateTime           @db.Timestamp(6)
+  cancelAtPeriodEnd Boolean
+  status            SubscriptionStatus @default(PENDING)
+  createdAt         DateTime           @default(now()) @db.Timestamp(6)
+  updatedAt         DateTime           @default(now()) @db.Timestamp(6)
+  lastEventTime     BigInt?
+  PremiumKey        PremiumKey[]
 }
 
 enum AppealStatus {
-    PENDING
-    ACCEPTED
-    REJECTED
+  PENDING
+  ACCEPTED
+  REJECTED
 }
 
 enum BlockWordAction {
-    BLOCK_MESSAGE
-    BLACKLIST
-    SEND_ALERT
-    WARN
-    MUTE
-    BAN
+  BLOCK_MESSAGE
+  SEND_ALERT
+  WARN
+  MUTE
+  BAN
+  BLACKLIST
 }
 
 enum HubActivityLevel {
-    LOW
-    MEDIUM
-    HIGH
+  LOW
+  MEDIUM
+  HIGH
 }
 
 enum InfractionStatus {
-    ACTIVE
-    REVOKED
-    APPEALED
+  ACTIVE
+  REVOKED
+  APPEALED
 }
 
 enum InfractionType {
-    BLACKLIST
-    WARNING
-    BAN
-    MUTE
+  BAN
+  BLACKLIST
+  MUTE
+  WARNING
 }
 
 enum ReportStatus {
-    PENDING
-    RESOLVED
-    IGNORED
+  PENDING
+  RESOLVED
+  IGNORED
 }
 
 enum Role {
-    MODERATOR
-    MANAGER
+  MODERATOR
+  MANAGER
 }
 
 enum Badges {
-    VOTER
-    SUPPORTER
-    TRANSLATOR
-    DEVELOPER
-    STAFF
-    BETA_TESTER
+  VOTER
+  SUPPORTER
+  TRANSLATOR
+  DEVELOPER
+  STAFF
+  BETA_TESTER
+  HUB_OWNER
+  HUB_MANAGER
+  HUB_MODERATOR
+  TOP_CHATTER
 }
 
 enum BlacklistType {
-    PERMANENT
-    TEMPORARY
+  PERMANENT
+  TEMPORARY
 }
 
 enum PatternMatchType {
-    EXACT
-    PREFIX
-    SUFFIX
-    WILDCARD
+  EXACT
+  PREFIX
+  SUFFIX
+  WILDCARD
 }
 
 enum MessageStatus {
-    PENDING
-    ACTIVE
-    DELETED
+  PENDING
+  ACTIVE
+  DELETED
 }
 
 enum HubVisibility {
-    PUBLIC
-    PRIVATE
-    UNLISTED
+  PUBLIC
+  PRIVATE
+  UNLISTED
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum KeyStatus {
+  ACTIVE
+  EXPIRED
+  REVOKED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  PENDING
 }
