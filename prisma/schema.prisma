@@ -1,7 +1,7 @@
 generator client {
   provider        = "prisma-client"
   output          = "../src/lib/generated/prisma/client"
-  previewFeatures = ["postgresqlExtensions", "relationJoins", "partialIndexes"]
+  previewFeatures = ["partialIndexes", "postgresqlExtensions", "relationJoins"]
   moduleFormat    = "esm"
   runtime         = "vercel-edge"
 }

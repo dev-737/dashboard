@@ -53,3 +53,49 @@ export async function createCheckoutSession(priceId: string, tierId: string) {
         return { error: 'An unexpected error occurred. Please try again.' };
     }
 }
+
+export async function cancelSubscription() {
+    try {
+        const session = await auth.api.getSession({
+            headers: await headers(),
+        });
+
+        if (!session?.user) {
+            return { error: 'You must be logged in to cancel a premium subscription.' };
+        }
+
+        const paymentApiUrl = process.env.PAYMENT_API_URL || 'http://localhost:8000/api/v1';
+        const baseUrl = paymentApiUrl.endsWith('/') ? paymentApiUrl.slice(0, -1) : paymentApiUrl;
+
+        const payload = {
+            uid: session.user.id,
+        };
+
+        const response = await fetch(`${baseUrl}/subscription/cancel`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            if (response.status === 404) {
+                return { error: 'No active subscription found to cancel.' };
+            }
+            console.error('Failed to cancel subscription:', await response.text());
+            return { error: 'Failed to cancel subscription. Please try again later.' };
+        }
+
+        const data = await response.json();
+
+        if (data.status !== 'Success') {
+            return { error: data.message || 'Invalid response from payment server.' };
+        }
+
+        return { success: true };
+    } catch (error) {
+        console.error('Error in cancelSubscription:', error);
+        return { error: 'An unexpected error occurred while communicating with the server.' };
+    }
+}
