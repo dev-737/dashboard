@@ -26,6 +26,22 @@ const CLICKHOUSE_DB = process.env.CLICKHOUSE_ANALYTICS_DB ?? 'interchat_analytic
 
 const isActive = CLICKHOUSE_URL.length > 0;
 
+// Precompute static endpoint URL and headers once at module init to avoid
+// rebuilding them on every event call.
+const clickhouseEndpoint = (() => {
+  if (!isActive) return '';
+  const url = new URL(CLICKHOUSE_URL);
+  url.searchParams.set('database', CLICKHOUSE_DB);
+  url.searchParams.set('query', 'INSERT INTO activity_events FORMAT JSONEachRow');
+  return url.toString();
+})();
+
+const clickhouseHeaders: Record<string, string> = {
+  'Content-Type': 'application/json',
+  'X-ClickHouse-User': CLICKHOUSE_USER,
+  'X-ClickHouse-Key': CLICKHOUSE_PASSWORD,
+};
+
 // ── Types ───────────────────────────────────────────────────────────────────
 
 interface AnalyticsEvent {
@@ -40,7 +56,7 @@ interface AnalyticsEvent {
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
 /**
- * Build the INSERT query + TSV row for a single event.
+ * Build the JSONEachRow payload for a single event.
  * ClickHouse's HTTP API accepts `FORMAT JSONEachRow` bodies.
  */
 function buildInsertBody(event: AnalyticsEvent): string {
@@ -77,26 +93,20 @@ export function trackEvent(
   const event: AnalyticsEvent = { eventName, ...opts };
   const body = buildInsertBody(event);
 
-  // Construct the ClickHouse HTTP API URL
-  const url = new URL(CLICKHOUSE_URL);
-  url.searchParams.set('database', CLICKHOUSE_DB);
-  url.searchParams.set(
-    'query',
-    'INSERT INTO activity_events FORMAT JSONEachRow',
-  );
-
   // Fire-and-forget — never block the request
-  fetch(url.toString(), {
+  fetch(clickhouseEndpoint, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-ClickHouse-User': CLICKHOUSE_USER,
-      'X-ClickHouse-Key': CLICKHOUSE_PASSWORD,
-    },
+    headers: clickhouseHeaders,
     body,
-  }).catch(() => {
-    // Silently swallow — analytics should never break the app
-  });
+  })
+    .then((response) => {
+      if (!response.ok && process.env.NODE_ENV !== 'production') {
+        console.warn(`[analytics] ClickHouse insert failed: ${response.status} ${response.statusText}`);
+      }
+    })
+    .catch(() => {
+      // Silently swallow — analytics should never break the app
+    });
 }
 
 // ── Convenience helpers ─────────────────────────────────────────────────────
