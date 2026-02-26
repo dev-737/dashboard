@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy package files and schema so any postinstall scripts don't fail
 COPY package.json bun.lock* ./
 COPY prisma ./prisma
-COPY prisma.config.ts ./prisma.config.ts
+COPY prisma.config.ts ./
 
 RUN --mount=type=cache,target=/root/.bun/install/cache \
     bun install --frozen-lockfile
