@@ -13,6 +13,10 @@ Sentry.init({
   // Enable logs to be sent to Sentry
   enableLogs: true,
 
+  // Use OTel tracing context so trace IDs are consistent across Sentry
+  // and the OTel Collector pipeline.  Same pattern as the bot.
+  instrumenter: 'otel',
+
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
 });

@@ -7,6 +7,7 @@ import { headers } from 'next/headers';
 import superjson from 'superjson';
 import z, { ZodError } from 'zod/v4';
 import { auth } from '@/lib/auth';
+import { trackEvent } from '@/lib/analytics';
 
 /**
  * Context type for tRPC procedures
@@ -51,6 +52,25 @@ const t = initTRPC.context<Context>().create({
 });
 
 /**
+ * Analytics middleware — automatically tracks all mutations passing through it.
+ * Fires a `web.trpc_mutation` event with the procedure path and outcome.
+ */
+const analyticsMiddleware = t.middleware(async ({ ctx, next, type, path }) => {
+  const result = await next();
+
+  // Only track mutations (not queries or subscriptions) and only on success
+  if (type === 'mutation' && result.ok) {
+    const userId = ctx.session?.user?.id;
+    trackEvent(`web.trpc.${path}`, {
+      userId: userId ?? '',
+      properties: { type: 'mutation' },
+    });
+  }
+
+  return result;
+});
+
+/**
  * Create a router
  */
 export const router = t.router;
@@ -61,16 +81,19 @@ export const router = t.router;
 export const publicProcedure = t.procedure;
 
 /**
- * Create a protected procedure that requires authentication
+ * Create a protected procedure that requires authentication.
+ * Includes analytics middleware — all mutations are automatically tracked.
  */
-export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
-  if (!ctx.session?.user) {
-    throw new TRPCError({ code: 'UNAUTHORIZED' });
-  }
-  return next({
-    ctx: {
-      ...ctx,
-      session: { ...ctx.session, user: ctx.session.user },
-    },
-  });
-});
+export const protectedProcedure = t.procedure
+  .use(({ ctx, next }) => {
+    if (!ctx.session?.user) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' });
+    }
+    return next({
+      ctx: {
+        ...ctx,
+        session: { ...ctx.session, user: ctx.session.user },
+      },
+    });
+  })
+  .use(analyticsMiddleware);

@@ -10,6 +10,7 @@ import type {
 } from '@/lib/generated/prisma/client/client';
 import { cache as perfCache } from '@/lib/performance-cache';
 import { db } from '@/lib/prisma';
+import { trackInfractionRevoked, trackServerBlocklistAdded, trackServerBlocklistRemoved } from '@/lib/analytics';
 
 // Discord API endpoints
 const DISCORD_API = 'https://discord.com/api/v10';
@@ -509,6 +510,8 @@ export async function revokeInfraction(infractionId: string) {
       },
     });
 
+    trackInfractionRevoked(moderatorId, infractionId);
+
     return { success: true, infraction: updatedInfraction, status: 200 };
   } catch (error) {
     console.error('Error revoking infraction:', error);
@@ -580,6 +583,8 @@ export async function addServerBlocklistEntry(
       },
     });
 
+    trackServerBlocklistAdded(session.user.id, serverId, { blockedServerId, blockedUserId });
+
     return { success: true, data: newBlocklist, status: 200 };
   } catch (error) {
     console.error('Error adding blocklist entry:', error);
@@ -608,9 +613,11 @@ export async function removeServerBlocklistEntry(
     await db.serverBlocklist.delete({
       where: {
         id: blocklistId,
-        serverId: serverId, // Extra safety to ensure the blocklist belongs to this server
+        serverId: serverId,
       },
     });
+
+    trackServerBlocklistRemoved(session.user.id, serverId, blocklistId);
 
     return { success: true, status: 200 };
   } catch (error) {

@@ -1,6 +1,7 @@
 'use server';
 
 import { auth } from '@/lib/auth';
+import { trackCheckoutInitiated, trackSubscriptionCancelRequested } from '@/lib/analytics';
 import { headers } from 'next/headers';
 
 export async function createCheckoutSession(priceId: string, tierId: string) {
@@ -47,6 +48,8 @@ export async function createCheckoutSession(priceId: string, tierId: string) {
             return { error: 'Invalid response from payment server.' };
         }
 
+        trackCheckoutInitiated(session.user.id, tierId, priceId);
+
         return { url: data.url };
     } catch (error) {
         console.error('Error in createCheckoutSession:', error);
@@ -92,6 +95,8 @@ export async function cancelSubscription() {
         if (data.status !== 'Success') {
             return { error: data.message || 'Invalid response from payment server.' };
         }
+
+        trackSubscriptionCancelRequested(session.user.id);
 
         return { success: true };
     } catch (error) {
