@@ -158,7 +158,7 @@ export default function PremiumPage() {
             if (res.url) {
                 window.location.href = res.url;
             }
-        } catch  {
+        } catch {
             toast.error('Failed to initiate checkout. Please try again.');
             setLoadingTier(null);
         }
@@ -212,7 +212,7 @@ export default function PremiumPage() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             key={tier.name}
-                            className={`group rem] relative flex flex-col overflow-hidden rounded-md[2 border bg-[#050810]/60 p-10 backdrop-blur-3xl transition-all duration-500 hover:-translate-y-2 ${tier.popular
+                            className={`group relative flex flex-col overflow-hidden rounded-[2rem] border bg-[#050810]/60 p-10 backdrop-blur-3xl transition-all duration-500 hover:-translate-y-2 ${tier.popular
                                 ? 'z-10 border-[#7B61FF]/30 shadow-2xl shadow-[#7B61FF]/10 md:scale-[1.03]'
                                 : 'border-white/4 hover:border-white/8 hover:bg-[#070B18]/60'
                                 }`}

@@ -6,6 +6,11 @@ export const auth = betterAuth({
     database: prismaAdapter(db, {
         provider: 'postgresql',
     }),
+    trustedOrigins: [
+        "http://localhost:3000",
+        "https://interchat.dev",
+        "https://beta.interchat.dev",
+    ],
     socialProviders: {
         discord: {
             clientId: process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID!,
