@@ -12,7 +12,7 @@ import { trackEvent } from '@/lib/analytics';
 /**
  * Context type for tRPC procedures
  */
-export interface Context {
+interface Context {
   session: {
     user?: {
       id: string;

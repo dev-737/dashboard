@@ -3,10 +3,10 @@
 import {
     ArrowRightIcon,
     Menu01Icon,
-    Diamond01Icon,
+    Diamond02Icon,
     Compass01Icon,
     BookOpen01Icon,
-    Tick01Icon,
+    HeartCheckIcon,
 } from '@hugeicons/core-free-icons';
 
 import { HugeiconsIcon } from '@hugeicons/react';
@@ -24,7 +24,7 @@ const links = [
     {
         text: 'Premium',
         url: '/premium',
-        icon: Diamond01Icon,
+        icon: Diamond02Icon,
     },
     {
         text: 'Discover',
@@ -39,7 +39,7 @@ const links = [
     {
         text: 'Vote',
         url: '/vote',
-        icon: Tick01Icon,
+        icon: HeartCheckIcon,
         external: true,
     },
 ];
