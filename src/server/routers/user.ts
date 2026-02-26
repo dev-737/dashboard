@@ -210,7 +210,6 @@ export const userRouter = router({
             },
             select: {
                 id: true,
-                tier: true,
                 StripeSubscription: true,
             },
         });
