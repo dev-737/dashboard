@@ -61,9 +61,9 @@ const analyticsMiddleware = t.middleware(async ({ ctx, next, type, path }) => {
   // Only track mutations (not queries or subscriptions) and only on success
   if (type === 'mutation' && result.ok) {
     const userId = ctx.session?.user?.id;
-    trackEvent(`web.trpc.${path}`, {
+    trackEvent('web.trpc_mutation', {
       userId: userId ?? '',
-      properties: { type: 'mutation' },
+      properties: { type: 'mutation', path, outcome: 'success' },
     });
   }
 
