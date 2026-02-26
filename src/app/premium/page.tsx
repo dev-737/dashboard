@@ -1,11 +1,11 @@
 'use client';
 
 import {
+    Cancel01Icon,
     CheckmarkSquare01Icon,
+    CrownIcon,
     SparklesIcon,
     StarIcon,
-    CrownIcon,
-    Cancel01Icon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { motion } from 'motion/react';
@@ -30,7 +30,7 @@ const tiers = [
             'An exclusive global badge',
             'Priority Support'
         ],
-        buttonText: 'Purchase',
+        buttonText: 'Get Started',
         popular: false,
         priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_CORE || 'price_core_placeholder',
     },
@@ -50,7 +50,7 @@ const tiers = [
             'External emojis pass through',
             'And more...',
         ],
-        buttonText: 'Purchase',
+        buttonText: 'Get Started',
         popular: true,
         priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PLUS || 'price_plus_placeholder',
     },
@@ -70,7 +70,7 @@ const tiers = [
             'Advanced automoderation',
             'And more...',
         ],
-        buttonText: 'Purchase',
+        buttonText: 'Get Started',
         popular: false,
         priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO || 'price_pro_placeholder',
     },
@@ -81,9 +81,9 @@ const comparisonFeatures = [
         category: 'Capacity & Limitations',
         items: [
             { name: 'Hub creation limit', free: '1 hub', core: '3 hubs', plus: '3 hubs', pro: '3 hubs' },
-            { name: 'Elevated hub connections', free: '2 connections', core: '2 connections', plus: '5 connections', pro: '5 connections' },
+            { name: 'Elevated hub connections to your server', free: '2 connections', core: '5 connections', plus: '10 connections', pro: '25 connections' },
             { name: 'Higher character limit', free: '1000 characters', core: '1000 characters', plus: '2000 characters', pro: '3000 characters' },
-            { name: 'Prolonged message retention', free: '1 day', core: '1 day', plus: '1 day', pro: 'Up to 7 days' },
+            { name: 'Prolonged message retention', free: '1 day', core: '1 day', plus: '7 days', pro: 'Up to 30 days' },
             { name: 'Access to premium broadcast nodes', free: false, core: false, plus: true, pro: true },
             { name: 'Advanced automoderation', free: false, core: false, plus: false, pro: true },
         ],
@@ -158,7 +158,7 @@ export default function PremiumPage() {
             if (res.url) {
                 window.location.href = res.url;
             }
-        } catch (error) {
+        } catch  {
             toast.error('Failed to initiate checkout. Please try again.');
             setLoadingTier(null);
         }
@@ -168,12 +168,12 @@ export default function PremiumPage() {
         <div className="relative min-h-screen overflow-hidden bg-dash-main pt-32 pb-24">
             {/* Absolute Background Effects */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                <div className="absolute top-[-10%] left-[-10%] h-[800px] w-[800px] rounded-full bg-purple-600/20 blur-[120px]" />
-                <div className="absolute right-[-10%] bottom-[-10%] h-[800px] w-[800px] rounded-full bg-blue-600/20 blur-[120px]" />
+                <div className="absolute top-[-10%] left-[-10%] h-200 w-200 rounded-full bg-purple-600/20 blur-[120px]" />
+                <div className="absolute right-[-10%] bottom-[-10%] h-200 w-200 rounded-full bg-blue-600/20 blur-[120px]" />
                 <div className="mask-[linear-gradient(180deg,white,rgba(255,255,255,0))] absolute inset-0 bg-[url('/assets/grid.svg')] bg-center opacity-30" />
             </div>
 
-            <div className="container relative z-10 mx-auto max-w-screen-xl px-4">
+            <div className="container relative z-10 mx-auto max-w-7xl px-4">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -181,7 +181,7 @@ export default function PremiumPage() {
                     transition={{ duration: 0.7 }}
                     className="mb-20 text-center"
                 >
-                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-blue-300 backdrop-blur-sm shadow-inner shadow-blue-500/10">
+                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-blue-300 shadow-blue-500/10 shadow-inner backdrop-blur-sm">
                         <HugeiconsIcon
                             strokeWidth={2}
                             icon={SparklesIcon}
@@ -212,9 +212,9 @@ export default function PremiumPage() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             key={tier.name}
-                            className={`group relative flex flex-col overflow-hidden rounded-[2rem] border bg-[#050810]/60 p-10 backdrop-blur-3xl transition-all duration-500 hover:-translate-y-2 ${tier.popular
-                                ? 'border-[#7B61FF]/30 shadow-2xl shadow-[#7B61FF]/10 z-10 md:scale-[1.03]'
-                                : 'border-white/[0.04] hover:border-white/[0.08] hover:bg-[#070B18]/60'
+                            className={`group rem] relative flex flex-col overflow-hidden rounded-[2 border bg-[#050810]/60 p-10 backdrop-blur-3xl transition-all duration-500 hover:-translate-y-2 ${tier.popular
+                                ? 'z-10 border-[#7B61FF]/30 shadow-2xl shadow-[#7B61FF]/10 md:scale-[1.03]'
+                                : 'border-white/4 hover:border-white/8 hover:bg-[#070B18]/60'
                                 }`}
                         >
                             {/* Inner Hover Glow */}
@@ -233,16 +233,16 @@ export default function PremiumPage() {
 
                             {tier.popular && (
                                 <div className="absolute top-6 right-6">
-                                    <span className="rounded-full border border-[#7B61FF]/50 bg-[#7B61FF]/10 px-3.5 py-1 font-bold text-[10px] text-[#A78BFF] shadow-[0_0_15px_rgba(123,97,255,0.2)] uppercase tracking-widest backdrop-blur-md">
+                                    <span className="rounded-full border border-[#7B61FF]/50 bg-[#7B61FF]/10 px-3.5 py-1 font-bold text-[#A78BFF] text-[10px] uppercase tracking-widest shadow-[0_0_15px_rgba(123,97,255,0.2)] backdrop-blur-md">
                                         Most Popular
                                     </span>
                                 </div>
                             )}
 
-                            <div className="relative z-10 flex flex-col h-full">
+                            <div className="relative z-10 flex h-full flex-col">
                                 <div className="mb-6 flex items-center gap-4">
                                     <div
-                                        className={`rounded-2xl bg-[#0A0F1E] p-3.5 ring-1 shadow-inner ${tier.popular ? 'ring-[#7B61FF]/30 shadow-[#7B61FF]/10' : 'ring-white/5 shadow-white/5'
+                                        className={`rounded-2xl bg-[#0A0F1E] p-3.5 shadow-inner ring-1 ${tier.popular ? 'shadow-[#7B61FF]/10 ring-[#7B61FF]/30' : 'shadow-white/5 ring-white/5'
                                             } ${tier.iconColor}`}
                                     >
                                         <HugeiconsIcon
@@ -261,21 +261,21 @@ export default function PremiumPage() {
                                     <span className="font-medium text-gray-500 text-lg">{tier.period}</span>
                                 </div>
 
-                                <p className="mb-8 min-h-[3rem] text-sm text-gray-400/90 leading-relaxed font-medium">{tier.description}</p>
+                                <p className="mb-8 min-h-12 font-medium text-gray-400/90 text-sm leading-relaxed">{tier.description}</p>
 
-                                <div className="mb-8 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                                <div className="mb-8 h-px w-full bg-linear-to-r from-transparent via-white/10 to-transparent" />
 
-                                <ul className="mb-10 space-y-4 flex-1">
+                                <ul className="mb-10 flex-1 space-y-4">
                                     {tier.features.map((feature, featureIdx) => (
                                         <li key={featureIdx} className="flex items-start gap-3">
                                             <div className={`mt-0.5 rounded-full p-0.5 ${tier.popular ? 'bg-[#7B61FF]/20 text-[#A78BFF]' : 'bg-white/5 text-gray-400'}`}>
                                                 <HugeiconsIcon
                                                     strokeWidth={2}
                                                     icon={CheckmarkSquare01Icon}
-                                                    className="h-4 w-4 flex-shrink-0"
+                                                    className="h-4 w-4 shrink-0"
                                                 />
                                             </div>
-                                            <span className="text-gray-300 font-medium text-sm">{feature}</span>
+                                            <span className="font-medium text-gray-300 text-sm">{feature}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -285,7 +285,7 @@ export default function PremiumPage() {
                                     disabled={loadingTier !== null}
                                     onClick={() => handleCheckout(tier.name, tier.id, tier.priceId)}
                                     className={`relative mt-auto h-14 w-full rounded-2xl font-bold transition-all duration-300 ${tier.popular
-                                        ? 'border-none bg-gradient-to-r from-[#4E56FF] to-[#7B61FF] text-white shadow-[0_8_30px_rgba(123,97,255,0.4)] hover:scale-[1.02] hover:shadow-[0_8_40px_rgba(123,97,255,0.6)]'
+                                        ? 'border-none bg-linear-to-r from-[#4E56FF] to-[#7B61FF] text-white shadow-[0_8_30px_rgba(123,97,255,0.4)] hover:scale-[1.02] hover:shadow-[0_8_40px_rgba(123,97,255,0.6)]'
                                         : 'border border-white/10 bg-white/5 text-white hover:scale-[1.02] hover:border-white/20 hover:bg-white/10'
                                         }`}
                                 >
@@ -308,19 +308,19 @@ export default function PremiumPage() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.5 }}
-                    className="mt-32 mx-auto max-w-6xl"
+                    className="mx-auto mt-32 max-w-6xl"
                 >
                     <div className="mb-12 text-center">
-                        <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
+                        <h2 className="font-bold text-3xl text-white tracking-tight md:text-5xl">
                             Compare Plans
                         </h2>
                         <p className="mt-4 text-gray-400">Find the absolute perfect fit for your needs.</p>
                     </div>
 
-                    <div className="overflow-x-auto rounded-[2rem] border border-white/[0.05] bg-[#050810]/40 backdrop-blur-2xl p-8">
-                        <div className="min-w-[800px]">
+                    <div className="overflow-x-auto rounded-4xl border border-white/5 bg-[#050810]/40 p-8 backdrop-blur-2xl">
+                        <div className="min-w-200">
                             {/* Table Header */}
-                            <div className="grid grid-cols-5 gap-4 border-b border-white/10 pb-6">
+                            <div className="grid grid-cols-5 gap-4 border-white/10 border-b pb-6">
                                 <div className="col-span-1"></div>
                                 <div className="col-span-1 text-center font-bold text-gray-400">Free</div>
                                 <div className="col-span-1 text-center font-bold text-[#6352BE]">Core</div>
@@ -331,14 +331,14 @@ export default function PremiumPage() {
                             {/* Table Body */}
                             {comparisonFeatures.map((section, idx) => (
                                 <div key={idx} className="mb-8 last:mb-0">
-                                    <div className="py-4 font-semibold text-white/80 uppercase tracking-wider text-sm">
+                                    <div className="py-4 font-semibold text-sm text-white/80 uppercase tracking-wider">
                                         {section.category}
                                     </div>
                                     <div className="space-y-2">
                                         {section.items.map((item, itemIdx) => (
                                             <div
                                                 key={itemIdx}
-                                                className="group grid grid-cols-5 items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/[0.02]"
+                                                className="group grid grid-cols-5 items-center gap-4 rounded-xl p-4 transition-colors hover:bg-white/2"
                                             >
                                                 <div className="col-span-1 font-medium text-gray-300">
                                                     {item.name}
@@ -380,10 +380,10 @@ export default function PremiumPage() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.6 }}
-                    className="mt-32 mx-auto max-w-4xl"
+                    className="mx-auto mt-32 max-w-4xl"
                 >
                     <div className="mb-12 text-center">
-                        <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
+                        <h2 className="font-bold text-3xl text-white tracking-tight md:text-5xl">
                             Frequently Asked Questions
                         </h2>
                         <p className="mt-4 text-gray-400">Everything you need to know about Premium.</p>
@@ -393,17 +393,17 @@ export default function PremiumPage() {
                         {faqs.map((faq, idx) => (
                             <div
                                 key={idx}
-                                className="rounded-[1.5rem] border border-white/[0.05] bg-[#050810]/40 p-8 backdrop-blur-2xl transition-all hover:border-white/10 hover:bg-white/[0.02]"
+                                className="rounded-3xl border border-white/5 bg-[#050810]/40 p-8 backdrop-blur-2xl transition-all hover:border-white/10 hover:bg-white/2"
                             >
-                                <h3 className="mb-3 text-lg font-bold text-white">{faq.question}</h3>
-                                <p className="text-gray-400 leading-relaxed text-sm">{faq.answer}</p>
+                                <h3 className="mb-3 font-bold text-lg text-white">{faq.question}</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed">{faq.answer}</p>
                             </div>
                         ))}
                     </div>
 
                     <div className="mt-16 text-center">
-                        <p className="text-gray-500 text-sm font-medium">
-                            Still have questions? <a href="https://interchat.dev/support" className="text-[#7B61FF] hover:text-[#A78BFF] transition-colors underline underline-offset-4 pointer-events-auto">Contact Support</a>
+                        <p className="font-medium text-gray-500 text-sm">
+                            Still have questions? <a href="https://interchat.dev/support" className="pointer-events-auto text-[#7B61FF] underline underline-offset-4 transition-colors hover:text-[#A78BFF]">Contact Support</a>
                         </p>
                     </div>
                 </motion.div>

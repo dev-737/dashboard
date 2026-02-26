@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert01Icon, Diamond01Icon } from '@hugeicons/core-free-icons';
+import { Alert01Icon, Diamond02Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -128,7 +128,7 @@ export function UserSettingsForm() {
                         <div className="flex items-center gap-2">
                             <HugeiconsIcon
                                 strokeWidth={2}
-                                icon={Diamond01Icon}
+                                icon={Diamond02Icon}
                                 className="h-5 w-5 text-indigo-400"
                             />
                             <h3 className="font-semibold text-indigo-100">Premium Subscription</h3>
@@ -229,7 +229,7 @@ export function UserSettingsForm() {
                 <Select value={locale} onValueChange={(value) => setLocale(value)}>
                     <SelectTrigger
                         id={languageSelectId}
-                        className="w-full border-gray-700/50 bg-gray-800/50 focus-visible:ring-indigo-500/50 md:w-[240px]"
+                        className="w-full border-gray-700/50 bg-gray-800/50 focus-visible:ring-indigo-500/50 md:w-60"
                     >
                         <SelectValue placeholder="Select language" />
                     </SelectTrigger>

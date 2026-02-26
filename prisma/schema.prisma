@@ -3,7 +3,7 @@ generator client {
   output          = "../src/lib/generated/prisma/client"
   previewFeatures = ["partialIndexes", "postgresqlExtensions", "relationJoins"]
   moduleFormat    = "esm"
-  runtime         = "vercel-edge"
+  runtime         = "bun"
 }
 
 datasource db {
@@ -16,8 +16,8 @@ model Achievement {
   description      String
   badgeEmoji       String
   badgeUrl         String
-  createdAt        DateTime                  @default(now()) @db.Timestamp(6)
-  updatedAt        DateTime                  @default(now()) @db.Timestamp(6)
+  createdAt        DateTime                  @default(now())
+  updatedAt        DateTime                  @default(now())
   threshold        Int
   secret           Boolean                   @default(false)
   userAchievements UserAchievement[]
@@ -41,8 +41,8 @@ model AntiSwearRule {
   createdBy           String
   enabled             Boolean              @default(true)
   muteDurationMinutes Int?
-  createdAt           DateTime             @default(now()) @db.Timestamp(6)
-  updatedAt           DateTime             @default(now()) @db.Timestamp(6)
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @default(now())
   actions             BlockWordAction[]    @default([])
   patterns            AntiSwearPattern[]
   creator             User                 @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -56,8 +56,8 @@ model Appeal {
   infractionId String
   userId       String
   reason       String       @db.VarChar(1000)
-  createdAt    DateTime     @default(now()) @db.Timestamp(6)
-  updatedAt    DateTime     @default(now()) @db.Timestamp(6)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @default(now())
   id           String       @id @default(cuid())
   status       AppealStatus @default(PENDING)
   infraction   Infraction   @relation(fields: [infractionId], references: [id], onDelete: Cascade, onUpdate: NoAction)
@@ -73,8 +73,8 @@ model BlockWord {
   hubId     String
   name      String
   createdBy String
-  createdAt DateTime          @default(now()) @db.Timestamp(6)
-  updatedAt DateTime          @default(now()) @db.Timestamp(6)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @default(now())
   words     String
   actions   BlockWordAction[]
   creator   User              @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -88,7 +88,7 @@ model Broadcast {
   messageId String
   guildId   String
   channelId String
-  createdAt DateTime @default(now()) @db.Timestamp(6)
+  createdAt DateTime @default(now())
   message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@index([channelId])
@@ -105,8 +105,8 @@ model Connection {
   webhookURL          String
   serverId            String
   hubId               String
-  createdAt           DateTime   @default(now()) @db.Timestamp(6)
-  lastActive          DateTime   @default(now()) @db.Timestamp(6)
+  createdAt           DateTime   @default(now())
+  lastActive          DateTime   @default(now())
   parentId            String?
   webhookSecondaryURL String?
   connected           Boolean    @default(true)
@@ -125,15 +125,15 @@ model Connection {
 
 model Hub {
   id                  String               @id @default(cuid())
-  name                String               @unique @db.VarChar(100)
+  name                String               @unique
   description         String               @db.VarChar(1024)
   ownerId             String
   iconUrl             String               @db.VarChar(512)
-  shortDescription    String?              @db.VarChar(100)
-  createdAt           DateTime             @default(now()) @db.Timestamp(6)
-  updatedAt           DateTime             @default(now()) @db.Timestamp(6)
-  lastActive          DateTime             @default(now()) @db.Timestamp(6)
-  lastNameChange      DateTime?            @default(now()) @db.Timestamp(6)
+  shortDescription    String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @default(now())
+  lastActive          DateTime             @default(now())
+  lastNameChange      DateTime?            @default(now())
   bannerUrl           String?
   welcomeMessage      String?
   language            String?
@@ -187,8 +187,8 @@ model Hub {
 model HubActivityMetrics {
   id                    String   @id @default(cuid())
   hubId                 String   @unique
-  lastUpdated           DateTime @default(now()) @db.Timestamp(6)
-  createdAt             DateTime @default(now()) @db.Timestamp(6)
+  lastUpdated           DateTime @default(now())
+  createdAt             DateTime @default(now())
   messagesLast24h       Int      @default(0)
   activeUsersLast24h    Int      @default(0)
   newConnectionsLast24h Int      @default(0)
@@ -207,9 +207,9 @@ model HubActivityMetrics {
 
 model HubInvite {
   hubId     String
-  expires   DateTime? @db.Timestamp(6)
+  expires   DateTime?
   code      String    @id @default(nanoid())
-  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  createdAt DateTime  @default(now())
   maxUses   Int       @default(0)
   uses      Int       @default(0)
   hub       Hub       @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
@@ -251,8 +251,8 @@ model HubModerator {
 
 model HubReview {
   id        String   @id @default(cuid())
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
   rating    Int
   text      String
   hubId     String
@@ -267,7 +267,7 @@ model HubRulesAcceptance {
   id         String   @id @default(cuid())
   userId     String
   hubId      String
-  acceptedAt DateTime @default(now()) @db.Timestamp(6)
+  acceptedAt DateTime @default(now())
   hub        Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   user       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
@@ -277,7 +277,7 @@ model HubRulesAcceptance {
 model HubUpvote {
   id        String   @id @default(cuid())
   userId    String
-  createdAt DateTime @default(now()) @db.Timestamp(6)
+  createdAt DateTime @default(now())
   hubId     String
   hub       Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   user      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -290,13 +290,13 @@ model Infraction {
   hubId              String
   moderatorId        String
   reason             String           @db.VarChar(500)
-  expiresAt          DateTime?        @db.Timestamp(6)
+  expiresAt          DateTime?
   userId             String?
   serverId           String?
   serverName         String?
   type               InfractionType
-  createdAt          DateTime         @default(now()) @db.Timestamp(6)
-  updatedAt          DateTime         @default(now()) @db.Timestamp(6)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @default(now())
   status             InfractionStatus @default(ACTIVE)
   notified           Boolean          @default(false)
   evidenceMessageId  String?
@@ -307,7 +307,7 @@ model Infraction {
   evidenceChannelId  String?
   evidenceGuildId    String?
   evidenceGuildName  String?
-  evidenceCreatedAt  DateTime?        @db.Timestamp(6)
+  evidenceCreatedAt  DateTime?
   appeals            Appeal[]
   hub                Hub              @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   moderator          User             @relation("Infraction_moderatorIdToUser", fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -328,9 +328,9 @@ model Message {
   guildId           String
   authorId          String
   referredMessageId String?
-  createdAt         DateTime             @default(now()) @db.Timestamp(6)
+  createdAt         DateTime             @default(now())
   status            MessageStatus        @default(ACTIVE)
-  deletionQueuedAt  DateTime?            @db.Timestamp(6)
+  deletionQueuedAt  DateTime?
   broadcasts        Broadcast[]
   globalReports     GlobalReport[]
   reactions         HubMessageReaction[]
@@ -352,7 +352,7 @@ model ReputationLog {
   giverId    String
   receiverId String
   reason     String
-  timestamp  DateTime @default(now()) @db.Timestamp(6)
+  timestamp  DateTime @default(now())
   automatic  Boolean  @default(false)
   receiver   User     @relation(fields: [receiverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
@@ -362,10 +362,10 @@ model ReputationLog {
 
 model ServerData {
   id                String            @id
-  name              String            @db.VarChar(100)
-  lastMessageAt     DateTime          @default(now()) @db.Timestamp(6)
-  createdAt         DateTime          @default(now()) @db.Timestamp(6)
-  updatedAt         DateTime          @default(now()) @db.Timestamp(6)
+  name              String
+  lastMessageAt     DateTime          @default(now())
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @default(now())
   inviteCode        String?
   messageCount      Int               @default(0)
   iconUrl           String?
@@ -384,7 +384,7 @@ model Tag {
   category    String?
   description String?
   color       String?
-  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  createdAt   DateTime @default(now())
   isOfficial  Boolean  @default(false)
   usageCount  Int      @default(0)
   hubs        Hub[]    @relation("HubToTag")
@@ -394,12 +394,12 @@ model User {
   id                                       String                    @id
   name                                     String?
   image                                    String?
-  lastMessageAt                            DateTime?                 @default(now()) @db.Timestamp(6)
-  inboxLastReadDate                        DateTime?                 @default(now()) @db.Timestamp(6)
-  createdAt                                DateTime?                 @default(now()) @db.Timestamp(6)
-  updatedAt                                DateTime?                 @default(now()) @db.Timestamp(6)
+  lastMessageAt                            DateTime?                 @default(now())
+  inboxLastReadDate                        DateTime?                 @default(now())
+  createdAt                                DateTime?                 @default(now())
+  updatedAt                                DateTime?                 @default(now())
   activityLevel                            HubActivityLevel?
-  lastHubJoinAt                            DateTime?                 @db.Timestamp(6)
+  lastHubJoinAt                            DateTime?
   email                                    String?
   emailVerified                            Boolean?
   showBadges                               Boolean                   @default(true)
@@ -411,11 +411,11 @@ model User {
   hubJoinCount                             Int                       @default(0)
   hubEngagementScore                       Float                     @default(0.0)
   locale                                   String?
-  lastVoted                                DateTime?                 @db.Timestamp(6)
+  lastVoted                                DateTime?
   badges                                   Badges[]                  @default([])
   preferredLanguages                       String[]                  @default([])
   voteRemindersEnabled                     Boolean                   @default(true)
-  lastVoteReminderSent                     DateTime?                 @db.Timestamp(6)
+  lastVoteReminderSent                     DateTime?
   customerId                               String?
   accounts                                 Account[]
   antiSwearRulesCreated                    AntiSwearRule[]
@@ -458,7 +458,7 @@ model UserAchievement {
   id            String      @id @default(cuid())
   userId        String
   achievementId String
-  unlockedAt    DateTime    @default(now()) @db.Timestamp(6)
+  unlockedAt    DateTime    @default(now())
   achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   user          User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
@@ -470,8 +470,8 @@ model UserAchievement {
 model UserAchievementProgress {
   userId        String
   achievementId String
-  createdAt     DateTime    @default(now()) @db.Timestamp(6)
-  updatedAt     DateTime    @default(now()) @db.Timestamp(6)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now())
   currentValue  Int         @default(0)
   achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   user          User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
@@ -484,9 +484,9 @@ model Blacklist {
   userId      String
   moderatorId String
   reason      String
-  expiresAt   DateTime?     @db.Timestamp(6)
-  createdAt   DateTime      @default(now()) @db.Timestamp(6)
-  updatedAt   DateTime?     @default(now()) @db.Timestamp(6)
+  expiresAt   DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime?     @default(now())
   type        BlacklistType @default(PERMANENT)
   moderator   User          @relation("Blacklist_moderatorIdToUser", fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   user        User          @relation("Blacklist_userIdToUser", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -500,9 +500,9 @@ model ServerBlacklist {
   moderatorId String
   reason      String        @db.VarChar(500)
   duration    Int?
-  expiresAt   DateTime?     @db.Timestamp(6)
-  createdAt   DateTime      @default(now()) @db.Timestamp(6)
-  updatedAt   DateTime      @default(now()) @db.Timestamp(6)
+  expiresAt   DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
   type        BlacklistType @default(PERMANENT)
   moderator   User          @relation(fields: [moderatorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   server      ServerData    @relation(fields: [serverId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -516,7 +516,7 @@ model DevAlerts {
   title        String
   content      String
   imageUrl     String?
-  createdAt    DateTime @default(now()) @db.Timestamp(6)
+  createdAt    DateTime @default(now())
   thumbnailUrl String?
 }
 
@@ -525,10 +525,10 @@ model HubAnnouncement {
   hubId                String
   title                String
   content              String
-  createdAt            DateTime  @default(now()) @db.Timestamp(6)
+  createdAt            DateTime  @default(now())
   frequencyMs          BigInt
-  previousAnnouncement DateTime? @db.Timestamp(6)
-  nextAnnouncement     DateTime? @db.Timestamp(6)
+  previousAnnouncement DateTime?
+  nextAnnouncement     DateTime?
   imageUrl             String?
   thumbnailUrl         String?
   hub                  Hub       @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
@@ -541,11 +541,11 @@ model GlobalReport {
   reportedServerId                       String
   messageId                              String?
   reason                                 String
-  createdAt                              DateTime     @default(now()) @db.Timestamp(6)
-  updatedAt                              DateTime     @default(now()) @db.Timestamp(6)
+  createdAt                              DateTime     @default(now())
+  updatedAt                              DateTime     @default(now())
   handledBy                              String?
   status                                 ReportStatus @default(PENDING)
-  handledAt                              DateTime?    @db.Timestamp(6)
+  handledAt                              DateTime?
   reportMessageId                        String?
   reportChannelId                        String?
   actionTaken                            String?
@@ -568,11 +568,11 @@ model HubReport {
   reportedServerId String
   messageId        String?
   reason           String
-  createdAt        DateTime     @default(now()) @db.Timestamp(6)
-  updatedAt        DateTime     @default(now()) @db.Timestamp(6)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @default(now())
   handledBy        String?
   status           ReportStatus @default(PENDING)
-  handledAt        DateTime?    @db.Timestamp(6)
+  handledAt        DateTime?
   reportMessageId  String?
   reportChannelId  String?
   actionTaken      String?
@@ -607,7 +607,7 @@ model AntiSwearWhitelist {
   word          String
   createdBy     String
   reason        String?
-  createdAt     DateTime      @default(now()) @db.Timestamp(6)
+  createdAt     DateTime      @default(now())
   User          User          @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
   AntiSwearRule AntiSwearRule @relation(fields: [ruleId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
@@ -617,26 +617,26 @@ model AntiSwearWhitelist {
 model Account {
   userId                String
   scope                 String?
-  createdAt             DateTime  @default(now()) @db.Timestamp(6)
-  updatedAt             DateTime  @default(now()) @db.Timestamp(6)
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @default(now())
   id                    String    @id
   accountId             String
   providerId            String
   accessToken           String?
   refreshToken          String?
   idToken               String?
-  accessTokenExpiresAt  DateTime? @db.Timestamp(6)
-  refreshTokenExpiresAt DateTime? @db.Timestamp(6)
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
   password              String?
   user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model Session {
   userId    String
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
   id        String   @id
-  expiresAt DateTime @db.Timestamp(6)
+  expiresAt DateTime
   token     String   @unique
   ipAddress String?
   userAgent String?
@@ -647,9 +647,9 @@ model Verification {
   id         String    @id
   identifier String
   value      String
-  expiresAt  DateTime  @db.Timestamp(6)
-  createdAt  DateTime? @default(now()) @db.Timestamp(6)
-  updatedAt  DateTime? @default(now()) @db.Timestamp(6)
+  expiresAt  DateTime
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @default(now())
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -659,8 +659,8 @@ model ServerBlocklist {
   blockedUserId   String?
   blockedServerId String?
   reason          String?
-  createdAt       DateTime    @default(now()) @db.Timestamp(6)
-  updatedAt       DateTime    @default(now()) @db.Timestamp(6)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @default(now())
   blockedServer   ServerData? @relation("blockedServers", fields: [blockedServerId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   User            User?       @relation(fields: [blockedUserId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   server          ServerData  @relation("serversBlockingMe", fields: [serverId], references: [id], onDelete: Cascade, onUpdate: NoAction)
@@ -677,7 +677,7 @@ model HubServerStats {
   year          Int
   month         Int
   messageCount  Int        @default(0)
-  lastMessageAt DateTime   @default(now()) @db.Timestamp(6)
+  lastMessageAt DateTime   @default(now())
   Hub           Hub        @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   ServerData    ServerData @relation(fields: [serverId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
@@ -692,7 +692,7 @@ model HubUserStats {
   year          Int
   month         Int
   messageCount  Int      @default(0)
-  lastMessageAt DateTime @default(now()) @db.Timestamp(6)
+  lastMessageAt DateTime @default(now())
   Hub           Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   User          User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
@@ -710,10 +710,10 @@ model AllowedBots {
 
 model Bot {
   id               String         @id
-  name             String         @db.VarChar(100)
+  name             String
   image            String?        @db.VarChar(512)
-  createdAt        DateTime       @default(now()) @db.Timestamp(6)
-  updatedAt        DateTime       @default(now()) @db.Timestamp(6)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @default(now())
   shortDescription String         @db.VarChar(255)
   longDescription  String
   features         String
@@ -729,7 +729,7 @@ model BotTag {
   name        String   @unique @db.VarChar(50)
   category    String?  @db.VarChar(50)
   description String?  @db.VarChar(255)
-  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  createdAt   DateTime @default(now())
   Bot         Bot[]    @relation("BotToTag")
 }
 
@@ -741,7 +741,7 @@ model PremiumKey {
   assignedGuild                      String?
   assignedHub                        String?
   status                             KeyStatus          @default(ACTIVE)
-  createdAt                          DateTime           @default(now()) @db.Timestamp(6)
+  createdAt                          DateTime           @default(now())
   ServerData                         ServerData?        @relation(fields: [assignedGuild], references: [id], onUpdate: NoAction)
   Hub                                Hub?               @relation(fields: [assignedHub], references: [id], onUpdate: NoAction)
   User_PremiumKey_assignedUserToUser User?              @relation("PremiumKey_assignedUserToUser", fields: [assignedUser], references: [id], onUpdate: NoAction)
@@ -758,18 +758,18 @@ model PremiumKey {
 model StripeEvent {
   id        String   @id
   type      String
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model StripeSubscription {
   id                String             @id
   customerId        String
-  currentPeriodEnd  DateTime           @db.Timestamp(6)
+  currentPeriodEnd  DateTime
   cancelAtPeriodEnd Boolean
   status            SubscriptionStatus @default(PENDING)
-  createdAt         DateTime           @default(now()) @db.Timestamp(6)
-  updatedAt         DateTime           @default(now()) @db.Timestamp(6)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @default(now())
   lastEventTime     BigInt?
   PremiumKey        PremiumKey[]
 }
