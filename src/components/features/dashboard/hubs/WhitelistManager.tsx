@@ -186,7 +186,7 @@ export function WhitelistManager({ hubId, canEdit }: WhitelistManagerProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="border border-green-800/30 bg-dash-main">
+      <Card className="border border-green-800/30 bg-main">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">

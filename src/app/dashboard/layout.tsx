@@ -25,7 +25,7 @@ export default async function DashboardLayout({
   return (
     <DashboardLayoutProvider>
       <GuidedTourProvider>
-        <div className="min-h-screen bg-dash-main">
+        <div className="min-h-screen bg-main">
           <div className="flex h-screen flex-col overflow-hidden">
             {/* Top bar */}
             <DashboardTopBar user={session.user} />

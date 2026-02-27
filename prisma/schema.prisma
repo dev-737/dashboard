@@ -616,11 +616,11 @@ model AntiSwearWhitelist {
 }
 
 model Account {
-    id                    String    @id @default(cuid())
+    id                    String    @id
     userId                String
     scope                 String?
     createdAt             DateTime  @default(now())
-    updatedAt             DateTime  @default(now())
+    updatedAt             DateTime  @updatedAt
     accountId             String
     providerId            String
     accessToken           String?
@@ -629,31 +629,39 @@ model Account {
     accessTokenExpiresAt  DateTime?
     refreshTokenExpiresAt DateTime?
     password              String?
-    user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
 }
 
 model Session {
     userId    String
     createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
     id        String   @id
     expiresAt DateTime
-    token     String   @unique
+    token     String
     ipAddress String?
     userAgent String?
-    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([token])
+    @@index([userId])
 }
 
 model Verification {
-    id         String    @id
+    id         String   @id
     identifier String
     value      String
     expiresAt  DateTime
-    createdAt  DateTime? @default(now())
-    updatedAt  DateTime? @default(now())
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    @@index([identifier])
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+
 model ServerBlocklist {
     id              String      @id @default(cuid())
     serverId        String
