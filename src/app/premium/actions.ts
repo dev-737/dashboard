@@ -1,8 +1,8 @@
 'use server';
 
+import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
 
 import { db } from '@/lib/prisma';
 
@@ -150,6 +150,7 @@ export async function claimGiftCode(codeId: string) {
 
         await tx.premiumKey.create({
           data: {
+            id: crypto.randomUUID(),
             purchasedBy: session.user.id,
             subscriptionId: dummySubscriptionId,
             tier: gift.tier,
