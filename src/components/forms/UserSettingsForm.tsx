@@ -3,9 +3,6 @@
 import { Alert01Icon, Diamond02Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useId, useState } from 'react';
-import { toast } from 'sonner';
 import { cancelSubscription } from '@/app/premium/actions';
 import { UnsavedChangesPrompt } from '@/components/features/dashboard/UnsavedChangesPrompt';
 import { PageFooter } from '@/components/layout/DashboardPageFooter';
@@ -21,6 +18,9 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { SUPPORTED_LANGUAGES } from '@/lib/constants';
 import { useTRPC } from '@/utils/trpc';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useId, useState } from 'react';
+import { toast } from 'sonner';
 
 export function UserSettingsForm() {
   const trpc = useTRPC();
@@ -154,7 +154,7 @@ export function UserSettingsForm() {
                   <div>
                     <div className="mb-1 flex items-center gap-2">
                       <span className="font-medium text-white">
-                        Tier: {key.tier || 'Legacy'}
+                        Tier: {key.tier || sub?.tier || 'Legacy'}
                       </span>
                       {sub.cancelAtPeriodEnd ? (
                         <span className="rounded border border-orange-500/30 bg-orange-500/20 px-2 py-0.5 text-orange-300 text-xs">
