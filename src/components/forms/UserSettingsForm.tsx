@@ -15,6 +15,16 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Switch } from '@/components/ui/switch';
 import { SUPPORTED_LANGUAGES } from '@/lib/constants';
 import { useTRPC } from '@/utils/trpc';
@@ -81,6 +91,7 @@ export function UserSettingsForm() {
     const [locale, setLocale] = useState<string>('en');
     const [showNsfwHubs, setShowNsfwHubs] = useState(false);
     const [hasChanges, setHasChanges] = useState(false);
+    const [isCancelAlertOpen, setIsCancelAlertOpen] = useState(false);
 
     // Update local state when settings are loaded
     useEffect(() => {
@@ -161,34 +172,36 @@ export function UserSettingsForm() {
                                             <span className="font-medium text-white">
                                                 Tier: {key.tier || sub?.tier || 'Legacy'}
                                             </span>
-                                            {sub.cancelAtPeriodEnd ? (
-                                                <span className="rounded border border-orange-500/30 bg-orange-500/20 px-2 py-0.5 text-orange-300 text-xs">
-                                                    Cancels at Period End
-                                                </span>
+                                            {sub ? (
+                                                sub.cancelAtPeriodEnd || sub.status === 'CANCELLED' ? (
+                                                    <span className="rounded border border-orange-500/30 bg-orange-500/20 px-2 py-0.5 text-orange-300 text-xs">
+                                                        Cancelled (Ends {periodEnd})
+                                                    </span>
+                                                ) : (
+                                                    <span className="rounded border border-emerald-500/30 bg-emerald-500/20 px-2 py-0.5 text-emerald-300 text-xs">
+                                                        Active
+                                                    </span>
+                                                )
                                             ) : (
-                                                <span className="rounded border border-emerald-500/30 bg-emerald-500/20 px-2 py-0.5 text-emerald-300 text-xs">
-                                                    Active
+                                                <span className="rounded border border-indigo-500/30 bg-indigo-500/20 px-2 py-0.5 text-indigo-300 text-xs">
+                                                    Gift Activated
                                                 </span>
                                             )}
                                         </div>
-                                        <p className="text-gray-400 text-sm">
-                                            Current billing period ends {periodEnd}
-                                        </p>
+                                        {sub && (
+                                            <p className="text-gray-400 text-sm">
+                                                {sub.cancelAtPeriodEnd || sub.status === 'CANCELLED'
+                                                    ? `Access until ${periodEnd}`
+                                                    : `Current billing period ends ${periodEnd}`}
+                                            </p>
+                                        )}
                                     </div>
 
-                                    {!sub.cancelAtPeriodEnd && !sub.id.startsWith('gift_') && (
+                                    {sub && !sub.cancelAtPeriodEnd && sub.status !== 'CANCELLED' && !sub.id.startsWith('gift_') && (
                                         <Button
                                             variant="destructive"
                                             size="sm"
-                                            onClick={() => {
-                                                if (
-                                                    confirm(
-                                                        'Are you sure you want to cancel your premium subscription? You will retain access until the end of the current billing period.'
-                                                    )
-                                                ) {
-                                                    cancelSubscriptionMutation.mutate();
-                                                }
-                                            }}
+                                            onClick={() => setIsCancelAlertOpen(true)}
                                             disabled={cancelSubscriptionMutation.isPending}
                                             className="whitespace-nowrap"
                                         >
@@ -278,6 +291,31 @@ export function UserSettingsForm() {
                 resetLabel="Reset Settings"
                 message="Careful! You have unsaved user setting changes."
             />
+
+            {/* Cancellation Confirmation Dialog */}
+            <AlertDialog open={isCancelAlertOpen} onOpenChange={setIsCancelAlertOpen}>
+                <AlertDialogContent className="border-gray-800 bg-gray-900 text-white">
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription className="text-gray-400">
+                            You are about to cancel your premium subscription. You will still
+                            have access to all premium features until the end of your
+                            current billing period.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel className="border-gray-700 bg-gray-800 text-white hover:bg-gray-700">
+                            Stay Premium
+                        </AlertDialogCancel>
+                        <AlertDialogAction
+                            onClick={() => cancelSubscriptionMutation.mutate()}
+                            className="bg-red-600 text-white hover:bg-red-700"
+                        >
+                            Cancel Subscription
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
 
             {/* Page Footer - provides scroll space for mobile prompts */}
             <PageFooter
