@@ -263,7 +263,7 @@ export function ServerSettingsForm({
               icon={FloppyDiskIcon}
               className="h-4 w-4"
             />
-            {isSavingInvite ? 'Saving...' : 'Save Settings01Icon'}
+            {isSavingInvite ? 'Saving...' : 'Save Settings'}
           </Button>
         </CardFooter>
       </Card>

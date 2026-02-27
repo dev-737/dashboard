@@ -269,8 +269,8 @@ export function UserSettingsForm() {
         onSave={handleSaveSettings}
         onReset={resetForm}
         isSubmitting={updateSettingsMutation.isPending}
-        saveLabel="Save Settings01Icon"
-        resetLabel="Reset Settings01Icon"
+        saveLabel="Save Settings"
+        resetLabel="Reset Settings"
         message="Careful! You have unsaved user setting changes."
       />
 

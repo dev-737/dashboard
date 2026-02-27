@@ -19,7 +19,7 @@ export default function ConnectionEditLoading() {
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
         <Card className="border border-gray-800/50 bg-main backdrop-blur-sm md:col-span-2">
           <CardHeader className="px-4 sm:px-6">
-            <CardTitle>Connection Settings01Icon</CardTitle>
+            <CardTitle>Connection Settings</CardTitle>
             <CardDescription>
               Configure how this connection works
             </CardDescription>

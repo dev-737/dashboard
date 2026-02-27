@@ -126,7 +126,7 @@ export function ConnectionEditFormClient({
             />
           </div>
           <div>
-            <CardTitle>Connection Settings01Icon</CardTitle>
+            <CardTitle>Connection Settings</CardTitle>
             <CardDescription>
               Configure how this connection works
             </CardDescription>
