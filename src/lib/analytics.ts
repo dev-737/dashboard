@@ -28,7 +28,7 @@ const isActive = CLICKHOUSE_URL.length > 0;
 
 // Precompute static endpoint URL and headers once at module init to avoid
 // rebuilding them on every event call.
-const clickhouseEndpoint = (() => {
+const activityEventsIngestUrl = (() => {
   if (!isActive) return '';
   const url = new URL(CLICKHOUSE_URL);
   url.searchParams.set('database', CLICKHOUSE_DB);
