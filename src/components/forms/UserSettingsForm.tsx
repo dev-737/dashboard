@@ -157,7 +157,7 @@ export function UserSettingsForm() {
                                         </p>
                                     </div>
 
-                                    {!sub.cancelAtPeriodEnd && (
+                                    {(!sub.cancelAtPeriodEnd && !sub.id.startsWith('gift_')) && (
                                         <Button
                                             variant="destructive"
                                             size="sm"

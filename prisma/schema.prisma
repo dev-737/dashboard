@@ -446,6 +446,7 @@ model User {
     sessions                                 Session[]
     achievements                             UserAchievement[]
     achievementProgress                      UserAchievementProgress[]
+    claimedGifts                             GiftCode[]                @relation("GiftCode_claimedBy")
 
     @@index([email])
     @@index([lastVoted])
@@ -741,6 +742,7 @@ model PremiumKey {
     assignedGuild                      String?
     assignedHub                        String?
     status                             KeyStatus          @default(ACTIVE)
+    tier                               PremiumTier        @default(CORE)
     createdAt                          DateTime           @default(now())
     ServerData                         ServerData?        @relation(fields: [assignedGuild], references: [id], onUpdate: NoAction)
     Hub                                Hub?               @relation(fields: [assignedHub], references: [id], onUpdate: NoAction)
@@ -768,10 +770,32 @@ model StripeSubscription {
     currentPeriodEnd  DateTime
     cancelAtPeriodEnd Boolean
     status            SubscriptionStatus @default(PENDING)
+    tier              PremiumTier        @default(CORE)
     createdAt         DateTime           @default(now())
     updatedAt         DateTime           @default(now())
     lastEventTime     BigInt?
     PremiumKey        PremiumKey[]
+}
+
+model GiftCode {
+    id              String      @id @default(cuid())
+    code            String      @unique
+    tier            PremiumTier @default(CORE)
+    isFree          Boolean     @default(true) // Whether it's 100% free
+    stripeCouponId  String?     // External Stripe Coupon ID if discounted
+    durationMonths  Int?
+    claimedById     String?
+    claimedAt       DateTime?
+    expiresAt       DateTime?
+    createdAt       DateTime    @default(now())
+
+    User            User?       @relation("GiftCode_claimedBy", fields: [claimedById], references: [id])
+}
+
+enum PremiumTier {
+    CORE
+    PLUS
+    PRO
 }
 
 enum AppealStatus {
