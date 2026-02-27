@@ -1,13 +1,12 @@
 /**
  * tRPC server setup
  */
-
+import { trackEvent } from '@/lib/analytics';
+import { auth } from '@/lib/auth';
 import { initTRPC, TRPCError } from '@trpc/server';
 import { headers } from 'next/headers';
 import superjson from 'superjson';
-import z, { ZodError } from 'zod/v4';
-import { auth } from '@/lib/auth';
-import { trackEvent } from '@/lib/analytics';
+import { ZodError } from 'zod'; // Use standard Zod import
 
 /**
  * Context type for tRPC procedures
@@ -27,9 +26,8 @@ interface Context {
  * Creates context for tRPC procedures
  */
 export async function createContext(): Promise<Context> {
-  // We don't use the opts parameter in this implementation
   const session = await auth.api.getSession({
-    headers: await headers(),
+    headers: await headers(), // Correctly awaited for Next.js 15+
   });
   return { session: session ? { user: session.user } : null };
 }
@@ -44,21 +42,20 @@ const t = initTRPC.context<Context>().create({
       ...shape,
       data: {
         ...shape.data,
+        // Standardized Zod error handling
         zodError:
-          error.cause instanceof ZodError ? z.treeifyError(error.cause) : null,
+          error.cause instanceof ZodError ? error.cause.flatten() : null,
       },
     };
   },
 });
 
 /**
- * Analytics middleware — automatically tracks all mutations passing through it.
- * Fires a `web.trpc_mutation` event with the procedure path and outcome.
+ * Analytics middleware — automatically tracks all successful mutations.
  */
 const analyticsMiddleware = t.middleware(async ({ ctx, next, type, path }) => {
   const result = await next();
 
-  // Only track mutations (not queries or subscriptions) and only on success
   if (type === 'mutation' && result.ok) {
     const userId = ctx.session?.user?.id;
     trackEvent('web.trpc_mutation', {
@@ -68,6 +65,24 @@ const analyticsMiddleware = t.middleware(async ({ ctx, next, type, path }) => {
   }
 
   return result;
+});
+
+/**
+ * Auth middleware — ensures user is authenticated and narrows the context type.
+ */
+const isAuthed = t.middleware(({ ctx, next }) => {
+  if (!ctx.session?.user) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
+
+  return next({
+    ctx: {
+      session: {
+        ...ctx.session,
+        user: ctx.session.user, // TypeScript safely narrows user to non-null
+      },
+    },
+  });
 });
 
 /**
@@ -82,18 +97,8 @@ export const publicProcedure = t.procedure;
 
 /**
  * Create a protected procedure that requires authentication.
- * Includes analytics middleware — all mutations are automatically tracked.
+ * Includes analytics middleware.
  */
 export const protectedProcedure = t.procedure
-  .use(({ ctx, next }) => {
-    if (!ctx.session?.user) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' });
-    }
-    return next({
-      ctx: {
-        ...ctx,
-        session: { ...ctx.session, user: ctx.session.user },
-      },
-    });
-  })
+  .use(isAuthed)
   .use(analyticsMiddleware);
