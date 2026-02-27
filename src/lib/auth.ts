@@ -1,6 +1,6 @@
+import { db } from '@/lib/prisma';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
-import { db } from '@/lib/prisma';
 
 export const auth = betterAuth({
   database: prismaAdapter(db, {
@@ -50,6 +50,7 @@ export const auth = betterAuth({
                 );
                 await db.account.create({
                   data: {
+                    id: crypto.randomUUID(),
                     userId: existingUser.id,
                     providerId: 'discord',
                     accountId: profile.id,
