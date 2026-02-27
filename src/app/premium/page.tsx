@@ -292,7 +292,7 @@ export default function PremiumPage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-dash-main pt-32 pb-24">
+    <div className="relative min-h-screen overflow-hidden bg-main pt-32 pb-24">
       {/* Absolute Background Effects */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] h-200 w-200 rounded-full bg-purple-600/20 blur-[120px]" />

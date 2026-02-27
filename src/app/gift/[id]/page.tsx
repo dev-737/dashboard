@@ -63,7 +63,7 @@ export default function GiftPage() {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-dash-main px-4 py-24">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-main px-4 py-24">
       {/* Absolute Background Effects */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-[-20%] left-[-10%] h-[800px] w-[800px] rounded-full bg-purple-600/20 blur-[120px]" />
