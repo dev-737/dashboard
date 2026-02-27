@@ -94,7 +94,7 @@ export function trackEvent(
   const body = buildInsertBody(event);
 
   // Fire-and-forget — never block the request
-  fetch(clickhouseEndpoint, {
+  fetch(activityEventsIngestUrl, {
     method: 'POST',
     headers: clickhouseHeaders,
     body,
