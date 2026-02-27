@@ -141,7 +141,7 @@ export default async function ConnectionEditPage(
 
         <div className="space-y-6">
           {/* Hub Information Card */}
-          <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-main backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <div className="rounded-lg border border-purple-500/20 bg-purple-500/10 p-2">
@@ -176,7 +176,7 @@ export default async function ConnectionEditPage(
           </Card>
 
           {/* Server Information Card */}
-          <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-main backdrop-blur-sm">
             <CardHeader className="px-6 py-4">
               <div className="flex items-center gap-2">
                 <div className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-2">

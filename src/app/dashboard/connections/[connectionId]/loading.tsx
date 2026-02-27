@@ -38,7 +38,7 @@ export default function ConnectionLoading() {
       </div>
       <ConnectionNavigationTabsSkeleton currentTab="overview" />
       {/* Connection Details Skeleton */}
-      <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-main backdrop-blur-sm">
         <CardHeader className="px-4 sm:px-6">
           <CardTitle>Connection Details</CardTitle>
           <CardDescription>Information about this connection</CardDescription>

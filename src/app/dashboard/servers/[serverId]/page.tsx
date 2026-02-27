@@ -116,7 +116,7 @@ export default async function ServerDetailPage(props: {
     // For other errors, show a generic error message
     return (
       <div className="space-y-6">
-        <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+        <Card className="border border-gray-800/50 bg-main backdrop-blur-sm">
           <CardHeader>
             <CardTitle>Error Loading Server</CardTitle>
             <CardDescription>
@@ -225,7 +225,7 @@ export default async function ServerDetailPage(props: {
         <TabsContent value="overview" className="space-y-6">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {/* Server Stats */}
-            <Card className="col-span-2 border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+            <Card className="col-span-2 border border-gray-800/50 bg-main backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <HugeiconsIcon
@@ -326,7 +326,7 @@ export default async function ServerDetailPage(props: {
             </Card>
 
             {/* Connection Status */}
-            <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+            <Card className="border border-gray-800/50 bg-main backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <HugeiconsIcon
@@ -398,7 +398,7 @@ export default async function ServerDetailPage(props: {
 
         {/* Connections Tab */}
         <TabsContent value="connections" className="space-y-6">
-          <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-main backdrop-blur-sm">
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
                 <CardTitle>Hub Connections</CardTitle>
@@ -464,7 +464,7 @@ export default async function ServerDetailPage(props: {
 
         {/* Settings Tab */}
         <TabsContent value="settings" className="space-y-6">
-          <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+          <Card className="border border-gray-800/50 bg-main backdrop-blur-sm">
             <CardHeader>
               <CardTitle>Server Settings</CardTitle>
               <CardDescription>

@@ -88,7 +88,7 @@ export default async function AnnouncementsPage() {
       </div>
 
       {announcements.length === 0 ? (
-        <Card className="border-gray-800 bg-dash-main backdrop-blur-sm">
+        <Card className="border-gray-800 bg-main backdrop-blur-sm">
           <CardContent className="flex flex-col items-center justify-center py-12">
             <HugeiconsIcon
               strokeWidth={2}
@@ -109,7 +109,7 @@ export default async function AnnouncementsPage() {
           {announcements.map((announcement) => (
             <Card
               key={announcement.id}
-              className={`border-gray-800 bg-dash-main backdrop-blur-sm ${
+              className={`border-gray-800 bg-main backdrop-blur-sm ${
                 announcement.isUnread ? 'border-l-4 border-l-indigo-500' : ''
               }`}
             >

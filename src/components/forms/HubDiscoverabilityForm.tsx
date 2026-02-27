@@ -72,9 +72,7 @@ export function HubDiscoverabilityForm({
               />
             </div>
             <div>
-              <CardTitle className="text-3xl">
-                Discovery Settings01Icon
-              </CardTitle>
+              <CardTitle className="text-3xl">Discovery Settings</CardTitle>
               <CardDescription className="text-base">
                 Manage tags, language, and content settings to help users find
                 your hub

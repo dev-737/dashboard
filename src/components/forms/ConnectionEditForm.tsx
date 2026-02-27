@@ -115,7 +115,7 @@ export function ConnectionEditFormClient({
   };
 
   return (
-    <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+    <Card className="border border-gray-800/50 bg-main backdrop-blur-sm">
       <CardHeader className="px-4 sm:px-6">
         <div className="flex items-center gap-3">
           <div className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-2">
@@ -126,7 +126,7 @@ export function ConnectionEditFormClient({
             />
           </div>
           <div>
-            <CardTitle>Connection Settings01Icon</CardTitle>
+            <CardTitle>Connection Settings</CardTitle>
             <CardDescription>
               Configure how this connection works
             </CardDescription>

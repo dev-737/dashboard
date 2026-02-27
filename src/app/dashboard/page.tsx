@@ -142,7 +142,7 @@ export default async function DashboardPage(props: {
             </div>
 
             {servers.length === 0 ? (
-              <Card className="border-gray-800/50 bg-dash-main backdrop-blur-sm">
+              <Card className="border-gray-800/50 bg-main backdrop-blur-sm">
                 <CardHeader className="py-12 text-center">
                   <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
                     <HugeiconsIcon

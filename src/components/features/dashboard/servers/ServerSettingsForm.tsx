@@ -220,7 +220,7 @@ export function ServerSettingsForm({
   return (
     <div className="space-y-6">
       {/* General Settings Card */}
-      <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-main backdrop-blur-sm">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <HugeiconsIcon
@@ -263,13 +263,13 @@ export function ServerSettingsForm({
               icon={FloppyDiskIcon}
               className="h-4 w-4"
             />
-            {isSavingInvite ? 'Saving...' : 'Save Settings01Icon'}
+            {isSavingInvite ? 'Saving...' : 'Save Settings'}
           </Button>
         </CardFooter>
       </Card>
 
       {/* Blocklist Card */}
-      <Card className="border border-gray-800/50 bg-dash-main backdrop-blur-sm">
+      <Card className="border border-gray-800/50 bg-main backdrop-blur-sm">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <HugeiconsIcon

@@ -1,8 +1,5 @@
-import { Loading03Icon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
-import { Suspense } from 'react';
 import { auth } from '@/lib/auth';
 import { getDiscoverHubs } from '@/lib/discover/query';
 import AdvancedSearchPage from './_components/AdvancedSearchPage';
@@ -26,21 +23,9 @@ export default async function Page() {
   });
 
   return (
-    <Suspense
-      fallback={
-        <div className="flex min-h-screen items-center justify-center bg-gray-950 text-gray-400">
-          <HugeiconsIcon
-            strokeWidth={2}
-            icon={Loading03Icon}
-            className="h-8 w-8 animate-spin"
-          />
-        </div>
-      }
-    >
-      <AdvancedSearchPage
-        initialData={initialData}
-        isAuthenticated={isAuthenticated}
-      />
-    </Suspense>
+    <AdvancedSearchPage
+      initialData={initialData}
+      isAuthenticated={isAuthenticated}
+    />
   );
 }

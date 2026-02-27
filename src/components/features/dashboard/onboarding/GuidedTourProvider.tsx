@@ -100,7 +100,7 @@ export function GuidedTourProvider({ children }: GuidedTourProviderProps) {
       },
       {
         id: 'user-menu',
-        title: 'User Settings01Icon',
+        title: 'User Settings',
         description:
           'Access your account settings, preferences, and logout options from this menu. You can also restart this tour anytime from the help menu.',
         targetSelector: "[data-tour='user-menu']",
