@@ -125,7 +125,7 @@ export async function createGiftCheckoutSession(
     const payload: Record<string, any> = {
       price_id: priceId,
       quantity: 1,
-      mode: 'subscription',
+      mode: 'payment',
       uid: session.user.id,
       tier: tierId,
       type: giftType,
