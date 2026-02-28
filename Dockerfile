@@ -6,6 +6,7 @@ WORKDIR /app
 
 COPY prisma ./prisma
 COPY prisma.config.ts ./
+COPY package.json bun.lock* ./
 
 # also runs prisma generate to create the client
 RUN --mount=type=cache,target=/root/.bun/install/cache \
