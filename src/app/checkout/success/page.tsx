@@ -6,18 +6,27 @@ import {
   Tick01Icon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
+import { useQueryClient } from '@tanstack/react-query';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { GradientText } from '@/components/ui/shadcn-io/gradient-text';
+import { useTRPC } from '@/utils/trpc';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const giftCode = searchParams.get('gift_code');
+  const trpc = useTRPC();
+  const queryClient = useQueryClient();
+
+  // Invalidate settings cache so premium status is fresh when user navigates to settings
+  useEffect(() => {
+    queryClient.invalidateQueries(trpc.user.getSettings.pathFilter());
+  }, [queryClient, trpc]);
 
   const handleCopyGiftCode = () => {
     if (giftCode) {

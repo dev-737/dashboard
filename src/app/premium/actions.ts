@@ -268,6 +268,7 @@ export async function cancelSubscription() {
 
     const payload = {
       uid: session.user.id,
+      subscriptionId: activeSub.subscriptionId,
     };
 
     const body = JSON.stringify(payload);
@@ -289,7 +290,7 @@ export async function cancelSubscription() {
 
     const data = await response.json();
 
-    if (data.status !== 'Success') {
+    if (data.status?.toLowerCase() !== 'success') {
       return {
         error: data.message || 'Invalid response from payment server.',
       };

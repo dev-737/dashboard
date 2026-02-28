@@ -155,7 +155,31 @@ export function UserSettingsForm() {
           <div className="space-y-4 p-4">
             {settings.activeKeys.map((key: any) => {
               const sub = key.StripeSubscription;
-              if (!sub) return null;
+
+              // Subscription record may not exist yet if webhook is still processing
+              if (!sub) {
+                return (
+                  <div
+                    key={key.id}
+                    className="flex flex-col justify-between gap-4 rounded-lg border border-gray-800 bg-gray-900/50 p-4 sm:flex-row sm:items-center"
+                  >
+                    <div>
+                      <div className="mb-1 flex items-center gap-2">
+                        <span className="font-medium text-white">
+                          Tier: {key.tier || 'Legacy'}
+                        </span>
+                        <span className="rounded border border-yellow-500/30 bg-yellow-500/20 px-2 py-0.5 text-xs text-yellow-300">
+                          Activating...
+                        </span>
+                      </div>
+                      <p className="text-gray-400 text-sm">
+                        Your subscription is being set up. This may take a
+                        moment.
+                      </p>
+                    </div>
+                  </div>
+                );
+              }
 
               const periodEnd = new Date(
                 sub.currentPeriodEnd
