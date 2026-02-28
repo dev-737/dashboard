@@ -56,7 +56,7 @@ export default function GiftPage() {
           router.push('/dashboard');
         }, 3000);
       }
-    } catch (error) {
+    } catch {
       toast.error('Something went wrong. Please try again later.');
       setIsClaiming(false);
     }
@@ -77,7 +77,7 @@ export default function GiftPage() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="relative z-10 w-full max-w-lg"
       >
-        <div className="group relative flex flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[#050810]/60 p-10 shadow-2xl shadow-[#7B61FF]/10 backdrop-blur-3xl">
+        <div className="group relative flex flex-col overflow-hidden rounded-4xl border border-white/10 bg-[#050810]/60 p-10 shadow-2xl shadow-[#7B61FF]/10 backdrop-blur-3xl">
           {/* Inner Hover Glow */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(123,97,255,0.15),transparent_70%)] opacity-100 transition-opacity duration-700" />
           <div

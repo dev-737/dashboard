@@ -1,10 +1,40 @@
 'use server';
 
-import { auth } from '@/lib/auth';
+import crypto from 'node:crypto';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { auth } from '@/lib/auth';
 
 import { db } from '@/lib/prisma';
+
+function getPaymentApiBase(): string {
+    const paymentApiUrl =
+        process.env.PAYMENT_API_URL || 'http://localhost:8000/api/v1';
+    return paymentApiUrl.endsWith('/')
+        ? paymentApiUrl.slice(0, -1)
+        : paymentApiUrl;
+}
+
+function createAuthHeaders(body: string): Record<string, string> {
+    const secret = process.env.PAYMENT_API_SECRET;
+    if (!secret) {
+        console.warn(
+            'PAYMENT_API_SECRET is not set — requests to the payment API will not be signed.'
+        );
+        return { 'Content-Type': 'application/json' };
+    }
+
+    const timestamp = Math.floor(Date.now() / 1000).toString();
+    const signature = crypto
+        .createHmac('sha256', secret)
+        .update(`${timestamp}.${body}`)
+        .digest('hex');
+
+    return {
+        'Content-Type': 'application/json',
+        'Stripe-Signature': `t=${timestamp},v1=${signature}`,
+    };
+}
 
 export async function createCheckoutSession(
     priceId: string,
@@ -20,24 +50,19 @@ export async function createCheckoutSession(
     }
 
     try {
-        const activeSub = await db.premiumKey.findFirst({
-            where: { purchasedBy: session.user.id, status: 'ACTIVE' },
-        });
+        // Skip active-sub check when redeeming a discount gift (couponId present)
+        if (!couponId) {
+            const activeSub = await db.premiumKey.findFirst({
+                where: { purchasedBy: session.user.id, status: 'ACTIVE' },
+            });
 
-        if (activeSub) {
-            return { error: 'You already have an active premium subscription.' };
+            if (activeSub) {
+                return { error: 'You already have an active premium subscription.' };
+            }
         }
 
-        const paymentApiUrl =
-            process.env.PAYMENT_API_URL || 'http://localhost:8000/api/v1';
+        const baseUrl = getPaymentApiBase();
 
-        // Strip trailing slash if present for safe path appending
-        const baseUrl = paymentApiUrl.endsWith('/')
-            ? paymentApiUrl.slice(0, -1)
-            : paymentApiUrl;
-
-        // We pass the user id as a string. Pydantic's implicit coercion to `int` will
-        // handle this safely on the Python side without Javascript floating-point precision loss.
         const payload: Record<string, any> = {
             price_id: priceId,
             quantity: 1,
@@ -50,12 +75,11 @@ export async function createCheckoutSession(
             payload.coupon_id = couponId;
         }
 
+        const body = JSON.stringify(payload);
         const response = await fetch(`${baseUrl}/checkout`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
+            headers: createAuthHeaders(body),
+            body,
         });
 
         if (!response.ok) {
@@ -96,15 +120,12 @@ export async function createGiftCheckoutSession(
     }
 
     try {
-        const paymentApiUrl =
-            process.env.PAYMENT_API_URL || 'http://localhost:8000/api/v1';
-
-        const baseUrl = paymentApiUrl.endsWith('/')
-            ? paymentApiUrl.slice(0, -1)
-            : paymentApiUrl;
+        const baseUrl = getPaymentApiBase();
 
         const payload: Record<string, any> = {
             price_id: priceId,
+            quantity: 1,
+            mode: 'subscription',
             uid: session.user.id,
             tier: tierId,
             type: giftType,
@@ -114,12 +135,11 @@ export async function createGiftCheckoutSession(
             payload.coupon_id = couponId;
         }
 
+        const body = JSON.stringify(payload);
         const response = await fetch(`${baseUrl}/checkout/gift`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
+            headers: createAuthHeaders(body),
+            body,
         });
 
         if (!response.ok) {
@@ -155,23 +175,26 @@ export async function claimGiftCode(codeId: string) {
             return { error: 'You must be logged in to claim a gift code.' };
         }
 
-        const paymentApiUrl =
-            process.env.PAYMENT_API_URL || 'http://localhost:8000/api/v1';
+        // Idempotency: check if this gift code was already claimed locally
+        const existingGift = await db.giftCode.findUnique({
+            where: { code: codeId },
+        });
 
-        const baseUrl = paymentApiUrl.endsWith('/')
-            ? paymentApiUrl.slice(0, -1)
-            : paymentApiUrl;
+        if (existingGift?.claimedById) {
+            return { error: 'This gift code has already been claimed.' };
+        }
+
+        const baseUrl = getPaymentApiBase();
 
         const payload = {
             uid: session.user.id,
         };
 
+        const body = JSON.stringify(payload);
         const response = await fetch(`${baseUrl}/gift/${codeId}/claim`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
+            headers: createAuthHeaders(body),
+            body,
         });
 
         if (!response.ok) {
@@ -199,6 +222,11 @@ export async function claimGiftCode(codeId: string) {
             };
 
             const priceId = priceMap[data.tier];
+
+            if (!priceId) {
+                console.error(`No price ID configured for tier: ${data.tier}`);
+                return { error: `No pricing configured for tier "${data.tier}". Please contact support.` };
+            }
 
             return await createCheckoutSession(
                 priceId,
@@ -238,22 +266,17 @@ export async function cancelSubscription() {
             return { error: 'Gift subscriptions cannot be cancelled manually.' };
         }
 
-        const paymentApiUrl =
-            process.env.PAYMENT_API_URL || 'http://localhost:8000/api/v1';
-        const baseUrl = paymentApiUrl.endsWith('/')
-            ? paymentApiUrl.slice(0, -1)
-            : paymentApiUrl;
+        const baseUrl = getPaymentApiBase();
 
         const payload = {
             uid: session.user.id,
         };
 
+        const body = JSON.stringify(payload);
         const response = await fetch(`${baseUrl}/subscription/cancel`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
+            headers: createAuthHeaders(body),
+            body,
         });
 
         if (!response.ok) {
@@ -281,5 +304,49 @@ export async function cancelSubscription() {
             error:
                 'An unexpected error occurred while communicating with the server.',
         };
+    }
+}
+
+export type GiftCodeStatus =
+    | { status: 'valid'; tier: string; isFree: boolean }
+    | { status: 'claimed' }
+    | { status: 'expired' }
+    | { status: 'not_found' };
+
+export async function getGiftCodeStatus(
+    codeId: string
+): Promise<GiftCodeStatus> {
+    try {
+        const giftCode = await db.giftCode.findUnique({
+            where: { code: codeId },
+            select: {
+                tier: true,
+                isFree: true,
+                claimedById: true,
+                claimedAt: true,
+                expiresAt: true,
+            },
+        });
+
+        if (!giftCode) {
+            return { status: 'not_found' };
+        }
+
+        if (giftCode.claimedById || giftCode.claimedAt) {
+            return { status: 'claimed' };
+        }
+
+        if (giftCode.expiresAt && giftCode.expiresAt < new Date()) {
+            return { status: 'expired' };
+        }
+
+        return {
+            status: 'valid',
+            tier: giftCode.tier,
+            isFree: giftCode.isFree,
+        };
+    } catch (error) {
+        console.error('Error checking gift code status:', error);
+        return { status: 'not_found' };
     }
 }
