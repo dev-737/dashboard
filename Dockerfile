@@ -1,37 +1,34 @@
 # ============================================
 # Stage 1: Dependencies Installation Stage
 # ============================================
-FROM oven/bun:1 AS dependencies
+FROM oven/bun:1-slim AS dependencies
 WORKDIR /app
 
-# Copy package files and schema so any postinstall scripts don't fail
-COPY package.json bun.lock* ./
 COPY prisma ./prisma
 COPY prisma.config.ts ./
 
+# also runs prisma generate to create the client
 RUN --mount=type=cache,target=/root/.bun/install/cache \
     bun install --frozen-lockfile
 
 # ============================================
 # Stage 2: Build Next.js application
 # ============================================
-FROM oven/bun:1 AS builder
+FROM oven/bun:1-slim AS builder
 WORKDIR /app
 
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
 
-RUN bunx prisma generate
-
 ENV NODE_ENV=production
 
-# Build Next.js application (Tracer will now see the generated files in src/)
-RUN bun run build
+RUN --mount=type=cache,target=/app/.next/cache \
+    bun run build
 
 # ============================================
 # Stage 3: Run Next.js application
 # ============================================
-FROM oven/bun:1 AS runner
+FROM oven/bun:1-slim AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
