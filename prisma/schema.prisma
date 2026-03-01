@@ -447,6 +447,7 @@ model User {
     achievements                             UserAchievement[]
     achievementProgress                      UserAchievementProgress[]
     claimedGifts                             GiftCode[]                @relation("GiftCode_claimedBy")
+    purchasedGifts                           GiftCode[]                @relation("GiftCode_purchasedBy")
 
     @@index([email])
     @@index([lastVoted])
@@ -786,18 +787,21 @@ model StripeSubscription {
 }
 
 model GiftCode {
-    id              String      @id @default(cuid())
-    code            String      @unique
-    tier            PremiumTier @default(CORE)
-    isFree          Boolean     @default(true) // Whether it's 100% free
-    stripeCouponId  String?     // External Stripe Coupon ID if discounted
-    durationMonths  Int?
-    claimedById     String?
-    claimedAt       DateTime?
-    expiresAt       DateTime?
-    createdAt       DateTime    @default(now())
+    id                String      @id @default(cuid())
+    type              GiftType    @default(FREE)
+    tier              PremiumTier @default(CORE)
+    purchasedBy       String
+    claimedBy         String?
+    discountCouponId  String?
+    isClaimed         Boolean     @default(false)
+    createdAt         DateTime    @default(now())
+    claimedAt         DateTime?
 
-    User            User?       @relation("GiftCode_claimedBy", fields: [claimedById], references: [id])
+    purchaser         User        @relation("GiftCode_purchasedBy", fields: [purchasedBy], references: [id], onDelete: Cascade)
+    claimer           User?       @relation("GiftCode_claimedBy", fields: [claimedBy], references: [id], onDelete: SetNull)
+
+    @@index([purchasedBy])
+    @@index([claimedBy])
 }
 
 enum PremiumTier {
@@ -905,4 +909,9 @@ enum SubscriptionStatus {
     PAST_DUE
     CANCELLED
     PENDING
+}
+
+enum GiftType {
+    FREE
+    DISCOUNT
 }

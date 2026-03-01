@@ -320,7 +320,6 @@ export async function cancelSubscription() {
 export type GiftCodeStatus =
     | { status: 'valid'; tier: string; isFree: boolean }
     | { status: 'claimed' }
-    | { status: 'expired' }
     | { status: 'not_found' };
 
 export async function getGiftCodeStatus(
@@ -331,10 +330,10 @@ export async function getGiftCodeStatus(
             where: { id: codeId },
             select: {
                 tier: true,
-                isFree: true,
-                claimedById: true,
+                type: true,
+                isClaimed: true,
+                claimedBy: true,
                 claimedAt: true,
-                expiresAt: true,
             },
         });
 
@@ -342,18 +341,14 @@ export async function getGiftCodeStatus(
             return { status: 'not_found' };
         }
 
-        if (giftCode.claimedById || giftCode.claimedAt) {
+        if (giftCode.isClaimed || giftCode.claimedBy || giftCode.claimedAt) {
             return { status: 'claimed' };
-        }
-
-        if (giftCode.expiresAt && giftCode.expiresAt < new Date()) {
-            return { status: 'expired' };
         }
 
         return {
             status: 'valid',
             tier: giftCode.tier,
-            isFree: giftCode.isFree,
+            isFree: giftCode.type === 'FREE',
         };
     } catch (error) {
         console.error('Error checking gift code status:', error);
