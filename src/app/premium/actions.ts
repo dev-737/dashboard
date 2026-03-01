@@ -191,7 +191,7 @@ export async function claimGiftCode(codeId: string) {
             where: { id: codeId },
         });
 
-        if (existingGift?.claimedById) {
+        if (existingGift?.claimedBy) {
             return { error: 'This gift code has already been claimed.' };
         }
 
