@@ -9,7 +9,6 @@
     "lint": "biome check",
     "format": "biome format --write",
     "typecheck": "tsc --build --noEmit && echo \"Success!\"",
-    "postinstall": "prisma generate",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {

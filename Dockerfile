@@ -8,7 +8,6 @@ COPY prisma ./prisma
 COPY prisma.config.ts ./
 COPY package.json bun.lock* ./
 
-# also runs prisma generate to create the client
 RUN --mount=type=cache,target=/root/.bun/install/cache \
     bun install --frozen-lockfile
 
@@ -22,6 +21,8 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
 
 ENV NODE_ENV=production
+
+RUN bunx prisma generate
 
 RUN --mount=type=cache,target=/app/.next/cache \
     bun run build
