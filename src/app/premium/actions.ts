@@ -188,7 +188,7 @@ export async function claimGiftCode(codeId: string) {
 
         // Idempotency: check if this gift code was already claimed locally
         const existingGift = await db.giftCode.findUnique({
-            where: { code: codeId },
+            where: { id: codeId },
         });
 
         if (existingGift?.claimedById) {
@@ -328,7 +328,7 @@ export async function getGiftCodeStatus(
 ): Promise<GiftCodeStatus> {
     try {
         const giftCode = await db.giftCode.findUnique({
-            where: { code: codeId },
+            where: { id: codeId },
             select: {
                 tier: true,
                 isFree: true,
