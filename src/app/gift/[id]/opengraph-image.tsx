@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { getGiftCodeStatus } from '@/app/premium/actions';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const alt = 'InterChat Premium Gift';
 export const size = {
   width: 1200,
