@@ -211,7 +211,18 @@ export const userRouter = router({
       select: {
         id: true,
         tier: true,
-        StripeSubscription: true,
+        subscriptionId: true,
+        StripeSubscription: {
+          select: {
+            id: true,
+            customerId: true,
+            currentPeriodEnd: true,
+            cancelAtPeriodEnd: true,
+            status: true,
+            tier: true,
+            updatedAt: true,
+          },
+        },
       },
     });
 

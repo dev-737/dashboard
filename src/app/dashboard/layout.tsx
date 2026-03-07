@@ -2,8 +2,10 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { auth } from '@/lib/auth';
+import { getUserBlacklist } from '@/lib/user-blacklist';
 import './dashboard.css';
 import { DashboardContentWrapper } from '@/app/dashboard/components/layout/DashboardContentWrapper';
+import { BlacklistedBanner } from '@/components/features/dashboard/BlacklistedBanner';
 import { DashboardLayoutProvider } from '@/components/features/dashboard/LayoutProvider';
 import { GuidedTourProvider } from '@/components/features/dashboard/onboarding/GuidedTourProvider';
 import { DashboardTopBar } from '@/components/layout/DashboardTopbar';
@@ -20,6 +22,21 @@ export default async function DashboardLayout({
   // Redirect to login if not authenticated
   if (!session?.user?.id) {
     redirect('/login?callbackUrl=/dashboard');
+  }
+
+  // Check if user is blacklisted
+  const blacklist = await getUserBlacklist(session.user.id);
+
+  if (blacklist) {
+    return (
+      <div className="min-h-screen bg-main">
+        <BlacklistedBanner
+          reason={blacklist.reason}
+          expiresAt={blacklist.expiresAt}
+          type={blacklist.type}
+        />
+      </div>
+    );
   }
 
   return (

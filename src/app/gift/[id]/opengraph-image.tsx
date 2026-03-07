@@ -19,18 +19,24 @@ export default async function Image({
   params: Promise<{ id: string }>;
 }) {
   const { id: codeId } = await params;
-  const giftStatus = await getGiftCodeStatus(codeId);
+
+  let giftStatus:
+    | { status: 'valid'; tier: string; isFree: boolean }
+    | { status: 'claimed' }
+    | { status: 'not_found' };
+  try {
+    giftStatus = await getGiftCodeStatus(codeId);
+  } catch {
+    giftStatus = { status: 'not_found' };
+  }
 
   const isValid = giftStatus.status === 'valid';
-  const tierName = isValid ? formatTierName(giftStatus.tier) : 'Premium';
-  const isFree = isValid && giftStatus.isFree;
-
-  // Colors based on status
-  const bgGradient = isValid
-    ? 'linear-gradient(135deg, #0a0e1a 0%, #1a1040 50%, #0a0e1a 100%)'
-    : 'linear-gradient(135deg, #1a0a0a 0%, #2a1010 50%, #1a0a0a 100%)';
+  const tierName =
+    giftStatus.status === 'valid' ? formatTierName(giftStatus.tier) : 'Premium';
+  const isFree = giftStatus.status === 'valid' && giftStatus.isFree;
 
   const accentColor = isValid ? '#7B61FF' : '#ef4444';
+  const bgColor = isValid ? '#0a0e1a' : '#1a0a0a';
 
   return new ImageResponse(
     <div
@@ -41,36 +47,10 @@ export default async function Image({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        background: bgGradient,
+        backgroundColor: bgColor,
         position: 'relative',
       }}
     >
-      {/* Glow effects */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '-200px',
-          left: '-100px',
-          width: '600px',
-          height: '600px',
-          borderRadius: '50%',
-          background: 'rgba(123, 97, 255, 0.15)',
-          filter: 'blur(100px)',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '-200px',
-          right: '-100px',
-          width: '600px',
-          height: '600px',
-          borderRadius: '50%',
-          background: 'rgba(78, 86, 255, 0.15)',
-          filter: 'blur(100px)',
-        }}
-      />
-
       {/* Content card */}
       <div
         style={{
@@ -80,12 +60,11 @@ export default async function Image({
           justifyContent: 'center',
           padding: '60px 80px',
           borderRadius: '32px',
-          background: 'rgba(255, 255, 255, 0.03)',
-          border: `1px solid rgba(255, 255, 255, 0.1)`,
-          boxShadow: '0 25px 50px -12px rgba(123, 97, 255, 0.25)',
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
         }}
       >
-        {/* Gift icon */}
+        {/* Gift icon container */}
         <div
           style={{
             display: 'flex',
@@ -94,23 +73,23 @@ export default async function Image({
             width: '100px',
             height: '100px',
             borderRadius: '24px',
-            background: `linear-gradient(135deg, ${accentColor}33, ${accentColor}1a)`,
+            backgroundColor: isValid
+              ? 'rgba(123, 97, 255, 0.2)'
+              : 'rgba(239, 68, 68, 0.2)',
             marginBottom: '32px',
           }}
         >
+          {/* biome-ignore lint/a11y/noSvgWithoutTitle: SVG in OG image doesn't need title for accessibility */}
           <svg
             width="56"
             height="56"
             viewBox="0 0 24 24"
             fill="none"
             stroke={accentColor}
-            strokeWidth="2"
+            strokeWidth={2}
             strokeLinecap="round"
             strokeLinejoin="round"
-            role="img"
-            aria-label="Gift icon"
           >
-            <title>Gift</title>
             <path d="M20 12v10H4V12" />
             <path d="M2 7h20v5H2z" />
             <path d="M12 22V7" />
@@ -119,7 +98,7 @@ export default async function Image({
           </svg>
         </div>
 
-        {/* Title */}
+        {/* Status text */}
         <div
           style={{
             display: 'flex',
@@ -144,9 +123,7 @@ export default async function Image({
               display: 'flex',
               fontSize: '72px',
               fontWeight: 'bold',
-              background: 'linear-gradient(90deg, #4E56FF, #7B61FF, #a78bff)',
-              backgroundClip: 'text',
-              color: 'transparent',
+              color: accentColor,
               marginBottom: '24px',
             }}
           >
@@ -183,18 +160,15 @@ export default async function Image({
           fontSize: '20px',
         }}
       >
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          role="img"
-          aria-label="InterChat logo"
-        >
-          <title>InterChat</title>
-          <circle cx="12" cy="12" r="10" />
-        </svg>
-        InterChat
+        <div
+          style={{
+            width: '28px',
+            height: '28px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(255, 255, 255, 0.4)',
+          }}
+        />
+        <span>InterChat</span>
       </div>
     </div>,
     {
