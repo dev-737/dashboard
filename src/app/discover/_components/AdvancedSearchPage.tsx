@@ -54,17 +54,15 @@ import type { DiscoverSort, getDiscoverHubs } from '@/lib/discover/query';
 import { cn } from '@/lib/utils';
 import { useTRPC } from '@/utils/trpc';
 import { FeaturedHubCarousel } from './FeaturedHubCarousel';
+import { SortOptions } from '@/app/hubs/constants';
 
-// Sort options mapping to user-friendly labels
 const SORT_OPTIONS = [
-    { value: 'trending', label: 'Trending' },
-    { value: 'active', label: 'Most Active' },
-    { value: 'new', label: 'Newest' },
-    { value: 'oldest', label: 'Oldest' },
-    { value: 'rated', label: 'Highest Rated' },
-    { value: 'members', label: 'Most Members' },
-    { value: 'growing', label: 'Fastest Growing' },
-];
+    { value: SortOptions.Alive, label: 'Alive' },
+    { value: SortOptions.Active, label: 'Active' },
+    { value: SortOptions.Growing, label: 'Growing' },
+    { value: SortOptions.Big, label: 'Big' },
+    { value: SortOptions.Emerging, label: 'Emerging' },
+]
 
 interface AdvancedSearchPageProps {
     initialData?: Awaited<ReturnType<typeof getDiscoverHubs>>;
