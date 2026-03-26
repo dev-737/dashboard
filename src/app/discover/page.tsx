@@ -8,39 +8,27 @@ import { getDiscoverHubs } from '@/lib/discover/query';
 import AdvancedSearchPage from './_components/AdvancedSearchPage';
 
 export const metadata: Metadata = {
-  title: 'Discover Hubs | InterChat',
-  description:
-    'Advanced search to find the perfect Discord hub for your community.',
+    title: 'Discover Hubs | InterChat',
+    description:
+        'Advanced search to find the perfect Discord hub for your community.',
 };
 
 export default async function Page() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-  const isAuthenticated = Boolean(session?.user?.id);
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    const isAuthenticated = Boolean(session?.user?.id);
 
-  const initialData = await getDiscoverHubs({
-    sort: 'trending',
-    page: 1,
-    pageSize: 24,
-  });
+    const initialData = await getDiscoverHubs({
+        sort: 'alive',
+        page: 1,
+        pageSize: 24,
+    });
 
-  return (
-    <Suspense
-      fallback={
-        <div className="flex min-h-screen items-center justify-center bg-gray-950 text-gray-400">
-          <HugeiconsIcon
-            strokeWidth={2}
-            icon={Loading03Icon}
-            className="h-8 w-8 animate-spin"
-          />
-        </div>
-      }
-    >
-      <AdvancedSearchPage
-        initialData={initialData}
-        isAuthenticated={isAuthenticated}
-      />
-    </Suspense>
-  );
+    return (
+        <AdvancedSearchPage
+            initialData={initialData}
+            isAuthenticated={isAuthenticated}
+        />
+    );
 }
