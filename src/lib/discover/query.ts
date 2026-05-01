@@ -2,7 +2,7 @@ import type { Prisma } from '@/lib/generated/prisma/client/client';
 import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 import { cacheLife } from 'next/cache';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 
 const DEFAULT_PAGE_SIZE = 24;
 const MAX_PAGE_SIZE = 60;
@@ -43,7 +43,7 @@ export type HubCardDTO = {
 };
 
 const DISCOVERY_THRESHOLDS = {
-    MIN_WEEKLY_MESSAGES: 50,
+    MIN_WEEKLY_MESSAGES: 10,
     MIN_CONNECTIONS: 3,
     MAX_INACTIVE_DAYS: 7,
 
