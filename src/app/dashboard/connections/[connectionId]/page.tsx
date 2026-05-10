@@ -66,18 +66,7 @@ async function getConnectionData(connectionId: string) {
           rules: true,
         },
       },
-      server: {
-        select: {
-          id: true,
-          name: true,
-          iconUrl: true,
-          createdAt: true,
-          updatedAt: true,
-          inviteCode: true,
-          messageCount: true,
-          lastMessageAt: true,
-        },
-      },
+      server: true
     },
   });
 

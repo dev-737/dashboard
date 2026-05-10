@@ -1,58 +1,46 @@
 {
-  description = "A Bun project on NixOS";
+  description = "Bun + Prisma 7 + PostgreSQL on NixOS";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+        nixpkgs.url = "nixpkgs/nixos-unstable";
   };
 
   outputs = { self, nixpkgs }:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
 
-      # These fixes "File not found" or "GLIBC_XX not found" errors
+      pkgs = import nixpkgs {
+        inherit system;
+      };
+
       nativeDeps = with pkgs; [
         stdenv.cc.cc.lib
+        openssl
         zlib
         glib
-        openssl
-        libglvnd
-        xorg.libX11
-        libxml2
         libuuid
       ];
 
-      # Define Prisma Environment
-      prismaEnv = {
-        PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
-        PRISMA_INTROSPECTION_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/introspection-engine";
-        PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
-        PRISMA_CLIENT_ENGINE_TYPE = "binary"; # Important for NixOS!
-      };
-
-    in
-    {
+    in {
       devShells.${system}.default = pkgs.mkShell {
-        # Tools available in the terminal
-        buildInputs = with pkgs; [
-          bun
-          uv
-          python314 # Changed from 314 to a real version
+        buildInputs = [
+            pkgs.bun
+            pkgs.nodejs
+            pkgs.prisma_7
+            pkgs.prisma-engines_7
+
         ] ++ nativeDeps;
 
         shellHook = ''
-          echo "🚀 Bun + Prisma + Python Dev Shell"
+          echo "🚀 Bun + Prisma 7 + NixOS"
 
-          # Apply Prisma Environment Variables
-          ${builtins.concatStringsSep "\n" (pkgs.lib.mapAttrsToList (name: value: "export ${name}=${value}") prismaEnv)}
-
-          # Configure UV/Python
-          export UV_PYTHON="${pkgs.python312}/bin/python"
-          export UV_PYTHON_DOWNLOADS="never"
-          export LANG=C.UTF-8
-
-          # Force Bun/Node to look in Nix store for dynamic libraries (fixes @next/swc, sharp, etc.)
           export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath nativeDeps}:$LD_LIBRARY_PATH
+
+          # Prisma CLI still occasionally wants these on NixOS
+          export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines}/bin/schema-engine"
+          export PRISMA_QUERY_ENGINE_BINARY="${pkgs.prisma-engines}/bin/query-engine"
+          export PRISMA_QUERY_ENGINE_LIBRARY="${pkgs.prisma-engines}/lib/libquery_engine.node"
+          export PRISMA_FMT_BINARY="${pkgs.prisma-engines}/bin/prisma-fmt"
         '';
       };
     };
