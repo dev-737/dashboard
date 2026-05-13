@@ -31,8 +31,7 @@ RUN --mount=type=secret,id=DATABASE_URL \
     export DATABASE_URL="$(cat /run/secrets/DATABASE_URL)" && \
     bunx prisma generate
 
-RUN --network=host \
-    --mount=type=cache,target=/app/.next/cache \
+RUN --mount=type=cache,target=/app/.next/cache \
     --mount=type=secret,id=DATABASE_URL \
     export DATABASE_URL="$(cat /run/secrets/DATABASE_URL)" && \
     bun run build
