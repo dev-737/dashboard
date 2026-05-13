@@ -1,6 +1,5 @@
 import type { SimplifiedHub } from '@/hooks/use-infinite-hubs';
 import type { Prisma } from '@/lib/generated/prisma/client/client';
-import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 import {
     ActivityLevel,
@@ -41,7 +40,7 @@ export function buildWhereClause({
     activityLevels,
 }: FilterOptions): Prisma.HubWhereInput {
     const conditions: Prisma.HubWhereInput[] = [
-        { visibility: HubVisibility.PUBLIC },
+        { visibility: 'PUBLIC' },
         { weeklyMessageCount: { gte: SURVIVAL_THRESHOLDS.MIN_WEEKLY_MESSAGES } },
         { connectionCount: { gte: SURVIVAL_THRESHOLDS.MIN_CONNECTIONS } },
         { lastActive: { gte: new Date(Date.now() - SURVIVAL_THRESHOLDS.MAX_INACTIVE_DAYS * 24 * 60 * 60 * 1000) } },

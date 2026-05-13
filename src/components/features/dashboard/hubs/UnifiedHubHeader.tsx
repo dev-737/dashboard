@@ -13,7 +13,7 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { HubVisibility } from '@/lib/generated/prisma/client/client';
+import type { HubVisibility } from '@/lib/generated/prisma/client/client';
 
 import { HubBannerUploadModal } from './HubBannerUploadModal';
 import { HubIconUploadModal } from './HubIconUploadModal';
@@ -42,7 +42,7 @@ export function UnifiedHubHeader({
 }: UnifiedHubHeaderProps) {
   const [iconUploadOpen, setIconUploadOpen] = useState(false);
   const [bannerUploadOpen, setBannerUploadOpen] = useState(false);
-  const isPrivate = hub.visibility === HubVisibility.PRIVATE;
+  const isPrivate = hub.visibility === 'PRIVATE';
 
   const handleIconUpdate = (iconUrl: string | null) => {
     if (iconUrl && onHubUpdate) {

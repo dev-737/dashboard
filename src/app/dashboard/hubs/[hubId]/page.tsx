@@ -19,7 +19,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { auth } from '@/lib/auth';
 import { PermissionLevel } from '@/lib/constants';
-import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { getUserHubPermission } from '@/lib/permissions';
 import { db } from '@/lib/prisma';
 
@@ -182,7 +181,7 @@ export default async function HubOverviewPage({
                       Visibility
                     </p>
                     <p className="font-bold text-2xl text-white">
-                      {hub.visibility === HubVisibility.PRIVATE
+                      {hub.visibility === 'PRIVATE'
                         ? 'Private'
                         : 'Public'}
                     </p>

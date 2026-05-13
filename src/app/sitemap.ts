@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next';
-import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -43,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // all public hubs
   const hubs = await db.hub.findMany({
     where: {
-      visibility: HubVisibility.PUBLIC,
+      visibility: 'PUBLIC', // Changed to string literal
     },
     orderBy: {
       updatedAt: 'desc',
@@ -75,6 +74,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
+    // ... rest of your blog posts remain the same
     {
       url: `${baseUrl}/blog/growing-discord-community`,
       lastModified: new Date('2023-05-15'),
@@ -109,6 +109,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
+    // ... rest of your redirects remain the same
     {
       url: `${baseUrl}/donate`,
       lastModified: new Date(),
