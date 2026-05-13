@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { Card } from '@/components/ui/card';
-import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 import { EssentialsStep } from './EssentialsStep';
 import { MediaUploadStep } from './MediaUploadStep';
@@ -166,7 +165,7 @@ export function HubCreateForm() {
       name,
       description,
       shortDescription: shortDescription || undefined,
-      visibility: isPrivate ? HubVisibility.PRIVATE : HubVisibility.PUBLIC,
+      visibility: isPrivate ? 'PRIVATE' : 'PUBLIC',
       rules: filteredRules,
       settings: modules,
     });
