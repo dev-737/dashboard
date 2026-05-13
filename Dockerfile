@@ -39,7 +39,7 @@ RUN --mount=type=secret,id=DATABASE_URL \
 
 # Cache Next build artifacts
 RUN --mount=type=cache,target=/app/.next/cache \
-    --mount=type=secret,id=DATABASE_URL
+    --mount=type=secret,id=DATABASE_URL \
     bun run build
 
 # ============================================
