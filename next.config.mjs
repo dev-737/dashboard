@@ -4,6 +4,7 @@ import { withSentryConfig } from '@sentry/nextjs';
 
 /** @type {import('next').NextConfig} */
 const config = {
+  output: 'standalone',
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
@@ -199,7 +200,7 @@ const config = {
       },
       {
         source: '/docs/:path*',
-        destination: 'https://docs.interchat.fun/:path*',
+        destination: 'https://docs.interchat.dev/:path*',
         permanent: true,
       },
     ];
