@@ -29,15 +29,11 @@ COPY . .
 
 RUN --mount=type=secret,id=DATABASE_URL \
     export DATABASE_URL="$(cat /run/secrets/DATABASE_URL)" && \
-    echo "--- 🔍 PRISMA GENERATE DB URL CHECK ---" && \
-    echo "$DATABASE_URL" | sed -E 's/(:\/\/([^:]+):)([^@]+)(@)/:\/\/\2:****\4/' && \
     bunx prisma generate
 
 RUN --mount=type=cache,target=/app/.next/cache \
     --mount=type=secret,id=DATABASE_URL \
     export DATABASE_URL="$(cat /run/secrets/DATABASE_URL)" && \
-    echo "--- 🔍 NEXTJS BUILD DB URL CHECK ---" && \
-    echo "$DATABASE_URL" | sed -E 's/(:\/\/([^:]+):)([^@]+)(@)/:\/\/\2:****\4/' && \
     bun run build
 
 # ============================================
@@ -55,9 +51,6 @@ COPY --from=builder --chown=bun:bun /app/.next/standalone ./
 COPY --from=builder --chown=bun:bun /app/.next/static ./.next/static
 COPY --from=builder --chown=bun:bun /app/public ./public
 COPY --from=builder --chown=bun:bun /app/src/lib/generated ./src/lib/generated
-
-COPY --from=builder --chown=bun:bun /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder --chown=bun:bun /app/node_modules/@prisma ./node_modules/@prisma
 
 USER bun
 
