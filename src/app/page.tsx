@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
+import nextDynamic from 'next/dynamic';
+import { headers } from 'next/headers';
 import { Suspense } from 'react';
+
 import { ActionGrid } from '@/app/_components/ActionGrid';
 import { Hero } from '@/app/_components/Hero';
 import { HomePageSchemas } from '@/app/_components/HomePageSchemas';
 
-const TrendingHubs = dynamic(
+
+const TrendingHubs = nextDynamic(
   () =>
     import('@/app/_components/TrendingHubsServer').then((mod) => ({
       default: mod.TrendingHubs,
@@ -15,7 +18,7 @@ const TrendingHubs = dynamic(
   }
 );
 
-const FeaturesShowcase = dynamic(
+const FeaturesShowcase = nextDynamic(
   () =>
     import('@/app/_components/FeaturesShowcase').then((mod) => ({
       default: mod.FeaturesShowcase,
@@ -27,7 +30,7 @@ const FeaturesShowcase = dynamic(
   }
 );
 
-const FaqSection = dynamic(
+const FaqSection = nextDynamic(
   () =>
     import('@/app/_components/FaqSection').then((mod) => ({
       default: mod.FaqSection,
@@ -39,7 +42,7 @@ const FaqSection = dynamic(
   }
 );
 
-const CTA = dynamic(
+const CTA = nextDynamic(
   () => import('@/app/_components/CTA').then((mod) => ({ default: mod.CTA })),
   {
     loading: () => (
@@ -78,6 +81,8 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
+  await headers();
+
   return (
     <>
       <HomePageSchemas />
