@@ -13,6 +13,10 @@ const config = {
     removeConsole:
       process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   },
+  serverExternalPackages: [
+    '@prisma/client',
+    '@prisma/adapter-pg'
+  ],
   // Re-enable and add "use cache" directives to pages for production optimization
   cacheComponents: true,
   cacheLife: {
