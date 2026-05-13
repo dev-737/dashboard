@@ -300,7 +300,7 @@ export default function PrivacyPolicy() {
                     <span className="font-semibold">How to exercise:</span>{' '}
                     Contact us at our{' '}
                     <Link
-                      href="https://interchat.dev/support"
+                      href="https://interchat.fun/support"
                       className="underline hover:text-white"
                     >
                       support server
@@ -379,7 +379,7 @@ export default function PrivacyPolicy() {
                   Have questions about your privacy?
                 </p>
                 <a
-                  href="https://interchat.dev/support"
+                  href="https://interchat.fun/support"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 font-semibold text-black transition-transform hover:scale-105"

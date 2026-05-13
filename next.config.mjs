@@ -199,7 +199,7 @@ const config = {
       },
       {
         source: '/docs/:path*',
-        destination: 'https://docs.interchat.dev/:path*',
+        destination: 'https://docs.interchat.fun/:path*',
         permanent: true,
       },
     ];

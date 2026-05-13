@@ -10,7 +10,7 @@ export function HomePageSchemas() {
     <>
       <WebsiteSchema
         name="InterChat"
-        url="https://interchat.dev"
+        url="https://interchat.fun"
         description="InterChat bridges your Discord servers, creating cross-server communication while maintaining complete moderation control."
       />
       <SoftwareAppSchema

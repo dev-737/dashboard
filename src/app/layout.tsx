@@ -16,7 +16,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || 'https://interchat.dev'
+    process.env.NEXT_PUBLIC_BASE_URL || 'https://interchat.fun'
   ),
   title: 'InterChat: Connect Discord Servers & Keep Your Community Active',
   description:
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     'global chat discord',
     'chatbot discord',
     'cross-server chat',
-    'interchat.dev',
+    'interchat.fun',
     'interchat discord bot',
     'server-to-server chat',
     'discord inter-server chat',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
       'Is your Discord server quiet? InterChat connects your community with others by linking channels into shared chatrooms. Grow your server and keep conversations flowing 24/7. Free & easy setup!',
     type: 'website',
     siteName: 'InterChat',
-    url: process.env.NEXT_PUBLIC_BASE_URL || 'https://interchat.dev',
+    url: process.env.NEXT_PUBLIC_BASE_URL || 'https://interchat.fun',
     images: [
       {
         url: '/assets/images/logos/InterChatLogo.webp',

@@ -41,7 +41,7 @@ export function Hero() {
                 icon={SparklesIcon}
                 className="h-4 w-4 animate-pulse text-purple-400"
               />
-              <Link href="https://interchat.dev/invite">
+              <Link href="https://interchat.fun/invite">
                 <AnimatedShinyText className="font-semibold text-sm tracking-wide">
                   InterChat v5.4.0 is out
                 </AnimatedShinyText>

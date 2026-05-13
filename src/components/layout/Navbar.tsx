@@ -21,7 +21,7 @@ import { HomepageMobileSidebar } from './HomepageMobileSidebar';
 const links = [
   // FIXME: Re-enable docs link when docs are ready{
   //   text: 'Docs',
-  //   url: 'https://docs.interchat.dev',
+  //   url: 'https://docs.interchat.fun',
   // },
   {
     text: 'Discover',
