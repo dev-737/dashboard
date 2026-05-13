@@ -52,18 +52,18 @@ export function Footer() {
       // FIXME: Re-enable changelog link when changelog is ready
       // {
       //   label: 'Documentation',
-      //   href: 'https://docs.interchat.dev',
+      //   href: 'https://docs.interchat.fun',
       //   icon: File01Icon,
       // },
       {
         label: 'Status Page',
-        href: 'https://status.interchat.dev',
+        href: 'https://status.interchat.fun',
         icon: Shield01Icon,
       },
       // FIXME: Re-enable changelog link when changelog is ready
       // {
       //   label: 'Changelog',
-      //   href: 'https://docs.interchat.dev/changelog',
+      //   href: 'https://docs.interchat.fun/changelog',
       //   icon: File01Icon,
       // },
     ],
@@ -222,7 +222,7 @@ export function Footer() {
 
             <div className="flex items-center gap-4">
               <iframe
-                src="https://status.interchat.dev/badge?theme=dark"
+                src="https://status.interchat.fun/badge?theme=dark"
                 width="250"
                 height="30"
                 style={{

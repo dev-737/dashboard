@@ -136,7 +136,7 @@ export function CTA() {
                 className="h-14 rounded-(--radius-button) border-gray-700/50 bg-gray-800/50 px-8 font-semibold text-white backdrop-blur-xl transition-all hover:border-gray-600/50 hover:bg-gray-700/50"
               >
                 <Link
-                  href="https://docs.interchat.dev"
+                  href="https://docs.interchat.fun"
                   className="group flex items-center"
                 >
                   Learn how it works

@@ -35,7 +35,7 @@ export function OnboardingHelpMenu() {
     //   label: 'Documentation',
     //   description: 'Read our comprehensive guides',
     //   icon: BookOpen,
-    //   href: 'https://docs.interchat.dev',
+    //   href: 'https://docs.interchat.fun',
     //   external: true,
     //   color: 'text-blue-400',
     // },

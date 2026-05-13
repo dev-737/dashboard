@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     title: 'InterChat v5 – Faster, modern, and redesigned',
     description:
       'A complete rewrite with improved performance, enhanced command UIs, and a modern dashboard.',
-    url: 'https://interchat.dev',
+    url: 'https://interchat.fun',
     siteName: 'InterChat',
     type: 'website',
   },

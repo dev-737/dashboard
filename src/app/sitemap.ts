@@ -3,7 +3,7 @@ import { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { db } from '@/lib/prisma';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://interchat.dev';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://interchat.fun';
 
   const staticPages = [
     {

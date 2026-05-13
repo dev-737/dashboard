@@ -329,7 +329,7 @@ export default function TermsOfService() {
                   For legal inquiries or support:
                 </p>
                 <a
-                  href="https://interchat.dev/support"
+                  href="https://interchat.fun/support"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 font-semibold text-black transition-transform hover:scale-105"

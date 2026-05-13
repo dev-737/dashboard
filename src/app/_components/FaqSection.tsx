@@ -161,7 +161,7 @@ export function FaqSection() {
             asChild
           >
             <Link
-              href="https://docs.interchat.dev"
+              href="https://docs.interchat.fun"
               className="flex items-center gap-2"
             >
               View Documentation
@@ -205,7 +205,7 @@ const faqs = [
         That’s it—you’ll be chatting with other communities in minutes! For
         detailed instructions and advanced options, check out our{' '}
         <Link
-          href="https://docs.interchat.dev"
+          href="https://docs.interchat.fun"
           className="font-medium text-blue-400 transition-colors hover:text-blue-300"
         >
           documentation
@@ -253,7 +253,7 @@ const faqs = [
         analytics, automated welcomes, and more. All of it is explained
         step-by-step in our{' '}
         <Link
-          href="https://docs.interchat.dev"
+          href="https://docs.interchat.fun"
           className="font-medium text-blue-400 transition-colors hover:text-blue-300"
         >
           documentation

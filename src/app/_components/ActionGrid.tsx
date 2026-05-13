@@ -48,7 +48,7 @@ const actions = [
     title: 'Moderation Tools',
     description: 'Keep your communities safe',
     icon: Shield01Icon,
-    href: 'https://docs.interchat.dev/hub-management/moderation',
+    href: 'https://docs.interchat.fun/hub-management/moderation',
     gradient: 'from-orange-500/10 to-red-500/10',
     border: 'group-hover:border-orange-500/30',
     iconColor: 'text-orange-400',
