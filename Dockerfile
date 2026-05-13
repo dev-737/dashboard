@@ -29,11 +29,15 @@ COPY . .
 
 RUN --mount=type=secret,id=DATABASE_URL \
     export DATABASE_URL="$(cat /run/secrets/DATABASE_URL)" && \
+    echo "--- 🔍 PRISMA GENERATE DB URL CHECK ---" && \
+    echo "$DATABASE_URL" | sed -E 's/(:\/\/([^:]+):)([^@]+)(@)/:\/\/\2:****\4/' && \
     bunx prisma generate
 
 RUN --mount=type=cache,target=/app/.next/cache \
     --mount=type=secret,id=DATABASE_URL \
     export DATABASE_URL="$(cat /run/secrets/DATABASE_URL)" && \
+    echo "--- 🔍 NEXTJS BUILD DB URL CHECK ---" && \
+    echo "$DATABASE_URL" | sed -E 's/(:\/\/([^:]+):)([^@]+)(@)/:\/\/\2:****\4/' && \
     bun run build
 
 # ============================================
