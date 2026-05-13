@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+import { headers } from 'next/headers';
 import { Suspense } from 'react';
+
 import { ActionGrid } from '@/app/_components/ActionGrid';
 import { Hero } from '@/app/_components/Hero';
 import { HomePageSchemas } from '@/app/_components/HomePageSchemas';
@@ -78,6 +80,8 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
+  await headers();
+
   return (
     <>
       <HomePageSchemas />
