@@ -1,14 +1,11 @@
 import type { Metadata } from 'next';
-import nextDynamic from 'next/dynamic';
+import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import { ActionGrid } from '@/app/_components/ActionGrid';
 import { Hero } from '@/app/_components/Hero';
 import { HomePageSchemas } from '@/app/_components/HomePageSchemas';
 
-// 🚨 Add this line to force Next.js to render this page dynamically at request time
-export const dynamic = 'force-dynamic';
-
-const TrendingHubs = nextDynamic(
+const TrendingHubs = dynamic(
   () =>
     import('@/app/_components/TrendingHubsServer').then((mod) => ({
       default: mod.TrendingHubs,
@@ -18,7 +15,7 @@ const TrendingHubs = nextDynamic(
   }
 );
 
-const FeaturesShowcase = nextDynamic(
+const FeaturesShowcase = dynamic(
   () =>
     import('@/app/_components/FeaturesShowcase').then((mod) => ({
       default: mod.FeaturesShowcase,
@@ -30,7 +27,7 @@ const FeaturesShowcase = nextDynamic(
   }
 );
 
-const FaqSection = nextDynamic(
+const FaqSection = dynamic(
   () =>
     import('@/app/_components/FaqSection').then((mod) => ({
       default: mod.FaqSection,
@@ -42,7 +39,7 @@ const FaqSection = nextDynamic(
   }
 );
 
-const CTA = nextDynamic(
+const CTA = dynamic(
   () => import('@/app/_components/CTA').then((mod) => ({ default: mod.CTA })),
   {
     loading: () => (
