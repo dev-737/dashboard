@@ -66,7 +66,7 @@ async function getConnectionData(connectionId: string) {
           rules: true,
         },
       },
-      server: true
+      server: true,
     },
   });
 

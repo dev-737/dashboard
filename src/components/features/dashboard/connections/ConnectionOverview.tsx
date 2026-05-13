@@ -25,9 +25,9 @@ import {
 } from '@/components/ui/card';
 import type {
   Connection,
+  HubVisibility,
   ServerData,
 } from '@/lib/generated/prisma/client/client';
-import type { HubVisibility } from '@/lib/generated/prisma/client/client';
 
 interface ConnectionOverviewProps {
   connection: Connection & {

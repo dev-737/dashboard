@@ -181,9 +181,7 @@ export default async function HubOverviewPage({
                       Visibility
                     </p>
                     <p className="font-bold text-2xl text-white">
-                      {hub.visibility === 'PRIVATE'
-                        ? 'Private'
-                        : 'Public'}
+                      {hub.visibility === 'PRIVATE' ? 'Private' : 'Public'}
                     </p>
                     <p className="text-gray-400 text-xs">
                       {hub.nsfw ? 'NSFW Content' : 'Safe for Work'}

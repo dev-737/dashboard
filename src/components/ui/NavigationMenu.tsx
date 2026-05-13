@@ -41,7 +41,7 @@ const NavigationMenuLink = NavigationMenuPrimitive.Link;
 
 export {
   NavigationMenu,
-  NavigationMenuList,
   NavigationMenuItem,
   NavigationMenuLink,
+  NavigationMenuList,
 };

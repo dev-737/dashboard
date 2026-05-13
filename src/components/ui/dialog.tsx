@@ -119,10 +119,10 @@ function DialogDescription({
 
 export {
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 };
