@@ -30,7 +30,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { BlockWordAction } from '@/lib/generated/prisma/client/client';
+import type { BlockWordAction } from '@/lib/generated/prisma/client/client';
 import {
   BlockWordActionColors,
   BlockWordActionLabels,
@@ -60,7 +60,7 @@ export function CreateRuleDialog({
   const [customRule, setCustomRule] = useState({
     name: '',
     patterns: [] as { pattern: string }[],
-    actions: [BlockWordAction.BLOCK_MESSAGE] as BlockWordAction[],
+    actions: ['BLOCK_MESSAGE'] as BlockWordAction[],
   });
 
   const createMutation = useMutation(
@@ -89,7 +89,7 @@ export function CreateRuleDialog({
     setCustomRule({
       name: '',
       patterns: [],
-      actions: [BlockWordAction.BLOCK_MESSAGE],
+      actions: ['BLOCK_MESSAGE'],
     });
   };
 

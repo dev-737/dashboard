@@ -14,7 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { HubVisibility } from '@/lib/generated/prisma/client/client';
+import type { HubVisibility } from '@/lib/generated/prisma/client/client';
 import { useTRPC } from '@/utils/trpc';
 import { BasicInfoSection } from './BasicInfoSection';
 import { RulesSection } from './RulesSection';
@@ -43,7 +43,7 @@ interface HubEditFormProps {
 
 export function HubEditForm({ hubData }: HubEditFormProps) {
   const trpc = useTRPC();
-  const initialIsPrivate = hubData.visibility === HubVisibility.PRIVATE;
+  const initialIsPrivate = hubData.visibility === 'PRIVATE';
 
   // Generate unique IDs for form fields
   const nameId = useId();
@@ -115,7 +115,7 @@ export function HubEditForm({ hubData }: HubEditFormProps) {
       hubId: hubData.id,
       name,
       description,
-      visibility: isPrivate ? HubVisibility.PRIVATE : HubVisibility.PUBLIC,
+      visibility: isPrivate ? 'PRIVATE' : 'PUBLIC',
       welcomeMessage: welcomeMessage || null,
       rules,
     });

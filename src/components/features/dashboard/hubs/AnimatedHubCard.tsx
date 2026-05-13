@@ -27,7 +27,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { PermissionLevel } from '@/lib/constants';
-import { HubVisibility } from '@/lib/generated/prisma/client/client';
+import type { HubVisibility } from '@/lib/generated/prisma/client/client';
 
 interface HubWithPermission {
   id: string;
@@ -52,7 +52,7 @@ export function AnimatedHubCard({ hub, index }: AnimatedHubCardProps) {
   });
 
   const [isHovering, setIsHovering] = useState(false);
-  const isPrivate = hub.visibility === HubVisibility.PRIVATE;
+  const isPrivate = hub.visibility === 'PRIVATE';
 
   const lastActive = hub.lastActive
     ? formatDistanceToNow(new Date(hub.lastActive), { addSuffix: true })

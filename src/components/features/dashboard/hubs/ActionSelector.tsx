@@ -18,7 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { BlockWordAction } from '@/lib/generated/prisma/client/client';
+import type { BlockWordAction } from '@/lib/generated/prisma/client/client';
 import {
   BlockWordActionColors,
   BlockWordActionDescriptions,
@@ -60,13 +60,13 @@ export function ActionSelector({
     }
   };
 
-  const actionOrder = [
-    BlockWordAction.SEND_ALERT,
-    BlockWordAction.BLOCK_MESSAGE,
-    BlockWordAction.WARN,
-    BlockWordAction.MUTE,
-    BlockWordAction.BAN,
-    BlockWordAction.BLACKLIST,
+  const actionOrder: BlockWordAction[] = [
+    'SEND_ALERT',
+    'BLOCK_MESSAGE',
+    'WARN',
+    'MUTE',
+    'BAN',
+    'BLACKLIST',
   ];
 
   return (
@@ -74,7 +74,7 @@ export function ActionSelector({
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         {actionOrder.map((action) => {
           const isSelected = selectedActions.includes(action);
-          const isDeprecated = action === BlockWordAction.BLACKLIST;
+          const isDeprecated = action === 'BLACKLIST';
 
           return (
             <Card
@@ -140,7 +140,7 @@ export function ActionSelector({
                         <p className="text-gray-300 text-sm">
                           {BlockWordActionDescriptions[action]}
                         </p>
-                        {action === BlockWordAction.MUTE && (
+                        {action === 'MUTE' && (
                           <p className="mt-2 text-purple-300 text-sm">
                             Requires mute duration configuration
                           </p>
@@ -156,7 +156,7 @@ export function ActionSelector({
       </div>
 
       {/* Mute Duration Configuration */}
-      {showMuteDuration && selectedActions.includes(BlockWordAction.MUTE) && (
+      {showMuteDuration && selectedActions.includes('MUTE') && (
         <Card className="border-gray-700 bg-gray-800/50 p-4">
           <div className="space-y-3">
             <div className="flex items-center gap-2">

@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { BlockWordAction } from '@/lib/generated/prisma/client/client';
+import type { BlockWordAction } from '@/lib/generated/prisma/client/client';
 import type { AntiSwearRule } from '@/lib/types/automod';
 import { useTRPC } from '@/utils/trpc';
 import { ActionSelector } from './ActionSelector';
@@ -100,7 +100,7 @@ export function EditRuleDialog({
       return;
     }
 
-    if (editForm.actions.includes(BlockWordAction.MUTE)) {
+    if (editForm.actions.includes('MUTE')) {
       if (
         !editForm.muteDurationMinutes ||
         editForm.muteDurationMinutes < 1 ||
@@ -117,7 +117,7 @@ export function EditRuleDialog({
       id: rule.id,
       name: editForm.name,
       actions: editForm.actions,
-      muteDurationMinutes: editForm.actions.includes(BlockWordAction.MUTE)
+      muteDurationMinutes: editForm.actions.includes('MUTE')
         ? editForm.muteDurationMinutes
         : null,
       patterns: editForm.patterns.map((p, index) => ({

@@ -25,9 +25,9 @@ import {
 } from '@/components/ui/card';
 import type {
   Connection,
+  HubVisibility,
   ServerData,
 } from '@/lib/generated/prisma/client/client';
-import { HubVisibility } from '@/lib/generated/prisma/client/client';
 
 interface ConnectionOverviewProps {
   connection: Connection & {
@@ -37,7 +37,7 @@ interface ConnectionOverviewProps {
 }
 
 export function ConnectionOverview({ connection }: ConnectionOverviewProps) {
-  const isPrivate = connection.hub.visibility === HubVisibility.PRIVATE;
+  const isPrivate = connection.hub.visibility === 'PRIVATE';
   const formatDate = (date: Date | string) => {
     const dateObj = typeof date === 'string' ? new Date(date) : date;
     return formatDistanceToNow(dateObj, { addSuffix: true });

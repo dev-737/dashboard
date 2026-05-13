@@ -1,6 +1,6 @@
-import {
+import type {
   BlockWordAction,
-  type PatternMatchType,
+  PatternMatchType,
 } from '@/lib/generated/prisma/client/client';
 
 export enum MatchPattern {
@@ -36,37 +36,34 @@ export interface AntiSwearWhitelistItem {
   };
 }
 
+// 1. Replaced enum keys with string literals
 export const BlockWordActionLabels: Record<BlockWordAction, string> = {
-  [BlockWordAction.BLOCK_MESSAGE]: 'Block Message',
-  [BlockWordAction.BLACKLIST]: 'Blacklist User',
-  [BlockWordAction.SEND_ALERT]: 'Send Alert to Moderators',
-  [BlockWordAction.WARN]: 'Warn User',
-  [BlockWordAction.MUTE]: 'Mute User',
-  [BlockWordAction.BAN]: 'Ban User Permanently',
+  BLOCK_MESSAGE: 'Block Message',
+  BLACKLIST: 'Blacklist User',
+  SEND_ALERT: 'Send Alert to Moderators',
+  WARN: 'Warn User',
+  MUTE: 'Mute User',
+  BAN: 'Ban User Permanently',
 };
 
+// 2. Replaced enum keys with string literals
 export const BlockWordActionDescriptions: Record<BlockWordAction, string> = {
-  [BlockWordAction.BLOCK_MESSAGE]: 'Prevents the message from being sent',
-  [BlockWordAction.BLACKLIST]: 'Legacy action - use Subtract01Icon instead',
-  [BlockWordAction.SEND_ALERT]: 'Notifies moderators but allows the message',
-  [BlockWordAction.WARN]: 'Sends a warning to the user',
-  [BlockWordAction.MUTE]:
-    'Temporarily mutes the user for the specified duration',
-  [BlockWordAction.BAN]: 'Permanently bans the user from the hub',
+  BLOCK_MESSAGE: 'Prevents the message from being sent',
+  BLACKLIST: 'Legacy action - use Subtract01Icon instead',
+  SEND_ALERT: 'Notifies moderators but allows the message',
+  WARN: 'Sends a warning to the user',
+  MUTE: 'Temporarily mutes the user for the specified duration',
+  BAN: 'Permanently bans the user from the hub',
 };
 
+// 3. Replaced enum keys with string literals
 export const BlockWordActionColors: Record<BlockWordAction, string> = {
-  [BlockWordAction.BLOCK_MESSAGE]:
-    'bg-blue-500/20 text-blue-400 border-blue-500/30',
-  [BlockWordAction.BLACKLIST]:
-    'bg-gray-500/20 text-gray-400 border-gray-500/30',
-  [BlockWordAction.SEND_ALERT]:
-    'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-  [BlockWordAction.WARN]:
-    'bg-orange-500/20 text-orange-400 border-orange-500/30',
-  [BlockWordAction.MUTE]:
-    'bg-purple-500/20 text-purple-400 border-purple-500/30',
-  [BlockWordAction.BAN]: 'bg-red-500/20 text-red-400 border-red-500/30',
+  BLOCK_MESSAGE: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+  BLACKLIST: 'bg-gray-500/20 text-gray-400 border-gray-500/30',
+  SEND_ALERT: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+  WARN: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+  MUTE: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+  BAN: 'bg-red-500/20 text-red-400 border-red-500/30',
 };
 
 export const MatchPatternLabels: Record<MatchPattern, string> = {
@@ -150,34 +147,23 @@ export function getMatchPatternFromPattern(
 export const RULE_TEMPLATES = {
   PROFANITY: {
     name: 'Profanity Filter',
-    actions: [
-      BlockWordAction.BLOCK_MESSAGE,
-      BlockWordAction.WARN,
-    ] as BlockWordAction[],
+    // 4. Replaced enum values in the array
+    actions: ['BLOCK_MESSAGE', 'WARN'] as BlockWordAction[],
     description: 'Blocks common profanity and warns users',
   },
   HARASSMENT: {
     name: 'Anti-Harassment',
-    actions: [
-      BlockWordAction.BLOCK_MESSAGE,
-      BlockWordAction.MUTE,
-    ] as BlockWordAction[],
+    actions: ['BLOCK_MESSAGE', 'MUTE'] as BlockWordAction[],
     description: 'Blocks harassment terms and mutes users',
   },
   SPAM: {
     name: 'Spam Prevention',
-    actions: [
-      BlockWordAction.BLOCK_MESSAGE,
-      BlockWordAction.SEND_ALERT,
-    ] as BlockWordAction[],
+    actions: ['BLOCK_MESSAGE', 'SEND_ALERT'] as BlockWordAction[],
     description: 'Detects and blocks spam content',
   },
   ZERO_TOLERANCE: {
     name: 'Zero Tolerance',
-    actions: [
-      BlockWordAction.BLOCK_MESSAGE,
-      BlockWordAction.BAN,
-    ] as BlockWordAction[],
+    actions: ['BLOCK_MESSAGE', 'BAN'] as BlockWordAction[],
     description: 'Blocks serious violations and bans users immediately',
   },
 } as const;
