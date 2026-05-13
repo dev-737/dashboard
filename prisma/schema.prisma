@@ -3,7 +3,7 @@ generator client {
   output          = "../src/lib/generated/prisma/client"
   previewFeatures = ["postgresqlExtensions", "relationJoins", "partialIndexes"]
   moduleFormat    = "esm"
-  runtime         = "vercel-edge"
+  runtime         = "bun"
 }
 
 datasource db {
