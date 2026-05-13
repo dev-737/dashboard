@@ -40,7 +40,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { Switch } from '@/components/ui/switch';
-import { BlockWordAction } from '@/lib/generated/prisma/client/client';
+import type { BlockWordAction } from '@/lib/generated/prisma/client/client';
 import {
   type AntiSwearRule,
   BlockWordActionColors,
@@ -59,19 +59,19 @@ interface RulesListProps {
 
 const ActionIcon = ({ action }: { action: BlockWordAction }) => {
   switch (action) {
-    case BlockWordAction.BLOCK_MESSAGE:
+    case 'BLOCK_MESSAGE':
       return (
         <HugeiconsIcon strokeWidth={2} icon={Alert02Icon} className="h-3 w-3" />
       );
-    case BlockWordAction.WARN:
+    case 'WARN':
       return (
         <HugeiconsIcon strokeWidth={2} icon={Alert01Icon} className="h-3 w-3" />
       );
-    case BlockWordAction.MUTE:
+    case 'MUTE':
       return (
         <HugeiconsIcon strokeWidth={2} icon={Clock01Icon} className="h-3 w-3" />
       );
-    case BlockWordAction.BAN:
+    case 'BAN':
       return (
         <HugeiconsIcon
           strokeWidth={2}
@@ -79,7 +79,7 @@ const ActionIcon = ({ action }: { action: BlockWordAction }) => {
           className="h-3 w-3"
         />
       );
-    case BlockWordAction.SEND_ALERT:
+    case 'SEND_ALERT':
       return (
         <HugeiconsIcon
           strokeWidth={2}
@@ -87,7 +87,7 @@ const ActionIcon = ({ action }: { action: BlockWordAction }) => {
           className="h-3 w-3"
         />
       );
-    case BlockWordAction.BLACKLIST:
+    case 'BLACKLIST':
       return (
         <HugeiconsIcon
           strokeWidth={2}
