@@ -121,6 +121,7 @@ export async function getServers(
                 updatedAt: new Date(),
                 inviteCode: null,
                 messageCount: 0,
+                callCount: 0,
                 lastMessageAt: new Date(),
                 iconUrl: null,
                 botAdded,
@@ -308,6 +309,7 @@ export async function getServers(
             updatedAt: new Date(),
             inviteCode: null,
             messageCount: 0,
+            callCount: 0,
             lastMessageAt: new Date(),
             iconUrl: null,
             // Discord guild data
@@ -434,6 +436,8 @@ export async function getServerDetails(
       inviteCode: dbServer?.inviteCode || null,
       updatedAt: dbServer?.updatedAt || new Date(),
       messageCount: dbServer?.messageCount || 0,
+      callCount: 0,
+
       lastMessageAt: dbServer?.lastMessageAt
         ? dbServer.lastMessageAt
         : new Date(),

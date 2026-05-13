@@ -70,33 +70,52 @@ export async function processTopGGVote(
     const updatedUser = await db.user.upsert({
       where: { id: userId },
       update: {
-        voteCount: {
-          increment: voteValue,
-        },
         lastVoted: new Date(),
+        stats: {
+          upsert: {
+            update: {
+              voteCount: {
+                increment: voteValue,
+              },
+              updatedAt: new Date(),
+            },
+            create: {
+              voteCount: voteValue,
+            },
+          },
+        },
       },
       create: {
         id: userId,
-        voteCount: voteValue,
         lastVoted: new Date(),
+        stats: {
+          create: {
+            voteCount: voteValue,
+          },
+        },
       },
       select: {
-        voteCount: true,
         badges: true,
+        stats: {
+          select: {
+            voteCount: true,
+          },
+        },
       },
     });
+    const totalVotes = updatedUser.stats?.voteCount ?? 0;
 
     // Check and award badges based on vote count
     const badgesAwarded = await checkAndAwardVoteBadges(
       userId,
-      updatedUser.voteCount,
+      totalVotes,
       updatedUser.badges
     );
 
     return {
       success: true,
       voteValue,
-      totalVotes: updatedUser.voteCount,
+      totalVotes,
       badgesAwarded: badgesAwarded.length > 0 ? badgesAwarded : undefined,
     };
   } catch (error) {
@@ -194,11 +213,14 @@ export async function sendDiscordVoteAnnouncement(
       select: {
         name: true,
         image: true,
-        voteCount: true,
         badges: true,
+        stats: {
+          select: {
+            voteCount: true,
+          },
+        },
       },
     });
-
     const embed = createVoteEmbed(voteData, result, user);
     const payload: DiscordWebhookPayload = {
       embeds: [embed],
@@ -239,15 +261,17 @@ function createVoteEmbed(
   user: {
     name: string | null;
     image: string | null;
-    voteCount: number;
     badges: Badges[];
+    stats: {
+      voteCount: number;
+    } | null;
   } | null
 ): DiscordEmbed {
   const userName = user?.name || 'Unknown User';
   const userAvatar =
     user?.image || 'https://cdn.discordapp.com/embed/avatars/0.png';
   const voteValue = result.voteValue;
-  const totalVotes = result.totalVotes;
+  const totalVotes = user?.stats?.voteCount ?? 0;
   const isWeekend = voteData.isWeekend;
 
   // Determine embed color based on vote type and weekend status

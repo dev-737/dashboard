@@ -3,9 +3,8 @@ import { PrismaClient } from '@/lib/generated/prisma/client/client';
 
 const globalForDb = global as unknown as { db: PrismaClient };
 
-const connectionString = `${process.env.DATABASE_URL}`;
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 
-const adapter = new PrismaPg({ connectionString });
-export const db = new PrismaClient({ adapter });
+export const db = globalForDb.db || new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== 'production') globalForDb.db = db;

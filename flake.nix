@@ -1,68 +1,47 @@
 {
-  description = "Multi-platform Bun + Prisma + Python Dev Environment";
+  description = "Bun + Prisma 7 + PostgreSQL on NixOS";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+        nixpkgs.url = "nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
+  outputs = { self, nixpkgs }:
+    let
+      system = "x86_64-linux";
 
-        buildDeps = with pkgs; [
-          bun
-          uv
-          python312
-        ];
+      pkgs = import nixpkgs {
+        inherit system;
+      };
 
-        linuxNativeDeps = pkgs.lib.optionals pkgs.stdenv.isLinux (with pkgs; [
-          stdenv.cc.cc.lib
-          zlib
-          glib
-          openssl
-          libglvnd
-          xorg.libX11
-          libxml2
-          libuuid
-          prisma
-        ]);
+      nativeDeps = with pkgs; [
+        stdenv.cc.cc.lib
+        openssl
+        zlib
+        glib
+        libuuid
+      ];
 
-        # Define Prisma Environment
-        prismaEnv = {
-          PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
-          PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
-          PRISMA_FMT_BINARY = "${pkgs.prisma-engines}/bin/prisma-fmt"; # Added for formatting/VS Code
-          # PRISMA_CLIENT_ENGINE_TYPE = "binary"; # Important for NixOS!
-        };
+    in {
+      devShells.${system}.default = pkgs.mkShell {
+        buildInputs = [
+            pkgs.bun
+            pkgs.nodejs
+            pkgs.prisma_7
+            pkgs.prisma-engines_7
 
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          # Combine the common tools with the OS-specific dependencies
-          buildInputs = buildDeps ++ linuxNativeDeps;
+        ] ++ nativeDeps;
 
-          shellHook = ''
-            echo "🚀 Multi-platform Dev Shell Loaded"
+        shellHook = ''
+          echo "🚀 Bun + Prisma 7 + NixOS"
 
-            # FIX: Ensure Nix's isolated temporary directory actually exists
-            mkdir -p "$TMPDIR"
+          export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath nativeDeps}:$LD_LIBRARY_PATH
 
-            # Apply Prisma Environment Variables
-            ${builtins.concatStringsSep "\n" (pkgs.lib.mapAttrsToList (name: value: "export ${name}=${value}") prismaEnv)}
-
-            # Configure UV/Python
-            export UV_PYTHON="${pkgs.python312}/bin/python"
-            export UV_PYTHON_DOWNLOADS="never"
-            export LANG=C.UTF-8
-
-            # Linux-specific: Force Bun/Node to look in Nix store for dynamic libraries
-            ${pkgs.lib.optionalString pkgs.stdenv.isLinux ''
-              export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath linuxNativeDeps}:$LD_LIBRARY_PATH
-            ''}
-          '';
-        };
-      }
-    );
+          # Prisma CLI still occasionally wants these on NixOS
+          export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines}/bin/schema-engine"
+          export PRISMA_QUERY_ENGINE_BINARY="${pkgs.prisma-engines}/bin/query-engine"
+          export PRISMA_QUERY_ENGINE_LIBRARY="${pkgs.prisma-engines}/lib/libquery_engine.node"
+          export PRISMA_FMT_BINARY="${pkgs.prisma-engines}/bin/prisma-fmt"
+        '';
+      };
+    };
 }
